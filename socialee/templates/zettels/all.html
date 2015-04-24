@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<ul>
+{% for zettel in zettels %}
+<li>{{zettel.user}}---{{zettel.email}}---{{zettel.timestamp}}<br/>{{zettel.bietet}}<br/>{{zettel.braucht}}<br/><br/></li>
+{% endfor %}
+</ul>
+
+{% endblock %}
