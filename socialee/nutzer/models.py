@@ -1,41 +1,50 @@
+from django.contrib.auth.models import User
 from django.db import models
 
-# Create your models here.
-class User(models.Model):
-    user = models.CharField(max_length=120, default='nickname')
-    firstname = models.CharField(max_length=120, null=True, blank=True)
-    lastname = models.CharField(max_length=120, null=True,blank=True)
+# TODO: BaseModel: created/updated
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, blank=True, null=True)
+    username = models.CharField(max_length=50, blank=True, unique=True)
+    firstname = models.CharField(max_length=100, blank=True)
+    lastname = models.CharField(max_length=100, blank=True)
     email = models.EmailField()
-    #newsletter = models.BooleanField(default=False)
-    permission = models.BooleanField(default=False)
-    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+    # TODO: PhoneField
+    phone = models.CharField(max_length=50, blank=True)
+    newsletter = models.BooleanField(default=False)
 
-    def __unicode__(self):
-        return self.email
+    def __str__(self):
+        return 'Profile ({})'.format(self.email)
 
-
-class Digiinput(models.Model):
-    user = models.OneToOneField('User', null=True, related_name="input", unique=True)
-    bietet = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to='zettels/images/input/', null=True)
-    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
-
-    def __unicode__(self):
-        return ' Xs Zettel Nr. y input'
+# class Zettel:
+#     image = models.ImageField(upload_to='zettels/images/input/', null=True)
+#     inputs = models.ManyToManyField(Input)
+#     outputs = models.ManyToManyField(Output)
 
 
-class Digioutput(models.Model):
-    user = models.OneToOneField('User', null=True, related_name="output", unique=True)
-    braucht = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to='zettels/images/output/', null=True)
-    timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+class InputOutput(models.Model):
+    class Meta:
+        abstract= True
 
-    def __unicode__(self):
-        return ' Xs Zettel Nr. y output'
+    profile = models.ForeignKey(Profile)
+    title = models.CharField(max_length=200)
 
 
-class Tag(models.Model):
-    tag = models.TextField(null=True, blank=True)
+class Input(InputOutput):
+    def __str__(self):
+        return 'Input "{}" from {}'.format(self.title, self.profile)
+
+
+class Output(InputOutput):
+    def __str__(self):
+        return 'Output "{}" from {}'.format(self.title, self.profile)
+
+
+class Project(models.Model):
+    title = models.CharField(max_length=100, unique=True)
+    inputs = models.ManyToManyField(Input)
+    outputs = models.ManyToManyField(Output)
+    # desc
+    # img
+    # featured
