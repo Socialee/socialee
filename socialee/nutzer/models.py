@@ -6,7 +6,7 @@ from django.db import models
 
 class Profile(models.Model):
     user = models.OneToOneField(User, blank=True, null=True)
-    username = models.CharField(max_length=50, blank=True, unique=True)
+    username = models.CharField(max_length=50, blank=True, null=True, unique=True)
     firstname = models.CharField(max_length=100, blank=True)
     lastname = models.CharField(max_length=100, blank=True)
     email = models.EmailField()
@@ -16,11 +16,6 @@ class Profile(models.Model):
 
     def __str__(self):
         return 'Profile ({})'.format(self.email)
-
-# class Zettel:
-#     image = models.ImageField(upload_to='zettels/images/input/', null=True)
-#     inputs = models.ManyToManyField(Input)
-#     outputs = models.ManyToManyField(Output)
 
 
 class InputOutput(models.Model):
@@ -44,6 +39,17 @@ class Output(InputOutput):
 
     def __str__(self):
         return 'Output "{}" from {}'.format(self.title, self.profile)
+
+
+class Zettel(models.Model):
+    profile = models.ForeignKey(Profile)
+    image = models.ImageField(upload_to='zettel/%Y-%m/', blank=True)
+    inputs = models.ManyToManyField(Input)
+    outputs = models.ManyToManyField(Output)
+
+    def __str__(self):
+        return 'Zettel from {}'.format(self.profile)
+
 
 
 class Project(models.Model):
