@@ -28,15 +28,20 @@ class InputOutput(models.Model):
         abstract= True
 
     profile = models.ForeignKey(Profile)
-    title = models.CharField(max_length=200)
 
 
 class Input(InputOutput):
+    title = models.CharField(verbose_name="What's the offer?",
+                             max_length=200)
+
     def __str__(self):
         return 'Input "{}" from {}'.format(self.title, self.profile)
 
 
 class Output(InputOutput):
+    title = models.CharField(verbose_name="What's the request?",
+                             max_length=200)
+
     def __str__(self):
         return 'Output "{}" from {}'.format(self.title, self.profile)
 
