@@ -108,26 +108,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "media")
-#MEDIA_ROOT = '/Users/jmitch/Desktop/ecommerce/static/media/'
-
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static_root")
-
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "build", "static")
 STATICFILES_DIRS = (
-    os.path.join(os.path.dirname(BASE_DIR), "static", "static_files"),
+    os.path.join(os.path.dirname(BASE_DIR), "static"),
 )
-
-TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates')),
-
-
-
-
-
-
-
-
-
-
-
-
-
