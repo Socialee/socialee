@@ -26,12 +26,11 @@ SITE_ID = 1
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'gx)-+#9(hotw=qt@swr170k3!l*!=a%6&+)siw4$0q35egtj(1'
+SECRET_KEY = env.str('DJANGO_SECRET_KEY',
+                     'gx)-+#9(hotw=qt@swr170k3!l*!=a%6&+)siw4$0q35egtj(1')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-TEMPLATE_DEBUG = True
+DEBUG = env.bool('DJANGO_DEBUG', False)
+TEMPLATE_DEBUG = env.bool('DJANGO_TEMPLATE_DEBUG', DEBUG)
 
 ALLOWED_HOSTS = []
 
