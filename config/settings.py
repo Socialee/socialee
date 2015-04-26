@@ -9,9 +9,15 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 import os
-from django.conf import global_settings
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+import environ
+
+ROOT_DIR = environ.Path(__file__) - 2  # (/a/b/myfile.py - 3 = /)
+APPS_DIR = ROOT_DIR.path('socialee')
+
+assert os.path.exists(str(ROOT_DIR.path("Makefile"))), "ROOT_DIR is set properly."
+
+env = environ.Env()
 
 SITE_ID = 1
 
@@ -42,7 +48,7 @@ INSTALLED_APPS = (
 
     'django.contrib.sites',
 
-    'nutzer',
+    'socialee',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -56,12 +62,12 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'socialee.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [str(APPS_DIR('templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,18 +80,15 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'socialee.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': env.db("DATABASE_URL", default="sqlite:///db.sqlite3"),
 }
+DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 
 # Internationalization
@@ -108,8 +111,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "build", "static")
-STATICFILES_DIRS = (
-    os.path.join(os.path.dirname(BASE_DIR), "static"),
-)
+MEDIA_ROOT = str(ROOT_DIR('media'))
+STATIC_ROOT = str(ROOT_DIR('build', 'static'))
+STATICFILES_DIRS = (str(APPS_DIR('static')), )

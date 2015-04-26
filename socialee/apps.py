@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 
+
 class SocialeeConfig(AppConfig):
-    name = 'nutzer'
+    name = 'socialee'
     verbose_name = "Socialee"
