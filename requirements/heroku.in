@@ -1,0 +1,9 @@
+# Requirements for Heroku.
+
+# Heroku package: django-toolbelt
+# Includes: Django, psycopg2, gunicorn, dj-database-url, dj-static, static
+
+-r production.in
+
+gunicorn
+dj-static

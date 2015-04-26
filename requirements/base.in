@@ -1,0 +1,6 @@
+# Base requirements.
+Django
+Pillow
+
+pytz
+django-environ
