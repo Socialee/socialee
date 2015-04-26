@@ -51,7 +51,6 @@ class Zettel(models.Model):
         return 'Zettel from {}'.format(self.profile)
 
 
-
 class Project(models.Model):
     title = models.CharField(max_length=100, unique=True)
     inputs = models.ManyToManyField(Input)

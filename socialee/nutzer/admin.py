@@ -1,30 +1,28 @@
 from django.contrib import admin
 
-
-# Register your models here.
 from .models import Input, Output, Profile, Zettel
 
 
 class InputInline(admin.TabularInline):
-	model = Input
+    model = Input
 
 
 class OutputInline(admin.TabularInline):
-	model = Output
+    model = Output
 
 
 class ZettelInline(admin.TabularInline):
-	model = Zettel
-	exclude = ('inputs', 'outputs')
-	extra = 1
+    model = Zettel
+    exclude = ('inputs', 'outputs')
+    extra = 1
 
 
 class InputAdmin(admin.ModelAdmin):
-	model = Input
+    model = Input
 
 
 class OutputAdmin(admin.ModelAdmin):
-	model = Output
+    model = Output
 
 
 class ZettelAdmin(admin.ModelAdmin):
@@ -32,11 +30,11 @@ class ZettelAdmin(admin.ModelAdmin):
 
 
 class ProfileAdmin(admin.ModelAdmin):
-	# search_fields = ['user','email','lastname', 'firstname']
-	# list_display = ['__unicode__', 'firstname', 'lastname', 'updated', 'timestamp']
-	inlines = [
-		InputInline, OutputInline, ZettelInline
-	]
+    # search_fields = ['user','email','lastname', 'firstname']
+    # list_display = ['__unicode__', 'firstname', 'lastname', 'updated', 'timestamp']
+    inlines = [
+        InputInline, OutputInline, ZettelInline
+    ]
 
 
 class ProfileErfassungsAdmin(ProfileAdmin):
