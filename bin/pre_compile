@@ -1,2 +1,2 @@
 # Heroku uses requirements.txt from the root.
-# ln -sfn requirements/requirements_heroku.txt requirements.txt
+ln -sfn requirements/heroku.txt requirements.txt
