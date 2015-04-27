@@ -6,21 +6,21 @@ https://docs.djangoproject.com/en/dev/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
+
+TODO: use django-configurations, for class based approach?!
 """
 
 import os
 
 import environ
 
-ROOT_DIR = environ.Path(__file__) - 2  # (/a/b/myfile.py - 3 = /)
+ROOT_DIR = environ.Path(__file__) - 2
 APPS_DIR = ROOT_DIR.path('socialee')
-
 assert os.path.exists(str(ROOT_DIR.path("Makefile"))), "ROOT_DIR is set properly."
 
 env = environ.Env()
 
 SITE_ID = 1
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
@@ -94,13 +94,9 @@ DATABASES['default']['ATOMIC_REQUESTS'] = True
 # https://docs.djangoproject.com/en/dev/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Europe/Berlin'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
