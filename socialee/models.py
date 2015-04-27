@@ -6,7 +6,8 @@ from django.db import models
 
 class Profile(models.Model):
     user = models.OneToOneField(User, blank=True, null=True)
-    username = models.CharField(max_length=50, blank=True, null=True, unique=True)
+    username = models.CharField(max_length=50, blank=True, null=True,
+                                unique=True)
     firstname = models.CharField(max_length=100, blank=True)
     lastname = models.CharField(max_length=100, blank=True)
     email = models.EmailField()
@@ -20,7 +21,7 @@ class Profile(models.Model):
 
 class InputOutput(models.Model):
     class Meta:
-        abstract= True
+        abstract = True
 
     profile = models.ForeignKey(Profile)
 

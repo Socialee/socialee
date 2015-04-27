@@ -31,7 +31,7 @@ class ZettelAdmin(admin.ModelAdmin):
 
 class ProfileAdmin(admin.ModelAdmin):
     # search_fields = ['user','email','lastname', 'firstname']
-    # list_display = ['__unicode__', 'firstname', 'lastname', 'updated', 'timestamp']
+    # list_display = ['firstname', 'lastname', 'updated', 'timestamp']
     inlines = [
         InputInline, OutputInline, ZettelInline
     ]
