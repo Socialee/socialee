@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
 
 # TODO: BaseModel: created/updated
 
@@ -43,6 +45,9 @@ class Output(InputOutput):
 
 
 class Zettel(models.Model):
+    class Meta:
+        verbose_name_plural = _('Zettel')
+
     profile = models.ForeignKey(Profile)
     image = models.ImageField(upload_to='zettel/%Y-%m/', blank=True)
     inputs = models.ManyToManyField(Input)
