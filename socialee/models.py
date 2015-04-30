@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 # TODO: BaseModel: created/updated
-
+#mj TODO: user-Passwort / Postleitzahl / Geburtsdatum / 
 
 class Profile(models.Model):
     user = models.OneToOneField(User, blank=True, null=True)
@@ -15,8 +15,9 @@ class Profile(models.Model):
     email = models.EmailField()
     # TODO: PhoneField
     phone = models.CharField(max_length=50, blank=True)
+    #mj plz = models.DecimalField(max_digits=5, decimal_places=0, null=True, blank=True, default='10969')
+    #mj geburtsdatum = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
     newsletter = models.BooleanField(default=False)
-
     def __str__(self):
         return 'Profile ({})'.format(self.email)
 
