@@ -51,6 +51,7 @@ class Zettel(models.Model):
 
     profile = models.ForeignKey(Profile)
     image = models.ImageField(upload_to='zettel/%Y-%m/', blank=True)
+    nrdclass = models.CharField(max_length=3, blank=True)#dies sind die Nummern der Zettel, wie sie derzeit aud wwww.socialee.de gelistet sind
     inputs = models.ManyToManyField(Input)
     outputs = models.ManyToManyField(Output)
 
