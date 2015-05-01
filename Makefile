@@ -11,6 +11,7 @@ export DJANGO_SETTINGS_MODULE?=config.settings
 run:
 	python manage.py runserver
 
+# Requirements files. {{{
 # Define different requirements files.
 PIP_REQUIREMENTS_DIR=$(PROJECT_ROOT)/requirements
 PIP_REQUIREMENTS_BASE:=$(PIP_REQUIREMENTS_DIR)/base.txt
@@ -31,9 +32,9 @@ requirements_rebuild:
 	$(RM) $(PIP_REQUIREMENTS_ALL)
 	$(MAKE_WITH_MAKEFILE) requirements
 
-
 # Compile/build requirements.txt files from .in files, using pip-compile.
 $(PIP_REQUIREMENTS_DIR)/%.txt: $(PIP_REQUIREMENTS_DIR)/%.in | $(PIP_COMPILE)
 	pip-compile $< > $@
 
 .PHONY: requirements requirements_rebuild
+# }}}
