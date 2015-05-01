@@ -16,6 +16,6 @@ application = get_wsgi_application()
 # For Heroku.
 try:
     from dj_static import Cling, MediaCling
-    application_with_static = Cling(MediaCling(get_wsgi_application()))
+    application_with_static = Cling(MediaCling(application))
 except ImportError:
     pass
