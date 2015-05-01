@@ -5,6 +5,12 @@ PROJECT_ROOT?=$(dir $(or $(shell readlink $(firstword $(MAKEFILE_LIST))), $(firs
 PROJECT_ROOT:=$(PROJECT_ROOT:%/=%)
 PROJECT_ROOT_SRC=$(PROJECT_ROOT)/src
 
+export DJANGO_DEBUG?=1
+export DJANGO_SETTINGS_MODULE?=config.settings
+
+run:
+	python manage.py runserver
+
 # Define different requirements files.
 PIP_REQUIREMENTS_DIR=$(PROJECT_ROOT)/requirements
 PIP_REQUIREMENTS_BASE:=$(PIP_REQUIREMENTS_DIR)/base.txt
