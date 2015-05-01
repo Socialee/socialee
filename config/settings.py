@@ -109,3 +109,21 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = str(ROOT_DIR('media'))
 STATIC_ROOT = str(ROOT_DIR('build', 'static'))
 STATICFILES_DIRS = (str(APPS_DIR('static')), )
+
+
+# Configure logging, especially for Heroku.
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+        }
+    }
+}
