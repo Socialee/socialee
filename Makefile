@@ -141,10 +141,10 @@ PIP_REQUIREMENTS_ALL:=$(PIP_REQUIREMENTS_BASE) $(PIP_REQUIREMENTS_DEV) $(PIP_REQ
 requirements: $(PIP_REQUIREMENTS_ALL)
 requirements_rebuild:
 	$(RM) $(PIP_REQUIREMENTS_ALL)
-	$(MAKE_WITH_MAKEFILE) requirements
+	make requirements
 
 # Compile/build requirements.txt files from .in files, using pip-compile.
-$(PIP_REQUIREMENTS_DIR)/%.txt: $(PIP_REQUIREMENTS_DIR)/%.in | $(PIP_COMPILE)
+$(PIP_REQUIREMENTS_DIR)/%.txt: $(PIP_REQUIREMENTS_DIR)/%.in
 	pip-compile $< > $@
 
 .PHONY: requirements requirements_rebuild
