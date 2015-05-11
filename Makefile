@@ -67,8 +67,8 @@ run:
 
 # Install bower components.
 bower_install:
-	# Create the bower_components folder manually. "bower install" does not respect umask/acl!
-	# NOTE: messed up because of umask not being effective from /.bashrc (in Docker)?
+	@# Create the bower_components folder manually. "bower install" does not respect umask/acl!
+	@# NOTE: messed up because of umask not being effective from /.bashrc (in Docker)?
 	mkdir -p -m 775 $(BOWER_COMPONENTS)
 	cd $(BOWER_COMPONENTS_ROOT) && bower install $(BOWER_OPTIONS)
 
@@ -87,11 +87,20 @@ collectstatic: $(BOWER_COMPONENTS)
 migrate:
 	python manage.py migrate
 
+TOX_BIN=$(command -v tox)
+install_testing_req:
+	pip install -r requirements/testing.txt
 
 # TODO: look at $(DATABASE_URL) to use py34-psql/py34-sqlite.
-test:
+test: $(if $(TOX_BIN),,install_testing_req)
 	tox -e py34-psql
 	@# tox -e py34
+
+test_heroku:
+	@# tox fails to build Pillow on Heroku.
+	@# Fails, because it cannot connect to "postgres"; https://code.djangoproject.com/ticket/16969
+	@# DATABASE_URL=$(HEROKU_POSTGRESQL_MAUVE_URL) py.test --strict -r fEsxXw tests
+	DATABASE_URL=sqlite:///:memory: py.test --strict -r fEsxXw tests
 
 test_sqlite:
 	tox -e py34-sqlite
@@ -119,7 +128,7 @@ deploy_check: check test
 deploy: deploy_check static migrate
 
 # Run via bin/post_compile for Heroku.
-deploy_heroku: deploy
+deploy_heroku: check test_heroku static migrate
 
 
 # Requirements files. {{{

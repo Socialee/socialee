@@ -3,6 +3,7 @@
 # Heroku package: django-toolbelt
 # Includes: Django, psycopg2, gunicorn, dj-database-url, dj-static, static
 
+-r testing.in
 -r production.in
 
 gunicorn
