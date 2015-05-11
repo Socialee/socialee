@@ -84,6 +84,44 @@ collectstatic: $(BOWER_COMPONENTS)
 	@echo "Collecting static files..."
 	python manage.py collectstatic -v0 --noinput --ignore *.scss --ignore bower.json
 
+migrate:
+	python manage.py migrate
+
+
+# TODO: look at $(DATABASE_URL) to use py34-psql/py34-sqlite.
+test:
+	tox -e py34-psql
+	@# tox -e py34
+
+test_sqlite:
+	tox -e py34-sqlite
+
+checkqa:
+	tox -e checkqa
+
+check: check_migrated
+	python manage.py check
+	# python manage.py check --deploy
+
+check_migrated:
+	# Check that there are no DB changes (missing migrations).
+	@# Exits with 1 if there are no changes.
+	@# --noinput works with 1.9+ only.
+	python manage.py makemigrations --exit --dry-run --noinput; \
+		ret=$$?; \
+		if [ $$ret != 1 ]; then \
+			echo 'There are DB changes that need a migration!'; \
+			exit 1; \
+		fi
+
+deploy_check: check test
+
+deploy: deploy_check static migrate
+
+# Run via bin/post_compile for Heroku.
+deploy_heroku: deploy
+
+
 # Requirements files. {{{
 # Define different requirements files.
 PIP_REQUIREMENTS_DIR=$(PROJECT_ROOT)/requirements
