@@ -3,10 +3,10 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 
-import socialee
+from socialee import views
 
 urlpatterns = [
-    url(r'^$', socialee.views.home, name='home'),
+    url(r'^$', views.home, name='home'),
 
     url(r'^admin/', include(admin.site.urls)),
 ]
