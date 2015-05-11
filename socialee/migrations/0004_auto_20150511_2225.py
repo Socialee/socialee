@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='zettel',
             name='number',
-            field=models.IntegerField(verbose_name='Number on the zettel', blank=True, null=True),
+            field=models.PositiveIntegerField(null=True, blank=True, verbose_name='Number on the zettel'),
         ),
     ]
