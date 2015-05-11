@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 # TODO: BaseModel: created/updated
-#mj TODO: user-Passwort / Postleitzahl / Geburtsdatum / 
+# TODO: mj>  user-Passwort / Postleitzahl / Geburtsdatum /
 
 class Profile(models.Model):
     user = models.OneToOneField(User, blank=True, null=True)
@@ -15,9 +15,13 @@ class Profile(models.Model):
     email = models.EmailField()
     # TODO: PhoneField
     phone = models.CharField(max_length=50, blank=True)
-    #mj plz = models.DecimalField(max_digits=5, decimal_places=0, null=True, blank=True, default='10969')
-    #mj geburtsdatum = models.DateField(auto_now=False, auto_now_add=False, blank=True, null=True)
+    # mj> plz = models.DecimalField(max_digits=5, decimal_places=0,
+    #                               null=True, blank=True, default='10969')
+    # dh> Should be CharField
+    # mj> geburtsdatum = models.DateField(auto_now=False, auto_now_add=False,
+    #                                     blank=True, null=True)
     newsletter = models.BooleanField(default=False)
+
     def __str__(self):
         return 'Profile ({})'.format(self.email)
 
@@ -51,8 +55,8 @@ class Zettel(models.Model):
 
     profile = models.ForeignKey(Profile)
     image = models.ImageField(upload_to='zettel/%Y-%m/', blank=True)
-    number = models.IntegerField(blank=True, null=True,
-                                 verbose_name=_("Number on the zettel"))
+    number = models.PositiveIntegerField(blank=True, null=True,
+                                         verbose_name=_("Number on the zettel"))
     inputs = models.ManyToManyField(Input)
     outputs = models.ManyToManyField(Output)
 
