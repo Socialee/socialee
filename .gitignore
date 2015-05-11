@@ -2,6 +2,12 @@ build
 db.sqlite3
 
 socialee/static/bower_components/
+socialee/static/css/
+
+Gemfile.lock
+
+.bundle
+.tox
 
 # Python boilerplate.
 __pycache__
