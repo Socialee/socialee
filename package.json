@@ -1,0 +1,24 @@
+{
+  "name": "socialee",
+  "version": "0.0.0",
+  "description": "For bower on Heroku",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Socialee/socialee.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Socialee/socialee/issues"
+  },
+  "dependencies": {
+    "bower": "^1.4.1"
+  }
+}
