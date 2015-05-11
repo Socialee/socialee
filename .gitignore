@@ -1,6 +1,8 @@
 build
 db.sqlite3
 
+socialee/static/bower_components/
+
 # Python boilerplate.
 __pycache__
 *.pyc
