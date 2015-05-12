@@ -14,7 +14,7 @@ export DJANGO_SETTINGS_MODULE?=config.settings
 DEBUG:=0
 override DEBUG:=$(filter-out 0,$(DEBUG))
 
-# Uncomment this to get more info during the make process,
+# Uncomment this to get more info during the make process.
 MY_MAKE_ARGS?=$(if $(DEBUG), --debug=v,)
 # Allow to pass on global options for all sub-makes.
 MY_MAKE=$(MAKE)$(MY_MAKE_ARGS)
@@ -22,9 +22,14 @@ MY_MAKE=$(MAKE)$(MY_MAKE_ARGS)
 # TODO: $(filter Dev,$(DJANGO_CONFIGURATION))
 SCSS_SOURCEMAPS:=1
 
-BUILD_DIR:=$(PROJECT_ROOT)/build
-CACHE_DIR=$(BUILD_DIR)/cache
+# Pick up CACHE_DIR from Heroku.
+CACHE_DIR?=build/cache
+CACHE_DIR_ABS:=$(abspath $(CACHE_DIR))
 BUNDLER_DIR:=$(CACHE_DIR)/bundler
+
+# Use cache/storage with Bower.
+export bower_storage__packages:=$(CACHE_DIR_ABS)/bower/packages
+export bower_storage__registry:=$(CACHE_DIR_ABS)/bower/registry
 
 # Install sass via bundler (Gemfile).
 export GEM_HOME:=$(CACHE_DIR)/gems
@@ -90,6 +95,8 @@ bower_install:
 	@# Create the bower_components folder manually. "bower install" does not respect umask/acl!
 	@# NOTE: messed up because of umask not being effective from /.bashrc (in Docker)?
 	mkdir -p -m 775 $(BOWER_COMPONENTS)
+	@# Create registry cache for bower manually, otherwise it fails silently.
+	mkdir -p $(bower_storage__registry)
 	cd $(BOWER_COMPONENTS_ROOT) && bower install $(BOWER_OPTIONS)
 
 # NOTE: controlled via env vars from Docker.
