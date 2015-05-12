@@ -39,6 +39,6 @@ echo "-----> Installing bower"
 npm install -g bower
 
 echo "-----> Running heroku_post_compile Makefile task"
-make heroku_post_compile
+make heroku_post_compile --debug=v
 
 echo "-----> Post-compile done"
