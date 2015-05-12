@@ -57,6 +57,11 @@ define func-notify-send
 $(if $(NOTIFY_SEND),$(NOTIFY_SEND) $(1),:)
 endef
 
+# Build sass/scss files.
+# They get written to a tmp file first, and only moved on success.
+# The sourcemap reference gets fixed, and "@charset" gets added (for
+# consistency across different Ruby versions).  My "scss" keeps removing
+# them, while another one might add add them again.
 scss: $(CSS_FILES)
 $(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss | $(BOWER_COMPONENTS) $(SCSS_BIN)
 	@echo "SCSS: building $@"
@@ -64,10 +69,12 @@ $(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss | $(BOWER_COMPONENTS) $(SCSS_BIN)
 	$(if $(DEBUG),,@)r=$$($(SCSS_RUN) $< $@.tmp 2>&1) || { \
 		$(call func-notify-send, "scss failed: $$r"); \
 		echo "ERROR: scss failed: $$r"; echo "command: $(SCSS_RUN) $< $@.tmp"; exit 1; } \
-	&& { head -n1 $@.tmp | grep -q "@charset" || sed -i '1 i@charset "UTF-8";' $@.tmp; } \
-	&& sed -i '$ s/\.tmp\.map/.map/' $@.tmp \
+	&& { head -n1 $@.tmp | grep -q "@charset" || { \
+		echo '@charset "UTF-8";' | cat - $@.tmp >$@.tmp2; mv $@.tmp2 $@.tmp; };} \
+	&& sed -i.bak '$$ s/\.tmp\.map/.map/' $@.tmp \
 	&& mv $@.tmp $@ \
-	&& mv $@.tmp.map $@.map
+	&& mv $@.tmp.map $@.map \
+	&& $(RM) $@.tmp.bak
 $(SCSS_DIR)/$(MAIN_SCSS): $(SCSS_DIR)/_settings.scss $(SCSS_COMPONENTS)
 	touch $@
 
