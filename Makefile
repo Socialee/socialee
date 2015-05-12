@@ -52,7 +52,7 @@ SCSS_RUN_NO_SOURCEMAP:=$(SCSS_BIN) --quiet --cache-location /tmp/sass-cache \
 SCSS_RUN:=$(SCSS_RUN_NO_SOURCEMAP) \
 	 $(if $(SCSS_SOURCEMAPS),--sourcemap,)
 
-NOTIFY_SEND:=$(shell which notify-send >/dev/null 2>&1 && echo notify-send || true)
+NOTIFY_SEND:=$(shell command -v notify-send >/dev/null 2>&1 && echo notify-send || true)
 define func-notify-send
 $(if $(NOTIFY_SEND),$(NOTIFY_SEND) $(1),:)
 endef
