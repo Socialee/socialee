@@ -46,7 +46,8 @@ endif
 
 # Install scss through Gemfile.
 SCSS_BIN:=$(BUNDLER_DIR)/bin/scss
-$(SCSS_BIN): $(BUNDLER_BIN)
+$(SCSS_BIN): | $(BUNDLER_BIN) .bundle/config
+.bundle/config:
 	$(BUNDLER_BIN) install --path $(BUNDLER_DIR) --binstubs $(BUNDLER_DIR)/bin
 
 BOWER_COMPONENTS_ROOT:=socialee/static
