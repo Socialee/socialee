@@ -54,7 +54,7 @@ SCSS_RUN:=$(SCSS_RUN_NO_SOURCEMAP) \
 
 NOTIFY_SEND:=$(shell which notify-send >/dev/null 2>&1 && echo notify-send || true)
 define func-notify-send
-$(if $(NOTIFY_SEND),$(NOTIFY_SEND) $(1),)
+$(if $(NOTIFY_SEND),$(NOTIFY_SEND) $(1),:)
 endef
 
 scss: $(CSS_FILES)
