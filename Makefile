@@ -33,7 +33,8 @@ export bower_storage__packages:=$(CACHE_DIR_ABS)/bower/packages
 export bower_storage__registry:=$(CACHE_DIR_ABS)/bower/registry
 
 # Install sass via bundler (Gemfile).
-export GEM_HOME:=$(CACHE_DIR)/gems
+export GEM_HOME:=$(CACHE_DIR)/rubygems
+GEM_PATH:=$(GEM_HOME):$(GEM_PATH)
 BUNDLER_BIN:=$(GEM_HOME)/bin/bundle
 SCSS_BIN:=$(BUNDLER_DIR)/bin/scss
 
