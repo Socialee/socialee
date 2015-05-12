@@ -155,7 +155,7 @@ deploy_check: check test
 deploy: deploy_check static migrate
 
 # Run via bin/post_compile for Heroku.
-heroku_post_compile: check test_heroku static migrate
+heroku_post_compile: check static test_heroku migrate
 
 
 # Requirements files. {{{
