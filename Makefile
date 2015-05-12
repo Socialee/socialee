@@ -78,6 +78,10 @@ $(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss | $(BOWER_COMPONENTS) $(SCSS_BIN)
 $(SCSS_DIR)/$(MAIN_SCSS): $(SCSS_DIR)/_settings.scss $(SCSS_COMPONENTS)
 	touch $@
 
+scss_force:
+	touch $(SCSS_FILES)
+	$(MY_MAKE) scss
+
 run:
 	python manage.py runserver
 
