@@ -5,28 +5,50 @@ PROJECT_ROOT?=$(dir $(or $(shell readlink $(firstword $(MAKEFILE_LIST))), $(firs
 PROJECT_ROOT:=$(PROJECT_ROOT:%/=%)
 PROJECT_ROOT_SRC=$(PROJECT_ROOT)/socialee
 
-DEBUG:=1
-
-export DJANGO_DEBUG?=$(DEBUG)
+# Django settings.
+export DJANGO_DEBUG?=1
+override DJANGO_DEBUG:=$(filter-out 0,$(DJANGO_DEBUG))
 export DJANGO_SETTINGS_MODULE?=config.settings
 
-# TODO: $(filter Dev,$(DJANGO_CONFIGURATION))
-SCSS_SOURCEMAPS:=1
+# Control the make process.
+# Set to 1 for more verbose output, and call `make` with `--debug=v`.
+DEBUG:=0
+override DEBUG:=$(filter-out 0,$(DEBUG))
 
-BUILD_DIR:=$(PROJECT_ROOT)/build
-CACHE_DIR=$(BUILD_DIR)/cache
+# Uncomment this to get more info during the make process.
+MY_MAKE_ARGS?=$(if $(DEBUG), --debug=v,)
+# Allow to pass on global options for all sub-makes.
+MY_MAKE=$(MAKE)$(MY_MAKE_ARGS)
+
+# TODO: $(filter Dev,$(DJANGO_CONFIGURATION))
+SCSS_SOURCEMAPS:=$(DJANGO_DEBUG)
+
+# Pick up CACHE_DIR from Heroku.
+CACHE_DIR?=build/cache
+CACHE_DIR_ABS:=$(abspath $(CACHE_DIR))
 BUNDLER_DIR:=$(CACHE_DIR)/bundler
 
+# Use cache/storage with Bower.
+export bower_storage__packages:=$(CACHE_DIR_ABS)/bower/packages
+export bower_storage__registry:=$(CACHE_DIR_ABS)/bower/registry
+
 # Install sass via bundler (Gemfile).
-export GEM_HOME:=$(CACHE_DIR)/gems
+export GEM_HOME:=$(CACHE_DIR)/rubygems
+GEM_PATH:=$(GEM_HOME):$(GEM_PATH)
+
+# Use existing bundler from PATH, or install it through rubygems.
+BUNDLER_BIN:=$(shell command -v bundle || true)
+ifeq ($(BUNDLER_BIN),)
 BUNDLER_BIN:=$(GEM_HOME)/bin/bundle
-SCSS_BIN:=$(BUNDLER_DIR)/bin/scss
-
-$(SCSS_BIN): $(BUNDLER_BIN)
-	$(BUNDLER_BIN) install --path $(BUNDLER_DIR) --binstubs $(BUNDLER_DIR)/bin
-
 $(BUNDLER_BIN):
 	gem install bundler
+endif
+
+# Install scss through Gemfile.
+SCSS_BIN:=$(BUNDLER_DIR)/bin/scss
+$(SCSS_BIN): | $(BUNDLER_BIN) .bundle/config
+.bundle/config:
+	$(BUNDLER_BIN) install --path $(BUNDLER_DIR) --binstubs $(BUNDLER_DIR)/bin
 
 BOWER_COMPONENTS_ROOT:=socialee/static
 BOWER_COMPONENTS:=$(BOWER_COMPONENTS_ROOT)/bower_components
@@ -43,11 +65,16 @@ SCSS_RUN_NO_SOURCEMAP:=$(SCSS_BIN) --quiet --cache-location /tmp/sass-cache \
 SCSS_RUN:=$(SCSS_RUN_NO_SOURCEMAP) \
 	 $(if $(SCSS_SOURCEMAPS),--sourcemap,)
 
-NOTIFY_SEND:=$(shell which notify-send >/dev/null 2>&1 && echo notify-send || true)
+NOTIFY_SEND:=$(shell command -v notify-send >/dev/null 2>&1 && echo notify-send || true)
 define func-notify-send
-$(if $(NOTIFY_SEND),$(NOTIFY_SEND) $(1),)
+$(if $(NOTIFY_SEND),$(NOTIFY_SEND) $(1),:)
 endef
 
+# Build sass/scss files.
+# They get written to a tmp file first, and only moved on success.
+# The sourcemap reference gets fixed, and "@charset" gets added (for
+# consistency across different Ruby versions).  My "scss" keeps removing
+# them, while another one might add add them again.
 scss: $(CSS_FILES)
 $(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss | $(BOWER_COMPONENTS) $(SCSS_BIN)
 	@echo "SCSS: building $@"
@@ -55,26 +82,35 @@ $(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss | $(BOWER_COMPONENTS) $(SCSS_BIN)
 	$(if $(DEBUG),,@)r=$$($(SCSS_RUN) $< $@.tmp 2>&1) || { \
 		$(call func-notify-send, "scss failed: $$r"); \
 		echo "ERROR: scss failed: $$r"; echo "command: $(SCSS_RUN) $< $@.tmp"; exit 1; } \
-	&& { head -n1 $@.tmp | grep -q "@charset" || sed -i '1 i@charset "UTF-8";' $@.tmp; } \
-	&& sed -i '$ s/\.tmp\.map/.map/' $@.tmp \
+	&& { head -n1 $@.tmp | grep -q "@charset" || { \
+		echo '@charset "UTF-8";' | cat - $@.tmp >$@.tmp2; mv $@.tmp2 $@.tmp; };} \
+	$(if $(SCSS_SOURCEMAPS),\
+		&& sed -i.bak '$$ s/\.tmp\.map/.map/' $@.tmp \
+		&& mv $@.tmp.map $@.map,) \
 	&& mv $@.tmp $@ \
-	&& mv $@.tmp.map $@.map
+	&& $(RM) $@.tmp.bak
 $(SCSS_DIR)/$(MAIN_SCSS): $(SCSS_DIR)/_settings.scss $(SCSS_COMPONENTS)
 	touch $@
+
+scss_force:
+	touch $(SCSS_FILES)
+	$(MY_MAKE) scss
 
 run:
 	python manage.py runserver
 
 # Install bower components.
 bower_install:
-	# Create the bower_components folder manually. "bower install" does not respect umask/acl!
-	# NOTE: messed up because of umask not being effective from /.bashrc (in Docker)?
+	@# Create the bower_components folder manually. "bower install" does not respect umask/acl!
+	@# NOTE: messed up because of umask not being effective from /.bashrc (in Docker)?
 	mkdir -p -m 775 $(BOWER_COMPONENTS)
+	@# Create registry cache for bower manually, otherwise it fails silently.
+	mkdir -p $(bower_storage__registry)
 	cd $(BOWER_COMPONENTS_ROOT) && bower install $(BOWER_OPTIONS)
 
 # NOTE: controlled via env vars from Docker.
 $(BOWER_COMPONENTS): $(BOWER_COMPONENTS_ROOT)/bower.json
-	make bower_install
+	$(MY_MAKE) bower_install
 	touch $@
 
 static: $(BOWER_COMPONENTS) scss collectstatic
@@ -87,11 +123,20 @@ collectstatic: $(BOWER_COMPONENTS)
 migrate:
 	python manage.py migrate
 
+TOX_BIN=$(shell command -v tox || true)
+install_testing_req:
+	pip install -r requirements/testing.txt
 
 # TODO: look at $(DATABASE_URL) to use py34-psql/py34-sqlite.
-test:
+test: $(if $(TOX_BIN),,install_testing_req)
 	tox -e py34-psql
 	@# tox -e py34
+
+test_heroku:
+	@# tox fails to build Pillow on Heroku.
+	@# Fails, because it cannot connect to "postgres"; https://code.djangoproject.com/ticket/16969
+	@# DATABASE_URL=$(HEROKU_POSTGRESQL_MAUVE_URL) py.test --strict -r fEsxXw tests
+	DATABASE_URL=sqlite:///:memory: py.test --strict -r fEsxXw tests
 
 test_sqlite:
 	tox -e py34-sqlite
@@ -119,7 +164,7 @@ deploy_check: check test
 deploy: deploy_check static migrate
 
 # Run via bin/post_compile for Heroku.
-deploy_heroku: deploy
+heroku_post_compile: check static test_heroku migrate
 
 
 # Requirements files. {{{
@@ -141,7 +186,7 @@ PIP_REQUIREMENTS_ALL:=$(PIP_REQUIREMENTS_BASE) $(PIP_REQUIREMENTS_DEV) $(PIP_REQ
 requirements: $(PIP_REQUIREMENTS_ALL)
 requirements_rebuild:
 	$(RM) $(PIP_REQUIREMENTS_ALL)
-	make requirements
+	$(MY_MAKE) requirements
 
 # Compile/build requirements.txt files from .in files, using pip-compile.
 $(PIP_REQUIREMENTS_DIR)/%.txt: $(PIP_REQUIREMENTS_DIR)/%.in
