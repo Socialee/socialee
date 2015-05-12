@@ -5,10 +5,19 @@ PROJECT_ROOT?=$(dir $(or $(shell readlink $(firstword $(MAKEFILE_LIST))), $(firs
 PROJECT_ROOT:=$(PROJECT_ROOT:%/=%)
 PROJECT_ROOT_SRC=$(PROJECT_ROOT)/socialee
 
-DEBUG:=1
-
-export DJANGO_DEBUG?=$(DEBUG)
+# Django settings.
+export DJANGO_DEBUG?=1
 export DJANGO_SETTINGS_MODULE?=config.settings
+
+# Control the make process.
+# Set to 1 for more verbose output, and call `make` with `--debug=v`.
+DEBUG:=0
+override DEBUG:=$(filter-out 0,$(DEBUG))
+
+# Uncomment this to get more info during the make process,
+MY_MAKE_ARGS?=$(if $(DEBUG), --debug=v,)
+# Allow to pass on global options for all sub-makes.
+MY_MAKE=$(MAKE)$(MY_MAKE_ARGS)
 
 # TODO: $(filter Dev,$(DJANGO_CONFIGURATION))
 SCSS_SOURCEMAPS:=1
@@ -74,7 +83,7 @@ bower_install:
 
 # NOTE: controlled via env vars from Docker.
 $(BOWER_COMPONENTS): $(BOWER_COMPONENTS_ROOT)/bower.json
-	make bower_install
+	$(MY_MAKE) bower_install
 	touch $@
 
 static: $(BOWER_COMPONENTS) scss collectstatic
@@ -150,7 +159,7 @@ PIP_REQUIREMENTS_ALL:=$(PIP_REQUIREMENTS_BASE) $(PIP_REQUIREMENTS_DEV) $(PIP_REQ
 requirements: $(PIP_REQUIREMENTS_ALL)
 requirements_rebuild:
 	$(RM) $(PIP_REQUIREMENTS_ALL)
-	make requirements
+	$(MY_MAKE) requirements
 
 # Compile/build requirements.txt files from .in files, using pip-compile.
 $(PIP_REQUIREMENTS_DIR)/%.txt: $(PIP_REQUIREMENTS_DIR)/%.in
