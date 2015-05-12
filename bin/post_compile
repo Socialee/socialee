@@ -3,40 +3,41 @@
 # post_compile: install nodejs/npm to install bower.
 # Then run the "heroku_post_compile" Makeifile task.
 #
+# The post_compile hook is run by heroku-buildpack-python.
+
 # Derived from https://gist.github.com/jiaaro/e76a776852a68106340a.
 
-set -veo pipefail
-
-# The post_compile hook is run by heroku-buildpack-python
+set -eo pipefail
 
 echo "-----> Running post-compile hook"
 
-echo "-----> Installing nodejs"
+if ! [ -f .heroku/python/bin/bower ]; then
+  echo "-----> Installing nodejs/npm for bower"
+  NODE_VERSION=$(curl --silent --get https://semver.io/node/stable)
+  NODE_BASENAME=node-v${NODE_VERSION}-linux-x64
+  NODE_ARCHIVE="http://nodejs.org/dist/v${NODE_VERSION}/${NODE_BASENAME}.tar.gz"
 
-NODE_VERSION=$(curl --silent --get https://semver.io/node/stable)
-NODE_BASENAME=node-v${NODE_VERSION}-linux-x64
-NODE_ARCHIVE="http://nodejs.org/dist/v${NODE_VERSION}/${NODE_BASENAME}.tar.gz"
+  tempdir="$(mktemp -d -t node_XXXX)"
 
-tempdir="$(mktemp -d -t node_XXXX)"
+  pushd $tempdir
+  curl -s -L -o tmp-nodejs.tar.gz $NODE_ARCHIVE
+  tar -zxvf tmp-nodejs.tar.gz > /dev/null
+  rm tmp-nodejs.tar.gz
+  popd
 
-pushd $tempdir
-curl -s -L -o tmp-nodejs.tar.gz $NODE_ARCHIVE
-tar -zxvf tmp-nodejs.tar.gz > /dev/null
-rm tmp-nodejs.tar.gz
-popd
+  mkdir -v -p $BUILD_DIR/.heroku/vendor
+  pushd $BUILD_DIR/.heroku/vendor
+  rm -rf node
+  mv $tempdir/$NODE_BASENAME node
+  popd
 
-mkdir -v -p $BUILD_DIR/.heroku/vendor
-pushd $BUILD_DIR/.heroku/vendor
-rm -rf node
-mv $tempdir/$NODE_BASENAME node
-popd
+  ln -sf ../../vendor/node/bin/node .heroku/python/bin/node
+  ln -sf ../../vendor/node/bin/node-waf .heroku/python/bin/node-waf
+  ln -sf ../../vendor/node/bin/npm .heroku/python/bin/npm
 
-ln -sf ../../vendor/node/bin/node .heroku/python/bin/node
-ln -sf ../../vendor/node/bin/node-waf .heroku/python/bin/node-waf
-ln -sf ../../vendor/node/bin/npm .heroku/python/bin/npm
-
-echo "-----> Installing bower"
-npm install -g bower
+  echo "-----> Installing bower"
+  npm install -g bower
+fi
 
 echo "-----> Running heroku_post_compile Makefile task"
 make heroku_post_compile --debug=v
