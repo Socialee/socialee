@@ -78,9 +78,10 @@ $(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss | $(BOWER_COMPONENTS) $(SCSS_BIN)
 		echo "ERROR: scss failed: $$r"; echo "command: $(SCSS_RUN) $< $@.tmp"; exit 1; } \
 	&& { head -n1 $@.tmp | grep -q "@charset" || { \
 		echo '@charset "UTF-8";' | cat - $@.tmp >$@.tmp2; mv $@.tmp2 $@.tmp; };} \
-	&& sed -i.bak '$$ s/\.tmp\.map/.map/' $@.tmp \
+	$(if $(SCSS_SOURCEMAPS),\
+		&& sed -i.bak '$$ s/\.tmp\.map/.map/' $@.tmp \
+		&& mv $@.tmp.map $@.map,) \
 	&& mv $@.tmp $@ \
-	&& mv $@.tmp.map $@.map \
 	&& $(RM) $@.tmp.bak
 $(SCSS_DIR)/$(MAIN_SCSS): $(SCSS_DIR)/_settings.scss $(SCSS_COMPONENTS)
 	touch $@
