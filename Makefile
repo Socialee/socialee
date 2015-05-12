@@ -122,7 +122,7 @@ collectstatic: $(BOWER_COMPONENTS)
 migrate:
 	python manage.py migrate
 
-TOX_BIN=$(command -v tox)
+TOX_BIN=$(shell command -v tox || true)
 install_testing_req:
 	pip install -r requirements/testing.txt
 
