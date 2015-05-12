@@ -1,5 +1,5 @@
-@include settings;
-// @include foundation;
+@import "settings";
+@import "foundation/scss/foundation";
 
 // Behold, here are all the Foundation components.
 // @import "foundation/components/grid";
@@ -38,3 +38,10 @@
 // @import "foundation/components/type";
 // @import "foundation/components/offcanvas";
 // @import "foundation/components/visibility";
+
+body{
+	background-color: #f89406;
+}
+.socialee-mega h1 {
+	font-size: 10em;
+}
