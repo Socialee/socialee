@@ -7,6 +7,7 @@ PROJECT_ROOT_SRC=$(PROJECT_ROOT)/socialee
 
 # Django settings.
 export DJANGO_DEBUG?=1
+override DJANGO_DEBUG:=$(filter-out 0,$(DJANGO_DEBUG))
 export DJANGO_SETTINGS_MODULE?=config.settings
 
 # Control the make process.
@@ -20,7 +21,7 @@ MY_MAKE_ARGS?=$(if $(DEBUG), --debug=v,)
 MY_MAKE=$(MAKE)$(MY_MAKE_ARGS)
 
 # TODO: $(filter Dev,$(DJANGO_CONFIGURATION))
-SCSS_SOURCEMAPS:=1
+SCSS_SOURCEMAPS:=$(DJANGO_DEBUG)
 
 # Pick up CACHE_DIR from Heroku.
 CACHE_DIR?=build/cache
