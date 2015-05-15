@@ -15,6 +15,10 @@ export DJANGO_SETTINGS_MODULE?=config.settings
 DEBUG:=0
 override DEBUG:=$(filter-out 0,$(DEBUG))
 
+
+# Default target.
+all: dev
+
 # Uncomment this to get more info during the make process.
 MY_MAKE_ARGS?=$(if $(DEBUG), --debug=v,)
 # Allow to pass on global options for all sub-makes.
@@ -70,6 +74,7 @@ define func-notify-send
 $(if $(NOTIFY_SEND),$(NOTIFY_SEND) $(1),:)
 endef
 
+
 # Build sass/scss files.
 # They get written to a tmp file first, and only moved on success.
 # The sourcemap reference gets fixed, and "@charset" gets added (for
@@ -98,6 +103,10 @@ scss_force:
 
 run:
 	python manage.py runserver
+
+# Main target for development.
+# TODO: start tmux with watch process.
+dev: migrate run
 
 # Install bower components.
 bower_install:
