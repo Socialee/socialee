@@ -39,9 +39,34 @@
 // @import "foundation/components/offcanvas";
 // @import "foundation/components/visibility";
 
-body{
-	background-color: #f89406;
+body {
+  background: url(../img/landingpage_bg/Anton.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  overflow: hidden;
 }
-.socialee-mega h1 {
-	font-size: 10em;
+
+.off-canvas-wrap {
+  .inner-wrap{
+    min-height: 100vh;
+  }
+}
+
+#welcome_text{
+  h1 {
+    color: black;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    font-weight: 100;
+    font-size: 68px;
+    line-height: 1.2em;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  position: relative;
+  top: 200px;
 }

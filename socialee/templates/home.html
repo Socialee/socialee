@@ -2,8 +2,57 @@
 
 {% block content %}
 
-<div class="socialee-mega">
+    <!-- Optional Classes: [callout radius] -->
 
+<div class="off-canvas-wrap" data-offcanvas>
+<div class="inner-wrap">
+  <nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name"><h1><a href="#">Socialee</a></h1></li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+  </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <li><a href="#">Log In</a></li>
+            <li class="divider"></li>
+            <li><a class="right-off-canvas-toggle menu-icon" href="#"><span></span>Menü</a></li>
+          </li>
+        </ul>
+    </section>
+  </nav>
+    <aside class="right-off-canvas-menu">
+      <ul class="off-canvas-list">
+        <li><a href="#">Leg los!</a></li>
+        <li><a href="#">Schau Dich um.</a></li>
+        <li><a href="#">Manifest</a></li>
+        <li><a href="#">User Stories</a></li>
+        <li><a href="#">About Socialee</a></li>
+      </ul>
+    </aside>
+
+
+<section class="main-section">
+
+<div class="row">
+  <div class="medium-3 medium-offset-1 columns">
+    <div id="welcome_text">
+      <h1>Make it<br/>beautiful</h1>
+      <h3>Socialee | the SOCIAL network</h3>
+      <br/>
+      <p class="text-justify">Wir glauben, dass sogar die wildesten Ideen wahr werden sollten.</p>
+      <p class="text-justify">Mit Socialee geht das ganz einfach. Sieh Dir an, wie wir mit Neil zusammenarbeiten, um seine Idee zu realisieren.</p>
+      <a href="#" data-reveal-id="logInModal" class="button radius">Mach mit!</a>
+
+    </div>
+  </div>
+</div>
+
+{% include "login_modal.html" %}
+{% include "signin_modal.html" %}
+
+<a class="exit-off-canvas"></a>
+</section>
+</div>
 </div>
 
 {% endblock %}
