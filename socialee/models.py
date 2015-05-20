@@ -8,16 +8,14 @@ from django.utils.translation import ugettext_lazy as _
 
 class Profile(models.Model):
     user = models.OneToOneField(User, blank=True, null=True)
-    username = models.CharField(max_length=50, blank=True, null=True,
+    nickname = models.CharField(max_length=50, blank=True, null=True,
                                 unique=True)
     firstname = models.CharField(max_length=100, blank=True)
     lastname = models.CharField(max_length=100, blank=True)
     email = models.EmailField()
-    # TODO: PhoneField
+    # TODO: dh> "PhoneField" (Validierung etc)
     phone = models.CharField(max_length=50, blank=True)
-    # mj> plz = models.DecimalField(max_digits=5, decimal_places=0,
-    #                               null=True, blank=True, default='10969')
-    # dh> Should be CharField
+    plz = models.CharField(max_length=5, null=True, blank=True, default='10969')
     # mj> geburtsdatum = models.DateField(auto_now=False, auto_now_add=False,
     #                                     blank=True, null=True)
     newsletter = models.BooleanField(default=False)
@@ -55,8 +53,9 @@ class Zettel(models.Model):
 
     profile = models.ForeignKey(Profile)
     image = models.ImageField(upload_to='zettel/%Y-%m/', blank=True)
-    number = models.PositiveIntegerField(blank=True, null=True,
-                                         verbose_name=_("Number on the zettel"))
+    number = models.CharField(blank=True, null=True, max_length=50,
+                              default="2015_000_0000",
+                              verbose_name=_("Number on the zettel"))
     inputs = models.ManyToManyField(Input)
     outputs = models.ManyToManyField(Output)
 
