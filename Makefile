@@ -61,7 +61,7 @@ MAIN_SCSS:=socialee.scss
 
 SCSS_DIR=$(PROJECT_ROOT_SRC)/static/scss
 CSS_DIR=$(PROJECT_ROOT_SRC)/static/css
-SCSS_FILES=$(addprefix $(SCSS_DIR)/, $(MAIN_SCSS))
+SCSS_FILES=$(addprefix $(SCSS_DIR)/, $(MAIN_SCSS) admin.scss)
 CSS_FILES=$(patsubst $(SCSS_DIR)/%.scss,$(CSS_DIR)/%.css,$(SCSS_FILES))
 SCSS_COMPONENTS:=$(wildcard $(BOWER_COMPONENTS)/foundation/scss/foundation/components/*.scss)
 SCSS_RUN_NO_SOURCEMAP:=$(SCSS_BIN) --quiet --cache-location /tmp/sass-cache \
