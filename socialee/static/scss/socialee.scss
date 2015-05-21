@@ -54,19 +54,41 @@ body {
   }
 }
 
-#welcome_text{
+#welcome_text_div{
   h1 {
-    color: black;
-    text-transform: uppercase;
-    letter-spacing: 8px;
-    font-weight: 100;
-    font-size: 68px;
+    //text-transform: uppercase;
+    //letter-spacing: 6px;
+    font-weight: 300;
+    font-size: 56px;
     line-height: 1.2em;
   }
   h3 {
     font-size: 18px;
     font-weight: 600;
   }
-  position: relative;
-  top: 200px;
+  p {
+    color: #222222;
+  }
+  // position: relative;
+  // top: 160px;
 }
+
+.socialee-button { 
+    @include button(); 
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.8em;
+    padding: 12px 25px;
+    font-weight: 400;
+    border-radius: 3px;
+    }
+
+.top-bar-section ul li {
+  background: rgba(#fff, .0);
+}
+
+.top-bar-section li:not(.has-form) a:not(.button):hover {
+  background: rgba(#f89406, .0);
+  font-weight: bolder;
+}
+
