@@ -58,7 +58,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 class ProfileErfassungsAdmin(admin.ModelAdmin):
-    search_fields = ['email', 'lastname', 'firstname']
+    search_fields = ['user__username', 'email', 'lastname', 'firstname']
     list_display = ['__str__', 'firstname', 'lastname', 'email']
     inlines = [
         InputProfileInline, OutputProfileInline
