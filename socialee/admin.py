@@ -37,11 +37,7 @@ class ProfileAdmin(admin.ModelAdmin):
     ]
 
 
-class ProfileErfassungsAdmin(ProfileAdmin):
-    exclude = ('user', 'username')
-
-
 admin.site.register(Input, InputAdmin)
 admin.site.register(Output, OutputAdmin)
-admin.site.register(Profile, ProfileErfassungsAdmin)
+admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Zettel, ZettelAdmin)
