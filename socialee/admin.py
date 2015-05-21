@@ -44,6 +44,9 @@ class OutputAdmin(admin.ModelAdmin):
 
 class ZettelAdmin(admin.ModelAdmin):
     model = Zettel
+    search_fields = ['profile__user__username', 'profile__email', 'profile__lastname','profile__firstname', 'number', 'origin__location']
+    list_filter = ['origin', 'origin__location']
+    list_display = ['__str__', 'image', 'origin']
     inlines = [
         InputZettelInline, OutputZettelInline
     ]
@@ -59,6 +62,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
 class ProfileErfassungsAdmin(admin.ModelAdmin):
     search_fields = ['user__username', 'email', 'lastname', 'firstname']
+    list_filter = ['plz', 'newsletter','zettel__origin__location']
     list_display = ['__str__', 'firstname', 'lastname', 'email']
     inlines = [
         InputProfileInline, OutputProfileInline
