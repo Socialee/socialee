@@ -153,9 +153,6 @@ test_heroku:
 	@# DATABASE_URL=$(HEROKU_POSTGRESQL_MAUVE_URL) py.test --strict -r fEsxXw tests
 	DATABASE_URL=sqlite:///:memory: py.test --strict -r fEsxXw tests
 
-test_sqlite:
-	tox -e py34-sqlite
-
 checkqa:
 	tox -e checkqa
 
