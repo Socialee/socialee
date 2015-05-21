@@ -8,8 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class Profile(models.Model):
     user = models.OneToOneField(User, blank=True, null=True)
-    nickname = models.CharField(max_length=50, blank=True, null=True,
-                                unique=True)
+    nickname = models.CharField(max_length=50, blank=True, null=True)
     firstname = models.CharField(max_length=100, blank=True)
     lastname = models.CharField(max_length=100, blank=True)
     email = models.EmailField()
