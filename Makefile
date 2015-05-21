@@ -136,10 +136,16 @@ TOX_BIN=$(shell command -v tox || true)
 install_testing_req:
 	pip install -r requirements/testing.txt
 
-# TODO: look at $(DATABASE_URL) to use py34-psql/py34-sqlite.
+# Default test target: install reqs, and call test_psql/test_sqlite.
 test: $(if $(TOX_BIN),,install_testing_req)
+# look at $(DATABASE_URL) to use py34-psql/py34-sqlite.
+test: $(if $(findstring postgresql:,$(DATABASE_URL)),test_psql,test_sqlite)
+
+test_sqlite:
+	tox -e py34-sqlite
+
+test_psql:
 	tox -e py34-psql
-	@# tox -e py34
 
 test_heroku:
 	@# tox fails to build Pillow on Heroku.
