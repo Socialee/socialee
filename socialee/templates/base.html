@@ -12,6 +12,11 @@
     <title>Socialee | coming soon</title>
 
     <link rel="stylesheet" href="{% static "css/socialee.css" %}">
+
+    <!-- Slick Slider CSS -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.5/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.5/slick-theme.css"/>
+
   </head>
   <body>
 
@@ -23,24 +28,29 @@
     <script src="{% static "bower_components/foundation/js/foundation/foundation.topbar.js" %}"></script>
     <script src="{% static "bower_components/foundation/js/foundation/foundation.offcanvas.js" %}"></script>
     <script src="{% static "bower_components/foundation/js/foundation/foundation.reveal.js" %}"></script>
+    <script src="{% static "bower_components/foundation/js/foundation/foundation.joyride.js" %}"></script>
     {# <script src="{% static "bower_components/foundation/js/foundation/foundation.alert.js" %}"></script> #}
     {# <script src="{% static "bower_components/foundation/js/foundation/foundation.reveal.js" %}"></script> #}
 
     {# <script src="{% static "js/main.js" %}"></script> #}
 
+    <!-- Foundation -->
     <script>
-      $(document).foundation({
-    offcanvas : {
-    // Sets method in which offcanvas opens.
-    // [ move | overlap_single | overlap ]
-    open_method: 'move', 
-    // Should the menu close when a menu link is clicked?
-    // [ true | false ]
-    close_on_click : false
-  }
-  });
+    $(document).foundation({
+            offcanvas : {
+            // Sets method in which offcanvas opens.
+            // [ move | overlap_single | overlap ]
+            open_method: 'move', 
+            // Should the menu close when a menu link is clicked?
+            // [ true | false ]
+            close_on_click : false
+          }
+        });
+    $(document).foundation('joyride', 'start');
     </script>
 
+    <!-- Slick Slider JS -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.5/slick.min.js"></script>
 
   </body>
 </html>

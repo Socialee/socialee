@@ -1,56 +1,63 @@
 {% extends "base.html" %}
-
 {% block content %}
 
-    <!-- Optional Classes: [callout radius] -->
-
 <div class="off-canvas-wrap" data-offcanvas>
-<div class="inner-wrap">
-  <nav class="top-bar" data-topbar role="navigation">
-  <ul class="title-area">
-    <li class="name"><h1><a href="#">Socialee</a></h1></li>
-    <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
-  </ul>
-      <section class="top-bar-section">
-        <ul class="right">
-          <li><a href="#">Log In</a></li>
-            <li class="divider"></li>
-            <li><a class="right-off-canvas-toggle menu-icon" href="#"><span></span>Menü</a></li>
-          </li>
-        </ul>
-    </section>
-  </nav>
+  <div class="inner-wrap">
+
+    <!-- Off Canvas Menu -->
     <aside class="right-off-canvas-menu">
-      <ul class="off-canvas-list">
-        <li><a href="#">Leg los!</a></li>
-        <li><a href="#">Schau Dich um.</a></li>
-        <li><a href="#">Manifest</a></li>
-        <li><a href="#">User Stories</a></li>
-        <li><a href="#">About Socialee</a></li>
-      </ul>
+        <ul class="off-canvas-list">
+          <li><a href="#" data-reveal-id="signInModal" class="button offcanvas-button">Get started!</a></li>
+          <li><a href="#">Take Tour</a></li>
+          <li><a href="#">Manifest</a></li>
+          <li><a href="#">User Stories</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Social</a></li>
+          <li><a href="#">Kontakt</a></li>
+          <li><a href="#">Presse</a></li>
+          <li><a href="#">Impressum</a></li>
+        </ul>
     </aside>
-
-
-<section class="main-section">
-<div class="row"><br/><br/><br/><br/><br/><br/><br/><br/><br/></div>
-<div class="row">
-  <div class="small-6 medium-4 large-3 large-offset-2 medium-offset-1 columns">
-    <div id="welcome_text_div" class="text-justify">
-      <h1>Make it<br/>beautiful.</h1>
-      <h3>Socialee | the SOCIAL network</h3>
-      <p>Wir glauben, dass sogar die wildesten Ideen wahr werden sollten. Mit Socialee geht das ganz einfach. Sieh Dir an, wie wir mit Neil zusammenarbeiten, um seine Idee zu realisieren.</p>
-      <a href="#" data-reveal-id="logInModal" class="socialee-button">Neils Idee!</a>
-
+    {% include "navbar.html" %}
+    <!-- main content starts here -->
+    <div class="row">
+      <div class="small-6 medium-4 large-3 large-offset-2 medium-offset-1 columns">
+        <div class="text-justify" id="welcome_text_wrap">
+          <h1 id="firstStop">Make it<br/>beautiful.</h1>
+          <h3>Socialee | the SOCIAL network</h3>
+          <p>Wir glauben, dass sogar die wildesten Ideen wahr werden sollten. Mit Socialee geht das ganz einfach. Sieh Dir an, wie wir mit Neil zusammenarbeiten, um seine Idee zu realisieren.</p>
+          <a href="#" class="socialee-button">Neils Zettel!</a>
+          <a class="show-for-medium-up" href="#" data-reveal-id="signInModal" id="mach_mit">Mach mit</a>
+        </div>
+      </div>
     </div>
+
+  <!-- close the off-canvas menu -->
+  <a class="exit-off-canvas"></a>
+
   </div>
 </div>
 
+<ol class="joyride-list" data-joyride>
+  <li data-id="firstStop" data-text="weiter" data-options="tip_location: top; prev_button: false">
+    <h4>Hallo!</h4>
+    <p>Hier kommt die beta-Version von Socialee!</p>
+  </li>
+  <li data-id="secondStop" data-text="weiter" data-prev-text="zurück" data-options="tip_location: top">
+    <h4>Yeah,</h4>
+    <p>das ist ja wohl total geil dieses Ding hier :-)</p>
+  </li>
+  <li data-id="thirdStop" data-button="weiter" data-prev-text="zurück" data-options="tip_location: top">
+    <h4>Oh ja,</h4>
+    <p>wir machen das jetzt mal!</p>
+  </li>
+  <li data-button="End" data-prev-text="Prev">
+    <h4>So...</h4>
+    <p>Genug getestet. Toll, dass Du da bist!</p>
+  </li>
+</ol>
+
 {% include "login_modal.html" %}
 {% include "signin_modal.html" %}
-
-<a class="exit-off-canvas"></a>
-</section>
-</div>
-</div>
-
 {% endblock %}

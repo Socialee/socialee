@@ -45,7 +45,7 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  overflow: hidden;
+  //overflow: hidden;
 }
 
 .off-canvas-wrap {
@@ -54,23 +54,22 @@ body {
   }
 }
 
-#welcome_text_div{
+#welcome_text_wrap{
   h1 {
-    //text-transform: uppercase;
-    //letter-spacing: 6px;
     font-weight: 300;
     font-size: 56px;
     line-height: 1.2em;
+    color: $jet;
   }
   h3 {
     font-size: 18px;
     font-weight: 600;
   }
   p {
-    color: #222222;
+    color: $tuatara;
   }
-  // position: relative;
-  // top: 160px;
+  top:70%;
+  margin-top:70%;
 }
 
 .socialee-button { 
@@ -83,12 +82,41 @@ body {
     border-radius: 3px;
     }
 
-.top-bar-section ul li {
-  background: rgba(#fff, .0);
+.offcanvas-button {
+  background-color: transparent;
+  border: 1px solid white !important;
+  border-radius: 3px;
+  padding: 10px;
+  margin: 12px 28px;
+  text-transform: uppercase;
 }
 
-.top-bar-section li:not(.has-form) a:not(.button):hover {
-  background: rgba(#f89406, .0);
-  font-weight: bolder;
+
+nav.top-bar:not(.expanded) {
+  text-align: center;
+    section.top-bar-section { 
+      display: inline-block; 
+  }
+    section.nav-right {
+      float: right;
+  }
 }
+
+.nav-middle li a {
+  margin: 0 25px 0 25px;
+}
+
+#mach_mit {
+  position: relative;
+  top: 16px;
+  margin-left: 16px;
+  text-decoration: underline;
+  text-transform: uppercase;
+  float: right;
+}
+
+
+
+
+
 
