@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    {# The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags #}
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="">
@@ -32,52 +32,6 @@
     <script src="{% static "bower_components/slick.js/slick/slick.js" %}"></script>
     {# Socialee Custom js #}
     <script src="{% static "js/main.js" %}"></script>
-
-    <script>
-    $(document).ready(function() {
-        $(document).foundation({
-            offcanvas : {
-            // Sets method in which offcanvas opens.
-            // [ move | overlap_single | overlap ]
-            open_method: 'move', 
-            // Should the menu close when a menu link is clicked?
-            // [ true | false ]
-            close_on_click : false
-          }
-        });
-        //$(document).foundation('joyride', 'start');
-        $('#fullpage_wrapper').fullpage({
-            anchors:['first', 'zettel', 'kontakt']
-        });
-        $('.socialee-lp-slider').slick({
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 3000,
-          speed: 3000,
-          arrows: false,
-          fade: true,
-        });
-        $('.zettel-slide-left').slick({
-          slidesToShow: 1,
-          vertical: true,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 3000,
-          speed: 3000,
-          arrows: true,
-        });
-        $('.zettel-slide-right').slick({
-          slidesToShow: 1,
-          vertical: true,
-          slidesToScroll: 1,
-          autoplay: true,
-          autoplaySpeed: 3000,
-          speed: 3000,
-          arrows: true,
-        });
-    });
-    </script>
 
   </body>
 </html>
