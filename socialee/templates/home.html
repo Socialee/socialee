@@ -23,35 +23,47 @@
 
     <!-- main content starts here -->
     <div id="fullpage_wrapper">
-    <div class="section" id="lp_section">
-    {% include "socialee_lp_slider.html" %}
-    <div class="row">
-      <div class="small-6 medium-4 large-5 large-offset-2 medium-offset-1 columns">
-        <div id="welcome_text">
-          <h1>Make it beautiful.</h1>
-          <h3>Socialee | the SOCIAL network</h3>
-          <p class="large-10 colums">Wir glauben, dass sogar die wildesten Ideen wahr werden sollten. Mit Socialee geht das ganz einfach. Sieh Dir an, wie wir mit Neil zusammenarbeiten, um seine Idee zu realisieren.</p>
-          <a href="#" class="socialee-button left">Neils Zettel!</a>
-          <a class="show-for-large-up" href="#" data-reveal-id="signInModal" id="mach_mit">Mach mit</a>
+
+      <div class="section">
+        {% include "socialee_lp_slider.html" %}
+        <div class="row">
+          <div class="small-6 medium-4 large-5 large-offset-2 medium-offset-1 columns">
+            <div id="welcome_text">
+              <h1>Make it beautiful.</h1>
+              <h3>Socialee | the SOCIAL network</h3>
+              <p class="large-10 colums show-for-medium-up">Wir glauben, dass sogar die wildesten Ideen wahr werden sollten. Mit Socialee geht das ganz einfach. Sieh Dir an, wie wir mit Neil zusammenarbeiten, um seine Idee zu realisieren.</p>
+              <a href="#" class="socialee-button left">Neils Zettel!</a>
+              <a class="show-for-large-up" href="#" data-reveal-id="signInModal" id="mach_mit">Mach mit</a>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    </div>
 
       <div class="row section">
-        <div class="small-9 small-centered columns zettel-wrap">
+
+        <div class="small-8 small-centered columns zettel-wrap">
+
           <div class="small-6 columns zettel-inner-wrap">
-            <p>Input</p>
+            <div class="zettel-slide-left">
+              <div class="zettel-img"><img src="../static/img/zettel/000_li.jpg"/></div>
+              <div class="zettel-img"><img src="../static/img/zettel/000_li.jpg"/></div>
+              <div class="zettel-img"><img src="../static/img/zettel/000_li.jpg"/></div>
+            </div>
           </div>
+
           <div class="small-6 columns zettel-inner-wrap">
-            <p>Output</p>
+            <div class="zettel-slide-right">
+              <div class="zettel-img"><img src="../static/img/zettel/000_re.jpg"/></div>
+              <div class="zettel-img"><img src="../static/img/zettel/000_re.jpg"/></div>
+              <div class="zettel-img"><img src="../static/img/zettel/000_re.jpg"/></div>
+            </div>
           </div>
+
         </div>
       </div>
-
     </div>
-  <!-- close the off-canvas menu -->
-  <a class="exit-off-canvas"></a>
+    <!-- close the off-canvas menu -->
+    <a class="exit-off-canvas"></a>
   </div>
 </div>
 
@@ -77,4 +89,5 @@
 
 {% include "login_modal.html" %}
 {% include "signin_modal.html" %}
+
 {% endblock %}

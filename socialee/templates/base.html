@@ -33,7 +33,6 @@
     {# Socialee Custom js #}
     <script src="{% static "js/main.js" %}"></script>
 
-    {# Foundation #}
     <script>
     $(document).ready(function() {
         $(document).foundation({
@@ -58,6 +57,24 @@
           speed: 3000,
           arrows: false,
           fade: true,
+        });
+        $('.zettel-slide-left').slick({
+          slidesToShow: 1,
+          vertical: true,
+          slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 3000,
+          speed: 3000,
+          arrows: true,
+        });
+        $('.zettel-slide-right').slick({
+          slidesToShow: 1,
+          vertical: true,
+          slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 3000,
+          speed: 3000,
+          arrows: true,
         });
     });
     </script>
