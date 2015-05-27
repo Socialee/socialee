@@ -11,11 +11,8 @@
     <link rel="icon" href="">
     <title>Socialee | coming soon</title>
 
+    {# Custom Socialee CSS #}
     <link rel="stylesheet" href="{% static "css/socialee.css" %}">
-
-    <!-- Slick Slider CSS -->
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.5/slick.css"/>
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.5.5/slick-theme.css"/>
 
   </head>
   <body>
@@ -29,14 +26,17 @@
     <script src="{% static "bower_components/foundation/js/foundation/foundation.offcanvas.js" %}"></script>
     <script src="{% static "bower_components/foundation/js/foundation/foundation.reveal.js" %}"></script>
     <script src="{% static "bower_components/foundation/js/foundation/foundation.joyride.js" %}"></script>
-    {# <script src="{% static "bower_components/foundation/js/foundation/foundation.alert.js" %}"></script> #}
-    {# <script src="{% static "bower_components/foundation/js/foundation/foundation.reveal.js" %}"></script> #}
+    {# fullPage JS #}
+    <script src="{% static "bower_components/fullpage.js/jquery.fullPage.js" %}"></script>
+    {# Slick Slider JS #}
+    <script src="{% static "bower_components/slick.js/slick/slick.js" %}"></script>
+    {# Socialee Custom js #}
+    <script src="{% static "js/main.js" %}"></script>
 
-    {# <script src="{% static "js/main.js" %}"></script> #}
-
-    <!-- Foundation -->
+    {# Foundation #}
     <script>
-    $(document).foundation({
+    $(document).ready(function() {
+        $(document).foundation({
             offcanvas : {
             // Sets method in which offcanvas opens.
             // [ move | overlap_single | overlap ]
@@ -46,11 +46,21 @@
             close_on_click : false
           }
         });
-    $(document).foundation('joyride', 'start');
+        //$(document).foundation('joyride', 'start');
+        $('#fullpage_wrapper').fullpage({
+            anchors:['first', 'zettel', 'kontakt']
+        });
+        $('.socialee-lp-slider').slick({
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 3000,
+          speed: 3000,
+          arrows: false,
+          fade: true,
+        });
+    });
     </script>
-
-    <!-- Slick Slider JS -->
-    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.5.5/slick.min.js"></script>
 
   </body>
 </html>
