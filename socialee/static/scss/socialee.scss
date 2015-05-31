@@ -14,6 +14,14 @@ $slick-loader-path: $bower_components_url + "/slick.js/slick/";
 // used only in home.html
 @import "fullpage.js/jquery.fullPage.scss";
 
+// Foundation Icons
+@import "foundation-icons/foundation_icons_general/sass/general_foundicons.scss";
+@import "foundation-icons/foundation_icons_general/sass/_settings.scss";
+@import "foundation-icons/foundation_icons_general_enclosed/sass/general_enclosed_foundicons.scss";
+@import "foundation-icons/foundation_icons_general_enclosed/sass/_settings.scss";
+@import "foundation-icons/foundation_icons_social/sass/social_foundicons.scss";
+@import "foundation-icons/foundation_icons_social/sass/_settings.scss";
+
 // Behold, here are all the Foundation components.
 @import "foundation/scss/foundation/components/grid";
 // @import "foundation/scss/foundation/components/accordion";
@@ -171,11 +179,21 @@ $slick-loader-path: $bower_components_url + "/slick.js/slick/";
       padding: 0 12px 0 12px;
       border-left: 1px solid #666666;
       border-right: 1px solid #666666;
+      text-align: center;
       p {
         @include vertical-align;
         color: white;
         font-size: 0.8em;
       }
+      i {
+          cursor: pointer;
+          color: white;
+          font-size: 1.9em;
+        }
+      i:hover { color: #f89406;  
+                opacity: .8; 
+                filter:alpha(opacity=80); 
+              }
   }
 
   .slider-overlay-bottom {
@@ -188,6 +206,7 @@ $slick-loader-path: $bower_components_url + "/slick.js/slick/";
       padding: 0 12px 0 12px;
       border-left: 1px solid #666666;
       border-right: 1px solid #666666;  
+      text-align: center;
       p {
         @include vertical-align;
         color: white;
@@ -198,4 +217,13 @@ $slick-loader-path: $bower_components_url + "/slick.js/slick/";
         margin-right: 10px;
         padding: 5px;
       }
+      i {
+          cursor: pointer;
+          color: white;
+          font-size: 1.9em;
+        }
+      i:hover { color: #f89406;  
+                opacity: .8; 
+                filter:alpha(opacity=80); 
+              }
   }
