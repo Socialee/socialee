@@ -161,6 +161,7 @@ $slick-loader-path: $bower_components_url + "/slick.js/slick/";
     border-right: none;
     padding: 0;
     margin: 0;
+    cursor: ns-resize;
   }
 
   .zettel-slide-right {
@@ -168,6 +169,7 @@ $slick-loader-path: $bower_components_url + "/slick.js/slick/";
     border-left: none;
     padding: 0;
     margin: 0;
+    cursor: ns-resize;
   }
 
   .slider-overlay-top {

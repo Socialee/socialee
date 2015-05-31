@@ -25,19 +25,25 @@ $(document).ready(function() {
   $('.zettel-slide-left').slick({
     slidesToShow: 1,
     vertical: true,
+    verticalSwiping: true,
     slidesToScroll: 1,
     autoplay: false,
     autoplaySpeed: 3000,
     speed: 2000,
-    arrows: false,
+    arrows: true,
+    prevArrow: '#navtopleft',
+    nextArrow: '#navbottomleft',
   });
   $('.zettel-slide-right').slick({
     slidesToShow: 1,
     vertical: true,
+    verticalSwiping: true,
     slidesToScroll: 1,
     autoplay: false,
     autoplaySpeed: 3000,
     speed: 2000,
-    arrows: false,
+    arrows: true,
+    prevArrow: '#navtopright',
+    nextArrow: '#navbottomright',
   });
 });
