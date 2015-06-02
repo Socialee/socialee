@@ -58,9 +58,9 @@ $slick-loader-path: $bower_components_url + "/slick.js/slick/";
 @import "foundation/scss/foundation/components/top-bar";
 @import "foundation/scss/foundation/components/type";
 @import "foundation/scss/foundation/components/offcanvas";
-// @import "foundation/scss/foundation/components/visibility";
+@import "foundation/scss/foundation/components/visibility";
 
-// handy mixins
+// Mixins
   @mixin vertical-align {
     position: relative;
     top: 50%;
@@ -81,15 +81,6 @@ $slick-loader-path: $bower_components_url + "/slick.js/slick/";
       }
 
 // Navigation
-  .offcanvas-button {
-    background-color: transparent;
-    border: 1px solid white !important;
-    border-radius: 3px;
-    padding: 10px;
-    margin: 12px 28px;
-    text-transform: uppercase;
-  }
-
   nav.top-bar:not(.expanded) {
     text-align: center;
       section.top-bar-section { 
@@ -143,6 +134,16 @@ $slick-loader-path: $bower_components_url + "/slick.js/slick/";
     z-index: -1;
   }
 
+//off-canvas
+  .offcanvas-button {
+    background-color: transparent;
+    border: 1px solid black !important;
+    border-radius: 3px;
+    padding: 14px;
+    margin: 18px 30px 20px 30px;
+    text-transform: uppercase;
+  }
+  
 // Zettel section
   .zettel-wrap {
     position: relative;
