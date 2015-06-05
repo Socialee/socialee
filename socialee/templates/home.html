@@ -1,8 +1,35 @@
 {% extends "base.html" %}
+{% load sekizai_tags %}
+
 {% block content %}
+<div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+    {% include "navbar.html" %}
+    
+    <aside class="right-off-canvas-menu">
+        <ul class="off-canvas-list">
+          <li><a href="#" data-reveal-id="signInModal" class="button offcanvas-button">Get started!</a></li>
+          <li><label>Was willst Du machen?</label></li>
+          <li><a href="#zettel">einen Zettel ausfüllen</a></li>
+          <li><a href="#">eine Tour machen</a></li>
+          <li><a href="#">ein Profil anlegen</a></li>
+          <li><a href="#">meine Daten ändern</a></li>
+          <li><a href="#">das Manifest lesen</a></li>
+          <li><a href="#">user-stories lesen</a></li>
+          <li><a href="#">zum Blog gehen</a></li>
+          <li><label>Über Socialee</label></li>
+          <li><a href="#">Socialees Geschichte</a></li>
+          <li><a href="#">das Team</a></li>
+          <li><a href="#">Presse &amp; Medien</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><label>...</label></li>
+          <li><a href="#">facebook &amp; Co.</a></li>
+          <li><a href="#">Kontakt</a></li>
+          <li><a href="#">Impressum</a></li>
+        </ul>
+    </aside>
 
     <div id="fullpage_wrapper">
-
       <div class="section">
         {% include "socialee_lp_slider.html" %}
         <div class="row">
@@ -11,33 +38,95 @@
               <h1>Make it beautiful.</h1>
               <h3>Socialee | the SOCIAL network</h3>
               <p class="large-10 colums show-for-medium-up">Wir glauben, dass sogar die wildesten Ideen wahr werden sollten. Mit Socialee geht das ganz einfach. Sieh Dir an, wie wir mit Neil zusammenarbeiten, um seine Idee zu realisieren.</p>
-              <a href="#second" class="socialee-button left">Neils Zettel!</a>
+              <a href="#zettel" class="socialee-button left">Neils Zettel!</a>
               <a class="show-for-large-up" href="#" data-reveal-id="signInModal" id="mach_mit">Mach mit</a>
             </div>
           </div>
         </div>
-      </div> 
-      <div class="row">
-        <div class="show-for-medium-up medium-8 large-10 small-centered columns">
-          <div class="cafePromoSlider">
-            <div class="cafePromoSlide">heute, 5.6. ba bla<br/>bla bla<img src="../static/img/landingpage_bg/Anton.jpg"></div>
-            <div class="cafePromoSlide">heute, 5.6. ba bla<br/>bla bla<img src="../static/img/landingpage_bg/Anton.jpg"></div>
-            <div class="cafePromoSlide">heute, 5.6. ba bla<br/>bla bla<img src="../static/img/landingpage_bg/Anton.jpg"></div><div class="cafePromoSlide">heute, 5.6. ba bla<br/>bla bla<img src="../static/img/landingpage_bg/Anton.jpg"></div>
-          </div>
-        </div>
-        <div class="small-4 small-centered columns">
-          <ul class="button-group">
-          <li><a href="#" data-reveal-id="cafeModal" class="button small">Interessiert am Raum?</a></li>
-          <li><a href="#second" class="button small">Buchen!</a></li>
-          </ul> 
-        </div>   
       </div>
-    </div>
-    <div class="section">
-      <iframe src="https://docs.google.com/forms/d/1RURKlzRNd6QaYrh-ScXboxvPIlWrKCvsosC2IufRAsc/viewform?embedded=true" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-    </div>
-  </div>
 
-{% include "cafe_modal.html" %}
+      <div class="row section">
+        <div class="small-8 small-centered columns zettel-wrap">
+
+          <div class="row collapse postfix-radius">
+            <div class="small-3 columns">
+              <span class="postfix">Was suchst Du?</span>
+            </div>
+            <div class="small-9 columns">
+              <input type="text" placeholder="Suche Mitsteiter für meine geniale Idee!">
+            </div>
+          </div>
+
+          <div class="small-6 columns zettel-inner-wrap">
+            <div class="slider-overlay-top">
+              <p class="left">Zettelnummer: #123</p><p class="right">Zettel 4 von 97</p>
+              <i class="fi-arrow-up" id="navtopleft"></i>
+            </div>
+            <div class="zettel-slide-left">
+              <div class="zettel-img"><img src="../static/img/zettel/000_li.jpg"/></div>
+              <div class="zettel-img"><img src="../static/img/zettel/000_li.jpg"/></div>
+              <div class="zettel-img"><img src="../static/img/zettel/000_li.jpg"/></div>
+              {# <div class="zettel-img"><img src="../static/img//zettel/engaged_li.jpg"/></div> #}
+            </div>
+            <div class="slider-overlay-bottom">
+              <p class="left">...</p>
+              <i class="fi-arrow-down" id="navbottomleft"></i>
+              <div class="right button tiny">Nachricht schicken</div></div>
+            </div>
+
+          <div class="small-6 columns zettel-inner-wrap">
+            <div class="slider-overlay-top">
+              <p class="left">Zettelnummer: #087</p><p class="right">Zettel 64 von 76</p>
+              <i class="fi-arrow-up" id="navtopright"></i>
+            </div>
+            <div class="zettel-slide-right">
+              <div class="zettel-img"><img src="../static/img/zettel/000_re.jpg"/></div>
+              <div class="zettel-img"><img src="../static/img/zettel/000_re.jpg"/></div>
+              <div class="zettel-img"><img src="../static/img/zettel/000_re.jpg"/></div>
+              {# <div class="zettel-img"><img src="../static/img/zettel/engaged_re.jpg"/></div> #}
+            </div>
+            <div class="slider-overlay-bottom">
+              <p class="left">...</p>
+              <i class="fi-arrow-down" id="navbottomright"></i>
+              <div class="right button tiny">Nachricht schicken</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <a class="exit-off-canvas"></a>
+  </div>
+</div>
+{# Joyride #}
+{# <ol class="joyride-list" data-joyride>
+  <li data-id="firstStop" data-text="weiter" data-options="tip_location: top; prev_button: false">
+    <h4>Hallo!</h4>
+    <p>Hier kommt die beta-Version von Socialee!</p>
+  </li>
+  <li data-id="secondStop" data-text="weiter" data-prev-text="zurück" data-options="tip_location: top">
+    <h4>Yeah,</h4>
+    <p>das ist ja wohl total geil dieses Ding hier :-)</p>
+  </li>
+  <li data-id="thirdStop" data-button="weiter" data-prev-text="zurück" data-options="tip_location: top">
+    <h4>Oh ja,</h4>
+    <p>wir machen das jetzt mal!</p>
+  </li>
+  <li data-button="End" data-prev-text="Prev">
+    <h4>So...</h4>
+    <p>Genug getestet. Toll, dass Du da bist!</p>
+  </li>
+</ol> #}
+
+{% include "login_modal.html" %}
+{% include "signin_modal.html" %}
 {% include "comingsoon_modal.html" %}
+
+{% addtoblock "js" strip %} 
+$('#fullpage_wrapper').fullpage({
+      anchors:['landingpage', 'zettel']
+  });
+{% endaddtoblock %} 
 {% endblock %}

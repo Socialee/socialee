@@ -1,7 +1,63 @@
 {% extends "base.html" %}
+{% load sekizai_tags %}
+
 {% block content %}
+  <div id="fullpage_wrapper">        
+    <div class="section">
+      {% include "socialee_cafe_bg_slider.html" %}
+      <div class="row">
+        <div class="small-4 small-centered columns">
+        	<h1>Das Crowdcafé</h1><p>Miete Dich ein. Für einen Apfel und ein Ei.</p>
+        </div>
+      </div> 
+      <div class="row">
+        <div class="show-for-medium-up medium-8 large-10 small-centered columns">
+          <div class="cafePromoSlider">
+            <div class="cafePromoSlide">heute, 5.6. ba bla<br/>bla bla<img src="../static/img/landingpage_bg/Anton.jpg"></div>
+            <div class="cafePromoSlide">heute, 5.6. ba bla<br/>bla bla<img src="../static/img/landingpage_bg/Anton.jpg"></div>
+            <div class="cafePromoSlide">heute, 5.6. ba bla<br/>bla bla<img src="../static/img/landingpage_bg/Anton.jpg"></div><div class="cafePromoSlide">heute, 5.6. ba bla<br/>bla bla<img src="../static/img/landingpage_bg/Anton.jpg"></div>
+          </div>
+        </div>
+        <div class="small-4 small-centered columns">
+          <ul class="button-group">
+          <li><a href="#info" class="button small">Interessiert am Raum?</a></li>
+          <li><a href="#formular" class="button small">Buchen!</a></li>
+          </ul> 
+        </div>   
+      </div>
+    </div>
 
-Café
+    <div class="section cafe-info">
+    	<div class="icon-bar four-up">
+		  <a href="#info" class="item"><i class="fi-calendar"></i><label>Kalender</label></a>
+		  <a href="#info/1" class="item"><i class="fi-wrench"></i><label>Inventar</label></a>
+		  <a href="#info/2" class="item"><i class="fi-info"></i><label>Service</label></a>
+		  <a href="#info/3" class="item"><i class="fi-map"></i><label>Location</label></a>
+		</div>
+		<div class="row">
+	    	<div class="slide kalender" data-anchor="kalender">
+	    		<h2>Unser Veranstaltungskalender.</h2>
+	    		<p>Wenn Du einen Termin eintragen möchtest, nutze das <a href="#formular">Formular</a>.</p>
+	    		<iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=m7ritrqdglor4ti7apns20ldgs%40group.calendar.google.com&amp;color=%23711616&amp;ctz=Europe%2FBerlin" style=" border-width:0 " width="100%" height="80%" frameborder="0" scrolling="no"></iframe>
+	    	</div>
+		    <div class="slide" data-anchor="inventar"><div class=""><h1>Inventarliste</h1><p>kommt bald</p></div></div>
+		    <div class="slide" data-anchor="service"><h1>Service</h1><p>kommt auch bald</p></div>
+		    <div class="slide" data-anchor="location"><h1>Location</h1><p>jaaaa</p></div>
+	    </div>
+    </div>
 
+    <div class="section">
+      <iframe src="https://docs.google.com/forms/d/1RURKlzRNd6QaYrh-ScXboxvPIlWrKCvsosC2IufRAsc/viewform?embedded=true" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+    </div>
 
+  </div>
+
+{% include "cafe_modal.html" %}
+{% include "comingsoon_modal.html" %}
+
+{% addtoblock "js" strip %} 
+$('#fullpage_wrapper').fullpage({
+      anchors:['cafe','info','formular']
+  });
+{% endaddtoblock %} 
 {% endblock %}

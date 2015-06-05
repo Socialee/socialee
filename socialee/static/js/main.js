@@ -10,9 +10,9 @@ $(document).ready(function() {
     }
   });
   //$(document).foundation('joyride', 'start');
-  $('#fullpage_wrapper').fullpage({
-      anchors:['first', 'second']
-  });
+  // $('html.home #fullpage_wrapper').fullpage({
+  //     anchors:['first', 'zettel']
+  // });
 
   $('.socialee-lp-slider').slick({
     slidesToShow: 1,
@@ -62,7 +62,7 @@ $(document).ready(function() {
 
   $('.cafePromoSlider').slick({
   centerMode: true,
-  centerPadding: '60px',
+  centerPadding: '0px',
   slidesToShow: 3,
   responsive: [
     {
@@ -70,7 +70,7 @@ $(document).ready(function() {
       settings: {
         arrows: false,
         centerMode: true,
-        centerPadding: '40px',
+        centerPadding: '10px',
         slidesToShow: 1
       }
     },
@@ -79,7 +79,7 @@ $(document).ready(function() {
       settings: {
         arrows: false,
         centerMode: true,
-        centerPadding: '40px',
+        centerPadding: '10px',
         slidesToShow: 1
       }
     }
