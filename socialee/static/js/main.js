@@ -11,7 +11,7 @@ $(document).ready(function() {
   });
   //$(document).foundation('joyride', 'start');
   $('#fullpage_wrapper').fullpage({
-      anchors:['first', 'zettel']
+      anchors:['first', 'second']
   });
   $('.socialee-lp-slider').slick({
     slidesToShow: 1,
