@@ -13,6 +13,7 @@ $(document).ready(function() {
   $('#fullpage_wrapper').fullpage({
       anchors:['first', 'second']
   });
+
   $('.socialee-lp-slider').slick({
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -22,6 +23,7 @@ $(document).ready(function() {
     arrows: false,
     fade: true,
   });
+
   $('.zettel-slide-left').slick({
     slidesToShow: 1,
     vertical: true,
@@ -34,6 +36,7 @@ $(document).ready(function() {
     prevArrow: '#navtopleft',
     nextArrow: '#navbottomleft',
   });
+
   $('.zettel-slide-right').slick({
     slidesToShow: 1,
     vertical: true,
@@ -45,5 +48,41 @@ $(document).ready(function() {
     arrows: true,
     prevArrow: '#navtopright',
     nextArrow: '#navbottomright',
+  });
+
+  $('.socialee-cafe-bg-slider').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    speed: 3000,
+    arrows: false,
+    fade: true,
+  });
+
+  $('.cafePromoSlider').slick({
+  centerMode: true,
+  centerPadding: '60px',
+  slidesToShow: 3,
+  responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 1
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 1
+      }
+    }
+  ]
   });
 });
