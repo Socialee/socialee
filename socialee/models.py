@@ -8,16 +8,13 @@ from django.utils.translation import ugettext_lazy as _
 
 class Profile(models.Model):
     user = models.OneToOneField(User, blank=True, null=True)
-    username = models.CharField(max_length=50, blank=True, null=True,
-                                unique=True)
+    nickname = models.CharField(max_length=50, blank=True, null=True)
     firstname = models.CharField(max_length=100, blank=True)
     lastname = models.CharField(max_length=100, blank=True)
     email = models.EmailField()
-    # TODO: PhoneField
+    # TODO: dh> "PhoneField" (Validierung etc)
     phone = models.CharField(max_length=50, blank=True)
-    # mj> plz = models.DecimalField(max_digits=5, decimal_places=0,
-    #                               null=True, blank=True, default='10969')
-    # dh> Should be CharField
+    plz = models.CharField(max_length=5, null=True, blank=True, default='10969')
     # mj> geburtsdatum = models.DateField(auto_now=False, auto_now_add=False,
     #                                     blank=True, null=True)
     newsletter = models.BooleanField(default=False)
@@ -26,11 +23,19 @@ class Profile(models.Model):
         return 'Profile ({})'.format(self.email)
 
 
+class ProfileErfassung(Profile):
+    class Meta:
+        proxy = True
+        verbose_name = "Profil-Erfassung"
+        verbose_name_plural = "Profil-Erfassungen"
+
+
 class InputOutput(models.Model):
     class Meta:
         abstract = True
 
-    profile = models.ForeignKey(Profile)
+    profile = models.ForeignKey(Profile, null=True)
+    zettel = models.ForeignKey('Zettel', null=True)
 
 
 class Input(InputOutput):
@@ -38,7 +43,9 @@ class Input(InputOutput):
                              max_length=200)
 
     def __str__(self):
-        return 'Input "{}" from {}'.format(self.title, self.profile)
+        return 'Input "{}" from profile {} and zettel {}'.format(self.title,
+                                                                 self.profile,
+                                                                 self.zettel)
 
 
 class Output(InputOutput):
@@ -46,7 +53,22 @@ class Output(InputOutput):
                              max_length=200)
 
     def __str__(self):
-        return 'Output "{}" from {}'.format(self.title, self.profile)
+        return 'Output "{}" from profile {} and zettel {}'.format(self.title,
+                                                                  self.profile,
+                                                                  self.zettel)
+
+
+class Location(models.Model):
+    plz = models.CharField(max_length=5, null=True, blank=True, default='10969')
+
+
+class Origin(models.Model):
+    title = models.CharField(max_length=100)
+    location = models.CharField(max_length=100, blank=True, null=True)
+    date = models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        return 'Origin: {}'.format(self.title)
 
 
 class Zettel(models.Model):
@@ -55,10 +77,11 @@ class Zettel(models.Model):
 
     profile = models.ForeignKey(Profile)
     image = models.ImageField(upload_to='zettel/%Y-%m/', blank=True)
-    number = models.PositiveIntegerField(blank=True, null=True,
-                                         verbose_name=_("Number on the zettel"))
-    inputs = models.ManyToManyField(Input)
-    outputs = models.ManyToManyField(Output)
+    number = models.CharField(blank=True, null=True, max_length=50,
+                              default="2015_000_0000",
+                              verbose_name=_("Number on the zettel"))
+
+    origin = models.ForeignKey(Origin, blank=True, null=True)
 
     def __str__(self):
         return 'Zettel from {}'.format(self.profile)

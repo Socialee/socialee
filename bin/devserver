@@ -1,0 +1,65 @@
+#!/usr/bin/env python
+# NOTE: using this as WSGI application wrapper causes problems with Ajax
+# requests (DDT). Therefore `livereload_only` is preferred.
+
+from __future__ import print_function, absolute_import
+
+import fnmatch
+import os
+import sys
+
+from livereload import Server
+from livereload.watcher import INotifyWatcher
+
+
+def recursive_glob(rootdir='.', pattern='*'):
+    return [os.path.join(walkdir, filename)
+            for walkdir, _, filenames in os.walk(rootdir)
+            for filename in filenames
+            if fnmatch.fnmatch(filename, pattern)]
+
+try:
+    watcher = INotifyWatcher()
+except Exception:
+    watcher = None
+
+if len(sys.argv) > 1 and sys.argv[1] == 'livereload_only':
+    # livereload only
+    port = 35729
+    application = None
+    debug = False
+else:
+    port = 8000
+    from config.wsgi import application
+    debug = True
+
+server = Server(application, watcher)
+
+for filepath in recursive_glob("socialee/static", "*.scss"):
+    assert os.path.exists(filepath)
+    print("Watching: %s" % filepath)
+    server.watch(filepath, 'make scss')
+    # delay=forever: do not trigger livereload; done via css watches.
+    # Ref: https://github.com/lepture/python-livereload/issues/63#issuecomment-60712396
+    server.watch(filepath, 'make scss', delay='forever')
+
+# Watch .css:
+for filepath in recursive_glob("socialee/static", "*.css"):
+    assert os.path.exists(filepath)
+    print("Watching: %s" % filepath)
+    server.watch(filepath)
+
+for filepath in recursive_glob("socialee/templates", "*.html"):
+    assert os.path.exists(filepath)
+    print("Watching: %s" % filepath)
+    server.watch(filepath)
+
+while True:
+    try:
+        # debug=False to prevent tornado from epolling for changed files to the
+        # livereload app (does not use inotify).
+        server.serve(port=port, debug=debug)
+    except SyntaxError as e:
+        print('ERROR_NOT_HAPPENING?: %s. Restarting.' % str(e))
+        continue
+    break
