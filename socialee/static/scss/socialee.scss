@@ -15,12 +15,8 @@ $slick-loader-path: $bower_components_url + "/slick.js/slick/";
 @import "fullpage.js/jquery.fullPage.scss";
 
 // Foundation Icons
-@import "foundation-icons/foundation_icons_general/sass/general_foundicons.scss";
-@import "foundation-icons/foundation_icons_general/sass/_settings.scss";
-@import "foundation-icons/foundation_icons_general_enclosed/sass/general_enclosed_foundicons.scss";
-@import "foundation-icons/foundation_icons_general_enclosed/sass/_settings.scss";
-@import "foundation-icons/foundation_icons_social/sass/social_foundicons.scss";
-@import "foundation-icons/foundation_icons_social/sass/_settings.scss";
+$fi-path: $bower_components_url + "/foundation-icon-fonts";
+@import "foundation-icon-fonts/foundation-icons.scss";
 
 // Behold, here are all the Foundation components.
 @import "foundation/scss/foundation/components/grid";
