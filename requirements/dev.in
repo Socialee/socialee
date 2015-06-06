@@ -12,3 +12,6 @@ tox
 
 ipdb
 livereload
+
+django-debug-toolbar
+django-extensions
