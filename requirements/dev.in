@@ -11,3 +11,4 @@ pytest-splinter
 tox
 
 ipdb
+livereload

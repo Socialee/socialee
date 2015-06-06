@@ -101,6 +101,10 @@ scss_force:
 	touch $(SCSS_FILES)
 	$(MY_MAKE) scss
 
+# Watch
+watch:
+	bin/devserver livereload_only
+
 run:
 	python manage.py runserver
 
