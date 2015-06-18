@@ -26,6 +26,10 @@
 
     {# <script src="{% static "js/main.js" %}"></script> #}
 
+    {% if debug %}
+    <script src="//localhost:35729/livereload.js"></script>
+    {% endif %}
+
     <script>
       $(document).foundation();
     </script>

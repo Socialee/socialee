@@ -30,6 +30,7 @@ SECRET_KEY = env.str('DJANGO_SECRET_KEY',
                      'gx)-+#9(hotw=qt@swr170k3!l*!=a%6&+)siw4$0q35egtj(1')
 
 DEBUG = env.bool('DJANGO_DEBUG', False)
+INTERNAL_IPS = ('127.0.0.1',)
 TEMPLATE_DEBUG = env.bool('DJANGO_TEMPLATE_DEBUG', DEBUG)
 
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
@@ -49,6 +50,12 @@ INSTALLED_APPS = (
 
     'socialee',
 )
+
+if DEBUG:
+    INSTALLED_APPS += (
+        'django_extensions',
+        'debug_toolbar',
+    )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

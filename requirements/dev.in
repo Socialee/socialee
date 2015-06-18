@@ -11,3 +11,7 @@ pytest-splinter
 tox
 
 ipdb
+livereload
+
+django-debug-toolbar
+django-extensions

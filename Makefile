@@ -25,7 +25,7 @@ MY_MAKE_ARGS?=$(if $(DEBUG), --debug=v,)
 MY_MAKE=$(MAKE)$(MY_MAKE_ARGS)
 
 # TODO: $(filter Dev,$(DJANGO_CONFIGURATION))
-SCSS_SOURCEMAPS:=$(DJANGO_DEBUG)
+USE_SCSS_SOURCEMAPS:=$(DJANGO_DEBUG)
 
 # Pick up CACHE_DIR from Heroku.
 CACHE_DIR?=build/cache
@@ -67,7 +67,7 @@ SCSS_COMPONENTS:=$(wildcard $(BOWER_COMPONENTS)/foundation/scss/foundation/compo
 SCSS_RUN_NO_SOURCEMAP:=$(SCSS_BIN) --quiet --cache-location /tmp/sass-cache \
 	 -I $(BOWER_COMPONENTS)
 SCSS_RUN:=$(SCSS_RUN_NO_SOURCEMAP) \
-	 $(if $(SCSS_SOURCEMAPS),--sourcemap,)
+	 $(if $(USE_SCSS_SOURCEMAPS),--sourcemap,)
 
 NOTIFY_SEND:=$(shell command -v notify-send >/dev/null 2>&1 && echo notify-send || true)
 define func-notify-send
@@ -89,7 +89,7 @@ $(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss | $(BOWER_COMPONENTS) $(SCSS_BIN)
 		echo "ERROR: scss failed: $$r"; echo "command: $(SCSS_RUN) $< $@.tmp"; exit 1; } \
 	&& { head -n1 $@.tmp | grep -q "@charset" || { \
 		echo '@charset "UTF-8";' | cat - $@.tmp >$@.tmp2; mv $@.tmp2 $@.tmp; };} \
-	$(if $(SCSS_SOURCEMAPS),\
+	$(if $(USE_SCSS_SOURCEMAPS),\
 		&& sed -i.bak '$$ s/\.tmp\.map/.map/' $@.tmp \
 		&& mv $@.tmp.map $@.map,) \
 	&& mv $@.tmp $@ \
@@ -100,6 +100,10 @@ $(SCSS_DIR)/$(MAIN_SCSS): $(SCSS_DIR)/_settings.scss $(SCSS_COMPONENTS)
 scss_force:
 	touch $(SCSS_FILES)
 	$(MY_MAKE) scss
+
+# Watch
+watch:
+	bin/devserver livereload_only
 
 run:
 	python manage.py runserver
@@ -136,19 +140,22 @@ TOX_BIN=$(shell command -v tox || true)
 install_testing_req:
 	pip install -r requirements/testing.txt
 
-# TODO: look at $(DATABASE_URL) to use py34-psql/py34-sqlite.
+# Default test target: install reqs, and call test_psql/test_sqlite.
 test: $(if $(TOX_BIN),,install_testing_req)
+# look at $(DATABASE_URL) to use py34-psql/py34-sqlite.
+test: $(if $(findstring postgresql:,$(DATABASE_URL)),test_psql,test_sqlite)
+
+test_sqlite:
+	tox -e py34-sqlite
+
+test_psql:
 	tox -e py34-psql
-	@# tox -e py34
 
 test_heroku:
 	@# tox fails to build Pillow on Heroku.
 	@# Fails, because it cannot connect to "postgres"; https://code.djangoproject.com/ticket/16969
 	@# DATABASE_URL=$(HEROKU_POSTGRESQL_MAUVE_URL) py.test --strict -r fEsxXw tests
 	DATABASE_URL=sqlite:///:memory: py.test --strict -r fEsxXw tests
-
-test_sqlite:
-	tox -e py34-sqlite
 
 checkqa:
 	tox -e checkqa
