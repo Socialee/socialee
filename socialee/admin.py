@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin, auth
 from django.utils.translation import ugettext_lazy as _
 
-from .models import (Input, Origin, Output, Profile, ProfileErfassung,
+from .models import (Input, Origin, Output, Profile,
                      UserEntry, Zettel)
 
 
@@ -92,7 +92,7 @@ class UserEntryAdmin(auth.admin.UserAdmin):
         return fieldsets
 
 
-class ProfileErfassungsAdmin(admin.ModelAdmin):
+class ProfileEntryAdmin(admin.ModelAdmin):
     search_fields = ['user__username', 'user__email', 'user__last_name',
                      'user__first_name']
     list_filter = ['plz', 'newsletter', 'zettel__origin__location']
@@ -106,7 +106,6 @@ class ProfileErfassungsAdmin(admin.ModelAdmin):
 admin.site.register(Input, InputAdmin)
 admin.site.register(Origin, OriginAdmin)
 admin.site.register(Output, OutputAdmin)
-admin.site.register(Profile, ProfileAdmin)
-admin.site.register(ProfileErfassung, ProfileErfassungsAdmin)
+admin.site.register(Profile, ProfileEntryAdmin)
 admin.site.register(UserEntry, UserEntryAdmin)
 admin.site.register(Zettel, ZettelAdmin)

@@ -42,13 +42,6 @@ class Profile(models.Model):
         return 'Profile ({})'.format(self.user)
 
 
-class ProfileErfassung(Profile):
-    class Meta:
-        proxy = True
-        verbose_name = "Profil-Erfassung"
-        verbose_name_plural = "Profil-Erfassungen"
-
-
 class InputOutput(models.Model):
     class Meta:
         abstract = True
