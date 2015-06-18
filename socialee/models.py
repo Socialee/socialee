@@ -6,12 +6,28 @@ from django.utils.translation import ugettext_lazy as _
 # TODO: BaseModel: created/updated
 # TODO: mj>  user-Passwort / Postleitzahl / Geburtsdatum /
 
+class UserEntry(User):
+    class Meta(User.Meta):
+        proxy = True
+        verbose_name = "User-Erfassung"
+        verbose_name_plural = "User-Erfassungen"
+
+    def __str__(self):
+        return "User ({})".format(self.username)
+
+
+class Origin(models.Model):
+    title = models.CharField(max_length=100)
+    location = models.CharField(max_length=100, blank=True, null=True)
+    date = models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        return 'Origin: {}'.format(self.title)
+
+
 class Profile(models.Model):
-    user = models.OneToOneField(User, blank=True, null=True)
+    user = models.OneToOneField(UserEntry, blank=True, null=True)
     nickname = models.CharField(max_length=50, blank=True, null=True)
-    firstname = models.CharField(max_length=100, blank=True)
-    lastname = models.CharField(max_length=100, blank=True)
-    email = models.EmailField()
     # TODO: dh> "PhoneField" (Validierung etc)
     phone = models.CharField(max_length=50, blank=True)
     plz = models.CharField(max_length=5, null=True, blank=True, default='10969')
@@ -19,15 +35,22 @@ class Profile(models.Model):
     #                                     blank=True, null=True)
     newsletter = models.BooleanField(default=False)
 
+    origin = models.ForeignKey(Origin, blank=True, null=True)
+
+    def user_first_name(self):
+        return self.user.first_name if self.user else None
+    user_first_name.short_description = _("First name")
+
+    def user_last_name(self):
+        return self.user.last_name if self.user else None
+    user_last_name.short_description = _("Last name")
+
+    def user_email(self):
+        return self.user.email if self.user else None
+    user_email.short_description = _("E-Mail")
+
     def __str__(self):
-        return 'Profile ({})'.format(self.email)
-
-
-class ProfileErfassung(Profile):
-    class Meta:
-        proxy = True
-        verbose_name = "Profil-Erfassung"
-        verbose_name_plural = "Profil-Erfassungen"
+        return 'Profile ({})'.format(self.user)
 
 
 class InputOutput(models.Model):
@@ -60,15 +83,6 @@ class Output(InputOutput):
 
 class Location(models.Model):
     plz = models.CharField(max_length=5, null=True, blank=True, default='10969')
-
-
-class Origin(models.Model):
-    title = models.CharField(max_length=100)
-    location = models.CharField(max_length=100, blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
-
-    def __str__(self):
-        return 'Origin: {}'.format(self.title)
 
 
 class Zettel(models.Model):
