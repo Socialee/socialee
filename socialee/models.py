@@ -16,6 +16,15 @@ class UserEntry(User):
         return "User ({})".format(self.username)
 
 
+class Origin(models.Model):
+    title = models.CharField(max_length=100)
+    location = models.CharField(max_length=100, blank=True, null=True)
+    date = models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        return 'Origin: {}'.format(self.title)
+
+
 class Profile(models.Model):
     user = models.OneToOneField(UserEntry, blank=True, null=True)
     nickname = models.CharField(max_length=50, blank=True, null=True)
@@ -25,6 +34,8 @@ class Profile(models.Model):
     # mj> geburtsdatum = models.DateField(auto_now=False, auto_now_add=False,
     #                                     blank=True, null=True)
     newsletter = models.BooleanField(default=False)
+
+    origin = models.ForeignKey(Origin, blank=True, null=True)
 
     def user_first_name(self):
         return self.user.first_name if self.user else None
@@ -72,15 +83,6 @@ class Output(InputOutput):
 
 class Location(models.Model):
     plz = models.CharField(max_length=5, null=True, blank=True, default='10969')
-
-
-class Origin(models.Model):
-    title = models.CharField(max_length=100)
-    location = models.CharField(max_length=100, blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
-
-    def __str__(self):
-        return 'Origin: {}'.format(self.title)
 
 
 class Zettel(models.Model):
