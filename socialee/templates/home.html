@@ -10,20 +10,19 @@
         <ul class="off-canvas-list">
           <li><a href="#" data-reveal-id="signInModal" class="button offcanvas-button">Get started!</a></li>
           <li><label>Was willst Du machen?</label></li>
-          <li><a href="#zettel">einen Zettel ausfüllen</a></li>
-          <li><a href="#">eine Tour machen</a></li>
-          <li><a href="#">ein Profil anlegen</a></li>
-          <li><a href="#">meine Daten ändern</a></li>
-          <li><a href="#">das Manifest lesen</a></li>
-          <li><a href="#">user-stories lesen</a></li>
-          <li><a href="#">zum Blog gehen</a></li>
+          <li><a href="#">...</a></li>
+          <li><a href="#">Zettel ausfüllen</a></li>
+          <li><a href="#">Projekt erstellen</a></li>
+          <li><a href="#">Raum buchen</a></li>
+          <li><a href="#">...</a></li>
+          <li><a href="#">...</a></li>
+          <li><a href="#">...</a></li>
           <li><label>Über Socialee</label></li>
           <li><a href="#">Socialees Geschichte</a></li>
           <li><a href="#">das Team</a></li>
           <li><a href="#">Presse &amp; Medien</a></li>
           <li><a href="#">FAQ</a></li>
-          <li><label>...</label></li>
-          <li><a href="#">facebook &amp; Co.</a></li>
+          <li><a href="#">facebook</a></li>
           <li><a href="#">Kontakt</a></li>
           <li><a href="#">Impressum</a></li>
         </ul>
@@ -35,31 +34,38 @@
         <div class="row">
           <div class="small-6 medium-4 large-5 large-offset-2 medium-offset-1 columns">
             <div id="welcome_text">
-              <h1>Make it beautiful.</h1>
-              <h3>Socialee | the SOCIAL network</h3>
-              <p class="large-10 colums show-for-medium-up">Wir glauben, dass sogar die wildesten Ideen wahr werden sollten. Mit Socialee geht das ganz einfach. Sieh Dir an, wie wir mit Neil zusammenarbeiten, um seine Idee zu realisieren.</p>
-              <a href="#zettel" class="socialee-button left">Neils Zettel!</a>
-              <a class="show-for-large-up" href="#" data-reveal-id="signInModal" id="mach_mit">Mach mit</a>
+              <h1>Socialee</h1>
+              <h3>Wir machen das jetzt mal.</h3>
+              <p class="large-10 colums show-for-medium-up">Wir glauben, dass Ideen wahr werden sollten. Mit Socialee geht das ganz einfach. <span>Sieh Dir unsere ersten Projekte an und wie wir mit Menschen zusammenarbeiten, um ihre Ideen zu realisieren.</span></p>
+              <a href="#projekte" class="socialee-button left">Projekte</a>
+              <a class="show-for-large-up" href="#" data-reveal-id="signInModal" id="mach_mit">Sei dabei!</a>
             </div>
-          </div>
+          </div>   
+        </div> 
+      </div>
+
+      <div class="section">
+        <div class="project-slide">
+        {% include "socialee_project_slider.html" %} 
         </div>
       </div>
 
       <div class="row section">
         <div class="small-8 small-centered columns zettel-wrap">
 
-          <div class="row collapse postfix-radius">
+          <!--<div class="row collapse postfix-radius">
             <div class="small-3 columns">
               <span class="postfix">Was suchst Du?</span>
             </div>
             <div class="small-9 columns">
               <input type="text" placeholder="Suche Mitsteiter für meine geniale Idee!">
             </div>
-          </div>
-
+          </div>-->
+          <h3>Socialee liebt Zettel.</h3>
+          <p>Viele Ideen finden ihren Anfang auf einem Zettel. Schreibe auch Du <a href="#">einen Zettel</a>.</p>
           <div class="small-6 columns zettel-inner-wrap">
             <div class="slider-overlay-top">
-              <p class="left">Zettelnummer: #123</p><p class="right">Zettel 4 von 97</p>
+              {# <p class="left">Zettelnummer: #123</p><p class="right">Zettel 4 von 97</p> #}
               <i class="fi-arrow-up" id="navtopleft"></i>
             </div>
             <div class="zettel-slide-left">
@@ -69,14 +75,15 @@
               {# <div class="zettel-img"><img src="../static/img//zettel/engaged_li.jpg"/></div> #}
             </div>
             <div class="slider-overlay-bottom">
-              <p class="left">...</p>
+              {# <p class="left">...</p> #}
               <i class="fi-arrow-down" id="navbottomleft"></i>
-              <div class="right button tiny">Nachricht schicken</div></div>
+              {# <div class="right button tiny">Nachricht schicken</div> #}
+            </div>
             </div>
 
           <div class="small-6 columns zettel-inner-wrap">
             <div class="slider-overlay-top">
-              <p class="left">Zettelnummer: #087</p><p class="right">Zettel 64 von 76</p>
+              {# <p class="left">Zettelnummer: #087</p><p class="right">Zettel 64 von 76</p> #}
               <i class="fi-arrow-up" id="navtopright"></i>
             </div>
             <div class="zettel-slide-right">
@@ -86,12 +93,11 @@
               {# <div class="zettel-img"><img src="../static/img/zettel/engaged_re.jpg"/></div> #}
             </div>
             <div class="slider-overlay-bottom">
-              <p class="left">...</p>
+              {# <p class="left">...</p> #}
               <i class="fi-arrow-down" id="navbottomright"></i>
-              <div class="right button tiny">Nachricht schicken</div>
+              {# <div class="right button tiny">Nachricht schicken</div> #}
             </div>
           </div>
-
         </div>
       </div>
 
@@ -121,12 +127,14 @@
 </ol> #}
 
 {% include "login_modal.html" %}
+{% include "video_modal.html" %}
+{% include "manifest_modal.html" %}
 {% include "signin_modal.html" %}
 {% include "comingsoon_modal.html" %}
 
 {% addtoblock "js" strip %} 
 $('#fullpage_wrapper').fullpage({
-      anchors:['landingpage', 'zettel']
+      anchors:['landingpage', 'projekte', 'zettel']
   });
 {% endaddtoblock %} 
 {% endblock %}

@@ -126,7 +126,7 @@ $grautranspa: rgba(#000, .5);
 
 // We use these as default colors throughout
 // $primary-color: #008CBA;
-// $primary-color: $oil;
+$primary-color: $oil;
 // $secondary-color: #e7e7e7;
 // $alert-color: #f04124;
 // $success-color: #43AC6A;
@@ -827,6 +827,7 @@ $joyride-tip-font-size: rem-calc(16);
 
 // We use these to style the labels
 // $label-padding: rem-calc(4 8 4);
+$label-padding: rem-calc(4 10 4);
 // $label-radius: $global-radius;
 
 // We use these to style the label text
@@ -1155,15 +1156,18 @@ $off-canvas-overlay-background-hover: rgba($white, .0);
 
 // We use these to control the style of the reveal overlay.
 // $reveal-overlay-bg: rgba($black, .45);
+$reveal-overlay-bg: rgba(#fff, 1);
 // $reveal-overlay-bg-old: $black;
 
 // We use these to control the style of the modal itself.
 // $reveal-modal-bg: $white;
+$reveal-modal-bg: rgba(#fff, 1);
 // $reveal-position-top: rem-calc(100);
 // $reveal-default-width: 80%;
 // $reveal-max-width: $row-width;
 // $reveal-modal-padding: rem-calc(20);
 // $reveal-box-shadow: 0 0 10px rgba($black,.4);
+$reveal-box-shadow: none;
 
 // We use these to style the reveal close button
 // $reveal-close-font-size: rem-calc(40);
@@ -1178,6 +1182,7 @@ $off-canvas-overlay-background-hover: rgba($white, .0);
 
 // We use these to control the modal border
 // $reveal-border-style: solid;
+$reveal-border-style: none;
 // $reveal-border-width: 1px;
 // $reveal-border-color: $steel;
 

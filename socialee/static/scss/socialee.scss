@@ -29,13 +29,13 @@ $fi-path: $bower_components_url + "/foundation-icon-fonts";
 // @import "foundation/scss/foundation/components/clearing";
 // @import "foundation/scss/foundation/components/dropdown";
 // @import "foundation/scss/foundation/components/dropdown-buttons";
-// @import "foundation/scss/foundation/components/flex-video";
+@import "foundation/scss/foundation/components/flex-video";
 @import "foundation/scss/foundation/components/forms";
 @import "foundation/scss/foundation/components/icon-bar";
 // @import "foundation/scss/foundation/components/inline-lists";
 @import "foundation/scss/foundation/components/joyride";
 // @import "foundation/scss/foundation/components/keystrokes";
-// @import "foundation/scss/foundation/components/labels";
+@import "foundation/scss/foundation/components/labels";
 // @import "foundation/scss/foundation/components/magellan";
 // @import "foundation/scss/foundation/components/pagination";
 // @import "foundation/scss/foundation/components/panels";
@@ -68,6 +68,7 @@ $fi-path: $bower_components_url + "/foundation-icon-fonts";
 // Socialee global styles
   .socialee-button { 
       @include button(); 
+      @include expand();
       text-transform: uppercase;
       letter-spacing: 2px;
       font-size: 0.8em;
@@ -106,6 +107,9 @@ $fi-path: $bower_components_url + "/foundation-icon-fonts";
     p {
       color: $oil;
       font-weight: 500;
+      span {
+        line-height: 1em;
+      }
     }
   }
 
@@ -125,9 +129,33 @@ $fi-path: $bower_components_url + "/foundation-icon-fonts";
     width: 100%;
   }
 
+  .socialee-project-slider {
+    position: absolute;
+    top: -65px;
+    height: 100vh;
+    z-index: -1;
+    width: 100%;
+  }
+
+  .project-slide {
+    position: relative;
+    top: -65px;
+  }
+
   .lp-slide {
     height: 100vh;
     z-index: -1;
+  }
+
+  .custom-lp-label {
+    @include label ();
+    padding: rem-calc(3 4 3);
+    top: -22px;
+    background-color: #f89406;
+    border-radius: 2px;
+    :hover { 
+    color: $silver;
+    }
   }
 
 //off-canvas
@@ -269,7 +297,7 @@ $fi-path: $bower_components_url + "/foundation-icon-fonts";
     position: fixed; 
     top: 0; 
     left: 0; 
-    background-color: rgba(#f89406, .75); 
+    background-color: rgba(#fff, .8); 
     z-index: -1; 
     width: 100%; 
     height: 100%; 

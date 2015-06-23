@@ -9,10 +9,6 @@ $(document).ready(function() {
       close_on_click : false
     }
   });
-  //$(document).foundation('joyride', 'start');
-  // $('html.home #fullpage_wrapper').fullpage({
-  //     anchors:['first', 'zettel']
-  // });
 
   $('.socialee-lp-slider').slick({
     slidesToShow: 1,
@@ -22,6 +18,16 @@ $(document).ready(function() {
     speed: 3000,
     arrows: false,
     fade: true,
+  });
+
+  $('.socialee-project-slider').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    speed: 4000,
+    arrows: false,
+    fade: false,
   });
 
   $('.zettel-slide-left').slick({
