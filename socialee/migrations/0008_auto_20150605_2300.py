@@ -7,16 +7,23 @@ import django.contrib.auth.models
 
 def forwards_func(apps, schema_editor):
     """
-    Migrate Profile to User(Erfassung).
+    Migrate Profile to User(Entry).
     """
     Profile = apps.get_model("socialee", "Profile")
     User = apps.get_model("socialee", "UserEntry")
     db_alias = schema_editor.connection.alias
     for Profile in Profile.objects.using(db_alias).all():
-        User.objects.create(username=Profile.email,
-                            email=Profile.email,
-                            first_name=Profile.firstname,
-                            last_name=Profile.lastname)
+        # Use part before "@", if username is longer than 30 (maxlength of
+        # Django's User.username; https://code.djangoproject.com/ticket/20846).
+        username = Profile.email
+        if len(username) > 30:
+            username = username.split("@", 1)[0]
+        user = User.objects.create(username=username,
+                                   email=Profile.email,
+                                   first_name=Profile.firstname,
+                                   last_name=Profile.lastname)
+        Profile.user = user
+        Profile.save()
 
 
 class Migration(migrations.Migration):
@@ -45,23 +52,6 @@ class Migration(migrations.Migration):
 
         migrations.RunPython(
             forwards_func,
-        ),
-
-        migrations.RemoveField(
-            model_name='profile',
-            name='email',
-        ),
-        migrations.RemoveField(
-            model_name='profile',
-            name='firstname',
-        ),
-        migrations.RemoveField(
-            model_name='profile',
-            name='lastname',
-        ),
-        migrations.AlterField(
-            model_name='profile',
-            name='user',
-            field=models.OneToOneField(blank=True, null=True, to='socialee.UserEntry'),
+            reverse_code=migrations.RunPython.noop
         ),
     ]

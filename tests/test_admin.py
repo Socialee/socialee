@@ -14,9 +14,9 @@ def test_userentry_add(admin_client):
     assert response.status_code == 200
 
 def test_profileentry_list(admin_client):
-    response = admin_client.get(reverse('admin:socialee_profileerfassung_changelist'))
+    response = admin_client.get(reverse('admin:socialee_profile_changelist'))
     assert response.status_code == 200
 
 def test_profileentry_add(admin_client):
-    response = admin_client.get(reverse('admin:socialee_profileerfassung_add'))
+    response = admin_client.get(reverse('admin:socialee_profile_add'))
     assert response.status_code == 200
