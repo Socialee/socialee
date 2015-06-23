@@ -136,6 +136,9 @@ collectstatic: $(BOWER_COMPONENTS)
 migrate:
 	python manage.py migrate
 
+migrate_deploy:
+	python manage.py migrate --noinput
+
 TOX_BIN=$(shell command -v tox || true)
 install_testing_req:
 	pip install -r requirements/testing.txt
@@ -180,7 +183,7 @@ deploy_check: check test
 deploy: deploy_check static migrate
 
 # Run via bin/post_compile for Heroku.
-heroku_post_compile: check static test_heroku migrate
+heroku_post_compile: check static test_heroku migrate_deploy
 
 
 # Requirements files. {{{
