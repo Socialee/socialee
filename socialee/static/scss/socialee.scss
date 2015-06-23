@@ -67,8 +67,7 @@ $fi-path: $bower_components_url + "/foundation-icon-fonts";
 
 // Socialee global styles
   .socialee-button { 
-      @include button(); 
-      @include expand();
+      @include button();
       text-transform: uppercase;
       letter-spacing: 2px;
       font-size: 0.8em;
