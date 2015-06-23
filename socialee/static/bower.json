@@ -13,7 +13,8 @@
   "dependencies": {
     "foundation": "~5.5.2",
     "jquery": "~2.1.4",
-    "slick.js": "~1.5.3"
+    "slick.js": "~1.5.3",
+    "fullpage.js": "~2.6.5",
+    "foundation-icon-fonts": "*"
   }
 }
-

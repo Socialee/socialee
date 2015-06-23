@@ -1,17 +1,20 @@
+{% load sekizai_tags %}
 {% load staticfiles %}
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="no-js {{ view.template_name | cut:".html" }}" lang="en">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    {# The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags #}
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="">
     <title>Socialee | coming soon</title>
 
+    {# Custom Socialee CSS #}
     <link rel="stylesheet" href="{% static "css/socialee.css" %}">
+    {% render_block "css" %}
   </head>
   <body>
 
@@ -20,18 +23,26 @@
 
     <script src="{% static "bower_components/jquery/dist/jquery.js" %}"></script>
     <script src="{% static "bower_components/foundation/js/foundation/foundation.js" %}"></script>
-    {# <script src="{% static "bower_components/foundation/js/foundation/foundation.alert.js" %}"></script> #}
-    {# <script src="{% static "bower_components/foundation/js/foundation/foundation.topbar.js" %}"></script> #}
-    {# <script src="{% static "bower_components/foundation/js/foundation/foundation.reveal.js" %}"></script> #}
-
-    {# <script src="{% static "js/main.js" %}"></script> #}
-
+    <script src="{% static "bower_components/foundation/js/foundation/foundation.topbar.js" %}"></script>
+    <script src="{% static "bower_components/foundation/js/foundation/foundation.offcanvas.js" %}"></script>
+    <script src="{% static "bower_components/foundation/js/foundation/foundation.reveal.js" %}"></script>
+    <script src="{% static "bower_components/foundation/js/foundation/foundation.joyride.js" %}"></script>
+    {# fullPage JS #}
+    <script src="{% static "bower_components/fullpage.js/jquery.fullPage.js" %}"></script>
+    {# Slick Slider JS #}
+    <script src="{% static "bower_components/slick.js/slick/slick.js" %}"></script>
+    {# Socialee Custom js #}
+    <script src="{% static "js/main.js" %}"></script>
+    
     {% if debug %}
-    <script src="//localhost:35729/livereload.js"></script>
+        <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
 
-    <script>
-      $(document).foundation();
+    <script type="text/javascript">
+        $(document).ready(function(){
+            {% render_block "js" %}
+        });
+
     </script>
   </body>
 </html>

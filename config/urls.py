@@ -6,7 +6,8 @@ from django.contrib import admin
 from socialee import views
 
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
+    url(r'^$', views.Home.as_view(), name='home'),
+    url(r'^cafe$', views.Cafe.as_view(), name='cafe'),
 
     url(r'^admin/', include(admin.site.urls)),
 ]
