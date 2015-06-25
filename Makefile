@@ -63,7 +63,15 @@ SCSS_DIR=$(PROJECT_ROOT_SRC)/static/scss
 CSS_DIR=$(PROJECT_ROOT_SRC)/static/css
 SCSS_FILES=$(addprefix $(SCSS_DIR)/, $(MAIN_SCSS) admin.scss)
 CSS_FILES=$(patsubst $(SCSS_DIR)/%.scss,$(CSS_DIR)/%.css,$(SCSS_FILES))
+
+# SCSS dependencies/includes for main scss.
 SCSS_COMPONENTS:=$(wildcard $(BOWER_COMPONENTS)/foundation/scss/foundation/components/*.scss)
+SCSS_COMPONENTS+=$(addprefix $(BOWER_COMPONENTS)/,\
+	slick.js/slick/slick.scss \
+	fullpage.js/jquery.fullPage.scss \
+	foundation-icon-fonts/_foundation-icons.scss \
+	)
+
 SCSS_RUN_NO_SOURCEMAP:=$(SCSS_BIN) --quiet --cache-location /tmp/sass-cache \
 	 -I $(BOWER_COMPONENTS)
 SCSS_RUN:=$(SCSS_RUN_NO_SOURCEMAP) \
