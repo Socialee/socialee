@@ -65,21 +65,17 @@
           <p>Viele Ideen finden ihren Anfang auf einem Zettel. Schreibe auch Du <a href="#">einen Zettel</a>.</p>
           <div class="small-6 columns zettel-inner-wrap">
             <div class="slider-overlay-top">
-              {# <p class="left">Zettelnummer: #123</p><p class="right">Zettel 4 von 97</p> #}
               <i class="fi-arrow-up" id="navtopleft"></i>
             </div>
             <div class="zettel-slide-left">
-              <div class="zettel-img"><img src="../static/img/zettel/000_li.jpg"/></div>
-              <div class="zettel-img"><img src="../static/img/zettel/000_li.jpg"/></div>
-              <div class="zettel-img"><img src="../static/img/zettel/000_li.jpg"/></div>
-              {# <div class="zettel-img"><img src="../static/img//zettel/engaged_li.jpg"/></div> #}
+              {% for i in zettel_links %}
+                <div><img data-lazy="{{ i }}"/></div>
+              {% endfor %}
             </div>
             <div class="slider-overlay-bottom">
-              {# <p class="left">...</p> #}
               <i class="fi-arrow-down" id="navbottomleft"></i>
-              {# <div class="right button tiny">Nachricht schicken</div> #}
             </div>
-            </div>
+          </div>
 
           <div class="small-6 columns zettel-inner-wrap">
             <div class="slider-overlay-top">
@@ -87,10 +83,9 @@
               <i class="fi-arrow-up" id="navtopright"></i>
             </div>
             <div class="zettel-slide-right">
-              <div class="zettel-img"><img src="../static/img/zettel/000_re.jpg"/></div>
-              <div class="zettel-img"><img src="../static/img/zettel/000_re.jpg"/></div>
-              <div class="zettel-img"><img src="../static/img/zettel/000_re.jpg"/></div>
-              {# <div class="zettel-img"><img src="../static/img/zettel/engaged_re.jpg"/></div> #}
+              {% for i in zettel_rechts %}
+                <div><img data-lazy="{{ i }}"/></div>
+              {% endfor %}
             </div>
             <div class="slider-overlay-bottom">
               {# <p class="left">...</p> #}
@@ -125,6 +120,7 @@
     <p>Genug getestet. Toll, dass Du da bist!</p>
   </li>
 </ol> #}
+
 
 {% include "login_modal.html" %}
 {% include "video_modal.html" %}

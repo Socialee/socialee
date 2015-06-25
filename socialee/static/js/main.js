@@ -33,27 +33,29 @@ $(document).ready(function() {
   $('.zettel-slide-left').slick({
     slidesToShow: 1,
     vertical: true,
-    verticalSwiping: true,
+    // verticalSwiping: true,
     slidesToScroll: 1,
     autoplay: false,
     autoplaySpeed: 3000,
-    speed: 2000,
+    speed: 1000,
     arrows: true,
     prevArrow: '#navtopleft',
     nextArrow: '#navbottomleft',
+    lazyLoad: 'ondemand',
   });
 
   $('.zettel-slide-right').slick({
     slidesToShow: 1,
     vertical: true,
-    verticalSwiping: true,
+    // verticalSwiping: true,
     slidesToScroll: 1,
     autoplay: false,
     autoplaySpeed: 3000,
-    speed: 2000,
+    speed: 1000,
     arrows: true,
     prevArrow: '#navtopright',
     nextArrow: '#navbottomright',
+    lazyLoad: 'ondemand',
   });
 
   $('.socialee-cafe-bg-slider').slick({
