@@ -39,9 +39,9 @@ server = Server(application, watcher)
 for filepath in recursive_glob("socialee/static", "*.scss"):
     assert os.path.exists(filepath)
     print("Watching: %s" % filepath)
-    server.watch(filepath, 'make scss')
+    # server.watch(filepath, 'make scss')
     # delay=forever: do not trigger livereload; done via css watches.
-    # Ref: https://github.com/lepture/python-livereload/issues/63#issuecomment-60712396
+    # Ref: https://github.com/lepture/python-livereload/issues/63#issuecomment-60712396  # noqa
     server.watch(filepath, 'make scss', delay='forever')
 
 # Watch .css:
