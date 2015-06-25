@@ -54,6 +54,15 @@ for filepath in recursive_glob("socialee/templates", "*.html"):
     print("Watching: %s" % filepath)
     server.watch(filepath)
 
+
+# Ref: https://github.com/lepture/python-livereload/issues/115
+class FakeWaiter:
+    "A no-op waiter to trigger scss re-building always."
+    def write_message(*args, **kwargs):
+        pass
+LiveReloadHandler.waiters.add(FakeWaiter)
+
+
 while True:
     try:
         # debug=False to prevent tornado from epolling for changed files to the
