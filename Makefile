@@ -63,7 +63,15 @@ SCSS_DIR=$(PROJECT_ROOT_SRC)/static/scss
 CSS_DIR=$(PROJECT_ROOT_SRC)/static/css
 SCSS_FILES=$(addprefix $(SCSS_DIR)/, $(MAIN_SCSS) admin.scss)
 CSS_FILES=$(patsubst $(SCSS_DIR)/%.scss,$(CSS_DIR)/%.css,$(SCSS_FILES))
+
+# SCSS dependencies/includes for main scss.
 SCSS_COMPONENTS:=$(wildcard $(BOWER_COMPONENTS)/foundation/scss/foundation/components/*.scss)
+SCSS_COMPONENTS+=$(addprefix $(BOWER_COMPONENTS)/,\
+	slick.js/slick/slick.scss \
+	fullpage.js/jquery.fullPage.scss \
+	foundation-icon-fonts/_foundation-icons.scss \
+	)
+
 SCSS_RUN_NO_SOURCEMAP:=$(SCSS_BIN) --quiet --cache-location /tmp/sass-cache \
 	 -I $(BOWER_COMPONENTS)
 SCSS_RUN:=$(SCSS_RUN_NO_SOURCEMAP) \
@@ -136,6 +144,9 @@ collectstatic: $(BOWER_COMPONENTS)
 migrate:
 	python manage.py migrate
 
+migrate_deploy:
+	python manage.py migrate --noinput
+
 TOX_BIN=$(shell command -v tox || true)
 install_testing_req:
 	pip install -r requirements/testing.txt
@@ -155,7 +166,7 @@ test_heroku:
 	@# tox fails to build Pillow on Heroku.
 	@# Fails, because it cannot connect to "postgres"; https://code.djangoproject.com/ticket/16969
 	@# DATABASE_URL=$(HEROKU_POSTGRESQL_MAUVE_URL) py.test --strict -r fEsxXw tests
-	DATABASE_URL=sqlite:///:memory: py.test --strict -r fEsxXw tests
+	DATABASE_URL=sqlite:///:memory: py.test --strict -r fEsxXw --create-db tests
 
 checkqa:
 	tox -e checkqa
@@ -180,7 +191,7 @@ deploy_check: check test
 deploy: deploy_check static migrate
 
 # Run via bin/post_compile for Heroku.
-heroku_post_compile: check static test_heroku migrate
+heroku_post_compile: check static test_heroku migrate_deploy
 
 
 # Requirements files. {{{

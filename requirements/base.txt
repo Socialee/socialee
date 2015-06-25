@@ -4,9 +4,7 @@
 #
 #    pip-compile base.in
 #
--e git+https://github.com/ojii/django-sekizai#egg=django-sekizai
-django-classy-tags==0.6.1
 django-environ==0.3.0
 django==1.8.2
-pillow==2.8.1
+pillow==2.8.2
 pytz==2015.4

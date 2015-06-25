@@ -1,8 +1,10 @@
 # Requirements for local development.
 
 -r base.in
-# Use editable as workaround for https://github.com/nvie/pip-tools/issues/155.
--e git+https://github.com/nvie/pip-tools.git@future#egg=pip-tools
+
+# For pip-compile, to build requirements files (`make requirements`).
+# Used in Makefile, too (via "grep pip-tools").
+git+git://github.com/blueyed/pip-tools.git@my-future#egg=pip-tools
 
 pytest
 pytest-django
