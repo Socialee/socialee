@@ -1,15 +1,16 @@
 <nav class="top-bar" data-topbar role="navigation" style="z-index:999;">
   <ul class="title-area">
-    <li class="name"><a href="#landingpage"><img src="../static/img/logo/socialee v.1.1_color_klein.png"></a></li>
+    <li class="name"><a href="#landingpage"><img src="../static/img/logo/socialee_v.1.1_color_klein.png"></a></li>
      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
     <li class="toggle-topbar menu-icon right-off-canvas-toggle"><a href="#"><span></span></a></li>
   </ul>
   <section class="top-bar-section">
     <!-- Middle Nav Section -->
     <ul class="nav-middle">
-      <li class="show-for-medium-up"><a href="#" data-reveal-id="manifestModal">Manifest</a></li>
-      <li class="show-for-medium-up"><a href="{% url 'cafe' %}">Café</a></li>
-      <li class="show-for-medium-up"><a href="#zettel">Zettelwirtschaft</a></li>
+      <li class="show-for-medium-up active" data-menuanchor="landingpage"><a href="#landingpage">Home</a></li>
+      <li class="show-for-medium-up" data-menuanchor="projekte"><a href="#projekte">Projekte</a></li>
+      {# <li class="show-for-medium-up" data-menuanchor="#"><a href="{% url 'cafe' %}">Café</a></li> #}
+      <li class="show-for-medium-up" data-menuanchor="zettel"><a href="#zettel">Zettelwirtschaft</a></li>
     </ul>
   </section>
   <section class="top-bar-section nav-right">
