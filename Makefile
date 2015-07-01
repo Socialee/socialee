@@ -94,7 +94,7 @@ $(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss | $(BOWER_COMPONENTS) $(SCSS_BIN)
 	@mkdir -p $(CSS_DIR)
 	$(if $(DEBUG),,@)r=$$($(SCSS_RUN) $< $@.tmp 2>&1) || { \
 		$(call func-notify-send, "scss failed: $$r"); \
-		echo "ERROR: scss failed: $$r"; echo "command: $(SCSS_RUN) $< $@.tmp"; exit 1; } \
+		echo "ERROR: scss failed: $$r" >&2; echo "command: $(SCSS_RUN) $< $@.tmp" >&2; exit 1; } \
 	&& { head -n1 $@.tmp | grep -q "@charset" || { \
 		echo '@charset "UTF-8";' | cat - $@.tmp >$@.tmp2; mv $@.tmp2 $@.tmp; };} \
 	$(if $(USE_SCSS_SOURCEMAPS),\
@@ -129,7 +129,6 @@ bower_install:
 	mkdir -p $(bower_storage__registry)
 	cd $(BOWER_COMPONENTS_ROOT) && bower install $(BOWER_OPTIONS)
 
-# NOTE: controlled via env vars from Docker.
 $(BOWER_COMPONENTS): $(BOWER_COMPONENTS_ROOT)/bower.json
 	$(MY_MAKE) bower_install
 	touch $@
