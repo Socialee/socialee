@@ -110,7 +110,7 @@ scss_force:
 	$(MY_MAKE) scss
 
 # Watch
-watch:
+watch: scss
 	bin/devserver livereload_only
 
 run:
