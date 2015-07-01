@@ -4,8 +4,6 @@
 #
 #    pip-compile production.in
 #
--e git+https://github.com/ojii/django-sekizai@6ca7e687c511681f6819848464c3d40286fe8dd0#egg=django-sekizai
-django-classy-tags==0.6.2
 django-environ==0.3.0
 django==1.8.2
 pillow==2.8.2

@@ -3,6 +3,7 @@ db.sqlite3
 
 socialee/static/bower_components/
 socialee/static/css/
+media/
 
 Gemfile.lock
 
@@ -12,3 +13,4 @@ Gemfile.lock
 # Python boilerplate.
 __pycache__
 *.pyc
+

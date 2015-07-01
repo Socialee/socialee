@@ -1156,18 +1156,15 @@ $off-canvas-overlay-background-hover: rgba($white, .0);
 
 // We use these to control the style of the reveal overlay.
 // $reveal-overlay-bg: rgba($black, .45);
-$reveal-overlay-bg: rgba(#fff, 1);
 // $reveal-overlay-bg-old: $black;
 
 // We use these to control the style of the modal itself.
 // $reveal-modal-bg: $white;
-$reveal-modal-bg: rgba(#fff, 1);
 // $reveal-position-top: rem-calc(100);
 // $reveal-default-width: 80%;
 // $reveal-max-width: $row-width;
 // $reveal-modal-padding: rem-calc(20);
 // $reveal-box-shadow: 0 0 10px rgba($black,.4);
-$reveal-box-shadow: none;
 
 // We use these to style the reveal close button
 // $reveal-close-font-size: rem-calc(40);
@@ -1453,7 +1450,9 @@ $topbar-link-color: $jet;
 // $topbar-link-color-hover: $white;
 $topbar-link-color-hover: $monsoon;
 // $topbar-link-color-active: $white;
+$topbar-link-color-active: $jet;
 // $topbar-link-color-active-hover: $white;
+$topbar-link-color-active-hover: $monsoon;
 // $topbar-link-weight: $font-weight-normal;
 $topbar-link-weight: $font-weight-bold;
 // $topbar-link-font-size: rem-calc(13);
@@ -1465,7 +1464,9 @@ $topbar-link-bg-hover: $transpa;
 // $topbar-link-bg-color-hover: $charcoal;
 $topbar-link-bg-color-hover: $transpa;
 // $topbar-link-bg-active: $primary-color;
+$topbar-link-bg-active: $transpa;
 // $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
+$topbar-link-bg-active-hover: transpa;
 // $topbar-link-font-family: $body-font-family;
 // $topbar-link-text-transform: none;
 $topbar-link-text-transform: uppercase;

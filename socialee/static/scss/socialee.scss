@@ -91,6 +91,10 @@ $fi-path: $bower_components_url + "/foundation-icon-fonts";
     margin: 0 25px 0 25px;
   }
 
+.top-bar-section li.active:not(.has-form) a:not(.button) {
+  text-decoration: underline;
+}
+
 // Landingpage
   #welcome_text{
     h1 {
