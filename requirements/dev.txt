@@ -16,10 +16,10 @@ gnureadline==6.3.3        # via ipython
 ipdb==0.8.1
 ipython==3.2.0            # via ipdb
 livereload==2.4.0
-pillow==2.8.2
+pillow==2.9.0
 git+git://github.com/blueyed/pip-tools.git@92e7d0a86def8b77214c7993fc58e82866b0607a#egg=pip-tools
 pluggy==0.3.0             # via tox
-py==1.4.29                # via pytest, tox
+py==1.4.30                # via pytest, tox
 pytest-django==2.8.0
 pytest-splinter==1.4.0
 pytest==2.7.2
@@ -30,8 +30,8 @@ splinter==0.7.2
 sqlparse==0.1.15          # via django-debug-toolbar
 tornado==4.2              # via livereload
 tox==2.1.1
-virtualenv==13.0.3        # via tox
+virtualenv==13.1.0        # via tox
 
 # The following packages are commented out because they are
 # considered to be unsafe in a requirements file:
-# setuptools==17.1.1        # via pytest-splinter
+# setuptools==18.0.1        # via pytest-splinter
