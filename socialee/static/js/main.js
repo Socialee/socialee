@@ -32,7 +32,7 @@ $(document).ready(function() {
 
   $('.zettel-slide-left').slick({
     slidesToShow: 1,
-    vertical: true,
+    vertical: false,
     // verticalSwiping: true,
     slidesToScroll: 1,
     autoplay: false,
@@ -46,7 +46,7 @@ $(document).ready(function() {
 
   $('.zettel-slide-right').slick({
     slidesToShow: 1,
-    vertical: true,
+    vertical: false,
     // verticalSwiping: true,
     slidesToScroll: 1,
     autoplay: false,
