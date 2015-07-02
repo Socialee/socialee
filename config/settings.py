@@ -57,6 +57,10 @@ if DEBUG:
         'debug_toolbar',
     )
 
+DEBUG_TOOLBAR_CONFIG = {
+    'JQUERY_URL': '',  # use always included jQuery.
+}
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
