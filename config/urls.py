@@ -4,12 +4,19 @@ from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 
+
 from socialee import views
+
+import allauth
+
+admin.autodiscover()
 
 urlpatterns = i18n_patterns('',
 	url(r'^$', views.home, name='home'),
+	url(r'^accounts/', include('allauth.urls')),
     url(r'^projects/', include('cms.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 )
 
 if settings.DEBUG:
