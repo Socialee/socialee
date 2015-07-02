@@ -149,15 +149,14 @@ MIGRATION_MODULES = {
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'de-de'
 TIME_ZONE = 'Europe/Berlin'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
-# LANGUAGES = [
-#     ('en', 'English'),
-# ]
+LANGUAGES = [
+    ('de-de', 'German'),
+]
 
 
 # Static files (CSS, JavaScript, Images)
