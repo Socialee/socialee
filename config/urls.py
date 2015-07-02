@@ -7,8 +7,8 @@ from django.contrib import admin
 from socialee import views
 
 urlpatterns = i18n_patterns('',
-    url(r'^', include('cms.urls')),
-    url(r'^$', views.home, name='home'),
+	url(r'^$', views.home, name='home'),
+    url(r'^projects/', include('cms.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
 

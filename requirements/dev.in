@@ -23,3 +23,12 @@ django-filer
 cmsplugin-filer
 django-reversion
 django-treebeard
+djangocms_file
+djangocms_flash
+# djangocms_googlemap
+djangocms_inherit
+djangocms_picture
+djangocms_teaser
+djangocms_video
+djangocms_link
+djangocms_snippet
