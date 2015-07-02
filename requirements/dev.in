@@ -17,3 +17,9 @@ livereload
 
 django-debug-toolbar
 django-extensions
+
+django-cms
+django-filer
+cmsplugin-filer
+django-reversion
+django-treebeard
