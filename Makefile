@@ -155,11 +155,14 @@ test: $(if $(TOX_BIN),,install_testing_req)
 # look at $(DATABASE_URL) to use py34-psql/py34-sqlite.
 test: $(if $(findstring postgresql:,$(DATABASE_URL)),test_psql,test_sqlite)
 
+test_createdb: TEST_OPTIONS:=--create-db
+test_createdb: test
+
 test_sqlite:
-	tox -e py34-sqlite
+	tox -e py34-sqlite -- tests $(TEST_OPTIONS)
 
 test_psql:
-	tox -e py34-psql
+	tox -e py34-psql -- tests $(TEST_OPTIONS)
 
 test_heroku:
 	@# tox fails to build Pillow on Heroku.
@@ -189,9 +192,20 @@ deploy_check: check test
 
 deploy: deploy_check static migrate
 
-# Run via bin/post_compile for Heroku.
-heroku_post_compile: check static test_heroku migrate_deploy
+# Gets run via bin/post_compile for Heroku.
+HEROKU_ZETTELS_MEDIA:=$(CURDIR)/.heroku/media-zettels
+heroku_post_compile: check heroku_fetch_zettels static test_heroku migrate_deploy
 
+# Fetch zettels media from separate repo (via https mirror (manually synced)).
+heroku_fetch_zettels:
+	mkdir -p $(HEROKU_ZETTELS_MEDIA) \
+		&& cd $(HEROKU_ZETTELS_MEDIA) \
+		&& wget -A '*.jpg' -r -nc -np --no-check-certificate \
+			https://codeprobe.de/spool/i/socialee-zettels-kae6cesh7laeFah/ \
+		&& mkdir -p $$BUILD_DIR/media \
+		&& cd $$BUILD_DIR/media \
+		&& ! test -e zettels \
+		&& ln -s $(HEROKU_ZETTELS_MEDIA)/codeprobe.de/spool/i/socialee-zettels-kae6cesh7laeFah zettels
 
 # Requirements files. {{{
 # Define different requirements files.
