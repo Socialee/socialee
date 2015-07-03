@@ -1,3 +1,6 @@
+{% load socialaccount %}
+{% providers_media_js %}
+
 <div id="signInModal" class="reveal-modal medium" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
     <div class="row">
         <div class="small-12 small-centered columns">
@@ -48,6 +51,7 @@
         </form>
                 
         <a href="#" class="socialee-button right">Anmelden</a>
+        <a href="{% provider_login_url "facebook" method="js_sdk" %}">Facebook Connect</a>
     </div>
         <a class="close-reveal-modal" aria-label="Close">&#215;</a>
     </div>

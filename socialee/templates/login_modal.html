@@ -1,3 +1,6 @@
+{% load socialaccount %}
+{% providers_media_js %}
+
 <div id="logInModal" class="reveal-modal medium" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
     <div class="row">
         <div class="small-12 small-centered columns">
@@ -25,6 +28,7 @@
             <div class="row-collapse">
             <div class="small-9 large-10 columns">
                 <p>Noch keinen Account? <a href="#" data-reveal-id="signInModal"> Anmelden!</a></p>
+                <a href="{% provider_login_url "facebook" method="js_sdk" %}">Facebook Connect</a>
             </div>
             <a href="#" class="socialee-button right">Log In</a>
             </div>
@@ -32,3 +36,4 @@
         <a class="close-reveal-modal" aria-label="Close">&#215;</a>
     </div>
 </div>
+
