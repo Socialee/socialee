@@ -8,8 +8,11 @@ from socialee import views
 
 urlpatterns = i18n_patterns('',
 	url(r'^$', views.home, name='home'),
-    url(r'^projects/', include('cms.urls')),
     url(r'^admin/', include(admin.site.urls)),
+
+    # At the end, for django-cms.
+    # Ref: https://django-cms.readthedocs.org/en/latest/how_to/install.html#url-configuration
+    url(r'^', include('cms.urls')),
 )
 
 if settings.DEBUG:
