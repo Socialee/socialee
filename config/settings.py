@@ -53,6 +53,7 @@ INSTALLED_APPS = (
 
     'django.contrib.sites',
 
+    # Base django-cms requirements.
     'cms',  # django CMS itself
     'mptt',  # utilities for implementing a tree
     'menus',  # helper for model independent hierarchical website navigation
