@@ -135,6 +135,8 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
@@ -174,6 +176,19 @@ LANGUAGES = [
     ('de', 'German'),
 ]
 
+# auth and allauth settings
+LOGIN_REDIRECT_URL = '/'
+SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_PROVIDERS = \
+    {'facebook':
+       {'SCOPE': ['email', 'public_profile', 'user_friends'],
+        'METHOD': 'js_sdk',
+        # 'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        # 'LOCALE_FUNC': 'path.to.callable',
+        # 'VERIFIED_EMAIL': False,
+        # 'VERSION': 'v2.3'
+        }
+    }
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/

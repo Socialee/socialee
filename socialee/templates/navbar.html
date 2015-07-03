@@ -16,7 +16,18 @@
   <section class="top-bar-section nav-right">
     <!-- Right Nav Section -->
     <ul>
-      <li class="show-for-medium-up"><a href="#" data-reveal-id="logInModal">Log In</a></li>
+      <li class="show-for-medium-up {% if request.user.is_authenticated %}logged-in{% else %}logged-out{% endif %}">
+        {% if request.user.is_authenticated %}
+          <a href="/accounts/logout/">Logout</a>
+          {% if request.user.first_name or request.user.last_name %}
+          {{ request.user.first_name }} {{ request.user.last_name }}
+        {% else %}
+          {{ request.user.username }}
+        {% endif %}
+        {% if request.user.profile.account_verified %} (verified) {% else %} (unverified) {% endif %}
+        {% else %}
+          <a href="#" data-reveal-id="logInModal">Log In</a></li>
+        {% endif %}
       <li class="right-off-canvas-toggle show-for-medium-up"><a href="#"><span>Menü</span></a></li>
     </ul>
   </section>

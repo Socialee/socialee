@@ -467,3 +467,15 @@ $fi-path: $bower_components_url + "/foundation-icon-fonts";
     width: 100%; 
     height: 100%; 
   }
+
+  .logged-out a {
+    color: red !important;
+  }
+
+  .logged-in a {
+    color: blue !important;
+  }
+
+
+
+

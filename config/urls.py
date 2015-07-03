@@ -12,7 +12,9 @@ import allauth
 admin.autodiscover()
 
 urlpatterns = i18n_patterns('',
-	url(r'^$', views.home, name='home'),
+    url(r'^$', views.Home.as_view(), name='home'),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', 
+        {'next_page': '/'}),
 	url(r'^accounts/', include('allauth.urls')),
     url(r'^projects/', include('cms.urls')),
     url(r'^admin/', include(admin.site.urls)),
@@ -24,11 +26,3 @@ if settings.DEBUG:
                           document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
-
-
-# und so steht's in den cms-docs:
-
-# urlpatterns = i18n_patterns('',
-#     url(r'^admin/', include(admin.site.urls)),
-#     url(r'^', include('cms.urls')),
-# ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
