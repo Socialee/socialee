@@ -4,3 +4,5 @@ Pillow
 
 pytz
 django-environ
+
+django-app-namespace-template-loader  # (namespaced) inheritence for "extends" in templates.

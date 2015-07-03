@@ -43,6 +43,7 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
 # Application definition
 
 INSTALLED_APPS = (
+    'djangocms_admin_style',  # for the admin skin. Before 'django.contrib.admin'.
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,13 +53,10 @@ INSTALLED_APPS = (
 
     'django.contrib.sites',
 
-    'socialee',
-
     'cms',  # django CMS itself
     'mptt',  # utilities for implementing a tree
     'menus',  # helper for model independent hierarchical website navigation
     'sekizai',  # for javascript and css management
-    'djangocms_admin_style',  # for the admin skin. You **must** add 'djangocms_admin_style' in the list **before** 'django.contrib.admin'.
     'treebeard',
 
     'reversion',
@@ -71,6 +69,9 @@ INSTALLED_APPS = (
     'djangocms_video',
     'djangocms_link',
     'djangocms_snippet',
+
+    # Main app.
+    'socialee',
 )
 
 if DEBUG:
@@ -102,8 +103,13 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [str(APPS_DIR('templates'))],
-        'APP_DIRS': True,
         'OPTIONS': {
+            # NOTE: app_namespace.Loader can not work properly if you use it in conjunction with django.template.loaders.cached.Loader and inheritance based on empty namespaces.
+            #       (README at https://github.com/Fantomas42/django-app-namespace-template-loader)
+            'loaders': ['app_namespace.Loader',
+                        'django.template.loaders.filesystem.Loader',
+                        'django.template.loaders.app_directories.Loader',
+                       ],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
