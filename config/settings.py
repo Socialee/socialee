@@ -10,22 +10,13 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 TODO: use django-configurations, for class based approach?!
 """
 
-# -*- coding: utf-8 -*-
 import os
-gettext = lambda s: s
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 import environ
 
 ROOT_DIR = environ.Path(__file__) - 2
 APPS_DIR = ROOT_DIR.path('socialee')
 assert os.path.exists(str(ROOT_DIR.path("Makefile"))), "ROOT_DIR is set properly."
-
-# TEMPLATE_DIRS = (
-#     # The docs say it should be absolute path: BASE_DIR is precisely one.
-#     # Life is wonderful!
-#     os.path.join(BASE_DIR, "templates"),
-# )
 
 CMS_TEMPLATES = (
     ('template_1.html', 'Template One'),
@@ -174,15 +165,14 @@ MIGRATION_MODULES = {
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'de'
 TIME_ZONE = 'Europe/Berlin'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-
-# LANGUAGES = [
-#     ('en', 'English'),
-# ]
+LANGUAGES = [
+    ('de', 'German'),
+]
 
 
 # Static files (CSS, JavaScript, Images)
