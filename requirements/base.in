@@ -4,7 +4,3 @@ Pillow
 
 pytz
 django-environ
-
-# django-sekizai
-# das hat noch keinen django 1.8 Support, na ja dann eben nicht. :-)
--e git+https://github.com/ojii/django-sekizai#egg=django-sekizai

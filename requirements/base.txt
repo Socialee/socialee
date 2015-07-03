@@ -6,5 +6,5 @@
 #
 django-environ==0.3.0
 django==1.8.2
-pillow==2.8.2
+pillow==2.9.0
 pytz==2015.4
