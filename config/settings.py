@@ -137,10 +137,8 @@ DATABASES = {
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 MIGRATION_MODULES = {
-    'cms': 'cms.migrations_django',
-    'menus': 'menus.migrations_django',
-
-    # Add also the following modules if you're using these plugins:
+    # For non-ported Django-CMS plugins.
+    # Ref: https://django-cms.readthedocs.org/en/latest/how_to/install.html
     'djangocms_file': 'djangocms_file.migrations_django',
     'djangocms_flash': 'djangocms_flash.migrations_django',
     'djangocms_googlemap': 'djangocms_googlemap.migrations_django',
