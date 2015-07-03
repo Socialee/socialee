@@ -20,7 +20,7 @@ $fi-path: $bower_components_url + "/foundation-icon-fonts";
 
 // Behold, here are all the Foundation components.
 @import "foundation/scss/foundation/components/grid";
-// @import "foundation/scss/foundation/components/accordion";
+@import "foundation/scss/foundation/components/accordion";
 // @import "foundation/scss/foundation/components/alert-boxes";
 // @import "foundation/scss/foundation/components/block-grid";
 // @import "foundation/scss/foundation/components/breadcrumbs";
