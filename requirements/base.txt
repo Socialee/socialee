@@ -4,9 +4,36 @@
 #
 #    pip-compile base.in
 #
--e git+https://github.com/ojii/django-sekizai@6ca7e687c511681f6819848464c3d40286fe8dd0#egg=django-sekizai
-django-classy-tags==0.6.2
+cmsplugin-filer==0.10.1
+django-app-namespace-template-loader==0.3
+django-appconf==1.0.1     # via cmsplugin-filer
+django-classy-tags==0.6.2  # via django-cms, django-sekizai
+django-cms==3.1.2
 django-environ==0.3.0
+django-filer==0.9.11
+django-mptt==0.7.4        # via django-filer
+django-polymorphic==0.7.1  # via django-filer
+django-reversion==1.8.7
+django-sekizai==0.8.2     # via cmsplugin-filer, django-cms
+django-select2==4.3.1     # via djangocms-link
+django-treebeard==3.0
 django==1.8.2
+djangocms-admin-style==0.2.7  # via django-cms
+djangocms-file==0.1
+djangocms-flash==0.2.0
+djangocms-inherit==0.1
+djangocms-link==1.6.2
+djangocms-picture==0.1
+djangocms-snippet==1.5
+djangocms-teaser==0.1
+djangocms-video==0.1
+easy-thumbnails==2.2      # via cmsplugin-filer, django-filer
+html5lib==0.999           # via django-cms
 pillow==2.9.0
 pytz==2015.4
+six==1.9.0                # via django-app-namespace-template-loader, django-appconf, html5lib
+unidecode==0.4.18         # via django-filer
+
+# The following packages are commented out because they are
+# considered to be unsafe in a requirements file:
+# setuptools==18.0.1        # via django-polymorphic

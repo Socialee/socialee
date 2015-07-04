@@ -35,13 +35,40 @@
           <div class="small-6 medium-4 large-5 large-offset-2 medium-offset-1 columns">
             <div id="welcome_text">
               <h1>Manifest</h1>
-              {# <h3>Socialee | The social funding network.</h3> #}
-              <h3>1) Wir machen das jetzt mal.</h3>
-              <h3>2) Wir sind digital und analog.</h3>
-              <h3>3) Du bist mehr als 140 Zeichen.</h3>
-              <h3>4) Ihr seid die, auf die ihr gewartet habt.</h3>
-              <h3>5) Wir machen das jetzt mal.</h3>
-              <p class="large-10 colums show-for-medium-up">Wir glauben, dass Ideen wahr werden sollten. Mit Socialee geht das ganz einfach. <span>Sieh Dir unsere ersten Projekte an und wie wir mit Menschen zusammenarbeiten, um ihre Ideen zu realisieren.</span></p>
+              <ul class="accordion" data-accordion>
+                <li class="accordion-navigation">
+                  <a href="#panel1a">1) Wir machen das jetzt mal.</a>
+                    <div id="panel1a" class="content">
+                      <p>Gute Ideen gibt’s wie Sand am Meer. Jedoch wissen wir auch, dass es nicht immer einfach ist, sie umzusetzen. Wir glauben mit euch an eure Ideen und dafür sorgen, dass sie nicht versanden.</p>
+                    </div>
+                  </li>
+                  <li class="accordion-navigation">
+                    <a href="#panel2a">2) Wir sind digital und analog.</a>
+                    <div id="panel2a" class="content">
+                     <p>Wir sind online und offline, genau wie du. Socialee findet nicht nur im Netz statt, man kann uns auch anfassen. Wir glauben an die Verbindung der digitalen und der realen Welt und daran, dass die eine nicht ohne die andere funktioniert. So findest du uns nicht nur im Internet, sondern auch in unserem Crowdcafe in Berlin, wo du mit uns reden, streiten und schweigen kannst. Ob du uns auf der Website posten oder lieber auf einen Kaffee vorbeikommen willst – die Wahl liegt bei dir.</p>
+                    </div>
+                  </li>
+                  <li class="accordion-navigation">
+                    <a href="#panel3a">3) Du bist mehr als 140 Zeichen.</a>
+                    <div id="panel3a" class="content">
+                      <p>Es heißt immer, eine gute Idee muss schnell auf den Punkt gebracht werden. In diesen Zeiten fühlen wir den Zwang, uns möglichst professionell und in möglichst kurzer Zeit zu vermarkten. Wir setzen dem etwas entgegen: Du bist mehr als 140 Zeichen. Du bist mehr als ein Werbeslogan. Du hast es verdient, dass man dir zuhört, weil du etwas zu sagen hast. Verkauf dich nicht. Sei du selbst.</p>
+                    </div>
+                  </li>
+                  <li class="accordion-navigation">
+                    <a href="#panel4a">4) Wir sind Geld und das, was Geld nicht kaufen kann.</a>
+                    <div id="panel4a" class="content">
+                      <p>Socialee ist eine soziale Plattform, die dir vieles geben kann. Wenn dein Projekt finanzielle Unterstützung benötigt, werden wir dir dabei helfen, die richtige Crowd zu finden. Aber da, wo andere Plattformen aufhören, fangen wir erst richtig an: Socialee hilft, Mitstreiter und Mitträumer zu finden. Wir organisieren Räume, Partner oder auch den Traktor, der dein Auto aus dem Graben holt. Die Grenzen fangen erst an, wo die Fantasie aufhört.</p>
+                    </div>
+                  </li>
+                  <li class="accordion-navigation">
+                    <a href="#panel5a">5) Ihr seid die, auf die ihr gewartet habt.</a>
+                    <div id="panel5a" class="content">
+                      <p>Wir können nicht darauf warten, bis jemand anders die Dinge für uns regelt. Die Gegenwart gehört uns und wir schieben keinerlei Verantwortung von uns weg. Was wir in der Welt sehen wollen, das müssen wir auch selbst in die Welt bringen.</p>
+                    </div>
+                  </li>
+                </ul>
+              <br/>
+              <p class="large-10 colums show-for-medium-up"><strong>Socialee | </strong>Wir glauben, dass Ideen wahr werden sollten. <span>Sieh Dir unsere ersten Projekte an und wie wir mit Menschen zusammenarbeiten, um ihre Ideen zu realisieren.</span></p>
               <a href="#projekte" class="socialee-button left">Projekte</a>
               <a class="show-for-large-up" href="#" data-reveal-id="signInModal" id="mach_mit">Sei dabei!</a>
             </div>
@@ -57,7 +84,6 @@
 
       <div class="row section">
         <div class="small-8 small-centered columns zettel-wrap">
-
           <!--<div class="row collapse postfix-radius">
             <div class="small-3 columns">
               <span class="postfix">Was suchst Du?</span>
@@ -84,7 +110,6 @@
 
           <div class="small-6 columns zettel-inner-wrap">
             <div class="slider-overlay-top">
-              {# <p class="left">Zettelnummer: #087</p><p class="right">Zettel 64 von 76</p> #}
               <i class="fi-arrow-up" id="navtopright"></i>
             </div>
             <div class="zettel-slide-right">
@@ -93,20 +118,41 @@
               {% endfor %}
             </div>
             <div class="slider-overlay-bottom">
-              {# <p class="left">...</p> #}
               <i class="fi-arrow-down" id="navbottomright"></i>
-              {# <div class="right button tiny">Nachricht schicken</div> #}
             </div>
           </div>
         </div>
       </div>
-
+      <footer class="footer section">
+        <div class="row">
+          <div class="small-12 medium-6 large-5 columns">
+            <p class="logo">Socialee | Wir machen das jetzt mal.</p> 
+            <p class="footer-links">
+              <a href="#">Home</a>
+              <a href="#">Blog</a>
+              <a href="#">About</a>
+              <a href="#">Faq</a>
+              <a href="#">Contact</a>
+            </p>
+            <p class="copywrite">Copywrite © 2015 Socialee</p>
+          </div>
+          <div class="small-12 medium-6 large-4 columns">
+            <ul class="contact">
+              <li><p><a href="#"><i class="fi-marker"></i>Mehringplatz 7, 10969 Berlin</a></p></li>
+              <li><p><a href="#"><i class="fi-mail"></i>hello@socialee.de</a></p></li>
+              <li><p><a href="#"><i class="fi-social-facebook"></i>Facebook</a></p></li>
+            </ul>
+          </div>
+          <div class="small-12 medium-12 large-3 columns">
+            <p class="about"><strong>An invasion of armies can be resisted, but not an idea whose time has come.</strong></p>
+            <p class="about subheader">Victor Hugo</p>
+          </div>
+        </div>
+      </footer>
     </div>
-
     <a class="exit-off-canvas"></a>
   </div>
 </div>
-
 
 {% include "login_modal.html" %}
 {% include "video_modal.html" %}
@@ -120,9 +166,9 @@ $('#fullpage_wrapper').fullpage({
       navigationPosition: 'left',
       slidesNavigation: true,
       slidesNavPosition: 'bottom',
-      navigationTooltips: ['Home', 'Projekte', 'Zettel'],
+      navigationTooltips: ['Home', 'Projekte', 'Zettel', 'Impressum'],
       menu: '.nav-middle',
-      anchors:['landingpage', 'projekte', 'zettel'],
+      anchors:['landingpage', 'projekte', 'zettel', 'imprint'],
   });
 {% endaddtoblock %} 
 {% endblock %}

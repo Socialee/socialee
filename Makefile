@@ -155,11 +155,14 @@ test: $(if $(TOX_BIN),,install_testing_req)
 # look at $(DATABASE_URL) to use py34-psql/py34-sqlite.
 test: $(if $(findstring postgresql:,$(DATABASE_URL)),test_psql,test_sqlite)
 
+test_createdb: TEST_OPTIONS:=--create-db
+test_createdb: test
+
 test_sqlite:
-	tox -e py34-sqlite
+	tox -e py34-sqlite -- tests $(TEST_OPTIONS)
 
 test_psql:
-	tox -e py34-psql
+	tox -e py34-psql -- tests $(TEST_OPTIONS)
 
 test_heroku:
 	@# tox fails to build Pillow on Heroku.

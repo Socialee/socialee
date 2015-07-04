@@ -82,7 +82,7 @@
 // $row-width: rem-calc(1000);
 $row-width: rem-calc(1200);
 // $total-columns: 12;
-// $column-gutter: rem-calc(30);
+$column-gutter: rem-calc(30);
 
 // c. Global
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -126,7 +126,7 @@ $grautranspa: rgba(#000, .5);
 
 // We use these as default colors throughout
 // $primary-color: #008CBA;
-$primary-color: $oil;
+$primary-color: $monsoon;
 // $secondary-color: #e7e7e7;
 // $alert-color: #f04124;
 // $success-color: #43AC6A;
@@ -136,7 +136,7 @@ $primary-color: $oil;
 // We use these to control various global styles
 // $body-bg: $white;
 // $body-font-color: $jet;
-// $body-font-family: $font-family-sans-serif;
+$body-font-family: $font-family-sans-serif;
 // $body-font-weight: $font-weight-normal;
 // $body-font-style: normal;
 
@@ -352,6 +352,18 @@ $primary-color: $oil;
 
 // $accordion-content-padding: ($column-gutter/2);
 // $accordion-content-active-bg-color: $white;
+
+// Socialee Custom
+$accordion-navigation-padding: rem-calc(8 8 8 0);
+$accordion-navigation-bg-color: $transpa;
+$accordion-navigation-hover-bg-color: scale-color($accordion-navigation-bg-color, $lightness: -5%);
+$accordion-navigation-active-bg-color: scale-color($accordion-navigation-bg-color, $lightness: -3%);
+$accordion-navigation-font-color: $jet;
+$accordion-navigation-font-size: rem-calc(16);
+$accordion-navigation-font-family: $body-font-family;
+
+$accordion-content-padding: ($column-gutter/8);
+$accordion-content-active-bg-color: $transpa;
 
 // 02. Alert Boxes
 // - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -18,6 +18,10 @@ ROOT_DIR = environ.Path(__file__) - 2
 APPS_DIR = ROOT_DIR.path('socialee')
 assert os.path.exists(str(ROOT_DIR.path("Makefile"))), "ROOT_DIR is set properly."
 
+CMS_TEMPLATES = (
+    ('template_1.html', 'Template One'),
+)
+
 env = environ.Env()
 
 SITE_ID = 1
@@ -39,16 +43,46 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
 # Application definition
 
 INSTALLED_APPS = (
+    'djangocms_admin_style',  # for the admin skin. Before 'django.contrib.admin'.
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admindocs',
+
     'django.contrib.sites',
 
-    'sekizai',
+    # Base django-cms requirements.
+    'cms',  # django CMS itself
+    'mptt',  # utilities for implementing a tree
+    'menus',  # helper for model independent hierarchical website navigation
+    'sekizai',  # for javascript and css management
+    'treebeard',
 
+    'reversion',
+    'djangocms_file',
+    'djangocms_flash',
+    # 'djangocms_googlemap',
+    'djangocms_inherit',
+    'djangocms_picture',
+    'djangocms_teaser',
+    'djangocms_video',
+    'djangocms_link',
+    'djangocms_snippet',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+
+    'django_comments',
+    'tagging',
+    'zinnia',
+    # 'cmsplugin_zinnia', not yet compatible with  v1.8
+
+    # Main app.
     'socialee',
 )
 
@@ -71,6 +105,12 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'cms.middleware.user.CurrentUserMiddleware',
+    'cms.middleware.page.CurrentPageMiddleware',
+    'cms.middleware.toolbar.ToolbarMiddleware',
+    'cms.middleware.language.LanguageCookieMiddleware',
+    'django.contrib.admindocs.middleware.XViewMiddleware',
 )
 
 ROOT_URLCONF = 'config.urls'
@@ -79,18 +119,41 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [str(APPS_DIR('templates'))],
-        'APP_DIRS': True,
         'OPTIONS': {
+            # NOTE: app_namespace.Loader can not work properly if you use it in conjunction with django.template.loaders.cached.Loader and inheritance based on empty namespaces.
+            #       (README at https://github.com/Fantomas42/django-app-namespace-template-loader)
+            'loaders': ['app_namespace.Loader',
+                        'django.template.loaders.filesystem.Loader',
+                        'django.template.loaders.app_directories.Loader',
+                       ],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.i18n',
+                'django.core.context_processors.media',
+                'django.core.context_processors.static',
+                'django.core.context_processors.request',
                 'sekizai.context_processors.sekizai',
+                'cms.context_processors.cms_settings',
+                'allauth.account.context_processors.account',
+                'allauth.socialaccount.context_processors.socialaccount',
+                'zinnia.context_processors.version',  # Optional
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -102,16 +165,46 @@ DATABASES = {
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
+MIGRATION_MODULES = {
+    # For non-ported Django-CMS plugins.
+    # Ref: https://django-cms.readthedocs.org/en/latest/how_to/install.html
+    'djangocms_file': 'djangocms_file.migrations_django',
+    'djangocms_flash': 'djangocms_flash.migrations_django',
+    'djangocms_googlemap': 'djangocms_googlemap.migrations_django',
+    'djangocms_inherit': 'djangocms_inherit.migrations_django',
+    'djangocms_link': 'djangocms_link.migrations_django',
+    'djangocms_picture': 'djangocms_picture.migrations_django',
+    'djangocms_snippet': 'djangocms_snippet.migrations_django',
+    'djangocms_teaser': 'djangocms_teaser.migrations_django',
+    'djangocms_video': 'djangocms_video.migrations_django',
+    'djangocms_text_ckeditor': 'djangocms_text_ckeditor.migrations_django',
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'de'
 TIME_ZONE = 'Europe/Berlin'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+LANGUAGES = [
+    ('de', 'German'),
+]
 
+# auth and allauth settings
+LOGIN_REDIRECT_URL = '/'
+SOCIALACCOUNT_QUERY_EMAIL = True
+SOCIALACCOUNT_PROVIDERS = \
+    {'facebook':
+       {'SCOPE': ['email', 'public_profile', 'user_friends'],
+        'METHOD': 'js_sdk',
+        # 'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        # 'LOCALE_FUNC': 'path.to.callable',
+        # 'VERIFIED_EMAIL': False,
+        # 'VERSION': 'v2.3'
+        }
+    }
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/

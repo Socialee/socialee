@@ -5,6 +5,20 @@ Pillow
 pytz
 django-environ
 
-# django-sekizai
-# das hat noch keinen django 1.8 Support, na ja dann eben nicht. :-)
--e git+https://github.com/ojii/django-sekizai#egg=django-sekizai
+django-app-namespace-template-loader  # (namespaced) inheritence for "extends" in templates.
+
+# Django CMS.
+django-cms
+django-filer
+cmsplugin-filer
+django-reversion
+django-treebeard
+djangocms_file
+djangocms_flash
+# djangocms_googlemap
+djangocms_inherit
+djangocms_picture
+djangocms_teaser
+djangocms_video
+djangocms_link
+djangocms_snippet
