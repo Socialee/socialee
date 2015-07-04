@@ -34,3 +34,5 @@ djangocms_link
 djangocms_snippet
 
 django-allauth
+
+django-blog-zinnia

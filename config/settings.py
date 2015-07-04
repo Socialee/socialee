@@ -77,6 +77,10 @@ INSTALLED_APPS = (
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
 
+    'django_comments',
+    'tagging',
+    'zinnia',
+
     # Main app.
     'socialee',
 )
@@ -129,10 +133,12 @@ TEMPLATES = [
                 'django.core.context_processors.i18n',
                 'django.core.context_processors.media',
                 'django.core.context_processors.static',
+                'django.core.context_processors.request',
                 'sekizai.context_processors.sekizai',
                 'cms.context_processors.cms_settings',
                 'allauth.account.context_processors.account',
                 'allauth.socialaccount.context_processors.socialaccount',
+                'zinnia.context_processors.version',  # Optional
             ],
         },
     },

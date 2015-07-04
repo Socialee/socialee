@@ -19,6 +19,8 @@ urlpatterns = i18n_patterns('',
     url(r'^projects/', include('cms.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^blog/', include('zinnia.urls', namespace='zinnia')),
+    url(r'^comments/', include('django_comments.urls')),
 )
 
 if settings.DEBUG:
