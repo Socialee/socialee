@@ -80,6 +80,7 @@ INSTALLED_APPS = (
     'django_comments',
     'tagging',
     'zinnia',
+    # 'cmsplugin_zinnia', not yet compatible with  v1.8
 
     # Main app.
     'socialee',
