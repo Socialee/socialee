@@ -43,6 +43,7 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
 # Application definition
 
 INSTALLED_APPS = (
+    'djangocms_admin_style',  # for the admin skin. Before 'django.contrib.admin'.
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,13 +54,11 @@ INSTALLED_APPS = (
 
     'django.contrib.sites',
 
-    'socialee',
-
+    # Base django-cms requirements.
     'cms',  # django CMS itself
     'mptt',  # utilities for implementing a tree
     'menus',  # helper for model independent hierarchical website navigation
     'sekizai',  # for javascript and css management
-    'djangocms_admin_style',  # for the admin skin. You **must** add 'djangocms_admin_style' in the list **before** 'django.contrib.admin'.
     'treebeard',
 
     'reversion',
@@ -77,6 +76,9 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+
+    # Main app.
+    'socialee',
 )
 
 if DEBUG:
@@ -84,6 +86,10 @@ if DEBUG:
         'django_extensions',
         'debug_toolbar',
     )
+
+DEBUG_TOOLBAR_CONFIG = {
+    'JQUERY_URL': '',  # use always included jQuery.
+}
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -108,8 +114,13 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [str(APPS_DIR('templates'))],
-        'APP_DIRS': True,
         'OPTIONS': {
+            # NOTE: app_namespace.Loader can not work properly if you use it in conjunction with django.template.loaders.cached.Loader and inheritance based on empty namespaces.
+            #       (README at https://github.com/Fantomas42/django-app-namespace-template-loader)
+            'loaders': ['app_namespace.Loader',
+                        'django.template.loaders.filesystem.Loader',
+                        'django.template.loaders.app_directories.Loader',
+                       ],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -148,10 +159,8 @@ DATABASES = {
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 MIGRATION_MODULES = {
-    'cms': 'cms.migrations_django',
-    'menus': 'menus.migrations_django',
-
-    # Add also the following modules if you're using these plugins:
+    # For non-ported Django-CMS plugins.
+    # Ref: https://django-cms.readthedocs.org/en/latest/how_to/install.html
     'djangocms_file': 'djangocms_file.migrations_django',
     'djangocms_flash': 'djangocms_flash.migrations_django',
     'djangocms_googlemap': 'djangocms_googlemap.migrations_django',
