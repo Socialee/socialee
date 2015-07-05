@@ -5,6 +5,8 @@ PROJECT_ROOT?=$(dir $(or $(shell readlink $(firstword $(MAKEFILE_LIST))), $(firs
 PROJECT_ROOT:=$(PROJECT_ROOT:%/=%)
 PROJECT_ROOT_SRC=$(PROJECT_ROOT)/socialee
 
+PROJECT_APPS:=socialee
+
 # Django settings.
 export DJANGO_DEBUG?=1
 override DJANGO_DEBUG:=$(filter-out 0,$(DJANGO_DEBUG))
@@ -181,7 +183,7 @@ check_migrated:
 	# Check that there are no DB changes (missing migrations).
 	@# Exits with 1 if there are no changes.
 	@# --noinput works with 1.9+ only.
-	python manage.py makemigrations --exit --dry-run --noinput; \
+	python manage.py makemigrations --exit --dry-run --noinput $(PROJECT_APPS); \
 		ret=$$?; \
 		if [ $$ret != 1 ]; then \
 			echo 'There are DB changes that need a migration!'; \
