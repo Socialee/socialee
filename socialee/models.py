@@ -3,10 +3,30 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from allauth.socialaccount.models import SocialAccount
+from allauth.account.models import EmailAddress
 import hashlib
 
-# TODO: BaseModel: created/updated
-# TODO: mj>  user-Passwort / Postleitzahl / Geburtsdatum /
+#TODO 1: Add "account_verified": http://www.sarahhagstrom.com/2013/09/the-missing-django-allauth-tutorial/
+
+# class UserProfile(models.Model):
+#     user = models.OneToOneField(User, related_name='profile')
+ 
+#     def __unicode__(self):
+#         return "{}'s profile".format(self.user.username)
+ 
+#     class Meta:
+#         db_table = 'user_profile'
+ 
+#     def account_verified(self):
+#         if self.user.is_authenticated:
+#             result = EmailAddress.objects.filter(email=self.user.email)
+#             if len(result):
+#                 return result[0].verified
+#         return False
+ 
+# User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
+
+# END TODO 1
 
 class UserEntry(User):
     class Meta(User.Meta):
@@ -53,7 +73,16 @@ class Profile(models.Model):
 
     def __str__(self):
         return 'Profile ({})'.format(self.user)
-
+        
+# TODO 2 Hier sollte das facebook Profilbild geladen werden, wird verwendet in navbar.html // ist das cool so? 
+    # def profile_image_url(self):
+    #     fb_uid = SocialAccount.objects.filter(user_id=self.user.id, provider='facebook')
+     
+    #     if len(fb_uid):
+    #         return "http://graph.facebook.com/{}/picture?width=40&height=40".format(fb_uid[0].uid)
+     
+    #     return "http://www.gravatar.com/avatar/{}?s=40".format(hashlib.md5(self.user.email).hexdigest())
+# END TODO 2
 
 class InputOutput(models.Model):
     class Meta:
@@ -110,12 +139,3 @@ class Project(models.Model):
     # desc
     # img
     # featured
-
-
-def profile_image_url(self):
-    fb_uid = SocialAccount.objects.filter(user_id=self.user.id, provider='facebook')
- 
-    if len(fb_uid):
-        return "http://graph.facebook.com/{}/picture?width=40&height=40".format(fb_uid[0].uid)
- 
-    return "http://www.gravatar.com/avatar/{}?s=40".format(hashlib.md5(self.user.email).hexdigest())
