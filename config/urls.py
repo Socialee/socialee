@@ -9,7 +9,6 @@ from socialee import views
 
 import allauth
 
-admin.autodiscover()
 
 urlpatterns = i18n_patterns('',
     url(r'^$', views.Home.as_view(), name='home'),
