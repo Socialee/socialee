@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.conf import settings
 
@@ -13,15 +12,17 @@ class Home(TemplateView):
         context['zettel_links'] = self.get_zettel_images("links")
         context['zettel_rechts'] = self.get_zettel_images("rechts")
         return context
-        
+
     @classmethod
     def get_zettel_images(cls, subdir):
         subdir = os.path.join("zettels", subdir)
         filenames = list(os.walk(os.path.join(settings.MEDIA_ROOT, subdir)))
         try:
-            return [os.path.join(settings.MEDIA_URL, subdir, x) for x in filenames[0][2] if x.endswith(".jpg")]  #[0:90]
+            l = [os.path.join(settings.MEDIA_URL, subdir, x)
+                 for x in filenames[0][2] if x.endswith(".jpg")]  #[0:90]
         except IndexError:
             return []
+        return sorted(l)
 
 
 class Cafe(TemplateView):
