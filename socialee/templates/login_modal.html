@@ -1,5 +1,5 @@
 {% load socialaccount %}
-{% providers_media_js %}
+{% include "socialaccount/snippets/login_extra.html" %}
 
 <div id="logInModal" class="reveal-modal medium" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
     <div class="row">
@@ -14,7 +14,7 @@
                 </div>
                 <div class="small-8 large-10 columns">
                     <input type="text" placeholder="Benutzername oder email">
-                </div>           
+                </div>
             </div>
             <div class="row collapse">
                 <div class="small-4 large-2 columns">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="small-8 large-10 columns">
                     <input type="text" placeholder="Dein Passwort bitte">
-                </div>           
+                </div>
             </div>
             </form>
             <div class="row-collapse">
