@@ -5,7 +5,7 @@
 <div class="off-canvas-wrap" data-offcanvas>
   <div class="inner-wrap">
     {% include "navbar.html" %}
-    
+
     <aside class="right-off-canvas-menu">
         <ul class="off-canvas-list">
           <li><a href="#" data-reveal-id="signInModal" class="button offcanvas-button">Get started!</a></li>
@@ -72,13 +72,13 @@
               <a href="#projekte" class="socialee-button left">Projekte</a>
               <a class="show-for-large-up" href="#" data-reveal-id="signInModal" id="mach_mit">Sei dabei!</a>
             </div>
-          </div>   
-        </div> 
+          </div>
+        </div>
       </div>
 
       <div class="section">
         <div class="project-slide">
-        {% include "socialee_project_slider.html" %} 
+        {% include "socialee_project_slider.html" %}
         </div>
       </div>
 
@@ -126,7 +126,7 @@
       <footer class="footer section">
         <div class="row">
           <div class="small-12 medium-6 large-5 columns">
-            <p class="logo">Socialee | Wir machen das jetzt mal.</p> 
+            <p class="logo">Socialee | Wir machen das jetzt mal.</p>
             <p class="footer-links">
               <a href="#">Home</a>
               <a href="#">Blog</a>
@@ -160,7 +160,7 @@
 {% include "signin_modal.html" %}
 {% include "comingsoon_modal.html" %}
 
-{% addtoblock "js" strip %} 
+{% addtoblock "js" strip %}
 $('#fullpage_wrapper').fullpage({
       navigation: true,
       navigationPosition: 'left',
@@ -170,5 +170,5 @@ $('#fullpage_wrapper').fullpage({
       menu: '.nav-middle',
       anchors:['landingpage', 'projekte', 'zettel', 'imprint'],
   });
-{% endaddtoblock %} 
+{% endaddtoblock %}
 {% endblock %}
