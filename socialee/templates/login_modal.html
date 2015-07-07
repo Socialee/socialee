@@ -28,7 +28,9 @@
             <div class="row-collapse">
             <div class="small-9 large-10 columns">
                 <p>Noch keinen Account? <a href="#" data-reveal-id="signInModal"> Anmelden!</a></p>
-                <a href="{% provider_login_url "facebook" method="js_sdk" %}">Facebook Connect</a>
+                <div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="true" data-auto-logout-link="false">
+                </div>
+                <a href="{% provider_login_url "facebook" method="js_sdk" %}">Login with Facebook</a>
             </div>
             <a href="#" class="socialee-button right">Log In</a>
             </div>
