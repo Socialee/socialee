@@ -38,7 +38,7 @@ class Profile(models.Model):
 
     origin = models.ForeignKey(Origin, blank=True, null=True)
 
-    def account_verified(self):
+    def email_verified(self):
         return (self.user.is_authenticated and
                 EmailAddress.objects.filter(email=self.user.email,
                                             verified=True).exists())

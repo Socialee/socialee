@@ -15,13 +15,13 @@ def profile(user):
 
 
 def test_profile_verified(profile):
-    "Test the account_verified method, which goes through allauth's EmailAddress model."
-    assert not profile.account_verified()
+    "Test the email_verified method, which goes through allauth's EmailAddress model."
+    assert not profile.email_verified()
 
     email = EmailAddress.objects.create(email=profile.user.email, user=profile.user)
-    assert not profile.account_verified()
+    assert not profile.email_verified()
 
     email.verified = True
     email.save()
 
-    assert profile.account_verified()
+    assert profile.email_verified()
