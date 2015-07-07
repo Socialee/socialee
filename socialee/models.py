@@ -6,27 +6,6 @@ from allauth.socialaccount.models import SocialAccount
 from allauth.account.models import EmailAddress
 import hashlib
 
-#TODO 1: Add "account_verified": http://www.sarahhagstrom.com/2013/09/the-missing-django-allauth-tutorial/
-
-# class UserProfile(models.Model):
-#     user = models.OneToOneField(User, related_name='profile')
- 
-#     def __unicode__(self):
-#         return "{}'s profile".format(self.user.username)
- 
-#     class Meta:
-#         db_table = 'user_profile'
- 
-#     def account_verified(self):
-#         if self.user.is_authenticated:
-#             result = EmailAddress.objects.filter(email=self.user.email)
-#             if len(result):
-#                 return result[0].verified
-#         return False
- 
-# User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
-
-# END TODO 1
 
 class UserEntry(User):
     class Meta(User.Meta):
@@ -59,6 +38,11 @@ class Profile(models.Model):
 
     origin = models.ForeignKey(Origin, blank=True, null=True)
 
+    def account_verified(self):
+        return (self.user.is_authenticated and
+                EmailAddress.objects.filter(email=self.user.email,
+                                            verified=True).exists())
+
     def user_first_name(self):
         return self.user.first_name if self.user else None
     user_first_name.short_description = _("First name")
@@ -73,7 +57,7 @@ class Profile(models.Model):
 
     def __str__(self):
         return 'Profile ({})'.format(self.user)
-        
+
 # TODO 2 Hier sollte das facebook Profilbild geladen werden, wird verwendet in navbar.html // ist das cool so? 
     # def profile_image_url(self):
     #     fb_uid = SocialAccount.objects.filter(user_id=self.user.id, provider='facebook')
