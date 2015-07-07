@@ -1,12 +1,12 @@
 {% load socialaccount %}
-{% providers_media_js %}
+{% include "socialaccount/snippets/login_extra.html" %}
 
 <div id="signInModal" class="reveal-modal medium" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
     <div class="row">
         <div class="small-12 small-centered columns">
         <h2 id="modalTitle2">Noch nicht dabei?</h2>
         <p class="lead">Na dann rein mit Dir!</p>
-        
+
         <form>
             <div  class="row collapse">
                 <div class="small-4 large-2 columns">
@@ -14,7 +14,7 @@
                 </div>
                 <div class="small-8 large-10 columns">
                     <input type="text" placeholder="Peter vielleicht? Oder Petra?">
-                </div>           
+                </div>
             </div>
             <div  class="row collapse">
                 <div class="small-4 large-2 columns">
@@ -22,7 +22,7 @@
                 </div>
                 <div class="small-8 large-10 columns">
                     <input type="text" placeholder="...">
-                </div>           
+                </div>
             </div>
             <div  class="row collapse">
                 <div class="small-4 large-2 columns">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="small-8 large-10 columns">
                     <input type="text" placeholder="ein schönes Passwort">
-                </div>           
+                </div>
             </div>
             <div  class="row collapse">
                 <div class="small-4 large-2 columns">
@@ -38,7 +38,7 @@
                 </div>
                 <div class="small-8 large-10 columns">
                     <input type="text" placeholder="">
-                </div>           
+                </div>
             </div>
             <div  class="row collapse">
                 <div class="small-4 large-2 columns">
@@ -46,10 +46,10 @@
                 </div>
                 <div class="small-8 large-10 columns">
                     <input type="text" placeholder="Und, Mensch oder Maschine?">
-                </div>           
+                </div>
             </div>
         </form>
-                
+
         <a href="#" class="socialee-button right">Anmelden</a>
         <a href="{% provider_login_url "facebook" method="js_sdk" %}">Facebook Connect</a>
     </div>
