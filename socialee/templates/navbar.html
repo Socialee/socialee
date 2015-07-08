@@ -24,13 +24,13 @@
       <li>
         <a>
           {% if request.user.is_authenticated %}
-            {% if request.user.profile.email_verified %}Hallo {% endif %}
+            {% if request.user.profile.is_email_verified %}Hallo {% endif %}
             {% if request.user.first_name or request.user.last_name %}
               {{ request.user.first_name }} {{ request.user.last_name }}
               {% else %}
               {{ request.user.username }}
             {% endif %}
-              {% if not request.user.profile.email_verified %} (unverified)
+              {% if not request.user.profile.is_email_verified %} (unverified)
               {% endif %}
         {% endif %}
         </a>
