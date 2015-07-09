@@ -1,0 +1,71 @@
+{% extends "account/allauth_base.html" %}
+{% load i18n %}
+{% load socialaccount %}
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+{% include "socialaccount/snippets/login_extra.html" %}
+
+
+{% block content %}
+
+<div id="signInModal" aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <div class="row">
+        <div class="small-12 small-centered columns">
+	        <h2 id="modalTitle2">Noch nicht dabei?</h2>
+	        <p class="lead">Na dann rein mit Dir!</p>
+	        <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+	        <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+	        	
+	        	{% csrf_token %}
+	  			{{ form.as_p }}
+	  			{% if redirect_field_value %}
+	  			<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+	  			{% endif %}
+
+	            <div  class="row collapse">
+	                <div class="small-4 large-2 columns">
+	                    <span class="prefix">Vorname</span>
+	                </div>
+	                <div class="small-8 large-10 columns">
+	                    <input type="text" placeholder="Peter vielleicht? Oder Petra?">
+	                </div>
+	            </div>
+	            <div  class="row collapse">
+	                <div class="small-4 large-2 columns">
+	                    <span class="prefix">Nachname</span>
+	                </div>
+	                <div class="small-8 large-10 columns">
+	                    <input type="text" placeholder="...">
+	                </div>
+	            </div>
+	            <div  class="row collapse">
+	                <div class="small-4 large-2 columns">
+	                    <span class="prefix">Passwort</span>
+	                </div>
+	                <div class="small-8 large-10 columns">
+	                    <input type="text" placeholder="ein schönes Passwort">
+	                </div>
+	            </div>
+	            <div  class="row collapse">
+	                <div class="small-4 large-2 columns">
+	                    <span class="prefix">Passwort</span>
+	                </div>
+	                <div class="small-8 large-10 columns">
+	                    <input type="text" placeholder="">
+	                </div>
+	            </div>
+	            <div  class="row collapse">
+	                <div class="small-4 large-2 columns">
+	                    <span class="prefix">2+4=?</span>
+	                </div>
+	                <div class="small-8 large-10 columns">
+	                    <input type="text" placeholder="Und, Mensch oder Maschine?">
+	                </div>
+	            </div>
+	            <button class="socialee-button right" type="submit">Anmelden</button>
+	        </form>
+    	</div>
+        	<a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
+</div>
+{% endblock %}

@@ -30,7 +30,7 @@
               {% else %}
               {{ request.user.username }}
             {% endif %}
-              {% if not request.user.profile.is_email_verified %} (unverified)
+              {% if not request.user.profile.is_email_verified %} |
               {% endif %}
         {% endif %}
         </a>
@@ -39,7 +39,7 @@
         {% if request.user.is_authenticated %}
         <a href="/accounts/logout/">Logout</a>
         {% else %}
-        <a href="#" data-reveal-id="logInModal">Log In</a>
+        <a href="/accounts/login">Log In</a>
         {% endif %}
       </li>
       <li class="right-off-canvas-toggle show-for-medium-up"><a href="#"><span>Menü</span></a></li>
