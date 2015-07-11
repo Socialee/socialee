@@ -2,15 +2,17 @@
 
 {% load i18n %}
 {% load account %}
-
+{% include "socialaccount/snippets/login_extra.html" %}
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
 
-<h1>{% trans "Sign In" %}</h1>
+<div class="row">
+    <div class="small-12 small-centered columns">
+      <h1>{% trans "Sign In" %}</h1>
 
 {% if socialaccount.providers %}
-<p>{% blocktrans with site.name as site_name %}Test test Please sign in with one
+<p>{% blocktrans with site.name as site_name %}Please sign in with one
 of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
 for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
@@ -40,5 +42,7 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
   <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
   <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
 </form>
+</div>
+</div>
 
 {% endblock %}

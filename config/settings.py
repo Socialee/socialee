@@ -19,7 +19,8 @@ APPS_DIR = ROOT_DIR.path('socialee')
 assert os.path.exists(str(ROOT_DIR.path("Makefile"))), "ROOT_DIR is set properly."
 
 CMS_TEMPLATES = (
-    ('template_1.html', 'Template One'),
+    ('empty_template.html', 'Empty Template'),
+    ('project_template.html', 'Project Template'),
 )
 
 env = environ.Env()

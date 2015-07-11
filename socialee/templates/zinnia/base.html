@@ -25,12 +25,8 @@
 {% block sidebar %}
 <aside id="widget-welcome" class="widget">
   <h3>{% trans "Welcome!" %}</h3>
-  <p>
-    {% trans "This simple theme is the default appearance of Zinnia." %}
-  </p>
-  <p>
-    {% trans "Don't hesitate to override the template <strong>zinnia/base.html</strong> to start <a href='http://docs.django-blog-zinnia.com/en/latest/how-to/customize_look_and_feel.html'>customizing your Weblog</a>." %}
-  </p>
+  <p>Schön, dass Du auf unserem Blog vorbeischaust!</p>
+  <p>Nimm Dir ein bisschen Zeit, in unseren Artikeln zu stöbern. <strong>Und wenn Du selber einen Blogartikel bei uns veröffentlichen willst, kein Problem, melde dich bei uns unter hello@socialee.de</strong></p>
 </aside>
 <aside id="widget-categories" class="widget">
   <h3>
@@ -44,10 +40,6 @@
   </h3>
   {% get_authors %}
 </aside>
-<aside id="widget-calendar" class="widget">
-  <h3>{% trans "Calendar" %}</h3>
-  {% get_calendar_entries %}
-</aside>
 <aside id="widget-tags" class="widget">
   <h3>
     <a href="{% url 'zinnia:tag_list' %}">{% trans "Tags" %}</a>
@@ -57,18 +49,6 @@
 <aside id="widget-recents" class="widget">
   <h3>{% trans "Recent entries" %}</h3>
   {% get_recent_entries %}
-</aside>
-<aside id="widget-comments" class="widget">
-  <h3>{% trans "Recent comments" %}</h3>
-  {% get_recent_comments %}
-</aside>
-<aside id="widget-linkbacks" class="widget">
-  <h3>{% trans "Recent linkbacks" %}</h3>
-  {% get_recent_linkbacks %}
-</aside>
-<aside id="widget-randoms" class="widget">
-  <h3>{% trans "Random entries" %}</h3>
-  {% get_random_entries %}
 </aside>
 <aside id="widget-populars" class="widget">
   <h3>{% trans "Popular entries" %}</h3>

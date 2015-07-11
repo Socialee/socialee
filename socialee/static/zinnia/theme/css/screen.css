@@ -32,7 +32,7 @@ table {
 
 .zinnia {
   line-height: 1.5;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Open Sans", Helvetica, sans-serif;
   font-size: 75%;
   color-profile: sRGB;
   rendering-intent: auto; }
@@ -205,9 +205,9 @@ table {
   .zinnia #header h1 {
     margin-top: 0.5em;
     margin-bottom: 0;
-    font-weight: bold; }
+    font-weight: normal; }
     .zinnia #header h1:first-letter {
-      font-size: 130%; }
+      font-size: 100%; }
   .zinnia #header blockquote {
     border: none;
     background: none;
@@ -253,8 +253,8 @@ table {
       font-size: 4em; } }
   @media (min-width: 1024px) {
     .zinnia #header h1 {
-      background: transparent url("../img/logo.png") no-repeat scroll left center;
-      padding-left: 1.5em; }
+      /*background: transparent url("../img/logo.png") no-repeat scroll left center;
+      padding-left: 1.5em; }*/
     .zinnia #header blockquote {
       margin-left: 6em; } }
 
@@ -391,7 +391,7 @@ table {
   margin-bottom: 1em; }
 
 .zinnia h2.entry-title {
-  font-weight: bold;
+  font-weight: normal;
   margin-bottom: 0; }
 
 .zinnia .entry-info {
@@ -567,7 +567,7 @@ table {
   .zinnia [class*='entries-calendar'] .entry {
     font-weight: bold; }
 
-.zinnia.default {
+/*.zinnia.default {
   color: #333;
   background-color: #fff;
   background: transparent url("../img/background.gif") repeat-x scroll left top; }
@@ -617,7 +617,7 @@ table {
   .zinnia.default #header {
     border-bottom: 1px solid #ddd; }
     .zinnia.default #header h1 {
-      text-shadow: 2px 2px 2px #ccc; }
+      text-shadow: 0px 0px 0px #ccc; }
     .zinnia.default #header blockquote {
       color: #666; }
   .zinnia.default fieldset {
@@ -833,7 +833,97 @@ table {
         .zinnia.dark .paginator li.page:hover a {
           color: #eee8d5; }
   .zinnia.dark.entry-list .hfeed > h2 {
-    border-top: 1px solid #586e75; }
+    border-top: 1px solid #586e75; }*/
+
+.zinnia.socialee {
+  color: #666;
+  background-color: #fff;
+  background: transparent url("../img/background.gif") repeat-x scroll left top; }
+  .zinnia.socialee h1, .zinnia.socialee h2, .zinnia.socialee h3, .zinnia.socialee h4, .zinnia.socialee h5, .zinnia.socialee h6 {
+    color: #333; }
+  .zinnia.socialee a {
+    color: #666; }
+    .zinnia.socialee a:visited {
+      color: #666; }
+    .zinnia.socialee a:focus {
+      color: #666; }
+    .zinnia.socialee a:hover {
+      color: #333; }
+    .zinnia.socialee a:active {
+      color: #333; }
+  .zinnia.socialee blockquote, .zinnia.socialee pre {
+    background-color: #eee;
+    color: #333; }
+  .zinnia.socialee blockquote {
+    border: 1px dashed #ccc; }
+  .zinnia.socialee pre {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc; }
+  .zinnia.socialee abbr, .zinnia.socialee acronym {
+    border-bottom: 1px dotted #ccc; }
+  .zinnia.socialee h2.entry-title {
+    border-bottom: 1px solid #ddd;
+    text-shadow: 0px 0px 0 #ddd; }
+  .zinnia.socialee .entry-info {
+    color: #666; }
+  .zinnia.socialee .entry-content {
+    color: #333; }
+  .zinnia.socialee .entry-image figcaption {
+    color: #666; }
+  .zinnia.socialee .entry-content img {
+    border: 1px solid #ddd; }
+  .zinnia.socialee .entry-footer strong {
+    color: #666; }
+  .zinnia.socialee .entry-widgets, .zinnia.socialee #comments, .zinnia.socialee #pingbacks, .zinnia.socialee #trackbacks, .zinnia.socialee #footer {
+    border-top: 1px solid #ddd; }
+  .zinnia.socialee li.comment, .zinnia.socialee li.pingback, .zinnia.socialee li.trackback {
+    border: 1px solid #ddd; }
+    .zinnia.socialee li.comment img, .zinnia.socialee li.pingback img, .zinnia.socialee li.trackback img {
+      border: 1px solid #ddd; }
+  .zinnia.socialee .superuser-comment img {
+    background-color: #ddd; }
+  .zinnia.socialee #header {
+    border-bottom: 1px solid #ddd; }
+    .zinnia.socialee #header h1 {
+      text-shadow: 0px 0px 0px #ccc; }
+    .zinnia.socialee #header blockquote {
+      color: #666; }
+  .zinnia.socialee fieldset {
+    border: 1px solid #ddd; }
+  .zinnia.socialee legend, .zinnia.socialee caption {
+    color: #666; }
+  .zinnia.socialee input[type=url], .zinnia.socialee input[type=email], .zinnia.socialee input[type=text], .zinnia.socialee input[type=password],
+  .zinnia.socialee textarea {
+    color: #666;
+    background-color: #eee;
+    border: 1px solid #ddd; }
+    .zinnia.socialee input[type=url]:focus, .zinnia.socialee input[type=email]:focus, .zinnia.socialee input[type=text]:focus, .zinnia.socialee input[type=password]:focus,
+    .zinnia.socialee textarea:focus {
+      border-color: #ccc;
+      color: #000; }
+  .zinnia.socialee ol.flex-control-nav li a {
+    background: #eee; }
+    .zinnia.socialee ol.flex-control-nav li a:hover {
+      background: #ccc; }
+    .zinnia.socialee ol.flex-control-nav li a.active {
+      background: #ddd; }
+  .zinnia.socialee #sidebar h3 {
+    background-color: #eee; }
+  .zinnia.socialee [class*='entries-calendar'] th, .zinnia.socialee [class*='entries-calendar'] tfoot td {
+    color: #666;
+    background: none repeat scroll 0 0 #eee;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd; }
+  .zinnia.socialee .paginator {
+    border-top: 1px solid #ddd; }
+    .zinnia.socialee .paginator li {
+      border: solid 1px #ddd; }
+      .zinnia.socialee .paginator li.page:hover {
+        background-color: #ccc; }
+        .zinnia.socialee .paginator li.page:hover a {
+          color: #333; }
+  .zinnia.socialee.entry-list .hfeed > h2 {
+    border-top: 1px solid #ddd; }
 
 .zinnia.yellow h1, .zinnia.yellow h2, .zinnia.yellow h3, .zinnia.yellow h4, .zinnia.yellow h5, .zinnia.yellow h6 {
   color: #b58900; }
@@ -856,18 +946,18 @@ table {
   color: #ffc203; }
 
 .zinnia.orange h1, .zinnia.orange h2, .zinnia.orange h3, .zinnia.orange h4, .zinnia.orange h5, .zinnia.orange h6 {
-  color: #cb4b16; }
+  color: #f89406; }
 
 .zinnia.orange a {
-  color: #cb4b16; }
+  color: #f89406; }
   .zinnia.orange a:visited {
-    color: #cb4b16; }
+    color: #f89406; }
   .zinnia.orange a:focus {
-    color: #cb4b16; }
+    color: #f89406; }
   .zinnia.orange a:hover {
-    color: #e25418; }
+    color: #d88105; }
   .zinnia.orange a:active {
-    color: #82e82c; }
+    color: #d88105; }
 
 .zinnia.orange ol.flex-control-nav li a.active {
   background: #cb4b16; }
@@ -1057,4 +1147,3 @@ table {
       color: white; }
     .zinnia .success a:active {
       color: white; }
-
