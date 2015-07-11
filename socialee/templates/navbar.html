@@ -17,22 +17,14 @@
     <!-- Right Nav Section -->
     <ul>
       <li>
-        {% if request.user.is_authenticated %}
-        <img src="{{ request.user.profile.profile_image_url }}"/>
-        {% endif %}
-      </li>
-      <li>
         <a>
           {% if request.user.is_authenticated %}
-            {% if request.user.profile.is_email_verified %}Hallo {% endif %}
             {% if request.user.first_name or request.user.last_name %}
               {{ request.user.first_name }} {{ request.user.last_name }}
               {% else %}
               {{ request.user.username }}
             {% endif %}
-              {% if not request.user.profile.is_email_verified %} |
-              {% endif %}
-        {% endif %}
+          {% endif %}   
         </a>
       </li>
       <li class="show-for-medium-up">

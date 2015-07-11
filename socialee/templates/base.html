@@ -1,5 +1,5 @@
-{% load sekizai_tags %}
-{% load staticfiles %}
+{% load sekizai_tags staticfiles cms_tags %}
+
 <!DOCTYPE html>
 <html class="no-js {{ view.template_name | cut:".html" }}" lang="en">
   <head>
@@ -10,14 +10,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="">
-    <title>Socialee | coming soon</title>
+    <title>Socialee | {% page_attribute "page_title" %}</title>
 
     {# Custom Socialee CSS #}
     <link rel="stylesheet" href="{% static "css/socialee.css" %}">
     {% render_block "css" %}
   </head>
   <body>
-
     {% block content %}
     {% endblock %}
 

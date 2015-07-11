@@ -27,7 +27,7 @@ django-select2==4.3.1     # via djangocms-link
 django-tagging==0.4       # via django-blog-zinnia
 django-treebeard==3.0
 django-xmlrpc==0.1.5      # via django-blog-zinnia
-django==1.8.2
+django==1.8.3
 djangocms-admin-style==0.2.7  # via django-cms
 djangocms-file==0.1
 djangocms-flash==0.2.0
@@ -36,11 +36,12 @@ djangocms-link==1.6.2
 djangocms-picture==0.1
 djangocms-snippet==1.5
 djangocms-teaser==0.1
+djangocms-text-ckeditor==2.5.2
 djangocms-video==0.1
 easy-thumbnails==2.2      # via cmsplugin-filer, django-filer
 first==2.0.1
 gnureadline==6.3.3        # via ipython
-html5lib==0.999           # via django-cms
+html5lib==0.999           # via django-cms, djangocms-text-ckeditor
 ipdb==0.8.1
 ipython==3.2.0            # via ipdb
 livereload==2.4.0
@@ -52,7 +53,7 @@ pluggy==0.3.0             # via tox
 py==1.4.30                # via pytest, tox
 pyparsing==2.0.3          # via django-blog-zinnia
 pytest-django==2.8.0
-pytest-splinter==1.4.0
+pytest-splinter==1.4.4
 pytest==2.7.2
 python3-openid==3.0.5     # via django-allauth
 pytz==2015.4

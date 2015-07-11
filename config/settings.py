@@ -71,6 +71,7 @@ INSTALLED_APPS = (
     'djangocms_video',
     'djangocms_link',
     'djangocms_snippet',
+    'djangocms_text_ckeditor',
 
     'allauth',
     'allauth.account',
