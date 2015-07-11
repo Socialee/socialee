@@ -31,6 +31,7 @@ djangocms-picture==0.1
 djangocms-snippet==1.5
 djangocms-teaser==0.1
 djangocms-video==0.1
+djangocms-text-ckeditor==2.5.2
 easy-thumbnails==2.2      # via cmsplugin-filer, django-filer
 first==2.0.1
 gunicorn==19.3.0
