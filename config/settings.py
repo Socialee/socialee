@@ -212,9 +212,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
 ACCOUNT_SIGNUP_FORM_CLASS = None
-# ACCOUNT_FORMS ={} Used to override forms, for example: {‘login’: ‘myapp.forms.LoginForm’}
 ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
-# ACCOUNT_USER_DISPLAY = a callable returning user.username
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
