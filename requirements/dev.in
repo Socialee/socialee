@@ -32,6 +32,7 @@ djangocms_teaser
 djangocms_video
 djangocms_link
 djangocms_snippet
+djangocms-text-ckeditor
 
 django-allauth
 

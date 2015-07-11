@@ -1,0 +1,31 @@
+{% extends "account/allauth_base.html" %}
+{% load i18n %}
+{% load socialaccount %}
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+
+
+{% block content %}
+
+
+    <div class="row">
+        <div class="small-8 small-centered columns">
+	        <h2 id="modalTitle2">Noch nicht dabei?</h2>
+	        <p class="lead">Na dann rein mit Dir!</p>
+	        <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+
+	        <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+	        	
+	        	{% csrf_token %}
+	  			{{ form.as_p }}
+	  			{% if redirect_field_value %}
+	  			<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+	  			{% endif %}
+
+	            <button class="socialee-button right" type="submit">Anmelden</button>
+	        </form>
+    	</div>
+    </div>
+
+
+{% endblock %}

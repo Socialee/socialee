@@ -32,7 +32,7 @@
       <div class="section">
         {% include "socialee_lp_slider.html" %}
         <div class="row">
-          <div class="small-6 medium-4 large-5 large-offset-2 medium-offset-1 columns">
+          <div class="small-6 medium-4 large-5 large-offset-2 small-offset-2 columns">
             <div id="welcome_text">
               <h1>Manifest</h1>
               <ul class="accordion" data-accordion>
@@ -70,7 +70,7 @@
               <br/>
               <p class="large-10 colums show-for-medium-up"><strong>Socialee | </strong>Wir glauben, dass Ideen wahr werden sollten. <span>Sieh Dir unsere ersten Projekte an und wie wir mit Menschen zusammenarbeiten, um ihre Ideen zu realisieren.</span></p>
               <a href="#projekte" class="socialee-button left">Projekte</a>
-              <a class="show-for-large-up" href="#" data-reveal-id="signInModal" id="mach_mit">Sei dabei!</a>
+              <a class="show-for-large-up" href="/accounts/signup" id="mach_mit">Sei dabei!</a>
             </div>
           </div>
         </div>
@@ -141,12 +141,6 @@
               <li><p><a href="#"><i class="fi-marker"></i>Mehringplatz 7, 10969 Berlin</a></p></li>
               <li><p><a href="#"><i class="fi-mail"></i>hello@socialee.de</a></p></li>
               <li><p><a href="#"><i class="fi-social-facebook"></i>Facebook</a></p></li>
-              <li><div
-                class="fb-like"
-                data-share="true"
-                data-width="450"
-                data-show-faces="true">
-              </div>
               </li>
             </ul>
           </div>
@@ -163,8 +157,7 @@
 
 {% include "login_modal.html" %}
 {% include "video_modal.html" %}
-{% include "manifest_modal.html" %}
-{% include "signin_modal.html" %}
+{% include "account/signup.html" %}
 {% include "comingsoon_modal.html" %}
 
 {% addtoblock "js" strip %}

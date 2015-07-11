@@ -1,8 +1,10 @@
 {% load cms_tags sekizai_tags %}
+{% include "base.html" %}
 <html>
   <head>
       <title>{% page_attribute "page_title" %}</title>
       {% render_block "css" %}
+
   </head>
   <body>
       {% cms_toolbar %}

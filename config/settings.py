@@ -19,7 +19,8 @@ APPS_DIR = ROOT_DIR.path('socialee')
 assert os.path.exists(str(ROOT_DIR.path("Makefile"))), "ROOT_DIR is set properly."
 
 CMS_TEMPLATES = (
-    ('template_1.html', 'Template One'),
+    ('empty_template.html', 'Empty Template'),
+    ('project_template.html', 'Project Template'),
 )
 
 env = environ.Env()
@@ -70,6 +71,7 @@ INSTALLED_APPS = (
     'djangocms_video',
     'djangocms_link',
     'djangocms_snippet',
+    'djangocms_text_ckeditor',
 
     'allauth',
     'allauth.account',
@@ -192,8 +194,6 @@ LANGUAGES = [
 ]
 
 # auth and allauth settings
-LOGIN_REDIRECT_URL = '/'
-SOCIALACCOUNT_QUERY_EMAIL = True
 SOCIALACCOUNT_PROVIDERS = \
     {'facebook':
        {'SCOPE': ['email', 'public_profile', 'user_friends'],
@@ -204,6 +204,17 @@ SOCIALACCOUNT_PROVIDERS = \
         # 'VERSION': 'v2.3'
         }
     }
+LOGIN_REDIRECT_URL = '/'
+SOCIALACCOUNT_QUERY_EMAIL = True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
+ACCOUNT_SIGNUP_FORM_CLASS = None
+ACCOUNT_FORMS ={} # Used to override forms, for example: {‘login’: ‘myapp.forms.LoginForm’}
+ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
+# ACCOUNT_USER_DISPLAY = a callable returning user.username
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
