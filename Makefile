@@ -63,7 +63,7 @@ MAIN_SCSS:=socialee.scss
 
 SCSS_DIR=$(PROJECT_ROOT_SRC)/static/scss
 CSS_DIR=$(PROJECT_ROOT_SRC)/static/css
-SCSS_FILES=$(addprefix $(SCSS_DIR)/, $(MAIN_SCSS) admin.scss)
+SCSS_FILES=$(filter-out $(wildcard $(SCSS_DIR)/_*.scss),$(wildcard $(SCSS_DIR)/*.scss))
 CSS_FILES=$(patsubst $(SCSS_DIR)/%.scss,$(CSS_DIR)/%.css,$(SCSS_FILES))
 
 # SCSS dependencies/includes for main scss.
@@ -90,11 +90,15 @@ endef
 # The sourcemap reference gets fixed, and "@charset" gets added (for
 # consistency across different Ruby versions).  My "scss" keeps removing
 # them, while another one might add add them again.
+scss: LOCKFILE=/tmp/scss.lock
 scss: $(CSS_FILES)
 $(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss | $(BOWER_COMPONENTS) $(SCSS_BIN)
 	@echo "SCSS: building $@"
 	@mkdir -p $(CSS_DIR)
-	$(if $(DEBUG),,@)r=$$($(SCSS_RUN) $< $@.tmp 2>&1) || { \
+	$(if $(DEBUG),,@)\
+		while [ -e $(LOCKFILE) ] && kill -0 $$(cat $(LOCKFILE)); do echo "Waiting for lock.."; sleep 1; done; \
+		trap "rm -f $(LOCKFILE); exit" INT TERM EXIT; echo $$$$ > $(LOCKFILE); \
+		r=$$($(SCSS_RUN) $< $@.tmp 2>&1) || { \
 		$(call func-notify-send, "scss failed: $$r"); \
 		echo "ERROR: scss failed: $$r" >&2; echo "command: $(SCSS_RUN) $< $@.tmp" >&2; exit 1; } \
 	&& { head -n1 $@.tmp | grep -q "@charset" || { \
@@ -103,7 +107,7 @@ $(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss | $(BOWER_COMPONENTS) $(SCSS_BIN)
 		&& sed -i.bak '$$ s/\.tmp\.map/.map/' $@.tmp \
 		&& mv $@.tmp.map $@.map,) \
 	&& mv $@.tmp $@ \
-	&& $(RM) $@.tmp.bak
+	&& $(RM) $@.tmp.bak $(LOCKFILE)
 $(SCSS_DIR)/$(MAIN_SCSS): $(SCSS_DIR)/_settings.scss $(SCSS_COMPONENTS)
 	touch $@
 
@@ -117,6 +121,9 @@ watch: scss
 
 run:
 	python manage.py runserver
+
+run_heroku:
+	gunicorn config.wsgi:application_with_static
 
 # Main target for development.
 # TODO: start tmux with watch process.
