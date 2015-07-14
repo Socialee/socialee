@@ -50,6 +50,12 @@ for filepath in recursive_glob("socialee/static", "*.css"):
     print("Watching: %s" % filepath)
     server.watch(filepath)
 
+# Watch .js:
+for filepath in recursive_glob("socialee/static", "*.js"):
+    assert os.path.exists(filepath)
+    print("Watching: %s" % filepath)
+    server.watch(filepath)
+
 for filepath in recursive_glob("socialee/templates", "*.html"):
     assert os.path.exists(filepath)
     print("Watching: %s" % filepath)
