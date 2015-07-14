@@ -33,16 +33,16 @@
     <script src="{% static "bower_components/slick.js/slick/slick.js" %}"></script>
     {# Socialee Custom js #}
     <script src="{% static "js/main.js" %}"></script>
-    
+
     {% if debug %}
         <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
 
+    {% render_block "js" %}
     <script type="text/javascript">
         $(document).ready(function(){
-            {% render_block "js" %}
+            {% render_block "js_ready" %}
         });
-
     </script>
   </body>
 </html>
