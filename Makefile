@@ -122,6 +122,9 @@ watch: scss
 run:
 	python manage.py runserver
 
+run_heroku:
+	gunicorn config.wsgi:application_with_static
+
 # Main target for development.
 # TODO: start tmux with watch process.
 dev: migrate run
