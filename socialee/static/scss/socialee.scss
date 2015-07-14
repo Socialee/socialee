@@ -10,11 +10,6 @@ $slick-loader-path: $bower_components_url + "/slick.js/slick/";
 @import "slick.js/slick/slick";
 @import "slick.js/slick/slick-theme";
 
-// fullpage.js
-// used only in home.html
-html.home {@import "fullpage.js/jquery.fullPage.scss";}
-
-
 // Foundation Icons
 $fi-path: $bower_components_url + "/foundation-icon-fonts";
 @import "foundation-icon-fonts/foundation-icons.scss";

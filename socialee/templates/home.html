@@ -1,5 +1,9 @@
 {% extends "base.html" %}
-{% load sekizai_tags %}
+{% load staticfiles sekizai_tags %}
+
+{% addtoblock "css" strip %}
+<link type="text/css" rel="stylesheet" href="{% static "css/socialee.css" %}" />
+{% endaddtoblock %}
 
 {% block content %}
 <div class="off-canvas-wrap" data-offcanvas>
