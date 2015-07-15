@@ -201,6 +201,9 @@ deploy_check: check test
 
 deploy: deploy_check static migrate
 
+deploy_staging:
+	git push staging staging:master
+
 # Gets run via bin/post_compile for Heroku.
 HEROKU_ZETTELS_MEDIA:=$(CURDIR)/.heroku/media-zettels
 heroku_post_compile: check heroku_fetch_zettels static test_heroku migrate_deploy
