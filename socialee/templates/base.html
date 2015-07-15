@@ -17,6 +17,8 @@
     {% render_block "css" %}
   </head>
   <body>
+    {% cms_toolbar %}
+
     {% block content %}
     {% endblock %}
 
@@ -27,22 +29,19 @@
     <script src="{% static "bower_components/foundation/js/foundation/foundation.reveal.js" %}"></script>
     <script src="{% static "bower_components/foundation/js/foundation/foundation.joyride.js" %}"></script>
     <script src="{% static "bower_components/foundation/js/foundation/foundation.accordion.js" %}"></script>
-    {# fullPage JS #}
     <script src="{% static "bower_components/fullpage.js/jquery.fullPage.js" %}"></script>
-    {# Slick Slider JS #}
     <script src="{% static "bower_components/slick.js/slick/slick.js" %}"></script>
-    {# Socialee Custom js #}
     <script src="{% static "js/main.js" %}"></script>
-    
+
     {% if debug %}
         <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
 
+    {% render_block "js" %}
     <script type="text/javascript">
         $(document).ready(function(){
-            {% render_block "js" %}
+            {% render_block "js_ready" %}
         });
-        
     </script>
   </body>
 </html>

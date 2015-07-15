@@ -53,9 +53,9 @@
 
 {% include "comingsoon_modal.html" %}
 
-{% addtoblock "js" strip %} 
+{% addtoblock "js_ready" strip %}
 $('#fullpage_wrapper').fullpage({
       anchors:['cafe','info','formular']
   });
-{% endaddtoblock %} 
+{% endaddtoblock %}
 {% endblock %}

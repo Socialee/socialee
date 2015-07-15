@@ -1,7 +1,7 @@
-from django.views.generic import TemplateView
-from django.conf import settings
-
 import os
+
+from django.conf import settings
+from django.views.generic import TemplateView
 
 
 class Home(TemplateView):
@@ -19,7 +19,7 @@ class Home(TemplateView):
         filenames = list(os.walk(os.path.join(settings.MEDIA_ROOT, subdir)))
         try:
             l = [os.path.join(settings.MEDIA_URL, subdir, x)
-                 for x in filenames[0][2] if x.endswith(".jpg")]  #[0:90]
+                 for x in filenames[0][2] if x.endswith(".jpg")]
         except IndexError:
             return []
         return sorted(l)
@@ -27,4 +27,3 @@ class Home(TemplateView):
 
 class Cafe(TemplateView):
     template_name = 'cafe.html'
-

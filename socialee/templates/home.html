@@ -1,7 +1,11 @@
 {% extends "base.html" %}
-{% load sekizai_tags %}
+{% load staticfiles sekizai_tags %}
 
 {% block content %}
+{% addtoblock "css" strip %}
+<link type="text/css" rel="stylesheet" href="{% static "css/home.css" %}" />
+{% endaddtoblock %}
+
 <div class="off-canvas-wrap" data-offcanvas>
   <div class="inner-wrap">
     {% include "navbar.html" %}
@@ -157,10 +161,9 @@
 
 {% include "login_modal.html" %}
 {% include "video_modal.html" %}
-{% include "account/signup.html" %}
 {% include "comingsoon_modal.html" %}
 
-{% addtoblock "js" strip %}
+{% addtoblock "js_ready" strip %}
 $('#fullpage_wrapper').fullpage({
       navigation: true,
       navigationPosition: 'left',
