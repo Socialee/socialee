@@ -98,48 +98,6 @@ $fi-path: $bower_components_url + "/foundation-icon-fonts";
   text-decoration: underline;
 }
 
-.fp-controlArrow {
-    position: absolute;
-    z-index: 4;
-    top: 95.5%;
-    cursor: pointer;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    margin-top: -15px;
-    -webkit-transform: translate3d(0,0,0);
-    -ms-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
-
-    &.fp-prev {
-        left: 30px;
-        width: 0;
-        border-width: 15.5px 15px 15.5px 0;
-        border-color: transparent #333 transparent transparent;
-    }
-
-    &.fp-next {
-        right: 30px;
-        border-width: 15.5px 0 15.5px 15px;
-        border-color: transparent transparent transparent #333;
-    }
-}
-
-.fp-slidesNav{
-    position: absolute;
-    z-index: 4;
-    left: 50%;
-    opacity: 1;
-
-    &.bottom {
-        bottom: 68px;
-    }
-
-    &.top {
-        top: 17px;
-    }
-}
-
 // Landingpage
   #welcome_text{
     h1 {
