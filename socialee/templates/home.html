@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% load staticfiles sekizai_tags %}
 
+{% block content %}
 {% addtoblock "css" strip %}
-<link type="text/css" rel="stylesheet" href="{% static "css/socialee.css" %}" />
+<link type="text/css" rel="stylesheet" href="{% static "css/home.css" %}" />
 {% endaddtoblock %}
 
-{% block content %}
 <div class="off-canvas-wrap" data-offcanvas>
   <div class="inner-wrap">
     {% include "navbar.html" %}
