@@ -1,106 +1,17 @@
 {% extends "base.html" %}
-{% load cms_tags %}
+{% load cms_tags staticfiles sekizai_tags%}
 
 {% block content %}
 
-
-<div>{% placeholder "header" %}
-	<br><br>
-</div>
- 
-<div class="row">
-<div class="large-3 panel columns">
-<img src="http://placehold.it/500x500&text=Image">
-<h4>Header</h4>
-<p>{% placeholder text %}</p><hr>
-<div class="row">
-<div class="large-4 columns">
-<a href="#" class="tiny button">Link</a>
-</div>
-<div class="large-4 columns">
-<a href="#" class="tiny button">Link</a>
-</div>
-<div class="large-4 large-collapse columns">
-<a href="#" class="tiny button">Link</a>
-</div>
-</div>
-</div>
-<div class="large-9 columns">
-<div class="panel">
-<div class="row">
-<div class="large-3 columns">
-<img src="http://placehold.it/600x500&text=Thumbnail">
-</div>
-<div class="large-3 columns">
-<img src="http://placehold.it/600x500&text=Thumbnail">
-</div>
-<div class="large-3 columns">
-<img src="http://placehold.it/600x500&text=Thumbnail">
-</div>
-<div class="large-3 columns">
-<img src="http://placehold.it/600x500&text=Thumbnail">
-</div>
-<div class="large-3 columns">
-<img src="http://placehold.it/600x500&text=Thumbnail">
-</div>
-<div class="large-3 columns">
-<img src="http://placehold.it/600x500&text=Thumbnail">
-</div>
-<div class="large-3 columns">
-<img src="http://placehold.it/600x500&text=Thumbnail">
-</div>
-<div class="large-3 columns">
-<img src="http://placehold.it/600x500&text=Thumbnail">
-</div>
-<div class="large-3 columns">
-<img src="http://placehold.it/600x500&text=Thumbnail">
-</div>
-<div class="large-3 columns">
-<img src="http://placehold.it/600x500&text=Thumbnail">
-</div>
-<div class="large-3 columns">
-<img src="http://placehold.it/600x500&text=Thumbnail">
-</div>
-<div class="large-3 columns end">
-<img src="http://placehold.it/600x500&text=Thumbnail">
-</div>
-</div>
-</div>
-<div class="row">
-<div class="large-6 columns">
-<div class="panel">
-<h5>Subheader</h5>
-<p>Sed sit amet posuere erat. Quisque in ipsum non augue euismod dapibus non et eros.</p>
-<a href="#" class="small button">Link</a>
-</div>
-</div>
-<div class="large-6 columns">
-<div class="panel">
-<h5>Subheader</h5>
-<p>Sed sit amet posuere erat. Quisque in ipsum non augue euismod dapibus non et eros.</p>
-<a href="#" class="small button">Link</a>
-</div>
-</div>
-</div>
-</div>
-</div>
  
 <footer class="row">
-<div class="large-12 columns"><hr/>
-<div class="row">
-<div class="large-6 columns">
-<p>&copy; Copyright no one at all. Go to town.</p>
-</div>
-<div class="large-6 columns">
-<ul class="inline-list right">
-<li><a href="#">Link 1</a></li>
-<li><a href="#">Link 2</a></li>
-<li><a href="#">Link 3</a></li>
-<li><a href="#">Link 4</a></li>
-</ul>
-</div>
-</div>
-</div>
+	<div class="large-12 columns"><hr/>
+		<div class="row">
+			<div class="large-6 columns">
+				<p>&copy; Copyright Socialee 2015</p>
+			</div>
+		</div>
+	</div>
 </footer>
 
 {% endblock %}
