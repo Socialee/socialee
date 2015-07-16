@@ -1,18 +1,17 @@
 {% extends "account/allauth_base.html" %}
 {% load i18n %}
+{% load account %}
 {% load socialaccount %}
+{% include "socialaccount/snippets/login_extra.html" %}
 {% block head_title %}{% trans "Signup" %}{% endblock %}
-
-
 
 {% block content %}
 
-
+</br></br></br></br></br>
     <div class="row">
         <div class="small-8 small-centered columns">
 	        <h2 id="modalTitle2">Noch nicht dabei?</h2>
 	        <p class="lead">Na dann rein mit Dir!</p>
-	        <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
 
 	        <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
 	        	
@@ -21,8 +20,9 @@
 	  			{% if redirect_field_value %}
 	  			<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
 	  			{% endif %}
-
-	            <button class="socialee-button right" type="submit">Anmelden</button>
+	  			<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+	            <button class="small" type="submit">Anmelden</button>
+	            <a href="/" class="right">Raus hier!</a>
 	        </form>
     	</div>
     </div>
