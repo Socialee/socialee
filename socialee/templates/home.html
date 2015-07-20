@@ -6,31 +6,7 @@
 <link type="text/css" rel="stylesheet" href="{% static "css/home.css" %}" />
 {% endaddtoblock %}
 
-<div class="off-canvas-wrap" data-offcanvas>
-  <div class="inner-wrap">
-    {% include "navbar.html" %}
 
-    <aside class="right-off-canvas-menu">
-        <ul class="off-canvas-list">
-          <li><a href="#" data-reveal-id="signInModal" class="button offcanvas-button">Get started!</a></li>
-          <li><label>Was willst Du machen?</label></li>
-          <li><a href="/blog">Blog</a></li>
-          <li><a href="#">Zettel ausfüllen</a></li>
-          <li><a href="#">Projekt erstellen</a></li>
-          <li><a href="#">Raum buchen</a></li>
-          <li><a href="#">...</a></li>
-          <li><a href="#">...</a></li>
-          <li><a href="#">...</a></li>
-          <li><label>Über Socialee</label></li>
-          <li><a href="#">Socialees Geschichte</a></li>
-          <li><a href="#">das Team</a></li>
-          <li><a href="#">Presse &amp; Medien</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">facebook</a></li>
-          <li><a href="#">Kontakt</a></li>
-          <li><a href="#">Impressum</a></li>
-        </ul>
-    </aside>
 
     <div id="fullpage_wrapper">
       <div class="section">
@@ -86,16 +62,16 @@
         </div>
       </div>
 
-      <div class="row section">
+      <!--<div class="row section">
         <div class="small-8 small-centered columns zettel-wrap">
-          <!--<div class="row collapse postfix-radius">
+          <div class="row collapse postfix-radius">
             <div class="small-3 columns">
               <span class="postfix">Was suchst Du?</span>
             </div>
             <div class="small-9 columns">
               <input type="text" placeholder="Suche Mitsteiter für meine geniale Idee!">
             </div>
-          </div>-->
+          </div>
           <h3>Socialee liebt Zettel.</h3>
           <p>Viele Ideen finden ihren Anfang auf einem Zettel. Schreibe auch Du <a href="#">einen Zettel</a>.</p>
           <div class="small-6 columns zettel-inner-wrap">
@@ -126,17 +102,18 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>-->
+
       <footer class="footer section">
         <div class="row">
           <div class="small-12 medium-6 large-5 columns">
             <p class="logo">Socialee | Wir machen das jetzt mal.</p>
             <p class="footer-links">
-              <a href="#">Home</a>
+              <!--<a href="#">Home</a>
               <a href="#">Blog</a>
               <a href="#">About</a>
               <a href="#">Faq</a>
-              <a href="#">Contact</a>
+              <a href="#">Contact</a>-->
             </p>
             <p class="copywrite">Copyright © 2015 Socialee</p>
           </div>
@@ -144,7 +121,7 @@
             <ul class="contact">
               <li><p><a href="#"><i class="fi-marker"></i>Mehringplatz 7, 10969 Berlin</a></p></li>
               <li><p><a href="#"><i class="fi-mail"></i>hello@socialee.de</a></p></li>
-              <li><p><a href="#"><i class="fi-social-facebook"></i>Facebook</a></p></li>
+              <li><p><a href="https://www.facebook.com/wirmachendasjetztmal?ref=hl" target="blank"><i class="fi-social-facebook"></i>Facebook</a></p></li>
               </li>
             </ul>
           </div>
@@ -156,8 +133,7 @@
       </footer>
     </div>
     <a class="exit-off-canvas"></a>
-  </div>
-</div>
+
 
 {% include "login_modal.html" %}
 {% include "video_modal.html" %}
@@ -169,9 +145,10 @@ $('#fullpage_wrapper').fullpage({
       navigationPosition: 'left',
       slidesNavigation: true,
       slidesNavPosition: 'bottom',
-      navigationTooltips: ['Home', 'Projekte', 'Zettel', 'Impressum'],
+      navigationTooltips: ['Home', 'Projekte', 'Kontakt'],
       menu: '.nav-middle',
-      anchors:['landingpage', 'projekte', 'zettel', 'imprint'],
+      anchors:['landingpage', 'projekte', 'kontakt'],
   });
 {% endaddtoblock %}
+
 {% endblock %}

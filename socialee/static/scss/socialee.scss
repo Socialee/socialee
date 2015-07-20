@@ -32,9 +32,9 @@ $fi-path: $bower_components_url + "/foundation-icon-fonts";
 @import "foundation/scss/foundation/components/joyride";
 // @import "foundation/scss/foundation/components/keystrokes";
 @import "foundation/scss/foundation/components/labels";
-// @import "foundation/scss/foundation/components/magellan";
+@import "foundation/scss/foundation/components/magellan";
 // @import "foundation/scss/foundation/components/pagination";
-// @import "foundation/scss/foundation/components/panels";
+@import "foundation/scss/foundation/components/panels";
 // @import "foundation/scss/foundation/components/pricing-tables";
 // @import "foundation/scss/foundation/components/progress-bars";
 // @import "foundation/scss/foundation/components/range-slider";
@@ -51,6 +51,10 @@ $fi-path: $bower_components_url + "/foundation-icon-fonts";
 @import "foundation/scss/foundation/components/type";
 @import "foundation/scss/foundation/components/offcanvas";
 @import "foundation/scss/foundation/components/visibility";
+
+a {
+  color: #f89406;
+}
 
 // Mixins
   @mixin vertical-align {
@@ -457,3 +461,84 @@ $fi-path: $bower_components_url + "/foundation-icon-fonts";
     width: 100%; 
     height: 100%; 
   }
+
+// Project Template
+
+.so-header-image-wrapper {
+  height: 25vh;
+}
+
+.so-header-image {
+  background: url("/static/img/projects/antonsreise/antontitel.jpg") no-repeat center center;
+  background-size: cover;
+  height: 100%;
+  position: relative;
+  .so-header-title {
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+  }
+  .panel {
+    background-color: rgba(#f89406, .9);
+    border-color: $monsoon;
+    margin-bottom: 0;
+    border-bottom: none;
+    height: 100%;
+  }
+  ul {
+    list-style-type: none;
+  }
+}
+
+.header-label {
+  @include label(
+    // This options sets label padding
+    $padding: 5px 5px 5px,
+    // This option sets label text-size
+    $text-size: 14px,
+    // This option sets label background-color
+    $bg: $monsoon,
+    // This option sets the radius of the label
+    $radius: 2px
+  );
+  margin-bottom: 3px;
+}
+
+.magellan-container {
+  background-color: $smoke;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  .active {
+    font-weight: bold;
+  }
+  dl {
+    list-style-type: none; /*to remove bullets*/
+    text-align: center;
+    margin: 0 auto;
+    padding: 0px;
+    overflow: hidden;
+    display: table;
+  }
+  dd {
+    // display: inline;
+    // width: 60px;
+    float: left;
+    padding: 2px;
+    width: 150px;
+    margin-left: auto ;
+    margin-right: auto ;
+  }
+  a {
+    color: $monsoon;
+  }
+}
+
+
+
+
+
+
+
+
+
