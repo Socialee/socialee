@@ -27,3 +27,6 @@ class Home(TemplateView):
 
 class Cafe(TemplateView):
     template_name = 'cafe.html'
+
+class Impressum(TemplateView):
+    template_name = 'impressum.html'

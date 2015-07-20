@@ -18,9 +18,26 @@
   </head>
   <body>
     {% cms_toolbar %}
+    <div class="off-canvas-wrap" data-offcanvas>
+        <div class="inner-wrap">
+            {% include "navbar.html" %}
 
-    {% block content %}
-    {% endblock %}
+            <aside class="right-off-canvas-menu">
+                <ul class="off-canvas-list">
+                  <li><a href="/accounts/signup" class="button offcanvas-button">Anmelden!</a></li>
+                  <li><label>Menü</label></li>
+                  <li><a href="/blog">zum Blog</a></li>
+                  <li><a href="https://www.facebook.com/wirmachendasjetztmal?ref=hl" target="blank">zur Facebook Seite</a></li>
+                  <li><a href="/impressum">Impressum</a></li>
+                  <li><label>Projekte</label></li>
+                  <li><a href="/antons-reise">Antons Reise</a></li>
+                </ul>
+            </aside>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
 
     <script src="{% static "bower_components/jquery/dist/jquery.js" %}"></script>
     <script src="{% static "bower_components/foundation/js/foundation/foundation.js" %}"></script>
@@ -29,6 +46,7 @@
     <script src="{% static "bower_components/foundation/js/foundation/foundation.reveal.js" %}"></script>
     <script src="{% static "bower_components/foundation/js/foundation/foundation.joyride.js" %}"></script>
     <script src="{% static "bower_components/foundation/js/foundation/foundation.accordion.js" %}"></script>
+    <script src="{% static "bower_components/foundation/js/foundation/foundation.magellan.js" %}"></script>
     <script src="{% static "bower_components/fullpage.js/jquery.fullPage.js" %}"></script>
     <script src="{% static "bower_components/slick.js/slick/slick.js" %}"></script>
     <script src="{% static "js/main.js" %}"></script>
