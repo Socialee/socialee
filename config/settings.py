@@ -154,7 +154,13 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# for local. defined in envronment
+EMAIL_BACKEND = env.str('DJANGO_EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
+EMAIL_HOST = env.str('DJANGO_EMAIL_HOST', '')
+EMAIL_HOST_PASSWORD = env.str('DJANGO_EMAIL_HOST_PASSWORD', '')
+EMAIL_HOST_USER = env.str('DJANGO_EMAIL_HOST_USER', '')
+EMAIL_PORT = env.str('DJANGO_EMAIL_PORT', '')
+EMAIL_SUBJECT_PREFIX = 'Socialee meldet: '
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
@@ -210,7 +216,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
-ACCOUNT_SIGNUP_FORM_CLASS = None
+ACCOUNT_SIGNUP_FORM_CLASS = 'socialee.forms.SignupForm'
 ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
 
 # Static files (CSS, JavaScript, Images)
