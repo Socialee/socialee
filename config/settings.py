@@ -161,6 +161,8 @@ EMAIL_HOST_PASSWORD = env.str('DJANGO_EMAIL_HOST_PASSWORD', '')
 EMAIL_HOST_USER = env.str('DJANGO_EMAIL_HOST_USER', '')
 EMAIL_PORT = env.str('DJANGO_EMAIL_PORT', '')
 EMAIL_SUBJECT_PREFIX = 'Socialee meldet: '
+if EMAIL_PORT == '465':
+    EMAIL_USE_SSL = True
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
