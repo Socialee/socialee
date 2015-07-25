@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block navigation %}
+
+<div class="off-canvas-wrap" data-offcanvas>
+    <div class="inner-wrap">
+        {% include "navbar.html" %}
+
+        <aside class="right-off-canvas-menu">
+            <ul class="off-canvas-list">
+              <li><a href="/accounts/signup" class="button offcanvas-button">Anmelden!</a></li>
+              <li><label>Menü</label></li>
+              <li><a href="/blog">zum Blog</a></li>
+              <li><a href="https://www.facebook.com/wirmachendasjetztmal?ref=hl" target="blank">zur Facebook Seite</a></li>
+              <li><a href="/impressum">Impressum</a></li>
+              <li><label>Projekte</label></li>
+              <li><a href="/antons-reise">Antons Reise</a></li>
+            </ul>
+        </aside>
+
+{% endblock %}
