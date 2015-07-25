@@ -1,0 +1,151 @@
+body {
+  font-family:'Open Sans', sans-serif;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+}
+h1 {
+  display: block;
+  margin: auto;
+  font-family: Oswald, sans-serif;
+  color: rgba(224, 131, 31, 0.49);
+  font-size: 69px;
+  line-height: 67px;
+  font-weight: 800;
+  text-decoration: none;
+}
+h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 32px;
+  line-height: 36px;
+  font-weight: 700;
+}
+h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 700;
+}
+h4 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+}
+h5 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+}
+h6 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 700;
+}
+p {
+  margin-bottom: 7px;
+  font-family: Oswald, sans-serif;
+  color: rgba(66, 66, 66, 0.94);
+}
+a {
+  display: block;
+  color: #00e;
+  font-size: 14px;
+  line-height: 4px;
+}
+a:hover {
+  font-size: 14px;
+  text-decoration: none;
+}
+._wf-header-img-wrapper {
+  height: 240px;
+  padding: 0px;
+  background-image: url('../images/NeilTrecker_fb.jpg');
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+._wf-titlediv {
+  position: relative;
+  display: block;
+  height: 240px;
+  margin-right: auto;
+  margin-left: auto;
+}
+._wf-titlerow {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 31px;
+  overflow-x: visible;
+  overflow-y: visible;
+}
+._wf-projecttitle {
+  display: block;
+  margin: 74px auto 0px;
+  padding-top: 5px;
+  box-shadow: none;
+}
+._wf-header-list {
+  display: block;
+}
+._wf-label-header {
+  display: inline-block;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 2px;
+  padding: 1px 5px;
+  background-color: rgba(230, 140, 5, 0.27);
+  font-family: Oswald, sans-serif;
+  font-size: 14px;
+}
+._wf-label-header._wf-var {
+  background-color: rgba(20, 19, 16, 0.27);
+}
+._wf-untertitel {
+  margin-bottom: auto;
+  font-size: 22px;
+  letter-spacing: 4px;
+}
+._wf-map-image {
+  position: static;
+}
+._wf-nav-bar {
+  background-color: #f0f0f0;
+}
+html.w-mod-js *[data-ix="fade-down"] {
+  opacity: 0;
+  -webkit-transform: translate(0px, -22px);
+  -ms-transform: translate(0px, -22px);
+  transform: translate(0px, -22px);
+}
+html.w-mod-js *[data-ix="fade-in-slowly"] {
+  opacity: 0;
+}
+html.w-mod-js *[data-ix="fade-in-from-right"] {
+  opacity: 0;
+  -webkit-transform: translate(10px, 0px);
+  -ms-transform: translate(10px, 0px);
+  transform: translate(10px, 0px);
+}
+@media (max-width: 991px) {
+}
+@media (max-width: 767px) {
+}
+@media (max-width: 479px) {
+  h1 {
+    font-size: 43px;
+    line-height: 53px;
+  }
+  p {
+    font-size: 11px;
+  }
+}

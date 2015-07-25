@@ -11,32 +11,20 @@
     <meta name="author" content="">
     <link rel="icon" href="">
     <title>Socialee | {% page_attribute "page_title" %}</title>
-
-    {# Custom Socialee CSS #}
-    <link rel="stylesheet" href="{% static "css/socialee.css" %}">
+    <link type="text/css" rel="stylesheet" href="{% static "css/socialee.css" %}" />
     {% render_block "css" %}
+    {% render_block "js_head" %}
   </head>
   <body>
     {% cms_toolbar %}
-    <div class="off-canvas-wrap" data-offcanvas>
-        <div class="inner-wrap">
-            {% include "navbar.html" %}
+        {% block navigation %}
+        {% endblock %}
 
-            <aside class="right-off-canvas-menu">
-                <ul class="off-canvas-list">
-                  <li><a href="/accounts/signup" class="button offcanvas-button">Anmelden!</a></li>
-                  <li><label>Menü</label></li>
-                  <li><a href="/blog">zum Blog</a></li>
-                  <li><a href="https://www.facebook.com/wirmachendasjetztmal?ref=hl" target="blank">zur Facebook Seite</a></li>
-                  <li><a href="/impressum">Impressum</a></li>
-                  <li><label>Projekte</label></li>
-                  <li><a href="/antons-reise">Antons Reise</a></li>
-                </ul>
-            </aside>
-            {% block content %}
-            {% endblock %}
-        </div>
-    </div>
+        {% block content %}
+        {% endblock %}
+
+        </div> 
+    </div> <!-- These two closing div tags correspont to offcanvas in nav_base.html -->
 
 
     <script src="{% static "bower_components/jquery/dist/jquery.js" %}"></script>
@@ -56,6 +44,7 @@
     {% endif %}
 
     {% render_block "js" %}
+
     <script type="text/javascript">
         $(document).ready(function(){
             {% render_block "js_ready" %}
