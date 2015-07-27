@@ -19,7 +19,8 @@ h2 {
   margin-bottom: 10px;
   font-size: 32px;
   line-height: 36px;
-  font-weight: 700;
+  font-weight: 300;
+  letter-spacing: 0px;
 }
 h3 {
   margin-top: 20px;
@@ -112,14 +113,91 @@ a:hover {
 }
 ._wf-untertitel {
   margin-bottom: auto;
-  font-size: 22px;
-  letter-spacing: 4px;
+  font-size: 16px;
+  letter-spacing: 3px;
 }
 ._wf-map-image {
   position: static;
 }
 ._wf-nav-bar {
   background-color: #f0f0f0;
+}
+._wf-nav-menu-link:hover {
+  color: #929296;
+}
+._wf-nav-menu-link:active {
+  color: #0b0b0f;
+}
+.socialee-nav {
+  background-color: white;
+}
+.logo {
+  margin-top: 3px;
+  margin-left: 5px;
+  padding: 2px;
+}
+.aufklappen {
+  position: relative;
+  z-index: 10;
+  width: 30px;
+  margin: 3px 20px 10px;
+  float: right;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+}
+.socialee-nav-menu {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  float: none;
+  text-align: center;
+}
+.socialee-nav-menu-link {
+  display: inline-block;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+.socialee-nav-menu-link:hover {
+  text-decoration: underline;
+}
+.facebook {
+  position: relative;
+  right: 15px;
+  bottom: 60px;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-left: 0px;
+  float: right;
+}
+.logbuch-div {
+  display: block;
+  overflow-x: auto;
+  overflow-y: auto;
+  height: 400px;
+  padding-top: 15px;
+  padding-left: 15px;
+}
+.logbuch-header {
+  margin-left: 15px;
+}
+.logbuch-list {
+  margin-right: 5px;
+  background-color: #f2f2f2;
+  box-shadow: black 1px 1px 3px 0px;
+}
+.log-eintr-ge {
+  padding: 5px;
+}
+.video-slider {
+  height: auto;
+  margin: 22px;
+}
+.right-arrow {
+  margin-top: 65px;
+  margin-bottom: 65px;
 }
 html.w-mod-js *[data-ix="fade-down"] {
   opacity: 0;
@@ -136,7 +214,23 @@ html.w-mod-js *[data-ix="fade-in-from-right"] {
   -ms-transform: translate(10px, 0px);
   transform: translate(10px, 0px);
 }
+html.w-mod-js *[data-ix="nav-closed"] {
+  -webkit-transform: translate(0px, -45px);
+  -ms-transform: translate(0px, -45px);
+  transform: translate(0px, -45px);
+}
+html.w-mod-js *[data-ix="nav-open"] {
+  opacity: 0.5;
+  -webkit-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  transform: scale(0.9);
+}
 @media (max-width: 991px) {
+  .aufklappen {
+    -webkit-transform: none;
+    -ms-transform: none;
+    transform: none;
+  }
 }
 @media (max-width: 767px) {
 }
@@ -147,5 +241,12 @@ html.w-mod-js *[data-ix="fade-in-from-right"] {
   }
   p {
     font-size: 11px;
+  }
+  ._wf-titlediv {
+    top: -95px;
+  }
+  .socialee-nav-menu-link {
+    padding-right: 12px;
+    padding-left: 12px;
   }
 }
