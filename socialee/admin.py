@@ -2,7 +2,7 @@ from django import forms
 from django.contrib import admin, auth
 from django.utils.translation import ugettext_lazy as _
 
-from .models import (Input, Origin, Output, Profile,
+from .models import (Input, Origin, Output, Profile, Project,
                      UserEntry, Zettel)
 
 
@@ -64,6 +64,10 @@ class ProfileAdmin(admin.ModelAdmin):
     pass
 
 
+class ProjectAdmin(admin.ModelAdmin):
+    pass
+
+
 class UserEntryForm(forms.ModelForm):
     """Special form for UserEntryAdmin."""
     class Meta:
@@ -108,4 +112,5 @@ admin.site.register(Origin, OriginAdmin)
 admin.site.register(Output, OutputAdmin)
 admin.site.register(Profile, ProfileEntryAdmin)
 admin.site.register(UserEntry, UserEntryAdmin)
+admin.site.register(Project, ProjectAdmin)
 admin.site.register(Zettel, ZettelAdmin)
