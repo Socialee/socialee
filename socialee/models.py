@@ -118,9 +118,20 @@ class Zettel(models.Model):
 
 
 class Project(models.Model):
-    title = models.CharField(max_length=100, unique=True)
+    title = models.TextField(max_length=100, unique=True)
     inputs = models.ManyToManyField(Input)
     outputs = models.ManyToManyField(Output)
+    profiles = models.ManyToManyField(Profile)
     # desc
     # img
     # featured
+
+
+class Dream(models.Model):
+    title = models.TextField(max_length=5000, verbose_name="Was ist Dein Traum?")
+    profiles = models.ManyToManyField(Profile)
+
+
+class Wish(models.Model):
+    title = models.TextField(max_length=5000)
+    profiles = models.ManyToManyField(Profile)

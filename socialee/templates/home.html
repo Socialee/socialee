@@ -1,5 +1,9 @@
 {% extends "nav_base.html" %}
 {% load staticfiles sekizai_tags %}
+{% load account %}
+{% load i18n %}
+{% load socialaccount %}
+{% include "socialaccount/snippets/login_extra.html" %}
 
 {% block content %}
 {% addtoblock "css" strip %}
@@ -12,48 +16,57 @@
     <div id="fullpage_wrapper">
       <div class="section">
         {% include "socialee_lp_slider.html" %}
+
+        {% if not request.user.is_authenticated %}
+          
         <div class="row">
-          <div class="small-6 medium-4 large-5 large-offset-2 small-offset-2 columns">
-            <div id="welcome_text">
-              <h1>Manifest</h1>
-              <ul class="accordion" data-accordion>
-                <li class="accordion-navigation">
-                  <a href="#panel1a">1) Wir machen das jetzt mal.</a>
-                    <div id="panel1a" class="content">
-                      <p>Gute Ideen gibt’s wie Sand am Meer. Jedoch wissen wir auch, dass es nicht immer einfach ist, sie umzusetzen. Wir glauben mit euch an eure Ideen und dafür sorgen, dass sie nicht versanden.</p>
-                    </div>
-                  </li>
-                  <li class="accordion-navigation">
-                    <a href="#panel2a">2) Wir sind digital und analog.</a>
-                    <div id="panel2a" class="content">
-                     <p>Wir sind online und offline, genau wie du. Socialee findet nicht nur im Netz statt, man kann uns auch anfassen. Wir glauben an die Verbindung der digitalen und der realen Welt und daran, dass die eine nicht ohne die andere funktioniert. So findest du uns nicht nur im Internet, sondern auch in unserem Crowdcafe in Berlin, wo du mit uns reden, streiten und schweigen kannst. Ob du uns auf der Website posten oder lieber auf einen Kaffee vorbeikommen willst – die Wahl liegt bei dir.</p>
-                    </div>
-                  </li>
-                  <li class="accordion-navigation">
-                    <a href="#panel3a">3) Du bist mehr als 140 Zeichen.</a>
-                    <div id="panel3a" class="content">
-                      <p>Es heißt immer, eine gute Idee muss schnell auf den Punkt gebracht werden. In diesen Zeiten fühlen wir den Zwang, uns möglichst professionell und in möglichst kurzer Zeit zu vermarkten. Wir setzen dem etwas entgegen: Du bist mehr als 140 Zeichen. Du bist mehr als ein Werbeslogan. Du hast es verdient, dass man dir zuhört, weil du etwas zu sagen hast. Verkauf dich nicht. Sei du selbst.</p>
-                    </div>
-                  </li>
-                  <li class="accordion-navigation">
-                    <a href="#panel4a">4) Wir sind Geld und das, was Geld nicht kaufen kann.</a>
-                    <div id="panel4a" class="content">
-                      <p>Socialee ist eine soziale Plattform, die dir vieles geben kann. Wenn dein Projekt finanzielle Unterstützung benötigt, werden wir dir dabei helfen, die richtige Crowd zu finden. Aber da, wo andere Plattformen aufhören, fangen wir erst richtig an: Socialee hilft, Mitstreiter und Mitträumer zu finden. Wir organisieren Räume, Partner oder auch den Traktor, der dein Auto aus dem Graben holt. Die Grenzen fangen erst an, wo die Fantasie aufhört.</p>
-                    </div>
-                  </li>
-                  <li class="accordion-navigation">
-                    <a href="#panel5a">5) Ihr seid die, auf die ihr gewartet habt.</a>
-                    <div id="panel5a" class="content">
-                      <p>Wir können nicht darauf warten, bis jemand anders die Dinge für uns regelt. Die Gegenwart gehört uns und wir schieben keinerlei Verantwortung von uns weg. Was wir in der Welt sehen wollen, das müssen wir auch selbst in die Welt bringen.</p>
-                    </div>
-                  </li>
+          <div class="small-8 small-centered columns">
+            <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+            {% csrf_token %}
+
+{{ form.non_field_errors }}
+
+<div class="fieldWrapper">
+    {{ form.project_title.errors }}
+    {{ form.project_title.label_tag }}
+    {{ form.project_title }}
+</div>
+
+<div class="fieldWrapper">
+    {{ form.dream_title.errors }}
+    {{ form.dream_title.label_tag }}
+    {{ form.dream_title }}
+</div>
+      
+<div class="fieldWrapper">
+    {{ form.wish_title.errors }}
+    {{ form.wish_title.label_tag }}
+    {{ form.wish_title }}
+</div>    
+            {{ form.as_p }}
+
+
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            {# <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p> #}
+                <button class="small" type="submit">Alles abschicken!</button>
+                {# <a href="/" class="right">Raus hier!</a> #}
+            </form>
+            <!--{% if socialaccount.providers %}
+              <div class="socialaccount_ballot">
+                <ul class="socialaccount_providers">
+                  {% include "socialaccount/snippets/provider_list.html" with process="login" %}
                 </ul>
-              <br/>
-              <p class="large-10 colums show-for-medium-up"><strong>Socialee | </strong>Wir glauben, dass Ideen wahr werden sollten. <span>Sieh Dir unsere ersten Projekte an und wie wir mit Menschen zusammenarbeiten, um ihre Ideen zu realisieren.</span></p>
-              <a href="#projekte" class="socialee-button left">Projekte</a>
-              <a class="show-for-large-up" href="/accounts/signup" id="mach_mit">Sei dabei!</a>
-            </div>
-          </div>
+              </div>
+              {% include "socialaccount/snippets/login_extra.html" %}
+              {% else %}
+              <p>{% blocktrans %}If you have not created an account yet, then please
+              <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+              {% endif %}-->
+              </div>
+
+        {% endif %}  
         </div>
       </div>
 

@@ -10,21 +10,17 @@
 </br></br></br></br></br>
     <div class="row">
         <div class="small-8 small-centered columns">
-	        <h2 id="modalTitle2">Noch nicht dabei?</h2>
-	        <p class="lead">Na dann rein mit Dir!</p>
-
 	        <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-	        	
 	        	{% csrf_token %}
 	  			{{ form.as_p }}
 	  			{% if redirect_field_value %}
 	  			<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
 	  			{% endif %}
-	  			<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
-	            <button class="small" type="submit">Anmelden</button>
-	            <a href="/" class="right">Raus hier!</a>
+	  			{# <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p> #}
+	            <button class="small" type="submit">Alles abschicken!</button>
+	            {# <a href="/" class="right">Raus hier!</a> #}
 	        </form>
-	            {% if socialaccount.providers %}
+	<!--{% if socialaccount.providers %}
     <div class="socialaccount_ballot">
       <ul class="socialaccount_providers">
         {% include "socialaccount/snippets/provider_list.html" with process="login" %}
@@ -34,7 +30,7 @@
     {% else %}
     <p>{% blocktrans %}If you have not created an account yet, then please
     <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-    {% endif %}
+    {% endif %}-->
     	</div>
     </div>
 
