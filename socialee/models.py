@@ -77,24 +77,45 @@ class InputOutput(models.Model):
     zettel = models.ForeignKey('Zettel', null=True)
 
 
-class Input(InputOutput):
-    title = models.CharField(verbose_name="What's the offer?",
-                             max_length=200)
+class Input(models.Model):
+    title = models.CharField(verbose_name="What's the offer?", max_length=5000)
+    profiles = models.ManyToManyField(Profile)
 
     def __str__(self):
-        return 'Input "{}" from profile {} and zettel {}'.format(self.title,
-                                                                 self.profile,
-                                                                 self.zettel)
+        return 'Input "{}"'.format(self.title)
 
 
-class Output(InputOutput):
-    title = models.CharField(verbose_name="What's the request?",
-                             max_length=200)
+class Output(models.Model):
+    title = models.CharField(verbose_name="What's the request?", max_length=5000)
+    profiles = models.ManyToManyField(Profile)
 
     def __str__(self):
-        return 'Output "{}" from profile {} and zettel {}'.format(self.title,
-                                                                  self.profile,
-                                                                  self.zettel)
+        return 'Output "{}" from profile {}'.format(self.title, self.profile)
+
+
+class Project(models.Model):
+    title = models.TextField(max_length=5000)
+    inputs = models.ManyToManyField(Input)
+    outputs = models.ManyToManyField(Output)
+    profiles = models.ManyToManyField(Profile)
+
+    def __str__(self):
+        return 'Project "{}" from profile {}'.format(self.title, self.profile)
+
+class Dream(models.Model):
+    title = models.TextField(max_length=5000)
+    profiles = models.ManyToManyField(Profile)
+
+    def __str__(self):
+        return '{}'.format(self.title)
+
+
+class Wish(models.Model):
+    title = models.TextField(max_length=5000)
+    profiles = models.ManyToManyField(Profile)
+
+    def __str__(self):
+        return 'Wish "{}" from profile {}'.format(self.title, self.profile)
 
 
 class Location(models.Model):
@@ -115,23 +136,3 @@ class Zettel(models.Model):
 
     def __str__(self):
         return 'Zettel from {}'.format(self.profile)
-
-
-class Project(models.Model):
-    title = models.TextField(max_length=100, unique=True)
-    inputs = models.ManyToManyField(Input)
-    outputs = models.ManyToManyField(Output)
-    profiles = models.ManyToManyField(Profile)
-    # desc
-    # img
-    # featured
-
-
-class Dream(models.Model):
-    title = models.TextField(max_length=5000, verbose_name="Was ist Dein Traum?")
-    profiles = models.ManyToManyField(Profile)
-
-
-class Wish(models.Model):
-    title = models.TextField(max_length=5000)
-    profiles = models.ManyToManyField(Profile)

@@ -102,6 +102,35 @@ a {
   text-decoration: underline;
 }
 
+.question-wrapper {
+  div {
+    color: $monsoon;
+  }
+  div:hover {
+    color: #f89406;
+  }
+}
+
+#questionnavleft{
+  cursor: pointer;
+  position: relative;
+  top: 130px;
+  right: 8px;
+  font-size: 1.5em;
+  z-index: 10;
+  float: left;
+}
+#questionnavright {
+  cursor: pointer;
+  position: relative;
+  top: 130px;
+  left: 8px;
+  font-size: 1.5em;
+  z-index: 10;
+  float: right;
+}
+
+
 // Landingpage
   #welcome_text{
     h1 {
@@ -140,6 +169,13 @@ a {
     width: 100%;
   }
 
+  .lp-slide {
+    position: relative;
+    top: -65px;
+    height: 100vh;
+    z-index: -1;
+  }
+
   .socialee-project-slider {
     position: absolute;
     top: -65px;
@@ -153,11 +189,6 @@ a {
     top: -65px;
   }
 
-  .lp-slide {
-    height: 100vh;
-    z-index: -1;
-  }
-
   .custom-lp-label {
     @include label ();
     padding: rem-calc(3 4 3);
@@ -168,6 +199,48 @@ a {
     color: $silver;
     }
   }
+
+.title-wrapper {
+  h1 {
+    text-align: center;
+    // text-decoration: underline;
+  }
+}
+
+.signup {
+  position: relative;
+  top: -50px;
+}
+
+.question-slide {
+  margin: 0 25px 0 25px;
+  h3 {
+    font-style: italic;
+  }
+}
+
+.lp-signup-form {
+    margin-top: 38px;
+    input {
+    height: 1.7rem;
+    margin-bottom: 2px;
+    padding: 0 0 0 10px;
+    }
+  .prefix {
+    line-height: 1.7rem;
+    height: 1.7rem;
+    margin-bottom: 2px;
+    }
+  p {
+    margin-bottom: 5px;
+  }
+  ul {
+    margin: 0;
+    list-style: none;
+    color: red;
+    font-size: 0.5rem;
+  }
+}
 
 //   .accordion
 // {
@@ -534,11 +607,20 @@ a {
   }
 }
 
-
-
-
-
-
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #999;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #999;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #999;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #999;
+}
 
 
 

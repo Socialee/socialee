@@ -13,68 +13,138 @@
 
 
 
-    <div id="fullpage_wrapper">
-      <div class="section">
-        {% include "socialee_lp_slider.html" %}
+<div id="fullpage_wrapper">
+  <div class="section">
+    {% include "socialee_lp_slider.html" %}
 
-        {% if not request.user.is_authenticated %}
-          
-        <div class="row">
-          <div class="small-8 small-centered columns">
-            <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-            {% csrf_token %}
-
-{{ form.non_field_errors }}
-
-<div class="fieldWrapper">
-    {{ form.project_title.errors }}
-    {{ form.project_title.label_tag }}
-    {{ form.project_title }}
-</div>
-
-<div class="fieldWrapper">
-    {{ form.dream_title.errors }}
-    {{ form.dream_title.label_tag }}
-    {{ form.dream_title }}
-</div>
+    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
       
-<div class="fieldWrapper">
-    {{ form.wish_title.errors }}
-    {{ form.wish_title.label_tag }}
-    {{ form.wish_title }}
-</div>    
-            {{ form.as_p }}
+      <div class="row">
+        <div class="small-8 small-centered columns">
+          <div class="title-wrapper">
+            <h1>Wir haben da mal eine Frage.</h1>
+          </div>
+        </div>    
+      </div> 
 
-
+      <div class="row">
+        <div class="small-8 small-centered columns"><hr/>
+          <div class="question-wrapper">
+            <div id="questionnavleft">&larr;</div>
+            <div id="questionnavright">&rarr;</div>
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="socialee-lp-questions">
+              <div class="fieldWrapper">
+                <div class="question-slide">
+                  <h3>Was würdest Du tun, wenn Du wüsstest, Du könntest nicht scheitern?</h3>
+                  {{ form.dream_title.errors }}
+                  {{ form.dream_title.label_tag }}
+                  {{ form.dream_title }}
+                </div>
+              </div>              
+              <div class="fieldWrapper">
+                <div class="question-slide">
+                  <h3>Was fehlt Dir in der Welt? Was würdest Du gerne Realität werden sehen?</h3>
+                  {{ form.wish_title.errors }}
+                  {{ form.wish_title.label_tag }}
+                  {{ form.wish_title }}
+                </div>    
+              </div>    
+              <div class="fieldWrapper">
+                <div class="question-slide">
+                  <h3>Was brauchst Du, wo drückt der Schuh?</h3>
+                  {{ form.input_title.errors }}
+                  {{ form.input_title.label_tag }}
+                  {{ form.input_title }}
+                </div>    
+              </div> 
+              <div class="fieldWrapper">
+                <div class="question-slide">
+                  <h3>Was kannst Du gut? Was machst Du gerne?</h3>
+                  {{ form.output_title.errors }}
+                  {{ form.output_title.label_tag }}
+                  {{ form.output_title }}
+                </div>    
+              </div> 
+              <div class="fieldWrapper">
+                <div class="question-slide">
+                  <h3>Hast Du ein konkretes Projekt? Oder eine Projektidee? Erzähle davon!</h3>
+                  {{ form.project_title.errors }}
+                  {{ form.project_title.label_tag }}
+                  {{ form.project_title }}
+                </div>
+              </div>
+            </div>
+          </div>
+          {% if not request.user.is_authenticated %}
+          <div class="lp-signup-form">
+            <p>Erstelle Dir einen Account bei uns! Nicht sicher warum? Lies mal eben unseren <a href="#" data-reveal-id="manifestModal">Brief an die Menschheit!</a></p>
+            <div class="row collapse">
+              <div class="small-4 large-2 columns">
+                  <span class="prefix">Vorname</span>
+              </div>
+              <div class="small-8 large-10 columns">
+                  {{ form.first_name }}
+                  {{ form.first_name.errors }}
+              </div>
+            </div>
+            <div class="row collapse">
+              <div class="small-4 large-2 columns">
+                  <span class="prefix">Nachname</span>
+              </div>
+              <div class="small-8 large-10 columns">
+                  {{ form.last_name }}
+                  {{ form.last_name.errors }}
+              </div>
+            </div>
+            <div class="row collapse">
+              <div class="small-4 large-2 columns">
+                  <span class="prefix">E-Mail</span>
+              </div>
+              <div class="small-8 large-10 columns">
+                  {{ form.email }}
+                  {{ form.email.errors }}
+              </div>
+            </div>
+            <div class="row collapse">
+              <div class="small-4 large-2 columns">
+                  <span class="prefix">Passwort</span>
+              </div>
+              <div class="small-8 large-10 columns">
+                  {{ form.password1 }}
+                  {{ form.password1.errors }}
+              </div>
+            </div>  
+            <div class="row collapse">
+              <div class="small-4 large-2 columns">
+                  <span class="prefix">Passwort</span>
+              </div>
+              <div class="small-8 large-10 columns">
+                  {{ form.password2 }}
+                  {{ form.password2.errors }}
+              </div>
+            </div>              
+          </div>
+          {% endif %}  
             {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
             {% endif %}
-            {# <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p> #}
-                <button class="small" type="submit">Alles abschicken!</button>
-                {# <a href="/" class="right">Raus hier!</a> #}
-            </form>
-            <!--{% if socialaccount.providers %}
-              <div class="socialaccount_ballot">
-                <ul class="socialaccount_providers">
-                  {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-                </ul>
-              </div>
-              {% include "socialaccount/snippets/login_extra.html" %}
-              {% else %}
-              <p>{% blocktrans %}If you have not created an account yet, then please
-              <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
-              {% endif %}-->
-              </div>
-
-        {% endif %}  
+            <button class="small radius" type="submit">Alles abschicken! <i class="fi-heart"></i></button>
         </div>
       </div>
+    </form>
+  </div>
 
-      <div class="section">
-        <div class="project-slide">
-        {% include "socialee_project_slider.html" %}
-        </div>
-      </div>
+  <div class="section">
+
+  </div>
+
+  <div class="section">
+    <div class="project-slide">
+    {% include "socialee_project_slider.html" %}
+    </div>
+  </div>
 
       <!--<div class="row section">
         <div class="small-8 small-centered columns zettel-wrap">
@@ -118,40 +188,41 @@
         </div>
       </div>-->
 
-      <footer class="footer section">
-        <div class="row">
-          <div class="small-12 medium-6 large-5 columns">
-            <p class="logo">Socialee | Wir machen das jetzt mal.</p>
-            <p class="footer-links">
-              <!--<a href="#">Home</a>
-              <a href="#">Blog</a>
-              <a href="#">About</a>
-              <a href="#">Faq</a>
-              <a href="#">Contact</a>-->
-            </p>
-            <p class="copywrite">Copyright © 2015 Socialee</p>
-          </div>
-          <div class="small-12 medium-6 large-4 columns">
-            <ul class="contact">
-              <li><p><a href="#"><i class="fi-marker"></i>Mehringplatz 7, 10969 Berlin</a></p></li>
-              <li><p><a href="#"><i class="fi-mail"></i>hello@socialee.de</a></p></li>
-              <li><p><a href="https://www.facebook.com/wirmachendasjetztmal?ref=hl" target="blank"><i class="fi-social-facebook"></i>Facebook</a></p></li>
-              </li>
-            </ul>
-          </div>
-          <div class="small-12 medium-12 large-3 columns">
-            <p class="about"><strong>An invasion of armies can be resisted, but not an idea whose time has come.</strong></p>
-            <p class="about subheader">Victor Hugo</p>
-          </div>
-        </div>
-      </footer>
+  <footer class="footer section">
+    <div class="row">
+      <div class="small-12 medium-6 large-5 columns">
+        <p class="logo">Socialee | Wir machen das jetzt mal.</p>
+        <p class="footer-links">
+          <!--<a href="#">Home</a>
+          <a href="#">Blog</a>
+          <a href="#">About</a>
+          <a href="#">Faq</a>
+          <a href="#">Contact</a>-->
+        </p>
+        <p class="copywrite">Copyright © 2015 Socialee</p>
+      </div>
+      <div class="small-12 medium-6 large-4 columns">
+        <ul class="contact">
+          <li><p><a href="#"><i class="fi-marker"></i>Mehringplatz 7, 10969 Berlin</a></p></li>
+          <li><p><a href="#"><i class="fi-mail"></i>hello@socialee.de</a></p></li>
+          <li><p><a href="https://www.facebook.com/wirmachendasjetztmal?ref=hl" target="blank"><i class="fi-social-facebook"></i>Facebook</a></p></li>
+          </li>
+        </ul>
+      </div>
+      <div class="small-12 medium-12 large-3 columns">
+        <p class="about"><strong>An invasion of armies can be resisted, but not an idea whose time has come.</strong></p>
+        <p class="about subheader">Victor Hugo</p>
+      </div>
     </div>
-    <a class="exit-off-canvas"></a>
+  </footer>
+  </div>
+  <a class="exit-off-canvas"></a>
 
 
 {% include "login_modal.html" %}
 {% include "video_modal.html" %}
 {% include "comingsoon_modal.html" %}
+{% include "manifest_modal.html" %}
 
 {% addtoblock "js_ready" strip %}
 $('#fullpage_wrapper').fullpage({
@@ -159,9 +230,24 @@ $('#fullpage_wrapper').fullpage({
       navigationPosition: 'left',
       slidesNavigation: true,
       slidesNavPosition: 'bottom',
-      navigationTooltips: ['Home', 'Projekte', 'Kontakt'],
+      navigationTooltips: ['Home', 'What you say', 'Projekte', 'Kontakt'],
       menu: '.nav-middle',
-      anchors:['landingpage', 'projekte', 'kontakt'],
+      anchors:['landingpage', 'what_you_say', 'projekte', 'kontakt'],
+      css3: true,
+      scrollingSpeed: 700,
+      autoScrolling: false,
+      fitToSection: true,
+      scrollBar: true,
+      easing: 'easeInOutCubic',
+      easingcss3: 'ease',
+      loopBottom: false,
+      loopTop: false,
+      loopHorizontal: true,
+      continuousVertical: false,
+      normalScrollElements: '#element1, .element2',
+      scrollOverflow: false,
+      touchSensitivity: 15,
+      normalScrollElementTouchThreshold: 5,
   });
 {% endaddtoblock %}
 

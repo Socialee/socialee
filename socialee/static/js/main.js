@@ -93,4 +93,33 @@ $(document).ready(function() {
     }
   ]
   });
+
+  $('.socialee-lp-questions').slick({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 3000,
+    speed: 1500,
+    arrows: true,
+    fade: false,
+    dots: true,
+    prevArrow: '#questionnavleft',
+    nextArrow: '#questionnavright',
+    adaptiveHeight: false,
+    responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+      }
+    }
+  ]
+  });
+
 });
