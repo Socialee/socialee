@@ -2,9 +2,16 @@ import os
 
 from django.conf import settings
 from django.views.generic import TemplateView
+from .forms import SignupForm
+from allauth.account.views import SignupView, RedirectAuthenticatedUserMixin
+
+# Overwrite/disable dispatch method of RedirectAuthenticatedUserMixin (endless redirect on /).
+def dispatch_no_redirect(self, request, *args, **kwargs):
+    return super(RedirectAuthenticatedUserMixin, self).dispatch(request, *args, **kwargs)
+RedirectAuthenticatedUserMixin.dispatch = dispatch_no_redirect
 
 
-class Home(TemplateView):
+class Home(SignupView):
     template_name = 'home.html'
 
     def get_context_data(self, **kwargs):
@@ -30,3 +37,7 @@ class Cafe(TemplateView):
 
 class Impressum(TemplateView):
     template_name = 'impressum.html'
+
+
+
+    # project.object.get

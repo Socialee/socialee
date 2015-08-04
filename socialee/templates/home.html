@@ -1,5 +1,9 @@
 {% extends "nav_base.html" %}
 {% load staticfiles sekizai_tags %}
+{% load account %}
+{% load i18n %}
+{% load socialaccount %}
+{% include "socialaccount/snippets/login_extra.html" %}
 
 {% block content %}
 {% addtoblock "css" strip %}
@@ -9,59 +13,141 @@
 
 
 
-    <div id="fullpage_wrapper">
-      <div class="section">
-        {% include "socialee_lp_slider.html" %}
-        <div class="row">
-          <div class="small-6 medium-4 large-5 large-offset-2 small-offset-2 columns">
-            <div id="welcome_text">
-              <h1>Manifest</h1>
-              <ul class="accordion" data-accordion>
-                <li class="accordion-navigation">
-                  <a href="#panel1a">1) Wir machen das jetzt mal.</a>
-                    <div id="panel1a" class="content">
-                      <p>Gute Ideen gibt’s wie Sand am Meer. Jedoch wissen wir auch, dass es nicht immer einfach ist, sie umzusetzen. Wir glauben mit euch an eure Ideen und dafür sorgen, dass sie nicht versanden.</p>
-                    </div>
-                  </li>
-                  <li class="accordion-navigation">
-                    <a href="#panel2a">2) Wir sind digital und analog.</a>
-                    <div id="panel2a" class="content">
-                     <p>Wir sind online und offline, genau wie du. Socialee findet nicht nur im Netz statt, man kann uns auch anfassen. Wir glauben an die Verbindung der digitalen und der realen Welt und daran, dass die eine nicht ohne die andere funktioniert. So findest du uns nicht nur im Internet, sondern auch in unserem Crowdcafe in Berlin, wo du mit uns reden, streiten und schweigen kannst. Ob du uns auf der Website posten oder lieber auf einen Kaffee vorbeikommen willst – die Wahl liegt bei dir.</p>
-                    </div>
-                  </li>
-                  <li class="accordion-navigation">
-                    <a href="#panel3a">3) Du bist mehr als 140 Zeichen.</a>
-                    <div id="panel3a" class="content">
-                      <p>Es heißt immer, eine gute Idee muss schnell auf den Punkt gebracht werden. In diesen Zeiten fühlen wir den Zwang, uns möglichst professionell und in möglichst kurzer Zeit zu vermarkten. Wir setzen dem etwas entgegen: Du bist mehr als 140 Zeichen. Du bist mehr als ein Werbeslogan. Du hast es verdient, dass man dir zuhört, weil du etwas zu sagen hast. Verkauf dich nicht. Sei du selbst.</p>
-                    </div>
-                  </li>
-                  <li class="accordion-navigation">
-                    <a href="#panel4a">4) Wir sind Geld und das, was Geld nicht kaufen kann.</a>
-                    <div id="panel4a" class="content">
-                      <p>Socialee ist eine soziale Plattform, die dir vieles geben kann. Wenn dein Projekt finanzielle Unterstützung benötigt, werden wir dir dabei helfen, die richtige Crowd zu finden. Aber da, wo andere Plattformen aufhören, fangen wir erst richtig an: Socialee hilft, Mitstreiter und Mitträumer zu finden. Wir organisieren Räume, Partner oder auch den Traktor, der dein Auto aus dem Graben holt. Die Grenzen fangen erst an, wo die Fantasie aufhört.</p>
-                    </div>
-                  </li>
-                  <li class="accordion-navigation">
-                    <a href="#panel5a">5) Ihr seid die, auf die ihr gewartet habt.</a>
-                    <div id="panel5a" class="content">
-                      <p>Wir können nicht darauf warten, bis jemand anders die Dinge für uns regelt. Die Gegenwart gehört uns und wir schieben keinerlei Verantwortung von uns weg. Was wir in der Welt sehen wollen, das müssen wir auch selbst in die Welt bringen.</p>
-                    </div>
-                  </li>
-                </ul>
-              <br/>
-              <p class="large-10 colums show-for-medium-up"><strong>Socialee | </strong>Wir glauben, dass Ideen wahr werden sollten. <span>Sieh Dir unsere ersten Projekte an und wie wir mit Menschen zusammenarbeiten, um ihre Ideen zu realisieren.</span></p>
-              <a href="#projekte" class="socialee-button left">Projekte</a>
-              <a class="show-for-large-up" href="/accounts/signup" id="mach_mit">Sei dabei!</a>
+<div id="fullpage_wrapper">
+  <div class="section">
+    <div class="vertical_arrow show-for-medium-up"><img src="{% static "img/landingpage_bg/vertical_arrow_1.png" %}"></div>
+    {% include "socialee_lp_slider.html" %}
+    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+      
+      <div class="row">
+        <div class="small-8 small-centered columns">
+          <div class="title-wrapper">
+            <h1>Wir haben da mal eine Frage.</h1>
+          </div>
+        </div>    
+      </div> 
+
+      <div class="row">
+        <div class="small-8 small-centered columns"><hr/>
+          <div class="question-wrapper">
+            <div id="questionnavleft">&larr;</div>
+            <div id="questionnavright">&rarr;</div>
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="socialee-lp-questions">
+              <div class="fieldWrapper">
+                <div class="question-slide">
+                  <h3>Was würdest Du tun, wenn Du wüsstest, Du könntest nicht scheitern?</h3>
+                  {{ form.dream_title.errors }}
+                  {{ form.dream_title.label_tag }}
+                  {{ form.dream_title }}
+                </div>
+              </div>              
+              <div class="fieldWrapper">
+                <div class="question-slide">
+                  <h3>Was fehlt Dir in der Welt? Was würdest Du gerne Realität werden sehen?</h3>
+                  {{ form.wish_title.errors }}
+                  {{ form.wish_title.label_tag }}
+                  {{ form.wish_title }}
+                </div>    
+              </div>    
+              <div class="fieldWrapper">
+                <div class="question-slide">
+                  <h3>Was brauchst Du, wo drückt der Schuh?</h3>
+                  {{ form.output_title.errors }}
+                  {{ form.output_title.label_tag }}
+                  {{ form.output_title }}
+                </div>    
+              </div> 
+              <div class="fieldWrapper">
+                <div class="question-slide">
+                  <h3>Was kannst Du gut? Was machst Du gerne?</h3>
+                  {{ form.input_title.errors }}
+                  {{ form.input_title.label_tag }}
+                  {{ form.input_title }}
+                </div>    
+              </div> 
+              <div class="fieldWrapper">
+                <div class="question-slide">
+                  <h3>Hast Du ein konkretes Projekt? Oder eine Projektidee? Erzähle davon!</h3>
+                  {{ form.project_title.errors }}
+                  {{ form.project_title.label_tag }}
+                  {{ form.project_title }}
+                </div>
+              </div>
             </div>
           </div>
+          {% if not request.user.is_authenticated %}
+          <div class="lp-signup-form">
+            <p>Erstelle Dir einen Account bei uns! Nicht sicher warum? Lies mal eben unseren <a href="#" data-reveal-id="manifestModal">Brief an die Menschheit!</a></p>
+            <div class="row collapse">
+              <div class="small-4 large-2 columns">
+                  <span class="prefix">Vorname</span>
+              </div>
+              <div class="small-8 large-10 columns">
+                  {{ form.first_name }}
+                  {{ form.first_name.errors }}
+              </div>
+            </div>
+            <div class="row collapse">
+              <div class="small-4 large-2 columns">
+                  <span class="prefix">Nachname</span>
+              </div>
+              <div class="small-8 large-10 columns">
+                  {{ form.last_name }}
+                  {{ form.last_name.errors }}
+              </div>
+            </div>
+            <div class="row collapse">
+              <div class="small-4 large-2 columns">
+                  <span class="prefix">E-Mail</span>
+              </div>
+              <div class="small-8 large-10 columns">
+                  {{ form.email }}
+                  {{ form.email.errors }}
+              </div>
+            </div>
+            <div class="row collapse">
+              <div class="small-4 large-2 columns">
+                  <span class="prefix">Passwort</span>
+              </div>
+              <div class="small-8 large-10 columns">
+                  {{ form.password1 }}
+                  {{ form.password1.errors }}
+              </div>
+            </div>  
+            <div class="row collapse">
+              <div class="small-4 large-2 columns">
+                  <span class="prefix">Passwort</span>
+              </div>
+              <div class="small-8 large-10 columns">
+                  {{ form.password2 }}
+                  {{ form.password2.errors }}
+              </div>
+            </div>              
+          </div>
+          {% endif %}  
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <button class="small radius" type="submit">Alles abschicken! <i class="fi-heart"></i></button>
         </div>
       </div>
+    </form>
+  </div>
 
-      <div class="section">
-        <div class="project-slide">
-        {% include "socialee_project_slider.html" %}
-        </div>
-      </div>
+  <div class="section">
+    <div class="vertical_arrow show-for-medium-up"><img src="{% static "img/landingpage_bg/vertical_arrow_1.png" %}"></div>
+    <div class="small-8 small-centered columns">
+      <h2>Hier stehen die Ideen der Leute</h2>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="project-slide">
+    {% include "socialee_project_slider.html" %}
+    </div>
+  </div>
 
       <!--<div class="row section">
         <div class="small-8 small-centered columns zettel-wrap">
@@ -105,40 +191,41 @@
         </div>
       </div>-->
 
-      <footer class="footer section">
-        <div class="row">
-          <div class="small-12 medium-6 large-5 columns">
-            <p class="logo">Socialee | Wir machen das jetzt mal.</p>
-            <p class="footer-links">
-              <!--<a href="#">Home</a>
-              <a href="#">Blog</a>
-              <a href="#">About</a>
-              <a href="#">Faq</a>
-              <a href="#">Contact</a>-->
-            </p>
-            <p class="copywrite">Copyright © 2015 Socialee</p>
-          </div>
-          <div class="small-12 medium-6 large-4 columns">
-            <ul class="contact">
-              <li><p><a href="#"><i class="fi-marker"></i>Mehringplatz 7, 10969 Berlin</a></p></li>
-              <li><p><a href="#"><i class="fi-mail"></i>hello@socialee.de</a></p></li>
-              <li><p><a href="https://www.facebook.com/wirmachendasjetztmal?ref=hl" target="blank"><i class="fi-social-facebook"></i>Facebook</a></p></li>
-              </li>
-            </ul>
-          </div>
-          <div class="small-12 medium-12 large-3 columns">
-            <p class="about"><strong>An invasion of armies can be resisted, but not an idea whose time has come.</strong></p>
-            <p class="about subheader">Victor Hugo</p>
-          </div>
-        </div>
-      </footer>
-    </div>
-    <a class="exit-off-canvas"></a>
+  <footer class="footer section">
+    <div class="row">
+      <div class="small-12 small-centered columns">
+        <p class="logo text-center">Socialee | Wir machen das jetzt mal.</p>
+        <!--<p class="footer-links">
+          <a href="#">Home</a>
+          <a href="#">Blog</a>
+          <a href="#">About</a>
+          <a href="#">Faq</a>
+          <a href="#">Contact</a>
+        </p>-->
+        <p class="copywrite text-center">Copyright © 2015 Socialee</p>
+      </div>
+      <!--<div class="small-12 medium-6 large-4 columns">
+        <ul class="contact">
+          <li><p><a href="#"><i class="fi-marker"></i>Mehringplatz 7, 10969 Berlin</a></p></li>
+          <li><p><a href="#"><i class="fi-mail"></i>hello@socialee.de</a></p></li>
+          <li><p><a href="https://www.facebook.com/wirmachendasjetztmal?ref=hl" target="blank"><i class="fi-social-facebook"></i>Facebook</a></p></li>
+          </li>
+        </ul>
+      </div>
+      <div class="small-12 medium-12 large-3 columns">
+        <p class="about"><strong>An invasion of armies can be resisted, but not an idea whose time has come.</strong></p>
+        <p class="about subheader">Victor Hugo</p>
+      </div>
+    </div>-->
+  </footer>
+  </div>
+  <a class="exit-off-canvas"></a>
 
 
 {% include "login_modal.html" %}
 {% include "video_modal.html" %}
 {% include "comingsoon_modal.html" %}
+{% include "manifest_modal.html" %}
 
 {% addtoblock "js_ready" strip %}
 $('#fullpage_wrapper').fullpage({
@@ -146,9 +233,24 @@ $('#fullpage_wrapper').fullpage({
       navigationPosition: 'left',
       slidesNavigation: true,
       slidesNavPosition: 'bottom',
-      navigationTooltips: ['Home', 'Projekte', 'Kontakt'],
+      navigationTooltips: ['Home', 'What you say', 'Projekte', 'Kontakt'],
       menu: '.nav-middle',
-      anchors:['landingpage', 'projekte', 'kontakt'],
+      anchors:['landingpage', 'what_you_say', 'projekte', 'kontakt'],
+      css3: true,
+      scrollingSpeed: 700,
+      autoScrolling: false,
+      fitToSection: true,
+      scrollBar: true,
+      easing: 'easeInOutCubic',
+      easingcss3: 'ease',
+      loopBottom: false,
+      loopTop: false,
+      loopHorizontal: true,
+      continuousVertical: false,
+      normalScrollElements: '#element1, .element2',
+      scrollOverflow: false,
+      touchSensitivity: 15,
+      normalScrollElementTouchThreshold: 5,
   });
 {% endaddtoblock %}
 

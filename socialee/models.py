@@ -36,7 +36,6 @@ class Profile(models.Model):
     # mj> geburtsdatum = models.DateField(auto_now=False, auto_now_add=False,
     #                                     blank=True, null=True)
     newsletter = models.BooleanField(default=False)
-
     origin = models.ForeignKey(Origin, blank=True, null=True)
 
     def is_email_verified(self):
@@ -69,32 +68,70 @@ class Profile(models.Model):
     #     return "http://www.gravatar.com/avatar/{}?s=40".format(hashlib.md5(self.user.email).hexdigest())
 # END TODO 2
 
-class InputOutput(models.Model):
-    class Meta:
-        abstract = True
+# class InputOutput(models.Model):
+#     class Meta:
+#         abstract = True
 
-    profile = models.ForeignKey(Profile, null=True)
-    zettel = models.ForeignKey('Zettel', null=True)
+#     profile = models.ForeignKey(Profile, null=True)
+#     zettel = models.ForeignKey('Zettel', null=True)
 
 
-class Input(InputOutput):
-    title = models.CharField(verbose_name="What's the offer?",
-                             max_length=200)
+# class Input(models.Model):
+#     title = models.CharField(verbose_name="What's the offer?",
+#                              max_length=200)
+
+#     def __str__(self):
+#         return 'Input "{}" from profile {} and zettel {}'.format(self.title,
+#                                                                  self.profile,
+#                                                                  self.zettel)
+
+
+# class Output(InputOutput):
+#     title = models.CharField(verbose_name="What's the request?",
+#                              max_length=200)
+
+#     def __str__(self):
+#         return 'Output "{}" from profile {} and zettel {}'.format(self.title,
+#                                                                   self.profile,
+#                                                                   self.zettel)
+
+class Input(models.Model):
+    title = models.TextField(max_length=5000)
+    profiles = models.ManyToManyField(Profile)
 
     def __str__(self):
-        return 'Input "{}" from profile {} and zettel {}'.format(self.title,
-                                                                 self.profile,
-                                                                 self.zettel)
+        return '{}'.format(self.title)
 
 
-class Output(InputOutput):
-    title = models.CharField(verbose_name="What's the request?",
-                             max_length=200)
+class Output(models.Model):
+    title = models.TextField(max_length=5000)
+    profiles = models.ManyToManyField(Profile)
 
     def __str__(self):
-        return 'Output "{}" from profile {} and zettel {}'.format(self.title,
-                                                                  self.profile,
-                                                                  self.zettel)
+        return '{}'.format(self.title)
+
+
+class Project(models.Model):
+    title = models.TextField(max_length=5000)
+    profiles = models.ManyToManyField(Profile)
+
+    def __str__(self):
+        return '{}'.format(self.title)
+
+class Dream(models.Model):
+    title = models.TextField(max_length=5000)
+    profiles = models.ManyToManyField(Profile)
+
+    def __str__(self):
+        return '{}'.format(self.title)
+
+
+class Wish(models.Model):
+    title = models.TextField(max_length=5000)
+    profiles = models.ManyToManyField(Profile)
+
+    def __str__(self):
+        return '{}'.format(self.title)
 
 
 class Location(models.Model):
@@ -115,12 +152,3 @@ class Zettel(models.Model):
 
     def __str__(self):
         return 'Zettel from {}'.format(self.profile)
-
-
-class Project(models.Model):
-    title = models.CharField(max_length=100, unique=True)
-    inputs = models.ManyToManyField(Input)
-    outputs = models.ManyToManyField(Output)
-    # desc
-    # img
-    # featured
