@@ -140,6 +140,16 @@ a {
 
 // Landingpage
   
+  .socialee-entries {
+    list-style: none;
+    li {
+      display: inline-block;
+      background-color: rgba(230, 140, 5, 0.27);
+      padding: 2px 10px 2px 10px;
+      margin: 2px; 
+    }
+  }
+  
   .vertical_arrow {
     position: absolute;
     right: 0;
