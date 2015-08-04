@@ -4,6 +4,9 @@ from django.conf import settings
 from django.views.generic import TemplateView
 from .forms import SignupForm
 from allauth.account.views import SignupView, RedirectAuthenticatedUserMixin
+from django.shortcuts import render
+
+from .models import Project
 
 # Overwrite/disable dispatch method of RedirectAuthenticatedUserMixin (endless redirect on /).
 def dispatch_no_redirect(self, request, *args, **kwargs):
@@ -18,7 +21,10 @@ class Home(SignupView):
         context = super(Home, self).get_context_data(**kwargs)
         context['zettel_links'] = self.get_zettel_images("links")
         context['zettel_rechts'] = self.get_zettel_images("rechts")
+        projects = Project.objects.all() # wenn diese und die nächste Zeile auskommentiert sind, funktioniert das signup-formular wieder. und so wie's jetzt ist, funktioniert das Anzeigen in der "what you say" section....
+        context = {"projects": projects}
         return context
+
 
     @classmethod
     def get_zettel_images(cls, subdir):
@@ -31,13 +37,15 @@ class Home(SignupView):
             return []
         return sorted(l)
 
+    # def home(request):
+    #     projects = Project.objects.all()
+    #     template = 'home.html'
+    #     context = {"projects": projects}
+    #     return render (request, template, context)
+
 
 class Cafe(TemplateView):
     template_name = 'cafe.html'
 
 class Impressum(TemplateView):
     template_name = 'impressum.html'
-
-
-
-    # project.object.get
