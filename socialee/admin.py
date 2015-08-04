@@ -5,15 +5,6 @@ from django.utils.translation import ugettext_lazy as _
 from .models import (Input, Origin, Output, Profile, Project, Dream, Wish, UserEntry, Zettel)
 
 
-class DreamAdmin(admin.ModelAdmin):
-    model = Dream
-    # exclude = ('profiles',)
-
-
-admin.site.register(Dream, DreamAdmin)
-
-
-
 # class InputZettelInline(admin.TabularInline):
 #     model = Input
 #     exclude = ('profile',)
@@ -34,101 +25,101 @@ admin.site.register(Dream, DreamAdmin)
 #     exclude = ('zettel',)
 
 
-# class ProfileInline(admin.TabularInline):
-#     model = Profile
+class ProfileInline(admin.TabularInline):
+    model = Profile
 
 
-# class ZettelInline(admin.TabularInline):
-#     model = Zettel
-#     exclude = ('inputs', 'outputs')
-#     extra = 1
+class ZettelInline(admin.TabularInline):
+    model = Zettel
+    exclude = ('inputs', 'outputs')
+    extra = 1
 
 
-# class InputAdmin(admin.ModelAdmin):
-#     model = Input
-
-
-# class OutputAdmin(admin.ModelAdmin):
-#     model = Output
-
-
-# class ZettelAdmin(admin.ModelAdmin):
-#     model = Zettel
-#     search_fields = ['profile__user__username', 'profile__user__email',
-#                      'profile__user__last_name', 'profile__user__first_name',
-#                      'number', 'origin__location']
-#     list_filter = ['origin', 'origin__location']
-#     list_display = ['__str__', 'image', 'origin']
+class ZettelAdmin(admin.ModelAdmin):
+    model = Zettel
+    search_fields = ['profile__user__username', 'profile__user__email',
+                     'profile__user__last_name', 'profile__user__first_name',
+                     'number', 'origin__location']
+    list_filter = ['origin', 'origin__location']
+    list_display = ['__str__', 'image', 'origin']
     # inlines = [
     #     InputZettelInline, OutputZettelInline
     # ]
 
 
-# class OriginAdmin(admin.ModelAdmin):
-#     model = Origin
+class OriginAdmin(admin.ModelAdmin):
+    model = Origin
 
 
-# class ProfileAdmin(admin.ModelAdmin):
-#     pass
+class ProfileAdmin(admin.ModelAdmin):
+    pass
 
 
-# class ProjectAdmin(admin.ModelAdmin):
-#     pass
+class InputAdmin(admin.ModelAdmin):
+    model = Input
 
 
-# class DreamAdmin(admin.ModelAdmin):
-#     pass
+class OutputAdmin(admin.ModelAdmin):
+    model = Output
 
 
-# class WishAdmin(admin.ModelAdmin):
-#     pass
+class ProjectAdmin(admin.ModelAdmin):
+    model = Project
 
 
-# class UserEntryForm(forms.ModelForm):
-#     """Special form for UserEntryAdmin."""
-#     class Meta:
-#         model = UserEntry
-#         fields = '__all__'
+class DreamAdmin(admin.ModelAdmin):
+    model = Dream
 
 
-# class UserEntryAdmin(auth.admin.UserAdmin):
-#     """Special Admin: Use the "change" form also for adding new users."""
-#     add_form = UserEntryForm
-
-#     readonly_fields = ['last_login']
-
-#     def get_fieldsets(self, request, obj=None):
-#         fieldsets = super(auth.admin.UserAdmin, self).get_fieldsets(request, obj)
-
-#         # Remove specific fields.
-#         fieldsets = list(fieldsets)
-#         # Remove "password".
-#         assert fieldsets[0][0] is None
-#         fieldsets[0] = (None, {'fields': ('username',)})
-
-#         # All from Permissions, but keep "is_active".
-#         assert fieldsets[2][0] == _('Permissions')
-#         fieldsets[2] = (_('Permissions'), {'fields': ('is_active',)})
-#         return fieldsets
+class WishAdmin(admin.ModelAdmin):
+    model = Wish
 
 
-# class ProfileEntryAdmin(admin.ModelAdmin):
-#     search_fields = ['user__username', 'user__email', 'user__last_name',
-#                      'user__first_name']
-#     list_filter = ['plz', 'newsletter', 'zettel__origin__location']
+class UserEntryForm(forms.ModelForm):
+    """Special form for UserEntryAdmin."""
+    class Meta:
+        model = UserEntry
+        fields = '__all__'
 
-#     list_display = ['__str__', 'user_last_name', 'user_first_name',
-#                     'user_email']
-#     inlines = [
-#         InputProfileInline, OutputProfileInline
-#     ]
 
-# admin.site.register(Input, InputAdmin)
-# admin.site.register(Origin, OriginAdmin)
-# admin.site.register(Output, OutputAdmin)
-# admin.site.register(Profile, ProfileEntryAdmin)
-# admin.site.register(UserEntry, UserEntryAdmin)
-# admin.site.register(Project, ProjectAdmin)
-# admin.site.register(Dream, DreamAdmin)
-# admin.site.register(Wish, WishAdmin)
-# admin.site.register(Zettel, ZettelAdmin)
+class UserEntryAdmin(auth.admin.UserAdmin):
+    """Special Admin: Use the "change" form also for adding new users."""
+    add_form = UserEntryForm
+
+    readonly_fields = ['last_login']
+
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = super(auth.admin.UserAdmin, self).get_fieldsets(request, obj)
+
+        # Remove specific fields.
+        fieldsets = list(fieldsets)
+        # Remove "password".
+        assert fieldsets[0][0] is None
+        fieldsets[0] = (None, {'fields': ('username',)})
+
+        # All from Permissions, but keep "is_active".
+        assert fieldsets[2][0] == _('Permissions')
+        fieldsets[2] = (_('Permissions'), {'fields': ('is_active',)})
+        return fieldsets
+
+
+class ProfileEntryAdmin(admin.ModelAdmin):
+    search_fields = ['user__username', 'user__email', 'user__last_name',
+                     'user__first_name']
+    list_filter = ['plz', 'newsletter', 'zettel__origin__location']
+
+    list_display = ['__str__', 'user_last_name', 'user_first_name',
+                    'user_email']
+    # inlines = [
+    #     InputProfileInline, OutputProfileInline
+    # ]
+
+admin.site.register(Input, InputAdmin)
+admin.site.register(Origin, OriginAdmin)
+admin.site.register(Output, OutputAdmin)
+admin.site.register(Profile, ProfileEntryAdmin)
+admin.site.register(UserEntry, UserEntryAdmin)
+admin.site.register(Project, ProjectAdmin)
+admin.site.register(Dream, DreamAdmin)
+admin.site.register(Wish, WishAdmin)
+admin.site.register(Zettel, ZettelAdmin)

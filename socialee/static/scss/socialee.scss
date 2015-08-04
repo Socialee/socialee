@@ -130,8 +130,28 @@ a {
   float: right;
 }
 
+// .top-bar .toggle-topbar.menu-icon a {
+//     color: $monsoon;
+//     height: 34px;
+//     line-height: 33px;
+//     padding: 90px 2.91667rem 0px 1.35417rem;
+//     position: relative;
+// }
 
 // Landingpage
+  
+  .vertical_arrow {
+    position: absolute;
+    right: 0;
+    bottom: -50%;
+    // margin-right: 80px;
+    margin-right: 10%;
+    z-index: 999;
+    img {
+      height: 100vh;  
+    }
+  }
+
   #welcome_text{
     h1 {
       font-weight: 300;

@@ -96,6 +96,7 @@ $(document).ready(function() {
 
   $('.socialee-lp-questions').slick({
     slidesToShow: 1,
+    infinite: false,
     slidesToScroll: 1,
     autoplay: false,
     autoplaySpeed: 3000,

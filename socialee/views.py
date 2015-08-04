@@ -37,3 +37,7 @@ class Cafe(TemplateView):
 
 class Impressum(TemplateView):
     template_name = 'impressum.html'
+
+
+
+    # project.object.get

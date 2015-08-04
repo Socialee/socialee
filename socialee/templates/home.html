@@ -15,8 +15,8 @@
 
 <div id="fullpage_wrapper">
   <div class="section">
+    <div class="vertical_arrow show-for-medium-up"><img src="{% static "img/landingpage_bg/vertical_arrow_1.png" %}"></div>
     {% include "socialee_lp_slider.html" %}
-
     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
       
       <div class="row">
@@ -54,17 +54,17 @@
               <div class="fieldWrapper">
                 <div class="question-slide">
                   <h3>Was brauchst Du, wo drückt der Schuh?</h3>
-                  {{ form.input_title.errors }}
-                  {{ form.input_title.label_tag }}
-                  {{ form.input_title }}
+                  {{ form.output_title.errors }}
+                  {{ form.output_title.label_tag }}
+                  {{ form.output_title }}
                 </div>    
               </div> 
               <div class="fieldWrapper">
                 <div class="question-slide">
                   <h3>Was kannst Du gut? Was machst Du gerne?</h3>
-                  {{ form.output_title.errors }}
-                  {{ form.output_title.label_tag }}
-                  {{ form.output_title }}
+                  {{ form.input_title.errors }}
+                  {{ form.input_title.label_tag }}
+                  {{ form.input_title }}
                 </div>    
               </div> 
               <div class="fieldWrapper">
@@ -137,7 +137,10 @@
   </div>
 
   <div class="section">
-
+    <div class="vertical_arrow show-for-medium-up"><img src="{% static "img/landingpage_bg/vertical_arrow_1.png" %}"></div>
+    <div class="small-8 small-centered columns">
+      <h2>Hier stehen die Ideen der Leute</h2>
+    </div>
   </div>
 
   <div class="section">
@@ -190,18 +193,18 @@
 
   <footer class="footer section">
     <div class="row">
-      <div class="small-12 medium-6 large-5 columns">
-        <p class="logo">Socialee | Wir machen das jetzt mal.</p>
-        <p class="footer-links">
-          <!--<a href="#">Home</a>
+      <div class="small-12 small-centered columns">
+        <p class="logo text-center">Socialee | Wir machen das jetzt mal.</p>
+        <!--<p class="footer-links">
+          <a href="#">Home</a>
           <a href="#">Blog</a>
           <a href="#">About</a>
           <a href="#">Faq</a>
-          <a href="#">Contact</a>-->
-        </p>
-        <p class="copywrite">Copyright © 2015 Socialee</p>
+          <a href="#">Contact</a>
+        </p>-->
+        <p class="copywrite text-center">Copyright © 2015 Socialee</p>
       </div>
-      <div class="small-12 medium-6 large-4 columns">
+      <!--<div class="small-12 medium-6 large-4 columns">
         <ul class="contact">
           <li><p><a href="#"><i class="fi-marker"></i>Mehringplatz 7, 10969 Berlin</a></p></li>
           <li><p><a href="#"><i class="fi-mail"></i>hello@socialee.de</a></p></li>
@@ -213,7 +216,7 @@
         <p class="about"><strong>An invasion of armies can be resisted, but not an idea whose time has come.</strong></p>
         <p class="about subheader">Victor Hugo</p>
       </div>
-    </div>
+    </div>-->
   </footer>
   </div>
   <a class="exit-off-canvas"></a>
