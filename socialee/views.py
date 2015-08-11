@@ -2,11 +2,11 @@ import os
 
 from django.conf import settings
 from django.views.generic import TemplateView
-from .forms import SignupForm
-from allauth.account.views import SignupView, RedirectAuthenticatedUserMixin
-from django.shortcuts import render
+
+from allauth.account.views import RedirectAuthenticatedUserMixin, SignupView
 
 from .models import Project
+
 
 # Overwrite/disable dispatch method of RedirectAuthenticatedUserMixin (endless redirect on /).
 def dispatch_no_redirect(self, request, *args, **kwargs):
