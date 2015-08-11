@@ -137,18 +137,20 @@
   </div>
 
   <div class="section">
-    <div class="vertical_arrow show-for-medium-up"><img src="{% static "img/landingpage_bg/vertical_arrow_1.png" %}"></div>
-    <div class="small-8 small-centered columns">
-      <h2>Hier stehen die Ideen der Leute....</h2>
-      <div class="row">
-        <ul class="socialee-entries">
-          {% for project in projects %}
-          <li>{{ project.title }}</li>
-          {% endfor %}
-        </ul>
+  <div class="vertical_arrow show-for-medium-up"><img src="{% static "img/landingpage_bg/vertical_arrow_1.png" %}"></div>    
+    <div class="row">
+      <div class="small-10 small-centered columns">
+        <div class="socialee-entries-wrapper">
+          <ul class="socialee-entries">
+            {% for project in projects %}
+            <li>{{ project.title }}</li>
+            {% endfor %}
+          </ul>
+        </div>
       </div>
     </div>
   </div>
+
 
   <div class="section">
     <div class="project-slide">
