@@ -84,6 +84,9 @@ a {
 
 
 // Navigation
+  
+  .f-topbar-fixed { padding-top: 0 ! important }  // override padding from foundation.topbar.js
+
   nav.top-bar:not(.expanded) {
     text-align: center;
       section.top-bar-section { 
@@ -140,15 +143,23 @@ a {
 
 // Landingpage
   
+  .socialee-entries-wrapper {
+      max-height: 80vh;
+      overflow: auto;
+    }
+     
   .socialee-entries {
     list-style: none;
     li {
-      display: inline-block;
-      background-color: rgba(230, 140, 5, 0.27);
-      padding: 2px 10px 2px 10px;
-      margin: 2px; 
+    font-size: 0.8rem;
+    display: inline-block;
+    background-color: rgba(230, 140, 5, 0.27);
+    padding: 2px 10px 2px 10px;
+    margin: 2px; 
+    margin: 1px 0 1px 0; 
     }
   }
+
   
   .vertical_arrow {
     position: absolute;
@@ -194,21 +205,21 @@ a {
 
   .socialee-lp-slider {
     position: absolute;
-    top: -65px;
+    top: 0px;
     z-index: -1;
     width: 100%;
   }
 
   .lp-slide {
     position: relative;
-    top: -65px;
+    top: 0px;
     height: 100vh;
     z-index: -1;
   }
 
   .socialee-project-slider {
     position: absolute;
-    top: -65px;
+    top: 0px;
     height: 100vh;
     z-index: -1;
     width: 100%;
@@ -216,7 +227,7 @@ a {
 
   .project-slide {
     position: relative;
-    top: -65px;
+    top: 0px;
   }
 
   .custom-lp-label {
