@@ -21,8 +21,7 @@ class Home(SignupView):
         context = super(Home, self).get_context_data(**kwargs)
         context['zettel_links'] = self.get_zettel_images("links")
         context['zettel_rechts'] = self.get_zettel_images("rechts")
-        projects = Project.objects.all() # wenn diese und die nächste Zeile auskommentiert sind, funktioniert das signup-formular wieder. und so wie's jetzt ist, funktioniert das Anzeigen in der "what you say" section....
-        context = {"projects": projects}
+        context['projects'] = Project.objects.all()
         return context
 
 
