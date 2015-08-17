@@ -144,8 +144,10 @@ a {
 // Landingpage
   
   .socialee-entries-wrapper {
-      max-height: 80vh;
-      overflow: auto;
+      // max-height: 80vh;
+      // overflow: auto;
+      margin: 65px 25px 25px 25px;
+
     }
      
   .socialee-entries {
@@ -166,10 +168,22 @@ a {
     right: 0;
     bottom: -50%;
     // margin-right: 80px;
-    margin-right: 10%;
+    margin-right: 7%;
     z-index: 999;
     img {
       height: 100vh;  
+    }
+    a {
+      color: $monsoon;
+      :hover {
+        color: $orange;
+      }
+    }
+    p {
+      font-size: 0.8rem;
+      font-weight: bold;
+      position: relative;
+      top: 20px;
     }
   }
 
@@ -241,48 +255,51 @@ a {
     }
   }
 
-.title-wrapper {
-  h1 {
-    text-align: center;
-    margin-top: 130px;
-    // text-decoration: underline;
-  }
-}
-
-.signup {
-  position: relative;
-  top: -50px;
-}
-
-.question-slide {
-  margin: 0 25px 0 25px;
-  h3 {
-    font-style: italic;
-  }
-}
-
-.lp-signup-form {
-    margin-top: 38px;
-    input {
-    height: 1.7rem;
-    margin-bottom: 2px;
-    padding: 0 0 0 10px;
+  .title-wrapper {
+    h4 {
+      text-align: center;
+      margin-top: 130px;
+      // text-decoration: underline;
     }
-  .prefix {
-    line-height: 1.7rem;
-    height: 1.7rem;
-    margin-bottom: 2px;
+  }
+
+  .signup {
+    position: relative;
+    top: -50px;
+  }
+
+  .question-slide {
+    // margin: 0 25px 0 25px;
+    h2 {
+      font-size: 3rem;
+      font-weight: 400;
+      font-style: italic;
+      margin-bottom: 20px;
     }
-  p {
-    margin-bottom: 5px;
   }
-  ul {
-    margin: 0;
-    list-style: none;
-    color: red;
-    font-size: 0.5rem;
+
+  .lp-signup-form {
+  //     margin-top: 38px;
+  //     input {
+  //     height: 1.7rem;
+  //     margin-bottom: 2px;
+  //     padding: 0 0 0 10px;
+  //     }
+  //   .prefix {
+  //     line-height: 1.7rem;
+  //     height: 1.7rem;
+  //     margin-bottom: 2px;
+  //     }
+    p {
+      margin-bottom: 5px;
+    }
+  //   ul {
+  //     margin: 0;
+  //     list-style: none;
+  //     color: red;
+  //     font-size: 0.5rem;
+  //   }
   }
-}
 
 //   .accordion
 // {

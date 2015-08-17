@@ -15,14 +15,15 @@
 
 <div id="fullpage_wrapper">
   <div class="section">
-    <div class="vertical_arrow show-for-medium-up"><img src="{% static "img/landingpage_bg/vertical_arrow_1.png" %}"></div>
+    <!--<div class="vertical_arrow show-for-medium-up"><a href="#what_you_say"><p>Was schreiben</br>die anderen?</p></a><img src="{% static "img/landingpage_bg/vertical_arrow_1.png" %}">
+    </div>-->
     {% include "socialee_lp_slider.html" %}
     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
       
       <div class="row">
         <div class="small-8 small-centered columns">
           <div class="title-wrapper">
-            <h1>Wir haben da mal eine Frage.</h1>
+            <h4>Wir bauen ein richtig gutes soziales Netzwerk. Und haben eine Frage.</h4>
           </div>
         </div>    
       </div> 
@@ -30,20 +31,20 @@
       <div class="row">
         <div class="small-8 small-centered columns"><hr/>
           <div class="question-wrapper">
-            <div id="questionnavleft">&larr;</div>
-            <div id="questionnavright">&rarr;</div>
+            <!--<div id="questionnavleft">&larr;</div>
+            <div id="questionnavright">&rarr;</div>-->
             {% csrf_token %}
             {{ form.non_field_errors }}
             <div class="socialee-lp-questions">
               <div class="fieldWrapper">
                 <div class="question-slide">
-                  <h3>Was würdest Du tun, wenn Du wüsstest, Du könntest nicht scheitern?</h3>
+                  <h2 class="text-center">Was ist Dein Traum?</h2>
                   {{ form.dream_title.errors }}
                   {{ form.dream_title.label_tag }}
                   {{ form.dream_title }}
                 </div>
               </div>              
-              <div class="fieldWrapper">
+              <!--<div class="fieldWrapper">
                 <div class="question-slide">
                   <h3>Was fehlt Dir in der Welt? Was würdest Du gerne Realität werden sehen?</h3>
                   {{ form.wish_title.errors }}
@@ -74,89 +75,101 @@
                   {{ form.project_title.label_tag }}
                   {{ form.project_title }}
                 </div>
-              </div>
+              </div>-->
             </div>
           </div>
           {% if not request.user.is_authenticated %}
-          <div class="lp-signup-form">
-            <p>Erstelle Dir einen Account bei uns! Nicht sicher warum? Lies mal eben unseren <a href="#" data-reveal-id="manifestModal">Brief an die Menschheit!</a></p>
-            <div class="row collapse">
-              <div class="small-4 large-2 columns">
-                  <span class="prefix">Vorname</span>
+          <div class="row">
+            <div class="small-12 small-centered columns">
+              <div class="lp-signup-form">
+                <p>Sehr schön! Zusammen verändern wir die Welt. Lies mal unseren <strong><a href="#" data-reveal-id="manifestModal">Brief an die Menschheit!</a></strong></p>
+                <!--<div class="row collapse">
+                  <div class="small-4 large-2 columns">
+                      <span class="prefix">Vorname</span>
+                  </div>
+                  <div class="small-8 large-10 columns">
+                      {{ form.first_name }}
+                      {{ form.first_name.errors }}
+                  </div>
+                </div>
+                <div class="row collapse">
+                  <div class="small-4 large-2 columns">
+                      <span class="prefix">Nachname</span>
+                  </div>
+                  <div class="small-8 large-10 columns">
+                      {{ form.last_name }}
+                      {{ form.last_name.errors }}
+                  </div>
+                </div>-->
+                <div class="row collapse">
+                  <div class="small-4 large-2 columns">
+                      <span class="prefix">E-Mail</span>
+                  </div>
+                  <div class="small-6 large-8 columns">
+                      {{ form.email }}
+                      {{ form.email.errors }}
+                  </div>
+                  <div class="small-2 columns">
+                    <a class="button postfix" href='#' onclick='document.forms["signup_form"].submit(); return false;'>Abschicken!</a>
+                  </div>
+                </div>
+                <!--<div class="row collapse">
+                  <div class="small-4 large-2 columns">
+                      <span class="prefix">Passwort</span>
+                  </div>
+                  <div class="small-8 large-10 columns">
+                      {{ form.password1 }}
+                      {{ form.password1.errors }}
+                  </div>
+                </div>  
+                <div class="row collapse">
+                  <div class="small-4 large-2 columns">
+                      <span class="prefix">Passwort</span>
+                  </div>
+                  <div class="small-8 large-10 columns">
+                      {{ form.password2 }}
+                      {{ form.password2.errors }}
+                  </div>
+                </div>-->             
               </div>
-              <div class="small-8 large-10 columns">
-                  {{ form.first_name }}
-                  {{ form.first_name.errors }}
-              </div>
+              {% endif %}  
+              {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+              {% endif %}
+              <!--<button class="small radius" type="submit">Alles abschicken! <i class="fi-heart"></i></button>-->
             </div>
-            <div class="row collapse">
-              <div class="small-4 large-2 columns">
-                  <span class="prefix">Nachname</span>
-              </div>
-              <div class="small-8 large-10 columns">
-                  {{ form.last_name }}
-                  {{ form.last_name.errors }}
-              </div>
-            </div>
-            <div class="row collapse">
-              <div class="small-4 large-2 columns">
-                  <span class="prefix">E-Mail</span>
-              </div>
-              <div class="small-8 large-10 columns">
-                  {{ form.email }}
-                  {{ form.email.errors }}
-              </div>
-            </div>
-            <div class="row collapse">
-              <div class="small-4 large-2 columns">
-                  <span class="prefix">Passwort</span>
-              </div>
-              <div class="small-8 large-10 columns">
-                  {{ form.password1 }}
-                  {{ form.password1.errors }}
-              </div>
-            </div>  
-            <div class="row collapse">
-              <div class="small-4 large-2 columns">
-                  <span class="prefix">Passwort</span>
-              </div>
-              <div class="small-8 large-10 columns">
-                  {{ form.password2 }}
-                  {{ form.password2.errors }}
-              </div>
-            </div>              
           </div>
-          {% endif %}  
-            {% if redirect_field_value %}
-            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-            {% endif %}
-            <button class="small radius" type="submit">Alles abschicken! <i class="fi-heart"></i></button>
-        </div>
+        </div>  
       </div>
     </form>
+            <div class="row">
+          <div class="small-2 small-centered columns">
+            <a class="socialee-button" href="#what_you_say">Die Träume der anderen.</a>
+          </div>
+        </div>
   </div>
 
   <div class="section">
-  <div class="vertical_arrow show-for-medium-up"><img src="{% static "img/landingpage_bg/vertical_arrow_1.png" %}"></div>    
-    <div class="row">
-      <div class="small-10 small-centered columns">
+  <!--<div class="vertical_arrow show-for-medium-up"><img src="{% static "img/landingpage_bg/vertical_arrow_1.png" %}"></div>-->
+
+
         <div class="socialee-entries-wrapper">
           <ul class="socialee-entries">
             {% for project in projects %}
-            <li>{{ project.title }}</li>
+            <li>{{ project.title }}</li><li>{{ project.title }}</li>
             {% endfor %}
           </ul>
         </div>
-      </div>
-    </div>
-  </div>
 
+
+  </div>
 
   <div class="section">
     <div class="project-slide">
     {% include "socialee_project_slider.html" %}
     </div>
   </div>
+
 
       <!--<div class="row section">
         <div class="small-8 small-centered columns zettel-wrap">
@@ -248,7 +261,7 @@ $('#fullpage_wrapper').fullpage({
       css3: true,
       scrollingSpeed: 700,
       autoScrolling: false,
-      fitToSection: true,
+      fitToSection: false,
       scrollBar: true,
       easing: 'easeInOutCubic',
       easingcss3: 'ease',
