@@ -101,9 +101,9 @@ $(document).ready(function() {
     autoplay: false,
     autoplaySpeed: 3000,
     speed: 1500,
-    arrows: true,
+    arrows: false,
     fade: false,
-    dots: true,
+    dots: false,
     prevArrow: '#questionnavleft',
     nextArrow: '#questionnavright',
     adaptiveHeight: false,
@@ -122,5 +122,4 @@ $(document).ready(function() {
     }
   ]
   });
-
 });
