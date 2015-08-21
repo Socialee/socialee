@@ -243,3 +243,6 @@ $(PIP_REQUIREMENTS_DIR)/%.txt: $(PIP_REQUIREMENTS_DIR)/%.in
 
 .PHONY: requirements requirements_rebuild
 # }}}
+models.png:
+	python manage.py graph_models socialee auth | dot -Tpng > models.png && open models.png
+.PHONY: models.png
