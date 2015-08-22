@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
-{% block navigation %}
-
+{% block content %}
 <div class="off-canvas-wrap" data-offcanvas>
     <div class="inner-wrap">
         {% include "navbar.html" %}
@@ -18,4 +17,8 @@
             </ul>
         </aside>
 
+{{ block.super }}
+
+    </div>
+</div>
 {% endblock %}

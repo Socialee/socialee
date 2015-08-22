@@ -17,13 +17,9 @@
   </head>
   <body>
     {% cms_toolbar %}
-        {% block navigation %}
-        {% endblock %}
-        {% block content %}
-        {% endblock %}
-        </div> 
-    </div> <!-- These two closing div tags correspont to offcanvas in nav_base.html --> 
 
+    {% block content %}
+    {% endblock %}
 
     <script src="{% static "bower_components/jquery/dist/jquery.js" %}"></script>
     <script src="{% static "bower_components/foundation/js/foundation/foundation.js" %}"></script>
