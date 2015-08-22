@@ -6,7 +6,7 @@ from .models import Project, Profile, UserEntry, Wish, Dream, Input, Output
 
 
 class SignupForm(forms.Form):
-	dream_title = forms.CharField(label='', widget=forms.Textarea(attrs={'placeholder': 'Wenn es an nichts fehlen würde, nicht an Geld, nicht an Zeit, was würdest Du tun? Wofür brennst Du? Kai würde Filme drehen, Sanne nach Argentinien fliegen. Peter würde sich um Flüchtlinge kümmern und Neil mit einem Trecker quer durch Deutschland fahren. Socialee baut eine Webseite, die diese Frage stellt.','rows':4}), required=False, max_length=5000)
+	dream_title = forms.CharField(label='Wenn es an nichts fehlen würde, nicht an Geld, nicht an Zeit, was würdest Du tun? Wofür brennst Du?', widget=forms.Textarea(attrs={'placeholder': 'Neil und Moritz würden mit einem Trecker quer durch Deutschland fahren. Socialee würde eine Webseite bauen, die diese Frage stellt.','rows':4}), required=False, max_length=5000)
 	wish_title = forms.CharField(label='Du hast 5000 Zeichen. Lass Dich ruhig aus.', widget=forms.Textarea(attrs={'placeholder': '','rows':4}), required=False, max_length=5000)
 	project_title = forms.CharField(label='Socialee sammelt Ideen und Projekte. Und wir bauen ein Netzwerk drumrum und dazwischen.', widget=forms.Textarea(attrs={'placeholder': 'Corinna arbeitet mit Flüchtlingen, Waldemar produziert tolle Kondome. Socialee sagt: "Stellt euch mal ein soziales Netzwerk vor!"','rows':4}), required=False, max_length=5000)	
 	output_title = forms.CharField(label='Und, was fehlt Dir? Welches Bedürfnis wird nicht befriedigt?', widget=forms.Textarea(attrs={'placeholder': 'Susi fehlt ein Fahrrad. Helge fehlt eine Freundin. Socialee fehlt noch ein Frontendler. ','rows':4}), required=False, max_length=5000)	

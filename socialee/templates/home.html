@@ -21,9 +21,10 @@
     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
       
       <div class="row">
-        <div class="small-8 small-centered columns">
+        <div class="large-12 columns">
           <div class="title-wrapper">
-            <h4>Wir bauen ein richtig gutes soziales Netzwerk. Und haben eine Frage.</h4>
+            <h1 class="text-center"><small>Es muss was getan werden.</small> Tun wir es!</h1>
+            <h6 class="subheader text-center">Socialee ist soziales Netzwerk, Werkzeug, Bank, weiße Leinwand. Wir bauen, was uns fehlt. <a href="#" data-reveal-id="manifestModal"><strong>&#8594; Brief an die Menschheit. &#8592;</strong></a></h6>
           </div>
         </div>    
       </div> 
@@ -31,133 +32,70 @@
       <div class="row">
         <div class="small-8 small-centered columns"><hr/>
           <div class="question-wrapper">
-            <!--<div id="questionnavleft">&larr;</div>
-            <div id="questionnavright">&rarr;</div>-->
+            <div id="questionnavleft">&larr;</div>
+            <div id="questionnavright">&rarr;</div>
             {% csrf_token %}
             {{ form.non_field_errors }}
             <div class="socialee-lp-questions">
               <div class="fieldWrapper">
                 <div class="question-slide">
-                  <h2 class="text-center">Was ist Dein Traum?</h2>
-                  {{ form.dream_title.errors }}
-                  {{ form.dream_title.label_tag }}
-                  {{ form.dream_title }}
+                  <h3 class="text-center">Was brauchst Du? Was wäre toll?</h3>
+                  <h6 style="text-transform: lowercase;">oder: </h6><h6>in welcher zukunft möchtest du leben.</h6>
+                  {{ form.output_title }}
                 </div>
               </div>              
-              <!--<div class="fieldWrapper">
+             <div class="fieldWrapper">
                 <div class="question-slide">
-                  <h3>Was fehlt Dir in der Welt? Was würdest Du gerne Realität werden sehen?</h3>
-                  {{ form.wish_title.errors }}
-                  {{ form.wish_title.label_tag }}
-                  {{ form.wish_title }}
+                  <h3 class="text-center">Was kannst Du gut? Was machst Du gerne?</h3>
+                  <h6 style="text-transform: lowercase;">oder: </h6><h6>Womit würdest du gerne einen Beitrag leisten. Zur Zukunft Deiner Wahl sozusagen.</h6>
+                  {{ form.input_title }}
                 </div>    
               </div>    
               <div class="fieldWrapper">
                 <div class="question-slide">
-                  <h3>Was brauchst Du, wo drückt der Schuh?</h3>
-                  {{ form.output_title.errors }}
-                  {{ form.output_title.label_tag }}
-                  {{ form.output_title }}
-                </div>    
-              </div> 
-              <div class="fieldWrapper">
-                <div class="question-slide">
-                  <h3>Was kannst Du gut? Was machst Du gerne?</h3>
-                  {{ form.input_title.errors }}
-                  {{ form.input_title.label_tag }}
-                  {{ form.input_title }}
-                </div>    
-              </div> 
-              <div class="fieldWrapper">
-                <div class="question-slide">
-                  <h3>Hast Du ein konkretes Projekt? Oder eine Projektidee? Erzähle davon!</h3>
-                  {{ form.project_title.errors }}
-                  {{ form.project_title.label_tag }}
+                  <h3 class="text-center">Hast Du ein Projekt? Oder eine Idee?</h3>
+                  <h6 style="text-transform: lowercase;">oder: </h6><h6>was würdest du tun, wenn du wüsstest du könntest nicht scheitern.</h6>
                   {{ form.project_title }}
-                </div>
-              </div>-->
+                </div>    
+              </div>
             </div>
           </div>
           {% if not request.user.is_authenticated %}
           <div class="row">
-            <div class="small-12 small-centered columns">
+            <div class="small-10 small-centered columns">
               <div class="lp-signup-form">
-                <p>Sehr schön! Zusammen verändern wir die Welt. Lies mal unseren <strong><a href="#" data-reveal-id="manifestModal">Brief an die Menschheit!</a></strong></p>
-                <!--<div class="row collapse">
-                  <div class="small-4 large-2 columns">
-                      <span class="prefix">Vorname</span>
-                  </div>
-                  <div class="small-8 large-10 columns">
-                      {{ form.first_name }}
-                      {{ form.first_name.errors }}
-                  </div>
-                </div>
                 <div class="row collapse">
-                  <div class="small-4 large-2 columns">
-                      <span class="prefix">Nachname</span>
-                  </div>
-                  <div class="small-8 large-10 columns">
-                      {{ form.last_name }}
-                      {{ form.last_name.errors }}
-                  </div>
-                </div>-->
-                <div class="row collapse">
-                  <div class="small-4 large-2 columns">
+                  <div class="small-2 columns">
                       <span class="prefix">E-Mail</span>
                   </div>
-                  <div class="small-5 large-7 columns">
+                  <div class="small-7 columns">
                       {{ form.email }}
-                      {{ form.email.errors }}
+                      {{ form.errors }}
                   </div>
                   <div class="small-3 columns">
-                    <a class="button postfix" href='#' onclick='document.forms["signup_form"].submit(); return false;'>alles abschicken!</a>
+                    <a class="button postfix" href='#' onclick='document.forms["signup_form"].submit(); return false;'>ab die Post!</a>
                   </div>
                 </div>
-                <!--<div class="row collapse">
-                  <div class="small-4 large-2 columns">
-                      <span class="prefix">Passwort</span>
-                  </div>
-                  <div class="small-8 large-10 columns">
-                      {{ form.password1 }}
-                      {{ form.password1.errors }}
-                  </div>
-                </div>  
-                <div class="row collapse">
-                  <div class="small-4 large-2 columns">
-                      <span class="prefix">Passwort</span>
-                  </div>
-                  <div class="small-8 large-10 columns">
-                      {{ form.password2 }}
-                      {{ form.password2.errors }}
-                  </div>
-                </div>-->             
               </div>
               {% endif %}  
               {% if redirect_field_value %}
               <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
               {% endif %}
-              <!--<button class="small radius" type="submit">Alles abschicken! <i class="fi-heart"></i></button>-->
+              <!--<button class="small radius" type="submit">Ab die Post! <i class="fi-###"></i></button>-->
+            </div>
+          </div><hr/>
+            <div class="title-wrapper">
+            <h6 class="subheader text-center">Was passiert mit Deinen Ideen? Schau Dich um.</h6>
+            <ul class="socialee-inline-buttons">
+                <li><a class="socialee-button" href="#answers">Die Ideen der anderen</a></li>
+                <li><a class="socialee-button" href="#projects">Socialee's Projekte</a></li>
+                <li><a class="socialee-button" href="#zettel">Zettelwirtschaft</a></li>
             </div>
           </div>
         </div>  
       </div>
     </form>
 
-        <div class="row">
-              <hr>
-    <p class="text-center">Und was passiert jetzt mit diesen Träumen und Ideen?</p>
-          <div class="large-6 large-centered columns">
-          <div class="large-4 columns">
-            <a class="socialee-button" href="#what_you_say">Die Träume der anderen</a>
-          </div>
-          <div class="large-4 columns">
-            <a class="socialee-button" href="#projekte">unsere Projekte</a>
-          </div>
-          <div class="large-4 columns">
-            <a class="socialee-button" href="#zettel">Zettelwirtschaft</a>
-          </div>
-        </div>
-        </div>
   </div>
 
   <div class="section">
@@ -167,102 +105,7 @@
         <div class="socialee-entries-wrapper">
           <ul class="socialee-entries">
             {% for project in projects %}
-            <li>{{ project.title }}</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-                        <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-                        <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-                        <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-                        <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-                        <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-                        <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-                        <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-                        <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-                        <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-            <li>tescht</li><li>{{ project.title }}</li>
-
-
-
+            <li>{{ project.title }}</li>
             {% endfor %}
           </ul>
         </div>
@@ -362,9 +205,9 @@ $('#fullpage_wrapper').fullpage({
       navigationPosition: 'left',
       slidesNavigation: true,
       slidesNavPosition: 'bottom',
-      navigationTooltips: ['Dein Traum', 'Die Träume der anderen', 'Projekte', 'Zettelwirtschaft', 'Kontakt'],
+      navigationTooltips: ['Fragen', 'Antworten', 'Projekte', 'Zettel', 'Kontakt'],
       menu: '.nav-middle',
-      anchors:['landingpage', 'dreams', 'projekte', 'zettel', 'kontakt'],
+      anchors:['questions', 'answers', 'projects', 'zettel', 'contact'],
       css3: true,
       scrollingSpeed: 700,
       autoScrolling: false,

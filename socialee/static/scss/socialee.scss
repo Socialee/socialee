@@ -98,51 +98,62 @@ a {
   }
 
   .nav-middle li a {
-    margin: 0 25px 0 25px;
+    margin: 0 20px 0 20px;
   }
 
-.top-bar-section li.active:not(.has-form) a:not(.button) {
-  text-decoration: underline;
-}
-
-.question-wrapper {
-  div {
-    color: $monsoon;
+  .top-bar-section li.active:not(.has-form) a:not(.button) {
+    text-decoration: underline;
   }
-  div:hover {
-    color: #f89406;
+
+  .question-wrapper {
+    div {
+      color: $monsoon;
+    }
+    div:hover {
+      color: #f89406;
+    }
   }
-}
 
-#questionnavleft{
-  cursor: pointer;
-  position: relative;
-  top: 130px;
-  right: 8px;
-  font-size: 1.5em;
-  z-index: 10;
-  float: left;
-}
-#questionnavright {
-  cursor: pointer;
-  position: relative;
-  top: 130px;
-  left: 8px;
-  font-size: 1.5em;
-  z-index: 10;
-  float: right;
-}
+  #questionnavleft{
+    cursor: pointer;
+    position: relative;
+    top: 110px;
+    right: 8px;
+    font-size: 1.5em;
+    z-index: 10;
+    float: left;
+  }
+  #questionnavright {
+    cursor: pointer;
+    position: relative;
+    top: 110px;
+    left: 8px;
+    font-size: 1.5em;
+    z-index: 10;
+    float: right;
+  }
 
-// .top-bar .toggle-topbar.menu-icon a {
-//     color: $monsoon;
-//     height: 34px;
-//     line-height: 33px;
-//     padding: 90px 2.91667rem 0px 1.35417rem;
-//     position: relative;
-// }
+  // .top-bar .toggle-topbar.menu-icon a {
+  //     color: $monsoon;
+  //     height: 34px;
+  //     line-height: 33px;
+  //     padding: 90px 2.91667rem 0px 1.35417rem;
+  //     position: relative;
+  // }
 
 // Landingpage
   
+  .socialee-inline-buttons {
+    list-style: none;
+    text-align: center;
+    li {
+      display: inline;
+      :hover {
+        color: $orange;
+      }
+    }
+  }
+
   .socialee-entries-wrapper {
       // max-height: 80vh;
       // overflow: auto;
@@ -256,10 +267,21 @@ a {
   }
 
   .title-wrapper {
-    h4 {
-      text-align: center;
-      margin-top: 130px;
-      // text-decoration: underline;
+    h1 {
+      // margin-top: 130px;
+      font-size: 2.5rem;
+      small {
+        font-size: 50%;
+        letter-spacing: 0.6rem;
+      }
+    }
+    h6 {
+      text-transform: uppercase;
+      font-size: 0.65rem;
+      letter-spacing: 0.05em;
+    }
+    .socialee-button {
+      padding: 4px 7px;
     }
   }
 
@@ -269,12 +291,22 @@ a {
   }
 
   .question-slide {
-    // margin: 0 25px 0 25px;
-    h2 {
-      font-size: 3rem;
-      font-weight: 400;
-      font-style: italic;
-      margin-bottom: 20px;
+    margin: 0 10px 0 10px;
+    h3 {
+      font-size: 1.85rem;
+      font-weight: 100;
+      letter-spacing: 0.11em;
+      // font-style: italic;
+      margin-bottom: 2px;
+      padding-bottom: 0;
+      line-height: 1.2em;
+    }
+    h6 {
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      color: $monsoon;
     }
   }
 

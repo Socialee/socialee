@@ -2,27 +2,27 @@ from django import forms
 from django.contrib import admin, auth
 from django.utils.translation import ugettext_lazy as _
 
-from .models import (Input, Origin, Output, Profile, Project, Dream, Wish, UserEntry, Zettel)
+from .models import *
 
 
-# class InputZettelInline(admin.TabularInline):
-#     model = Input
-#     exclude = ('profile',)
+class InputZettelInline(admin.TabularInline):
+    model = Input
+    exclude = ('profile',)
 
 
-# class OutputZettelInline(admin.TabularInline):
-#     model = Output
-#     exclude = ('profile',)
+class OutputZettelInline(admin.TabularInline):
+    model = Output
+    exclude = ('profile',)
 
 
-# class InputProfileInline(admin.TabularInline):
-#     model = Input
-#     exclude = ('zettel',)
+class InputProfileInline(admin.TabularInline):
+    model = Input
+    exclude = ('zettel',)
 
 
-# class OutputProfileInline(admin.TabularInline):
-#     model = Output
-#     exclude = ('zettel',)
+class OutputProfileInline(admin.TabularInline):
+    model = Output
+    exclude = ('zettel',)
 
 
 class ProfileInline(admin.TabularInline):
@@ -35,26 +35,6 @@ class ZettelInline(admin.TabularInline):
     extra = 1
 
 
-class ZettelAdmin(admin.ModelAdmin):
-    model = Zettel
-    search_fields = ['profile__user__username', 'profile__user__email',
-                     'profile__user__last_name', 'profile__user__first_name',
-                     'number', 'origin__location']
-    list_filter = ['origin', 'origin__location']
-    list_display = ['__str__', 'image', 'origin']
-    # inlines = [
-    #     InputZettelInline, OutputZettelInline
-    # ]
-
-
-class OriginAdmin(admin.ModelAdmin):
-    model = Origin
-
-
-class ProfileAdmin(admin.ModelAdmin):
-    pass
-
-
 class InputAdmin(admin.ModelAdmin):
     model = Input
 
@@ -63,16 +43,24 @@ class OutputAdmin(admin.ModelAdmin):
     model = Output
 
 
-class ProjectAdmin(admin.ModelAdmin):
-    model = Project
+class ZettelAdmin(admin.ModelAdmin):
+    model = Zettel
+    search_fields = ['profile__user__username', 'profile__user__email',
+                     'profile__user__last_name', 'profile__user__first_name',
+                     'number', 'origin__location']
+    list_filter = ['origin', 'origin__location']
+    list_display = ['__str__', 'image', 'origin']
+    inlines = [
+        InputZettelInline, OutputZettelInline,
+    ]
 
 
-class DreamAdmin(admin.ModelAdmin):
-    model = Dream
+class OriginAdmin(admin.ModelAdmin):
+    model = Origin
 
 
-class WishAdmin(admin.ModelAdmin):
-    model = Wish
+class ProfileAdmin(admin.ModelAdmin):
+    pass
 
 
 class UserEntryForm(forms.ModelForm):
@@ -110,16 +98,13 @@ class ProfileEntryAdmin(admin.ModelAdmin):
 
     list_display = ['__str__', 'user_last_name', 'user_first_name',
                     'user_email']
-    # inlines = [
-    #     InputProfileInline, OutputProfileInline
-    # ]
+    inlines = [
+        InputProfileInline, OutputProfileInline
+    ]
 
 admin.site.register(Input, InputAdmin)
 admin.site.register(Origin, OriginAdmin)
 admin.site.register(Output, OutputAdmin)
 admin.site.register(Profile, ProfileEntryAdmin)
 admin.site.register(UserEntry, UserEntryAdmin)
-admin.site.register(Project, ProjectAdmin)
-admin.site.register(Dream, DreamAdmin)
-admin.site.register(Wish, WishAdmin)
-admin.site.register(Zettel, ZettelAdmin)
+admin.site.register(Zettel, ZettelAdmin)    
