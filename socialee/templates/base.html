@@ -18,7 +18,13 @@
   <body>
     {% cms_toolbar %}
 
+    {% block before_content %}  {# for base_navbar #}
+    {% endblock %}
+
     {% block content %}
+    {% endblock %}
+
+    {% block after_content %}  {# for base_navbar #}
     {% endblock %}
 
     <script src="{% static "bower_components/jquery/dist/jquery.js" %}"></script>
