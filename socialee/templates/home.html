@@ -15,8 +15,6 @@
 
 <div id="fullpage_wrapper">
   <div class="section">
-    <!--<div class="vertical_arrow show-for-medium-up"><a href="#what_you_say"><p>Was schreiben</br>die anderen?</p></a><img src="{% static "img/landingpage_bg/vertical_arrow_1.png" %}">
-    </div>-->
     {% include "socialee_lp_slider.html" %}
     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
       
@@ -60,57 +58,54 @@
               </div>
             </div>
           </div>
-          {% if not request.user.is_authenticated %}
-          <div class="row">
-            <div class="small-10 small-centered columns">
-              <div class="lp-signup-form">
-                <div class="row collapse">
-                  <div class="small-2 columns">
-                      <span class="prefix">E-Mail</span>
-                  </div>
-                  <div class="small-7 columns">
-                      {{ form.email }}
-                      {{ form.errors }}
-                  </div>
-                  <div class="small-3 columns">
-                    <a class="button postfix" href='#' onclick='document.forms["signup_form"].submit(); return false;'>ab die Post!</a>
-                  </div>
-                </div>
+        </div>
+      </div>
+
+      {% if not request.user.is_authenticated %}
+      <div class="row">
+        <div class="small-8 small-centered columns">
+          <div class="lp-signup-form">
+            <div class="row collapse">
+              <div class="small-2 columns">
+                  <span class="prefix">E-Mail</span>
               </div>
-              {% endif %}  
-              {% if redirect_field_value %}
-              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-              {% endif %}
-              <!--<button class="small radius" type="submit">Ab die Post! <i class="fi-###"></i></button>-->
-            </div>
-          </div><hr/>
-            <div class="title-wrapper">
-            <h6 class="subheader text-center">Was passiert mit Deinen Ideen? Schau Dich um.</h6>
-            <ul class="socialee-inline-buttons">
-                <li><a class="socialee-button" href="#answers">Die Ideen der anderen</a></li>
-                <li><a class="socialee-button" href="#projects">Socialee's Projekte</a></li>
-                <li><a class="socialee-button" href="#zettel">Zettelwirtschaft</a></li>
+              <div class="small-7 columns">
+                  {{ form.email }}
+                  {{ form.errors }}
+              </div>
+              <div class="small-3 columns">
+                <a class="button postfix" href='#' onclick='document.forms["signup_form"].submit(); return false;'>ab die Post!</a>
+              </div>
             </div>
           </div>
-        </div>  
+          {% endif %}  
+          {% if redirect_field_value %}
+          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          <!--<button class="small radius" type="submit">Ab die Post! <i class="fi-###"></i></button>-->
+          <hr/>
+        </div>
+      </div>
+
+      <div class="row title-wrapper">
+        <h6 class="subheader text-center">Was passiert mit Deinen Ideen? Schau Dich um.</h6>
+        <ul class="socialee-inline-buttons">
+            <li><a class="socialee-button" href="#answers">Die Ideen der anderen</a></li>
+            <li><a class="socialee-button" href="#projects">Socialee's Projekte</a></li>
+            <li><a class="socialee-button" href="#zettel">Zettelwirtschaft</a></li>
+        </ul>
       </div>
     </form>
-
   </div>
 
   <div class="section">
-<!--div class="vertical_arrow show-for-medium-up"><img src="{% static "img/landingpage_bg/vertical_arrow_1.png" %}"></div>-->
-
-
-        <div class="socialee-entries-wrapper">
-          <ul class="socialee-entries">
-            {% for project in projects %}
-            <li>{{ project.title }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-
-
+    <div class="socialee-entries-wrapper">
+      <ul class="socialee-entries">
+        {% for project in projects %}
+        <li>{{ project.title }}</li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 
   <div class="section">
@@ -120,48 +115,48 @@
   </div>
 
 
-      <div class="row section">
-        <div class="small-8 small-centered columns zettel-wrap">
+  <div class="row section">
+    <div class="small-8 small-centered columns zettel-wrap">
 
-          <h3>Socialee liebt Zettel.</h3>
-          <p>Viele Ideen finden ihren Anfang auf einem Zettel. Schreibe auch Du <a href="#">einen Zettel</a>.</p>
-                    <div class="row collapse postfix-radius">
-            <div class="small-3 columns">
-              <span class="postfix">Was suchst Du?</span>
-            </div>
-            <div class="small-9 columns">
-              <input type="text" placeholder="Suche Mitsteiter für meine geniale Idee!">
-            </div>
-          </div>
-          <div class="small-6 columns zettel-inner-wrap">
-            <div class="slider-overlay-top">
-              <i class="fi-arrow-up" id="navtopleft"></i>
-            </div>
-            <div class="zettel-slide-left">
-              {% for i in zettel_links %}
-                <div><img data-lazy="{{ i }}"/></div>
-              {% endfor %}
-            </div>
-            <div class="slider-overlay-bottom">
-              <i class="fi-arrow-down" id="navbottomleft"></i>
-            </div>
-          </div>
-
-          <div class="small-6 columns zettel-inner-wrap">
-            <div class="slider-overlay-top">
-              <i class="fi-arrow-up" id="navtopright"></i>
-            </div>
-            <div class="zettel-slide-right">
-              {% for i in zettel_rechts %}
-                <div><img data-lazy="{{ i }}"/></div>
-              {% endfor %}
-            </div>
-            <div class="slider-overlay-bottom">
-              <i class="fi-arrow-down" id="navbottomright"></i>
-            </div>
-          </div>
+      <h3>Socialee liebt Zettel.</h3>
+      <p>Viele Ideen finden ihren Anfang auf einem Zettel. Schreibe auch Du <a href="#">einen Zettel</a>.</p>
+      <div class="row collapse postfix-radius">
+        <div class="small-3 columns">
+          <span class="postfix">Was suchst Du?</span>
+        </div>
+        <div class="small-9 columns">
+          <input type="text" placeholder="Suche Mitsteiter für meine geniale Idee!">
         </div>
       </div>
+      <div class="small-6 columns zettel-inner-wrap">
+        <div class="slider-overlay-top">
+          <i class="fi-arrow-up" id="navtopleft"></i>
+        </div>
+        <div class="zettel-slide-left">
+          {% for i in zettel_links %}
+            <div><img data-lazy="{{ i }}"/></div>
+          {% endfor %}
+        </div>
+        <div class="slider-overlay-bottom">
+          <i class="fi-arrow-down" id="navbottomleft"></i>
+        </div>
+      </div>
+
+      <div class="small-6 columns zettel-inner-wrap">
+        <div class="slider-overlay-top">
+          <i class="fi-arrow-up" id="navtopright"></i>
+        </div>
+        <div class="zettel-slide-right">
+          {% for i in zettel_rechts %}
+            <div><img data-lazy="{{ i }}"/></div>
+          {% endfor %}
+        </div>
+        <div class="slider-overlay-bottom">
+          <i class="fi-arrow-down" id="navbottomright"></i>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <footer class="footer section">
     <div class="row">
@@ -190,8 +185,9 @@
       </div>
     </div>-->
   </footer>
-  </div>
-  <a class="exit-off-canvas"></a>
+
+</div>
+<a class="exit-off-canvas"></a>
 
 
 {% include "login_modal.html" %}
