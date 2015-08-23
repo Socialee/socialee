@@ -50,5 +50,22 @@
             {% render_block "js_ready" %}
         });
     </script>
+
+    {# Piwik #}
+    {% if not DEBUG %}
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//piwik.thequod.de/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', 25]);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//piwik.thequod.de/piwik.php?idsite=25" style="border:0;" alt="" /></p></noscript>
+    {% endif %}
   </body>
 </html>
