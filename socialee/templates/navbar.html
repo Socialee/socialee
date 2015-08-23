@@ -2,18 +2,18 @@
 <div class="fixed">
   <nav class="top-bar" data-topbar role="navigation" style="z-index:999;">
     <ul class="title-area">
-      <li class="name hide-for-small-only"><a href="#landingpage"><img src="{% static "img/logo/socialee_v.1.1_color_klein.png" %}"></a></li>
+      <li class="name hide-for-small-only"><a href="#questions"><img src="{% static "img/logo/socialee_v.1.1_color_klein.png" %}"></a></li>
        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
       <!--<li class="toggle-topbar menu-icon right-off-canvas-toggle"><a href="#"><span></span></a></li>-->
     </ul>
     <section class="top-bar-section">
       <!-- Middle Nav Section -->
       <ul class="nav-middle">
-        <li class="show-for-large-up active" data-menuanchor="landingpage"><a href="#landingpage">Dein Traum</a></li>
-        <li class="show-for-large-up" data-menuanchor="dreams"><a href="#dreams">die Träume der anderen</a></li>
-        <li class="show-for-large-up" data-menuanchor="projekte"><a href="#projekte">unsere Projekte</a></li>
-        <li class="show-for-large-up" data-menuanchor="zettel"><a href="#zettel">Zettelwirtschaft</a></li>
-        <li class="show-for-large-up" data-menuanchor="kontakt"><a href="#kontakt">Kontakt</a></li>
+        <li class="show-for-large-up" data-menuanchor="questions"><a href="#questions">drei Fragen</a></li>
+        <li class="show-for-large-up" data-menuanchor="answers"><a href="#answers">{{ projects|length }} Antworten</a></li>
+        <li class="show-for-large-up" data-menuanchor="projects"><a href="#projects">3 Projekte</a></li>
+        <li class="show-for-large-up" data-menuanchor="zettel"><a href="#zettel">198 Zettel</a></li>
+        <li class="show-for-large-up" data-menuanchor="contact"><a href="#contact">ein Kollektiv</a></li>
         {# <li class="show-for-medium-up" data-menuanchor="#"><a href="{% url 'cafe' %}">Café</a></li> #}
         {# <li class="show-for-medium-up" data-menuanchor="zettel"><a href="#zettel">Zettelwirtschaft</a></li> #}
       </ul>

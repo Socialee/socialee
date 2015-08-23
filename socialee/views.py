@@ -14,14 +14,23 @@ def dispatch_no_redirect(self, request, *args, **kwargs):
 RedirectAuthenticatedUserMixin.dispatch = dispatch_no_redirect
 
 
-class Home(SignupView):
+class BaseView:
+    def get_context_data(self, **kwargs):
+        context = super(BaseView, self).get_context_data(**kwargs)
+        context['DEBUG'] = settings.DEBUG
+        return context
+
+
+class Home(BaseView, SignupView):
     template_name = 'home.html'
 
     def get_context_data(self, **kwargs):
         context = super(Home, self).get_context_data(**kwargs)
         context['zettel_links'] = self.get_zettel_images("links")
         context['zettel_rechts'] = self.get_zettel_images("rechts")
-        context['projects'] = Project.objects.all()
+        context['projects'] = list(Project.objects.all())
+        for i in range(1, 311):
+            context['projects'] += [Project(title='dummy' + str(i))]
         return context
 
 
@@ -43,8 +52,8 @@ class Home(SignupView):
     #     return render (request, template, context)
 
 
-class Cafe(TemplateView):
+class Cafe(BaseView, TemplateView):
     template_name = 'cafe.html'
 
-class Impressum(TemplateView):
+class Impressum(BaseView, TemplateView):
     template_name = 'impressum.html'

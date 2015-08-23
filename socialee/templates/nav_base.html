@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
-{% block navigation %}
-
+{% block before_content %}
 <div class="off-canvas-wrap" data-offcanvas>
     <div class="inner-wrap">
         {% include "navbar.html" %}
@@ -17,5 +16,12 @@
               <li><a href="/antons-reise">Antons Reise</a></li>
             </ul>
         </aside>
+{% endblock %}
 
+{% block content %}
+{% endblock %}
+
+{% block after_content %}
+    </div>
+</div>
 {% endblock %}
