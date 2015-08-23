@@ -1,4 +1,8 @@
+// this main.js is being loaded in base.html before closing body tag, treat it well
+
 $(document).ready(function() {
+  
+  // Foundation Offcanvas
   $(document).foundation({
       offcanvas : {
       // Sets method in which offcanvas opens.
@@ -10,6 +14,7 @@ $(document).ready(function() {
     }
   });
 
+  // Slick Slider
   $('.socialee-lp-slider').slick({
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -33,7 +38,7 @@ $(document).ready(function() {
   $('.zettel-slide-left').slick({
     slidesToShow: 1,
     vertical: false,
-    // verticalSwiping: true,
+    verticalSwiping: true,
     slidesToScroll: 1,
     autoplay: false,
     autoplaySpeed: 3000,
@@ -46,8 +51,8 @@ $(document).ready(function() {
 
   $('.zettel-slide-right').slick({
     slidesToShow: 1,
-    vertical: false,
-    // verticalSwiping: true,
+    vertical: true,
+    verticalSwiping: true,
     slidesToScroll: 1,
     autoplay: false,
     autoplaySpeed: 3000,
@@ -122,4 +127,26 @@ $(document).ready(function() {
     }
   ]
   });
+
+  //jQueryUI stuff
+
+  $(function() {                
+      $( document ).tooltip({
+        track: true,
+      });
+    });
+
+  $(function() {
+    $( "#jui_accordion" ).accordion({
+      collapsible: true,
+      heightStyle: "content",
+      active: false,
+      // icons: { "header": "test", "activeHeader": "ui-icon-minus" }
+    });
+  });
+
+  $(function() {
+    $( "#draggable" ).draggable();
+  });
+
 });

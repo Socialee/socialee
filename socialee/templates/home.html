@@ -12,17 +12,18 @@
 {% endaddtoblock %}
 
 
-
 <div id="fullpage_wrapper">
+<p id="draggable" class="socialee-feedback" title="Information und Feedback"><a href="#" data-reveal-id="wipModal">&#10043;</a></p>
+
   <div class="section">
     {% include "socialee_lp_slider.html" %}
     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
       
-      <div class="row">
+      <div class="row low1">
         <div class="large-12 columns">
           <div class="title-wrapper">
             <h1 class="text-center"><small>Es muss was getan werden.</small> Tun wir es!</h1>
-            <h6 class="subheader text-center">Socialee ist soziales Netzwerk, Werkzeug, Bank, weiße Leinwand. Wir bauen, was uns fehlt. <a href="#" data-reveal-id="manifestModal"><strong>&#8594; Brief an die Menschheit. &#8592;</strong></a></h6>
+            <h6 class="subheader text-center">Socialee ist soziales Netzwerk, Werkzeug, Bank, weiße Leinwand. Wir bauen, was uns fehlt. Bau mit!<br/><a href="#" data-reveal-id="manifestModal"><strong>&#8594; Brief an die Menschheit. &#8592;</strong></a></h6>
           </div>
         </div>    
       </div> 
@@ -38,7 +39,7 @@
               <div class="fieldWrapper">
                 <div class="question-slide">
                   <h3 class="text-center">Was brauchst Du? Was wäre toll?</h3>
-                  <h6 style="text-transform: lowercase;">oder: </h6><h6>in welcher zukunft möchtest du leben.</h6>
+                  <h6 style="text-transform: lowercase;">oder: </h6><h6>in welcher zukunft möchtest du leben. Was fehlt Dir in der Welt?</h6>
                   {{ form.output_title }}
                 </div>
               </div>              
@@ -104,8 +105,15 @@
         {% for project in projects %}
         <li>{{ project.title }}</li>
         {% endfor %}
-      </ul>
+      </ul><hr/>
     </div>
+    <div class="row title-wrapper">
+      <h6 class="subheader text-center">Aus diesem Ideenpool entstehen Projekte. Ist das aufregend!</h6>
+      <ul class="socialee-inline-buttons">
+        <li><a class="socialee-button" href="#projects">Socialee's Projekte</a></li>
+        <li><a class="socialee-button" href="#questions">Ich will auch was eintragen!</a></li>
+      </ul>
+    </div>   
   </div>
 
   <div class="section">
@@ -115,77 +123,73 @@
   </div>
 
 
-  <div class="row section">
-    <div class="small-8 small-centered columns zettel-wrap">
+  <div class="section">
 
-      <h3>Socialee liebt Zettel.</h3>
-      <p>Viele Ideen finden ihren Anfang auf einem Zettel. Schreibe auch Du <a href="#">einen Zettel</a>.</p>
-      <div class="row collapse postfix-radius">
-        <div class="small-3 columns">
-          <span class="postfix">Was suchst Du?</span>
+    <div class="row low2">
+      <div class="large-12 columns">
+        <div class="title-wrapper">
+          <h1 class="text-center">online geht auch offline</h1>
+          <h6 class="subheader text-center">Wir schmeißen immer gerne mit Zetteln um uns. <a href="#" data-reveal-id="manifestModal"><strong>&#8594; Hole Dir Deinen Zettel! &#8592;</strong></a></h6>
         </div>
-        <div class="small-9 columns">
-          <input type="text" placeholder="Suche Mitsteiter für meine geniale Idee!">
-        </div>
-      </div>
-      <div class="small-6 columns zettel-inner-wrap">
-        <div class="slider-overlay-top">
-          <i class="fi-arrow-up" id="navtopleft"></i>
-        </div>
-        <div class="zettel-slide-left">
-          {% for i in zettel_links %}
-            <div><img data-lazy="{{ i }}"/></div>
-          {% endfor %}
-        </div>
-        <div class="slider-overlay-bottom">
-          <i class="fi-arrow-down" id="navbottomleft"></i>
-        </div>
-      </div>
+      </div>    
+    </div>
 
-      <div class="small-6 columns zettel-inner-wrap">
-        <div class="slider-overlay-top">
-          <i class="fi-arrow-up" id="navtopright"></i>
+    <div class="row zettel-wrap">
+      <div class="small-8 small-centered columns">
+        <div class="small-6 columns zettel-inner-wrap">
+          <div class="slider-overlay-top">
+            <i class="fi-arrow-up" id="navtopleft"></i>
+          </div>
+          <div class="zettel-slide-left">
+            {% for i in zettel_links %}
+              <div><img data-lazy="{{ i }}"/></div>
+            {% endfor %}
+          </div>
+          <div class="slider-overlay-bottom">
+            <i class="fi-arrow-down" id="navbottomleft"></i>
+          </div>
         </div>
-        <div class="zettel-slide-right">
-          {% for i in zettel_rechts %}
-            <div><img data-lazy="{{ i }}"/></div>
-          {% endfor %}
-        </div>
-        <div class="slider-overlay-bottom">
-          <i class="fi-arrow-down" id="navbottomright"></i>
+
+        <div class="small-6 columns zettel-inner-wrap">
+          <div class="slider-overlay-top">
+            <i class="fi-arrow-up" id="navtopright"></i>
+          </div>
+          <div class="zettel-slide-right">
+            {% for i in zettel_rechts %}
+              <div><img data-lazy="{{ i }}"/></div>
+            {% endfor %}
+          </div>
+          <div class="slider-overlay-bottom">
+            <i class="fi-arrow-down" id="navbottomright"></i>
+          </div>
         </div>
       </div>
     </div>
+
+    <div class="row title-wrapper">
+      <h6 class="subheader text-center" style="margin-top:18px">Du willst Deinen Zettel abgeben?</h6>
+      <ol class="socialee-inline-buttons">
+          <li><a class="socialee-button" href="#">lade ihn hoch</a></li><p> oder </p>
+          <li><a class="socialee-button" href="#">schicke eine Mail mit Anhang</a></li>
+      </ol>
+    </div>
   </div>
 
-  <footer class="footer section">
+  <div class="section">
     <div class="row">
       <div class="small-12 small-centered columns">
         <p class="logo text-center">Socialee | Wir machen das jetzt mal.</p>
-        <!--<p class="footer-links">
-          <a href="#">Home</a>
-          <a href="#">Blog</a>
-          <a href="#">About</a>
-          <a href="#">Faq</a>
-          <a href="#">Contact</a>
-        </p>-->
         <p class="copywrite text-center">Copyright © 2015 Socialee</p>
       </div>
-      <!--<div class="small-12 medium-6 large-4 columns">
-        <ul class="contact">
-          <li><p><a href="#"><i class="fi-marker"></i>Mehringplatz 7, 10969 Berlin</a></p></li>
-          <li><p><a href="#"><i class="fi-mail"></i>hello@socialee.de</a></p></li>
-          <li><p><a href="https://www.facebook.com/wirmachendasjetztmal?ref=hl" target="blank"><i class="fi-social-facebook"></i>Facebook</a></p></li>
-          </li>
-        </ul>
-      </div>
-      <div class="small-12 medium-12 large-3 columns">
-        <p class="about"><strong>An invasion of armies can be resisted, but not an idea whose time has come.</strong></p>
-        <p class="about subheader">Victor Hugo</p>
-      </div>
-    </div>-->
-  </footer>
+      <img src="{% static "img/team/moritz.png" %}" style="height:228px; position:absolute; left:0; z-index:10000;" title="Moritz Jüdes, Chef von's Ganze.">
+      <img src="{% static "img/team/jochen.png" %}" style="width:130px; position:absolute; bottom:0px; right:120px; z-index:10000;">
+      <img src="{% static "img/team/amira.png" %}" style="height:130px; position:absolute; left:0; top:100px; z-index:10000;">
+      <img src="{% static "img/team/ben.png" %}" style="width:90px; position:absolute; right:0; top:0; z-index:10000;">
+      <img src="{% static "img/team/daniel.png" %}" style="width:180px; position:absolute; bottom:0px; left:120px; z-index:10000;">
+      {# <img src="{% static "img/team/ralf.png" %}" style="width:200px; position:absolute; bottom:0px; left:320px; z-index:10000;"> #}
 
+      <!--<span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">extended information</span> # TODO: THIS DOES NOT WORK-->
+  </div>
 </div>
 <a class="exit-off-canvas"></a>
 
@@ -194,6 +198,7 @@
 {% include "video_modal.html" %}
 {% include "comingsoon_modal.html" %}
 {% include "manifest_modal.html" %}
+{% include "wip_modal.html" %}
 
 {% addtoblock "js_ready" strip %}
 $('#fullpage_wrapper').fullpage({
@@ -201,7 +206,7 @@ $('#fullpage_wrapper').fullpage({
       navigationPosition: 'left',
       slidesNavigation: true,
       slidesNavPosition: 'bottom',
-      navigationTooltips: ['Fragen', 'Antworten', 'Projekte', 'Zettel', 'Kontakt'],
+      navigationTooltips: ['Fragen', 'Antworten', 'Projekte', 'Zettel', 'Team'],
       menu: '.nav-middle',
       anchors:['questions', 'answers', 'projects', 'zettel', 'contact'],
       css3: true,

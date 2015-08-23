@@ -2,53 +2,58 @@
 
 <!DOCTYPE html>
 <html class="no-js {{ view.template_name | cut:".html" }}" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {# The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags #}
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="">
-    <title>Socialee | {% page_attribute "page_title" %}</title>
-    <link type="text/css" rel="stylesheet" href="{% static "css/socialee.css" %}" />
-    {% render_block "css" %}
-    {% render_block "js_head" %}
-  </head>
-  <body>
-    {% cms_toolbar %}
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {# The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags #}
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="">
+        <title>Socialee | {% page_attribute "page_title" %}</title>
+        <link type="text/css" rel="stylesheet" href="{% static "css/socialee.css" %}" />
 
-    {% block before_content %}  {# for base_navbar #}
-    {% endblock %}
+        <link rel="stylesheet" href="{% static "bower_components/jquery-ui/themes/smoothness/jquery-ui.css" %}" />
 
-    {% block content %}
-    {% endblock %}
+        {% render_block "css" %}
+        {% render_block "js_head" %}
+    </head>
+    <body>
+        {% cms_toolbar %}
 
-    {% block after_content %}  {# for base_navbar #}
-    {% endblock %}
+        {% block before_content %}  {# for base_navbar #}
+        {% endblock %}
 
-    <script src="{% static "bower_components/jquery/dist/jquery.js" %}"></script>
-    <script src="{% static "bower_components/foundation/js/foundation/foundation.js" %}"></script>
-    <script src="{% static "bower_components/foundation/js/foundation/foundation.topbar.js" %}"></script>
-    <script src="{% static "bower_components/foundation/js/foundation/foundation.offcanvas.js" %}"></script>
-    <script src="{% static "bower_components/foundation/js/foundation/foundation.reveal.js" %}"></script>
-    <script src="{% static "bower_components/foundation/js/foundation/foundation.joyride.js" %}"></script>
-    <script src="{% static "bower_components/foundation/js/foundation/foundation.accordion.js" %}"></script>
-    <script src="{% static "bower_components/foundation/js/foundation/foundation.magellan.js" %}"></script>
-    <script src="{% static "bower_components/fullpage.js/jquery.fullPage.js" %}"></script>
-    <script src="{% static "bower_components/slick.js/slick/slick.js" %}"></script>
-    <script src="{% static "js/main.js" %}"></script>
+        {% block content %}
+        {% endblock %}
 
-    {% if debug %}
-        <script src="//localhost:35729/livereload.js"></script>
-    {% endif %}
+        {% block after_content %}  {# for base_navbar #}
+        {% endblock %}
 
-    {% render_block "js" %}
+        <script src="{% static "bower_components/jquery/dist/jquery.js" %}"></script>
+        <script src="{% static "bower_components/jquery-ui/jquery-ui.min.js" %}"></script>
+        <script src="{% static "bower_components/foundation/js/foundation/foundation.js" %}"></script>
+        <!--<script src="{% static "bower_components/foundation/js/foundation/foundation.tooltip.js" %}"></script>-->
+        <script src="{% static "bower_components/foundation/js/foundation/foundation.topbar.js" %}"></script>
+        <script src="{% static "bower_components/foundation/js/foundation/foundation.offcanvas.js" %}"></script>
+        <script src="{% static "bower_components/foundation/js/foundation/foundation.reveal.js" %}"></script>
+        <script src="{% static "bower_components/foundation/js/foundation/foundation.joyride.js" %}"></script>
+        <script src="{% static "bower_components/foundation/js/foundation/foundation.accordion.js" %}"></script>
+        <script src="{% static "bower_components/foundation/js/foundation/foundation.magellan.js" %}"></script>
+        <script src="{% static "bower_components/fullpage.js/jquery.fullPage.js" %}"></script>
+        <script src="{% static "bower_components/slick.js/slick/slick.js" %}"></script>
+        <script src="{% static "js/main.js" %}"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
-            {% render_block "js_ready" %}
-        });
-    </script>
-  </body>
+        {% if debug %}
+            <script src="//localhost:35729/livereload.js"></script>
+        {% endif %}
+
+        {# {% render_block "js" %} #}
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                {% render_block "js_ready" %}
+            });
+        </script>
+    </body>
 </html>

@@ -22,7 +22,7 @@ class Home(SignupView):
         context['zettel_links'] = self.get_zettel_images("links")
         context['zettel_rechts'] = self.get_zettel_images("rechts")
         context['projects'] = list(Project.objects.all())
-        for i in range(1, 100):
+        for i in range(1, 311):
             context['projects'] += [Project(title='dummy' + str(i))]
         return context
 
