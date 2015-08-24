@@ -17,7 +17,6 @@ RedirectAuthenticatedUserMixin.dispatch = dispatch_no_redirect
 class BaseView:
     def get_context_data(self, **kwargs):
         context = super(BaseView, self).get_context_data(**kwargs)
-        context['DEBUG'] = settings.DEBUG
         return context
 
 
