@@ -1,4 +1,5 @@
 import os
+import urllib.request
 
 from django.conf import settings
 from django.views.generic import TemplateView
@@ -57,3 +58,12 @@ class Cafe(BaseView, TemplateView):
 
 class Impressum(BaseView, TemplateView):
     template_name = 'impressum.html'
+
+class Jumpage(BaseView, TemplateView):
+    template_name = 'jumpage.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(Jumpage, self).get_context_data(**kwargs)
+        url = 'https://jumpage.com/1109292709086173'
+        context['jumpage'] = urllib.request.urlopen(url).read()
+        return context
