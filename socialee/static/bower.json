@@ -15,6 +15,7 @@
     "jquery": "~2.1.4",
     "slick.js": "~1.5.3",
     "fullpage.js": "~2.6.5",
-    "foundation-icon-fonts": "*"
+    "foundation-icon-fonts": "*",
+    "jquery-ui": "~1.11.4"
   }
 }
