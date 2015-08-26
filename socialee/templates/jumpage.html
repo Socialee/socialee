@@ -1,7 +1,191 @@
-{% extends "base.html" %}
+{% load staticfiles %}
 
+<!DOCTYPE html>
+<html dir="ltr" lang="en" data-ng-app="jumpage">
+<head prefix="og: http://ogp.me/ns#">                                                                               <!--
+              ____       _
+            |__\_\_o____/_|
+           <[___\_\_- - -<      BLUE SKIES AND HAPPY LANDINGS
+           |  o'       .
+                       .
+                        .
+                         .
+                          .
+                           .
+                            ..
+                              .
+                               ..
+                                 .
+                                  ..
+                                    ..)/
+                                    _@'
+                                     o\                                                                              -->
+    <meta charset="UTF-8">
+
+    <title>{{ page_title }}</title>
+
+    <meta name="description" content="{{ page_description }}">
+
+    <meta name="generator" content="Jumpage">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Jumpage">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ page_title }}">
+    <meta property="og:url" content="{{ app.request.uri }}">
+    <meta property="og:image" content="{{ page_image }}">
+    <meta property="og:description" content="{{ page_description }}">
+
+{% block favicon %}
+    <link rel="shortcut icon" href="/favicon.ico">
+{% endblock %}
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    {#<link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">#}
+
+    <link rel="stylesheet" href="{% static "css/jumpage.css" %}">
+
+</head>
+<body>
 {% block content %}
 
+    <header class="fixed">
+    {% if jumpage.cover_photo %}
+
+        <div class="titlepic" style="background-image: url({{ jumpage.cover_photo.source }})">
+            <img class="profile_picture hidden-xs" src="https://graph.facebook.com/{{ jumpage.page.id }}/picture?width=120">
+        </div>
+
+    {% endif %}
+
+    <div class="container-map">
+        <div id="map-canvas" class="map"></div>
+    </div>
+    </header>
+
+    <section class="pdg white">
+
+        <div class="container-fluid">
+            <h1>{{ jumpage.page.name }}</h1>
+            <p>{{ page_description }}</p>
+            <br>
+        </div>
+
+        <div class="container-fluid">
+            {% if jumpage.page.posts %}
+            <div class="row">
+                {% for post in jumpage.page.posts %}
+                {% if post.link %}
+                <a class="inline-column text-center" href="{{ post.link }}">
+                    {% if post.full_picture %}
+                    <img src="{{ post.full_picture}}" class="img-responsive" />
+                    {% endif %}
+                    {% if post.message %}
+                    <p class="lead pdg">{{ post.message }}</p>
+                    {% endif %}
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="container-fluid text-center">
+            <a class="h3 pdg" href="{{ jumpage.page.link }}">Folge Anton auf Facebook</a>
+        </div>
+
+    </section>
+
+    {% if jumpage.page.featured_video %}
+        <div class="container-video">
+            {#<img class="video-placeholder" src="{{ page.featured_video.picture }}" />#}
+            <div class="fb-video"
+                 data-href="https://www.facebook.com/{{ jumpage.page.id }}/videos/{{ jumpage.page.featured_video.id }}/"
+                 data-allowfullscreen="true" data-width="100%"></div>
+        </div><div class="hidden-xs"></div>
+    {% endif %}
+
+    {#<footer class="pdg">#}
+        {#{% if page.impressum %}#}
+            {#<div class="container text-center">#}
+                {#<p>{{ page.impressum }}</p>#}
+            {#</div>#}
+        {#{% endif %}#}
+    {#</footer>#}
+
+    <!-- no-edit -->
+    <section class="jumpage text-center"><a
+                title="Make your Facebook page an awesome Jumpage"
+                href="https://jumpage.com">Built with love by Jumpage</a></section>
+
+{% endblock content %}
+
+{% block components %}
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>window.jQuery || document.write(
+            '<script src="/components/jquery/dist/jquery.min.js"><\/script>')</script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script>window.jQuery.fn.modal || document.write(
+            '<script src="/components/bootstrap/dist/js/bootstrap.min.js"><\/script>')</script>
 {% endblock %}
 
-{#{{ jumpage | safe }}#}
+{% block scripts %}
+    <script src="//maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="{% static "js/jumpage.js" %}"></script>
+    <script>
+
+        (function ( $ ) {
+
+            $(document).ready( function() {
+
+                var map = new google.maps.Map(document.getElementById('map-canvas'), {
+                    center: {lat: 51.52584386, lng: 8.15649033},
+                    scrollwheel: false,
+                    zoom: 15,
+                    streetViewControl: !$('.hidden-xs:first').is(':hidden'),
+                    mapTypeControl: true,
+                    navigationControl: true,
+                    navigationControlOptions: {
+                        style : google.maps.NavigationControlStyle.DEFAULT
+                    },
+                    scaleControl: true,
+                    scrollwheel: false,
+                    draggable: !$('.hidden-xs:first').is(':hidden'),
+                    disableDoubleClickZoom: false,
+                    disableDefaultUI : false
+                });
+                google.maps.event.addListener(new google.maps.Marker({
+                    position: map.getCenter(),
+                    map: map,
+                    title: 'Antons Zuhause',
+                    icon: new google.maps.MarkerImage('{% static "img/marker.png" %}',
+                    new google.maps.Size(48,32), new google.maps.Point(0,0),
+                    new google.maps.Point(24,16))
+                }), 'click', function () {
+                    alert('Hallo Welt');
+                });
+            });
+            }( jQuery ));
+
+    </script>
+
+    {% if jumpage.page.featured_video %}
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+            fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+    {% endif %}
+
+{% endblock %}
+</body>
+</html>
+

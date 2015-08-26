@@ -1,0 +1,277 @@
+$font-stack: 'Open Sans', Arial, sans-serif;
+
+$grey-dark: #444444;
+$grey-light: #f2f2f2;
+$grey-med: #8e8e8e;
+$blue-dark: #0e6a93;
+$blue-light: #15c2ff;
+$white: #ffffff;
+$orange: #ea511a;
+
+html {
+  min-height: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: $font-stack;
+  color: #000000;
+  height: 100%;
+  background: #ffffff;
+  /* 	word-break: break-all; */
+  word-wrap: break-word;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+a:hover {
+  text-decoration: none;
+  color: $orange;
+}
+
+header, section, footer {
+  -webkit-transform: translate3d(0,0,0);
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(0,0,0);
+  width: 100%;
+  padding: 1.5em;
+  padding-bottom: 0;
+  background: #ffffff;
+}
+
+.titlepic:before {
+  content:"";
+  display: block;
+  padding-top: 50%;
+}
+.titlepic {
+  display: block;
+  position: relative;
+  height: 50%;
+  width: 100%;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  //background-attachment: fixed;
+
+  //background-image: url(https://jumpage.com/antonsreise/antontitel.jpg);
+}
+.container, .container-fluid, .fixed {
+  position: relative;
+}
+
+.fixed {
+  height: 100%;
+}
+
+.row {
+  -webkit-column-gap: 1.5em;
+  -moz-column-gap: 1.5em;
+  column-gap: 1.5em;
+
+  vertical-align: top;
+
+  padding: 0 1em;
+}
+
+.inline-column {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.5em;
+}
+
+.img-responsive {
+  width: 100%;
+}
+
+.lead {
+  font-size: 1.5em;
+}
+
+.pdg {
+  padding: .75em;
+}
+
+.white {
+  background-color: #ffffff;
+}
+
+.modal-backdrop {
+  background-color: #444444;
+}
+.modal-backdrop.in {
+  opacity: .75;
+}
+
+.container-map {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  display: block;
+}
+
+.fb-box {
+  height: 100%;
+  width: 100%;
+  border: 0;
+}
+.fb-video {
+  position: relative;
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+}
+
+.jumpage {
+  width: 100%;
+  padding: 1.5em;
+  background: #ffffff;
+}
+
+.jumpage a {
+  color: $blue-light;
+  text-decoration: none;
+}
+
+.jumpage a:hover {
+  color: $blue-dark;
+}
+
+.form-control {
+  border-color: $white;
+  box-shadow: none;
+}
+
+.btn-primary {
+  background-color: $blue-light;
+  border-color: $blue-light;
+  color: $white;
+}
+
+.btn-primary:hover {
+  background-color: $blue-dark;
+  border-color: $blue-dark;
+  color: $white;
+}
+
+.modal-content {
+  background-color: $grey-light;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0;
+}
+
+.profile_picture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  //bottom: -60px;
+  //left: 50%;
+  //margin-left: -60px;
+  //z-index: 2500;
+}
+
+.video-placeholder {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.container-video {
+  border: none;
+  bottom: 0;
+  height: auto;
+  min-height: 100%;
+  min-width: 100%;
+  position: fixed;
+  right: 0;
+  width: auto;
+  z-index: -100;
+  padding: 0 0 0 0;
+  overflow: hidden;
+}
+
+
+/* Extra Small */
+@media(max-width:767px){
+  .row {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+  }
+  .container-video {
+    position: relative;
+  }
+  header {
+    padding: 0;
+  }
+}
+
+/* Small */
+@media(min-width:768px) and (max-width:991px){
+  .row {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+}
+
+/* Medium */
+@media(min-width:992px) and (max-width:1199px){
+  .row {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+  }
+}
+
+/* Large */
+@media(min-width:1200px){
+  .row {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+  }
+}
+
+.modal {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .modal:before {
+    display: inline-block;
+    vertical-align: middle;
+    content: " ";
+    height: 100%;
+  }
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+::-moz-selection {
+  color: $white;
+  background: $blue-light;
+}
+
+::selection {
+  color: $white;
+  background: $blue-light;
+}
