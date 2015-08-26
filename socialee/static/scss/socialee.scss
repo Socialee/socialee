@@ -243,11 +243,19 @@ a {
     }
      
   .socialee-entries {
+    .label-projects {
+      background-color: rgba(#f89406, 0.4);
+    }
+    .label-inputs {
+      background-color: rgba(#88D498, 0.4);
+    }
+    .label-outputs {
+      background-color: rgba(#087CA7, 0.4);
+    }
     list-style: none;
     li {
     font-size: 0.8rem;
     display: inline-block;
-    background-color: rgba(230, 140, 5, 0.27);
     padding: 2px 10px 2px 10px;
     margin: 2px; 
     margin: 1px 0 1px 0; 
@@ -380,7 +388,7 @@ a {
   .question-slide {
     margin: 0 10px 0 10px;
     h3 {
-      font-size: 1.85rem;
+      font-size: 1.8rem;
       font-weight: 100;
       letter-spacing: 0.11em;
       // font-style: italic;
