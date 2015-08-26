@@ -16,6 +16,8 @@ import environ
 
 ROOT_DIR = environ.Path(__file__) - 2
 APPS_DIR = ROOT_DIR.path('socialee')
+# APPEND_SLASH = False # TODO: get rid of trailing slash
+
 assert os.path.exists(str(ROOT_DIR.path("Makefile"))), "ROOT_DIR is set properly."
 
 CMS_TEMPLATES = (

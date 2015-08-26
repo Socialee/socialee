@@ -1,5 +1,5 @@
 import os
-import urllib.request
+import requests
 
 from django.conf import settings
 from django.views.generic import TemplateView
@@ -28,19 +28,17 @@ class Home(BaseView, SignupView):
         context = super(Home, self).get_context_data(**kwargs)
         context['zettel_links'] = self.get_zettel_images("links")
         context['zettel_rechts'] = self.get_zettel_images("rechts")
-
         context['projects'] = list(Project.objects.all())
-        for i in range(1, 311):
-            context['projects'] += [Project(title='dummy' + str(i))]
+        for i in range(1, 10):
+            context['projects'] += [Project(title='projectdummy' + str(i))]
         context['inputs'] = list(Input.objects.all())
-        for i in range(1, 311):
-            context['inputs'] += [Input(title='dummy' + str(i))]
+        for i in range(1, 10):
+            context['inputs'] += [Input(title='inputdummy' + str(i))]
         context['outputs'] = list(Output.objects.all())
-        for i in range(1, 311):
-            context['outputs'] += [Output(title='dummy' + str(i))]
+        for i in range(1, 10):
+            context['outputs'] += [Output(title='outputdummy' + str(i))]
         context['shuffled'] = context['outputs']+context['inputs']+context['projects']
         random.shuffle(context['shuffled'])
-        print (context['shuffled'])
         return context
 
 
@@ -74,5 +72,8 @@ class Jumpage(BaseView, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(Jumpage, self).get_context_data(**kwargs)
         url = 'https://jumpage.com/1109292709086173'
-        context['jumpage'] = urllib.request.urlopen(url).read()
+        r = requests.get(url, dict(
+            format = 'json'
+        ))
+        context['jumpage'] = r.json()
         return context

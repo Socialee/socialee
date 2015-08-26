@@ -13,7 +13,7 @@
 
 
 <div id="fullpage_wrapper">
-  <p id="draggable" class="socialee-feedback" title="Information und Feedback"><a href="#" data-reveal-id="wipModal">&#10043;</a></p>
+  <p id="draggable" class="socialee-feedback" title="Info &amp; Feedback"><a href="#" data-reveal-id="wipModal">&#10043;</a></p>
 
   <div class="section">
     {% include "socialee_lp_slider.html" %}
@@ -108,16 +108,17 @@
     <div class="socialee-entries-wrapper">
       <ul class="socialee-entries">
         {% for item in shuffled %}
-        {# <li class="label-{{item.__class__}}">{{ item.title }}</li> #}
+        {# <!--<li class="{% cycle "label-projects" "label-inputs" "label-outputs" %}">{{ item.title }}</li>--> #}
+        <li class="label-{{item.itemclass}}">{{ item.title }}</li>
         {% endfor %}
         
-{#         {% for input in inputs %}
+        <!--{% for input in inputs %}
         <li class="label-inputs">{{ input.title }}</li>
         {% endfor %}
         
         {% for output in outputs %}
         <li class="label-outputs">{{ output.title }}</li>
-        {% endfor %} #}
+        {% endfor %}-->
 
       </ul><hr/>
     </div>
