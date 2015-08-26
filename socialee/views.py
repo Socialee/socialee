@@ -1,5 +1,5 @@
 import os
-import urllib.request
+import requests
 
 from django.conf import settings
 from django.views.generic import TemplateView
@@ -72,5 +72,8 @@ class Jumpage(BaseView, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(Jumpage, self).get_context_data(**kwargs)
         url = 'https://jumpage.com/1109292709086173'
-        context['jumpage'] = urllib.request.urlopen(url).read()
+        r = requests.get(url, dict(
+            format = 'json'
+        ))
+        context['jumpage'] = r.json()
         return context
