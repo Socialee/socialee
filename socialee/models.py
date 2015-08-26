@@ -76,6 +76,8 @@ class Input(InputOutput):
         return 'Input "{}" from profile {} and zettel {}'.format(self.title,
                                                                  self.profile,
                                                                  self.zettel)
+    def itemclass(self):
+        return self.__class__()
 
 
 class Output(InputOutput):
@@ -86,6 +88,8 @@ class Output(InputOutput):
         return 'Output "{}" from profile {} and zettel {}'.format(self.title,
                                                                   self.profile,
                                                                   self.zettel)
+    def itemclass(self):
+        return self.__class__()
 
 
 class Zettel(models.Model):
@@ -111,7 +115,10 @@ class Project(models.Model):
     outputs = models.ManyToManyField(Output)
 
     def __str__(self):
-        return '{}'.format(self.title)
+        return 'Project "{}"'.format(self.title)
+    def itemclass(self):
+        return self.__class__()
+
 
 class Dream(models.Model):
     title = models.TextField(max_length=5000)
