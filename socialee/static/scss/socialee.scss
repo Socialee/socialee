@@ -80,7 +80,25 @@ a {
           padding: 0;
           margin: 0;
         }
-      }
+  }
+
+  .socialee-button:hover {
+    color: $orange;
+  }
+
+  .button:hover {
+    color: $orange; 
+  }
+
+  button:hover {
+    color: $orange; 
+  }
+
+  .errorlist {
+    background-color: red;
+    color: red;
+    list-style: none;
+  }
 
 // jQueryUI Tooltip
   .ui-tooltip {
@@ -229,9 +247,6 @@ a {
     }
     li {
       display: inline;
-      :hover {
-        color: $orange;
-      }
     }
   }
 
