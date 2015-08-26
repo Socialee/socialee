@@ -36,6 +36,11 @@ class Profile(models.Model):
     # mj> geburtsdatum = models.DateField(auto_now=False, auto_now_add=False,
     #                                     blank=True, null=True)
     newsletter = models.BooleanField(default=False)
+ 
+    def is_email_verified(self):
+        return (self.user.is_authenticated and
+                EmailAddress.objects.filter(email=self.user.email,
+                                            verified=True).exists())
 
     origin = models.ForeignKey(Origin, blank=True, null=True)
 

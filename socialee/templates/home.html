@@ -13,7 +13,7 @@
 
 
 <div id="fullpage_wrapper">
-<p id="draggable" class="socialee-feedback" title="Information und Feedback"><a href="#" data-reveal-id="wipModal">&#10043;</a></p>
+  <p id="draggable" class="socialee-feedback" title="Information und Feedback"><a href="#" data-reveal-id="wipModal">&#10043;</a></p>
 
   <div class="section">
     {% include "socialee_lp_slider.html" %}
@@ -62,9 +62,10 @@
         </div>
       </div>
 
-      {% if not request.user.is_authenticated %}
+      
       <div class="row">
         <div class="small-8 small-centered columns">
+          {% if not request.user.is_authenticated %}
           <div class="lp-signup-form">
             <div class="row collapse">
               <div class="small-2 columns">
@@ -72,7 +73,7 @@
               </div>
               <div class="small-7 columns">
                   {{ form.email }}
-                  {{ form.errors }}
+                  {{ form.email.errors }}
               </div>
               <div class="small-3 columns">
                 <a class="button postfix" href='#' onclick='document.forms["signup_form"].submit(); return false;'>ab die Post!</a>
@@ -83,7 +84,11 @@
           {% if redirect_field_value %}
           <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
           {% endif %}
-          <!--<button class="small radius" type="submit">Ab die Post! <i class="fi-###"></i></button>-->
+          <div class="small-4 small-centered columns">
+          {% if request.user.is_authenticated %}
+          <button class="small radius expand" type="submit">Ab die Post!</button>
+          {% endif %}
+          </div>
           <hr/>
         </div>
       </div>
@@ -102,9 +107,18 @@
   <div class="section">
     <div class="socialee-entries-wrapper">
       <ul class="socialee-entries">
-        {% for project in projects %}
-        <li>{{ project.title }}</li>
+        {% for item in shuffled %}
+        {# <li class="label-{{item.__class__}}">{{ item.title }}</li> #}
         {% endfor %}
+        
+{#         {% for input in inputs %}
+        <li class="label-inputs">{{ input.title }}</li>
+        {% endfor %}
+        
+        {% for output in outputs %}
+        <li class="label-outputs">{{ output.title }}</li>
+        {% endfor %} #}
+
       </ul><hr/>
     </div>
     <div class="row title-wrapper">

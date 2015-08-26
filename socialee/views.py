@@ -1,11 +1,12 @@
 import os
+import urllib.request
 
 from django.conf import settings
 from django.views.generic import TemplateView
 
 from allauth.account.views import RedirectAuthenticatedUserMixin, SignupView
-
-from .models import Project
+import random
+from .models import Project, Input, Output
 
 
 # Overwrite/disable dispatch method of RedirectAuthenticatedUserMixin (endless redirect on /).
@@ -17,7 +18,6 @@ RedirectAuthenticatedUserMixin.dispatch = dispatch_no_redirect
 class BaseView:
     def get_context_data(self, **kwargs):
         context = super(BaseView, self).get_context_data(**kwargs)
-        context['DEBUG'] = settings.DEBUG
         return context
 
 
@@ -28,9 +28,19 @@ class Home(BaseView, SignupView):
         context = super(Home, self).get_context_data(**kwargs)
         context['zettel_links'] = self.get_zettel_images("links")
         context['zettel_rechts'] = self.get_zettel_images("rechts")
+
         context['projects'] = list(Project.objects.all())
         for i in range(1, 311):
             context['projects'] += [Project(title='dummy' + str(i))]
+        context['inputs'] = list(Input.objects.all())
+        for i in range(1, 311):
+            context['inputs'] += [Input(title='dummy' + str(i))]
+        context['outputs'] = list(Output.objects.all())
+        for i in range(1, 311):
+            context['outputs'] += [Output(title='dummy' + str(i))]
+        context['shuffled'] = context['outputs']+context['inputs']+context['projects']
+        random.shuffle(context['shuffled'])
+        print (context['shuffled'])
         return context
 
 
@@ -57,3 +67,12 @@ class Cafe(BaseView, TemplateView):
 
 class Impressum(BaseView, TemplateView):
     template_name = 'impressum.html'
+
+class Jumpage(BaseView, TemplateView):
+    template_name = 'jumpage.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(Jumpage, self).get_context_data(**kwargs)
+        url = 'https://jumpage.com/1109292709086173'
+        context['jumpage'] = urllib.request.urlopen(url).read()
+        return context
