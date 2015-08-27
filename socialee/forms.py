@@ -58,20 +58,3 @@ class MySignupForm(SignupForm):
             output = Output.objects.create(title=self.cleaned_data['output_title'])
             output.profiles.add(profile)
             output.save()
-
-
-# class ProjectForm(forms.ModelForm):
-#   class Meta:
-#       model = Project
-#       fields = ['title']
-
-#class DreamForm(forms.ModelForm):
-#   class Meta:
-#       model = Dream
-#       fields = ['title']
-
-
-#class WishForm(forms.ModelForm):
-#   class Meta:
-#       model = Wish
-#       fields = ['title']
