@@ -1,11 +1,16 @@
-# from allauth.account.forms import SignupForm
-import os
+from allauth.account.forms import SignupForm
 
 from django import forms
 from .models import Project, Profile, UserEntry, Wish, Dream, Input, Output
 
 
-class SignupForm(forms.Form):
+class MySignupForm(SignupForm):
+	"A specialized signup form to not require the password fields."
+	def __init__(self, *args, **kwargs):
+		super(MySignupForm, self).__init__(*args, **kwargs)
+		del self.fields["password1"]
+		del self.fields["password2"]
+
 	dream_title = forms.CharField(label='Wenn es an nichts fehlen würde, nicht an Geld, nicht an Zeit, was würdest Du tun? Wofür brennst Du?', widget=forms.Textarea(attrs={'placeholder': 'Neil und Moritz würden mit einem Trecker quer durch Deutschland fahren. Socialee würde eine Webseite bauen, die diese Frage stellt.','rows':4}), required=False, max_length=5000)
 	wish_title = forms.CharField(label='Du hast 5000 Zeichen. Lass Dich ruhig aus.', widget=forms.Textarea(attrs={'placeholder': '','rows':4}), required=False, max_length=5000)
 	project_title = forms.CharField(label='Socialee sammelt Ideen und Projekte. Und wir bauen ein Netzwerk drumrum und dazwischen.', widget=forms.Textarea(attrs={'placeholder': 'Corinna arbeitet mit Flüchtlingen, Waldemar produziert tolle Kondome. Socialee sagt: "Stellt euch mal ein soziales Netzwerk vor!"','rows':4}), required=False, max_length=5000)	
@@ -17,7 +22,9 @@ class SignupForm(forms.Form):
 	# newsletter = forms.BooleanField()
 
 
-	def signup(self, request, user):
+	def save(self, request):
+		user = super(MySignupForm, self).save(request)
+
 		user.first_name = self.cleaned_data['first_name']
 		user.last_name = self.cleaned_data['last_name']
 		user.save()
