@@ -43,6 +43,10 @@ class OutputAdmin(admin.ModelAdmin):
     model = Output
 
 
+class ProjectAdmin(admin.ModelAdmin):
+    model = Project
+
+
 class ZettelAdmin(admin.ModelAdmin):
     model = Zettel
     search_fields = ['profile__user__username', 'profile__user__email',
@@ -103,8 +107,9 @@ class ProfileEntryAdmin(admin.ModelAdmin):
     ]
 
 admin.site.register(Input, InputAdmin)
-admin.site.register(Origin, OriginAdmin)
 admin.site.register(Output, OutputAdmin)
+admin.site.register(Project, ProjectAdmin)
+admin.site.register(Origin, OriginAdmin)
 admin.site.register(Profile, ProfileEntryAdmin)
 admin.site.register(UserEntry, UserEntryAdmin)
 admin.site.register(Zettel, ZettelAdmin)    
