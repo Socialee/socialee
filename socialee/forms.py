@@ -27,27 +27,27 @@ class SignupForm(forms.Form):
 
 		profile = Profile.objects.create(user=user)
 
-		if len (self.cleaned_data['project_title']):
+		if self.cleaned_data['project_title']:
 			project = Project.objects.create(title=self.cleaned_data['project_title'])
 			project.profiles.add(profile)
 			project.save()
 
-		if len (self.cleaned_data['wish_title']):
+		if self.cleaned_data['wish_title']:
 			wish = Wish.objects.create(title=self.cleaned_data['wish_title'])
 			wish.profiles.add(profile)
 			wish.save()
 
-		if len (self.cleaned_data['dream_title']):
+		if self.cleaned_data['dream_title']:
 			dream = Dream.objects.create(title=self.cleaned_data['dream_title'])
 			dream.profiles.add(profile)
 			dream.save()
 
-		if len (self.cleaned_data['input_title']):
+		if self.cleaned_data['input_title']:
 			input = Input.objects.create(title=self.cleaned_data['input_title'])
 			input.profiles.add(profile)
 			input.save()
 
-		if len (self.cleaned_data['output_title']):
+		if self.cleaned_data['output_title']:
 			output = Output.objects.create(title=self.cleaned_data['output_title'])
 			output.profiles.add(profile)
 			output.save()
