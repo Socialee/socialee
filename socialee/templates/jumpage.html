@@ -22,9 +22,9 @@
                                      o\                                                                              -->
     <meta charset="UTF-8">
 
-    <title>{{ page_title }}</title>
+    <title>{{ jumpage.page_title }}</title>
 
-    <meta name="description" content="{{ page_description }}">
+    <meta name="description" content="{{ jumpage.page_description }}">
 
     <meta name="generator" content="Jumpage">
 
@@ -35,18 +35,18 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ page_title }}">
-    <meta property="og:url" content="{{ app.request.uri }}">
-    <meta property="og:image" content="{{ page_image }}">
-    <meta property="og:description" content="{{ page_description }}">
+    <meta property="og:title" content="{{ jumpage.page_title }}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:image" content="https://{{ request.get_host }}{% static "img/jumpage/open-graph-image.jpg" %}">
+    <meta property="og:description" content="{{ jumpage.page_description }}">
 
 {% block favicon %}
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="https://graph.facebook.com/{{ jumpage.page.id }}/picture?width=24">
 {% endblock %}
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="https://graph.facebook.com/{{ jumpage.page.id }}/picture?width=120">
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    {#<link rel="stylesheet" href="/components/bootstrap/dist/css/bootstrap.min.css">#}
+    {#<link rel="stylesheet" href="{% static "/bower_components/bootstrap/dist/css/bootstrap.min.css" %}">#}
 
     <link rel="stylesheet" href="{% static "css/jumpage.css" %}">
 
@@ -72,7 +72,7 @@
 
         <div class="container-fluid">
             <h1>{{ jumpage.page.name }}</h1>
-            <p>{{ page_description }}</p>
+            <p>{{ jumpage.page_description }}</p>
             <br>
         </div>
 
@@ -111,9 +111,9 @@
     {% endif %}
 
     {#<footer class="pdg">#}
-        {#{% if page.impressum %}#}
+        {#{% if jumpage.page.impressum %}#}
             {#<div class="container text-center">#}
-                {#<p>{{ page.impressum }}</p>#}
+                {#<p>{{ jumpage.page.impressum }}</p>#}
             {#</div>#}
         {#{% endif %}#}
     {#</footer>#}
@@ -128,10 +128,10 @@
 {% block components %}
 <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
 <script>window.jQuery || document.write(
-            '<script src="/components/jquery/dist/jquery.min.js"><\/script>')</script>
+            '<script src="{% static "/bower_components/jquery/dist/jquery.min.js" %}"><\/script>')</script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script>window.jQuery.fn.modal || document.write(
-            '<script src="/components/bootstrap/dist/js/bootstrap.min.js"><\/script>')</script>
+            '<script src="{% static "/bower_components/bootstrap/dist/js/bootstrap.min.js" %}"><\/script>')</script>
 {% endblock %}
 
 {% block scripts %}
@@ -163,7 +163,7 @@
                     position: map.getCenter(),
                     map: map,
                     title: 'Antons Zuhause',
-                    icon: new google.maps.MarkerImage('{% static "img/marker.png" %}',
+                    icon: new google.maps.MarkerImage('{% static "img/jumpage/marker.png" %}',
                     new google.maps.Size(48,32), new google.maps.Point(0,0),
                     new google.maps.Point(24,16))
                 }), 'click', function () {

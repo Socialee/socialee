@@ -215,6 +215,9 @@ SOCIALACCOUNT_PROVIDERS = \
         # 'VERSION': 'v2.3'
         }
     }
+ACCOUNT_FORMS = {
+    'signup': 'socialee.forms.MySignupForm',
+}
 LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
@@ -222,7 +225,6 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
-ACCOUNT_SIGNUP_FORM_CLASS = 'socialee.forms.SignupForm'
 ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
 
 # Static files (CSS, JavaScript, Images)
