@@ -1,7 +1,7 @@
 from allauth.account.forms import SignupForm
 
 from django import forms
-from .models import Project, Profile, UserEntry, Wish, Dream, Input, Output
+from .models import Project, Profile, UserEntry, Input, Output
 
 
 class MySignupForm(SignupForm):
@@ -11,8 +11,6 @@ class MySignupForm(SignupForm):
         del self.fields["password1"]
         del self.fields["password2"]
 
-    dream_title = forms.CharField(label='Wenn es an nichts fehlen würde, nicht an Geld, nicht an Zeit, was würdest Du tun? Wofür brennst Du?', widget=forms.Textarea(attrs={'placeholder': 'Neil und Moritz würden mit einem Trecker quer durch Deutschland fahren. Socialee würde eine Webseite bauen, die diese Frage stellt.','rows':4}), required=False, max_length=5000)
-    wish_title = forms.CharField(label='Du hast 5000 Zeichen. Lass Dich ruhig aus.', widget=forms.Textarea(attrs={'placeholder': '','rows':4}), required=False, max_length=5000)
     project_title = forms.CharField(label='Socialee sammelt Ideen und Projekte. Und wir bauen ein Netzwerk drumrum und dazwischen.', widget=forms.Textarea(attrs={'placeholder': 'Corinna arbeitet mit Flüchtlingen, Waldemar produziert tolle Kondome. Socialee sagt: "Stellt euch mal ein soziales Netzwerk vor!"','rows':4}), required=False, max_length=5000)
     output_title = forms.CharField(label='Und, was fehlt Dir? Welches Bedürfnis wird nicht befriedigt?', widget=forms.Textarea(attrs={'placeholder': 'Susi fehlt ein Fahrrad. Helge fehlt eine Freundin. Socialee fehlt auch noch alles Mögliche. ','rows':4}), required=False, max_length=5000)
     input_title= forms.CharField(label='Wenn wir uns mal kurz entspannen, fällt uns wieder ein, was wir so alles gut können. Uh, wie gut Du bist!', widget=forms.Textarea(attrs={'placeholder': 'Petra kann Autos reparieren und Peter arbeitet gerne mit Kindern. Fadhumo kann Flüchtlinge motivieren und Socialee kann ganz gut zuhören.','rows':4}), required=False, max_length=5000)
@@ -38,16 +36,6 @@ class MySignupForm(SignupForm):
             project = Project.objects.create(title=self.cleaned_data['project_title'])
             project.profiles.add(profile)
             project.save()
-
-        if self.cleaned_data['wish_title']:
-            wish = Wish.objects.create(title=self.cleaned_data['wish_title'])
-            wish.profiles.add(profile)
-            wish.save()
-
-        if self.cleaned_data['dream_title']:
-            dream = Dream.objects.create(title=self.cleaned_data['dream_title'])
-            dream.profiles.add(profile)
-            dream.save()
 
         if self.cleaned_data['input_title']:
             input = Input.objects.create(title=self.cleaned_data['input_title'])

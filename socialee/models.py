@@ -66,6 +66,9 @@ class InputOutput(models.Model):
 
     profile = models.ForeignKey(Profile, null=True)
     zettel = models.ForeignKey('Zettel', null=True)
+    
+    def itemclass(self):
+        return self.__class__()
 
 
 class Input(InputOutput):
@@ -76,8 +79,6 @@ class Input(InputOutput):
         return 'Input "{}" from profile {} and zettel {}'.format(self.title,
                                                                  self.profile,
                                                                  self.zettel)
-    def itemclass(self):
-        return self.__class__()
 
 
 class Output(InputOutput):
@@ -88,8 +89,6 @@ class Output(InputOutput):
         return 'Output "{}" from profile {} and zettel {}'.format(self.title,
                                                                   self.profile,
                                                                   self.zettel)
-    def itemclass(self):
-        return self.__class__()
 
 
 class Zettel(models.Model):
