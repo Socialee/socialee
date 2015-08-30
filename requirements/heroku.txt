@@ -4,24 +4,32 @@
 #
 #    pip-compile heroku.in
 #
-click==4.0
-cmsplugin-filer==0.10.1
+beautifulsoup4==4.4.0     # via django-blog-zinnia
+click==5.1
+cmsplugin-filer==0.10.2
+decorator==4.0.2          # via ipython, traitlets
+defusedxml==0.4.1         # via python3-openid
 dj-static==0.0.6
+django-allauth==0.23.0
 django-app-namespace-template-loader==0.3
 django-appconf==1.0.1     # via cmsplugin-filer
+django-blog-zinnia==0.15.2
 django-classy-tags==0.6.2  # via django-cms, django-sekizai
 django-cms==3.1.2
+django-contrib-comments==1.6.1  # via django-blog-zinnia
 django-debug-toolbar==1.3.2
 django-environ==0.3.0
-django-extensions==1.5.5
-django-filer==0.9.11
-django-mptt==0.7.4        # via django-filer
+django-extensions==1.5.6
+django-filer==0.9.12
+django-mptt==0.7.4        # via django-blog-zinnia, django-filer
 django-polymorphic==0.7.1  # via django-filer
-django-reversion==1.8.7
+django-reversion==1.9.3
 django-sekizai==0.8.2     # via cmsplugin-filer, django-cms
 django-select2==4.3.1     # via djangocms-link
+django-tagging==0.4       # via django-blog-zinnia
 django-treebeard==3.0
-django==1.8.2
+django-xmlrpc==0.1.5      # via django-blog-zinnia
+django==1.8.4
 djangocms-admin-style==0.2.7  # via django-cms
 djangocms-file==0.1
 djangocms-flash==0.2.0
@@ -30,34 +38,46 @@ djangocms-link==1.6.2
 djangocms-picture==0.1
 djangocms-snippet==1.5
 djangocms-teaser==0.1
+djangocms-text-ckeditor==2.6.0
 djangocms-video==0.1
-djangocms-text-ckeditor==2.5.2
 easy-thumbnails==2.2      # via cmsplugin-filer, django-filer
 first==2.0.1
 gunicorn==19.3.0
-html5lib==0.999           # via django-cms
+html5lib==0.999           # via django-cms, djangocms-text-ckeditor
 ipdb==0.8.1
-ipython==3.2.0            # via ipdb
+ipython-genutils==0.1.0   # via traitlets
+ipython==4.0.0            # via ipdb
 livereload==2.4.0
+mots-vides==2015.5.11     # via django-blog-zinnia
+oauthlib==1.0.3           # via requests-oauthlib
+path.py==8.1              # via pickleshare
+pexpect==3.3              # via ipython
+pickleshare==0.5          # via ipython
 pillow==2.9.0
-git+git://github.com/blueyed/pip-tools.git@92e7d0a86def8b77214c7993fc58e82866b0607a#egg=pip-tools
+git+git://github.com/blueyed/pip-tools.git@24b6b3e61f8ca530687e25a7f916c06c676bfe29#egg=pip-tools
 pluggy==0.3.0             # via tox
 psycopg2==2.6.1
 py==1.4.30                # via pytest, tox
+pyparsing==2.0.3          # via django-blog-zinnia
 pytest-django==2.8.0
-pytest-splinter==1.4.0
+pytest-splinter==1.6.6
 pytest==2.7.2
+python3-openid==3.0.6     # via django-allauth
 pytz==2015.4
-selenium==2.46.0          # via splinter
+requests-oauthlib==0.5.0  # via django-allauth
+requests==2.7.0           # via django-allauth, requests-oauthlib
+selenium==2.47.1          # via pytest-splinter, splinter
+simplegeneric==0.8.1      # via ipython
 six==1.9.0                # via django-app-namespace-template-loader, django-appconf, django-extensions, html5lib, livereload
-splinter==0.7.2
-sqlparse==0.1.15          # via django-debug-toolbar
+splinter==0.7.3
+sqlparse==0.1.16          # via django-debug-toolbar
 static3==0.6.1            # via dj-static
-tornado==4.2              # via livereload
+tornado==4.2.1            # via livereload
 tox==2.1.1
+traitlets==4.0.0          # via ipython
 unidecode==0.4.18         # via django-filer
-virtualenv==13.1.0        # via tox
+virtualenv==13.1.2        # via tox
 
 # The following packages are commented out because they are
 # considered to be unsafe in a requirements file:
-# setuptools==18.0.1        # via django-polymorphic, pytest-splinter
+# setuptools==18.2          # via django-polymorphic, pytest-splinter
