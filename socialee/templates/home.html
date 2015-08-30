@@ -24,8 +24,8 @@
             <h1 class="text-center"><small>Es muss was getan werden.</small> Tun wir es!</h1>
             <h6 class="subheader text-center">Socialee ist soziales Netzwerk, Werkzeug, Bank, weiße Leinwand. Wir bauen, was uns fehlt. Bau mit!<br/><a href="#" data-reveal-id="manifestModal"><strong>&#8594; Brief an die Menschheit. &#8592;</strong></a></h6>
           </div>
-        </div>    
-      </div> 
+        </div>
+      </div>
 
       <div class="row">
         <div class="small-8 small-centered columns"><hr/>
@@ -41,27 +41,27 @@
                   <h6 style="text-transform: lowercase;">oder: </h6><h6>in welcher zukunft möchtest du leben. Was fehlt Dir in der Welt?</h6>
                   {{ form.output_title }}
                 </div>
-              </div>              
+              </div>
              <div class="fieldWrapper">
                 <div class="question-slide">
                   <h3 class="text-center">Was kannst Du gut? Was machst Du gerne?</h3>
                   <h6 style="text-transform: lowercase;">oder: </h6><h6>Womit würdest du gerne einen Beitrag leisten. Zur Zukunft Deiner Wahl sozusagen.</h6>
                   {{ form.input_title }}
-                </div>    
-              </div>    
+                </div>
+              </div>
               <div class="fieldWrapper">
                 <div class="question-slide">
                   <h3 class="text-center">Hast Du ein Projekt? Oder eine Idee?</h3>
                   <h6 style="text-transform: lowercase;">oder: </h6><h6>was würdest du tun, wenn du wüsstest du könntest nicht scheitern.</h6>
                   {{ form.project_title }}
-                </div>    
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      
+
       <div class="row">
         <div class="small-8 small-centered columns">
           {% if not request.user.is_authenticated %}
@@ -79,7 +79,7 @@
               </div>
             </div>
           </div>
-          {% endif %}  
+          {% endif %}
           {% if redirect_field_value %}
           <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
           {% endif %}
@@ -110,11 +110,11 @@
         {# <!--<li class="{% cycle "label-projects" "label-inputs" "label-outputs" %}">{{ item.title }}</li>--> #}
         <li class="label-{{item.itemclass}}">{{ item.title }}</li>
         {% endfor %}
-        
+
         <!--{% for input in inputs %}
         <li class="label-inputs">{{ input.title }}</li>
         {% endfor %}
-        
+
         {% for output in outputs %}
         <li class="label-outputs">{{ output.title }}</li>
         {% endfor %}-->
@@ -127,7 +127,7 @@
         <li><a class="socialee-button" href="#projects">Socialee's Projekte</a></li>
         <li><a class="socialee-button" href="#questions">Ich will auch was eintragen!</a></li>
       </ul>
-    </div>   
+    </div>
   </div>
 
   <div class="section">
@@ -145,7 +145,7 @@
           <h1 class="text-center">online geht auch offline</h1>
           <h6 class="subheader text-center">Wir schmeißen immer gerne mit Zetteln um uns. <a href="{% static "img/zettel/for_download/Zettel_AntonsReise_download.pdf" %}" target="_blank"><strong>&#8594; Hole Dir Deinen Zettel! &#8592;</strong></a></h6>
         </div>
-      </div>    
+      </div>
     </div>
 
     <div class="row zettel-wrap">
