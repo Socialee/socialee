@@ -23,14 +23,44 @@ class MySignupForm(SignupForm):
         if "last_name" in self.cleaned_data:
             user.last_name = self.cleaned_data['last_name']
         user.save()
+        return user
 
+
+class MyHomeSignupForm(MySignupForm):
+    "A specialized signup form to not require some fields for signup on home."
+
+    # Optional PLZ, used for Flüchlingspaten.
+    plz = forms.CharField(label='PLZ', required=False,
+                          widget=forms.TextInput(attrs={'placeholder': 'Bitte trage hier Deine Postleitzahl ein.'}),
+                          max_length=5)
+    # Optional referrer project, used for Flüchlingspaten.
+    ref_project = forms.CharField(required=False, widget=forms.HiddenInput())
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        del self.fields["password1"]
+        del self.fields["password2"]
+        del self.fields["first_name"]
+        del self.fields["last_name"]
+
+    def save(self, request):
+        user = super().save(request)
         # HACK
         user = UserEntry(id=user.id)
 
-        profile = Profile.objects.create(user=user)
+        # Create profile with optional PLZ from socialee_project_slider.html.
+        profile = Profile(user=user)
+        if "plz" in self.cleaned_data:
+            profile.plz = self.cleaned_data["plz"]
+        profile.save()
 
         if self.cleaned_data['project_title']:
             project = Project.objects.create(title=self.cleaned_data['project_title'])
+            project.profiles.add(profile)
+            project.save()
+
+        if self.cleaned_data['ref_project']:
+            project, created = Project.objects.get_or_create(title=self.cleaned_data['ref_project'])
             project.profiles.add(profile)
             project.save()
 
@@ -43,15 +73,5 @@ class MySignupForm(SignupForm):
             output = Output.objects.create(title=self.cleaned_data['output_title'])
             output.profile = profile
             output.save()
+
         return user
-
-
-class MyHomeSignupForm(MySignupForm):
-    "A specialized signup form to not require some fields for signup on home."
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        del self.fields["password1"]
-        del self.fields["password2"]
-        del self.fields["first_name"]
-        del self.fields["last_name"]

@@ -22,7 +22,7 @@ def socialauth():
     sapp.sites.add(1)
 
 @pytest.yield_fixture
-def browser(browser, request, live_server):
+def browser(browser, request, live_server, socialauth):
     """
     Provide a browser fixture via pytest-splinter's browser.
 
