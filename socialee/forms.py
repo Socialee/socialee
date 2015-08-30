@@ -36,12 +36,12 @@ class MySignupForm(SignupForm):
 
         if self.cleaned_data['input_title']:
             input = Input.objects.create(title=self.cleaned_data['input_title'])
-            input.profiles.add(profile)
+            input.profile = profile
             input.save()
 
         if self.cleaned_data['output_title']:
             output = Output.objects.create(title=self.cleaned_data['output_title'])
-            output.profiles.add(profile)
+            output.profile = profile
             output.save()
         return user
 
