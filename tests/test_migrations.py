@@ -1,7 +1,9 @@
 from django.db import connection
 from django.db.migrations.executor import MigrationExecutor
+import pytest
 
 
+@pytest.mark.slow
 def test_migrate_profile_to_user(transactional_db):
     "Test that Profile fields get migrated to Users properly."
 
