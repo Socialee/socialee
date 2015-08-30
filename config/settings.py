@@ -99,7 +99,7 @@ DEBUG_TOOLBAR_CONFIG = {
     'JQUERY_URL': '',  # use always included jQuery.
 }
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -114,7 +114,7 @@ MIDDLEWARE_CLASSES = (
     'cms.middleware.toolbar.ToolbarMiddleware',
     'cms.middleware.language.LanguageCookieMiddleware',
     'django.contrib.admindocs.middleware.XViewMiddleware',
-)
+]
 
 ROOT_URLCONF = 'config.urls'
 
