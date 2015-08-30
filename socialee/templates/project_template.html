@@ -19,6 +19,7 @@
     });
   </script>
   <script type="text/javascript" src="{% static "webflow/js/modernizr.js" %}"></script>
+  <script type="text/javascript" src="{% static "webflow/js/webflow.js" %}"></script>
 {% endaddtoblock %}
 
   <div class="contain-all" data-ix="nav-closed">
@@ -149,9 +150,5 @@
       <div class="w-slider-nav w-round"></div>
     </div>
   </div>
-
-  {% addtoblock "js" strip %}
-  <script type="text/javascript" src="{% static "webflow/js/webflow.js" %}"></script>
-  {% endaddtoblock %}
 
 {% endblock %}
