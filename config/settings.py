@@ -237,7 +237,7 @@ STATICFILES_DIRS = (str(APPS_DIR('static')), )
 
 # Add django-sslify on Heroku, based on env setting.
 # > heroku config:set --app socialee-staging DJANGO_SECURE_PROXY_SSL_HEADER=HTTP_X_FORWARDED_PROTO,https
-SECURE_PROXY_SSL_HEADER = tuple(env.list('DJANGO_SECURE_PROXY_SSL_HEADER', []))
+SECURE_PROXY_SSL_HEADER = tuple(env.list('DJANGO_SECURE_PROXY_SSL_HEADER', default=[]))
 if SECURE_PROXY_SSL_HEADER:
     MIDDLEWARE_CLASSES = ['sslify.middleware.SSLifyMiddleware'] + \
         MIDDLEWARE_CLASSES
