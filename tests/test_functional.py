@@ -17,7 +17,7 @@ def test_signup_on_home_email_only(browser):
 
     browser.fill("email", "user@example.com")
     browser.click_link_by_text(submit_text)
-    assert "Bestätige deine E-Mail-Adresse" in browser.html
+    assert "Klasse, das hat geklappt!" in browser.html
 
     assert UserEntry.objects.get(email="user@example.com")
 
@@ -42,7 +42,7 @@ def test_signup_on_home_complete(browser):
 
     browser.fill("email", "user@example.com")
     browser.click_link_by_text(submit_text)
-    assert "Bestätige deine E-Mail-Adresse" in browser.html
+    assert "Klasse, das hat geklappt!" in browser.html
 
     user = UserEntry.objects.get(email="user@example.com")
     profile = user.profile
@@ -63,7 +63,7 @@ def test_signup_from_fluechtlingspaten(browser):
     browser.find_by_css('#form_fluechtlingspaten input[name=plz]')[0].fill("12345")
     browser.find_by_css('#form_fluechtlingspaten input[name=email]')[0].fill(
         "user@example.com\r")
-    assert "Bestätige deine E-Mail-Adresse" in browser.html
+    assert "Klasse, das hat geklappt!" in browser.html
 
     profile = UserEntry.objects.get(email="user@example.com").profile
 
