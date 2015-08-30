@@ -30,6 +30,10 @@
         {% block after_content %}  {# for base_navbar #}
         {% endblock %}
 
+        {% if debug %}
+            <script src="//localhost:35729/livereload.js"></script>
+        {% endif %}
+
         <script src="{% static "bower_components/jquery/dist/jquery.js" %}"></script>
         <script src="{% static "bower_components/jquery-ui/jquery-ui.min.js" %}"></script>
         <script src="{% static "bower_components/foundation/js/foundation/foundation.js" %}"></script>
@@ -40,21 +44,11 @@
         <script src="{% static "bower_components/foundation/js/foundation/foundation.joyride.js" %}"></script>
         <script src="{% static "bower_components/foundation/js/foundation/foundation.accordion.js" %}"></script>
         <script src="{% static "bower_components/foundation/js/foundation/foundation.magellan.js" %}"></script>
-        <script src="{% static "bower_components/fullpage.js/jquery.fullPage.js" %}"></script>
         <script src="{% static "bower_components/slick.js/slick/slick.js" %}"></script>
+
+        {# Render "js" block before main.js (for fullPage) #}
+        {% render_block "js" %}
         <script src="{% static "js/main.js" %}"></script>
-
-        {% if debug %}
-            <script src="//localhost:35729/livereload.js"></script>
-        {% endif %}
-
-        {# {% render_block "js" %} #}
-
-        <script type="text/javascript">
-            $(document).ready(function(){
-                {% render_block "js_ready" %}
-            });
-        </script>
 
     {# Piwik #}
     {% if not debug %}

@@ -140,8 +140,6 @@ TEMPLATES = [
                 'django.core.context_processors.request',
                 'sekizai.context_processors.sekizai',
                 'cms.context_processors.cms_settings',
-                'allauth.account.context_processors.account',
-                'allauth.socialaccount.context_processors.socialaccount',
                 'zinnia.context_processors.version',  # Optional
             ],
         },
@@ -237,6 +235,12 @@ MEDIA_ROOT = str(ROOT_DIR('media'))
 STATIC_ROOT = str(ROOT_DIR('build', 'static'))
 STATICFILES_DIRS = (str(APPS_DIR('static')), )
 
+# Add django-sslify on Heroku, based on env setting.
+# > heroku config:set --app socialee-staging DJANGO_SECURE_PROXY_SSL_HEADER=HTTP_X_FORWARDED_PROTO,https
+SECURE_PROXY_SSL_HEADER = tuple(env.list('DJANGO_SECURE_PROXY_SSL_HEADER', []))
+if SECURE_PROXY_SSL_HEADER:
+    MIDDLEWARE_CLASSES = ['sslify.middleware.SSLifyMiddleware'] + \
+        MIDDLEWARE_CLASSES
 
 # Configure logging, especially for Heroku.
 LOGGING = {

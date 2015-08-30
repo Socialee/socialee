@@ -1,13 +1,41 @@
 // this main.js is being loaded in base.html before closing body tag, treat it well
 
 $(document).ready(function() {
-  
+  $('.socialee-lp-questions').slick({
+    slidesToShow: 1,
+    infinite: false,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 3000,
+    speed: 1500,
+    arrows: true,
+    fade: false,
+    dots: true,
+    prevArrow: '#questionnavleft',
+    nextArrow: '#questionnavright',
+    adaptiveHeight: false,
+    responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+      }
+    }
+  ]
+  });
+
   // Foundation Offcanvas
   $(document).foundation({
       offcanvas : {
       // Sets method in which offcanvas opens.
       // [ move | overlap_single | overlap ]
-      open_method: 'move', 
+      open_method: 'move',
       // Should the menu close when a menu link is clicked?
       // [ true | false ]
       close_on_click : false
@@ -99,38 +127,9 @@ $(document).ready(function() {
   ]
   });
 
-  $('.socialee-lp-questions').slick({
-    slidesToShow: 1,
-    infinite: false,
-    slidesToScroll: 1,
-    autoplay: false,
-    autoplaySpeed: 3000,
-    speed: 1500,
-    arrows: true,
-    fade: false,
-    dots: true,
-    prevArrow: '#questionnavleft',
-    nextArrow: '#questionnavright',
-    adaptiveHeight: false,
-    responsive: [
-    {
-      breakpoint: 768,
-      settings: {
-        arrows: false,
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        arrows: false,
-      }
-    }
-  ]
-  });
-
   //jQueryUI stuff
 
-  $(function() {                
+  $(function() {
       $( document ).tooltip({
         track: true,
       });

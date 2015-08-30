@@ -733,6 +733,14 @@ a {
   }
 }
 
+.team-img-wrapper {
+  position:relative;
+  img {
+    position:absolute;
+    z-index:10000;
+  }
+}
+
 .header-label {
   @include label(
     // This options sets label padding
@@ -791,6 +799,3 @@ a {
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
    color:    #999;
 }
-
-
-

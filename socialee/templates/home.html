@@ -17,16 +17,15 @@
 
   <div class="section">
     {% include "socialee_lp_slider.html" %}
-    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-      
+    <form class="signup" id="signup_form" method="post" action="{% url 'home' %}">
       <div class="row low1">
         <div class="large-12 columns">
           <div class="title-wrapper">
             <h1 class="text-center"><small>Es muss was getan werden.</small> Tun wir es!</h1>
             <h6 class="subheader text-center">Socialee ist soziales Netzwerk, Werkzeug, Bank, weiße Leinwand. Wir bauen, was uns fehlt. Bau mit!<br/><a href="#" data-reveal-id="manifestModal"><strong>&#8594; Brief an die Menschheit. &#8592;</strong></a></h6>
           </div>
-        </div>    
-      </div> 
+        </div>
+      </div>
 
       <div class="row">
         <div class="small-8 small-centered columns"><hr/>
@@ -34,7 +33,13 @@
             <div id="questionnavleft">&larr;</div>
             <div id="questionnavright">&rarr;</div>
             {% csrf_token %}
+
+            {% if form.non_field_errors %}
+            {# TODO: styling #}
+            Das Formular konnte nicht verarbeitet werden!
             {{ form.non_field_errors }}
+            {% endif %}
+
             <div class="socialee-lp-questions">
               <div class="fieldWrapper">
                 <div class="question-slide">
@@ -42,27 +47,27 @@
                   <h6 style="text-transform: lowercase;">oder: </h6><h6>in welcher zukunft möchtest du leben. Was fehlt Dir in der Welt?</h6>
                   {{ form.output_title }}
                 </div>
-              </div>              
+              </div>
              <div class="fieldWrapper">
                 <div class="question-slide">
                   <h3 class="text-center">Was kannst Du gut? Was machst Du gerne?</h3>
                   <h6 style="text-transform: lowercase;">oder: </h6><h6>Womit würdest du gerne einen Beitrag leisten. Zur Zukunft Deiner Wahl sozusagen.</h6>
                   {{ form.input_title }}
-                </div>    
-              </div>    
+                </div>
+              </div>
               <div class="fieldWrapper">
                 <div class="question-slide">
                   <h3 class="text-center">Hast Du ein Projekt? Oder eine Idee?</h3>
                   <h6 style="text-transform: lowercase;">oder: </h6><h6>was würdest du tun, wenn du wüsstest du könntest nicht scheitern.</h6>
                   {{ form.project_title }}
-                </div>    
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      
+
       <div class="row">
         <div class="small-8 small-centered columns">
           {% if not request.user.is_authenticated %}
@@ -80,7 +85,7 @@
               </div>
             </div>
           </div>
-          {% endif %}  
+          {% endif %}
           {% if redirect_field_value %}
           <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
           {% endif %}
@@ -111,11 +116,11 @@
         {# <!--<li class="{% cycle "label-projects" "label-inputs" "label-outputs" %}">{{ item.title }}</li>--> #}
         <li class="label-{{item.itemclass}}">{{ item.title }}</li>
         {% endfor %}
-        
+
         <!--{% for input in inputs %}
         <li class="label-inputs">{{ input.title }}</li>
         {% endfor %}
-        
+
         {% for output in outputs %}
         <li class="label-outputs">{{ output.title }}</li>
         {% endfor %}-->
@@ -128,7 +133,7 @@
         <li><a class="socialee-button" href="#projects">Socialee's Projekte</a></li>
         <li><a class="socialee-button" href="#questions">Ich will auch was eintragen!</a></li>
       </ul>
-    </div>   
+    </div>
   </div>
 
   <div class="section">
@@ -146,7 +151,7 @@
           <h1 class="text-center">online geht auch offline</h1>
           <h6 class="subheader text-center">Wir schmeißen immer gerne mit Zetteln um uns. <a href="{% static "img/zettel/for_download/Zettel_AntonsReise_download.pdf" %}" target="_blank"><strong>&#8594; Hole Dir Deinen Zettel! &#8592;</strong></a></h6>
         </div>
-      </div>    
+      </div>
     </div>
 
     <div class="row zettel-wrap">
@@ -189,19 +194,18 @@
     </div>
   </div>
 
-  <div class="section">
+  <div class="section team-img-wrapper">
     <div class="row">
       <div class="small-12 small-centered columns">
         <p class="logo text-center">Socialee | Wir machen das jetzt mal.</p>
         <p class="copywrite text-center">Copyright © 2015 Socialee</p>
       </div>
-      <img src="{% static "img/team/moritz.png" %}" style="height:228px; position:absolute; left:0; z-index:10000;" title="Moritz Jüdes, CEO CHEF BOSS FOUNDER ENTREPRENEUR voll SOCIAL und Stur ohne Ende. Auch ganz nett.">
-      <img src="{% static "img/team/jochen.png" %}" style="width:130px; position:absolute; bottom:0px; right:120px; z-index:10000;" title="Jochen Nünning war unser Grafiker, bis sich der Arbeitsmarkt ihn uns weggeschnappt hat. Grrrr. .">
-      <img src="{% static "img/team/amira.png" %}" style="height:130px; position:absolute; left:0; top:100px; z-index:10000;" title="Amira Jehia, Netzwerkerin, Socialee engaged, gute Seele, tanzt auf zu vielen Hochzeiten.">
-      <img src="{% static "img/team/ben.png" %}" style="width:90px; position:absolute; right:0; top:0; z-index:10000;" title="Ben. Halber Grieche. Ben? Ben, was machst Du eigentlich?">
-      <img src="{% static "img/team/daniel.png" %}" style="width:180px; position:absolute; bottom:0px; left:120px; z-index:10000;" title="Entwickler, Ritter, Spaßvogel. Gute Mischung Daniel Hahler!">
-      {# <img src="{% static "img/team/ralf.png" %}" style="width:200px; position:absolute; bottom:0px; left:320px; z-index:10000;"> #}
-
+      <img src="{% static "img/team/moritz.png" %}" style="height:228px; left:0" title="Moritz Jüdes, CEO CHEF BOSS FOUNDER ENTREPRENEUR voll SOCIAL und Stur ohne Ende. Auch ganz nett.">
+      <img src="{% static "img/team/jochen.png" %}" style="width:130px; bottom:0px; right:120px" title="Jochen Nünning war unser Grafiker, bis sich der Arbeitsmarkt ihn uns weggeschnappt hat. Grrrr. .">
+      <img src="{% static "img/team/amira.png" %}" style="height:130px; left:0; top:100px" title="Amira Jehia, Netzwerkerin, Socialee engaged, gute Seele, tanzt auf zu vielen Hochzeiten.">
+      <img src="{% static "img/team/ben.png" %}" style="width:90px; right:0; top:0" title="Ben. Halber Grieche. Ben? Ben, was machst Du eigentlich?">
+      <img src="{% static "img/team/daniel.png" %}" style="width:180px; bottom:0px; left:120px" title="Entwickler, Ritter, Spaßvogel. Gute Mischung Daniel Hahler!">
+      {# <img src="{% static "img/team/ralf.png" %}" style="width:200px; bottom:0px; left:320px"> #}
       <!--<span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">extended information</span> # TODO: THIS DOES NOT WORK-->
   </div>
 </div>
@@ -214,7 +218,9 @@
 {% include "manifest_modal.html" %}
 {% include "wip_modal.html" %}
 
-{% addtoblock "js_ready" strip %}
+{% addtoblock "js" strip %}
+<script src="{% static "bower_components/fullpage.js/jquery.fullPage.js" %}"></script>
+<script>
 $('#fullpage_wrapper').fullpage({
       navigation: true,
       navigationPosition: 'left',
@@ -239,6 +245,7 @@ $('#fullpage_wrapper').fullpage({
       touchSensitivity: 15,
       normalScrollElementTouchThreshold: 5,
   });
+</script>
 {% endaddtoblock %}
 
 {% endblock %}

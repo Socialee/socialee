@@ -53,9 +53,12 @@
 
 {% include "comingsoon_modal.html" %}
 
-{% addtoblock "js_ready" strip %}
+{% addtoblock "js" strip %}
+<script src="{% static "bower_components/fullpage.js/jquery.fullPage.js" %}"></script>
+<script>
 $('#fullpage_wrapper').fullpage({
       anchors:['cafe','info','formular']
   });
+</script>
 {% endaddtoblock %}
 {% endblock %}
