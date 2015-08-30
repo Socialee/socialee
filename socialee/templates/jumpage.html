@@ -1,25 +1,9 @@
 {% load staticfiles %}
 
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en" data-ng-app="jumpage">
-<head prefix="og: http://ogp.me/ns#">                                                                               <!--
-              ____       _
-            |__\_\_o____/_|
-           <[___\_\_- - -<      BLUE SKIES AND HAPPY LANDINGS
-           |  o'       .
-                       .
-                        .
-                         .
-                          .
-                           .
-                            ..
-                              .
-                               ..
-                                 .
-                                  ..
-                                    ..)/
-                                    _@'
-                                     o\                                                                              -->
+<head prefix="og: http://ogp.me/ns#">
     <meta charset="UTF-8">
 
     <title>{{ jumpage.page_title }}</title>
@@ -50,11 +34,15 @@
 
     <link rel="stylesheet" href="{% static "css/jumpage.css" %}">
 
+    <link type="text/css" rel="stylesheet" href="{% static "webflow/css/webflow.css" %}" />
+    <link type="text/css" rel="stylesheet" href="{% static "webflow/css/antons-reise.webflow.css" %}" />
+
 </head>
 <body>
 {% block content %}
+<!--hierhin der Socialee nav bar-->
 
-    <header class="fixed">
+    <!--<header class="fixed">
     {% if jumpage.cover_photo %}
 
         <div class="titlepic" style="background-image: url({{ jumpage.cover_photo.source }})">
@@ -66,9 +54,90 @@
     <div class="container-map">
         <div id="map-canvas" class="map"></div>
     </div>
-    </header>
+    </header>-->
+<div class="contain-all" data-ix="nav-closed">
+    <div class="w-nav socialee-nav" data-collapse="none" data-animation="default" data-duration="400" data-contain="1" data-ix="keep-nav-open">
+      <a class="w-nav-brand w-hidden-small w-hidden-tiny" href="/"><img class="logo" src="{% static "img/logo/socialee_v.1.1_color_klein.png" %}" height="40">
+      </a>
+      <div class="w-container">
+        <nav class="w-nav-menu socialee-nav-menu" role="navigation"><a class="w-nav-link socialee-nav-menu-link" href="/">Home</a><a class="w-nav-link socialee-nav-menu-link" href="/#projekte">Projekte</a><a class="w-nav-link socialee-nav-menu-link" href="/">Mitmachen</a>
+        </nav>
+        <div class="w-nav-button">
+          <div class="w-icon-nav-menu"></div>
+        </div>
+      </div>
+    </div>
 
-    <section class="pdg white">
+    <div class="w-section w-clearfix _wf-header-img-wrapper" id="first-section" data-ix="fade-in-from-right"><img class="aufklappen" src="{% static "webflow/images/arrowdown.png" %}" data-ix="nav-open">
+      <div class="w-container _wf-titlediv">
+        <div class="w-row _wf-titlerow">
+          <div class="w-col w-col-6 w-col-stack _wf-projecttitle">
+            <h1 data-ix="fade-down">Antons Reise</h1>
+            <p class="_wf-untertitel" data-ix="fade-in-slowly">Ein Roadtrip von Westfalen nach Berlin</p>
+          </div>
+          <div class="w-col w-col-6 w-col-stack">
+            <ul class="w-list-unstyled w-hidden-tiny _wf-header-list">
+              <li class="_wf-label-header" data-ix="fade-in-from-right">Datum:</li>
+              <li class="_wf-label-header _wf-var" data-ix="fade-in-slowly">{% now "SHORT_DATE_FORMAT" %}</li>
+              <li class="_wf-label-header" data-ix="fade-in-from-right">letztes großes Erlebnis:</li>
+              <li class="_wf-label-header _wf-var" data-ix="fade-in-slowly">Bauer Jakob getroffen</li>
+              <li class="_wf-label-header" data-ix="fade-in-from-right">Wetter heute:</li>
+              <li class="_wf-label-header _wf-var" data-ix="fade-in-slowly">Regen und Sturm, ächz.</li>
+              <li class="_wf-label-header" data-ix="fade-in-from-right">gefahrene Kilometer:</li>
+              <li class="_wf-label-header _wf-var" data-ix="fade-in-slowly">124 km</li>
+              <li class="_wf-label-header" data-ix="fade-in-from-right">Wo sind wir gerade:</li>
+              <li class="_wf-label-header _wf-var" data-ix="fade-in-slowly">Ratsiek im Weserbergland</li>
+              <li class="_wf-label-header" data-ix="fade-in-from-right">Dieselverbrauch:</li>
+              <li class="_wf-label-header _wf-var" data-ix="fade-in-slowly">68 Liter</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-nav _wf-nav-bar" data-collapse="small" data-animation="default" data-duration="400" data-contain="1" data-ix="fade-in-slowly">
+      <div class="w-hidden-small w-hidden-tiny _wf-nav-bar-container w-container">
+        <nav class="w-nav-menu _wf-nav-menu socialee-nav-menu left" role="navigation"><a class="w-nav-link _wf-nav-menu-link" href="#first-section">Übersicht</a><a class="w-nav-link _wf-nav-menu-link" href="#second-section">Karte</a><a class="w-nav-link _wf-nav-menu-link" href="#third-section">Logbuch</a><a class="w-nav-link _wf-nav-menu-link" href="#fourth-section">Video</a><a class="w-nav-link _wf-nav-menu-link" href="#">Musik</a><a class="w-nav-link _wf-nav-menu-link" href="#">Geschichten</a><a class="w-nav-link _wf-nav-menu-link" href="#">Bilder</a><a class="w-nav-link _wf-nav-menu-link" href="#">Kontakt</a>
+        </nav>
+        <div class="w-nav-button">
+          <div class="w-icon-nav-menu"></div>
+        </div>
+      </div>
+    </div>
+
+    <!--<div class="container-map">
+        <div id="map-canvas" class="map"></div>
+    </div>-->
+    <!--<iframe src="https://www.google.com/maps/d/embed?mid=zBlpnfY3nAzk.kdUvwyOUTp6U" width="100%" height="480"></iframe>-->
+    <div class="w-container">
+        <h2>Geschichten vom Wegesrand</h2><p>Wenn Du auf eines der Bilder klickst, kommst Du zu unserer Facebookseite. Danke Jumpage!</p>
+        <!--jumpage content-->
+        <div class="row">
+            {% for post in jumpage.page.posts %}
+            {% if post.link %}
+            <a class="inline-column text-center" href="{{ post.link }}" target="_blank">
+            {# <p class="inline-column text-center"> #}
+                {% if post.full_picture %}
+                <img src="{{ post.full_picture}}" class="img-responsive" />
+                {% endif %}
+                {% if post.message %}
+                <p class="lead pdg">{{ post.message }}</p>
+                {% endif %}
+            </a>
+            {% endif %}
+            {% endfor %}
+        </div><hr/>
+        <h2>Das Video des Tages</h2><p>Wir bemühen uns, euch mit dem latest most fresh hot shit zu versorgen. Aber manchmal wollen wir unsere Ruhe haben!</p>
+        <div class="fb-video"
+                     data-href="https://www.facebook.com/{{ jumpage.page.id }}/videos/{{ jumpage.page.featured_video.id }}/"
+                     data-allowfullscreen="true" data-width="100%"></div>
+        <!--end jumpage content-->
+    </div>
+
+
+
+</div>
+    <!--<section class="pdg white">
 
         <div class="container-fluid">
             <h1>{{ jumpage.page.name }}</h1>
@@ -99,16 +168,16 @@
             <a class="h3 pdg" href="{{ jumpage.page.link }}">Folge Anton auf Facebook</a>
         </div>
 
-    </section>
+    </section>-->
 
-    {% if jumpage.page.featured_video %}
+    <!--{% if jumpage.page.featured_video %}
         <div class="container-video">
             {#<img class="video-placeholder" src="{{ page.featured_video.picture }}" />#}
             <div class="fb-video"
                  data-href="https://www.facebook.com/{{ jumpage.page.id }}/videos/{{ jumpage.page.featured_video.id }}/"
                  data-allowfullscreen="true" data-width="100%"></div>
         </div><div class="hidden-xs"></div>
-    {% endif %}
+    {% endif %}-->
 
     {#<footer class="pdg">#}
         {#{% if jumpage.page.impressum %}#}
@@ -118,10 +187,11 @@
         {#{% endif %}#}
     {#</footer>#}
 
+    <hr/>
     <!-- no-edit -->
-    <section class="jumpage text-center"><a
+    <div class="jumpage text-center"><a
                 title="Make your Facebook page an awesome Jumpage"
-                href="https://jumpage.com">Built with love by Jumpage</a></section>
+                href="https://jumpage.com">Built with love by Jumpage</a></div>
 
 {% endblock content %}
 
@@ -132,6 +202,7 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script>window.jQuery.fn.modal || document.write(
             '<script src="{% static "/bower_components/bootstrap/dist/js/bootstrap.min.js" %}"><\/script>')</script>
+<script type="text/javascript" src="{% static "webflow/js/webflow.js" %}"></script>
 {% endblock %}
 
 {% block scripts %}
