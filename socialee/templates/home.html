@@ -218,7 +218,9 @@
 {% include "manifest_modal.html" %}
 {% include "wip_modal.html" %}
 
-{% addtoblock "js_ready" strip %}
+{% addtoblock "js" strip %}
+<script src="{% static "bower_components/fullpage.js/jquery.fullPage.js" %}"></script>
+<script>
 $('#fullpage_wrapper').fullpage({
       navigation: true,
       navigationPosition: 'left',
@@ -243,6 +245,7 @@ $('#fullpage_wrapper').fullpage({
       touchSensitivity: 15,
       normalScrollElementTouchThreshold: 5,
   });
+</script>
 {% endaddtoblock %}
 
 {% endblock %}
