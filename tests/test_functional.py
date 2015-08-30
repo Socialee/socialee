@@ -4,10 +4,15 @@ from selenium.webdriver.support.ui import WebDriverWait
 from socialee.models import UserEntry
 
 
+SIGNUP_SUBMIT_TEXT = "ab die Post!"
+
+def assert_signup_success(browser):
+    assert "Klasse, das hat geklappt!" in browser.html
+
+
 def test_signup_on_home_email_only(browser):
     browser.visit(reverse("home"))
-    submit_text = "ab die Post!"
-    browser.click_link_by_text(submit_text)
+    browser.click_link_by_text(SIGNUP_SUBMIT_TEXT)
 
     email_errorlist = browser.find_by_xpath("//form[@id='signup_form']"
                                             "//input[@id='id_email']"
@@ -16,15 +21,14 @@ def test_signup_on_home_email_only(browser):
     assert email_errorlist[0].text == "Dieses Feld ist zwingend erforderlich."
 
     browser.fill("email", "user@example.com")
-    browser.click_link_by_text(submit_text)
-    assert "Bestätige deine E-Mail-Adresse" in browser.html
+    browser.click_link_by_text(SIGNUP_SUBMIT_TEXT)
+    assert_signup_success(browser)
 
     assert UserEntry.objects.get(email="user@example.com")
 
 
 def test_signup_on_home_complete(browser):
     browser.visit(reverse("home"))
-    submit_text = "ab die Post!"
 
     next_button = browser.find_by_id("questionnavright")
     def click_and_is_scrolled_off(x, name):
@@ -41,8 +45,8 @@ def test_signup_on_home_complete(browser):
     browser.fill("project_title", "Projekt")
 
     browser.fill("email", "user@example.com")
-    browser.click_link_by_text(submit_text)
-    assert "Bestätige deine E-Mail-Adresse" in browser.html
+    browser.click_link_by_text(SIGNUP_SUBMIT_TEXT)
+    assert_signup_success(browser)
 
     user = UserEntry.objects.get(email="user@example.com")
     profile = user.profile
@@ -63,7 +67,7 @@ def test_signup_from_fluechtlingspaten(browser):
     browser.find_by_css('#form_fluechtlingspaten input[name=plz]')[0].fill("12345")
     browser.find_by_css('#form_fluechtlingspaten input[name=email]')[0].fill(
         "user@example.com\r")
-    assert "Bestätige deine E-Mail-Adresse" in browser.html
+    assert_signup_success(browser)
 
     profile = UserEntry.objects.get(email="user@example.com").profile
 
