@@ -5,11 +5,7 @@ from .models import Project, Profile, UserEntry, Input, Output
 
 
 class MySignupForm(SignupForm):
-    "A specialized signup form to not require the password fields."
-    def __init__(self, *args, **kwargs):
-        super(MySignupForm, self).__init__(*args, **kwargs)
-        del self.fields["password1"]
-        del self.fields["password2"]
+    "A specialized signup form to ask for extra fields."
 
     project_title = forms.CharField(label='Socialee sammelt Ideen und Projekte. Und wir bauen ein Netzwerk drumrum und dazwischen.', widget=forms.Textarea(attrs={'placeholder': 'Corinna arbeitet mit Flüchtlingen, Waldemar produziert tolle Kondome. Socialee sagt: "Stellt euch mal ein soziales Netzwerk vor!"','rows':4}), required=False, max_length=5000)
     output_title = forms.CharField(label='Und, was fehlt Dir? Welches Bedürfnis wird nicht befriedigt?', widget=forms.Textarea(attrs={'placeholder': 'Susi fehlt ein Fahrrad. Helge fehlt eine Freundin. Socialee fehlt auch noch alles Mögliche. ','rows':4}), required=False, max_length=5000)
@@ -19,12 +15,13 @@ class MySignupForm(SignupForm):
     last_name = forms.CharField(label='Nachname', widget=forms.TextInput(attrs={'placeholder': 'Nachname'}), max_length=30)
     # newsletter = forms.BooleanField()
 
-
     def save(self, request):
-        user = super(MySignupForm, self).save(request)
+        user = super().save(request)
 
-        user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
+        if "first_name" in self.cleaned_data:
+            user.first_name = self.cleaned_data['first_name']
+        if "last_name" in self.cleaned_data:
+            user.last_name = self.cleaned_data['last_name']
         user.save()
 
         # HACK
@@ -46,3 +43,15 @@ class MySignupForm(SignupForm):
             output = Output.objects.create(title=self.cleaned_data['output_title'])
             output.profiles.add(profile)
             output.save()
+        return user
+
+
+class MyHomeSignupForm(MySignupForm):
+    "A specialized signup form to not require some fields for signup on home."
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        del self.fields["password1"]
+        del self.fields["password2"]
+        del self.fields["first_name"]
+        del self.fields["last_name"]

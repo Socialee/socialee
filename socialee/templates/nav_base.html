@@ -8,10 +8,10 @@
         <aside class="right-off-canvas-menu">
             <ul class="off-canvas-list">
               {% if not request.user.is_authenticated %}
-              <li><a href="/accounts/signup" class="button offcanvas-button">Anmelden!</a></li>
-              {% else %} 
-              <li><a href="/accounts/logout" class="button offcanvas-button">Log out!</a></li>
-              {% endif %} 
+              <li><a href="{% url 'account_signup' %}" class="button offcanvas-button">Anmelden!</a></li>
+              {% else %}
+              <li><a href="{% url 'account_logout' %}" class="button offcanvas-button">Log out!</a></li>
+              {% endif %}
               <li><label>Menü</label></li>
               <li><a href="/blog">zum Blog</a></li>
               <li><a href="https://www.facebook.com/wirmachendasjetztmal?ref=hl" target="blank">zur Facebook Seite</a></li>

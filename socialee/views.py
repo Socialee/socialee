@@ -7,6 +7,7 @@ from django.views.generic import TemplateView
 from allauth.account.views import RedirectAuthenticatedUserMixin, SignupView
 import random
 from .models import Project, Input, Output
+from .forms import MyHomeSignupForm
 
 
 # Overwrite/disable dispatch method of RedirectAuthenticatedUserMixin (endless redirect on /).
@@ -23,6 +24,9 @@ class BaseView:
 
 class Home(BaseView, SignupView):
     template_name = 'home.html'
+
+    def get_form_class(self):
+        return MyHomeSignupForm
 
     def get_context_data(self, **kwargs):
         context = super(Home, self).get_context_data(**kwargs)
