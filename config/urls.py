@@ -12,7 +12,6 @@ urlpatterns = i18n_patterns(
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout',
         {'next_page': '/'}),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^$', views.Home.as_view(), name='account_signup'),
     url(r'^impressum/$', views.Impressum.as_view(), name='impressum'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^blog/', include('zinnia.urls', namespace='zinnia')),
