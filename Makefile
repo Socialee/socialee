@@ -177,7 +177,7 @@ test_heroku:
 	@# tox fails to build Pillow on Heroku.
 	@# Fails, because it cannot connect to "postgres"; https://code.djangoproject.com/ticket/16969
 	@# DATABASE_URL=$(HEROKU_POSTGRESQL_MAUVE_URL) py.test --strict -r fEsxXw tests
-	env DATABASE_URL=sqlite:///:memory: \
+	env DATABASE_URL=sqlite:///:memory: SKIP_BROWSER_TESTS=1 \
 		py.test --strict -r fEsxXw --create-db --runslow tests
 
 checkqa:
