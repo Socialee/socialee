@@ -33,7 +33,13 @@
             <div id="questionnavleft">&larr;</div>
             <div id="questionnavright">&rarr;</div>
             {% csrf_token %}
+
+            {% if form.non_field_errors %}
+            {# TODO: styling #}
+            Das Formular konnte nicht verarbeitet werden!
             {{ form.non_field_errors }}
+            {% endif %}
+
             <div class="socialee-lp-questions">
               <div class="fieldWrapper">
                 <div class="question-slide">
