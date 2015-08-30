@@ -1,8 +1,13 @@
+import os
+
+import pytest
 from django.core.urlresolvers import reverse
 from selenium.webdriver.support.ui import WebDriverWait
 
 from socialee.models import UserEntry
 
+pytestmark = pytest.mark.skipif(int(os.environ.get("SKIP_BROWSER_TESTS", 0)) == 1,
+                                reason="Browser tests are skipped (SKIP_BROWSER_TESTS=1)")
 
 SIGNUP_SUBMIT_TEXT = "ab die Post!"
 
