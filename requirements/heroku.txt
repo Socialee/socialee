@@ -26,6 +26,7 @@ django-polymorphic==0.7.1  # via django-filer
 django-reversion==1.9.3
 django-sekizai==0.8.2     # via cmsplugin-filer, django-cms
 django-select2==4.3.1     # via djangocms-link
+django-sslify==0.2.7
 django-tagging==0.4       # via django-blog-zinnia
 django-treebeard==3.0
 django-xmlrpc==0.1.5      # via django-blog-zinnia
