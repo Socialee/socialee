@@ -35,7 +35,7 @@ $(document).ready(function() {
       offcanvas : {
       // Sets method in which offcanvas opens.
       // [ move | overlap_single | overlap ]
-      open_method: 'move', 
+      open_method: 'move',
       // Should the menu close when a menu link is clicked?
       // [ true | false ]
       close_on_click : false
@@ -129,7 +129,7 @@ $(document).ready(function() {
 
   //jQueryUI stuff
 
-  $(function() {                
+  $(function() {
       $( document ).tooltip({
         track: true,
       });
