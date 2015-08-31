@@ -38,7 +38,6 @@ SECRET_KEY = env.str('DJANGO_SECRET_KEY',
 
 DEBUG = env.bool('DJANGO_DEBUG', False)
 INTERNAL_IPS = ('127.0.0.1',)
-TEMPLATE_DEBUG = env.bool('DJANGO_TEMPLATE_DEBUG', DEBUG)
 
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
 
@@ -142,6 +141,7 @@ TEMPLATES = [
                 'cms.context_processors.cms_settings',
                 'zinnia.context_processors.version',  # Optional
             ],
+            'debug': env.bool('DJANGO_TEMPLATE_DEBUG', DEBUG),
         },
     },
 ]
