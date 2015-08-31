@@ -1,0 +1,16 @@
+{% extends "account/allauth_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+
+{% block content %}
+<div class="row" style="margin-top:10rem;">
+	<div class="small-8 small-centered columns">
+    	<h1>Klasse, das hat geklappt!</h1>
+    	<p>Deine Antworten und Ideen sind bei uns angekommen. Sobald der Pool der Ideen, Fähigkeiten und Bedürfnisse gut gefüllt ist, kommt der nächste Schritt, das Vernetzen und Realisieren von Projekten. Wie gut ist das denn. Am besten Du erzählst gleich allen davon!</p>
+    	<p>Wir haben Dir eine Mail geschickt. Klicke dort den Link, damit wissen wir, dass Du wirklich Du bist.</p>
+    	<a href="/" class="socialee-button right">Nichts wie raus hier!</a>
+    </div>
+</div>    
+{% endblock %}

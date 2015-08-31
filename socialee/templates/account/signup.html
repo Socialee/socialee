@@ -1,0 +1,78 @@
+{% extends "account/allauth_base.html" %}
+{% load i18n %}
+{% load account %}
+{% load socialaccount %}
+{% include "socialaccount/snippets/login_extra.html" %}
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+    <div class="row" style="margin-top:200px;">
+        <div class="small-8 small-centered columns">
+	        <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+	        	{% csrf_token %}
+                <h2>You say you want a revolution?</h2>
+                <p>Hier kannst Du Dich bei Socialee anmelden. Was auch immer das zu diesem Zeitpunkt genau heißen soll. <!--Oder hast Du schon ein Konto und möchtest Dich <a href="{{ login_url }}">einloggen?</a>--></p>
+                <div class="row collapse">
+                  <div class="small-4 large-2 columns">
+                      <span class="prefix">Vorname</span>
+                  </div>
+                  <div class="small-8 large-10 columns">
+                      {{ form.first_name }}
+                      {{ form.first_name.errors }}
+                  </div>
+                </div>
+                <div class="row collapse">
+                  <div class="small-4 large-2 columns">
+                      <span class="prefix">Nachname</span>
+                  </div>
+                  <div class="small-8 large-10 columns">
+                      {{ form.last_name }}
+                      {{ form.last_name.errors }}
+                  </div>
+                </div>
+                <div class="row collapse">
+                  <div class="small-4 large-2 columns">
+                      <span class="prefix">E-Mail</span>
+                  </div>
+                  <div class="small-8 large-10 columns">
+                      {{ form.email }}
+                      {{ form.email.errors }}
+                  </div>
+                </div>
+                <div class="row collapse">
+                  <div class="small-4 large-2 columns">
+                      <span class="prefix">Passwort</span>
+                  </div>
+                  <div class="small-8 large-10 columns">
+                      {{ form.password1 }}
+                      {{ form.password1.errors }}
+                  </div>
+                </div>  
+                <div class="row collapse">
+                  <div class="small-4 large-2 columns">
+                      <span class="prefix">Passwort</span>
+                  </div>
+                  <div class="small-8 large-10 columns">
+                      {{ form.password2 }}
+                      {{ form.password2.errors }}
+                  </div>
+                </div>              
+	  			{% if redirect_field_value %}
+	  			<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+	  			{% endif %}
+	            <button class="small" type="submit">Ab die Post!</button>
+	            <a href="/" class="right">Raus hier!</a>
+	        </form>
+        	{% if socialaccount.providers %}
+                <p>Du kannst Dich auch mit Facebook anmelden. Verrückt!</p>{% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                {% include "socialaccount/snippets/login_extra.html" %}
+            {% else %}
+            <p>{% blocktrans %}If you have not created an account yet, then please
+            <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+            {% endif %}
+    	</div>
+    </div>
+
+
+{% endblock %}

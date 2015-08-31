@@ -2,8 +2,7 @@ from django import forms
 from django.contrib import admin, auth
 from django.utils.translation import ugettext_lazy as _
 
-from .models import (Input, Origin, Output, Profile,
-                     UserEntry, Zettel)
+from .models import *
 
 
 class InputZettelInline(admin.TabularInline):
@@ -44,6 +43,10 @@ class OutputAdmin(admin.ModelAdmin):
     model = Output
 
 
+class ProjectAdmin(admin.ModelAdmin):
+    model = Project
+
+
 class ZettelAdmin(admin.ModelAdmin):
     model = Zettel
     search_fields = ['profile__user__username', 'profile__user__email',
@@ -52,7 +55,7 @@ class ZettelAdmin(admin.ModelAdmin):
     list_filter = ['origin', 'origin__location']
     list_display = ['__str__', 'image', 'origin']
     inlines = [
-        InputZettelInline, OutputZettelInline
+        InputZettelInline, OutputZettelInline,
     ]
 
 
@@ -104,8 +107,9 @@ class ProfileEntryAdmin(admin.ModelAdmin):
     ]
 
 admin.site.register(Input, InputAdmin)
-admin.site.register(Origin, OriginAdmin)
 admin.site.register(Output, OutputAdmin)
+admin.site.register(Project, ProjectAdmin)
+admin.site.register(Origin, OriginAdmin)
 admin.site.register(Profile, ProfileEntryAdmin)
 admin.site.register(UserEntry, UserEntryAdmin)
-admin.site.register(Zettel, ZettelAdmin)
+admin.site.register(Zettel, ZettelAdmin)    

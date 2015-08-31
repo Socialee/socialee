@@ -2,9 +2,11 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from allauth.socialaccount.models import SocialAccount
+from allauth.account.models import EmailAddress
 
-# TODO: BaseModel: created/updated
-# TODO: mj>  user-Passwort / Postleitzahl / Geburtsdatum /
+import hashlib
+
 
 class UserEntry(User):
     class Meta(User.Meta):
@@ -34,6 +36,11 @@ class Profile(models.Model):
     # mj> geburtsdatum = models.DateField(auto_now=False, auto_now_add=False,
     #                                     blank=True, null=True)
     newsletter = models.BooleanField(default=False)
+ 
+    def is_email_verified(self):
+        return (self.user.is_authenticated and
+                EmailAddress.objects.filter(email=self.user.email,
+                                            verified=True).exists())
 
     origin = models.ForeignKey(Origin, blank=True, null=True)
 
@@ -59,6 +66,9 @@ class InputOutput(models.Model):
 
     profile = models.ForeignKey(Profile, null=True)
     zettel = models.ForeignKey('Zettel', null=True)
+    
+    def itemclass(self):
+        return self.__class__()
 
 
 class Input(InputOutput):
@@ -81,10 +91,6 @@ class Output(InputOutput):
                                                                   self.zettel)
 
 
-class Location(models.Model):
-    plz = models.CharField(max_length=5, null=True, blank=True, default='10969')
-
-
 class Zettel(models.Model):
     class Meta:
         verbose_name_plural = _('Zettel')
@@ -102,9 +108,28 @@ class Zettel(models.Model):
 
 
 class Project(models.Model):
-    title = models.CharField(max_length=100, unique=True)
+    title = models.TextField(max_length=5000)
+    profiles = models.ManyToManyField(Profile)
     inputs = models.ManyToManyField(Input)
     outputs = models.ManyToManyField(Output)
-    # desc
-    # img
-    # featured
+
+    def __str__(self):
+        return 'Project "{}"'.format(self.title)
+    def itemclass(self):
+        return self.__class__()
+
+
+class Dream(models.Model):
+    title = models.TextField(max_length=5000)
+    profiles = models.ManyToManyField(Profile)
+
+    def __str__(self):
+        return '{}'.format(self.title)
+
+
+class Wish(models.Model):
+    title = models.TextField(max_length=5000)
+    profiles = models.ManyToManyField(Profile)
+
+    def __str__(self):
+        return '{}'.format(self.title)
