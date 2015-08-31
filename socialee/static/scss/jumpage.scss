@@ -20,6 +20,7 @@ body {
   background: #ffffff;
   /* 	word-break: break-all; */
   word-wrap: break-word;
+  padding: 0 15px;
 }
 
 a {
@@ -138,11 +139,11 @@ header, section, footer {
 }
 
 .lead {
-  font-size: 1.5em;
+  font-size: 1.25em;
 }
 
 .pdg {
-  padding: .75em;
+  padding: .5em;
 }
 
 .white {
@@ -172,6 +173,7 @@ header, section, footer {
 }
 .fb-video {
   position: relative;
+  margin: 0 auto;
 }
 
 .map {

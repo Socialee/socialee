@@ -1441,7 +1441,7 @@ textarea.w-select {
 }
 .w-nav {
   position: relative;
-  background: #BBB;
+  background: #fff;
   z-index: 1000;
 }
 .w-nav:before,
@@ -1478,7 +1478,7 @@ textarea.w-select {
   color: #222222;
 }
 .w-nav-link.w--current {
-  color: #339ce1;
+  color: #f89406;
 }
 .w-nav-menu {
   position: relative;
@@ -1490,7 +1490,7 @@ textarea.w-select {
   top: 100%;
   left: 0;
   right: 0;
-  background: #999;
+  background: #fff;
   text-align: center;
   overflow: visible;
   min-width: 200px;
