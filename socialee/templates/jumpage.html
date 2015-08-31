@@ -68,130 +68,59 @@
       </div>
     </div>
 
-    <div class="w-section w-clearfix _wf-header-img-wrapper" id="first-section" data-ix="fade-in-from-right"><img class="aufklappen" src="{% static "webflow/images/arrowdown.png" %}" data-ix="nav-open">
-      <div class="w-container _wf-titlediv">
-        <div class="w-row _wf-titlerow">
-          <div class="w-col w-col-6 w-col-stack _wf-projecttitle">
-            <h1 data-ix="fade-down">Antons Reise</h1>
-            <p class="_wf-untertitel" data-ix="fade-in-slowly">Ein Roadtrip von Westfalen nach Berlin</p>
-          </div>
-          <div class="w-col w-col-6 w-col-stack">
-            <ul class="w-list-unstyled w-hidden-tiny _wf-header-list">
-              <li class="_wf-label-header" data-ix="fade-in-from-right">Datum:</li>
-              <li class="_wf-label-header _wf-var" data-ix="fade-in-slowly">{% now "SHORT_DATE_FORMAT" %}</li>
-              <li class="_wf-label-header" data-ix="fade-in-from-right">letztes großes Erlebnis:</li>
-              <li class="_wf-label-header _wf-var" data-ix="fade-in-slowly">Bauer Jakob getroffen</li>
-              <li class="_wf-label-header" data-ix="fade-in-from-right">Wetter heute:</li>
-              <li class="_wf-label-header _wf-var" data-ix="fade-in-slowly">Regen und Sturm, ächz.</li>
-              <li class="_wf-label-header" data-ix="fade-in-from-right">gefahrene Kilometer:</li>
-              <li class="_wf-label-header _wf-var" data-ix="fade-in-slowly">124 km</li>
-              <li class="_wf-label-header" data-ix="fade-in-from-right">Wo sind wir gerade:</li>
-              <li class="_wf-label-header _wf-var" data-ix="fade-in-slowly">Ratsiek im Weserbergland</li>
-              <li class="_wf-label-header" data-ix="fade-in-from-right">Dieselverbrauch:</li>
-              <li class="_wf-label-header _wf-var" data-ix="fade-in-slowly">68 Liter</li>
-            </ul>
+    <div class="w-section w-clearfix _wf-header-img-wrapper" data-ix="fade-in-from-right"><img class="aufklappen" src="{% static "webflow/images/arrowdown.png" %}" data-ix="nav-open">
+        <div class="w-nav _wf-nav-bar" data-collapse="small" data-animation="default" data-duration="400" data-contain="1" data-ix="fade-in-slowly">
+          <div class="w-hidden-small w-hidden-tiny _wf-nav-bar-container w-container">
+            <nav class="w-nav-menu _wf-nav-menu socialee-nav-menu" role="navigation"><a class="w-nav-link _wf-nav-menu-link" href="#first-section">Geschichten</a><a class="w-nav-link _wf-nav-menu-link" href="#second-section">Video</a><a class="w-nav-link _wf-nav-menu-link" href="#third-section">Reiseroute</a><!--<a class="w-nav-link _wf-nav-menu-link" href="#">Musik</a>--><a class="w-nav-link _wf-nav-menu-link" href="#fourth-section">Kontakt</a>
+            </nav><hr/>
+            <div class="w-nav-button">
+              <div class="w-icon-nav-menu"></div>
+            </div>
           </div>
         </div>
-      </div>
     </div>
 
-    <div class="w-nav _wf-nav-bar" data-collapse="small" data-animation="default" data-duration="400" data-contain="1" data-ix="fade-in-slowly">
-      <div class="w-hidden-small w-hidden-tiny _wf-nav-bar-container w-container">
-        <nav class="w-nav-menu _wf-nav-menu socialee-nav-menu left" role="navigation"><a class="w-nav-link _wf-nav-menu-link" href="#first-section">Übersicht</a><a class="w-nav-link _wf-nav-menu-link" href="#second-section">Karte</a><a class="w-nav-link _wf-nav-menu-link" href="#third-section">Logbuch</a><a class="w-nav-link _wf-nav-menu-link" href="#fourth-section">Video</a><a class="w-nav-link _wf-nav-menu-link" href="#">Musik</a><a class="w-nav-link _wf-nav-menu-link" href="#">Geschichten</a><a class="w-nav-link _wf-nav-menu-link" href="#">Bilder</a><a class="w-nav-link _wf-nav-menu-link" href="#">Kontakt</a>
-        </nav>
-        <div class="w-nav-button">
-          <div class="w-icon-nav-menu"></div>
-        </div>
-      </div>
-    </div>
-
-    <!--<div class="container-map">
-        <div id="map-canvas" class="map"></div>
-    </div>-->
-    <!--<iframe src="https://www.google.com/maps/d/embed?mid=zBlpnfY3nAzk.kdUvwyOUTp6U" width="100%" height="480"></iframe>-->
-    <div class="w-container">
-        <h2>Geschichten vom Wegesrand</h2><p>Wenn Du auf eines der Bilder klickst, kommst Du zu unserer Facebookseite. Danke Jumpage!</p>
-        <!--jumpage content-->
-        <div class="row">
-            {% for post in jumpage.page.posts %}
-            {% if post.link %}
-            <a class="inline-column text-center" href="{{ post.link }}" target="_blank">
-            {# <p class="inline-column text-center"> #}
-                {% if post.full_picture %}
-                <img src="{{ post.full_picture}}" class="img-responsive" />
-                {% endif %}
-                {% if post.message %}
-                <p class="lead pdg">{{ post.message }}</p>
-                {% endif %}
-            </a>
+    <h2 id="first-section"><br/>Geschichten vom Wegesrand</h2><br/>
+    <div class="row">
+        {% for post in jumpage.page.posts %}
+        {% if post.link %}
+        <a class="inline-column text-center" href="{{ post.link }}" target="_blank">
+        {# <p class="inline-column text-center"> #}
+            {% if post.full_picture %}
+            <img src="{{ post.full_picture}}" class="img-responsive" />
             {% endif %}
-            {% endfor %}
-        </div><hr/>
-        <h2>Das Video des Tages</h2><p>Wir bemühen uns, euch mit dem latest most fresh hot shit zu versorgen. Aber manchmal wollen wir unsere Ruhe haben!</p>
-        <div class="fb-video"
-                     data-href="https://www.facebook.com/{{ jumpage.page.id }}/videos/{{ jumpage.page.featured_video.id }}/"
-                     data-allowfullscreen="true" data-width="100%"></div>
-        <!--end jumpage content-->
+            {% if post.message %}
+            <p class="lead pdg">{{ post.message }}</p>
+            {% endif %}
+        </a>
+        {% endif %}
+        {% endfor %}
+    </div><hr/>
+
+    <h2 id="second-section"><br/>unser letztes Video</h2>
+            <div class="fb-video" style="padding:50px;" data-href="https://www.facebook.com/{{ jumpage.page.id }}/videos/{{ jumpage.page.featured_video.id }}/" data-allowfullscreen="true" data-width="100%" id="second_section"></div>
+    <hr/>
+
+    <h2 id="third-section"><br/>die Reiseroute nach Berlin</h2>
+    <div class="">
+        <iframe class="" src="https://www.google.com/maps/d/embed?mid=zKdwtyrAMUjA.kxgslM944KgQ" frameborder="0" width="100%" height="980px"></iframe>
+        <!--<div id="map-canvas" class="map"></div>-->
+    </div><hr/>
+
+    <div style="height:100vh;" id="fourth-section">
+        <div style="position: relative; top:50%;">
+            <h2 style="text-align: center;"><br/>Kontakt</h2>
+            <p style="text-align: center;">Die Treckerpiloten sind:<br/>Neil Masur &amp; Moritz Jüdes<br/>Schreibt uns an:<br/><br/><a href="mailto:antonsreise@socialee.de?Subject=Hallo%20liebe%20Treckerpiloten!"> antonsreise@socialee.de</p>
+        </div>
     </div>
-
-
 
 </div>
-    <!--<section class="pdg white">
 
-        <div class="container-fluid">
-            <h1>{{ jumpage.page.name }}</h1>
-            <p>{{ jumpage.page_description }}</p>
-            <br>
-        </div>
-
-        <div class="container-fluid">
-            {% if jumpage.page.posts %}
-            <div class="row">
-                {% for post in jumpage.page.posts %}
-                {% if post.link %}
-                <a class="inline-column text-center" href="{{ post.link }}">
-                    {% if post.full_picture %}
-                    <img src="{{ post.full_picture}}" class="img-responsive" />
-                    {% endif %}
-                    {% if post.message %}
-                    <p class="lead pdg">{{ post.message }}</p>
-                    {% endif %}
-                </a>
-                {% endif %}
-                {% endfor %}
-            </div>
-            {% endif %}
-        </div>
-
-        <div class="container-fluid text-center">
-            <a class="h3 pdg" href="{{ jumpage.page.link }}">Folge Anton auf Facebook</a>
-        </div>
-
-    </section>-->
-
-    <!--{% if jumpage.page.featured_video %}
-        <div class="container-video">
-            {#<img class="video-placeholder" src="{{ page.featured_video.picture }}" />#}
-            <div class="fb-video"
-                 data-href="https://www.facebook.com/{{ jumpage.page.id }}/videos/{{ jumpage.page.featured_video.id }}/"
-                 data-allowfullscreen="true" data-width="100%"></div>
-        </div><div class="hidden-xs"></div>
-    {% endif %}-->
-
-    {#<footer class="pdg">#}
-        {#{% if jumpage.page.impressum %}#}
-            {#<div class="container text-center">#}
-                {#<p>{{ jumpage.page.impressum }}</p>#}
-            {#</div>#}
-        {#{% endif %}#}
-    {#</footer>#}
-
-    <hr/>
-    <!-- no-edit -->
-    <div class="jumpage text-center"><a
+    <div class="jumpage text-center"><hr/><a
                 title="Make your Facebook page an awesome Jumpage"
-                href="https://jumpage.com">Built with love by Jumpage</a></div>
+                href="https://jumpage.com">Built with love by Jumpage</a><br/>
+                <a href="/">in Kooperation mit Socialee</a>
+    </div>
 
 {% endblock content %}
 
