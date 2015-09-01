@@ -3,7 +3,7 @@
 .fp-controlArrow {
     position: absolute;
     z-index: 4;
-    top: 95.5%;
+    bottom: 30px;
     cursor: pointer;
     width: 0;
     height: 0;
@@ -14,14 +14,14 @@
     transform: translate3d(0,0,0);
 
     &.fp-prev {
-        left: 30px;
+        left: 45%;
         width: 0;
         border-width: 15.5px 15px 15.5px 0;
         border-color: transparent #333 transparent transparent;
     }
 
     &.fp-next {
-        right: 30px;
+        right: 45%;
         border-width: 15.5px 0 15.5px 15px;
         border-color: transparent transparent transparent #333;
     }
@@ -34,7 +34,7 @@
     opacity: 1;
 
     &.bottom {
-        bottom: 68px;
+        bottom: 30px;
     }
 
     &.top {
