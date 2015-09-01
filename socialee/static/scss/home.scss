@@ -3,7 +3,7 @@
 .fp-controlArrow {
     position: absolute;
     z-index: 4;
-    bottom: 30px;
+    top: 95.5%;
     cursor: pointer;
     width: 0;
     height: 0;
@@ -34,7 +34,7 @@
     opacity: 1;
 
     &.bottom {
-        bottom: 30px;
+        bottom: 28px;
     }
 
     &.top {
