@@ -33,14 +33,14 @@ class Home(BaseView, SignupView):
         context['zettel_links'] = self.get_zettel_images("links")
         context['zettel_rechts'] = self.get_zettel_images("rechts")
         context['projects'] = list(Project.objects.all())
-        for i in range(1, 11):
-            context['projects'] += [Project(title='projectdummy' + str(i))]
+        # for i in range(1, 11):
+        #     context['projects'] += [Project(title='projectdummy' + str(i))]
         context['inputs'] = list(Input.objects.all())
-        for i in range(1, 11):
-            context['inputs'] += [Input(title='inputdummy' + str(i))]
+        # for i in range(1, 11):
+        #     context['inputs'] += [Input(title='inputdummy' + str(i))]
         context['outputs'] = list(Output.objects.all())
-        for i in range(1, 11):
-            context['outputs'] += [Output(title='outputdummy' + str(i))]
+        # for i in range(1, 11):
+        #     context['outputs'] += [Output(title='outputdummy' + str(i))]
         context['shuffled'] = context['outputs']+context['inputs']+context['projects']
         random.shuffle(context['shuffled'])
         return context
