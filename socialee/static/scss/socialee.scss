@@ -233,6 +233,21 @@ a {
       text-shadow:3px 3px 3px $monsoon;
     }
   }
+  .antonsinfo {
+    z-index: 500;
+    position: absolute;
+    left: 100px;
+    bottom: 0;
+    margin: 0;
+    padding: 0; 
+    :hover {
+      color: $orange;
+      text-shadow:3px 3px 3px $monsoon;
+    }
+    img {
+      width: 180px;
+    }
+  }
 
   .socialee-inline-buttons {
     list-style: none;
@@ -258,13 +273,16 @@ a {
      
   .socialee-entries {
     .label-Project {
-      background-color: rgba(#ABB7B7, 0.99);
+      background-color: rgba(#f89406, 0.8);
+      border-radius: 5px;
     }
     .label-Input {
       background-color: rgba(#EEEEEE, 0.99);
+      border-radius: 5px;
     }
     .label-Output {
       background-color: rgba(#BDC3C7, 0.99);
+      border-radius: 5px;
     }
     list-style: none;
     li {
