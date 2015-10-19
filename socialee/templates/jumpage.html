@@ -97,8 +97,23 @@
         {% endfor %}
     </div><hr/>
 
-    <h2 id="second-section"><br/>unser letztes Video</h2>
-            <div class="fb-video" style="padding:50px;" data-href="https://www.facebook.com/{{ jumpage.page.id }}/videos/{{ jumpage.page.featured_video.id }}/" data-allowfullscreen="true" data-width="100%" id="second_section"></div>
+    <h2 id="second-section"><br/>die Videos</h2>
+    {% if jumpage.page.videos %}
+        <div class="row">
+            {% for video in jumpage.page.videos %}
+                <div class="inline-column">
+                    {#<img class="video-placeholder" src="{{ video.picture }}" />#}
+                    <div class="fb-video"
+                         data-href="https://www.facebook.com/{{ jumpage.page.id }}/videos/{{ video.id }}/"
+                         data-allowfullscreen="true" data-width="100%"></div>
+                    {#{% if video.description %}#}
+                        {#<p class="lead pdg">{{ video.description }}</p>#}
+                    {#{% endif %}#}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+            <!--<div class="fb-video" style="padding:50px;" data-href="https://www.facebook.com/{{ jumpage.page.id }}/videos/{{ jumpage.page.featured_video.id }}/" data-allowfullscreen="true" data-width="100%" id="second_section"></div>-->
     <hr/>
 
     <h2 id="third-section"><br/>die Reiseroute nach Berlin</h2>
@@ -186,6 +201,23 @@
     {% endif %}
 
 {% endblock %}
+
+{# Piwik, copied from base.html. #}
+{% if not debug %}
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//piwik.thequod.de/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 25]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//piwik.thequod.de/piwik.php?idsite=25" style="border:0;" alt="" /></p></noscript>
+{% endif %}
+
 </body>
 </html>
-
