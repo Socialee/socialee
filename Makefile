@@ -161,17 +161,17 @@ install_testing_req:
 
 # Default test target: install reqs, and call test_psql/test_sqlite.
 test: $(if $(TOX_BIN),,install_testing_req)
-# look at $(DATABASE_URL) to use py34-psql/py34-sqlite.
+# look at $(DATABASE_URL) to use py35-psql/py35-sqlite.
 test: $(if $(findstring postgresql:,$(DATABASE_URL)),test_psql,test_sqlite)
 
 test_createdb: TEST_OPTIONS:=--create-db
 test_createdb: test
 
 test_sqlite:
-	tox -e py34-sqlite -- tests $(TEST_OPTIONS)
+	tox -e py35-sqlite -- tests $(TEST_OPTIONS)
 
 test_psql:
-	tox -e py34-psql -- tests $(TEST_OPTIONS)
+	tox -e py35-psql -- tests $(TEST_OPTIONS)
 
 test_heroku:
 	@# tox fails to build Pillow on Heroku.
