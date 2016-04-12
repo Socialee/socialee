@@ -71,7 +71,6 @@ INSTALLED_APPS = (
     'djangocms_teaser',
     'djangocms_video',
     'djangocms_link',
-    'djangocms_snippet',
     'djangocms_text_ckeditor',
 
     'allauth',
@@ -185,7 +184,6 @@ MIGRATION_MODULES = {
     'djangocms_inherit': 'djangocms_inherit.migrations_django',
     'djangocms_link': 'djangocms_link.migrations_django',
     'djangocms_picture': 'djangocms_picture.migrations_django',
-    'djangocms_snippet': 'djangocms_snippet.migrations_django',
     'djangocms_teaser': 'djangocms_teaser.migrations_django',
     'djangocms_video': 'djangocms_video.migrations_django',
 }
