@@ -13,7 +13,7 @@ Gemfile.lock
 # Python boilerplate.
 __pycache__
 *.pyc
-.pyenv-version
+.python-version
 
 models.png
 
