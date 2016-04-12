@@ -5,8 +5,8 @@
 #    pip-compile --output-file requirements/base.txt requirements/base.in
 #
 
+-e git+https://github.com/Fantomas42/django-app-namespace-template-loader@feature/django-1.9#egg=django-app-namespace-template-loader
 cmsplugin-filer==1.0.1
-django-app-namespace-template-loader==0.3.1
 django-appconf==1.0.1     # via cmsplugin-filer
 django-classy-tags==0.7.2  # via django-cms, django-sekizai
 django-cms==3.2.3
@@ -33,7 +33,7 @@ easy-thumbnails==2.3      # via cmsplugin-filer, django-filer
 html5lib==0.9999999       # via django-cms
 Pillow==3.2.0             # via easy-thumbnails
 pytz==2016.3
-six==1.10.0               # via django-app-namespace-template-loader, django-appconf, django-environ, html5lib
+six==1.10.0               # via django-appconf, django-environ, html5lib
 Unidecode==0.4.19         # via django-filer
 
 # The following packages are commented out because they are

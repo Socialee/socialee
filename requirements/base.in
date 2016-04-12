@@ -5,7 +5,8 @@ Pillow
 pytz
 django-environ
 
-django-app-namespace-template-loader  # (namespaced) inheritence for "extends" in templates.
+# django-app-namespace-template-loader  # (namespaced) inheritence for "extends" in templates.
+-e git+https://github.com/Fantomas42/django-app-namespace-template-loader@feature/django-1.9#egg=django-app-namespace-template-loader
 
 # Django CMS.
 django-cms
