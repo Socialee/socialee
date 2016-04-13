@@ -106,7 +106,7 @@ $(SCSS_DIR)/$(MAIN_SCSS): $(SCSS_DIR)/_settings.scss $(SCSS_COMPONENTS)
 	touch $@
 
 scss_force:
-	touch $(SCSS_FILES)
+	for f in $(SCSS_FILES); do test -f $$f && touch $$f; done
 	$(MY_MAKE) scss
 
 # Watch
