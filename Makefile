@@ -53,7 +53,10 @@ endif
 # Install scss through Gemfile.
 SCSS_BIN:=$(BUNDLER_DIR)/bin/scss
 $(SCSS_BIN): | $(BUNDLER_BIN) .bundle/config
-.bundle/config:
+# NOTE: prefer dependency on/through .bundle/config for Heroku's cache
+# to pick it up (via 00b48e9, not sure if still required?!), but also install
+# a missing scss.
+$(if $(wildcard .bundle/config),$(SCSS_BIN),.bundle/config):
 	$(BUNDLER_BIN) install --path $(BUNDLER_DIR) --binstubs $(BUNDLER_DIR)/bin
 
 BOWER_COMPONENTS_ROOT:=socialee/static
