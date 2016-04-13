@@ -1,6 +1,8 @@
 {
-  "name": "Socialee static files",
-  "version": "0.0.0",
+  "name": "socialee-static-files",
+  "homepage": "https://github.com/Socialee/socialee",
+  "description": "Static files for Socialee",
+  "main": "",
   "license": "None",
   "private": true,
   "ignore": [
