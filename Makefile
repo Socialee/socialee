@@ -70,7 +70,8 @@ SCSS_FILES=$(filter-out $(wildcard $(SCSS_DIR)/_*.scss),$(wildcard $(SCSS_DIR)/*
 CSS_FILES=$(patsubst $(SCSS_DIR)/%.scss,$(CSS_DIR)/%.css,$(SCSS_FILES))
 
 # SCSS dependencies/includes for main scss.
-SCSS_COMPONENTS:=$(wildcard $(BOWER_COMPONENTS)/foundation/scss/foundation/components/*.scss)
+FOUNDATION_ROOT:=$(BOWER_COMPONENTS)/foundation-sites
+SCSS_COMPONENTS=$(wildcard $(FOUNDATION_ROOT)/scss/components/*.scss)
 SCSS_COMPONENTS+=$(addprefix $(BOWER_COMPONENTS)/,\
 	slick.js/slick/slick.scss \
 	fullpage.js/jquery.fullPage.scss \
