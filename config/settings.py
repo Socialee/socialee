@@ -175,19 +175,6 @@ DATABASES = {
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
-MIGRATION_MODULES = {
-    # For non-ported Django-CMS plugins.
-    # Ref: https://django-cms.readthedocs.org/en/latest/how_to/install.html
-    'djangocms_file': 'djangocms_file.migrations_django',
-    'djangocms_flash': 'djangocms_flash.migrations_django',
-    'djangocms_googlemap': 'djangocms_googlemap.migrations_django',
-    'djangocms_inherit': 'djangocms_inherit.migrations_django',
-    'djangocms_link': 'djangocms_link.migrations_django',
-    'djangocms_picture': 'djangocms_picture.migrations_django',
-    'djangocms_teaser': 'djangocms_teaser.migrations_django',
-    'djangocms_video': 'djangocms_video.migrations_django',
-}
-
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
 
