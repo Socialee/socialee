@@ -136,7 +136,9 @@ bower_install:
 	mkdir -p -m 775 $(BOWER_COMPONENTS)
 	@# Create registry cache for bower manually, otherwise it fails silently.
 	mkdir -p $(bower_storage__registry)
-	cd $(BOWER_COMPONENTS_ROOT) && bower install $(BOWER_OPTIONS)
+	cd $(BOWER_COMPONENTS_ROOT) \
+		&& bower install --force-latest $(BOWER_OPTIONS) \
+		&& bower prune
 
 $(BOWER_COMPONENTS): $(BOWER_COMPONENTS_ROOT)/bower.json
 	$(MY_MAKE) bower_install
