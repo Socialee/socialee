@@ -50,15 +50,6 @@ $(BUNDLER_BIN):
 	gem install bundler
 endif
 
-# Install scss through Gemfile.
-SCSS_BIN:=$(BUNDLER_DIR)/bin/scss
-$(SCSS_BIN): | $(BUNDLER_BIN) .bundle/config
-# NOTE: prefer dependency on/through .bundle/config for Heroku's cache
-# to pick it up (via 00b48e9, not sure if still required?!), but also install
-# a missing scss.
-$(if $(wildcard .bundle/config),$(SCSS_BIN),.bundle/config):
-	$(BUNDLER_BIN) install --path $(BUNDLER_DIR) --binstubs $(BUNDLER_DIR)/bin
-
 BOWER_COMPONENTS_ROOT:=socialee/static
 BOWER_COMPONENTS:=$(BOWER_COMPONENTS_ROOT)/bower_components
 
@@ -78,10 +69,8 @@ SCSS_COMPONENTS+=$(addprefix $(BOWER_COMPONENTS)/,\
 	foundation-icon-fonts/_foundation-icons.scss \
 	)
 
-SCSS_RUN_NO_SOURCEMAP:=$(SCSS_BIN) --quiet --cache-location /tmp/sass-cache \
-	 -I $(BOWER_COMPONENTS) -I $(FOUNDATION_ROOT)/scss
-SCSS_RUN:=$(SCSS_RUN_NO_SOURCEMAP) \
-	 $(if $(USE_SCSS_SOURCEMAPS),--sourcemap,)
+SCSS_RUN_NO_SOURCEMAP:=sassc -I $(BOWER_COMPONENTS) -I $(FOUNDATION_ROOT)/scss
+SCSS_RUN:=$(SCSS_RUN_NO_SOURCEMAP) $(if $(USE_SCSS_SOURCEMAPS),--sourcemap,)
 
 NOTIFY_SEND:=$(shell command -v notify-send >/dev/null 2>&1 && echo notify-send || true)
 define func-notify-send
@@ -94,14 +83,15 @@ endef
 # The sourcemap reference gets fixed, and "@charset" gets added (for
 # consistency across different Ruby versions).  My "scss" keeps removing
 # them, while another one might add add them again.
-scss: LOCKFILE=/tmp/scss.lock
+SASSC_LOCKFILE=/tmp/scss.lock
 scss: $(CSS_FILES)
-$(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss | $(BOWER_COMPONENTS) $(SCSS_BIN)
+$(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss | $(BOWER_COMPONENTS)
 	@echo "SCSS: building $@"
 	@mkdir -p $(CSS_DIR)
 	$(if $(DEBUG),,@)\
-		while [ -e $(LOCKFILE) ] && kill -0 $$(cat $(LOCKFILE)); do echo "Waiting for lock.."; sleep 1; done; \
-		trap "rm -f $(LOCKFILE); exit" INT TERM EXIT; echo $$$$ > $(LOCKFILE); \
+		while [ -e $(SASSC_LOCKFILE) ] && kill -0 $$(cat $(SASSC_LOCKFILE)); do \
+			echo "Waiting for lock.."; sleep 1; done; \
+		trap "rm -f $(SASSC_LOCKFILE); exit" INT TERM EXIT; echo $$$$ > $(SASSC_LOCKFILE); \
 		r=$$($(SCSS_RUN) $< $@.tmp 2>&1) || { \
 		$(call func-notify-send, "scss failed: $$r"); \
 		echo "ERROR: scss failed: $$r" >&2; echo "command: $(SCSS_RUN) $< $@.tmp" >&2; exit 1; } \
@@ -111,7 +101,7 @@ $(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss | $(BOWER_COMPONENTS) $(SCSS_BIN)
 		&& sed -i.bak '$$ s/\.tmp\.map/.map/' $@.tmp \
 		&& mv $@.tmp.map $@.map,) \
 	&& mv $@.tmp $@ \
-	&& $(RM) $@.tmp.bak $(LOCKFILE)
+	&& $(RM) $@.tmp.bak $(SASSC_LOCKFILE)
 $(SCSS_DIR)/$(MAIN_SCSS): $(SCSS_DIR)/_settings.scss $(SCSS_COMPONENTS)
 	touch $@
 
