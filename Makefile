@@ -79,7 +79,7 @@ SCSS_COMPONENTS+=$(addprefix $(BOWER_COMPONENTS)/,\
 	)
 
 SCSS_RUN_NO_SOURCEMAP:=$(SCSS_BIN) --quiet --cache-location /tmp/sass-cache \
-	 -I $(BOWER_COMPONENTS)
+	 -I $(BOWER_COMPONENTS) -I $(FOUNDATION_ROOT)/scss
 SCSS_RUN:=$(SCSS_RUN_NO_SOURCEMAP) \
 	 $(if $(USE_SCSS_SOURCEMAPS),--sourcemap,)
 
