@@ -112,19 +112,3 @@ class Project(models.Model):
 
     def itemclass(self):
         return self.__class__()
-
-
-class Dream(models.Model):
-    title = models.TextField(max_length=5000)
-    profiles = models.ManyToManyField(Profile)
-
-    def __str__(self):
-        return '{}'.format(self.title)
-
-
-class Wish(models.Model):
-    title = models.TextField(max_length=5000)
-    profiles = models.ManyToManyField(Profile)
-
-    def __str__(self):
-        return '{}'.format(self.title)
