@@ -2,10 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from allauth.socialaccount.models import SocialAccount
 from allauth.account.models import EmailAddress
-
-import hashlib
 
 
 class UserEntry(User):
@@ -32,11 +29,10 @@ class Profile(models.Model):
     nickname = models.CharField(max_length=50, blank=True, null=True)
     # TODO: dh> "PhoneField" (Validierung etc)
     phone = models.CharField(max_length=50, blank=True)
-    plz = models.CharField(max_length=5, null=True, blank=True, default='10969')
-    # mj> geburtsdatum = models.DateField(auto_now=False, auto_now_add=False,
-    #                                     blank=True, null=True)
+    plz = models.CharField(max_length=5, null=True, blank=True,
+                           default='10969')
     newsletter = models.BooleanField(default=False)
- 
+
     def is_email_verified(self):
         return (self.user.is_authenticated and
                 EmailAddress.objects.filter(email=self.user.email,
@@ -76,9 +72,8 @@ class Input(InputOutput):
                              max_length=200)
 
     def __str__(self):
-        return 'Input "{}" from profile {} and zettel {}'.format(self.title,
-                                                                 self.profile,
-                                                                 self.zettel)
+        return 'Input "{}" from profile {} and zettel {}'.format(
+          self.title, self.profile, self.zettel)
 
 
 class Output(InputOutput):
@@ -86,9 +81,8 @@ class Output(InputOutput):
                              max_length=200)
 
     def __str__(self):
-        return 'Output "{}" from profile {} and zettel {}'.format(self.title,
-                                                                  self.profile,
-                                                                  self.zettel)
+        return 'Output "{}" from profile {} and zettel {}'.format(
+          self.title, self.profile, self.zettel)
 
 
 class Zettel(models.Model):
@@ -115,6 +109,7 @@ class Project(models.Model):
 
     def __str__(self):
         return 'Project "{}"'.format(self.title)
+
     def itemclass(self):
         return self.__class__()
 
