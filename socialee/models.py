@@ -32,6 +32,10 @@ class Profile(models.Model):
     plz = models.CharField(max_length=5, null=True, blank=True,
                            default='10969')
     newsletter = models.BooleanField(default=False)
+    liked_projects = models.ForeignKey('Project',
+                                       null=True,
+                                       on_delete=models.SET_NULL,
+                                       related_name='likes')
 
     def is_email_verified(self):
         return (self.user.is_authenticated and
@@ -56,13 +60,47 @@ class Profile(models.Model):
         return 'Profile ({})'.format(self.user)
 
 
+class Zettel(models.Model):
+    class Meta:
+        verbose_name_plural = _('Zettel')
+
+    profile = models.ForeignKey(Profile)
+    image = models.ImageField(upload_to='zettel/%Y-%m/', blank=True)
+    number = models.CharField(blank=True, null=True, max_length=50,
+                              default="2015_000_0000",
+                              verbose_name=_("Number on the zettel"))
+
+    origin = models.ForeignKey(Origin, blank=True, null=True)
+
+    def __str__(self):
+        return 'Zettel from {}'.format(self.profile)
+
+
 class InputOutput(models.Model):
+    UNKNOWN = ''
+    KNOWLEDGE = 'knowledge'
+    SKILL = 'skill'
+    PROBLEM = 'problem'
+    RESOURCE = 'resource'
+    SOLUTION = 'solution'
+    TYPES = (
+        (UNKNOWN, ''),
+        (KNOWLEDGE, 'Wissen'),
+        (SKILL, 'Fähigkeit'),
+        (PROBLEM, 'Problem'),
+        (RESOURCE, 'Resource'),
+        (SOLUTION, 'Lösung'),
+    )
+
     class Meta:
         abstract = True
 
     profile = models.ForeignKey(Profile, null=True)
-    zettel = models.ForeignKey('Zettel', null=True)
-    
+    zettel = models.ForeignKey(Zettel, null=True)
+    type = models.CharField(max_length=25,
+                            choices=list(TYPES),
+                            default=UNKNOWN)
+
     def itemclass(self):
         return self.__class__()
 
@@ -85,27 +123,15 @@ class Output(InputOutput):
           self.title, self.profile, self.zettel)
 
 
-class Zettel(models.Model):
-    class Meta:
-        verbose_name_plural = _('Zettel')
-
-    profile = models.ForeignKey(Profile)
-    image = models.ImageField(upload_to='zettel/%Y-%m/', blank=True)
-    number = models.CharField(blank=True, null=True, max_length=50,
-                              default="2015_000_0000",
-                              verbose_name=_("Number on the zettel"))
-
-    origin = models.ForeignKey(Origin, blank=True, null=True)
-
-    def __str__(self):
-        return 'Zettel from {}'.format(self.profile)
-
-
 class Project(models.Model):
     title = models.TextField(max_length=5000)
     profiles = models.ManyToManyField(Profile)
     inputs = models.ManyToManyField(Input)
     outputs = models.ManyToManyField(Output)
+    liked_users = models.ForeignKey(Profile,
+                                    null=True,
+                                    on_delete=models.SET_NULL,
+                                    related_name='likes')
 
     def __str__(self):
         return 'Project "{}"'.format(self.title)
