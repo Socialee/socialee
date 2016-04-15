@@ -113,8 +113,17 @@ scss_force:
 watch: scss
 	bin/devserver livereload_only
 
+run: DJANGO_DEBUG?=1
 run:
-	python manage.py runserver
+	DJANGO_DEBUG=$(DJANGO_DEBUG) python manage.py runserver $(RUNSERVER_ARGS)
+
+run_public: RUNSERVER_ARGS=0.0.0.0:8001
+run_public: DJANGO_DEBUG=0
+run_public: run
+
+run_public_debug: RUNSERVER_ARGS=0.0.0.0:8001
+run_public_debug: DJANGO_DEBUG=1
+run_public_debug: run
 
 run_heroku:
 	gunicorn config.wsgi:application_with_static
