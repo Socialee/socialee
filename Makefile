@@ -130,7 +130,10 @@ run_heroku:
 
 # Main target for development.
 # TODO: start tmux with watch process.
-dev: migrate run
+dev: install_dev_requirements migrate static run
+
+install_dev_requirements:
+	pip install -r requirements/dev.txt
 
 # Install bower components.
 bower_install:
