@@ -255,6 +255,9 @@ $(PIP_REQUIREMENTS_DIR)/%.txt: $(PIP_REQUIREMENTS_DIR)/%.in
 
 .PHONY: requirements requirements_rebuild
 # }}}
+
+OPEN=$(shell hash xdg-open 2>/dev/null && echo xdg-open || echo open)
 models.png:
-	python manage.py graph_models socialee auth | dot -Tpng > models.png && open models.png
+	python manage.py graph_models socialee auth | dot -Tpng > models.png
+	$(OPEN) models.png
 .PHONY: models.png
