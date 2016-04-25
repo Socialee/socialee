@@ -1,46 +1,30 @@
-{% load staticfiles %}
-<div class="fixed">
-  <nav class="top-bar" data-topbar role="navigation" style="z-index:999;">
-    <ul class="title-area">
-      <li class="name hide-for-small-only"><a href="#questions"><img src="{% static "img/logo/socialee_v.1.1_color_klein.png" %}"></a></li>
-       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-      <!--<li class="toggle-topbar menu-icon right-off-canvas-toggle"><a href="#"><span></span></a></li>-->
-    </ul>
-    <section class="top-bar-section">
-      <!-- Middle Nav Section -->
-      <ul class="nav-middle">
-        <li class="show-for-large-up" data-menuanchor="questions"><a href="#questions">drei Fragen</a></li>
-        <li class="show-for-large-up" data-menuanchor="answers"><a href="#answers">{{ shuffled|length }} Antworten</a></li>
-        <li class="show-for-large-up" data-menuanchor="projects"><a href="#projects">1 Projekt</a></li>
-        <li class="show-for-large-up" data-menuanchor="zettel"><a href="#zettel">{{ zettel_links|length }} Zettel</a></li>
-        <li class="show-for-large-up" data-menuanchor="contact"><a href="#contact">ein Kollektiv</a></li>
-        {# <li class="show-for-medium-up" data-menuanchor="#"><a href="{% url 'cafe' %}">Café</a></li> #}
-        {# <li class="show-for-medium-up" data-menuanchor="zettel"><a href="#zettel">Zettelwirtschaft</a></li> #}
-      </ul>
-    </section>
-    <section class="top-bar-section nav-right">
-      <!-- Right Nav Section -->
-      <ul>
-        <!--<li>
-          <a>
-            {% if request.user.is_authenticated %}
-              {% if request.user.first_name or request.user.last_name %}
-                {{ request.user.first_name }} {{ request.user.last_name }}
-                {% else %}
-                {{ request.user.username }}
-              {% endif %}
-            {% endif %}   
-          </a>
+<div class="top-bar">
+  <div class="top-bar-title">
+    <span data-responsive-toggle="responsive-menu" data-hide-for="medium">
+      <button class="menu-icon dark" type="button" data-toggle></button>
+    </span>
+    <strong>Socialee</strong>
+  </div>
+  <div id="responsive-menu">
+    <div class="top-bar-left">
+      <ul class="dropdown menu" data-dropdown-menu>
+        <li>
+          <a href="#">One</a>
+          <ul class="menu vertical">
+            <li><a href="#">One</a></li>
+            <li><a href="#">Two</a></li>
+            <li><a href="#">Three</a></li>
+          </ul>
         </li>
-        <li class="show-for-medium-up">
-          {% if request.user.is_authenticated %}
-          <a href="/accounts/logout/">Logout</a>
-          {% else %}
-          <a href="/accounts/login">Log In</a>
-          {% endif %}
-        </li>-->
-        <li class="right-off-canvas-toggle show-for-medium-up"><a href="#" style="font-size:1.2em"><span>&#8618;</span></a></li>
+        <li><a href="#">Two</a></li>
+        <li><a href="#">Three</a></li>
       </ul>
-    </section>
-  </nav>
+    </div>
+    <div class="top-bar-right">
+      <ul class="menu">
+        <li><input type="search" placeholder="Search"></li>
+        <li><button type="button" class="button">Search</button></li>
+      </ul>
+    </div>
+  </div>
 </div>
