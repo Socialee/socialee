@@ -47,13 +47,10 @@
 
         {# Not included anymore #}
         {# <script src="{% static "bower_components/foundation-sites/js/foundation.topbar.js" %}"></script> #}
+        {#<script src="{% static "bower_components/slick.js/slick/slick.js" %}"></script>#}
         {# Not included yet #}
         {# <script src="{% static "bower_components/foundation-sites/js/foundation.joyride.js" %}"></script> #}
-
-        <script src="{% static "bower_components/slick.js/slick/slick.js" %}"></script>
-
-        {# Render "js" block before main.js (for fullPage) #}
-        {% render_block "js" %}
+        
         <script src="{% static "js/main.js" %}"></script>
 
     {# Piwik #}

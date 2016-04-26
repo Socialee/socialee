@@ -198,9 +198,9 @@ SOCIALACCOUNT_PROVIDERS = \
         # 'VERSION': 'v2.3'
         }
     }
-ACCOUNT_FORMS = {
-    'signup': 'socialee.forms.MySignupForm',
-}
+# ACCOUNT_FORMS = {
+#     'signup': 'socialee.forms.MySignupForm',
+# }
 LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'

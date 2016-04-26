@@ -16,7 +16,6 @@ urlpatterns = i18n_patterns(
     url(r'^admin/', include(admin.site.urls)),
     url(r'^blog/', include('zinnia.urls', namespace='zinnia')),
     url(r'^comments/', include('django_comments.urls')),
-    url(r'^projekte/antonsreise/$', views.Jumpage.as_view(), name='jumpage'),
 
     # At the end, for django-cms.
     # Ref: https://django-cms.readthedocs.org/en/latest/how_to/install.html#url-configuration
