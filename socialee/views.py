@@ -27,3 +27,15 @@ class Home(BaseView, SignupView):
 
 class Impressum(BaseView, TemplateView):
     template_name = 'impressum.html'
+
+
+class WelcomePage(BaseView, TemplateView):
+    template_name = 'welcome.html'
+
+
+class StartPage(BaseView, TemplateView):
+    template_name = 'start.html'
+
+
+class ProjectOverview(BaseView, TemplateView):
+    template_name = 'project_overview.html'

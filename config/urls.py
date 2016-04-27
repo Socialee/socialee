@@ -12,10 +12,14 @@ urlpatterns = i18n_patterns(
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout',
         {'next_page': '/'}),
     url(r'^accounts/', include('allauth.urls')),
-    url(r'^impressum/$', views.Impressum.as_view(), name='impressum'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^blog/', include('zinnia.urls', namespace='zinnia')),
     url(r'^comments/', include('django_comments.urls')),
+    url(r'^impressum/$', views.Impressum.as_view(), name='impressum'),
+    url(r'^welcome/$', views.WelcomePage.as_view(), name='welcome'),
+    url(r'^start/$', views.StartPage.as_view(), name='start'),
+    url(r'^project_overview/$', views.ProjectOverview.as_view(), name='project_overview'),
+
 
     # At the end, for django-cms.
     # Ref: https://django-cms.readthedocs.org/en/latest/how_to/install.html#url-configuration
