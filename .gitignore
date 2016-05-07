@@ -19,3 +19,6 @@ models.png
 
 # Screenshots from --splinter-screenshot-dir=tests/screenshots (setup.cfg).
 tests/screenshots/
+
+*.sublime-project
+*.sublime-workspace
