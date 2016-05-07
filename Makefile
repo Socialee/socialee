@@ -63,6 +63,7 @@ CSS_FILES=$(patsubst $(SCSS_DIR)/%.scss,$(CSS_DIR)/%.css,$(SCSS_FILES))
 # SCSS dependencies/includes for main scss.
 FOUNDATION_ROOT:=$(BOWER_COMPONENTS)/foundation-sites
 SCSS_COMPONENTS=$(wildcard $(FOUNDATION_ROOT)/scss/*/*.scss)
+# Known scss files that are expected to exist after "bower_install".
 SCSS_COMPONENTS+=$(addprefix $(BOWER_COMPONENTS)/,\
 	slick.js/slick/slick.scss \
 	fullpage.js/jquery.fullPage.scss \
@@ -146,11 +147,11 @@ bower_install:
 		&& bower install --force-latest $(BOWER_OPTIONS) \
 		&& bower prune
 
-$(BOWER_COMPONENTS): $(BOWER_COMPONENTS_ROOT)/bower.json
+$(BOWER_COMPONENTS)/.installed_stamp: $(BOWER_COMPONENTS_ROOT)/bower.json
 	$(MY_MAKE) bower_install
 	touch $@
 
-static: $(BOWER_COMPONENTS) scss collectstatic
+static: $(BOWER_COMPONENTS)/.installed_stamp scss collectstatic
 
 # Collect static files from DJANGO_STATICFILES etc to STATIC_ROOT.
 collectstatic: $(BOWER_COMPONENTS)
