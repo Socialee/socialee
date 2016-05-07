@@ -3,12 +3,26 @@
 
 {% block content %}
 {% include "navbar.html" %}
-<div class="row lp-header">
-  <div class="column align-self-middle align-center">
-  	<h1>Wir können die Welt verändern. Endlich.</h1>
-  	<p>Socialee verbindet Ideengeber, Macher und Ermöglicher.</p>
-  	<button class="secondary hollow button" data-open="inviteModal">Ladet mich ein!</button>
-  	{# <button type="button" class="button" data-toggle="offCanvas">Open Menu</button> #}
+
+<div class="row lp-header align-center align-middle">
+  <div class="large-12 columns text-center">
+    <h1>Wir können die Welt verändern. Endlich.</h1>
+    <p>Socialee ist ein Marktplatz für <strong>Ideen, Projekte und Menschen.</strong> Wir verbinden <strong>Ideengeber, Macher und Ermöglicher.</strong></p>
+  </div>
+</div>
+
+<div class="row align-center">
+  <div class="large-8 columns">
+    <div class="flex-video widescreen vimeo">
+      <iframe src="https://player.vimeo.com/video/90407201" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<div class="row align-center">
+  <div class="large-10 columns text-center s-container">
+    <a class="button" href="{% url 'project_overview' %}">Die ersten Projekte ansehen</a><br />
+    <a data-open="inviteModal">Ladet mich ein!</a>
   </div>
 </div>
 

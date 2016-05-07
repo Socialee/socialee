@@ -7,6 +7,7 @@ from django.http import HttpResponse
 
 from allauth.account.views import RedirectAuthenticatedUserMixin, SignupView
 
+import random
 from .models import Project, Input, Output
 
 from .forms import StartProjectForm
@@ -24,9 +25,17 @@ RedirectAuthenticatedUserMixin.dispatch = dispatch_no_redirect
 class BaseView:
     def get_context_data(self, **kwargs):
         context = super(BaseView, self).get_context_data(**kwargs)
-        context['quote'] = Quote.objects.filter(active=True)
+        context['quotes'] = list(Quote.objects.filter(active=True))
+        context['random_quote'] = random.choice(context['quotes'])
+
         return context
 
+    # def get_queryset(self): # get_queryset ist für ListViews obligatorisch
+    #     """Return the last five published questions. (Not including those set to be published in the future.)"""
+    #     x = Question.objects.filter(pub_date__lte=timezone.now())
+    #     y = x.order_by('-pub_date')[:5]
+
+    #     return y
 
 class Home(BaseView, TemplateView):
     template_name = 'home.html'

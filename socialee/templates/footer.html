@@ -1,24 +1,9 @@
-<!--<div class="row">
-  <div class="callout large-12 text-center">
-	{% for i in quotes %}
-		<li style="list-style-type: none;"><h3>{{ i.title }}</h3><h6 class="subheader">{{ i.author }}</h6></li>
-	{% endfor %}
-
-	<p>Hast Du ein gutes Zitat?</p> <a href="{% url 'make_quote' %}">Schreibe uns!</a>
-
-  </div>
-</div>-->
-
-
-
-
 <footer class="footer-top">
   <div class="row">
     <div class="small-12 columns">
-		{% for i in quote %}
-			<p class="quote">{{ i.title }}</p>
-			<p class="quote-author">{{ i.author }}</p>
-		{% endfor %}
+    <p class="quote"> {{ random_quote.title }}</p> 
+    <p class="quote-author"> {{ random_quote.author }}</p>
+    <a class="float-right" href="{% url 'make_quote' %}">Gib Dein Zitat ab!</a>
     </div>
   </div>
 </footer>
