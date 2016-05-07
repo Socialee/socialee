@@ -85,6 +85,7 @@ INSTALLED_APPS = (
 
     # Main app.
     'socialee',
+    'quotes',
 )
 
 if DEBUG:
@@ -201,14 +202,14 @@ SOCIALACCOUNT_PROVIDERS = \
 # ACCOUNT_FORMS = {
 #     'signup': 'socialee.forms.MySignupForm',
 # }
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/welcome/'
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
-ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
+ACCOUNT_UNIQUE_EMAIL = True
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/

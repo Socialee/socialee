@@ -1,0 +1,38 @@
+<!--<div class="row">
+  <div class="callout large-12 text-center">
+	{% for i in quotes %}
+		<li style="list-style-type: none;"><h3>{{ i.title }}</h3><h6 class="subheader">{{ i.author }}</h6></li>
+	{% endfor %}
+
+	<p>Hast Du ein gutes Zitat?</p> <a href="{% url 'make_quote' %}">Schreibe uns!</a>
+
+  </div>
+</div>-->
+
+
+
+
+<footer class="footer-top">
+  <div class="row">
+    <div class="small-12 columns">
+		{% for i in quote %}
+			<p class="quote">{{ i.title }}</p>
+			<p class="quote-author">{{ i.author }}</p>
+		{% endfor %}
+    </div>
+  </div>
+</footer>
+
+<footer class="footer-bottom">
+  <div class="row">
+    <div class="small-12 columns">
+      <p class="slogan"></p>
+      <p class="links">
+        <a href="#">Home</a>
+        <a href="#">Blog</a>
+        <a href="#">über Socialee</a>
+      </p>
+      <p class="copywrite">Socialee © 2016</p>
+    </div>
+  </div>
+</footer>

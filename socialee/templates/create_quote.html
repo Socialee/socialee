@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row">
+    <div class="large-8 large-offset-2">
+      <h2>Schreibe uns Dein schönes Zitat!</h2>
+      <p>Wir gucken es uns an und schalten es frei, wenn es jugendfrei ist.</p>
+      <form method="POST" action=""> {% csrf_token %}
+        {{ form.as_p }} 
+        <input class="button" type="submit" value="Und ab dafür!" ></input>
+      </form>
+    </div>
+  </div>
+
+{% include "footer.html" %}
+{% endblock content %}

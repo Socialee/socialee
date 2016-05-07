@@ -1,1 +1,31 @@
-<p>Navbar</p>
+<div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="menu">
+      <li class="menu-text">Socialee</li>
+    </ul>
+  </div>
+  <div class="top-bar-righttodo"> <!-- TODO: Flexbox is messing with topbar -->
+    <ul class="dropdown menu" data-dropdown-menu>
+      {% if not request.user.is_authenticated %}
+      <li><a href="{% url 'account_login' %}">Log in</a></li>
+      {% else %}
+      <li><a href="{% url 'user_profile' %}">
+      {% if request.user.first_name %}
+      {{ request.user.first_name }}
+      {% else %}
+      {{ request.user.email }}
+      {% endif %}</a></li>
+      <li><a href="{% url 'account_logout' %}">Log out</a></li>
+      {% endif %}
+        <li>
+          <a href="">Menü</a>
+          <ul class="menu">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'project_overview' %}">Projekte</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="{% url 'startproject' %}">Projekt starten</a></li>
+          </ul>
+      </li>
+    </ul>
+  </div>
+</div>

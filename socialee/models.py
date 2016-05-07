@@ -8,8 +8,8 @@ from allauth.account.models import EmailAddress
 class UserEntry(User):
     class Meta(User.Meta):
         proxy = True
-        verbose_name = "User-Erfassung"
-        verbose_name_plural = "User-Erfassungen"
+        verbose_name = "manuelle User Erfassung"
+        verbose_name_plural = "manuelle User Erfassungen"
 
     def __str__(self):
         return "User ({})".format(self.username)
@@ -29,10 +29,10 @@ class Profile(models.Model):
     nickname = models.CharField(max_length=50, blank=True, null=True)
     # TODO: dh> "PhoneField" (Validierung etc)
     phone = models.CharField(max_length=50, blank=True)
-    plz = models.CharField(max_length=5, null=True, blank=True,
-                           default='10969')
+    plz = models.CharField(max_length=5, null=True, blank=True)
     newsletter = models.BooleanField(default=False)
     liked_projects = models.ForeignKey('Project',
+                                       blank=True,
                                        null=True,
                                        on_delete=models.SET_NULL,
                                        related_name='likes')
@@ -84,7 +84,7 @@ class InputOutput(models.Model):
     RESOURCE = 'resource'
     SOLUTION = 'solution'
     TYPES = (
-        (UNKNOWN, ''),
+        (UNKNOWN, 'sonstige'),
         (KNOWLEDGE, 'Wissen'),
         (SKILL, 'Fähigkeit'),
         (PROBLEM, 'Problem'),
@@ -106,7 +106,7 @@ class InputOutput(models.Model):
 
 
 class Input(InputOutput):
-    title = models.CharField(verbose_name="What's the offer?",
+    title = models.CharField(verbose_name="Was ist der Input?",
                              max_length=200)
 
     def __str__(self):
@@ -115,7 +115,7 @@ class Input(InputOutput):
 
 
 class Output(InputOutput):
-    title = models.CharField(verbose_name="What's the request?",
+    title = models.CharField(verbose_name="Was ist der Output?",
                              max_length=200)
 
     def __str__(self):
@@ -124,7 +124,9 @@ class Output(InputOutput):
 
 
 class Project(models.Model):
-    title = models.TextField(max_length=5000)
+    title = models.CharField(max_length=60)
+    tagline = models.CharField(max_length=140, null= True)
+    description = models.TextField(max_length=5000, null=True)
     profiles = models.ManyToManyField(Profile)
     inputs = models.ManyToManyField(Input)
     outputs = models.ManyToManyField(Output)

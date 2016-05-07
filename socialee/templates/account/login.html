@@ -1,13 +1,13 @@
-{% extends "account/base.html" %}
+{% extends "account/allauth_base.html" %}
 
 {% load i18n %}
 {% load account socialaccount %}
 
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
 
-{% block content %}
+{% block allauth_content %}
 
-<h1>{% trans "Sign In" %}</h1>
+<h1>Schön, dass Du da bist.</h1>
 
 {% get_providers as socialaccount_providers %}
 
@@ -29,8 +29,8 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 {% include "socialaccount/snippets/login_extra.html" %}
 
 {% else %}
-<p>{% blocktrans %}If you have not created an account yet, then please
-<a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+<p>{% blocktrans %}Wenn Du noch keinen Account hast,
+<a href="{{ signup_url }}">mach Dir einen.</a>{% endblocktrans %}</p>
 {% endif %}
 
 <form class="login" method="POST" action="{% url 'account_login' %}">
@@ -39,8 +39,17 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
-  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>
+  <button class="button" type="submit">{% trans "Sign In" %}</button>
+  <a href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+</form>
+
+<hr />
+
+<form>
+  <p>Noch kein Konto? Du kannst dich hier in unsere Warteliste eintragen und bist so eine/r der ersten, die eingeladen werden. Easy.</p>
+  E-Mail-Adresse
+  <input type="text" name="email" method="post" value=""></input>
+  <input class="button" type="submit" value="Und ab dafür!"></input>
 </form>
 
 {% endblock %}

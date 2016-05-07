@@ -1,7 +1,17 @@
-{% extends "base.html" %}
+{% extends "nav_base.html" %}
 {% load cms_tags staticfiles sekizai_tags%}
 
 {% block content %}
-<p>Home</p>
-<a href="{% url 'start' %}">Start</a>
+{% include "navbar.html" %}
+<div class="row lp-header">
+  <div class="column align-self-middle align-center">
+  	<h1>Wir können die Welt verändern. Endlich.</h1>
+  	<p>Socialee verbindet Ideengeber, Macher und Ermöglicher.</p>
+  	<button class="secondary hollow button" data-open="inviteModal">Ladet mich ein!</button>
+  	{# <button type="button" class="button" data-toggle="offCanvas">Open Menu</button> #}
+  </div>
+</div>
+
+{% include "invite_modal.html" %}
+{% include "footer.html" %}
 {% endblock %}

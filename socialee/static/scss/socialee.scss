@@ -1,3 +1,78 @@
 @import "settings";
 @import "foundation-sites/scss/foundation";
-@include foundation-everything;
+@include foundation-everything(true);
+
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.full-height {
+  height: 100vh;
+}
+
+.close-button {
+  padding: 2rem;
+}
+
+.lp-header {
+  background-color: white;
+  height: 100%;
+  text-align: center;
+}
+
+.footer-top {
+  background-color: $light-gray;
+  text-align: center;
+  padding: 0.5rem;
+  border-top: 1px solid $dark-gray;
+  .quote {
+      margin: 0;
+      padding: 0;
+      font-size: 1.8rem;
+  }
+  .quote-author {
+    color: $dark-gray;
+    font-size: 0.9rem;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.footer-bottom {
+  background-color: $medium-gray;
+  text-align: center;
+  font-size: 1rem;
+  padding: 2rem;
+  border-top: 1px solid $dark-gray;
+  p {
+    &.slogan {
+      color: $dark-gray;
+      font-size: 1.8rem;
+      margin: 0 0 1rem;
+    }
+    &.copywrite {
+      color: $dark-gray;
+      font-size: 0.75rem;
+      margin: 0;
+    }
+  }
+  .links a {
+    text-decoration: none;
+    list-style: none;
+    color: $dark-gray;
+    padding: 3rem 0 2rem;
+    margin: 0;
+    &::after {
+      content: "•";
+      padding: 0 0.4rem 0 0.8rem;
+    }
+    &:last-child::after {
+      content: "";
+      padding: 0 0.4rem 0 0.8rem;
+    }
+  }
+}
