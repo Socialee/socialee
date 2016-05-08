@@ -20,15 +20,9 @@
         {% render_block "js_head" %}
     </head>
     <body>
-        {% cms_toolbar %}
-        
-        {% block before_content %}  {# for base_navbar #}
-        {% endblock %}
+        {# {% cms_toolbar %} #}
 
         {% block content %}
-        {% endblock %}
-
-        {% block after_content %}  {# for base_navbar #}
         {% endblock %}
 
         {% if debug %}

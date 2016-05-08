@@ -1,9 +1,13 @@
 <footer class="footer-top">
   <div class="row">
     <div class="small-12 columns">
-    <p class="quote"> {{ random_quote.title }}</p> 
-    <p class="quote-author"> {{ random_quote.author }}</p>
-    <a class="float-right" href="{% url 'make_quote' %}">Gib Dein Zitat ab!</a>
+    {% if quote %}
+      <p class="quote"> {{ random_quote.title }}</p> 
+      <p class="quote-author"> {{ random_quote.author }}</p>
+      <a class="float-right" href="{% url 'make_quote' %}">Gib Dein Zitat ab!</a>
+      {% else %}
+      <p>Hm, es gibt hier noch keine Zitate. <a href="{% url 'make_quote' %}">Schreib das erste!</a></p>
+    {% endif %}
     </div>
   </div>
 </footer>
