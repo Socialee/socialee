@@ -1,7 +1,7 @@
 <footer class="footer-top">
   <div class="row">
     <div class="small-12 columns">
-    {% if quote %}
+    {% if random_quote %}
       <p class="quote"> {{ random_quote.title }}</p> 
       <p class="quote-author"> {{ random_quote.author }}</p>
       <a class="float-right" href="{% url 'make_quote' %}">Gib Dein Zitat ab!</a>

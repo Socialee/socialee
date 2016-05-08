@@ -28,7 +28,7 @@ class BaseView:
         quotes = Quote.objects.filter(active=True)
         if quotes:
             all_active_quotes = list(Quote.objects.filter(active=True))
-            context['random_quote'] = random.choice(context[all_active_quotes])
+            context['random_quote'] = random.choice(all_active_quotes)
         return context
 
     # def get_queryset(self): # get_queryset ist für ListViews obligatorisch
