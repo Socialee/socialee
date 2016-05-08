@@ -85,7 +85,7 @@ INSTALLED_APPS = (
 
     # Main app.
     'socialee',
-    'quotes',
+    'quotes.apps.QuotesConfig',
 )
 
 if DEBUG:
