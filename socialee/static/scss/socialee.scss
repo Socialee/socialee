@@ -91,3 +91,34 @@
     }
   }
 }
+
+.s-space {
+  height: 5rem;
+}
+
+/*Projectübersicht*/
+
+.s-projectcard{
+  border: solid 2px $medium-gray; 
+  padding: 1rem 1rem 0 1rem;
+  margin: 1rem;
+  background-color: $light-gray;
+  h3 {
+    line-height: 1;
+    margin-bottom: 0;
+  }
+  .tagline {
+    line-height: 1;
+  }
+  li {
+    font-size: 95%;
+    line-height: 1;
+  }
+  .s-icon-text {
+    font-size: 0.65rem;
+    font-weight: bold;
+  }
+}
+.s-projectcard:hover {
+  border: solid 2px $dark-gray; 
+}
