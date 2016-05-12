@@ -1,6 +1,8 @@
 {
-  "name": "Socialee static files",
-  "version": "0.0.0",
+  "name": "socialee-static-files",
+  "homepage": "https://github.com/Socialee/socialee",
+  "description": "Static files for Socialee",
+  "main": "",
   "license": "None",
   "private": true,
   "ignore": [
@@ -11,8 +13,8 @@
     "tests"
   ],
   "dependencies": {
-    "foundation": "~5.5.2",
-    "jquery": "~2.1.4",
+    "foundation-sites": "~6.2.1",
+    "jquery": "~2.2.0",
     "slick.js": "~1.5.3",
     "fullpage.js": "~2.6.5",
     "foundation-icon-fonts": "*",

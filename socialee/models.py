@@ -2,17 +2,14 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from allauth.socialaccount.models import SocialAccount
 from allauth.account.models import EmailAddress
-
-import hashlib
 
 
 class UserEntry(User):
     class Meta(User.Meta):
         proxy = True
-        verbose_name = "User-Erfassung"
-        verbose_name_plural = "User-Erfassungen"
+        verbose_name = "manuelle User Erfassung"
+        verbose_name_plural = "manuelle User Erfassungen"
 
     def __str__(self):
         return "User ({})".format(self.username)
@@ -32,11 +29,14 @@ class Profile(models.Model):
     nickname = models.CharField(max_length=50, blank=True, null=True)
     # TODO: dh> "PhoneField" (Validierung etc)
     phone = models.CharField(max_length=50, blank=True)
-    plz = models.CharField(max_length=5, null=True, blank=True, default='10969')
-    # mj> geburtsdatum = models.DateField(auto_now=False, auto_now_add=False,
-    #                                     blank=True, null=True)
+    plz = models.CharField(max_length=5, null=True, blank=True)
     newsletter = models.BooleanField(default=False)
- 
+    liked_projects = models.ForeignKey('Project',
+                                       blank=True,
+                                       null=True,
+                                       on_delete=models.SET_NULL,
+                                       related_name='likes')
+
     def is_email_verified(self):
         return (self.user.is_authenticated and
                 EmailAddress.objects.filter(email=self.user.email,
@@ -60,37 +60,6 @@ class Profile(models.Model):
         return 'Profile ({})'.format(self.user)
 
 
-class InputOutput(models.Model):
-    class Meta:
-        abstract = True
-
-    profile = models.ForeignKey(Profile, null=True)
-    zettel = models.ForeignKey('Zettel', null=True)
-    
-    def itemclass(self):
-        return self.__class__()
-
-
-class Input(InputOutput):
-    title = models.CharField(verbose_name="What's the offer?",
-                             max_length=200)
-
-    def __str__(self):
-        return 'Input "{}" from profile {} and zettel {}'.format(self.title,
-                                                                 self.profile,
-                                                                 self.zettel)
-
-
-class Output(InputOutput):
-    title = models.CharField(verbose_name="What's the request?",
-                             max_length=200)
-
-    def __str__(self):
-        return 'Output "{}" from profile {} and zettel {}'.format(self.title,
-                                                                  self.profile,
-                                                                  self.zettel)
-
-
 class Zettel(models.Model):
     class Meta:
         verbose_name_plural = _('Zettel')
@@ -107,29 +76,67 @@ class Zettel(models.Model):
         return 'Zettel from {}'.format(self.profile)
 
 
-class Project(models.Model):
-    title = models.TextField(max_length=5000)
-    profiles = models.ManyToManyField(Profile)
-    inputs = models.ManyToManyField(Input)
-    outputs = models.ManyToManyField(Output)
+class InputOutput(models.Model):
+    UNKNOWN = ''
+    KNOWLEDGE = 'knowledge'
+    SKILL = 'skill'
+    PROBLEM = 'problem'
+    RESOURCE = 'resource'
+    SOLUTION = 'solution'
+    TYPES = (
+        (UNKNOWN, 'sonstige'),
+        (KNOWLEDGE, 'Wissen'),
+        (SKILL, 'Fähigkeit'),
+        (PROBLEM, 'Problem'),
+        (RESOURCE, 'Resource'),
+        (SOLUTION, 'Lösung'),
+    )
 
-    def __str__(self):
-        return 'Project "{}"'.format(self.title)
+    class Meta:
+        abstract = True
+
+    profile = models.ForeignKey(Profile, null=True)
+    zettel = models.ForeignKey(Zettel, null=True)
+    type = models.CharField(max_length=25,
+                            choices=list(TYPES),
+                            default=UNKNOWN)
+
     def itemclass(self):
         return self.__class__()
 
 
-class Dream(models.Model):
-    title = models.TextField(max_length=5000)
-    profiles = models.ManyToManyField(Profile)
+class Input(InputOutput):
+    title = models.CharField(verbose_name="Was ist der Input?",
+                             max_length=200)
 
     def __str__(self):
-        return '{}'.format(self.title)
+        return 'Input "{}" from profile {} and zettel {}'.format(
+          self.title, self.profile, self.zettel)
 
 
-class Wish(models.Model):
-    title = models.TextField(max_length=5000)
-    profiles = models.ManyToManyField(Profile)
+class Output(InputOutput):
+    title = models.CharField(verbose_name="Was ist der Output?",
+                             max_length=200)
 
     def __str__(self):
-        return '{}'.format(self.title)
+        return 'Output "{}" from profile {} and zettel {}'.format(
+          self.title, self.profile, self.zettel)
+
+
+class Project(models.Model):
+    title = models.CharField(max_length=60)
+    tagline = models.CharField(max_length=140, null= True)
+    description = models.TextField(max_length=5000, null=True)
+    profiles = models.ManyToManyField(Profile)
+    inputs = models.ManyToManyField(Input)
+    outputs = models.ManyToManyField(Output)
+    liked_users = models.ForeignKey(Profile,
+                                    null=True,
+                                    on_delete=models.SET_NULL,
+                                    related_name='likes')
+
+    def __str__(self):
+        return 'Project "{}"'.format(self.title)
+
+    def itemclass(self):
+        return self.__class__()

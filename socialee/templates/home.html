@@ -1,251 +1,32 @@
-{% extends "nav_base.html" %}
-{% load staticfiles sekizai_tags %}
-{% load account %}
-{% load i18n %}
-{% load socialaccount %}
-{% include "socialaccount/snippets/login_extra.html" %}
+{% extends "base.html" %}
 
 {% block content %}
-{% addtoblock "css" strip %}
-<link rel="stylesheet" href="{% static "css/socialee.css" %}" />
-<link rel="stylesheet" href="{% static "css/home.css" %}" />
-{% endaddtoblock %}
 
+{% include "navbar.html" %}
+{% include "messages.html" %}
 
-<div id="fullpage_wrapper">
-  <p id="draggable" class="socialee-feedback" title="Info &amp; Feedback"><a href="#" data-reveal-id="wipModal">*</a></p>
-
-  <div class="section">
-    {% include "socialee_lp_slider.html" %}
-    <form class="signup" id="signup_form" method="post" action="{% url 'home' %}">
-      <div class="row low1">
-        <div class="large-12 columns">
-          <div class="title-wrapper">
-            <h1 class="text-center"><small>Es muss was getan werden.</small> Tun wir es!</h1>
-            <h6 class="subheader text-center">Socialee ist soziales Netzwerk, Werkzeug, Bank, weiße Leinwand. Wir bauen, was uns fehlt. Bau mit!<br/><a href="#" data-reveal-id="manifestModal"><strong>&#8594; Brief an die Menschheit. &#8592;</strong></a></h6>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="small-8 small-centered columns"><hr/>
-          <div class="question-wrapper">
-            <div id="questionnavleft">&larr;</div>
-            <div id="questionnavright">&rarr;</div>
-            {% csrf_token %}
-
-            {% if form.non_field_errors %}
-            {# TODO: styling #}
-            Das Formular konnte nicht verarbeitet werden!
-            {{ form.non_field_errors }}
-            {% endif %}
-
-            <div class="socialee-lp-questions">
-              <div class="fieldWrapper">
-                <div class="question-slide">
-                  <h3 class="text-center">Was brauchst Du? Was wäre toll?</h3>
-                  <h6 style="text-transform: lowercase;">oder: </h6><h6>in welcher zukunft möchtest du leben. Was fehlt Dir in der Welt?</h6>
-                  {{ form.output_title }}
-                </div>
-              </div>
-             <div class="fieldWrapper">
-                <div class="question-slide">
-                  <h3 class="text-center">Was kannst Du gut? Was machst Du gerne?</h3>
-                  <h6 style="text-transform: lowercase;">oder: </h6><h6>Womit würdest du gerne einen Beitrag leisten. Zur Zukunft Deiner Wahl sozusagen.</h6>
-                  {{ form.input_title }}
-                </div>
-              </div>
-              <div class="fieldWrapper">
-                <div class="question-slide">
-                  <h3 class="text-center">Hast Du ein Projekt? Oder eine Idee?</h3>
-                  <h6 style="text-transform: lowercase;">oder: </h6><h6>was würdest du tun, wenn du wüsstest du könntest nicht scheitern.</h6>
-                  {{ form.project_title }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="row">
-        <div class="small-8 small-centered columns">
-          {% if not request.user.is_authenticated %}
-          <div class="lp-signup-form">
-            <div class="row collapse">
-              <div class="small-2 columns">
-                  <span class="prefix">E-Mail</span>
-              </div>
-              <div class="small-7 columns">
-                  {{ form.email }}
-                  {{ form.email.errors }}
-              </div>
-              <div class="small-3 columns">
-                <a class="button postfix" href='#' onclick='document.forms["signup_form"].submit(); return false;'>ab die Post!</a>
-              </div>
-            </div>
-          </div>
-          {% endif %}
-          {% if redirect_field_value %}
-          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-          {% endif %}
-          <div class="small-4 small-centered columns">
-          {% if request.user.is_authenticated %}
-          <button class="small radius expand" type="submit">Ab die Post!</button>
-          {% endif %}
-          </div>
-          <hr/>
-        </div>
-      </div>
-
-      <div class="row title-wrapper">
-        <h6 class="subheader text-center">Was passiert mit Deinen Ideen? Schau Dich um.</h6>
-        <ul class="socialee-inline-buttons">
-            <li><a class="socialee-button" href="#answers">Die Ideen der anderen</a></li>
-            <li><a class="socialee-button" href="#projects">Socialee's Projekte</a></li>
-            <li><a class="socialee-button" href="#zettel">Zettelwirtschaft</a></li>
-        </ul>
-      </div>
-    </form>
-  </div>
-
-  <div class="section">
-    <div class="socialee-entries-wrapper">
-      <ul class="socialee-entries">
-        {% for item in shuffled %}
-        {# <!--<li class="{% cycle "label-projects" "label-inputs" "label-outputs" %}">{{ item.title }}</li>--> #}
-        <li class="label-{{item.itemclass}}">{{ item.title }}</li>
-        {% endfor %}
-
-        <!--{% for input in inputs %}
-        <li class="label-inputs">{{ input.title }}</li>
-        {% endfor %}
-
-        {% for output in outputs %}
-        <li class="label-outputs">{{ output.title }}</li>
-        {% endfor %}-->
-
-      </ul><hr/>
-    </div>
-    <div class="row title-wrapper">
-      <h6 class="subheader text-center">Aus diesem Ideenpool entstehen Projekte. Ist das aufregend!</h6>
-      <ul class="socialee-inline-buttons">
-        <li><a class="socialee-button" href="#projects">Socialee's Projekte</a></li>
-        <li><a class="socialee-button" href="#questions">Ich will auch was eintragen!</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="project-slide">
-    {% include "socialee_project_slider.html" %}
-    </div>
-  </div>
-
-
-  <div class="section">
-
-    <div class="row low2">
-      <div class="large-12 columns">
-        <div class="title-wrapper">
-          <h1 class="text-center">online geht auch offline</h1>
-          <h6 class="subheader text-center">Wir schmeißen immer gerne mit Zetteln um uns. <a href="{% static "img/zettel/for_download/Zettel_AntonsReise_download.pdf" %}" target="_blank"><strong>&#8594; Hole Dir Deinen Zettel! &#8592;</strong></a></h6>
-        </div>
-      </div>
-    </div>
-
-    <div class="row zettel-wrap">
-      <div class="small-8 small-centered columns">
-        <div class="small-6 columns zettel-inner-wrap">
-          <div class="slider-overlay-top">
-            <i class="fi-arrow-up" id="navtopleft"></i>
-          </div>
-          <div class="zettel-slide-left">
-            {% for i in zettel_links %}
-              <div><img data-lazy="{{ i }}"/></div>
-            {% endfor %}
-          </div>
-          <div class="slider-overlay-bottom">
-            <i class="fi-arrow-down" id="navbottomleft"></i>
-          </div>
-        </div>
-
-        <div class="small-6 columns zettel-inner-wrap">
-          <div class="slider-overlay-top">
-            <i class="fi-arrow-up" id="navtopright" title="Sorry Leute, dass das bisher nur horizantal funktioniert, wir arbeiten dran."></i>
-          </div>
-          <div class="zettel-slide-right">
-            {% for i in zettel_rechts %}
-              <div><img data-lazy="{{ i }}"/></div>
-            {% endfor %}
-          </div>
-          <div class="slider-overlay-bottom">
-            <i class="fi-arrow-down" id="navbottomright"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row title-wrapper">
-      <h6 class="subheader text-center" style="margin-top:18px">Du willst Deinen Zettel abgeben?</h6>
-      <ol class="socialee-inline-buttons">
-          <li><a class="socialee-button" href="#">schicke eine Mail mit Deinem Zettel im Anhang</a></li>
-      </ol>
-    </div>
-  </div>
-
-  <div class="section team-img-wrapper">
-    <div class="row">
-      <div class="small-12 small-centered columns">
-        <p class="logo text-center">Socialee | Wir machen das jetzt mal.</p>
-        <p class="copywrite text-center">Copyright © 2015 Socialee</p>
-      </div>
-      <img src="{% static "img/team/moritz.png" %}" style="height:228px; left:0" title="Moritz Jüdes, CEO CHEF BOSS FOUNDER ENTREPRENEUR voll SOCIAL und Stur ohne Ende. Auch ganz nett.">
-      <img src="{% static "img/team/jochen.png" %}" style="width:130px; bottom:0px; right:120px" title="Jochen Nünning war unser Grafiker, bis sich der Arbeitsmarkt ihn uns weggeschnappt hat. Grrrr. .">
-      <img src="{% static "img/team/amira.png" %}" style="height:130px; left:0; top:100px" title="Amira Jehia, Netzwerkerin, Socialee engaged, gute Seele, tanzt auf zu vielen Hochzeiten.">
-      <img src="{% static "img/team/ben.png" %}" style="width:90px; right:0; top:0" title="Ben. Halber Grieche. Ben? Ben, was machst Du eigentlich?">
-      <img src="{% static "img/team/daniel.png" %}" style="width:180px; bottom:0px; left:120px" title="Entwickler, Ritter, Spaßvogel. Gute Mischung Daniel Hahler!">
-      {# <img src="{% static "img/team/ralf.png" %}" style="width:200px; bottom:0px; left:320px"> #}
-      <!--<span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">extended information</span> # TODO: THIS DOES NOT WORK-->
+<div class="row lp-header align-center align-middle">
+  <div class="large-12 columns text-center">
+    <h1>Wir können die Welt verändern. Endlich.</h1>
+    <p>Socialee ist ein Marktplatz für <strong>Ideen, Projekte und Menschen.</strong> Wir verbinden <strong>Ideengeber, Macher und Ermöglicher.</strong></p>
   </div>
 </div>
-<a class="exit-off-canvas"></a>
 
+<div class="row align-center">
+  <div class="large-8 columns">
+    <div class="flex-video widescreen vimeo">
+      <iframe src="https://player.vimeo.com/video/90407201" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
 
-{% include "login_modal.html" %}
-{% include "video_modal.html" %}
-{% include "comingsoon_modal.html" %}
-{% include "manifest_modal.html" %}
-{% include "wip_modal.html" %}
+<div class="row align-center">
+  <div class="large-10 columns text-center s-container">
+    <a class="button" href="{% url 'project_overview' %}">Die ersten Projekte ansehen</a><br />
+    <a data-open="inviteModal">Ladet mich ein!</a>
+  </div>
+</div>
 
-{% addtoblock "js" strip %}
-<script src="{% static "bower_components/fullpage.js/jquery.fullPage.js" %}"></script>
-<script>
-$('#fullpage_wrapper').fullpage({
-      navigation: true,
-      navigationPosition: 'left',
-      slidesNavigation: true,
-      slidesNavPosition: 'bottom',
-      navigationTooltips: ['Fragen', 'Antworten', 'Projekte', 'Zettel', 'Team'],
-      menu: '.nav-middle',
-      anchors:['questions', 'answers', 'projects', 'zettel', 'contact'],
-      css3: true,
-      scrollingSpeed: 700,
-      autoScrolling: false,
-      fitToSection: true,
-      scrollBar: true,
-      easing: 'easeInOutCubic',
-      easingcss3: 'ease',
-      loopBottom: false,
-      loopTop: false,
-      loopHorizontal: true,
-      continuousVertical: false,
-      normalScrollElements: '#element1, .element2',
-      scrollOverflow: false,
-      touchSensitivity: 15,
-      normalScrollElementTouchThreshold: 5,
-  });
-</script>
-{% endaddtoblock %}
-
+{% include "invite_modal.html" %}
+{% include "footer.html" %}
 {% endblock %}

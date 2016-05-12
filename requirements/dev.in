@@ -3,8 +3,7 @@
 -r base.in
 
 # For pip-compile, to build requirements files (`make requirements`).
-# Used in Makefile, too (via "grep pip-tools").
-git+git://github.com/blueyed/pip-tools.git@my-future#egg=pip-tools
+pip-tools
 
 pytest
 pytest-django

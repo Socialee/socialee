@@ -1,0 +1,27 @@
+<footer class="footer-top">
+  <div class="row">
+    <div class="small-12 columns">
+    {% if random_quote %}
+      <p class="quote"> {{ random_quote.title }}</p> 
+      <p class="quote-author"> {{ random_quote.author }}</p>
+      <a class="float-right" href="{% url 'make_quote' %}">Gib Dein Zitat ab!</a>
+      {% else %}
+      <p>Hm, es gibt hier noch keine Zitate. <a href="{% url 'make_quote' %}">Schreib das erste!</a></p>
+    {% endif %}
+    </div>
+  </div>
+</footer>
+
+<footer class="footer-bottom">
+  <div class="row">
+    <div class="small-12 columns">
+      <p class="slogan"></p>
+      <p class="links">
+        <a href="#">Home</a>
+        <a href="#">Blog</a>
+        <a href="#">über Socialee</a>
+      </p>
+      <p class="copywrite">Socialee © 2016</p>
+    </div>
+  </div>
+</footer>

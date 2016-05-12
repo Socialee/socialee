@@ -52,7 +52,7 @@ h6 {
 }
 p {
   margin-bottom: 7px;
-  font-family: Oswald, sans-serif;
+  /*font-family: Oswald, sans-serif;*/
   color: rgba(66, 66, 66, 0.94);
 }
 a {
@@ -66,9 +66,10 @@ a:hover {
   text-decoration: none;
 }
 ._wf-header-img-wrapper {
-  height: 240px;
-  padding: 0px;
-  background-image: url('../images/NeilTrecker_fb.jpg');
+  height: 100vh;
+  padding: 0;
+  /*background-image: url('../images/NeilTrecker_fb.jpg');*/
+  background-image: url('../images/Titellogo_socialee_jumpage.jpg');
   background-position: 50% 50%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -105,7 +106,7 @@ a:hover {
   margin-left: 2px;
   padding: 1px 5px;
   background-color: rgba(230, 140, 5, 0.27);
-  font-family: Oswald, sans-serif;
+  /*font-family: Oswald, sans-serif;*/
   font-size: 14px;
 }
 ._wf-label-header._wf-var {
@@ -120,7 +121,9 @@ a:hover {
   position: static;
 }
 ._wf-nav-bar {
-  background-color: #f0f0f0;
+  background-color: #fff;
+  position: relative;
+  top: 80%;
 }
 ._wf-nav-menu-link:hover {
   color: #929296;

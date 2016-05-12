@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include "navbar.html" %}
+  <div class="row align-center align-middle">
+    <div class="full-height"></div>
+    <div class="large-8 columns">
+      <h2>Schreibe uns Dein schönes Zitat!</h2>
+      <p>Wir gucken es uns an und schalten es frei, wenn es jugendfrei ist.</p>
+      <form method="POST" action=""> {% csrf_token %}
+        {{ form.as_p }} 
+        <input class="button" type="submit" value="Und ab dafür!" ></input>
+        <a href="{% url 'home' %}">Raus hier.</a>
+      </form>
+    </div>
+  </div>
+
+{% endblock content %}

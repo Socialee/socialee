@@ -1,3 +1,15 @@
 {% extends "base.html" %}
 
-
+{% block content %}
+<button class="close-button" aria-label="Close alert" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+<div class="row align-center align-middle">
+  <div class="full-height"></div>
+    <div class="large-8 columns">
+		{% block allauth_content %}
+		{% endblock allauth_content %}
+    </div>
+  </div>
+</div>
+{% endblock content %}

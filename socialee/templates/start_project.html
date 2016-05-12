@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load cms_tags staticfiles sekizai_tags%}
+
+{% block content %}
+
+<div class="row">
+	<div class="large-12 columns">
+		<form method="POST" action=""> {% csrf_token %}
+			{{ startprojectform.form.as_p }}		
+			<input class="button" type="submit" value="abschicken!"></input>
+		</form>
+	</div>
+</div>
+
+{% include "footer.html" %}
+{% endblock content %}

@@ -38,7 +38,6 @@ SECRET_KEY = env.str('DJANGO_SECRET_KEY',
 
 DEBUG = env.bool('DJANGO_DEBUG', False)
 INTERNAL_IPS = ('127.0.0.1',)
-TEMPLATE_DEBUG = env.bool('DJANGO_TEMPLATE_DEBUG', DEBUG)
 
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
 
@@ -72,13 +71,12 @@ INSTALLED_APPS = (
     'djangocms_teaser',
     'djangocms_video',
     'djangocms_link',
-    'djangocms_snippet',
     'djangocms_text_ckeditor',
 
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
+    #'allauth.socialaccount.providers.facebook',
 
     'django_comments',
     'tagging',
@@ -87,6 +85,7 @@ INSTALLED_APPS = (
 
     # Main app.
     'socialee',
+    'quotes.apps.QuotesConfig',
 )
 
 if DEBUG:
@@ -142,6 +141,7 @@ TEMPLATES = [
                 'cms.context_processors.cms_settings',
                 'zinnia.context_processors.version',  # Optional
             ],
+            'debug': env.bool('DJANGO_TEMPLATE_DEBUG', DEBUG),
         },
     },
 ]
@@ -154,7 +154,7 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-# for local. defined in envronment
+# for local. defined in environment
 EMAIL_BACKEND = env.str('DJANGO_EMAIL_BACKEND', 'django.core.mail.backends.console.EmailBackend')
 EMAIL_HOST = env.str('DJANGO_EMAIL_HOST', '')
 EMAIL_HOST_PASSWORD = env.str('DJANGO_EMAIL_HOST_PASSWORD', '')
@@ -175,20 +175,6 @@ DATABASES = {
     'default': env.db("DATABASE_URL", default="sqlite:///db.sqlite3"),
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
-
-MIGRATION_MODULES = {
-    # For non-ported Django-CMS plugins.
-    # Ref: https://django-cms.readthedocs.org/en/latest/how_to/install.html
-    'djangocms_file': 'djangocms_file.migrations_django',
-    'djangocms_flash': 'djangocms_flash.migrations_django',
-    'djangocms_googlemap': 'djangocms_googlemap.migrations_django',
-    'djangocms_inherit': 'djangocms_inherit.migrations_django',
-    'djangocms_link': 'djangocms_link.migrations_django',
-    'djangocms_picture': 'djangocms_picture.migrations_django',
-    'djangocms_snippet': 'djangocms_snippet.migrations_django',
-    'djangocms_teaser': 'djangocms_teaser.migrations_django',
-    'djangocms_video': 'djangocms_video.migrations_django',
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
@@ -213,17 +199,17 @@ SOCIALACCOUNT_PROVIDERS = \
         # 'VERSION': 'v2.3'
         }
     }
-ACCOUNT_FORMS = {
-    'signup': 'socialee.forms.MySignupForm',
-}
-LOGIN_REDIRECT_URL = '/'
+# ACCOUNT_FORMS = {
+#     'signup': 'socialee.forms.MySignupForm',
+# }
+LOGIN_REDIRECT_URL = '/welcome/'
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
-ACCOUNT_USER_MODEL_USERNAME_FIELD = 'username'
+ACCOUNT_UNIQUE_EMAIL = True
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/

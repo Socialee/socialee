@@ -50,12 +50,6 @@ $(BUNDLER_BIN):
 	gem install bundler
 endif
 
-# Install scss through Gemfile.
-SCSS_BIN:=$(BUNDLER_DIR)/bin/scss
-$(SCSS_BIN): | $(BUNDLER_BIN) .bundle/config
-.bundle/config:
-	$(BUNDLER_BIN) install --path $(BUNDLER_DIR) --binstubs $(BUNDLER_DIR)/bin
-
 BOWER_COMPONENTS_ROOT:=socialee/static
 BOWER_COMPONENTS:=$(BOWER_COMPONENTS_ROOT)/bower_components
 
@@ -67,17 +61,16 @@ SCSS_FILES=$(filter-out $(wildcard $(SCSS_DIR)/_*.scss),$(wildcard $(SCSS_DIR)/*
 CSS_FILES=$(patsubst $(SCSS_DIR)/%.scss,$(CSS_DIR)/%.css,$(SCSS_FILES))
 
 # SCSS dependencies/includes for main scss.
-SCSS_COMPONENTS:=$(wildcard $(BOWER_COMPONENTS)/foundation/scss/foundation/components/*.scss)
+FOUNDATION_ROOT:=$(BOWER_COMPONENTS)/foundation-sites
+SCSS_COMPONENTS=$(wildcard $(FOUNDATION_ROOT)/scss/*/*.scss)
 SCSS_COMPONENTS+=$(addprefix $(BOWER_COMPONENTS)/,\
 	slick.js/slick/slick.scss \
 	fullpage.js/jquery.fullPage.scss \
 	foundation-icon-fonts/_foundation-icons.scss \
 	)
 
-SCSS_RUN_NO_SOURCEMAP:=$(SCSS_BIN) --quiet --cache-location /tmp/sass-cache \
-	 -I $(BOWER_COMPONENTS)
-SCSS_RUN:=$(SCSS_RUN_NO_SOURCEMAP) \
-	 $(if $(USE_SCSS_SOURCEMAPS),--sourcemap,)
+SCSS_RUN_NO_SOURCEMAP:=sassc -I $(BOWER_COMPONENTS) -I $(FOUNDATION_ROOT)/scss
+SCSS_RUN:=$(SCSS_RUN_NO_SOURCEMAP) $(if $(USE_SCSS_SOURCEMAPS),--sourcemap,)
 
 NOTIFY_SEND:=$(shell command -v notify-send >/dev/null 2>&1 && echo notify-send || true)
 define func-notify-send
@@ -90,14 +83,15 @@ endef
 # The sourcemap reference gets fixed, and "@charset" gets added (for
 # consistency across different Ruby versions).  My "scss" keeps removing
 # them, while another one might add add them again.
-scss: LOCKFILE=/tmp/scss.lock
+SASSC_LOCKFILE=/tmp/scss.lock
 scss: $(CSS_FILES)
-$(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss | $(BOWER_COMPONENTS) $(SCSS_BIN)
+$(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss | $(BOWER_COMPONENTS)
 	@echo "SCSS: building $@"
 	@mkdir -p $(CSS_DIR)
 	$(if $(DEBUG),,@)\
-		while [ -e $(LOCKFILE) ] && kill -0 $$(cat $(LOCKFILE)); do echo "Waiting for lock.."; sleep 1; done; \
-		trap "rm -f $(LOCKFILE); exit" INT TERM EXIT; echo $$$$ > $(LOCKFILE); \
+		while [ -e $(SASSC_LOCKFILE) ] && kill -0 $$(cat $(SASSC_LOCKFILE)); do \
+			echo "Waiting for lock.."; sleep 1; done; \
+		trap "rm -f $(SASSC_LOCKFILE); exit" INT TERM EXIT; echo $$$$ > $(SASSC_LOCKFILE); \
 		r=$$($(SCSS_RUN) $< $@.tmp 2>&1) || { \
 		$(call func-notify-send, "scss failed: $$r"); \
 		echo "ERROR: scss failed: $$r" >&2; echo "command: $(SCSS_RUN) $< $@.tmp" >&2; exit 1; } \
@@ -107,20 +101,29 @@ $(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss | $(BOWER_COMPONENTS) $(SCSS_BIN)
 		&& sed -i.bak '$$ s/\.tmp\.map/.map/' $@.tmp \
 		&& mv $@.tmp.map $@.map,) \
 	&& mv $@.tmp $@ \
-	&& $(RM) $@.tmp.bak $(LOCKFILE)
+	&& $(RM) $@.tmp.bak $(SASSC_LOCKFILE)
 $(SCSS_DIR)/$(MAIN_SCSS): $(SCSS_DIR)/_settings.scss $(SCSS_COMPONENTS)
 	touch $@
 
 scss_force:
-	touch $(SCSS_FILES)
+	for f in $(SCSS_FILES); do test -f $$f && touch $$f; done
 	$(MY_MAKE) scss
 
 # Watch
 watch: scss
 	bin/devserver livereload_only
 
+run: DJANGO_DEBUG?=1
 run:
-	python manage.py runserver
+	DJANGO_DEBUG=$(DJANGO_DEBUG) python manage.py runserver $(RUNSERVER_ARGS)
+
+run_public: RUNSERVER_ARGS=0.0.0.0:8001
+run_public: DJANGO_DEBUG=0
+run_public: run
+
+run_public_debug: RUNSERVER_ARGS=0.0.0.0:8001
+run_public_debug: DJANGO_DEBUG=1
+run_public_debug: run
 
 run_heroku:
 	gunicorn config.wsgi:application_with_static
@@ -136,7 +139,9 @@ bower_install:
 	mkdir -p -m 775 $(BOWER_COMPONENTS)
 	@# Create registry cache for bower manually, otherwise it fails silently.
 	mkdir -p $(bower_storage__registry)
-	cd $(BOWER_COMPONENTS_ROOT) && bower install $(BOWER_OPTIONS)
+	cd $(BOWER_COMPONENTS_ROOT) \
+		&& bower install --force-latest $(BOWER_OPTIONS) \
+		&& bower prune
 
 $(BOWER_COMPONENTS): $(BOWER_COMPONENTS_ROOT)/bower.json
 	$(MY_MAKE) bower_install
@@ -161,17 +166,17 @@ install_testing_req:
 
 # Default test target: install reqs, and call test_psql/test_sqlite.
 test: $(if $(TOX_BIN),,install_testing_req)
-# look at $(DATABASE_URL) to use py34-psql/py34-sqlite.
+# look at $(DATABASE_URL) to use py35-psql/py35-sqlite.
 test: $(if $(findstring postgresql:,$(DATABASE_URL)),test_psql,test_sqlite)
 
 test_createdb: TEST_OPTIONS:=--create-db
 test_createdb: test
 
 test_sqlite:
-	tox -e py34-sqlite -- tests $(TEST_OPTIONS)
+	tox -e py35-sqlite -- tests $(TEST_OPTIONS)
 
 test_psql:
-	tox -e py34-psql -- tests $(TEST_OPTIONS)
+	tox -e py35-psql -- tests $(TEST_OPTIONS)
 
 test_heroku:
 	@# tox fails to build Pillow on Heroku.
@@ -201,6 +206,9 @@ check_migrated:
 deploy_check: check test
 
 deploy: deploy_check static migrate
+
+deploy_staging:
+	git push staging staging:master
 
 # Gets run via bin/post_compile for Heroku.
 HEROKU_ZETTELS_MEDIA:=$(CURDIR)/.heroku/media-zettels

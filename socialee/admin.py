@@ -5,6 +5,21 @@ from django.utils.translation import ugettext_lazy as _
 from .models import *
 
 
+
+# admin.site.register(UserEntry)
+# admin.site.register(Origin)
+# admin.site.register(Profile)
+# admin.site.register(Zettel)
+# admin.site.register(InputOutput)
+# admin.site.register(Input)
+# admin.site.register(Output)
+# admin.site.register(Project)
+
+
+
+
+
+
 class InputZettelInline(admin.TabularInline):
     model = Input
     exclude = ('profile',)
@@ -112,4 +127,4 @@ admin.site.register(Project, ProjectAdmin)
 admin.site.register(Origin, OriginAdmin)
 admin.site.register(Profile, ProfileEntryAdmin)
 admin.site.register(UserEntry, UserEntryAdmin)
-admin.site.register(Zettel, ZettelAdmin)    
+admin.site.register(Zettel, ZettelAdmin)

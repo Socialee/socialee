@@ -7,27 +7,22 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {# The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags #}
-        <meta name="description" content="">
+        <meta name="description" content="Socialee. Es fehlt an nichts.">
         <meta name="author" content="">
         <link rel="icon" href="">
-        <title>Socialee | {% page_attribute "page_title" %}</title>
+        <title>Socialee | Wir machen das jetzt mal</title>
         <link type="text/css" rel="stylesheet" href="{% static "css/socialee.css" %}" />
 
-        <link rel="stylesheet" href="{% static "bower_components/jquery-ui/themes/smoothness/jquery-ui.css" %}" />
+        {# <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css'> #}
+        {# <link rel="stylesheet" href="{% static "bower_components/jquery-ui/themes/smoothness/jquery-ui.css" %}" /> #}
 
         {% render_block "css" %}
         {% render_block "js_head" %}
     </head>
     <body>
-        {% cms_toolbar %}
-
-        {% block before_content %}  {# for base_navbar #}
-        {% endblock %}
+        {# {% cms_toolbar %} #}
 
         {% block content %}
-        {% endblock %}
-
-        {% block after_content %}  {# for base_navbar #}
         {% endblock %}
 
         {% if debug %}
@@ -36,18 +31,26 @@
 
         <script src="{% static "bower_components/jquery/dist/jquery.js" %}"></script>
         <script src="{% static "bower_components/jquery-ui/jquery-ui.min.js" %}"></script>
-        <script src="{% static "bower_components/foundation/js/foundation/foundation.js" %}"></script>
-        <!--<script src="{% static "bower_components/foundation/js/foundation/foundation.tooltip.js" %}"></script>-->
-        <script src="{% static "bower_components/foundation/js/foundation/foundation.topbar.js" %}"></script>
-        <script src="{% static "bower_components/foundation/js/foundation/foundation.offcanvas.js" %}"></script>
-        <script src="{% static "bower_components/foundation/js/foundation/foundation.reveal.js" %}"></script>
-        <script src="{% static "bower_components/foundation/js/foundation/foundation.joyride.js" %}"></script>
-        <script src="{% static "bower_components/foundation/js/foundation/foundation.accordion.js" %}"></script>
-        <script src="{% static "bower_components/foundation/js/foundation/foundation.magellan.js" %}"></script>
-        <script src="{% static "bower_components/slick.js/slick/slick.js" %}"></script>
 
-        {# Render "js" block before main.js (for fullPage) #}
-        {% render_block "js" %}
+        {# Foundation Sites #}
+        <script src="{% static "bower_components/foundation-sites/dist/foundation.js" %}"></script>
+        {# <script src="{% static "bower_components/foundation-sites/js/foundation.core.js" %}"></script> #}
+        {# <script src="{% static "bower_components/foundation-sites/js/foundation.util.mediaQuery.js" %}"></script> #}
+        {# <script src="{% static "bower_components/foundation-sites/js/foundation.dropdownMenu.js" %}"></script> #}
+        {# <script src="{% static "bower_components/foundation-sites/js/foundation.util.keyboard.js" %}"></script> #}
+        {# <script src="{% static "bower_components/foundation-sites/js/foundation.util.box.js" %}"></script> #}
+        {# <script src="{% static "bower_components/foundation-sites/js/foundation.util.nest.js" %}"></script> #}
+        {# <script src="{% static "bower_components/foundation-sites/js/foundation.offcanvas.js" %}"></script> #}
+        {# <script src="{% static "bower_components/foundation-sites/js/foundation.reveal.js" %}"></script> #}
+        {# <script src="{% static "bower_components/foundation-sites/js/foundation.accordion.js" %}"></script> #}
+        {# <script src="{% static "bower_components/foundation-sites/js/foundation.magellan.js" %}"></script> #}
+
+        {# Not included anymore #}
+        {# <script src="{% static "bower_components/foundation-sites/js/foundation.topbar.js" %}"></script> #}
+        {#<script src="{% static "bower_components/slick.js/slick/slick.js" %}"></script>#}
+        {# Not included yet #}
+        {# <script src="{% static "bower_components/foundation-sites/js/foundation.joyride.js" %}"></script> #}
+        
         <script src="{% static "js/main.js" %}"></script>
 
     {# Piwik #}
