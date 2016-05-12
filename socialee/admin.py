@@ -40,10 +40,6 @@ class OutputProfileInline(admin.TabularInline):
     exclude = ('zettel',)
 
 
-class ProfileInline(admin.TabularInline):
-    model = Profile
-
-
 class ZettelInline(admin.TabularInline):
     model = Zettel
     exclude = ('inputs', 'outputs')

@@ -63,6 +63,7 @@ CSS_FILES=$(patsubst $(SCSS_DIR)/%.scss,$(CSS_DIR)/%.css,$(SCSS_FILES))
 # SCSS dependencies/includes for main scss.
 FOUNDATION_ROOT:=$(BOWER_COMPONENTS)/foundation-sites
 SCSS_COMPONENTS=$(wildcard $(FOUNDATION_ROOT)/scss/*/*.scss)
+# Known scss files that are expected to exist after "bower_install".
 SCSS_COMPONENTS+=$(addprefix $(BOWER_COMPONENTS)/,\
 	slick.js/slick/slick.scss \
 	fullpage.js/jquery.fullPage.scss \
@@ -130,7 +131,10 @@ run_heroku:
 
 # Main target for development.
 # TODO: start tmux with watch process.
-dev: migrate run
+dev: install_dev_requirements migrate static run
+
+install_dev_requirements:
+	pip install -r requirements/dev.txt
 
 # Install bower components.
 bower_install:
@@ -143,11 +147,11 @@ bower_install:
 		&& bower install --force-latest $(BOWER_OPTIONS) \
 		&& bower prune
 
-$(BOWER_COMPONENTS): $(BOWER_COMPONENTS_ROOT)/bower.json
+$(BOWER_COMPONENTS)/.installed_stamp: $(BOWER_COMPONENTS_ROOT)/bower.json
 	$(MY_MAKE) bower_install
 	touch $@
 
-static: $(BOWER_COMPONENTS) scss collectstatic
+static: $(BOWER_COMPONENTS)/.installed_stamp scss collectstatic
 
 # Collect static files from DJANGO_STATICFILES etc to STATIC_ROOT.
 collectstatic: $(BOWER_COMPONENTS)
@@ -252,6 +256,9 @@ $(PIP_REQUIREMENTS_DIR)/%.txt: $(PIP_REQUIREMENTS_DIR)/%.in
 
 .PHONY: requirements requirements_rebuild
 # }}}
+
+OPEN=$(shell hash xdg-open 2>/dev/null && echo xdg-open || echo open)
 models.png:
-	python manage.py graph_models socialee auth | dot -Tpng > models.png && open models.png
+	python manage.py graph_models socialee auth | dot -Tpng > models.png
+	$(OPEN) models.png
 .PHONY: models.png
