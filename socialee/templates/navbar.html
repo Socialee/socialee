@@ -18,13 +18,7 @@
       <li><a href="{% url 'account_logout' %}">Log out</a></li>
       {% endif %}
         <li>
-          <a href="">Menü</a>
-          <ul class="menu">
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'project_overview' %}">Projekte</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="{% url 'startproject' %}">Projekt starten</a></li>
-          </ul>
+        <button type="button" class="button" data-toggle="offCanvas">Menü</button>
       </li>
     </ul>
   </div>

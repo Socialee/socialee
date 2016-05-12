@@ -9,7 +9,6 @@ from socialee import views
 
 urlpatterns = i18n_patterns(
     '',
-    # url(r'^$', 'quotes.views.show_quote_list'),
     url(r'^$', views.Home.as_view(), name='home'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
     url(r'^accounts/', include('allauth.urls')),
