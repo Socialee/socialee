@@ -1,15 +1,9 @@
 # Requirements for local development.
-
 # Depends on base.in
+# Depends on testing.in
 
 # For pip-compile, to build requirements files (`make requirements`).
 pip-tools
-
-pytest
-pytest-django
-splinter
-pytest-splinter
-tox
 
 ipdb
 livereload
