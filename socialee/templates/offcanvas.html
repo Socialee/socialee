@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block before_content %}
+  <div class="off-canvas-wrapper">
+    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+      <div class="off-canvas position-right" id="offCanvas" data-off-canvas data-position="right">
+
+        <!-- Close button -->
+        <button class="close-button" aria-label="Close menu" type="button" data-close>
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+        <!-- Menu -->
+        <ul class="vertical menu">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'project_overview' %}">Projekte</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="{% url 'startproject' %}">Projekt starten</a></li>
+        </ul>
+
+      </div>
+
+      <div class="off-canvas-content" data-off-canvas-content>
+{% endblock before_content %}
+
+{% block content %}
+{% endblock content %}
+
+{% block after_content %}
+      </div>
+    </div>
+  </div>
+{% endblock after_content %}
