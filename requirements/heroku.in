@@ -1,10 +1,10 @@
 # Requirements for Heroku.
 
+# Depends on testing.in
+# Depends on production.in
+
 # Heroku package: django-toolbelt
 # Includes: Django, psycopg2, gunicorn, dj-database-url, dj-static, static
-
--r testing.in
--r production.in
 
 gunicorn
 dj-static

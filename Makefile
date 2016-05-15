@@ -247,12 +247,21 @@ $(PIP_REQUIREMENTS_HEROKU): $(PIP_REQUIREMENTS_PRODUCTION)
 PIP_REQUIREMENTS_ALL:=$(PIP_REQUIREMENTS_BASE) $(PIP_REQUIREMENTS_DEV) $(PIP_REQUIREMENTS_TESTING) $(PIP_REQUIREMENTS_PRODUCTION) $(PIP_REQUIREMENTS_HEROKU)
 requirements: $(PIP_REQUIREMENTS_ALL)
 requirements_rebuild:
+	@depcache=$$(python -c 'from piptools.cache import DependencyCache as DC; \
+	             print(DC()._cache_file)'); \
+	if [ -f "$$depcache" ]; then \
+	  echo "Removing $$depcache"; \
+	  $(RM) $$depcache; \
+	fi
 	$(RM) $(PIP_REQUIREMENTS_ALL)
 	$(MY_MAKE) requirements
 
 # Compile/build requirements.txt files from .in files, using pip-compile.
 $(PIP_REQUIREMENTS_DIR)/%.txt: $(PIP_REQUIREMENTS_DIR)/%.in
-	pip-compile $< > $@
+	@sed -n '1,10 s/# Depends on/-r/; s/\.in/.txt/p' "$<" > "$@"
+	pip-compile --no-header --output-file "$@.tmp" "$<" >/dev/null
+	@cat "$@.tmp" >> "$@"
+	@$(RM) "$@.tmp"
 
 .PHONY: requirements requirements_rebuild
 # }}}

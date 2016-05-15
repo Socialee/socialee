@@ -1,6 +1,6 @@
 # Requirements for local development.
 
--r base.in
+# Depends on base.in
 
 # For pip-compile, to build requirements files (`make requirements`).
 pip-tools
