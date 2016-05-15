@@ -21,3 +21,9 @@ djangocms_picture
 djangocms_teaser
 djangocms_video
 djangocms_link
+
+# Moved from dev.
+djangocms_snippet
+djangocms_text_ckeditor
+django-allauth
+django-blog-zinnia
