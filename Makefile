@@ -63,6 +63,7 @@ CSS_FILES=$(patsubst $(SCSS_DIR)/%.scss,$(CSS_DIR)/%.css,$(SCSS_FILES))
 # SCSS dependencies/includes for main scss.
 FOUNDATION_ROOT:=$(BOWER_COMPONENTS)/foundation-sites
 SCSS_COMPONENTS=$(wildcard $(FOUNDATION_ROOT)/scss/*/*.scss)
+# Known scss files that are expected to exist after "bower_install".
 SCSS_COMPONENTS+=$(addprefix $(BOWER_COMPONENTS)/,\
 	slick.js/slick/slick.scss \
 	fullpage.js/jquery.fullPage.scss \
@@ -130,7 +131,10 @@ run_heroku:
 
 # Main target for development.
 # TODO: start tmux with watch process.
-dev: migrate run
+dev: install_dev_requirements migrate static run
+
+install_dev_requirements:
+	pip install -r requirements/dev.txt
 
 # Install bower components.
 bower_install:
@@ -143,11 +147,11 @@ bower_install:
 		&& bower install --force-latest $(BOWER_OPTIONS) \
 		&& bower prune
 
-$(BOWER_COMPONENTS): $(BOWER_COMPONENTS_ROOT)/bower.json
+$(BOWER_COMPONENTS)/.installed_stamp: $(BOWER_COMPONENTS_ROOT)/bower.json
 	$(MY_MAKE) bower_install
 	touch $@
 
-static: $(BOWER_COMPONENTS) scss collectstatic
+static: $(BOWER_COMPONENTS)/.installed_stamp scss collectstatic
 
 # Collect static files from DJANGO_STATICFILES etc to STATIC_ROOT.
 collectstatic: $(BOWER_COMPONENTS)
@@ -238,20 +242,32 @@ PIP_REQUIREMENTS_TESTING:=$(PIP_REQUIREMENTS_DIR)/testing.txt
 $(PIP_REQUIREMENTS_DEV): $(PIP_REQUIREMENTS_BASE)
 $(PIP_REQUIREMENTS_TESTING): $(PIP_REQUIREMENTS_DEV)
 $(PIP_REQUIREMENTS_PRODUCTION): $(PIP_REQUIREMENTS_BASE)
-$(PIP_REQUIREMENTS_HEROKU): $(PIP_REQUIREMENTS_PRODUCTION)
+$(PIP_REQUIREMENTS_HEROKU): $(PIP_REQUIREMENTS_TESTING) $(PIP_REQUIREMENTS_PRODUCTION)
 
 PIP_REQUIREMENTS_ALL:=$(PIP_REQUIREMENTS_BASE) $(PIP_REQUIREMENTS_DEV) $(PIP_REQUIREMENTS_TESTING) $(PIP_REQUIREMENTS_PRODUCTION) $(PIP_REQUIREMENTS_HEROKU)
 requirements: $(PIP_REQUIREMENTS_ALL)
 requirements_rebuild:
+	@depcache=$$(python -c 'from piptools.cache import DependencyCache as DC; \
+	             print(DC()._cache_file)'); \
+	if [ -f "$$depcache" ]; then \
+	  echo "Removing $$depcache"; \
+	  $(RM) $$depcache; \
+	fi
 	$(RM) $(PIP_REQUIREMENTS_ALL)
 	$(MY_MAKE) requirements
 
 # Compile/build requirements.txt files from .in files, using pip-compile.
 $(PIP_REQUIREMENTS_DIR)/%.txt: $(PIP_REQUIREMENTS_DIR)/%.in
-	pip-compile $< > $@
+	@sed -n '1,10 s/# Depends on/-r/; s/\.in/.txt/p' "$<" > "$@"
+	pip-compile --no-header --output-file "$@.tmp" "$<" >/dev/null
+	@cat "$@.tmp" >> "$@"
+	@$(RM) "$@.tmp"
 
 .PHONY: requirements requirements_rebuild
 # }}}
+
+OPEN=$(shell hash xdg-open 2>/dev/null && echo xdg-open || echo open)
 models.png:
-	python manage.py graph_models socialee auth | dot -Tpng > models.png && open models.png
+	python manage.py graph_models socialee auth | dot -Tpng > models.png
+	$(OPEN) models.png
 .PHONY: models.png

@@ -1,38 +1,12 @@
 # Requirements for local development.
-
--r base.in
+# Depends on base.in
+# Depends on testing.in
 
 # For pip-compile, to build requirements files (`make requirements`).
 pip-tools
-
-pytest
-pytest-django
-splinter
-pytest-splinter
-tox
 
 ipdb
 livereload
 
 django-debug-toolbar
 django-extensions
-
-django-cms
-django-filer
-cmsplugin-filer
-django-reversion
-django-treebeard
-djangocms_file
-djangocms_flash
-# djangocms_googlemap
-djangocms_inherit
-djangocms_picture
-djangocms_teaser
-djangocms_video
-djangocms_link
-djangocms_snippet
-djangocms_text_ckeditor
-
-django-allauth
-
-django-blog-zinnia

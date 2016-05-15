@@ -1,1 +1,7 @@
--r dev.in
+# Requirements for tests.  Used for dev and heroku.
+
+pytest
+pytest-django
+splinter
+pytest-splinter
+tox
