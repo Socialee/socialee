@@ -258,8 +258,10 @@ requirements_rebuild:
 
 # Compile/build requirements.txt files from .in files, using pip-compile.
 $(PIP_REQUIREMENTS_DIR)/%.txt: $(PIP_REQUIREMENTS_DIR)/%.in
+	pip-compile --no-header --output-file - "$<" >"$@.tmp" || { \
+	  ret=$$?; echo "pip-compile failed:" >&2; cat "$@.tmp" >&2; \
+	  exit $$ret; }
 	@sed -n '1,10 s/# Depends on/-r/; s/\.in/.txt/p' "$<" > "$@"
-	pip-compile --no-header --output-file "$@.tmp" "$<" >/dev/null
 	@cat "$@.tmp" >> "$@"
 	@$(RM) "$@.tmp"
 
