@@ -12,6 +12,7 @@
 
 .button, .top-bar ul li a {
   text-decoration: none;
+  background-color: #eee;
 }
 
 .full-height {
@@ -99,7 +100,7 @@
 /*Projectübersicht*/
 
 .s-projectcard{
-  border: solid 2px $medium-gray; 
+  border: solid 2px $medium-gray;
   padding: 1rem 1rem 0 1rem;
   margin: 1rem;
   background-color: $light-gray;
@@ -120,5 +121,5 @@
   }
 }
 .s-projectcard:hover {
-  border: solid 2px $dark-gray; 
+  border: solid 2px $dark-gray;
 }
