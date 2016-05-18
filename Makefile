@@ -17,6 +17,8 @@ export DJANGO_SETTINGS_MODULE?=config.settings
 DEBUG:=0
 override DEBUG:=$(filter-out 0,$(DEBUG))
 
+# This is required for "exit 1" to work in the sassc rule (with missing sassc).
+SHELL=/bin/bash -o pipefail
 
 # Default target.
 all: dev
@@ -96,7 +98,9 @@ $(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss $(STAMP_BOWER_COMPONENTS_INSTALLED)
 		trap "rm -f $(SASSC_LOCKFILE); exit" INT TERM EXIT; echo $$$$ > $(SASSC_LOCKFILE); \
 		r=$$($(SCSS_RUN) $< $@.tmp 2>&1) || { \
 		$(call func-notify-send, "scss failed: $$r"); \
-		echo "ERROR: scss failed: $$r" >&2; echo "command: $(SCSS_RUN) $< $@.tmp" >&2; exit 1; } \
+		echo "ERROR: scss failed: $$r" >&2; \
+		echo "command: $(SCSS_RUN) $< $@.tmp" >&2; \
+		exit 1; } \
 	&& { head -n1 $@.tmp | grep -q "@charset" || { \
 		echo '@charset "UTF-8";' | cat - $@.tmp >$@.tmp2; mv $@.tmp2 $@.tmp; };} \
 	$(if $(USE_SCSS_SOURCEMAPS),\

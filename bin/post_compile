@@ -4,6 +4,10 @@
 # Then run the "heroku_post_compile" Makeifile task.
 #
 # The post_compile hook is run by heroku-buildpack-python.
+#
+# Required build-packs for Heroku:
+# 1. https://github.com/djmattyg007/heroku-buildpack-sassc
+# 2. git://github.com/heroku/heroku-buildpack-python.git
 
 # Derived from https://gist.github.com/jiaaro/e76a776852a68106340a.
 
@@ -40,6 +44,8 @@ if ! [ -f .heroku/python/bin/bower ]; then
 fi
 
 echo "-----> Running heroku_post_compile Makefile task"
+# Add /usr/local/bin to pass for sassc.
+source ~/.profile.d/sassc.sh
 make heroku_post_compile --debug=v
 
 echo "-----> Post-compile done"
