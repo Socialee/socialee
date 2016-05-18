@@ -63,6 +63,16 @@ CSS_DIR=$(PROJECT_ROOT_SRC)/static/css
 SCSS_FILES=$(filter-out $(wildcard $(SCSS_DIR)/_*.scss),$(wildcard $(SCSS_DIR)/*.scss))
 CSS_FILES=$(patsubst $(SCSS_DIR)/%.scss,$(CSS_DIR)/%.css,$(SCSS_FILES))
 
+define info-debug-var
+$(info => $(if $(2),$(2),$(1)): '$($(1))'  (from $(origin $(1)), $(flavor $(1))))
+endef
+$(if $(DEBUG),$(call info-debug-var,CSS_DIR)\
+  $(call info-debug-var,CSS_FILES)\
+  $(call info-debug-var,SCSS_DIR)\
+  $(call info-debug-var,SCSS_FILES)\
+  $(call info-debug-var,PROJECT_ROOT)\
+  $(call info-debug-var,CURDIR),)
+
 # SCSS dependencies/includes for main scss.
 FOUNDATION_ROOT:=$(BOWER_COMPONENTS)/foundation-sites
 SCSS_COMPONENTS=$(wildcard $(FOUNDATION_ROOT)/scss/*/*.scss)
