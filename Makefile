@@ -216,7 +216,7 @@ deploy_staging:
 
 # Gets run via bin/post_compile for Heroku.
 HEROKU_ZETTELS_MEDIA:=$(CURDIR)/.heroku/media-zettels
-heroku_post_compile: check heroku_fetch_zettels static test_heroku migrate_deploy
+heroku_post_compile: check static test_heroku migrate_deploy
 
 # Fetch zettels media from separate repo (via https mirror (manually synced)).
 heroku_fetch_zettels:
