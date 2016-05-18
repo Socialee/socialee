@@ -17,7 +17,7 @@ export DJANGO_SETTINGS_MODULE?=config.settings
 DEBUG:=0
 override DEBUG:=$(filter-out 0,$(DEBUG))
 
-$(info DEBUG: original SHELL $(SHELL))
+# This is required for "exit 1" to work in the sassc rule (with missing sassc).
 SHELL=/bin/bash -o pipefail
 
 # Default target.
