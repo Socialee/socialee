@@ -1,14 +1,14 @@
 from django.conf import settings
 from django.conf.urls import include, url
-from django.conf.urls.i18n import i18n_patterns
+# from django.conf.urls.i18n import i18n_patterns # not used right now
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required, permission_required
 
 from socialee import views
 
-urlpatterns = i18n_patterns(
-    '',
+urlpatterns = [
+    
     url(r'^$', views.Home.as_view(), name='home'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
     url(r'^accounts/', include('allauth.urls')),
@@ -27,7 +27,7 @@ urlpatterns = i18n_patterns(
     # At the end, for django-cms.
     # Ref: https://django-cms.readthedocs.org/en/latest/how_to/install.html#url-configuration
     url(r'^', include('cms.urls')),
-)
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,
