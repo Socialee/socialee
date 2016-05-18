@@ -40,6 +40,6 @@ if ! [ -f .heroku/python/bin/bower ]; then
 fi
 
 echo "-----> Running heroku_post_compile Makefile task"
-make heroku_post_compile --debug=v
+make heroku_post_compile -d
 
 echo "-----> Post-compile done"
