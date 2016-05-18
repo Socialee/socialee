@@ -52,6 +52,7 @@ endif
 
 BOWER_COMPONENTS_ROOT:=socialee/static
 BOWER_COMPONENTS:=$(BOWER_COMPONENTS_ROOT)/bower_components
+STAMP_BOWER_COMPONENTS_INSTALLED:=$(BOWER_COMPONENTS)/.installed_stamp
 
 MAIN_SCSS:=socialee.scss
 
@@ -96,7 +97,7 @@ endef
 # them, while another one might add add them again.
 SASSC_LOCKFILE=/tmp/scss.lock
 scss: $(CSS_FILES)
-$(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss | $(BOWER_COMPONENTS)
+$(CSS_DIR)/%.css: $(SCSS_DIR)/%.scss $(STAMP_BOWER_COMPONENTS_INSTALLED)
 	@echo "SCSS: building $@"
 	@mkdir -p $(CSS_DIR)
 	$(if $(DEBUG),,@)\
@@ -147,7 +148,8 @@ install_dev_requirements:
 	pip install -r requirements/dev.txt
 
 # Install bower components.
-bower_install:
+bower_install: $(STAMP_BOWER_COMPONENTS_INSTALLED)
+$(STAMP_BOWER_COMPONENTS_INSTALLED): $(BOWER_COMPONENTS_ROOT)/bower.json
 	@# Create the bower_components folder manually. "bower install" does not respect umask/acl!
 	@# NOTE: messed up because of umask not being effective from /.bashrc (in Docker)?
 	mkdir -p -m 775 $(BOWER_COMPONENTS)
@@ -156,15 +158,12 @@ bower_install:
 	cd $(BOWER_COMPONENTS_ROOT) \
 		&& bower install --force-latest $(BOWER_OPTIONS) \
 		&& bower prune
-
-$(BOWER_COMPONENTS)/.installed_stamp: $(BOWER_COMPONENTS_ROOT)/bower.json
-	$(MY_MAKE) bower_install
 	touch $@
 
-static: $(BOWER_COMPONENTS)/.installed_stamp scss collectstatic
+static: $(STAMP_BOWER_COMPONENTS_INSTALLED) scss collectstatic
 
 # Collect static files from DJANGO_STATICFILES etc to STATIC_ROOT.
-collectstatic: $(BOWER_COMPONENTS)
+collectstatic: $(STAMP_BOWER_COMPONENTS_INSTALLED)
 	@echo "Collecting static files..."
 	python manage.py collectstatic -v0 --noinput --ignore *.scss --ignore bower.json
 
