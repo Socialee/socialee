@@ -24,10 +24,7 @@ RedirectAuthenticatedUserMixin.dispatch = dispatch_no_redirect
 class BaseView:
     def get_context_data(self, **kwargs):
         context = super(BaseView, self).get_context_data(**kwargs)
-        quotes = Quote.objects.filter(active=True)
-        if quotes:
-            all_active_quotes = list(Quote.objects.filter(active=True))
-            context['random_quote'] = random.choice(all_active_quotes)
+
         return context
 
 

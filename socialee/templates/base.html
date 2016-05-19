@@ -19,7 +19,6 @@
     </head>
     <body>
         {# {% cms_toolbar %} #}
-
         {% block before_content %}
         {% endblock before_content %}
         {% include "navbar.html" %}
@@ -29,7 +28,6 @@
         {% include "footer.html" %}
         {% block after_content %}
         {% endblock after_content %}
-
 
         {% if debug %}
             <script src="//localhost:35729/livereload.js"></script>
