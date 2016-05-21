@@ -28,4 +28,5 @@ djangocms_text_ckeditor
 django-allauth
 django-blog-zinnia
 
+django-crispy-forms
 crispy-forms-foundation
