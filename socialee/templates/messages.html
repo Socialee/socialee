@@ -2,7 +2,7 @@
 <div class= "secondary callout" data-closable>
   <ul class="messages text-center" style="list-style: none;">
       {% for message in messages %}
-      <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+      	<li><h3>{{ message }}</h3></li>
       {% endfor %}
   </ul>
   <button class="close-button" aria-label="Dismiss alert" type="button" data-close>

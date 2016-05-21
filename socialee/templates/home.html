@@ -7,7 +7,7 @@
     <h1>Wir können die Welt verändern. Endlich.</h1>
     <p>Socialee ist ein Marktplatz für <strong>Ideen, Projekte und Menschen.</strong> Wir verbinden <strong>Ideengeber, Macher und Ermöglicher.</strong></p>
     <a class="button" href="{% url 'project_overview' %}">Die ersten Projekte ansehen</a><br />
-    <a data-open="inviteModal">Ladet mich ein!</a>
+    <a href="{% url 'invite_me' %}">Ladet mich ein!</a>
   </div>
 </div>
 
@@ -25,5 +25,4 @@
   </div>
 </div>-->
 
-{% include "invite_modal.html" %}
 {% endblock %}

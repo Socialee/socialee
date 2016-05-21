@@ -4,7 +4,7 @@
       <li class="menu-text">Socialee</li>
     </ul>
   </div>
-  <div class="top-bar-righttodo"> <!-- TODO: Flexbox is messing with topbar -->
+  <div class="top-bar-right-todo"> <!-- TODO: Flexbox is messing with topbar -->
     <ul class="dropdown menu" data-dropdown-menu>
       {% if not request.user.is_authenticated %}
       <li><a href="{% url 'account_login' %}">Log in</a></li>

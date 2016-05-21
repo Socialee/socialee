@@ -78,6 +78,8 @@ INSTALLED_APPS = (
     'allauth.socialaccount',
     #'allauth.socialaccount.providers.facebook',
 
+    'crispy_forms',
+    'crispy_forms_foundation',
     'django_comments',
     'tagging',
     'zinnia',
@@ -243,3 +245,8 @@ LOGGING = {
         }
     }
 }
+
+# Add 'foundation-5' layout pack
+CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3', 'foundation-5') # F5 works for F6 as well
+# Default layout to use with "crispy_forms"
+CRISPY_TEMPLATE_PACK = 'foundation-5'
