@@ -23,16 +23,16 @@ if ! [ -f .heroku/python/bin/bower ]; then
 
   tempdir="$(mktemp -d -t node_XXXX)"
 
-  pushd $tempdir
-  curl -s -L -o tmp-nodejs.tar.gz $NODE_ARCHIVE
+  pushd "$tempdir"
+  curl -s -L -o tmp-nodejs.tar.gz "$NODE_ARCHIVE"
   tar -zxvf tmp-nodejs.tar.gz > /dev/null
   rm tmp-nodejs.tar.gz
   popd
 
-  mkdir -v -p $BUILD_DIR/.heroku/vendor
-  pushd $BUILD_DIR/.heroku/vendor
+  mkdir -v -p "$BUILD_DIR/.heroku/vendor"
+  pushd "$BUILD_DIR/.heroku/vendor"
   rm -rf node
-  mv $tempdir/$NODE_BASENAME node
+  mv "$tempdir/$NODE_BASENAME" node
   popd
 
   ln -sf ../../vendor/node/bin/node .heroku/python/bin/node
