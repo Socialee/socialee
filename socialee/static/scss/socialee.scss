@@ -3,6 +3,24 @@
 @include foundation-everything(true);
 
 
+/* GLOBAL STYLES AND HELPERS*/
+
+.s-space {
+  height: 5rem;
+}
+
+.button {
+  text-decoration: none;
+}
+
+.full-height {
+  min-height: 95vh;
+}
+
+.s-container {
+  padding: 10rem;
+}
+
 @mixin vertical-align {
   position: relative;
   top: 50%;
@@ -11,16 +29,10 @@
   transform: translateY(-50%);
 }
 
-.button {
-  text-decoration: none;
-}
-
-.full-height {
-  min-height: 100vh;
-}
+/* LANDINGPAGE STYLES*/
 
 .lp-header {
-  min-height: 100vh;
+  min-height: 95vh;
   h1, p {
     position: relative;
     top: -5rem;
@@ -32,19 +44,16 @@
   }
 }
 
-.s-container {
-  padding: 10rem;
-}
-
 .lp-description {
   margin-top: 5rem;
 }
 
+/* FOOTER STYLES*/
+
 .footer-top {
-  margin-top: 80px;
   background-color: $light-gray;
   text-align: center;
-  padding: 0.5rem;
+  padding: 0.8rem;
   border-top: 1px solid $dark-gray;
   .quote {
       margin: 0;
@@ -94,11 +103,8 @@
   }
 }
 
-.s-space {
-  height: 5rem;
-}
 
-/*Projectübersicht*/
+/*PROJEKTÜBERSICHT STYLES*/
 
 .s-projectcard{
   border: solid 2px $medium-gray;
@@ -124,3 +130,42 @@
 .s-projectcard:hover {
   border: solid 2px $dark-gray;
 }
+
+
+/*OFFCANVAS STYLES*/
+
+.off-canvas {
+  height: 100%;
+}
+
+.menu.vertical .button {
+    margin: 0.6rem 4rem 1rem 1rem;
+    background-color: rgba(255, 255, 255, 0);
+    border: solid 1px black;
+    color: black;
+}
+
+.menu.vertical :hover .button{
+    background-color: rgba(255, 255, 255, 0.8);
+    border: solid 1px black;
+    color: $dark-gray;
+}
+
+.menu.vertical > li a {
+    text-decoration: none;
+    border-bottom: solid 1px white;
+}
+
+.menu.vertical > li a:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+
+
+
+
+
+
+
+
+

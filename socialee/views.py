@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 
 from allauth.account.views import RedirectAuthenticatedUserMixin, SignupView
+from allauth.account.decorators import verified_email_required
 
 from .models import Project, Input, Output
 from .forms import StartProjectForm, InviteForm
