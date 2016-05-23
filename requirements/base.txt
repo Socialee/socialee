@@ -1,6 +1,7 @@
 
 beautifulsoup4==4.4.1     # via django-blog-zinnia
 cmsplugin-filer==1.0.1
+crispy-forms-foundation==0.5.4
 defusedxml==0.4.1         # via python3-openid
 django-allauth==0.25.2
 django-app-namespace-template-loader==0.4
@@ -9,6 +10,7 @@ django-blog-zinnia==0.16
 django-classy-tags==0.7.2  # via django-cms, django-sekizai
 django-cms==3.2.5
 django-contrib-comments==1.7.1  # via django-blog-zinnia
+django-crispy-forms==1.6.0
 django-environ==0.4.0
 django-filer==1.2.0
 django-formtools==1.0     # via django-cms
@@ -21,10 +23,10 @@ django-tagging==0.4.3     # via django-blog-zinnia
 django-treebeard==4.0.1
 django-xmlrpc==0.1.5      # via django-blog-zinnia
 Django==1.9.6             # via cmsplugin-filer, django-allauth, django-classy-tags, django-cms, django-contrib-comments, django-environ, django-filer, django-formtools, django-mptt, django-reversion, django-treebeard, djangocms-picture, easy-thumbnails
-djangocms-admin-style==1.1.1  # via django-cms
+djangocms-admin-style==1.2.0  # via django-cms
 djangocms-file==1.0
 djangocms-flash==0.3.0
-djangocms-inherit==0.1.1
+djangocms-inherit==0.2.1
 djangocms-link==1.7.2
 djangocms-picture==1.0.0
 djangocms-snippet==1.8.1
