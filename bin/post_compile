@@ -45,7 +45,7 @@ fi
 
 echo "-----> Running heroku_post_compile Makefile task"
 # Add /usr/local/bin to pass for sassc.
-source ~/.profile.d/sassc.sh
+# source ~/.profile.d/sassc.sh
 make heroku_post_compile --debug=v
 
 echo "-----> Post-compile done"
