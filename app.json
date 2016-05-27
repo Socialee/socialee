@@ -1,7 +1,7 @@
 {
   "name": "socialee",
   "scripts": {
-    "predeploy": "bin/pre_compile"
+    "predeploy": "bin/pre_compile",
     "postdeploy": "bin/post_compile"
   },
   "env": {
