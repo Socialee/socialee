@@ -11,14 +11,13 @@ TODO: use django-configurations, for class based approach?!
 """
 
 import os
-
 import environ
 
+# Build paths inside the project like this: os.path.join(ROOT_DIR, ...)
 ROOT_DIR = environ.Path(__file__) - 2
 APPS_DIR = ROOT_DIR.path('socialee')
-# APPEND_SLASH = False # TODO: get rid of trailing slash
 
-assert os.path.exists(str(ROOT_DIR.path("Makefile"))), "ROOT_DIR is set properly."
+assert os.path.exists(str(ROOT_DIR.path("Makefile"))), "ROOT_DIR is (not?) set properly."
 
 CMS_TEMPLATES = (
     ('empty_template.html', 'Empty Template'),
@@ -45,6 +44,7 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
 # Application definition
 
 INSTALLED_APPS = (
+    # DJANGO APPS
     'djangocms_admin_style',  # for the admin skin. Before 'django.contrib.admin'.
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,7 +52,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'django.contrib.sites',
 
     # Base django-cms requirements.
@@ -83,10 +82,9 @@ INSTALLED_APPS = (
     'django_comments',
     'tagging',
     'zinnia',
-    # 'cmsplugin_zinnia', not yet compatible with  v1.8
 
-    # Main app.
-    'socialee',
+    # SOCIALEE CUSTOM APPS   
+    'socialee.apps.SocialeeConfig',
     'quotes.apps.QuotesConfig',
 )
 
@@ -122,7 +120,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(APPS_DIR('templates'))],
+        'DIRS': [str('templates/socialee')],
         'OPTIONS': {
             # NOTE: app_namespace.Loader can not work properly if you use it in conjunction with django.template.loaders.cached.Loader and inheritance based on empty namespaces.
             #       (README at https://github.com/Fantomas42/django-app-namespace-template-loader)
