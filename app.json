@@ -1,7 +1,8 @@
 {
   "name": "socialee",
-  "description": "von Heroku ",
   "scripts": {
+    "predeploy": "bin/pre_compile",
+    "postdeploy": "bin/post_compile"
   },
   "env": {
     "DJANGO_ALLOWED_HOSTS": {
