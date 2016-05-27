@@ -1,0 +1,49 @@
+{
+  "name": "socialee",
+  "description": "von Heroku ",
+  "scripts": {
+  },
+  "env": {
+    "DJANGO_ALLOWED_HOSTS": {
+      "required": true
+    },
+    "DJANGO_DEBUG": {
+      "required": true
+    },
+    "DJANGO_EMAIL_BACKEND": {
+      "required": true
+    },
+    "DJANGO_EMAIL_HOST": {
+      "required": true
+    },
+    "DJANGO_EMAIL_HOST_PASSWORD": {
+      "required": true
+    },
+    "DJANGO_EMAIL_HOST_USER": {
+      "required": true
+    },
+    "DJANGO_EMAIL_PORT": {
+      "required": true
+    },
+    "DJANGO_FROM_EMAIL": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "heroku-postgresql",
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/djmattyg007/heroku-buildpack-sassc"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
