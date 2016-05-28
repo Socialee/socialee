@@ -1,9 +1,0 @@
-{# {% extends ":admin/base_site.html" %} #}
-{% extends "djangocms_admin_style:admin/base_site.html" %}
-{% load admin_static %}
-
-{% block extrastyle %}
-  {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}" media="all">
-{% endblock %}
-

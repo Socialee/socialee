@@ -51,10 +51,10 @@
 /* FOOTER STYLES*/
 
 .footer-top {
-  background-color: $light-gray;
+  background-color: $socialee-gray;
   text-align: center;
   padding: 0.8rem;
-  border-top: 1px solid $dark-gray;
+  border-top: 1px solid $light-gray;
   .quote {
       margin: 0;
       padding: 0;
@@ -69,11 +69,11 @@
 }
 
 .footer-bottom {
-  background-color: $medium-gray;
+  background-color: $socialee-gray;
   text-align: center;
   font-size: 1rem;
   padding: 2rem;
-  border-top: 1px solid $dark-gray;
+  border-top: 1px solid $light-gray;
   p {
     &.slogan {
       color: $dark-gray;
@@ -107,10 +107,12 @@
 /*PROJEKTÜBERSICHT STYLES*/
 
 .s-projectcard{
+  /*min-width: 400px;*/
+  min-height: 100%;
   border: solid 2px $medium-gray;
   padding: 1rem 1rem 0 1rem;
   margin: 1rem;
-  background-color: $light-gray;
+  background-color: $socialee-gray;
   h3 {
     line-height: 1;
     margin-bottom: 0;
@@ -128,7 +130,7 @@
   }
 }
 .s-projectcard:hover {
-  border: solid 2px $dark-gray;
+  border: solid 2px orange;
 }
 
 

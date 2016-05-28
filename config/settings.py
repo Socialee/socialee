@@ -16,7 +16,7 @@ import environ
 # Build paths inside the project like this: os.path.join(ROOT_DIR, ...)
 ROOT_DIR = environ.Path(__file__) - 2
 APPS_DIR = ROOT_DIR.path('socialee')
-print ("Your ROOT_DIR is: ", ROOT_DIR)
+print ("ROOT_DIR is: ", ROOT_DIR)
 assert os.path.exists(str(ROOT_DIR.path("Makefile"))), "ROOT_DIR is (not?) set properly."
 
 CMS_TEMPLATES = (
@@ -120,8 +120,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(ROOT_DIR('templates', 'socialee'))],
-        # 'APPS_DIRS': True,
+        'DIRS': [str(APPS_DIR('templates/socialee/'))],
         'OPTIONS': {
             # NOTE: app_namespace.Loader can not work properly if you use it in conjunction with django.template.loaders.cached.Loader and inheritance based on empty namespaces.
             #       (README at https://github.com/Fantomas42/django-app-namespace-template-loader)
