@@ -1,0 +1,25 @@
+{% extends "offcanvas.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="s-space"></div>
+<div class="row lp-header align-center align-middle">
+  <div class="large-8 columns">
+    <h1 class="text-center">Sei dabei.</h1>
+    <p class="text-center">Bei Socialee bist Du Teil der Veränderung, die Du in der Welt sehen möchtest. Noch kein Konto? Du kannst dich hier in unsere Warteliste eintragen und bist so einer der ersten, die eingeladen werden.</p>
+    
+    <form method="POST" action=""> {% csrf_token %}
+      {{ form|crispy }}
+      <input class="button float-right" type="submit" value="Ladet mich ein!">
+    </form>
+  </div>
+</div>
+<div class="row align-center">
+  <div class="large-8 columns">
+  <h5>Möchtest Du mit uns kooperieren, hast Du eine konkrete Frage oder willst Du Dich einfach mit uns auf einen Kaffee treffen? <a href="mailto:hello@socialee.de?Subject=Hallo%20Socialee!">Dann schreib uns doch</a>, wir freuen uns auf Dich!</h5>
+  </div>
+</div>
+<div class="s-space"></div>
+
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends "account/allauth_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block allauth_content %}
+
+    <h1>Neues Konto eröffnen.</h1>
+
+    <p>Wenn Du schon ein Konto hast, <a href="{{ login_url }}">logge Dich ein.</a></p>
+
+    <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"><input>
+      {% endif %}
+      <button class="button" type="submit">{% trans "Sign Up" %} &raquo;</button>
+    </form>
+
+{% endblock %}

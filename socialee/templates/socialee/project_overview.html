@@ -1,0 +1,31 @@
+{% extends "offcanvas.html" %}
+
+{% block content %}
+
+<div class="s-space"></div>
+
+<div class="row align-center">
+  <div class="large-12 columns text-center">
+    <h2>Die ersten Projekte.</h2>
+    <p>Hier findest Du eine Übersicht der <strong>Ideen, Projekte und Menschen</strong> bei Socialee.</p>
+  </div>
+</div>
+
+<div class="row align-center small-up-1 medium-up-2 large-up-3">
+  {% for i in "xxxxxxxxxx" %}
+    {% include "project_card_element.html" %}
+{% endfor %}
+</div>
+
+<div class="s-space"></div>
+<hr>
+<div class="row align-center">
+  <div class="large-12 columns text-center">
+    <h6>Ich habe auch eine Idee!</h6>
+    <a class="button large" href="{% url 'startproject' %}">Idee starten</a>
+  </div>
+</div>
+
+<div class="s-space"></div>
+
+{% endblock content %}

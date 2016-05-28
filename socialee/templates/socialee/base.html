@@ -1,0 +1,61 @@
+{% load sekizai_tags staticfiles cms_tags %}
+
+<!DOCTYPE html>
+<html class="no-js {{ view.template_name | cut:".html" }}" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {# The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags #}
+        <meta name="description" content="Socialee. Es fehlt an nichts.">
+        <meta name="author" content="">
+        <link rel="icon" href="">
+        <title>Socialee | Wir machen das jetzt mal</title>
+        <link type="text/css" rel="stylesheet" href="{% static "css/socialee.css" %}" />
+
+        <script src="https://use.fontawesome.com/6261c3fed5.js"></script>
+        {# {% render_block "css" %} #}
+        {# {% render_block "js_head" %} #}
+    </head>
+    <body>
+        {# {% cms_toolbar %} #}
+        {% block before_content %}
+        {% endblock before_content %}
+        {% include "navbar.html" %}
+        {% include "messages.html" %}
+        {% block content %}
+        {% endblock content %}
+        {% include "footer.html" %}
+        {% block after_content %}
+        {% endblock after_content %}
+
+        {% if debug %}
+            <script src="//localhost:35729/livereload.js"></script>
+        {% endif %}
+
+        <script src="{% static "bower_components/jquery/dist/jquery.js" %}"></script>
+        <script src="{% static "bower_components/jquery-ui/jquery-ui.min.js" %}"></script>
+
+        {# Foundation Sites #}
+        <script src="{% static "bower_components/foundation-sites/dist/foundation.js" %}"></script>
+        
+        <script src="{% static "js/main.js" %}"></script>
+
+    {# Piwik #}
+    {% if not debug %}
+    <script type="text/javascript">
+      var _paq = _paq || [];
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="//piwik.thequod.de/";
+        _paq.push(['setTrackerUrl', u+'piwik.php']);
+        _paq.push(['setSiteId', 25]);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="//piwik.thequod.de/piwik.php?idsite=25" style="border:0;" alt="" /></p></noscript>
+    {% endif %}
+    </body>
+</html>

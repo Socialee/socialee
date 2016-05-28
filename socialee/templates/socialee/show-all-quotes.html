@@ -1,0 +1,13 @@
+{% extends "offcanvas.html" %}
+
+{% block content %}
+
+<div class="row lp-header align-center align-middle">
+<div class="large-12 columns">
+{% for item in all_quotes %}
+<blockquote>{{ item.title }}<cite>{{ item.author }}</cite></blockquote>
+{% endfor %}
+</div>
+</div>
+
+{% endblock content %}
