@@ -120,7 +120,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(APPS_DIR('templates/socialee/'))],
+        'DIRS': [str(APPS_DIR('templates'))],
         'OPTIONS': {
             # NOTE: app_namespace.Loader can not work properly if you use it in conjunction with django.template.loaders.cached.Loader and inheritance based on empty namespaces.
             #       (README at https://github.com/Fantomas42/django-app-namespace-template-loader)
