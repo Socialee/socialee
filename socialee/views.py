@@ -101,7 +101,7 @@ class UserProfile(MultiFormsView):
     
 
 def Invite_me(request):
-    form = UserEntryForm(request.POST or None)
+    form = InviteForm(request.POST or None)
     context = {
         "form": form,
     }
