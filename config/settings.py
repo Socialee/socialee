@@ -79,6 +79,7 @@ INSTALLED_APPS = (
 
     'crispy_forms',
     'crispy_forms_foundation',
+    # 'django-betterforms', # somehow does not work
     'django_comments',
     'tagging',
     'zinnia',
@@ -209,6 +210,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
 
 
 # Static files (CSS, JavaScript, Images)

@@ -3,19 +3,28 @@ import requests
 import random
 
 from django.conf import settings
-from django.views.generic import TemplateView
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.core.mail import send_mail
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.utils.decorators import method_decorator
+from django.views.generic import TemplateView, FormView, UpdateView
+from django.views.generic.detail import SingleObjectMixin
 
-from allauth.account.views import RedirectAuthenticatedUserMixin, SignupView
+from allauth.account.views import *
+from allauth.account.forms import *
 from allauth.account.decorators import verified_email_required
 
 from .models import Project, Input, Output
-from .forms import StartProjectForm, InviteForm
+from .forms import *
 from quotes.models import Quote
+
+
+
+
+
 
 
 # Overwrite/disable dispatch method of RedirectAuthenticatedUserMixin (endless redirect on /).
@@ -78,17 +87,16 @@ class ProjectDetailview(BaseView, TemplateView):
         return context
 
 
-class UserProfile(BaseView, TemplateView):
+class UserProfile(BaseView, PasswordChangeView, EmailView):
     template_name = 'user_profile.html'
+    form_class = AddEmailForm
 
-    def get_context_data(self, **kwargs):
-        context = super(UserProfile, self).get_context_data(**kwargs)
 
-        return context
+
 
 
 def Invite_me(request):
-    form = InviteForm(request.POST or None)
+    form = UserEntryForm(request.POST or None)
     context = {
         "form": form,
     }

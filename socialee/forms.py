@@ -2,6 +2,8 @@ from allauth.account.forms import LoginForm
 
 from django.utils.translation import ugettext_lazy as _
 
+from allauth.account.forms import *
+
 from django import forms
 from .models import Project, Profile, UserEntry, Input, Output, Invite
 
@@ -53,3 +55,27 @@ class InviteForm(forms.ModelForm):
         # help_texts = {
         #     'full_name': _('Some useful help text.'),
         # }
+
+
+class UserEntryForm(forms.ModelForm):
+    class Meta:
+        model = UserEntry
+        fields = ('first_name','last_name', 'email', 'password')
+    
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = '__all__'
+
+
+
+
+
+
+
+
+
+
+
+

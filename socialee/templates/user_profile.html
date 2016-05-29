@@ -1,6 +1,32 @@
 {% extends "offcanvas.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 
+<div class="row align-center">
+  <div class="large-12 columns text-center">
+    {% if request.user.first_name %}
+    <h2>Hallo {{ request.user.first_name }}!</h2>
+    <p>Wie ist die Lage? Was hast Du heute vor?</p>
+    {% else %}
+    <h2>Hallo!</h2> 
+    <p>Hier ist dein Profil.</p>
+    {% endif %}
+    <hr>
+  </div>
+</div>
 
+<div class="row">
+  <div class="large-4 columns">
+    <h2>Passwort ändern</h2>
+    <form method="POST" action="{% url 'account_change_password' %}">{% csrf_token %}
+      <label for="id_oldpassword">Aktuelles Passwort:</label>
+      <input id="id_oldpassword" name="oldpassword" placeholder="Aktuelles Passwort" type="password">
+      <label for="id_password1">Neues Passwort:</label>
+      <input id="id_password1" name="password1" placeholder="Neues Passwort" type="password">
+      <label for="id_password2">Neues Passwort (Wiederholung):</label>
+      <input id="id_password2" name="password2" placeholder="Neues Passwort (Wiederholung)" type="password">
+      <button class="button" type="submit" name="action">abschicken</button>
+    </form>
+  </div>
+</div>
 {% endblock content %}
