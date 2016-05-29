@@ -17,16 +17,12 @@
 
 <div class="row">
   <div class="large-4 columns">
-    <h2>Passwort ändern</h2>
-    <form method="POST" action="{% url 'account_change_password' %}">{% csrf_token %}
-      <label for="id_oldpassword">Aktuelles Passwort:</label>
-      <input id="id_oldpassword" name="oldpassword" placeholder="Aktuelles Passwort" type="password">
-      <label for="id_password1">Neues Passwort:</label>
-      <input id="id_password1" name="password1" placeholder="Neues Passwort" type="password">
-      <label for="id_password2">Neues Passwort (Wiederholung):</label>
-      <input id="id_password2" name="password2" placeholder="Neues Passwort (Wiederholung)" type="password">
-      <button class="button" type="submit" name="action">abschicken</button>
+  <h3>Passwort ändern</h3>
+    <form class="" method="POST" action="{% url 'user_profile' %}">{% csrf_token %}
+      {{ forms.change|crispy }}
+      <input name="action" class="button" type="submit" value="change">
     </form>
   </div>
 </div>
+
 {% endblock content %}

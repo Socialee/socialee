@@ -79,7 +79,7 @@ INSTALLED_APPS = (
 
     'crispy_forms',
     'crispy_forms_foundation',
-    # 'django-betterforms', # somehow does not work
+    'betterforms', # works only in Version 1.1.2
     'django_comments',
     'tagging',
     'zinnia',

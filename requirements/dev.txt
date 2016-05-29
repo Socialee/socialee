@@ -2,7 +2,6 @@
 -r testing.txt
 
 appnope==0.1.0            # via ipython
-backports-abc==0.4        # via tornado
 backports.shutil-get-terminal-size==1.0.0  # via ipython
 click==6.6                # via pip-tools
 decorator==4.0.9          # via ipython, traitlets

@@ -4,8 +4,9 @@ import random
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.contrib import messages
+from django.contrib.auth.forms import UserChangeForm
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -21,9 +22,7 @@ from .models import Project, Input, Output
 from .forms import *
 from quotes.models import Quote
 
-
-
-
+from .utils.multiform import MultiFormsView
 
 
 
@@ -87,13 +86,19 @@ class ProjectDetailview(BaseView, TemplateView):
         return context
 
 
-class UserProfile(BaseView, PasswordChangeView, EmailView):
+class UserProfile(MultiFormsView):
     template_name = 'user_profile.html'
-    form_class = AddEmailForm
+    form_classes = {
+        'change': ChangePasswordForm,
+        }
+    success_url = reverse_lazy("user_profile")
 
+    def get_context_data(self, **kwargs):
+        context = super(UserProfile, self).get_context_data(**kwargs)
+        context['test'] = "testing"
 
-
-
+        return context
+    
 
 def Invite_me(request):
     form = UserEntryForm(request.POST or None)

@@ -7,11 +7,7 @@ from allauth.account.forms import *
 from django import forms
 from .models import Project, Profile, UserEntry, Input, Output, Invite
 
-
-# class QuoteForm(forms.ModelForm):
-#     class Meta:
-#         model = Quote
-#         fields = ('title', 'author')
+from crispy_forms.helper import FormHelper
 
 
 class StartProjectForm(forms.ModelForm):
@@ -29,12 +25,6 @@ class StartProjectForm(forms.ModelForm):
             'description': forms.Textarea(
                 attrs={'placeholder': 'Beschreibe dein Projekt oder Deine Idee. Du kannst diese Sachen später jederzeit ändern.'}),
         }
-    
-
-# class MyLoginForm(LoginForm):
-#     class Meta:
-#         model = Project
-#         fields = ('title', 'tagline', 'description')
 
 
 class InviteForm(forms.ModelForm):
@@ -55,27 +45,3 @@ class InviteForm(forms.ModelForm):
         # help_texts = {
         #     'full_name': _('Some useful help text.'),
         # }
-
-
-class UserEntryForm(forms.ModelForm):
-    class Meta:
-        model = UserEntry
-        fields = ('first_name','last_name', 'email', 'password')
-    
-
-class ProfileForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = '__all__'
-
-
-
-
-
-
-
-
-
-
-
-
