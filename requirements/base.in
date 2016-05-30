@@ -31,3 +31,5 @@ django-blog-zinnia
 django-crispy-forms
 crispy-forms-foundation
 django-betterforms==1.1.2
+
+django-simple-auth

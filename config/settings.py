@@ -16,7 +16,7 @@ import environ
 # Build paths inside the project like this: os.path.join(ROOT_DIR, ...)
 ROOT_DIR = environ.Path(__file__) - 2
 APPS_DIR = ROOT_DIR.path('socialee')
-print ("ROOT_DIR is: ", ROOT_DIR)
+
 assert os.path.exists(str(ROOT_DIR.path("Makefile"))), "ROOT_DIR is (not?) set properly."
 
 CMS_TEMPLATES = (
@@ -81,6 +81,7 @@ INSTALLED_APPS = (
     'crispy_forms_foundation',
     'betterforms', # works only in Version 1.1.2
     'django_comments',
+    'simple_auth',
     'tagging',
     'zinnia',
 
@@ -115,6 +116,11 @@ MIDDLEWARE_CLASSES = [
     'cms.middleware.language.LanguageCookieMiddleware',
     'django.contrib.admindocs.middleware.XViewMiddleware',
 ]
+
+if not DEBUG:
+    MIDDLEWARE_CLASSES += [
+    'simple_auth.middleware.SimpleAuthMiddleware',
+    ]
 
 ROOT_URLCONF = 'config.urls'
 
@@ -250,3 +256,6 @@ LOGGING = {
 CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3', 'foundation-5') # F5 works for F6 as well
 # Default layout to use with "crispy_forms"
 CRISPY_TEMPLATE_PACK = 'foundation-5'
+
+print ("ROOT_DIR is: ", ROOT_DIR)
+print ('DEBUG is: ', DEBUG)

@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^project_overview/$', views.ProjectOverview.as_view(), name='project_overview'),
     url(r'^project_detailview/$', login_required(views.ProjectDetailview.as_view()), name='project_detailview'),
     url(r'^user_profile/$', login_required(views.UserProfile.as_view()), name='user_profile'), # login required!
-
+    url(r'^protect/', include('simple_auth.urls')),
 
     # At the end, for django-cms.
     # Ref: https://django-cms.readthedocs.org/en/latest/how_to/install.html#url-configuration
