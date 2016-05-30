@@ -117,10 +117,11 @@ def Invite_me(request):
             subject = 'Ladet mich ein!'
             from_email = settings.EMAIL_HOST_USER
             to_email = [from_email, 'hello@socialee.de']
-            contact_message = "%s: %s via %s"%( 
+            contact_message = "%s via %s:\n%s"%( 
                     form_full_name, 
+                    form_email,
                     form_message, 
-                    form_email)
+                    )
             some_html_message = """
             <h1>Hallo Mo!</h1>
             """
