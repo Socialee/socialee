@@ -2,5 +2,9 @@
 {% load cms_tags staticfiles sekizai_tags%}
 
 {% block content %}
-
+<p>Dies ist die Projektseite von:</p>
+<h2>{{ object.title }}</h2>
+<p>{{ object.tagline }}</p>
+<p>{{ object.description }}</p>
+<p>{{ object.created_by.first_name }} {{ object.created_by.last_name }}</p>
 {% endblock %}

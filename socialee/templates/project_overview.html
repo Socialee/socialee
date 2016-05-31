@@ -2,8 +2,6 @@
 
 {% block content %}
 
-
-
 <div class="row align-center">
   <div class="large-12 columns text-center">
     <h2>Die ersten Projekte.</h2>
@@ -12,9 +10,10 @@
 </div>
 
 <div class="row align-center small-up-1 medium-up-2 large-up-3">
-  {% for i in "xxxxxxxxxx" %}
-    {% include "project_card_element.html" %}
+{% for project in object_list %}
+  {% include "project_card_element.html" %}
 {% endfor %}
+
 </div>
 
 

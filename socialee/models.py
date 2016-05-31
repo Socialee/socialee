@@ -1,8 +1,11 @@
 import datetime
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models.signals import pre_save, post_save
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django.utils.text import slugify
 
 from allauth.account.models import EmailAddress
 
@@ -129,7 +132,9 @@ class Project(models.Model):
     title = models.CharField(max_length=60)
     tagline = models.CharField(max_length=140, null= True)
     description = models.TextField(max_length=5000, null=True)
+    slug = models.SlugField()
     profiles = models.ManyToManyField(Profile)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     inputs = models.ManyToManyField(Input)
     outputs = models.ManyToManyField(Output)
     liked_users = models.ForeignKey(Profile,
@@ -143,6 +148,15 @@ class Project(models.Model):
     def itemclass(self):
         return self.__class__()
 
+    def get_absolute_url(self):
+        return reverse('project_detailview', kwargs = {"slug": self.slug})
+
+
+def pre_save_project(sender, instance, *args, **kwargs):
+    slug = slugify(instance.title)
+    instance.slug = slug
+
+pre_save.connect(pre_save_project, sender = Project)
 
 class Invite(models.Model):
     full_name = models.CharField(max_length=120, blank=True, null=True, verbose_name='Name')

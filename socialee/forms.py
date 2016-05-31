@@ -42,6 +42,3 @@ class InviteForm(forms.ModelForm):
             'message': forms.Textarea(
                 attrs={'placeholder': 'Erzähl uns, wie Du von Socialee gehört hast und warum Du dabei sein möchtest. Wenn Du sogar schon eine Projektidee hast, erzähle uns davon! Wir lieben Ideen.'}),
         }
-        # help_texts = {
-        #     'full_name': _('Some useful help text.'),
-        # }

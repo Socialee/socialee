@@ -14,28 +14,10 @@
 <div class="row align-center">
 	<div class="large-10 columns">
 		<form method="POST" action=""> {% csrf_token %}
-			{{ startprojectform.form|crispy }}		
+      {{ form }}
 			<input class="button float-right" type="submit" value="Und los!"></input>
 		</form>
 	</div>
 </div>
-
-
-
-<div class="row align-center">
-  <div class="large-12 columns text-center">
-    <h3>Inspriation gefällig?</h3>
-    <p>Guck mal hier, das machen die anderen:</p>
-  </div>
-</div>
-
-<div class="row align-center small-up-1 medium-up-2 large-up-3">
-  {% for i in "xxx" %}
-    {% include "project_card_element.html" %}
-{% endfor %}
-</div>
-
-
-
 
 {% endblock content %}
