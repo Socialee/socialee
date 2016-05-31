@@ -3,8 +3,8 @@
     <div class="s-projectcard">
         <div class="row">
           <div class="large-8 columns">
-          <h3>Socialee</h3> {# Titel #}
-          <p class="tagline">Das soziale Netzwerk</p> {# Tagline #}
+          <h3>{{ project.title }}</h3> {# Titel #}
+          <p class="tagline">{{ project.tagline }}</p> {# Tagline #}
           <ul class="fa-ul"> {# Tags #}
             <li><i class="fa-li fa fa-tag"></i>Netzwerk</li>
             <li><i class="fa-li fa fa-tag"></i>Nachhaltigkeit</li>
@@ -16,19 +16,19 @@
           <div class="columns text-center">
             <p class="s-icon-text">ein Projekt von:</p>
             <i class="fa fa-user fa-5x" aria-hidden="true"></i> {# user-Bild #}
-            <p class="s-icon-text">Moritz</p> {# user-first_name #}
+            <p class="s-icon-text">{{ project.created_by.first_name }}</p> {# user-first_name #}
           </div>
         </div><hr>
 
         <div class="row">
           <div class="large-12 columns">
-            <p>„Socialee ist das soziale Netzwerk für Ideen und Projekte. Wir machen das Umsetzen von guten Ideen zum Volkssport."</p> {# short-description #}
+            <p>{{ project.description }}</p> {# short-description #}
           </div>
         </div><hr>
 
         <div class="row text-center">
           <div class="large-3 columns"><i class="fa fa-heart-o fa-3x" aria-hidden="true"></i><p class="s-icon-text">Socialeebhaber<br/>+5</p></div> {# zähler der socialeehaber #}
-          <div class="large-9 columns align-self-bottom"><a href="{% url 'project_detailview' %}" class="expanded large button">Projekt anschauen</a></div> {# login only link zum projekt #}
+          <div class="large-9 columns align-self-bottom"><a href="{{ project.get_absolute_url }}" class="expanded large button">Projekt anschauen</a></div> {# login only link zum projekt #}
         </div>
 
     </div>

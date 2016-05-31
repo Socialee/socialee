@@ -8,10 +8,13 @@ from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView, FormView, UpdateView
+from django.utils.translation import ugettext_lazy as _
+from django.shortcuts import render
+from django.views.generic import TemplateView, FormView, UpdateView, ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import SingleObjectMixin
+
 
 from allauth.account.views import *
 from allauth.account.forms import *
@@ -58,19 +61,27 @@ class WelcomePage(BaseView, TemplateView):
         return context
 
 
-class StartProject(BaseView, TemplateView):
+# CRUD CREATE PROJECT
+class StartProject(BaseView, CreateView):
     template_name = 'start_project.html'
+    model = Project
+    form_class = StartProjectForm
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+
+        return super(StartProject, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super(StartProject, self).get_context_data(**kwargs)
-        form = StartProjectForm()
-        context['startprojectform'] = {"form": form,}
 
         return context
 
 
-class ProjectOverview(BaseView, TemplateView):
+# CRUD RETRIEVE PROJECT
+class ProjectOverview(BaseView, ListView):
     template_name = 'project_overview.html'
+    model = Project
 
     def get_context_data(self, **kwargs):
         context = super(ProjectOverview, self).get_context_data(**kwargs)
@@ -78,11 +89,12 @@ class ProjectOverview(BaseView, TemplateView):
         return context
 
 
-class ProjectDetailview(BaseView, TemplateView):
+class ProjectDetailView(BaseView, DetailView):
     template_name = 'project_template.html'
+    model = Project
 
     def get_context_data(self, **kwargs):
-        context = super(ProjectDetailview, self).get_context_data(**kwargs)
+        context = super(ProjectDetailView, self).get_context_data(**kwargs)
 
         return context
 
