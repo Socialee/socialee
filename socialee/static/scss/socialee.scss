@@ -5,6 +5,13 @@
 
 /* GLOBAL STYLES AND HELPERS*/
 
+.messages-callout {
+  @include callout-base;
+  li {
+    list-style: none;
+  }
+}
+
 .s-space {
   height: 5rem;
 }
@@ -31,17 +38,26 @@
 
 /* LANDINGPAGE STYLES*/
 
-.lp-header {
-  min-height: 95vh;
-  h1, p {
+.lp-manifest {
     position: relative;
     top: -5rem;
-    letter-spacing: 0.05rem;
+  h1 {
+    color: #191919;
+    font-size: 1.8rem;
+    display: inline-block;
+    position: relative;
+    /*letter-spacing: 0.05rem;*/
   }
   p {
-    font-size: 0.85rem;
-    text-transform: uppercase;
+    color: #b3b3b3;
+    display: inline;
+    /*font-size: 0.85rem;*/
+    /*text-transform: uppercase;*/
   }
+}
+
+.lp-header {
+  min-height: 95vh;
 }
 
 .lp-description {

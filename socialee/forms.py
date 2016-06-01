@@ -32,13 +32,20 @@ class InviteForm(forms.ModelForm):
         model = Invite
         fields = ('full_name', 'email', 'message')
         labels = {
-            'full_name': _('Vor- & Nachname (freiwillig)'),
-            'email': _('Deine Email-Adresse'),
-            'message': _('Erzähl uns was! (freiwillig)'),
+            'full_name': _('Wenn Du Lust hast: Vor- & Nachname'),
+            'email': _('Muss sein: Deine Email-Adresse'),
+            'message': _('Wenn Du Lust hast: Was würdest Du tun, wenn Du wüsstest, Du könntest nicht scheitern?'),
         }
         widgets = {
-            'full_name': forms.TextInput(attrs={'placeholder': 'Peter oder Petra Musterfraumann?'}),
-            'email': forms.TextInput(attrs={'placeholder': 'Deine Email-Adresse ist bei uns sicher.'}),
+            'full_name': forms.TextInput(attrs={'placeholder': 'Peter oder Petra?'}),
+            'email': forms.TextInput(attrs={'placeholder': 'Wir sind die Guten, Deine Email-Adresse ist bei uns sicher. Und alles andere auch.'}),
             'message': forms.Textarea(
-                attrs={'placeholder': 'Erzähl uns, wie Du von Socialee gehört hast und warum Du dabei sein möchtest. Wenn Du sogar schon eine Projektidee hast, erzähle uns davon! Wir lieben Ideen.'}),
+                attrs={'placeholder': 'Schwierige Frage? Na, Du kannst auch was anderes schreiben.\n\nErzähl und doch, wie Du von Socialee gehört hast und warum Du dabei sein möchtest. Oder wenn Du sogar schon eine Projektidee hast, erzähle uns davon! Wir lesen das wirklich. Und vielleicht sind wir ja begeistert und machen dann was zusammen!'}),
         }
+
+
+class SocialeeLoginForm(LoginForm): # Changing labels of default Allauth Login Form (note ACCOUNT_FORMS in settings.py)
+    def __init__(self, *args, **kwargs):
+        super(SocialeeLoginForm, self).__init__(*args, **kwargs)
+        self.fields['password'].widget = forms.PasswordInput(attrs={'placeholder': 'tri tra trullala'})
+    password = PasswordField(label=_("Dein Passwort"))

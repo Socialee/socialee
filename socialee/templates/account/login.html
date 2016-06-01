@@ -8,7 +8,7 @@
 
 {% block allauth_content %}
 
-<h1>Schön, dass Du da bist.</h1>
+<h1>{% blocktrans %}Hier kommt auch nicht jeder rein.{% endblocktrans %}</h1>
 
 {% get_providers as socialaccount_providers %}
 
@@ -30,8 +30,8 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 {% include "socialaccount/snippets/login_extra.html" %}
 
 {% else %}
-<p>{% blocktrans %}Wenn Du noch keinen Account hast,
-<a href="{{ signup_url }}">mach Dir einen.</a>{% endblocktrans %}</p>
+<p>Wenn Du noch kein Konto bei Socialee hast,
+<a href="{% url 'invite_me' %}">lass Dich einladen!</a></p>
 {% endif %}
 
 <form class="login" method="POST" action="{% url 'account_login' %}">

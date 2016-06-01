@@ -4,9 +4,8 @@ import random
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.core.urlresolvers import reverse
 from django.contrib import messages
-from django.contrib.auth.forms import UserChangeForm
 from django.core.mail import send_mail
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.decorators import method_decorator
@@ -25,7 +24,9 @@ from .models import Project, Input, Output
 from .forms import *
 from quotes.models import Quote
 
-from .utils.multiform import MultiFormsView
+
+
+
 
 
 
@@ -98,19 +99,10 @@ class ProjectDetailView(BaseView, DetailView):
         return context
 
 
-class UserProfile(MultiFormsView):
+class UserProfile(BaseView, PasswordChangeView, EmailView):
     template_name = 'user_profile.html'
-    form_classes = {
-        'change': ChangePasswordForm,
-        }
-    success_url = reverse_lazy("user_profile")
+    form_class = AddEmailForm
 
-    def get_context_data(self, **kwargs):
-        context = super(UserProfile, self).get_context_data(**kwargs)
-        context['test'] = "testing"
-
-        return context
-    
 
 def Invite_me(request):
     form = InviteForm(request.POST or None)
@@ -122,18 +114,17 @@ def Invite_me(request):
         if form.is_valid():
             instance = form.save(commit=False)
             instance.save()
-            messages.success(request, 'Danke für Deine Nachricht! Wir melden uns.')
+            messages.success(request, 'Danke für Deine Nachricht! Wir melden uns ganz bald.')
             form_email = form.cleaned_data.get("email")
             form_message = form.cleaned_data.get("message")
             form_full_name = form.cleaned_data.get("full_name")
             subject = 'Ladet mich ein!'
             from_email = settings.EMAIL_HOST_USER
             to_email = [from_email, 'hello@socialee.de']
-            contact_message = "%s via %s:\n%s"%( 
+            contact_message = "%s via %s schreibt:\n\n %s"%( 
                     form_full_name, 
                     form_email,
-                    form_message, 
-                    )
+                    form_message)
             some_html_message = """
             <h1>Hallo Mo!</h1>
             """
