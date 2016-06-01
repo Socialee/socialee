@@ -104,11 +104,8 @@ class UserProfile(BaseView, PasswordChangeView, EmailView):
     form_class = AddEmailForm
 
 
-
-
-
 def Invite_me(request):
-    form = UserEntryForm(request.POST or None)
+    form = InviteForm(request.POST or None)
     context = {
         "form": form,
     }
@@ -117,17 +114,17 @@ def Invite_me(request):
         if form.is_valid():
             instance = form.save(commit=False)
             instance.save()
-            messages.success(request, 'Danke für Deine Nachricht! Wir melden uns.')
+            messages.success(request, 'Danke für Deine Nachricht! Wir melden uns ganz bald.')
             form_email = form.cleaned_data.get("email")
             form_message = form.cleaned_data.get("message")
             form_full_name = form.cleaned_data.get("full_name")
             subject = 'Ladet mich ein!'
             from_email = settings.EMAIL_HOST_USER
             to_email = [from_email, 'hello@socialee.de']
-            contact_message = "%s: %s via %s"%( 
+            contact_message = "%s via %s schreibt:\n\n %s"%( 
                     form_full_name, 
-                    form_message, 
-                    form_email)
+                    form_email,
+                    form_message)
             some_html_message = """
             <h1>Hallo Mo!</h1>
             """

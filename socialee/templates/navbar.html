@@ -1,8 +1,12 @@
 <div class="top-bar">
-  <div class="top-bar-title">
-    <strong>Socialee</strong>
+  
+  <div class="tob-bar-left">
+    <div class="top-bar-title">
+      <a style="text-decoration: none;" href="{% url 'home' %}"><strong>Socialee</strong></a>
+    </div>
   </div>
-  <div class="top-bar-right-todo"> <!-- TODO: Flexbox is messing with topbar -->
+  
+  <div class="top-bar-right###DOES_NOT_WORK"> <!-- TODO: Flexbox is messing with topbar -->
     <ul class="dropdown menu" data-dropdown-menu>
       {% if not request.user.is_authenticated %}
       <li><a href="{% url 'account_login' %}">Log in</a></li>
@@ -20,4 +24,5 @@
       </li>
     </ul>
   </div>
+
 </div>

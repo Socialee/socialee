@@ -1,5 +1,5 @@
 {% extends "offcanvas.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 
   <div class="row align-center align-middle">
@@ -8,7 +8,7 @@
       <h2>Schreibe uns Dein schönes Zitat!</h2>
       <p>Wir gucken es uns an und schalten es frei, wenn es jugendfrei ist.</p>
       <form method="POST" action=""> {% csrf_token %}
-        {{ form.as_p }} 
+        {{ form|crispy }} 
         <input class="button" type="submit" value="Und ab dafür!" ></input>
         <a href="{% url 'home' %}">Raus hier.</a>
       </form>
