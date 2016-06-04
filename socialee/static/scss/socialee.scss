@@ -4,6 +4,19 @@
 
 
 /* GLOBAL STYLES AND HELPERS*/
+.s-badge {
+  position: relative;
+  bottom: 0.8rem;
+  right: 1.5rem;
+  line-height: 1.8rem;
+  text-align: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  background-color: rgba(127, 127, 127, 0.5);
+  color: #ffffff;
+}
+
 
 .messages-callout {
   @include callout-base;

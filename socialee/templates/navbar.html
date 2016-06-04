@@ -8,15 +8,22 @@
   
   <div class="top-bar-right###DOES_NOT_WORK"> <!-- TODO: Flexbox is messing with topbar -->
     <ul class="dropdown menu" data-dropdown-menu>
+      {% if request.user.is_authenticated and request.user.is_staff %}
+      <li><a href="/admin">Socialee Admin</a></li>
+      {% endif %}
       {% if not request.user.is_authenticated %}
       <li><a href="{% url 'account_login' %}">Log in</a></li>
       {% else %}
       <li><a href="{% url 'user_profile' %}">
       {% if request.user.first_name %}
-      {{ request.user.first_name }}
+      Profil von {{ request.user.first_name }}
       {% else %}
       {{ request.user.email }}
       {% endif %}</a></li>
+      {% if request.user.is_authenticated %}
+      <li><a aria-describedby="messageCount" href="#">News</a></li>
+      <li class="s-badge" id="messageCount">3</li>
+      {% endif %}
       <li><a href="{% url 'account_logout' %}">Log out</a></li>
       {% endif %}
         <li>
