@@ -1,7 +1,7 @@
 {% load sekizai_tags staticfiles cms_tags %}
 
 <!DOCTYPE html>
-<html class="no-js {{ view.template_name | cut:".html" }}" lang="de">
+<html class="no-js {{ view.template_name | cut:'.html' }}" lang="de">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,9 +11,14 @@
         <meta name="author" content="">
         <link rel="icon" href="#">
         <title>Socialee | Wir machen das jetzt mal</title>
-        <link type="text/css" rel="stylesheet" href="{% static "css/socialee.css" %}" />
+        
+        {# <script src="https://use.fontawesome.com/6261c3fed5.js"></script> #}
+        <link rel="stylesheet" href="{% static 'font-awesome-4.6.3/css/font-awesome.min.css' %}">
 
-        <script src="https://use.fontawesome.com/6261c3fed5.js"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'bower_components/slick.js/slick/slick.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'bower_components/slick.js/slick/slick-theme.css' %}"/>
+
+        <link type="text/css" rel="stylesheet" href="{% static 'css/socialee.css' %}" />
         {# {% render_block "css" %} #}
         {# {% render_block "js_head" %} #}
     </head>
@@ -35,13 +40,15 @@
             <script src="//localhost:35729/livereload.js"></script>
         {% endif %}
 
-        <script src="{% static "bower_components/jquery/dist/jquery.js" %}"></script>
-        <script src="{% static "bower_components/jquery-ui/jquery-ui.min.js" %}"></script>
-
+        {# jQuery #}
+        <script src="{% static 'bower_components/jquery/dist/jquery.js' %}"></script>
+        <script src="{% static 'bower_components/jquery-ui/jquery-ui.min.js' %}"></script>
+        {# Slick Slider #}
+        <script type="text/javascript" src="{% static 'bower_components/slick.js/slick/slick.js' %}"></script>
         {# Foundation Sites #}
-        <script src="{% static "bower_components/foundation-sites/dist/foundation.js" %}"></script>
-        
-        <script src="{% static "js/main.js" %}"></script>
+        <script src="{% static 'bower_components/foundation-sites/dist/foundation.js' %}"></script>
+        {# Socialee javascript #}
+        <script src="{% static 'js/main.js' %}"></script>
 
     {# Piwik #}
     <!--{% if not debug %}
