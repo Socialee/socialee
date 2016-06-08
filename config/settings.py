@@ -85,9 +85,10 @@ INSTALLED_APPS = (
     'tagging',
     'zinnia',
 
-    # SOCIALEE CUSTOM APPS   
-    'socialee.apps.SocialeeConfig',
+    # SOCIALEE CUSTOM APPS
+    'questions.apps.QuestionsConfig',
     'quotes.apps.QuotesConfig',
+    'socialee.apps.SocialeeConfig',
 )
 
 if DEBUG:

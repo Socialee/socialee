@@ -22,11 +22,6 @@ from allauth.account.decorators import verified_email_required
 
 from .models import Project, Input, Output
 from .forms import *
-from quotes.models import Quote
-
-
-
-
 
 
 

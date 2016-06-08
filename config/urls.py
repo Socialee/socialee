@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^blog/', include('zinnia.urls', namespace='zinnia')),
     url(r'^comments/', include('django_comments.urls')),
+    url(r'^question/', include('questions.urls')),
     url(r'^quotes/', include('quotes.urls')),
     url(r'^invite_me/$', views.Invite_me, name='invite_me'),
     url(r'^impressum/$', views.Impressum.as_view(), name='impressum'),

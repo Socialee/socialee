@@ -1,0 +1,31 @@
+{% extends "offcanvas.html" %}
+
+{% block content %}
+<div class="s-space"></div>
+<div class="row align-center">
+  <div class="small-8 columns">
+    {{ form.errors }}
+    <form method="POST" action="">{% csrf_token %}
+      <input type="hidden" name="question_id" value="{{ instance.id }}" />
+      <h1>{{ instance.text }}</h1>
+
+      <h3>Deine Antwort</h3>
+      {% for ans in instance.answer_set.all %}  
+      <input type="radio" name="answer_id" value="{{ ans.id }}" {% if user_answer.my_answer.id == ans.id %}checked=checked{% endif %}> {{ ans.text }} <br>
+      {% endfor %}
+      Wie wichtig ist diese Frage? {{ form.importance_level }}
+      <hr> 
+      <h3>Was sollen die anderen idealerweise sagen?</h3>
+      {% for ans in instance.answer_set.all %}  
+      <input type="radio" name="their_answer_id" value="{{ ans.id }}" {% if user_answer.their_answer.id == ans.id %}checked=checked {% endif %}> {{ ans.text }} <br>
+      {% endfor %}
+      <input type="radio" name="their_answer_id" value="-1" {% if not user_answer.their_answer %}checked=checked{% endif %}/> Doesn't matter at all.<br>
+      Wie wichtig ist diese Frage? {{ form.their_importance_level }}
+      
+      <input class="button" type="submit" name="" value="Speichern und weiter">
+
+    </form>
+  </div>
+</div>
+<div class="s-space"></div>
+{% endblock content %}
