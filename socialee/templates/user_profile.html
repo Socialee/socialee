@@ -2,27 +2,14 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<div class="row align-center">
-  <div class="large-12 columns text-center">
-    {% if request.user.first_name %}
-    <h2>Hallo {{ request.user.first_name }}!</h2>
-    <p>Wie ist die Lage? Was hast Du heute vor?</p>
-    {% else %}
-    <h2>Hallo!</h2> 
-    <p>Hier ist dein Profil.</p>
-    {% endif %}
-    <hr>
-  </div>
-</div>
-
-<div class="row">
-  <div class="large-4 columns">
-  <h3>Passwort ändern</h3>
-    <form class="" method="POST" action="{% url 'user_profile' %}">{% csrf_token %}
-      {{ forms.change|crispy }}
-      <input name="action" class="button" type="submit" value="change">
-    </form>
-  </div>
+<div class="row align-middle">
+  <div class="full-height"></div>
+    <div class="large-12 columns">
+        <h2>Hallo {% if request.user.first_name %}{{ request.user.first_name }}{% endif %}!</h2>
+        <p>Ändere hier Dein Profil.</p>
+        {{ form|crispy }}
+        <img src="{{ profile.picture.url }}" />
+    </div>
 </div>
 
 {% endblock content %}

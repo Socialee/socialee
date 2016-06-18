@@ -71,15 +71,13 @@
 		  <div class="tabs-panel is-active" id="panel1">
 		    <p></p>
 		    	{% if user.email == object.created_by.email %}
-				Du bist der Admin dieses Projektes
+				{{ object.created_by.first_name }} {{ object.created_by.last_name }} Du bist der Admin dieses Projektes.
 				{% else %}
 				Du bist nicht der Admin dieses Projektes
-				{% endif %}
-				<p>Dies ist die Projektseite von:</p>
+				{% endif %}				
 				<h2>{{ object.title }}</h2>
 				<p>{{ object.tagline }}</p>
-				<p>{{ object.description }}</p>
-				<p>{{ object.created_by.first_name }} {{ object.created_by.last_name }}</p>
+				<p>{{ object.description }}</p>				
 		  </div>
 		  <div class="tabs-panel" id="panel2">
 		    <p>Suspendisse dictum feugiat nisl ut dapibus.  Vivamus hendrerit arcu sed erat molestie vehicula. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor.  Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>

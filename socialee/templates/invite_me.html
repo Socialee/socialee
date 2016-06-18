@@ -3,15 +3,15 @@
 {% block content %}
 
 
-<div class="row lp-header align-center">
-  <div class="large-8 columns">
-    <h1 class="text-center">Mach doch mal.</h1>
-    <p class="text-center">Socialee ist bisher nicht öffentlich, du musst dich einladen lassen. Mach doch mal.</p>
+<div class="row align-center align-middle">
+<div class="full-height"></div>
+  <div class="large-10 columns">
+    <h1 class="text-center">Socialee ist bisher nicht öffentlich, Du kannst Dich aber einladen lassen!</h1>
     
     <form method="POST" action=""> {% csrf_token %}
       {{ form|crispy }}
       <input class="button float-right" type="submit" value="Ladet mich ein!">
-      <a href="mailto:hello@socialee.de?Subject=Hallo%20Socialee!">Lieber eine Mail schreiben? Auch gut.</a>
+		<a href="mailto:hello@socialee.de?Subject=Hallo%20Socialee!">Lieber eine Mail schreiben? Auch gut.</a>
     </form>
   </div>
 </div>

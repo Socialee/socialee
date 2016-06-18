@@ -1,4 +1,5 @@
 import datetime
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -29,10 +30,13 @@ class Origin(models.Model):
         return 'Origin: {}'.format(self.title)
 
 
+def upload_location(instance, filename):
+    location = str(instance.user.username)
+    return "%s/%s" % (location, filename)
+
 class Profile(models.Model):
-    user = models.OneToOneField(UserEntry, blank=True, null=True)
-    nickname = models.CharField(max_length=50, blank=True, null=True)
-    # TODO: dh> "PhoneField" (Validierung etc)
+    user = models.OneToOneField(User, blank=True, null=True)
+    picture = models.ImageField(upload_to=upload_location, null=True, blank=True)
     phone = models.CharField(max_length=50, blank=True)
     plz = models.CharField(max_length=5, null=True, blank=True)
     newsletter = models.BooleanField(default=False)

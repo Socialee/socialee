@@ -1,0 +1,16 @@
+{% extends "offcanvas.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+	<div class="small-12 columns">
+		<form method="POST" action="">{% csrf_token %}
+			{{ form|crispy }}
+			<input class="button float-right" type="submit" value="Und los!"></input>
+		</form>
+		
+	</div>
+</div>
+
+	
+{% endblock content %}

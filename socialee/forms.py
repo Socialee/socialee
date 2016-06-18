@@ -13,17 +13,27 @@ from crispy_forms.helper import FormHelper
 class StartProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ('title', 'tagline', 'description')
+        fields = ('title', 'tagline')
         labels = {
             'title': _('Projekttitel'),
             'tagline': _('Untertitel'),
-            'description': _('Beschreibung'),
         }
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Socialee'}),
             'tagline': forms.TextInput(attrs={'placeholder': 'Das soziale Netzwerk für Ideen und Projekte'}),
-            'description': forms.Textarea(
-                attrs={'placeholder': 'Beschreibe dein Projekt oder Deine Idee. Du kannst diese Sachen später jederzeit ändern.'}),
+        }
+
+class EditProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ('title', 'tagline', 'description')
+        labels = {
+            'title': _('Gib deiner Idee einen Namen...'),
+            'tagline': _('... und einen Untertitel.'),
+        }
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'Socialee'}),
+            'tagline': forms.TextInput(attrs={'placeholder': 'Das soziale Netzwerk für Ideen und Projekte'}),
         }
 
 

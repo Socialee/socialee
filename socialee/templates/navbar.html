@@ -12,11 +12,11 @@
       <li><a href="/admin">Socialee Admin</a></li>
       {% endif %}
       {% if not request.user.is_authenticated %}
-      <li><a href="{% url 'account_login' %}">Log in</a></li>
+      <li><a href="{% url 'account_login' %}">Log In</a></li>
       {% else %}
-      <li><a href="{% url 'user_profile' %}">
+      <li><a href="{% url 'welcome' %}">
       {% if request.user.first_name %}
-      Profil von {{ request.user.first_name }}
+      Home von {{ request.user.first_name }}
       {% else %}
       {{ request.user.email }}
       {% endif %}</a></li>
@@ -26,6 +26,7 @@
       {% endif %}
       <li><a href="{% url 'account_logout' %}">Log out</a></li>
       {% endif %}
+      <li><a href="{% url 'startproject' %}">Idee starten</a></li>
         <li>
         <button type="button" class="button" data-toggle="offCanvas">Menü</button>
       </li>

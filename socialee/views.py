@@ -3,15 +3,16 @@ import requests
 import random
 
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.core.mail import send_mail
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
-from django.shortcuts import render
-from django.views.generic import TemplateView, FormView, UpdateView, ListView, DetailView
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import TemplateView, FormView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import SingleObjectMixin
 
@@ -20,10 +21,10 @@ from allauth.account.views import *
 from allauth.account.forms import *
 from allauth.account.decorators import verified_email_required
 
-from .models import Project, Input, Output
+from .models import Project, Input, Output, Profile
 from .forms import *
 
-
+User = get_user_model()
 
 # Overwrite/disable dispatch method of RedirectAuthenticatedUserMixin (endless redirect on /).
 def dispatch_no_redirect(self, request, *args, **kwargs):
@@ -47,8 +48,9 @@ class Home(BaseView, TemplateView):
         return context
 
 
-class WelcomePage(BaseView, TemplateView):
+class WelcomePage(BaseView, ListView):
     template_name = 'welcome.html'
+    model = Project
 
     def get_context_data(self, **kwargs):
         context = super(WelcomePage, self).get_context_data(**kwargs)
@@ -63,9 +65,12 @@ class StartProject(BaseView, CreateView):
     form_class = StartProjectForm
 
     def form_valid(self, form):
-        form.instance.created_by = self.request.user
+        user = self.request.user
+        form.instance.created_by = user
+        valid_data = super(StartProject, self).form_valid(form)
+        form.instance.managers.add(user)
 
-        return super(StartProject, self).form_valid(form)
+        return valid_data
 
     def get_context_data(self, **kwargs):
         context = super(StartProject, self).get_context_data(**kwargs)
@@ -73,7 +78,7 @@ class StartProject(BaseView, CreateView):
         return context
 
 
-# CRUD RETRIEVE PROJECT
+# CRUD LIST OF ALL PROJECTS
 class ProjectOverview(BaseView, ListView):
     template_name = 'project_overview.html'
     model = Project
@@ -84,6 +89,7 @@ class ProjectOverview(BaseView, ListView):
         return context
 
 
+# CRUD RETRIEVE PARTICULAR PROJECT
 class ProjectDetailView(BaseView, DetailView):
     template_name = 'project_template.html'
     model = Project
@@ -94,9 +100,54 @@ class ProjectDetailView(BaseView, DetailView):
         return context
 
 
-class UserProfile(BaseView, PasswordChangeView, EmailView):
+# CRUD UPDATE PARTICULAR PROJECT
+class ProjectUpdateView(BaseView, UpdateView):
+    template_name = 'edit_project.html'
+    model = Project
+    form_class = EditProjectForm
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectUpdateView, self).get_context_data(**kwargs)
+
+        return context
+
+    # Nur der Admin und die Manager des Projektes kann Änderungen vornehmen
+    def get_object(self, *args, **kwargs):
+        user = self.request.user
+        obj = super(ProjectUpdateView, self).get_object(*args, **kwargs)
+        if obj.created_by == user or user in obj.managers.all():
+            return obj
+        else:
+            raise Http404
+
+
+# def user_profile(request):
+#     user = get_object_or_404(User, username=request.user)
+#     profile, created = Profile.objects.get_or_create(user=user)
+#     context = {
+#     "profile": profile,
+#     }
+#     return render (request, 'user_profile.html', context)
+
+class User_profileView(BaseView, UpdateView):
     template_name = 'user_profile.html'
-    form_class = AddEmailForm
+    model = Profile
+    form_class = None
+    fields = '__all__'
+
+    def get_context_data(self, **kwargs):
+        context = super(User_profileView, self).get_context_data(**kwargs)
+
+        return context
+
+
+def profile_view(request, username):
+    user = get_object_or_404(User, username=username)
+    profile, created = Profile.objects.get_or_create(user=user)
+    context = {
+    "profile": profile,
+    }
+    return render (request, 'profile_view.html', context)
 
 
 def Invite_me(request):

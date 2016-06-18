@@ -2,20 +2,14 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
+<div class="row align-center align-middle full-height">
+  <div class="large-8 columns">
+    <h2 class="text-center">Was ist deine Idee?</h2>
+    <p class="text-center">Hier kannst Du Dein <strong>Projekt</strong> oder Deine <strong>Idee</strong> starten. Juchuu.</p>
 
-
-<div class="row align-center">
-  <div class="large-12 columns text-center">
-    <h2>Was ist deine Idee?</h2>
-    <p>Hier kannst Du Dein <strong>Projekt</strong> oder Deine <strong>Idee</strong> starten. Juchuu.</p>
-  </div>
-</div>
-
-<div class="row align-center">
-	<div class="large-10 columns">
 		<form method="POST" action=""> {% csrf_token %}
-      {{ form }}
-			<input class="button float-right" type="submit" value="Und los!"></input>
+		{{ form }}
+		<input class="button float-right" type="submit" value="Und los!"></input>
 		</form>
 	</div>
 </div>

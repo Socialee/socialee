@@ -23,7 +23,9 @@ urlpatterns = [
     url(r'^startproject/$', login_required(views.StartProject.as_view()), name='startproject'), # login required!
     url(r'^project_overview/$', views.ProjectOverview.as_view(), name='project_overview'),
     url(r'^project/(?P<slug>[-\w]+)/$', login_required(views.ProjectDetailView.as_view()), name='project_detailview'),
-    url(r'^user_profile/$', login_required(views.UserProfile.as_view()), name='user_profile'), # login required!
+    url(r'^project/(?P<slug>[-\w]+)/edit/$', login_required(views.ProjectUpdateView.as_view()), name='project_updateview'),
+    url(r'^profile/(?P<username>[\w.@+-]+)/$', login_required(views.profile_view), name='user_profile'), # login required!
+
     url(r'^protect/', include('simple_auth.urls')),
 
     # At the end, for django-cms.
