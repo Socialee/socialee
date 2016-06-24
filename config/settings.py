@@ -63,7 +63,7 @@ INSTALLED_APPS = (
     'sekizai',  # for JavaScript and CSS management
     'mptt',  # utilities for implementing a tree
 
-    'reversion',
+    # 'reversion', # version-conflicts with cms (http://docs.django-cms.org/en/latest/how_to/install.html)
     'djangocms_file',
     'djangocms_flash',
     #'djangocms_googlemap',
