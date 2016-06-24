@@ -9,9 +9,11 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 
 TODO: use django-configurations, for class based approach?!
 """
-
+# -*- coding: utf-8 -*-
 import os
 import environ
+
+gettext = lambda s: s
 
 # Build paths inside the project like this: os.path.join(ROOT_DIR, ...)
 ROOT_DIR = environ.Path(__file__) - 2
@@ -20,7 +22,7 @@ APPS_DIR = ROOT_DIR.path('socialee')
 assert os.path.exists(str(ROOT_DIR.path("Makefile"))), "ROOT_DIR is (not?) set properly."
 
 CMS_TEMPLATES = (
-    ('empty_template.html', 'Empty Template'),
+    ('home.html', 'Home / Landingpage'),
     ('project_template.html', 'Project Template'),
 )
 
@@ -56,21 +58,22 @@ INSTALLED_APPS = (
 
     # Base django-cms requirements.
     'cms',  # django CMS itself
-    'mptt',  # utilities for implementing a tree
+    'treebeard',  # utilities for implementing a tree
     'menus',  # helper for model independent hierarchical website navigation
-    'sekizai',  # for javascript and css management
-    'treebeard',
+    'sekizai',  # for JavaScript and CSS management
+    'mptt',  # utilities for implementing a tree
 
     'reversion',
     'djangocms_file',
     'djangocms_flash',
-    # 'djangocms_googlemap',
+    #'djangocms_googlemap',
     'djangocms_inherit',
     'djangocms_picture',
     'djangocms_teaser',
     'djangocms_video',
     'djangocms_link',
     'djangocms_text_ckeditor',
+    'djangocms_snippet',
 
     'allauth',
     'allauth.account',
@@ -102,6 +105,7 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 MIDDLEWARE_CLASSES = [
+    # 'cms.middleware.utils.ApphookReloadMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

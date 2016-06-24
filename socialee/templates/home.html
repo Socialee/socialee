@@ -1,10 +1,10 @@
 {% extends "offcanvas.html" %}
+{% load cms_tags %}
 {% block content %}
-
 <div class="row expanded lp-header align-center align-middle ">
   <div class="large-12 columns">
     <div class="text-center">
-    <p>Socialee ist ein Marktplatz für <strong>Ideen und Projekte.</strong> Und eine Plattorm zur Kommunikation.<br>Wir bringen <strong>Ideengeber, Macher und Ermöglicher</strong> zusammen. Und helfen, <strong>das Gute</strong> in die Welt zu bringen.</p>
+    {% placeholder landingpage_headline %}
     <a class="button" href="{% url 'project_overview' %}">Die ersten Socialee-Projekte.</a><br />
     <a href="{% url 'invite_me' %}">Ladet mich sofort ein!</a>
     </div>

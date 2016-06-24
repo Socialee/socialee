@@ -19,11 +19,11 @@
         <link rel="stylesheet" type="text/css" href="{% static 'bower_components/slick.js/slick/slick-theme.css' %}"/>
 
         <link type="text/css" rel="stylesheet" href="{% static 'css/socialee.css' %}" />
-        {# {% render_block "css" %} #}
+        {% render_block "css" %}
         {# {% render_block "js_head" %} #}
     </head>
     <body>
-        {# {% cms_toolbar %} #}
+        {% cms_toolbar %}
         {% block before_content %}
         {% endblock before_content %}
         {% include "navbar.html" %}
@@ -49,6 +49,8 @@
         <script src="{% static 'bower_components/foundation-sites/dist/foundation.js' %}"></script>
         {# Socialee javascript #}
         <script src="{% static 'js/main.js' %}"></script>
+        
+        {% render_block "js" %}
 
     {# Piwik #}
     <!--{% if not debug %}

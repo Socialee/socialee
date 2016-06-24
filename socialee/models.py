@@ -8,6 +8,8 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
 
+# from cms.admin.placeholderadmin import FrontendEditableAdminMixin
+
 from allauth.account.models import EmailAddress
 
 
