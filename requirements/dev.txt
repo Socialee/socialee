@@ -4,13 +4,13 @@
 appnope==0.1.0            # via ipython
 backports.shutil-get-terminal-size==1.0.0  # via ipython
 click==6.6                # via pip-tools
-decorator==4.0.9          # via ipython, traitlets
+decorator==4.0.10         # via ipython, traitlets
 django-debug-toolbar==1.4
 django-extensions==1.6.7
-Django==1.9.6             # via django-debug-toolbar
+Django==1.9.7             # via django-debug-toolbar
 first==2.0.1              # via pip-tools
 gnureadline==6.3.3        # via ipython
-ipdb==0.10.0
+ipdb==0.10.1
 ipython-genutils==0.1.0   # via traitlets
 ipython==4.2.0            # via ipdb
 livereload==2.4.1
