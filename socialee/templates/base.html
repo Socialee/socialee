@@ -21,6 +21,7 @@
         <link type="text/css" rel="stylesheet" href="{% static 'css/socialee.css' %}" />
         {% render_block "css" %}
         {# {% render_block "js_head" %} #}
+        {% block head_extra %}{% endblock head_extra %}
     </head>
     <body>
         {% cms_toolbar %}
@@ -47,6 +48,8 @@
         <script type="text/javascript" src="{% static 'bower_components/slick.js/slick/slick.js' %}"></script>
         {# Foundation Sites #}
         <script src="{% static 'bower_components/foundation-sites/dist/foundation.js' %}"></script>
+        {# Markdown #}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
         {# Socialee javascript #}
         <script src="{% static 'js/main.js' %}"></script>
         

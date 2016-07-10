@@ -33,3 +33,5 @@ crispy-forms-foundation
 django-betterforms==1.1.2
 
 django-simple-auth
+
+django-summernote

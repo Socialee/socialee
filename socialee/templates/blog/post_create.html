@@ -1,0 +1,17 @@
+{% extends "offcanvas.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="row align-center align-middle">
+<div class="full-height"></div>
+    <div class="large-8 columns">
+		<form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+			{{ form|crispy }}
+			<button type="submit" class="button">Create Post</button>
+		</form>
+    </div>
+</div>
+
+
+{% endblock content %}

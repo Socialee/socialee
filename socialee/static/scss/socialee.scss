@@ -17,7 +17,6 @@
   color: #ffffff;
 }
 
-
 .messages-callout {
   @include callout-base;
   li {
@@ -257,6 +256,11 @@
     width: 100%;
     background-color: $socialee-gray;
   }
+}
+
+// Crispy Things
+.error {
+  color: red;
 }
 
 

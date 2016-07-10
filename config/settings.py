@@ -80,10 +80,12 @@ INSTALLED_APPS = (
     'allauth.socialaccount',
     #'allauth.socialaccount.providers.facebook',
 
+    # THIRD PARTY APPS
+    'betterforms', # works only in Version 1.1.2
     'crispy_forms',
     'crispy_forms_foundation',
-    'betterforms', # works only in Version 1.1.2
     'django_comments',
+    'django_summernote',
     'simple_auth',
     'tagging',
     'zinnia',
@@ -92,6 +94,7 @@ INSTALLED_APPS = (
     'questions.apps.QuestionsConfig',
     'quotes.apps.QuotesConfig',
     'socialee.apps.SocialeeConfig',
+    'posts',
 )
 
 if DEBUG:
@@ -264,3 +267,49 @@ CRISPY_TEMPLATE_PACK = 'foundation-5'
 
 print ("ROOT_DIR is: ", ROOT_DIR)
 print ('DEBUG is: ', DEBUG)
+
+
+SUMMERNOTE_CONFIG = {
+    # Using SummernoteWidget - iframe mode
+    'iframe': False,  # or set False to use SummernoteInplaceWidget - no iframe mode
+
+    # Using Summernote Air-mode
+    'airMode': False,
+
+    # Use native HTML tags (`<b>`, `<i>`, ...) instead of style attributes
+    # (Firefox, Chrome only)
+    'styleWithTags': True,
+
+    # Set text direction : 'left to right' is default.
+    'direction': 'ltr',
+
+    # Change editor size
+    'width': '100%',
+    'height': '380',
+
+    # Use proper language setting automatically (default)
+    'lang': None,
+
+    # Or, set editor language/locale forcely
+    'lang': 'de-DE',
+
+    # Customize toolbar buttons
+    'toolbar': [
+    ['style', ['style']],
+    ['font', ['bold', 'italic', 'underline', 'clear']],
+    ['fontname', ['fontname']],
+    ['color', ['color']],
+    ['para', ['ul', 'ol', 'paragraph']],
+    ['height', ['height']],
+    ['table', ['table']],
+    ['insert', ['link', 'picture', 'hr']],
+    ['view', ['fullscreen', 'codeview']],
+    ['help', ['help']]
+  ],
+
+    # Need authentication while uploading attachments.
+    'attachment_require_authentication': True,
+
+    # You can disable file upload feature.
+    'disable_upload': False,
+}

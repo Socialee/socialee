@@ -1,0 +1,24 @@
+{% extends "offcanvas.html" %}
+
+{% block content %}
+
+<div class="row align-center align-middle">
+<div class="full-height"></div>
+    <div class="small-8 columns">
+        <div class="callout">
+            {% if instance.image %}
+                <img src="{{ instance.image.url }}">
+            {% endif %}
+            {% if instance.user.get_full_name %}
+                <p>{{ instance.user.get_full_name }} | {{ instance.publish }} | {{ instance.timestamp|timesince }}</p>
+            {% endif %}
+            <h4>{{ instance.title }} {% if instance.draft %}<small style="color:red">Entwurf</small>{% endif %}</h4>
+            <p>{{ instance.content|safe }}</p>
+            <a href="{% url 'posts:update' instance.slug %}">bearbeiten</a>
+            <a href="{% url 'posts:blog_index' %}">zurück zur Übersicht</a>
+        </div>          
+    </div>
+</div>
+
+
+{% endblock content %}
