@@ -218,7 +218,7 @@ ACCOUNT_FORMS = {
     'login': 'socialee.forms.SocialeeLoginForm'
 }
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/project_overview/'
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
