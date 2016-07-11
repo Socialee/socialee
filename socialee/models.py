@@ -68,23 +68,7 @@ class Profile(models.Model):
     user_email.short_description = _("E-Mail")
 
     def __str__(self):
-        return 'Profile ({})'.format(self.user)
-
-
-class Zettel(models.Model):
-    class Meta:
-        verbose_name_plural = _('Zettel')
-
-    profile = models.ForeignKey(Profile)
-    image = models.ImageField(upload_to='zettel/%Y-%m/', blank=True)
-    number = models.CharField(blank=True, null=True, max_length=50,
-                              default="2015_000_0000",
-                              verbose_name=_("Number on the zettel"))
-
-    origin = models.ForeignKey(Origin, blank=True, null=True)
-
-    def __str__(self):
-        return 'Zettel from {}'.format(self.profile)
+        return 'Profil von {}'.format(self.user)
 
 
 class InputOutput(models.Model):
@@ -107,7 +91,6 @@ class InputOutput(models.Model):
         abstract = True
 
     profile = models.ForeignKey(Profile, null=True)
-    zettel = models.ForeignKey(Zettel, null=True)
     type = models.CharField(max_length=25,
                             choices=list(TYPES),
                             default=UNKNOWN)
@@ -119,35 +102,47 @@ class InputOutput(models.Model):
 class Input(InputOutput):
     title = models.CharField(verbose_name="Was ist der Input?",
                              max_length=200)
+    description = models.TextField(max_length=5000, null=True, blank=True)
 
     def __str__(self):
-        return 'Input "{}" from profile {} and zettel {}'.format(
-          self.title, self.profile, self.zettel)
+        return 'Input "{}" from profile {}'.format(
+          self.title, self.profile)
 
 
 class Output(InputOutput):
     title = models.CharField(verbose_name="Was ist der Output?",
                              max_length=200)
+    description = models.TextField(max_length=5000, null=True, blank=True)
 
     def __str__(self):
-        return 'Output "{}" from profile {} and zettel {}'.format(
-          self.title, self.profile, self.zettel)
+        return 'Output "{}" from profile {}'.format(
+          self.title, self.profile)
+
+
+class Tag(InputOutput):
+    title = models.CharField(verbose_name="Tag-Beschreibung",
+                             max_length=200)
+    description = models.TextField(max_length=5000, null=True, blank=True)
+
+    def __str__(self):
+        return 'Output "{}" from profile {}'.format(
+          self.title, self.profile)
 
 
 class Project(models.Model):
     title = models.CharField(max_length=60)
     tagline = models.CharField(max_length=140, null= True)
-    description = models.TextField(max_length=5000, null=True)
+    description = models.TextField(max_length=5000, null=True, blank=True)
+    header_img = models.ImageField(upload_to=upload_location, null=True, blank=True)
     slug = models.SlugField()
-    profiles = models.ManyToManyField(Profile)
+    profiles = models.ManyToManyField(User, related_name='Socialeebhaber') # follower/beobachter
+    managers = models.ManyToManyField(User, related_name='Project_Managers', blank=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    inputs = models.ManyToManyField(Input)
-    outputs = models.ManyToManyField(Output)
-    liked_users = models.ForeignKey(Profile,
-                                    null=True,
-                                    on_delete=models.SET_NULL,
-                                    related_name='likes')
+    inputs = models.ManyToManyField(Input, blank=True)
+    outputs = models.ManyToManyField(Output, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
 
+    
     def __str__(self):
         return 'Project "{}"'.format(self.title)
 
@@ -164,6 +159,7 @@ def pre_save_project(sender, instance, *args, **kwargs):
 
 pre_save.connect(pre_save_project, sender = Project)
 
+
 class Invite(models.Model):
     full_name = models.CharField(max_length=120, blank=True, null=True, verbose_name='Name')
     email = models.EmailField()
@@ -174,7 +170,6 @@ class Invite(models.Model):
     class Meta:
         verbose_name = 'Bitte ladet mich ein!'
         verbose_name_plural = 'Bitte ladet mich ein!'
-
 
     def was_submitted_recently(self):
         now = timezone.now()

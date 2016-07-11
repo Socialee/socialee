@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from allauth.account.forms import *
 
 from django import forms
-from .models import Project, Profile, UserEntry, Input, Output, Invite
+from .models import Project, Profile, UserEntry, Input, Output, Invite, User
 
 from crispy_forms.helper import FormHelper
 
@@ -35,6 +35,13 @@ class EditProjectForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'placeholder': 'Socialee'}),
             'tagline': forms.TextInput(attrs={'placeholder': 'Das soziale Netzwerk für Ideen und Projekte'}),
         }
+
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = '__all__'
+        # fields = ('picture', 'phone', 'plz', 'newsletter')
 
 
 class InviteForm(forms.ModelForm):

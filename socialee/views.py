@@ -32,6 +32,8 @@ def dispatch_no_redirect(self, request, *args, **kwargs):
 RedirectAuthenticatedUserMixin.dispatch = dispatch_no_redirect
 
 
+# General-Views
+
 class BaseView:
     def get_context_data(self, **kwargs):
         context = super(BaseView, self).get_context_data(**kwargs)
@@ -46,108 +48,6 @@ class Home(BaseView, TemplateView):
         context = super(Home, self).get_context_data(**kwargs)
 
         return context
-
-
-class WelcomePage(BaseView, ListView):
-    template_name = 'welcome.html'
-    model = Project
-
-    def get_context_data(self, **kwargs):
-        context = super(WelcomePage, self).get_context_data(**kwargs)
-
-        return context
-
-
-# CRUD CREATE PROJECT
-class StartProject(BaseView, CreateView):
-    template_name = 'start_project.html'
-    model = Project
-    form_class = StartProjectForm
-
-    def form_valid(self, form):
-        user = self.request.user
-        form.instance.created_by = user
-        valid_data = super(StartProject, self).form_valid(form)
-        # form.instance.managers.add(user)
-
-        return valid_data
-
-    def get_context_data(self, **kwargs):
-        context = super(StartProject, self).get_context_data(**kwargs)
-
-        return context
-
-
-# CRUD LIST OF ALL PROJECTS
-class ProjectOverview(BaseView, ListView):
-    template_name = 'project_overview.html'
-    model = Project
-
-    def get_context_data(self, **kwargs):
-        context = super(ProjectOverview, self).get_context_data(**kwargs)
-
-        return context
-
-
-# CRUD RETRIEVE PARTICULAR PROJECT
-class ProjectDetailView(BaseView, DetailView):
-    template_name = 'project_template.html'
-    model = Project
-
-    def get_context_data(self, **kwargs):
-        context = super(ProjectDetailView, self).get_context_data(**kwargs)
-
-        return context
-
-
-# CRUD UPDATE PARTICULAR PROJECT
-class ProjectUpdateView(BaseView, UpdateView):
-    template_name = 'edit_project.html'
-    model = Project
-    form_class = EditProjectForm
-
-    def get_context_data(self, **kwargs):
-        context = super(ProjectUpdateView, self).get_context_data(**kwargs)
-
-        return context
-
-    # Nur der Admin und die Manager des Projektes kann Änderungen vornehmen
-    def get_object(self, *args, **kwargs):
-        user = self.request.user
-        obj = super(ProjectUpdateView, self).get_object(*args, **kwargs)
-        if obj.created_by == user or user in obj.managers.all():
-            return obj
-        else:
-            raise Http404
-
-
-# def user_profile(request):
-#     user = get_object_or_404(User, username=request.user)
-#     profile, created = Profile.objects.get_or_create(user=user)
-#     context = {
-#     "profile": profile,
-#     }
-#     return render (request, 'user_profile.html', context)
-
-class User_profileView(BaseView, UpdateView):
-    template_name = 'user_profile.html'
-    model = Profile
-    form_class = None
-    fields = '__all__'
-
-    def get_context_data(self, **kwargs):
-        context = super(User_profileView, self).get_context_data(**kwargs)
-
-        return context
-
-
-def profile_view(request, username):
-    user = get_object_or_404(User, username=username)
-    profile, created = Profile.objects.get_or_create(user=user)
-    context = {
-    "profile": profile,
-    }
-    return render (request, 'profile_view.html', context)
 
 
 def Invite_me(request):
@@ -192,3 +92,133 @@ class Impressum(BaseView, TemplateView):
         context = super(Impressum, self).get_context_data(**kwargs)
 
         return context        
+
+# Project-Views
+
+# CRUD CREATE PROJECT
+class StartProject(BaseView, CreateView):
+    template_name = 'start_project.html'
+    model = Project
+    form_class = StartProjectForm
+
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.created_by = user
+        valid_data = super(StartProject, self).form_valid(form)
+        form.instance.managers.add(user)
+        return valid_data
+
+    def get_context_data(self, **kwargs):
+        context = super(StartProject, self).get_context_data(**kwargs)
+
+        return context
+
+
+# CRUD LIST OF ALL PROJECTS
+class ProjectOverview(BaseView, ListView):
+    template_name = 'project_overview.html'
+    model = Project
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectOverview, self).get_context_data(**kwargs)
+
+        return context
+
+
+# CRUD RETRIEVE PARTICULAR PROJECT
+class ProjectDetailView(BaseView, DetailView):
+    template_name = 'project_template.html'
+    model = Project
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectDetailView, self).get_context_data(**kwargs)
+
+        return context
+
+
+# CRUD UPDATE PARTICULAR PROJECT
+class ProjectUpdateView(BaseView, UpdateView):
+    template_name = 'edit_project.html'
+    model = Project
+    form_class = EditProjectForm
+
+    def get_context_data(self, **kwargs):
+        context = super(ProjectUpdateView, self).get_context_data(**kwargs)
+
+        return context
+
+    # Nur der Admin und die Manager des Projektes kann Änderungen vornehmen
+    def get_object(self, *args, **kwargs):
+        user = self.request.user # erfragt den derzeitigen user
+        obj = super(ProjectUpdateView, self).get_object(*args, **kwargs)
+        if obj.created_by == user or user in obj.managers.all():
+            return obj
+        else:
+            raise Http404
+
+
+# Profile-Views
+
+# Update Profile: User updates own profile
+# Retrieve Profile: User watches detail-view of own profile or profile of others
+# Delete Profile: User deletes own profile
+# Profile View: Public Profile View for other users
+# Welcome View: Landing-Page for User and overview
+
+
+# Update Profile: User updates own profile
+class ProfileUpdateView(BaseView, UpdateView):
+    template_name = 'user_profile_update.html'
+    model = User
+    fields = '__all__'
+    # form_class = EditProfileForm
+    slug_field = 'username'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileUpdateView, self).get_context_data(**kwargs)
+
+        return context
+
+    # Nur der Admin und die Manager des Projektes kann Änderungen vornehmen
+    # def get_object(self, *args, **kwargs):
+    #     user = self.request.user # erfragt den derzeitigen user
+    #     obj = super(ProfileUpdateView, self).get_object(*args, **kwargs)
+    #     if obj.created_by == user or user in obj.managers.all():
+    #         return obj
+    #     else:
+    #         raise Http404
+
+
+# Retrieve Profile: User watches detail-view of own profile or profile of others
+class ProfileDetailView(BaseView, DetailView):
+    template_name = 'user_profile_detail.html'
+    model = User
+    slug_field = 'username'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileDetailView, self).get_context_data(**kwargs)
+
+        return context
+
+
+class ProfileView(BaseView, DetailView):
+    template_name = 'user_profile_view.html'
+    model = User
+    slug_field = 'username'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileDetailView, self).get_context_data(**kwargs)
+
+        return context
+
+
+# Welcome View: Landing-Page for User and overview
+class WelcomePage(BaseView, ListView):
+    template_name = 'welcome.html'
+    model = Project
+
+    def get_context_data(self, **kwargs):
+        context = super(WelcomePage, self).get_context_data(**kwargs)
+        context['user_project_list'] = Project.objects.filter(created_by=self.request.user)
+
+        return context

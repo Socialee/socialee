@@ -5,10 +5,8 @@
 <div class="row align-middle">
   <div class="full-height"></div>
     <div class="large-12 columns">
-        <h2>Hallo {% if request.user.first_name %}{{ request.user.first_name }}{% endif %}!</h2>
-        <p>Ändere hier Dein Profil.</p>
-        {{ form|crispy }}
-        <img src="{{ profile.picture.url }}" />
+        <h2>Hallo {% if request.user.first_name %}{{ request.user.first_name }}{% else %}{{ request.user }}{% endif %}!</h2>
+        <p>Hier ist Dein Profil.</p>
     </div>
 </div>
 

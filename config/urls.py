@@ -20,12 +20,14 @@ urlpatterns = [
     url(r'^quotes/', include('quotes.urls')),
     url(r'^invite_me/$', views.Invite_me, name='invite_me'),
     url(r'^impressum/$', views.Impressum.as_view(), name='impressum'),
-    url(r'^welcome/$', login_required(views.WelcomePage.as_view()), name='welcome'), # login required!
+    url(r'^welcome/(?P<slug>[\w.@+-]+)/$', login_required(views.WelcomePage.as_view()), name='welcome'), # login required!
     url(r'^startproject/$', login_required(views.StartProject.as_view()), name='startproject'), # login required!
     url(r'^project_overview/$', views.ProjectOverview.as_view(), name='project_overview'),
     url(r'^project/(?P<slug>[-\w]+)/$', login_required(views.ProjectDetailView.as_view()), name='project_detailview'),
     url(r'^project/(?P<slug>[-\w]+)/edit/$', login_required(views.ProjectUpdateView.as_view()), name='project_updateview'),
-    url(r'^profile/(?P<username>[\w.@+-]+)/$', login_required(views.profile_view), name='user_profile'), # login required!
+    url(r'^(?P<slug>[\w.@+-]+)/profile/update/$', login_required(views.ProfileUpdateView.as_view()), name='update_profile'),
+    url(r'^(?P<slug>[\w.@+-]+)/profile/detail/$', login_required(views.ProfileDetailView.as_view()), name='profile_detail'),
+    url(r'^(?P<slug>[\w.@+-]+)/$', login_required(views.ProfileView.as_view()), name='profile_view'),
 
     url(r'^protect/', include('simple_auth.urls')),
 

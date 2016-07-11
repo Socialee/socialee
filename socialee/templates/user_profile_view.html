@@ -10,8 +10,11 @@
         <li>Vorname: {{ profile.user.first_name }}</li>
         <li>Nachname: {{ profile.user.last_name }}</li>
         <li>Liked Projects: {{ profile.liked_projects }}</li>
-        <li>PLZ: {{ profile.plz }}</li>      
-        <img src="{{ profile.picture.url }}" />
+        <li>PLZ: {{ profile.plz }}</li> 
+        {% if profile.picture %}
+        <img src="{{ profile.picture.url }}" />     	
+     	{% endif %}     
+        
     </div>
 </div>
 

@@ -4,17 +4,14 @@
 
 
 /* GLOBAL STYLES AND HELPERS*/
-.s-badge {
-  position: relative;
-  bottom: 0.8rem;
-  right: 1.5rem;
-  line-height: 1.8rem;
-  text-align: center;
-  width: 1.8rem;
-  height: 1.8rem;
-  border-radius: 50%;
-  background-color: rgba(127, 127, 127, 0.5);
-  color: #ffffff;
+div.cms .cms-toolbar-trigger a {
+    display: block;
+    width: 6px;
+    height: 5px;
+    text-align: center;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    background: #fff;
 }
 
 .messages-callout {
@@ -236,7 +233,7 @@
   position: absolute;
   z-index: 100;
   bottom: 1rem;
-  left: 1rem;
+  left: 0.95rem;
   div {
     padding: 0 1.5rem 0 0.5rem;
     height: 100%;
@@ -249,13 +246,20 @@
   position: absolute;
   z-index: 100;
   bottom: 1rem;
-  right: 1rem;
+  right: 1.8rem;
   div {
     padding: 0 1.5rem 0 0.5rem;
     height: 100%;
     width: 100%;
     background-color: $socialee-gray;
   }
+}
+
+.edit-project-button {
+  position: absolute;
+  z-index: 100;
+  top: 1rem;
+  right: 1.8rem;
 }
 
 // Crispy Things

@@ -2,32 +2,20 @@
 {% load cms_tags staticfiles sekizai_tags%}
 
 {% block content %}
-
 <div class="row align-center align-middle">
 <div class="full-height"></div>
-  <div class="large-12 columns text-center">
-  	{% if request.user.first_name %}
-  	<h2>Hallo {{ request.user.first_name }}!</h2>
-  	{% else %}
-  	<h2>Hallo!</h2>	
-  	<p>Du bist neu hier, oder? <a href="{% url 'user_profile' %}">Hier</a> kannst Du Dein Profil einrichten.</p>
-  	{% endif %}
-  	<p>Willkommen bei Socialee. Wir helfen Dir, Deine Idee umzusetzen. Ziemlich einfach.</p>
-  	<p>Bei Socialee treffen drei Sorten Menschen aufeinander: Ideengeber, Ermöglicher und Macher. Manchmal ist man mehr das eine, manchmal mehr das andere. Manchmal fehlt ein Ermöglicher, manchmal ein Ideengeber. Whatever – wir haben sie alle.</p>
-  	<a href="#" class="button">Ich habe Ideen!</a>
-  	<a href="#" class="button">Ich bin ein Macher!</a>
-  	<a href="#" class="button">Ich will unterstützen!</a>
+  <div class="large-12 columns">
+    <h3>Deine Projekte</h3>
+    <div class="row align-center small-up-1 medium-up-2 large-up-3">
+      {% for project in user_project_list %}
+        {% include "project_card_element.html" %}
+      {% endfor %}
+    </div>
   </div>
 </div>
 
 <div class="row full-height">
-  <div class="large-12 columns">
-  <h3>Deine Projekte</h3>
-    {% for project in object_list  %}
-      <li><a href="">{{ project }}</a></li>
-    {% endfor %}
 
-  </div>
 </div>
 
     <ul class="text-left">
