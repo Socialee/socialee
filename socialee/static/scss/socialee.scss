@@ -162,12 +162,13 @@ div.cms .cms-toolbar-trigger a {
 /*OFFCANVAS STYLES*/
 
 .off-canvas {
+  padding-top: 0em;
   height: 100%;
 }
 
 .menu.vertical .button {
+    @include button-hollow;
     margin: 0.6rem 4rem 1rem 1rem;
-    background-color: rgba(255, 255, 255, 0);
     border: solid 1px black;
     color: black;
 }
