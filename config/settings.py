@@ -86,7 +86,7 @@ INSTALLED_APPS = (
     'crispy_forms_foundation',
     'django_comments',
     'django_summernote',
-    'simple_auth',
+    # 'simple_auth',
     'tagging',
     'zinnia',
 
@@ -125,10 +125,10 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.admindocs.middleware.XViewMiddleware',
 ]
 
-if not DEBUG:
-    MIDDLEWARE_CLASSES += [
-    'simple_auth.middleware.SimpleAuthMiddleware',
-    ]
+# if DEBUG:
+#     MIDDLEWARE_CLASSES += [
+#     'simple_auth.middleware.SimpleAuthMiddleware',
+#     ]
 
 ROOT_URLCONF = 'config.urls'
 
@@ -218,7 +218,7 @@ ACCOUNT_FORMS = {
     'login': 'socialee.forms.SocialeeLoginForm'
 }
 
-LOGIN_REDIRECT_URL = '/project_overview/'
+LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
@@ -309,7 +309,7 @@ SUMMERNOTE_CONFIG = {
   ],
 
     # Need authentication while uploading attachments.
-    'attachment_require_authentication': True,
+    'attachment_require_authentication': False,
 
     # You can disable file upload feature.
     'disable_upload': False,

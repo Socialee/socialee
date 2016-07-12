@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^(?P<slug>[\w.@+-]+)/profile/detail/$', login_required(views.ProfileDetailView.as_view()), name='profile_detail'),
     url(r'^(?P<slug>[\w.@+-]+)/$', login_required(views.ProfileView.as_view()), name='profile_view'),
 
-    url(r'^protect/', include('simple_auth.urls')),
+    # url(r'^protect/', include('simple_auth.urls')),
 
     # At the end, for django-cms.
     # Ref: https://django-cms.readthedocs.org/en/latest/how_to/install.html#url-configuration

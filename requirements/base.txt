@@ -19,7 +19,6 @@ django-polymorphic==0.8.1  # via django-filer
 django-reversion==2.0.5
 django-sekizai==0.9.0     # via cmsplugin-filer, django-cms
 django-select2==4.3.2     # via djangocms-link
-django-simple-auth==0.1.5
 django-summernote==0.8.5
 django-tagging==0.4.3     # via django-blog-zinnia
 django-treebeard==4.0.1
