@@ -125,10 +125,10 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.admindocs.middleware.XViewMiddleware',
 ]
 
-# if DEBUG:
-#     MIDDLEWARE_CLASSES += [
-#     'simple_auth.middleware.SimpleAuthMiddleware',
-#     ]
+if not DEBUG:
+    MIDDLEWARE_CLASSES += [
+    #'simple_auth.middleware.SimpleAuthMiddleware',
+    ]
 
 ROOT_URLCONF = 'config.urls'
 
