@@ -88,7 +88,7 @@ INSTALLED_APPS = (
     'django_summernote',
     # 'simple_auth',
     'tagging',
-    'zinnia',
+    # 'zinnia',
 
     # SOCIALEE CUSTOM APPS
     'questions.apps.QuestionsConfig',
@@ -154,7 +154,7 @@ TEMPLATES = [
                 'django.core.context_processors.request',
                 'sekizai.context_processors.sekizai',
                 'cms.context_processors.cms_settings',
-                'zinnia.context_processors.version',  # Optional
+                # 'zinnia.context_processors.version',  # Optional
             ],
             'debug': env.bool('DJANGO_TEMPLATE_DEBUG', DEBUG),
         },
