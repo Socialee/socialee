@@ -6,8 +6,8 @@
 /* GLOBAL STYLES AND HELPERS*/
 div.cms .cms-toolbar-trigger a {
     display: block;
-    width: 6px;
-    height: 5px;
+    width: 18px;
+    height: 18px;
     text-align: center;
     border-top: 1px solid #fff;
     border-left: 1px solid #fff;
@@ -73,10 +73,27 @@ div.cms .cms-toolbar-trigger a {
   margin-top: 5rem;
 }
 
+.lp-fullscreen-image {
+  min-height: 95vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+// .lp-fullscreen-overlay {
+//   position: absolute;
+//    top: 0;
+//    left: 0;
+//    width: 100%;
+//    height: 100%;
+//    background-color: #00ffff;
+//    opacity: 0.6;
+// }
+
 /* FOOTER STYLES*/
 
 .footer-top {
-  background-color: $socialee-gray;
+  background-color: #32534C;
   text-align: center;
   padding: 0.8rem;
   border-top: 1px solid $light-gray;
@@ -86,7 +103,7 @@ div.cms .cms-toolbar-trigger a {
       font-size: 1.8rem;
   }
   .quote-author {
-    color: $dark-gray;
+    // color: $dark-gray;
     font-size: 0.9rem;
     padding: 0;
     margin: 0;
@@ -94,19 +111,19 @@ div.cms .cms-toolbar-trigger a {
 }
 
 .footer-bottom {
-  background-color: $socialee-gray;
+  background-color: #32534C;
   text-align: center;
   font-size: 1rem;
   padding: 2rem;
   border-top: 1px solid $light-gray;
   p {
     &.slogan {
-      color: $dark-gray;
+      // color: $dark-gray;
       font-size: 1.8rem;
       margin: 0 0 1rem;
     }
     &.copywrite {
-      color: $dark-gray;
+      // color: $dark-gray;
       font-size: 0.75rem;
       margin: 0;
     }
@@ -114,7 +131,7 @@ div.cms .cms-toolbar-trigger a {
   .links a {
     text-decoration: none;
     list-style: none;
-    color: $dark-gray;
+    // color: $dark-gray;
     padding: 3rem 0 2rem;
     margin: 0;
     &::after {

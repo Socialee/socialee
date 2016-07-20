@@ -171,6 +171,9 @@ collectstatic: $(STAMP_BOWER_COMPONENTS_INSTALLED)
 	@echo "Collecting static files..."
 	python manage.py collectstatic -v0 --noinput --ignore *.scss --ignore bower.json
 
+makemigrations:
+	python manage.py makemigrations
+
 migrate:
 	python manage.py migrate
 

@@ -45,11 +45,18 @@
 // 1. Global
 // ---------
 
+// #4EA18F 
+// #6ED0BA 
+// #367A6C 
+// #32534C
+// #4891B4 
+// #E0A72B 
+
 $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #7f7f7f,
+  primary: #6ED0BA,
   secondary: #777,
   success: #3adb76,
   warning: #ffae00,
@@ -61,8 +68,8 @@ $medium-gray: #7f7f7f;
 $dark-gray: #3f3f3f;
 $black: #0a0a0a;
 $white: #fefefe;
-$body-background: $white;
-$body-font-color: #7f7f7f;
+$body-background: #4EA18F;
+$body-font-color: #E0A72B;
 $body-font-family: 'Open Sans', Helvetica, Roboto, Arial, sans-serif;
 $body-antialiased: true;
 $global-margin: 1rem;
@@ -140,7 +147,7 @@ $code-font-weight: $global-weight-normal;
 $code-background: $light-gray;
 $code-border: 1px solid $medium-gray;
 $code-padding: rem-calc(2 5 1);
-$anchor-color: #0080ff;
+$anchor-color: $primary-color;
 $anchor-color-hover: scale-color($anchor-color, $lightness: -75%);
 $anchor-text-decoration: none;
 $anchor-text-decoration-hover: none;
@@ -560,7 +567,7 @@ $tooltip-radius: $global-radius;
 // -----------
 
 $topbar-padding: 0.5rem;
-$topbar-background: $socialee-gray;
+$topbar-background: #32534C;
 $topbar-submenu-background: $topbar-background;
 $topbar-title-spacing: 1rem;
 $topbar-input-width: 200px;
