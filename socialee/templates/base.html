@@ -17,6 +17,9 @@
 
         <link rel="stylesheet" type="text/css" href="{% static 'bower_components/slick.js/slick/slick.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'bower_components/slick.js/slick/slick-theme.css' %}"/>
+        
+        <script src="https://use.typekit.net/def1wap.js"></script>
+        <script>try{Typekit.load({ async: true });}catch(e){}</script>
 
         {% render_block "css" %}
         {% render_block "js_head" %}
@@ -24,15 +27,14 @@
     </head>
 
     <body>
-        {% cms_toolbar %}
+        {# {% cms_toolbar %} #}
         {% block before_content %}
         {% endblock before_content %}
-        {% include "navbar.html" %}
+        {# {% include "navbar.html" %} #}
         {% include "messages.html" %}
         {# <div class="s-space"></div> #}
         {% block content %}
         {% endblock content %}
-        {# <div class="s-space"></div> #}
         {% include "footer.html" %}
         {% block after_content %}
         {% endblock after_content %}

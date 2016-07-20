@@ -25,8 +25,16 @@ div.cms .cms-toolbar-trigger a {
   height: 5rem;
 }
 
-.button {
-  text-decoration: none;
+.s-button {
+  font-size: 1.5em;
+  font-weight: bold;
+  transition: border-bottom 0.5s ease;
+  border-bottom: 5px solid #fff;
+  color: #fff;
+  &:hover {
+    color: #fff;
+    border-bottom: 5px solid #E0A72B;
+  }
 }
 
 .full-height {
@@ -48,25 +56,31 @@ div.cms .cms-toolbar-trigger a {
 /* LANDINGPAGE STYLES*/
 
 .lp-manifest {
-    position: relative;
-    /*top: -5rem;*/
+  margin: 5em 5em;
   h1 {
-    color: #191919;
-    font-size: 1.8rem;
-    display: inline-block;
-    position: relative;
-    /*letter-spacing: 0.05rem;*/
+    color: #E0A72B;
+    margin-bottom: 1em;
+  }
+  h3 {
+    margin-bottom: 0;
   }
   p {
-    color: #b3b3b3;
-    display: inline;
-    /*font-size: 0.85rem;*/
-    /*text-transform: uppercase;*/
+    font-size: 1.2em; 
+    letter-spacing: 0.05em;
   }
 }
 
 .lp-header {
-  min-height: 95vh;
+  img {
+    max-width: 200px;
+    padding: 2em 0 5em 0;  
+  }
+  h1 {
+    font-weight: bold;
+  }
+  p {
+    font-size: 1.5em;
+  }
 }
 
 .lp-description {
@@ -74,21 +88,11 @@ div.cms .cms-toolbar-trigger a {
 }
 
 .lp-fullscreen-image {
-  min-height: 95vh;
+  min-height: 100vh;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
 }
-
-// .lp-fullscreen-overlay {
-//   position: absolute;
-//    top: 0;
-//    left: 0;
-//    width: 100%;
-//    height: 100%;
-//    background-color: #00ffff;
-//    opacity: 0.6;
-// }
 
 /* FOOTER STYLES*/
 
@@ -96,14 +100,12 @@ div.cms .cms-toolbar-trigger a {
   background-color: #32534C;
   text-align: center;
   padding: 0.8rem;
-  border-top: 1px solid $light-gray;
   .quote {
       margin: 0;
       padding: 0;
       font-size: 1.8rem;
   }
   .quote-author {
-    // color: $dark-gray;
     font-size: 0.9rem;
     padding: 0;
     margin: 0;
@@ -113,25 +115,20 @@ div.cms .cms-toolbar-trigger a {
 .footer-bottom {
   background-color: #32534C;
   text-align: center;
-  font-size: 1rem;
-  padding: 2rem;
-  border-top: 1px solid $light-gray;
+  font-size: 1.2rem;
+  padding: 1rem;
   p {
     &.slogan {
-      // color: $dark-gray;
-      font-size: 1.8rem;
+      font-size: 1.2rem;
       margin: 0 0 1rem;
     }
     &.copywrite {
-      // color: $dark-gray;
-      font-size: 0.75rem;
-      margin: 0;
+      font-size: 1rem;
     }
   }
   .links a {
     text-decoration: none;
     list-style: none;
-    // color: $dark-gray;
     padding: 3rem 0 2rem;
     margin: 0;
     &::after {

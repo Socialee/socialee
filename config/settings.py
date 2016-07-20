@@ -100,7 +100,7 @@ INSTALLED_APPS = (
 if DEBUG:
     INSTALLED_APPS += (
         'django_extensions',
-        'debug_toolbar',
+        #'debug_toolbar',
     )
 
 DEBUG_TOOLBAR_CONFIG = {
