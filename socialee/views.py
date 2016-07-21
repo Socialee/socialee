@@ -207,7 +207,7 @@ class ProfileView(BaseView, DetailView):
     slug_field = 'username'
 
     def get_context_data(self, **kwargs):
-        context = super(ProfileDetailView, self).get_context_data(**kwargs)
+        context = super(ProfileView, self).get_context_data(**kwargs)
 
         return context
 
