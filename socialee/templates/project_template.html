@@ -21,10 +21,9 @@
 	</div>
 	<div class="project-header-details">
 		<div>
-			<li>tag 1</li>
-			<li>tag 2</li>
-			<li>tag 3</li>
-			<li>tag 4</li>
+			{% for tag in object.tags.all %}
+              <li>{{ tag }}</li>
+            {% endfor %}
 		</div>	
 	</div>
 	{% if request.user == project.created_by %}
@@ -60,7 +59,7 @@
 				<div class="row align-spaced align-middle text-center">
 					<i class="fa fa-user" aria-hidden="true"></i>
 					Ein Projekt von
-					<a href="{% url 'profile_view' project.created_by %}">{{ project.created_by.first_name }} {{ project.created_by.last_name }}</a>
+					<a href="{% url 'profile_view' project.created_by  %}">{{ project.created_by.first_name }} {{ project.created_by.last_name }}</a>
 				</div>
 			</div>
 		</div>
