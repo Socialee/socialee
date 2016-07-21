@@ -87,7 +87,7 @@ INSTALLED_APPS = (
     'django_comments',
     'django_summernote',
     # 'simple_auth',
-    'tagging',
+    'taggit',
     # 'zinnia',
 
     # SOCIALEE CUSTOM APPS

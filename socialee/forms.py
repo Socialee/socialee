@@ -26,7 +26,7 @@ class StartProjectForm(forms.ModelForm):
 class EditProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        fields = ('title', 'tagline', 'description')
+        fields = ('title', 'tagline', 'description', 'tags')
         labels = {
             'title': _('Gib deiner Idee einen Namen...'),
             'tagline': _('... und einen Untertitel.'),

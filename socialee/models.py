@@ -12,6 +12,8 @@ from django.utils.text import slugify
 
 from allauth.account.models import EmailAddress
 
+from taggit.managers import TaggableManager
+
 
 class UserEntry(User):
     class Meta(User.Meta):
@@ -140,8 +142,8 @@ class Project(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     inputs = models.ManyToManyField(Input, blank=True)
     outputs = models.ManyToManyField(Output, blank=True)
-    tags = models.ManyToManyField(Tag, blank=True)
-
+    tags = TaggableManager()
+    
     
     def __str__(self):
         return 'Project "{}"'.format(self.title)

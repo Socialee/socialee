@@ -7,11 +7,9 @@
           <h3>{{ project.title }}</h3> {# Titel #}
           <p class="tagline">{{ project.tagline }}</p> {# Tagline #}
           <ul class="fa-ul"> {# Tags #}
-            <li><i class="fa-li fa fa-tag"></i>Netzwerk</li>
-            <li><i class="fa-li fa fa-tag"></i>Nachhaltigkeit</li>
-            <li><i class="fa-li fa fa-tag"></i>Postwachstum</li>
-            <li><i class="fa-li fa fa-tag"></i>Crowd</li>
-            <li><i class="fa-li fa fa-tag"></i>RevolutionNow</li>
+            {% for tag in project.tags.all %}
+              <li><i class="fa-li fa fa-tag"></i>{{ tag }}</li>
+            {% endfor %}
           </ul>
           </div>
           <div class="columns text-center">
