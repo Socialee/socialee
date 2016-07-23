@@ -208,6 +208,7 @@ class ProfileView(BaseView, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
+        context['profile'] = Profile.objects.get(user=context['user'])
 
         return context
 
