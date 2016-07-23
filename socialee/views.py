@@ -167,17 +167,42 @@ class ProjectUpdateView(BaseView, UpdateView):
 
 
 # Update Profile: User updates own profile
-class ProfileUpdateView(BaseView, UpdateView):
+class ProfileUpdateView(UpdateView):
     template_name = 'user_profile_update.html'
-    model = User
-    fields = '__all__'
+    model = Profile
     # form_class = EditProfileForm
-    slug_field = 'username'
+    form_class = EditProfileForm
 
     def get_context_data(self, **kwargs):
         context = super(ProfileUpdateView, self).get_context_data(**kwargs)
-
         return context
+
+    def get(self, request, *args, **kwargs):
+        super(ProfileUpdateView, self).get(request, *args, **kwargs)
+        form = self.form_class(initial={
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
+            'email': request.user.email,
+            'username': request.user.username
+                    }, instance=request.user.profile)
+        return self.render_to_response(self.get_context_data(
+            object=self.object, form=form))
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(request.POST)
+
+        request.user.username = request.POST['username']
+        request.user.first_name = request.POST['first_name']
+        request.user.last_name = request.POST['last_name']
+        request.user.email = request.POST['email']
+        request.user.save()
+
+        return super(ProfileUpdateView, self).post(request, *args, **kwargs)
+        
+
+    def get_success_url(self):
+        return reverse('profile_view', kwargs = {"slug": self.request.user.profile.slug})
 
     # Nur der Admin und die Manager des Projektes kann Änderungen vornehmen
     # def get_object(self, *args, **kwargs):
@@ -189,11 +214,11 @@ class ProfileUpdateView(BaseView, UpdateView):
     #         raise Http404
 
 
+
 # Retrieve Profile: User watches detail-view of own profile or profile of others
 class ProfileDetailView(BaseView, DetailView):
     template_name = 'user_profile_detail.html'
-    model = User
-    slug_field = 'username'
+    model = Profile
 
     def get_context_data(self, **kwargs):
         context = super(ProfileDetailView, self).get_context_data(**kwargs)
@@ -203,12 +228,10 @@ class ProfileDetailView(BaseView, DetailView):
 
 class ProfileView(BaseView, DetailView):
     template_name = 'user_profile_view.html'
-    model = User
-    slug_field = 'username'
+    model = Profile
 
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
-        context['profile'] = Profile.objects.get(user=context['user'])
 
         return context
 

@@ -1,4 +1,6 @@
 import datetime
+import PIL
+from PIL import Image
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -7,6 +9,8 @@ from django.db.models.signals import pre_save, post_save
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
+from allauth.account.signals import email_confirmed
+from django.dispatch import receiver
 
 # from cms.admin.placeholderadmin import FrontendEditableAdminMixin
 
@@ -40,6 +44,7 @@ def upload_location(instance, filename):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, blank=True, null=True)
+    slug = models.SlugField(default='slug')
     picture = models.ImageField(upload_to=upload_location, null=True, blank=True)
     phone = models.CharField(max_length=50, blank=True)
     plz = models.CharField(max_length=5, null=True, blank=True)
@@ -72,6 +77,45 @@ class Profile(models.Model):
     def __str__(self):
         return 'Profil von {}'.format(self.user)
 
+
+    #saving picture in small size
+    #TODO make this a bit nicer
+    def save(self):
+
+        super(Profile, self).save()
+
+        if not self.picture:
+            return            
+
+
+        image = Image.open(self.picture)
+        (width, height) = image.size
+    
+        if ( width < height):
+            factor =  200 / height 
+        else:
+            factor =  200 / width
+
+        size = ( int(width * factor), int(height * factor))
+        image = image.resize(size, Image.ANTIALIAS)
+        w,h = image.size
+        small = h
+        if w<h:
+            small = w
+        image = image.crop((0, 0, small, small))
+        image.save(self.picture.path)
+
+
+@receiver(email_confirmed, dispatch_uid="socialee.signals.allauth.email_confirmed")
+def email_confirmed_(request, email_address, **kwargs):
+    Profile.objects.get_or_create(user=kwargs['user'])
+
+def pre_save_profile(sender, instance, *args, **kwargs):
+    #TODO we probably have to slugify the username at some point
+    slug = instance.user.username
+    instance.slug = slug
+
+pre_save.connect(pre_save_profile, sender = Profile)
 
 class InputOutput(models.Model):
     UNKNOWN = ''

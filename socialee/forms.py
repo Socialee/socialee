@@ -8,6 +8,7 @@ from django import forms
 from .models import Project, Profile, UserEntry, Input, Output, Invite, User
 
 from crispy_forms.helper import FormHelper
+from crispy_forms.layout import *
 
 
 class StartProjectForm(forms.ModelForm):
@@ -38,10 +39,34 @@ class EditProjectForm(forms.ModelForm):
 
 
 class EditProfileForm(forms.ModelForm):
+    model = Profile
+    fields = ('picture', 'phone', 'plz', 'newsletter')
+    username = forms.CharField(required=True)
+    email = forms.EmailField(required=True)
+    first_name = forms.CharField(required=False)
+    last_name = forms.CharField(required=False)
+    def __init__(self, *args, **kwargs):
+        super(EditProfileForm, self).__init__(*args, **kwargs)
+
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                'Ändere hier Dein Profil.',
+                'username', 'email', 'first_name', 'last_name',
+                'picture',
+                'phone',
+                'plz',
+                'newsletter'
+
+            ),
+            ButtonHolder(
+                Submit('submit', 'Save')
+            )
+        )
     class Meta:
-        model = User
-        fields = '__all__'
-        # fields = ('picture', 'phone', 'plz', 'newsletter')
+        model = Profile
+        #fields = '__all__'
+        fields = ('picture', 'phone', 'plz', 'newsletter')
 
 
 class InviteForm(forms.ModelForm):

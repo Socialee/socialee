@@ -7,6 +7,14 @@
     <div class="large-12 columns">
         <h2>Hallo {% if request.user.first_name %}{{ request.user.first_name }}{% else %}{{ request.user }}{% endif %}!</h2>
         <p>Hier ist Dein Profil.</p>
+        <p>{{ request.user.first_name }} {{ request.user.last_name }}</p>
+        <p> {{ request.user.profile.plz }}</p> 
+        {% if request.user.profile.picture %}
+        <img src="{{ request.user.profile.picture.url }}" />     	
+     	{% endif %}   
+        {% for project in request.user.profile.liked_projects %}
+        	{% include "project_card_element.html" %}
+      	{% endfor %}
     </div>
 </div>
 

@@ -6,13 +6,11 @@
   <div class="full-height"></div>
     <div class="large-12 columns">
         <h2>Hallo {% if request.user.first_name %}{{ request.user.first_name }}{% else %}{{ request.user }}{% endif %}!</h2>
-        <p>Ändere hier Dein Profil.</p>
-        {{ form|crispy }}
-        {{ object.id }}
-        {{ object.user }}
-        {% if profile.picture %}
-        <img src="{{ profile.picture.url }}" />	
+        {% if request.user.profile.picture %}
+        <img src="{{ request.user.profile.picture.url }}" /> 
         {% endif %}
+        {% crispy form %}
+        
     </div>
 </div>
 
