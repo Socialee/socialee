@@ -5,7 +5,7 @@
 # For pip-compile, to build requirements files (`make requirements`).
 pip-tools
 
-ipdb
+#ipdb
 livereload
 
 django-debug-toolbar

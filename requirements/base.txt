@@ -11,29 +11,31 @@ django-crispy-forms==1.6.0
 django-environ==0.4.0
 django-filer==1.2.4
 django-formtools==1.0     # via django-cms
-django-mptt==0.8.4        # via django-filer
+django-mptt==0.8.5        # via django-filer
 django-polymorphic==0.8.1  # via django-filer
-django-reversion==2.0.5
+django-reversion==2.0.6
 django-sekizai==0.9.0     # via cmsplugin-filer, django-cms
 django-select2==4.3.2     # via djangocms-link
 django-summernote==0.8.5
+django-taggit==0.20.2
 django-treebeard==4.0.1
-Django==1.9.7             # via cmsplugin-filer, django-allauth, django-betterforms, django-classy-tags, django-cms, django-environ, django-filer, django-formtools, django-mptt, django-reversion, django-summernote, django-treebeard, djangocms-attributes-field, djangocms-picture, easy-thumbnails
+Django==1.9.8             # via cmsplugin-filer, django-allauth, django-betterforms, django-classy-tags, django-cms, django-environ, django-filer, django-formtools, django-reversion, django-summernote, django-treebeard, djangocms-attributes-field, djangocms-picture, easy-thumbnails
 djangocms-admin-style==1.2.3  # via django-cms
 djangocms-attributes-field==0.1.1  # via cmsplugin-filer, djangocms-link
 djangocms-file==1.0
 djangocms-flash==0.3.0
 djangocms-inherit==0.2.1
-djangocms-link==1.8.1
+djangocms-link==1.8.2
 djangocms-picture==1.0.0
 djangocms-snippet==1.8.1
 djangocms-teaser==0.2.0
-djangocms-text-ckeditor==3.0.0
+djangocms-text-ckeditor==3.0.1
 djangocms-video==1.0.0
 easy-thumbnails==2.3      # via cmsplugin-filer, django-filer
 html5lib==0.9999999       # via django-cms, djangocms-text-ckeditor
 oauthlib==1.1.2           # via requests-oauthlib
 Pillow==3.3.0             # via djangocms-text-ckeditor, easy-thumbnails
+psycopg2==2.6.2
 python3-openid==3.0.10    # via django-allauth
 pytz==2016.6.1
 requests-oauthlib==0.6.2  # via django-allauth
