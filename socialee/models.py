@@ -80,9 +80,9 @@ class Profile(models.Model):
 
     #saving picture in small size
     #TODO make this a bit nicer
-    def save(self):
+    def save(self, **kwargs):
 
-        super(Profile, self).save()
+        super(Profile, self).save(kwargs)
 
         if not self.picture:
             return            
@@ -106,9 +106,9 @@ class Profile(models.Model):
         image.save(self.picture.path)
 
 
-@receiver(email_confirmed, dispatch_uid="socialee.signals.allauth.email_confirmed")
-def email_confirmed_(request, email_address, **kwargs):
-    Profile.objects.get_or_create(user=kwargs['user'])
+def post_save_user(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.get_or_create(user=instance)
 
 def pre_save_profile(sender, instance, *args, **kwargs):
     #TODO we probably have to slugify the username at some point
