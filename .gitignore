@@ -1,5 +1,5 @@
 build
-# db.sqlite3
+db.sqlite3
 
 socialee/static/bower_components/
 socialee/static/css/
