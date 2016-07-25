@@ -1,3 +1,7 @@
+// Hier befindet sich das Socialee Custom SCSS.
+// `make watch` überacht diese Datei und kompiliert bei Änderungen automatisch
+
+
 @import "settings";
 @import "foundation-sites/scss/foundation";
 @include foundation-everything(true);
@@ -63,10 +67,12 @@ div.cms .cms-toolbar-trigger a {
   }
   h3 {
     margin-bottom: 0;
+    color: $white;
   }
   p {
     font-size: 1.2em; 
     letter-spacing: 0.05em;
+    color: $white;
   }
 }
 
@@ -77,9 +83,11 @@ div.cms .cms-toolbar-trigger a {
   }
   h1 {
     font-weight: bold;
+    color: $white;
   }
   p {
     font-size: 1.5em;
+    color: $white;
   }
 }
 
@@ -124,6 +132,7 @@ div.cms .cms-toolbar-trigger a {
     }
     &.copywrite {
       font-size: 1rem;
+      color: $white;
     }
   }
   .links a {
