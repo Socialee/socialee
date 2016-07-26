@@ -14,7 +14,11 @@
           </div>
           <div class="columns text-center">
             <p class="s-icon-text">ein Projekt von:</p>
-            <i class="fa fa-user fa-5x" aria-hidden="true"></i> {# user-Bild #}
+            {% if request.user.profile.picture %}
+              <img src="{{ request.user.profile.picture.url }}" /> {# user-Bild #}
+            {% else %}
+            <i class="fa fa-user fa-5x" aria-hidden="true"></i> {# user-Icon als dummy #}
+            {% endif %}   
             <p class="s-icon-text">{{ project.created_by.first_name }}</p> {# user-first_name #}
           </div>
         </div><hr>
