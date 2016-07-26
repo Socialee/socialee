@@ -27,12 +27,9 @@
     </head>
 
     <body>
-        {# {% cms_toolbar %} #}
         {% block before_content %}
         {% endblock before_content %}
-        {% include "navbar.html" %}
         {% include "messages.html" %}
-        {# <div class="s-space"></div> #}
         {% block content %}
         {% endblock content %}
         {% include "footer.html" %}

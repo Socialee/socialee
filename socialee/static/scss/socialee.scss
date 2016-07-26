@@ -8,6 +8,11 @@
 
 
 /* GLOBAL STYLES AND HELPERS*/
+
+p {
+  font-size: 150%;
+}
+
 div.cms .cms-toolbar-trigger a {
     display: block;
     width: 18px;
@@ -25,19 +30,29 @@ div.cms .cms-toolbar-trigger a {
   }
 }
 
+.scroll-down {
+  background-color: red;
+  width: 100px;
+}
+
 .s-space {
   height: 5rem;
 }
 
 .s-button {
-  font-size: 1.5em;
+  font-size: 1.5rem;
   font-weight: bold;
-  transition: border-bottom 0.5s ease;
+  transition: border-bottom 2s ease, color 0.5s ease;
   border-bottom: 5px solid #fff;
   color: #fff;
   &:hover {
-    color: #fff;
-    border-bottom: 5px solid #E0A72B;
+    color: $socialee-orange;
+    border-bottom: 5px solid $socialee-orange;
+    text-decoration: none;
+  }
+  @include breakpoint(small only) {
+    font-size: 0.85rem;
+    border-bottom: 5px solid $socialee-orange;
   }
 }
 
@@ -59,48 +74,82 @@ div.cms .cms-toolbar-trigger a {
 
 /* LANDINGPAGE STYLES*/
 
-.lp-manifest {
-  margin: 5em 5em;
-  h1 {
-    color: #E0A72B;
-    margin-bottom: 1em;
-  }
-  h3 {
-    margin-bottom: 0;
-    color: $white;
-  }
-  p {
-    font-size: 1.2em; 
-    letter-spacing: 0.05em;
-    color: $white;
-  }
+.fullscreen-img {
+  min-height: 100vh;
+  background: no-repeat center center; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .lp-header {
+  @include flex-align($x: center, $y: stretch);
   img {
     max-width: 200px;
-    padding: 2em 0 5em 0;  
+    max-height: 50vh;
+    padding: 2rem 0 2rem 0;
+    margin: 0 auto; 
   }
   h1 {
     font-weight: bold;
     color: $white;
   }
   p {
-    font-size: 1.5em;
     color: $white;
+  }
+  i {
+    margin-top: 2rem;
+  }
+  @include breakpoint(retina) {
+    img {
+    max-height: 35vh;
+    }
+    p {
+    font-size: 0.8rem;
+    text-shadow: 1px 1px black;
+    }
   }
 }
 
-.lp-description {
-  margin-top: 5rem;
+.lp-headline {
+  margin: 3rem 0 3rem 0;
+  font-weight: bold;
+  color: $socialee-orange;
+  @include breakpoint(medium down) {
+    margin: 1rem 0 1rem 0;
+  }
 }
 
-.lp-fullscreen-image {
-  min-height: 100vh;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
+.manifest {
+  margin: 2rem 0 6rem 0;
+  padding: 2.5rem;
+  border-radius: 3px;
+  border: 3px solid rgba($black, 0.2);
+  outline: 26px solid rgba($black, 0.1);
+  background-color: white;
+  h3 {
+    margin-bottom: 0;
+  }
+  @include breakpoint(small only) {
+    margin: 1rem 0 1rem 0;
+    padding: 1rem;
+    border: 1px solid rgba($black, 0.2);
+    outline: 6px solid rgba($black, 0.1);
+    p {
+      font-size: 0.65rem;
+    }
+  }
 }
+
+.lp-nav {
+  @include top-bar-container;  
+}
+
+.lp-nav, .lp-nav ul {
+    background-color: transparent;
+}
+
 
 /* FOOTER STYLES*/
 
@@ -123,15 +172,15 @@ div.cms .cms-toolbar-trigger a {
 .footer-bottom {
   background-color: #32534C;
   text-align: center;
-  font-size: 1.2rem;
-  padding: 1rem;
+  font-size: 0.8rem;
+  padding: 0.5rem;
   p {
     &.slogan {
       font-size: 1.2rem;
       margin: 0 0 1rem;
     }
     &.copywrite {
-      font-size: 1rem;
+      font-size: 0.65rem;
       color: $white;
     }
   }
@@ -142,7 +191,9 @@ div.cms .cms-toolbar-trigger a {
     margin: 0;
     &::after {
       content: "•";
-      padding: 0 0.4rem 0 0.8rem;
+      padding: 0 0.4rem 0 0.5rem;
+      color: white;
+      
     }
     &:last-child::after {
       content: "";

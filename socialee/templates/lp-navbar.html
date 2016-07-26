@@ -1,0 +1,67 @@
+<div class="lp-nav">
+  <div class="top-bar-left">
+  </div>
+  <div class="top-bar-right">
+    <ul class="dropdown menu" data-dropdown-menu>
+      {% if not request.user.is_authenticated %}
+      <li><a class="s-button" href="{% url 'account_login' %}">Log In</a></li>
+      {% else %}
+      <li>
+        <a class="s-button" href="#">
+            <i class="fa fa-home" aria-hidden="true"></i>
+            {% if request.user.first_name %}
+              {{ request.user.first_name }}
+            {% else %}
+              {{ request.user }}
+            {% endif %}
+          </a>
+        <ul class="menu">
+          <li><a href="{% url 'welcome' request.user %}">Übersicht</a></li>
+          <li><a href="{% url 'profile_detail' request.user %}">Profil anzeigen</a></li>
+          <li><a href="{% url 'update_profile' request.user %}">Profil bearbeiten</a></li>
+        </ul>
+      </li>
+      <li><a class="s-button" href="{% url 'account_logout' %}">Log out</a></li>
+      {% endif %}
+      <li><a class="s-button" href="{% url 'startproject' %}"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>Idee starten</a></li>
+        <li>
+        <a class="s-button" data-toggle="offCanvas">Menü</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!--
+style="background-color:linen;"
+
+
+
+    <ul class="dropdown menu" data-dropdown-menu>
+      {% if not request.user.is_authenticated %}
+      <li><a href="{% url 'account_login' %}">Log In</a></li>
+      {% else %}
+      <li>
+        <a href="#">
+            <i class="fa fa-home" aria-hidden="true"></i>
+            {% if request.user.first_name %}
+              {{ request.user.first_name }}
+            {% else %}
+              {{ request.user }}
+            {% endif %}
+          </a>
+        <ul class="menu">
+          <li><a href="{% url 'welcome' request.user %}">Übersicht</a></li>
+          <li><a href="{% url 'profile_detail' request.user %}">Profil anzeigen</a></li>
+          <li><a href="{% url 'update_profile' request.user %}">Profil bearbeiten</a></li>
+        </ul>
+      </li>
+      <li><a href="{% url 'account_logout' %}">Log out</a></li>
+      {% endif %}
+      <li><a href="{% url 'startproject' %}"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>Idee starten</a></li>
+        <li>
+        <button type="button" class="button" data-toggle="offCanvas">Menü</button>
+      </li>
+    </ul>
+
+
+-->

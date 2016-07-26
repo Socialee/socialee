@@ -62,15 +62,16 @@ $foundation-palette: (
   warning: #ffae00,
   alert: #ec5840,
 );
+$socialee-orange: #FF9E1A; 
 $socialee-gray: #eaeaea;
 $light-gray: #bfbfbf;
 $medium-gray: #7f7f7f;
 $dark-gray: #3f3f3f;
 $black: #0a0a0a;
 $white: #fefefe;
-$body-background: #4EA18F;
+$body-background: $socialee-gray;
 $body-font-color: $black;
-$body-font-family: 'brandon-grotesque', Open Sans, Roboto, Arial, sans-serif;
+$body-font-family: 'brandon-grotesque', Open Sans, sans-serif;
 $body-antialiased: true;
 $global-margin: 1rem;
 $global-padding: 1rem;
@@ -148,9 +149,9 @@ $code-background: $light-gray;
 $code-border: 1px solid $medium-gray;
 $code-padding: rem-calc(2 5 1);
 $anchor-color: white;
-$anchor-color-hover: #E0A72B;
+$anchor-color-hover: $socialee-orange;
 $anchor-text-decoration: none;
-$anchor-text-decoration-hover: none;
+$anchor-text-decoration-hover: underline;
 $hr-width: $global-width;
 $hr-border: 1px solid $medium-gray;
 $hr-margin: rem-calc(20) auto;
@@ -405,7 +406,7 @@ $meter-fill-bad: $alert-color;
 // --------------
 
 $offcanvas-size: 250px;
-$offcanvas-background: $socialee-gray;
+$offcanvas-background: #377A6D;
 $offcanvas-zindex: -1;
 $offcanvas-transition-length: 0.75s;
 $offcanvas-transition-timing: ease;
