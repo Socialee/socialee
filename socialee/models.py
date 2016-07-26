@@ -106,16 +106,8 @@ class Profile(models.Model):
         image.save(self.picture.path)
 
 
-def post_save_user(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.get_or_create(user=instance)
 
-def pre_save_profile(sender, instance, *args, **kwargs):
-    #TODO we probably have to slugify the username at some point
-    slug = instance.user.username
-    instance.slug = slug
-
-pre_save.connect(pre_save_profile, sender = Profile)
+User.profile = property(lambda u: Profile.objects.get_or_create(user=u, slug=u.username)[0])
 
 class InputOutput(models.Model):
     UNKNOWN = ''

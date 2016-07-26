@@ -24,5 +24,13 @@ class InviteAdmin(admin.ModelAdmin):
     actions = [mark_as_done]
 
 
+
+class ProfileAdmin(admin.ModelAdmin):
+    model = Profile
+    list_display = ['user', 'slug']
+    fields = ('user', 'slug', 'picture', 'phone', 'plz', 'newsletter', 'liked_projects')
+
+
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Invite, InviteAdmin)

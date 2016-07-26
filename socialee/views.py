@@ -46,6 +46,9 @@ class Home(BaseView, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(Home, self).get_context_data(**kwargs)
+        # make sure the profile exists
+        if self.request.user.is_authenticated():
+            self.request.user.profile
 
         return context
 
@@ -242,6 +245,9 @@ class WelcomePage(BaseView, ListView):
     model = Project
 
     def get_context_data(self, **kwargs):
+        # make sure the profile exists
+        if self.request.user.is_authenticated():
+            self.request.user.profile
         context = super(WelcomePage, self).get_context_data(**kwargs)
         context['user_project_list'] = Project.objects.filter(created_by=self.request.user)
 
