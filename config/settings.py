@@ -84,9 +84,7 @@ INSTALLED_APPS = (
     'betterforms', # works only in Version 1.1.2
     'crispy_forms',
     'crispy_forms_foundation',
-    # 'django_comments', # brauchen wir das? causes nen error auf heroku
     'django_summernote',
-    # 'simple_auth',
     'taggit',
     # 'zinnia',
 
