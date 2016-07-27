@@ -160,6 +160,27 @@ class ProjectUpdateView(BaseView, UpdateView):
             raise Http404
 
 
+
+class Socialeebhaber(BaseView, UpdateView):
+    template_name = 'project_card_element.html'
+
+    def post(self, request, *args, **kwargs):
+        project_id = request.POST.get('project_id')
+
+        project = Project.objects.get(id=project_id)
+        if project in request.user.profile.liked_projects.all():
+            request.user.profile.liked_projects.remove(project)
+            project.profiles.remove(request.user)
+        else:
+            project.profiles.add(request.user)
+            request.user.profile.liked_projects.add(project)
+
+            
+
+        return render(request, self.template_name, {'project' : project} )
+
+
+
 # Profile-Views
 
 # Update Profile: User updates own profile
@@ -170,7 +191,7 @@ class ProjectUpdateView(BaseView, UpdateView):
 
 
 # Update Profile: User updates own profile
-class ProfileUpdateView(UpdateView):
+class ProfileUpdateView(BaseView, UpdateView):
     template_name = 'user_profile_update.html'
     model = Profile
     # form_class = EditProfileForm
@@ -235,6 +256,7 @@ class ProfileView(BaseView, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
+        context['user_project_list'] = Project.objects.filter(created_by=context["profile"].user)
 
         return context
 

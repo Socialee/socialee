@@ -13,8 +13,13 @@
         <li>PLZ: {{ profile.plz }}</li> 
         {% if profile.picture %}
         <img src="{{ profile.picture.url }}" />     	
-     	{% endif %}     
-        
+     	{% endif %} 
+
+         <div class="row align-center small-up-1 medium-up-2 large-up-3">
+          {% for project in user_project_list %}
+              {% include "project_card_element.html" %}
+          {% endfor %}
+        </div>
     </div>
 </div>
 

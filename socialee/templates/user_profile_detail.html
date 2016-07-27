@@ -11,10 +11,12 @@
         <p> {{ request.user.profile.plz }}</p> 
         {% if request.user.profile.picture %}
         <img src="{{ request.user.profile.picture.url }}" />     	
-     	{% endif %}   
-        {% for project in request.user.profile.liked_projects %}
-        	{% include "project_card_element.html" %}
-      	{% endfor %}
+     	{% endif %}
+        <div class="row align-center small-up-1 medium-up-2 large-up-3">   
+        	{% for project in request.user.profile.liked_projects.all %}
+        		{% include "project_card_element.html" %}
+      		{% endfor %}
+        </div>
     </div>
 </div>
 

@@ -1,4 +1,5 @@
 <!--Anfang Project-Card-Element-->
+<div id="{{project.id}}">
 <div class="columns">      
     <div class="s-projectcard">
       
@@ -14,12 +15,12 @@
           </div>
           <div class="columns text-center">
             <p class="s-icon-text">ein Projekt von:</p>
-            {% if request.user.profile.picture %}
-              <img src="{{ request.user.profile.picture.url }}" /> {# user-Bild #}
-            {% else %}
-            <i class="fa fa-user fa-5x" aria-hidden="true"></i> {# user-Icon als dummy #}
-            {% endif %}   
-            <p class="s-icon-text">{{ project.created_by.first_name }}</p> {# user-first_name #}
+            {% if project.created_by.profile.picture %}
+              <i class="fa fa-5x" aria-hidden="true"><img src="{{ project.created_by.profile.picture.url }}" /></i>
+            {% else %} 
+              <i class="fa fa-user fa-5x" aria-hidden="true"></i> {# user-Bild #}     
+            {% endif %}
+            <p class="s-icon-text">{{ project.created_by }}</p> {# user-first_name #}
           </div>
         </div><hr>
 
@@ -30,10 +31,18 @@
         </div><hr>
 
         <div class="row text-center">
-          <div class="large-3 columns"><i class="fa fa-heart-o fa-3x" aria-hidden="true"></i><p class="s-icon-text">Socialeebhaber<br/>+5</p></div> {# zähler der socialeehaber #}
+          <div class="large-3 columns">
+            {% if request.user in project.profiles.all %}
+            <i class="fa fa-heart fa-3x socialeebhaber" user_id="{{request.user.username}}" id="{{project.id}}" aria-hidden="true"></i>
+            {% else %}
+            <i class="fa fa-heart-o fa-3x socialeebhaber" user_id="{{request.user.username}}" id="{{project.id}}" aria-hidden="true"></i>
+            {% endif %}
+
+            <p class="s-icon-text">Socialeebhaber<br/>{{ project.profiles.all.count }}</p></div> {# zähler der socialeehaber #}
           <div class="large-9 columns align-self-bottom"><a href="{{ project.get_absolute_url }}" class="expanded large button">Projekt anschauen</a></div> {# login only link zum projekt #}
         </div>
 
     </div>
+</div>
 </div>
 <!--Ende Project-Card-Element-->

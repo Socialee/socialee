@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^(?P<slug>[\w.@+-]+)/profile/update/$', login_required(views.ProfileUpdateView.as_view()), name='update_profile'),
     url(r'^(?P<slug>[\w.@+-]+)/profile/detail/$', login_required(views.ProfileDetailView.as_view()), name='profile_detail'),
     url(r'^(?P<slug>[\w.@+-]+)/$', login_required(views.ProfileView.as_view()), name='profile_view'),
+    url(r'^(?P<slug>[\w.@+-]+)/socialeebhaber/$', login_required(views.Socialeebhaber.as_view()), name='socialeebhaber'),
 
     # url(r'^protect/', include('simple_auth.urls')),
 
