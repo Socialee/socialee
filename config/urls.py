@@ -15,7 +15,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^summernote/', include('django_summernote.urls')),
     url(r'^posts/', include('posts.urls', namespace='posts')),
-    url(r'^comments/', include('django_comments.urls')),
+    # url(r'^comments/', include('django_comments.urls')),
     url(r'^question/', include('questions.urls')),
     url(r'^quotes/', include('quotes.urls')),
     url(r'^invite_me/$', views.Invite_me, name='invite_me'),
