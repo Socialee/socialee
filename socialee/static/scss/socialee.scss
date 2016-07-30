@@ -96,7 +96,7 @@ div.cms .cms-toolbar-trigger a {
 
 .fullscreen-img {
   min-height: 100vh;
-  background: no-repeat center center; 
+  background: no-repeat top center; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -144,12 +144,13 @@ div.cms .cms-toolbar-trigger a {
 .manifest {
   margin: 2rem 0 6rem 0;
   padding: 2.5rem;
-  border-radius: 3px;
-  border: 3px solid rgba($black, 0.2);
   outline: 26px solid rgba($black, 0.1);
   background-color: white;
   h3 {
     margin-bottom: 0;
+    font-weight: 900;
+    font-size: 1.9rem;
+    color: $socialee-darkgreen;
   }
   @include breakpoint(small only) {
     margin: 1rem 0 1rem 0;
