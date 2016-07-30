@@ -9,8 +9,8 @@
 
 /* GLOBAL STYLES AND HELPERS*/
 
-p {
-  font-size: 150%;
+p, a {
+  font-size: 1.5rem;
 }
 
 div.cms .cms-toolbar-trigger a {
@@ -23,12 +23,29 @@ div.cms .cms-toolbar-trigger a {
     background: #fff;
 }
 
-.messages-callout {
+.message-callout {
   @include callout-base;
-  li {
-    list-style: none;
+  background-color: $socialee-orange;
+  margin-bottom: 0;
+  color: $white;
+  font-weight: bold;
+  p {
+    margin-bottom: 0;
   }
 }
+
+.socialee-callout {
+  @include callout-base;
+  background-color: white;
+  padding: 3rem;
+  p {
+    color: $socialee-darkgreen!important;
+  }
+  a {
+    color: $socialee-orange!important;
+  }
+}
+
 
 .scroll-down {
   background-color: red;
@@ -362,8 +379,5 @@ div.cms .cms-toolbar-trigger a {
 .error {
   color: red;
 }
-
-
-
 
 
