@@ -74,15 +74,15 @@ class InviteForm(forms.ModelForm):
         model = Invite
         fields = ('full_name', 'email', 'message')
         labels = {
-            'full_name': _('Wenn Du Lust hast: Vor- & Nachname'),
-            'email': _('Muss sein: Deine Email-Adresse'),
-            'message': _('Wenn Du Lust hast: Was würdest Du tun, wenn Du wüsstest, Du könntest nicht scheitern?'),
+            'full_name': _('Vor- & Nachname'),
+            'email': _('Deine Email-Adresse'),
+            'message': _('Deine Nachricht'),
         }
         widgets = {
-            'full_name': forms.TextInput(attrs={'placeholder': 'Peter oder Petra?'}),
-            'email': forms.TextInput(attrs={'placeholder': 'Wir sind die Guten, Deine Email-Adresse ist bei uns sicher. Und alles andere auch.'}),
+            'full_name': forms.TextInput(attrs={'placeholder': ''}),
+            'email': forms.TextInput(attrs={'placeholder': ''}),
             'message': forms.Textarea(
-                attrs={'placeholder': 'Schwierige Frage? Na, Du kannst auch was anderes schreiben.\n\nErzähl und doch, wie Du von Socialee gehört hast und warum Du dabei sein möchtest. Oder wenn Du sogar schon eine Projektidee hast, erzähle uns davon! Wir lesen das wirklich. Und vielleicht sind wir ja begeistert und machen dann was zusammen!'}),
+                attrs={'placeholder': ''}),
         }
 
 
