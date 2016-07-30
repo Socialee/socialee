@@ -1,25 +1,12 @@
-{% load quote_tags %}
-
 <footer>
-  <!--<div class="footer-top">
-    <div class="row align-center">
-      <div class="small-12 columns">
-        {% random_quote as random_quote %}
-          <p class="quote">{{ random_quote.title }}</p> 
-          <p class="quote-author">Das hat <strong>{{ random_quote.author }}</strong> gesagt. <a href="{% url 'make_quote' %}">Was sagst Du?</a></p>
-        </div>
-    </div>
-  </div>-->
-  
   <div class="footer-bottom">
     <div class="row">
       <div class="small-12 columns">
         <p class="slogan"></p>
         <p class="links">
           <a href="{% url 'home' %}">Home</a>
-          {# <a href="{% url 'posts:blog_index' %}">Blog</a> #}
+          <a href="{% url 'home' %}#manifest">Manifest</a>
           <a href="{% url 'impressum' %}">Impressum</a>
-          {# <a href="#">AGB</a> #}
         </p>
       </div>
     </div>

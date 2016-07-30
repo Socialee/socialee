@@ -60,6 +60,9 @@ div.cms .cms-toolbar-trigger a {
   height: 5rem;
 }
 
+.socialee-form-label {
+  background-color: red;
+}
 
 .s-button {
   font-size: 1.5rem;
@@ -120,6 +123,9 @@ div.cms .cms-toolbar-trigger a {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  @include breakpoint(small only) {
+  min-height: 95vh;
+  }
 }
 
 .lp-header {

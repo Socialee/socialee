@@ -13,7 +13,20 @@
           <p class="text-center">Wir halten dich auf dem Laufenden</p>
           <div class="socialee-callout large">
             <form method="POST" action=""> {% csrf_token %}
-                {{ form|crispy }}
+                    <div class="fieldWrapper">
+                        {{ form.full_name.label_tag }}
+                        {# <span class="socialee-form-label">Wenn du Lust hast</span> #}
+                        {{ form.full_name }}
+                        {{ form.full_name.errors }}
+                        {{ form.email.label_tag }}
+                        {# <span class="socialee-form-label">Das muss sein</span> #}
+                        {{ form.email }}
+                        {{ form.email.errors }}
+                        {{ form.message.label_tag }}
+                        {# <span class="socialee-form-label">Das muss sein</span> #}
+                        {{ form.message }}
+                        {{ form.message.errors }}
+                    </div>
                 <input class="s-button-form" type="submit" value="Ladet mich ein!">
             </form>
           </div>
