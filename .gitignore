@@ -9,7 +9,7 @@ Gemfile.lock
 
 .bundle
 .tox
-.psd
+*.psd
 
 # Python boilerplate.
 __pycache__
