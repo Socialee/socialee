@@ -39,12 +39,32 @@ div.cms .cms-toolbar-trigger a {
   height: 5rem;
 }
 
+
 .s-button {
   font-size: 1.5rem;
   font-weight: bold;
-  transition: border-bottom 2s ease, color 0.5s ease;
+  transition: border-bottom 0.5s ease, color 0.5s ease;
   border-bottom: 5px solid #fff;
   color: #fff;
+  &:hover {
+    color: $socialee-orange;
+    border-bottom: 5px solid $socialee-orange;
+    text-decoration: none;
+  }
+  @include breakpoint(small only) {
+    font-size: 0.85rem;
+    border-bottom: 5px solid $socialee-orange;
+  }
+}
+
+.s-button-form {
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: border-bottom 0.5s ease, color 0.5s ease;
+  border: none;
+  border-bottom: 5px solid $socialee-mediumgreen;
+  color: $socialee-mediumgreen;
+  background-color: white;
   &:hover {
     color: $socialee-orange;
     border-bottom: 5px solid $socialee-orange;
