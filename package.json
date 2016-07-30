@@ -19,6 +19,6 @@
     "url": "https://github.com/Socialee/socialee/issues"
   },
   "dependencies": {
-    "bower": "^1.4.1"
+    "bower": "^1.7.9"
   }
 }
