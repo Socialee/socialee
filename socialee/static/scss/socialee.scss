@@ -142,16 +142,18 @@ div.cms .cms-toolbar-trigger a {
   }
   @include breakpoint(small only) {
     img {
-    max-height: 35vh;
+    max-height: 25vh;
+    padding: 1.2rem 0 0 0;
+    margin: 0 auto;
     }
     p {
     font-size: 1.2rem;
     line-height: 1.625rem;
     }
     h1 {
-    line-height: 3.3rem;
-    font-size: 3rem;
-    margin: 2.5rem 0 0.1rem;
+    line-height: 2.5rem;
+    font-size: 2.5rem;
+    margin: 2.5rem 0 1.2rem 0;
     }
   }
 }
