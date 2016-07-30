@@ -6,12 +6,12 @@
 <section class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, medium], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, large]">
       
       {# {% include "lp-navbar.html" %} #}
-    <div class="s-space"></div>
+    <div class="s-space show show-for-medium"></div>
       <div class="row lp-header">
         <div class="large-6 columns">
           <h1 class="text-center">Melde dich an</h1>
           <p class="text-center">Wir halten dich auf dem Laufenden</p>
-          <div class="callout large">
+          <div class="socialee-callout large">
             <form method="POST" action=""> {% csrf_token %}
                 {{ form|crispy }}
                 <input class="s-button-form" type="submit" value="Ladet mich ein!">
