@@ -74,7 +74,7 @@ $dark-gray: #3f3f3f;
 $black: #0a0a0a;
 $white: #fefefe;
 $body-background: $socialee-gray;
-$body-font-color: $black;
+$body-font-color: $socialee-darkgreen;
 $body-font-family: 'brandon-grotesque', Open Sans, sans-serif;
 $body-antialiased: true;
 $global-margin: 1rem;
@@ -116,7 +116,7 @@ $block-grid-max: 8;
 // ------------------
 
 $header-font-family: $body-font-family;
-$header-font-weight: $global-weight-normal;
+$header-font-weight: 900;
 $header-font-style: normal;
 $font-family-monospace: Consolas, 'Liberation Mono', Courier, monospace;
 $header-sizes: (
@@ -131,7 +131,7 @@ $header-sizes: (
   medium: (
     'h1': 48,
     'h2': 40,
-    'h3': 31,
+    'h3': 34,
     'h4': 25,
     'h5': 20,
     'h6': 16,
@@ -275,12 +275,12 @@ $buttongroup-expand-max: 6;
 
 $callout-background: $white;
 $callout-background-fade: 85%;
-$callout-border: 1px solid rgba($black, 0.25);
+$callout-border: none;
 $callout-margin: 0 0 1rem 0;
 $callout-padding: 1rem;
-$callout-font-color: $body-font-color;
+$callout-font-color: $socialee-darkgreen;
 $callout-font-color-alt: $body-background;
-$callout-radius: $global-radius;
+$callout-radius: none;
 $callout-link-tint: 30%;
 
 // 14. Close Button
@@ -291,7 +291,7 @@ $closebutton-offset-horizontal: 1rem;
 $closebutton-offset-vertical: 0.5rem;
 $closebutton-size: 2em;
 $closebutton-lineheight: 1;
-$closebutton-color: $dark-gray;
+$closebutton-color: $white;
 $closebutton-color-hover: $black;
 
 // 15. Drilldown
