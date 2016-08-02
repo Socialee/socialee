@@ -79,7 +79,7 @@ class InviteForm(forms.ModelForm):
             'message': _('Deine Nachricht'),
         }
         widgets = {
-            'full_name': forms.TextInput(attrs={'placeholder': 'Mein Ingomann!'}),
+            'full_name': forms.TextInput(attrs={'placeholder': ''}),
             'email': forms.TextInput(attrs={'placeholder': ''}),
             'message': forms.Textarea(
                 attrs={'placeholder': ''}),

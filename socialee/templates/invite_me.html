@@ -9,9 +9,9 @@
     <div class="s-space show show-for-medium"></div>
       <div class="row lp-header">
         <div class="large-6 columns">
-          <h1 class="text-center">Melde dich an</h1>
-          <p class="text-center">Wir halten dich auf dem Laufenden</p>
-          <div class="socialee-callout large">
+          <h1 class="text-center">Melde dich an ...</h1>
+          <p class="text-center">... und wir halten dich auf dem Laufenden!</p>
+          <div class="socialee-callout">
             <form method="POST" action=""> {% csrf_token %}
                     <div class="fieldWrapper">
                         {{ form.full_name.label_tag }}
@@ -27,7 +27,9 @@
                         {{ form.message }}
                         {{ form.message.errors }}
                     </div>
-                <input class="s-button-form" type="submit" value="Ladet mich ein!">
+                    <div class="row align-center">
+                      <input class="s-button-form self" type="submit" value="Und ab dafür!">
+                    </div>
             </form>
           </div>
         </div>

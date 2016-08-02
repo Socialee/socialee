@@ -13,6 +13,10 @@ p, a {
   font-size: 1.5rem;
 }
 
+.orange {
+  color: $socialee-orange !important;
+}
+
 div.cms .cms-toolbar-trigger a {
     display: block;
     width: 18px;
@@ -38,6 +42,7 @@ div.cms .cms-toolbar-trigger a {
   @include callout-base;
   background-color: white;
   padding: 3rem;
+  width: 100%;
   p {
     color: $socialee-darkgreen!important;
   }
