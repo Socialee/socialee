@@ -14,8 +14,6 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^summernote/', include('django_summernote.urls')),
-    url(r'^posts/', include('posts.urls', namespace='posts')),
-    # url(r'^comments/', include('django_comments.urls')),
     url(r'^question/', include('questions.urls')),
     url(r'^quotes/', include('quotes.urls')),
     url(r'^invite_me/$', views.Invite_me, name='invite_me'),
@@ -29,8 +27,6 @@ urlpatterns = [
     url(r'^(?P<slug>[\w.@+-]+)/profile/detail/$', login_required(views.ProfileDetailView.as_view()), name='profile_detail'),
     url(r'^(?P<slug>[\w.@+-]+)/$', login_required(views.ProfileView.as_view()), name='profile_view'),
     url(r'^(?P<slug>[\w.@+-]+)/socialeebhaber/$', login_required(views.Socialeebhaber.as_view()), name='socialeebhaber'),
-
-    # url(r'^protect/', include('simple_auth.urls')),
 
     # At the end, for django-cms.
     # Ref: https://django-cms.readthedocs.org/en/latest/how_to/install.html#url-configuration

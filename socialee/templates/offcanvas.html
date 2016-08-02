@@ -20,7 +20,7 @@
             <li><a href="{% url 'project_overview' %}">Übersicht der Projekte</a></li>
             <li><a href="{% url 'question_single' 1 %}">Frage &amp; Antwort</a></li>
             <li><a href="{% url 'make_quote' %}">Zitat erstellen</a></li>
-            <li><a href="{% url 'posts:blog_index' %}">Blog</a></li>
+            <li><a href="#">Blog</a></li>
             {% if request.user.is_authenticated and request.user.is_staff %}
             <li><a href="#"></a></li>
             <li><a href="/admin">Socialee Admin</a></li>

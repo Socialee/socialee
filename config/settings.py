@@ -94,7 +94,6 @@ INSTALLED_APPS = (
     'questions.apps.QuestionsConfig',
     'quotes.apps.QuotesConfig',
     'socialee.apps.SocialeeConfig',
-    'posts',
 )
 
 if DEBUG:
