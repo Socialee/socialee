@@ -61,7 +61,11 @@ INSTALLED_APPS = (
     'treebeard',  # utilities for implementing a tree
     'menus',  # helper for model independent hierarchical website navigation
     'sekizai',  # for JavaScript and CSS management
+
+    # Zinnia requirements.
     'mptt',  # utilities for implementing a tree
+    'tagging',
+    'django_comments',
 
     # 'reversion', # version-conflicts with cms (http://docs.django-cms.org/en/latest/how_to/install.html)
     'djangocms_file',
@@ -84,11 +88,10 @@ INSTALLED_APPS = (
     'betterforms', # works only in Version 1.1.2
     'crispy_forms',
     'crispy_forms_foundation',
-    # 'django_comments',
     'django_summernote',
     # 'simple_auth',
     'taggit',
-    # 'zinnia',
+    'zinnia',
 
     # SOCIALEE CUSTOM APPS
     'questions.apps.QuestionsConfig',
@@ -145,6 +148,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.i18n',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.core.context_processors.i18n',
@@ -153,7 +157,7 @@ TEMPLATES = [
                 'django.core.context_processors.request',
                 'sekizai.context_processors.sekizai',
                 'cms.context_processors.cms_settings',
-                # 'zinnia.context_processors.version',  # Optional
+                'zinnia.context_processors.version',  # Optional
             ],
             'debug': env.bool('DJANGO_TEMPLATE_DEBUG', DEBUG),
         },

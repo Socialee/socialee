@@ -8,5 +8,4 @@ pip-tools
 #ipdb
 livereload
 
-django-debug-toolbar
 django-extensions
