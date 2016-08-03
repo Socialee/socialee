@@ -1,14 +1,14 @@
 {% extends "offcanvas.html" %}
-{% load crispy_forms_tags static %}
+{% load static %}
 
 {% block content %}
 
 <section class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, medium], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, large]">
       
       {# {% include "lp-navbar.html" %} #}
-    <div class="s-space"></div>
+    <div class="s-space show show-for-medium"></div>
       <div class="row lp-header">
-        <div class="large-12 columns">
+        <div class="large-6 columns">
           <h1 class="text-center">Impressum</h1>
           <div class="socialee-callout">
             <h3>Angaben gemäß § 5 TMG</h3>

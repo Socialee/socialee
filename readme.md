@@ -40,6 +40,12 @@ Sehera hatte noch folgende Issues:
 `pip install django-tagging`
 
 -
+###Liste der addons, plugins, apps, snippets
+* Sekizai (inheritance/verschachtelung für css/js)
+	*[https://django-sekizai.readthedocs.io/en/latest](https://django-sekizai.readthedocs.io/en/latest/)
+* 
+
+-
 ###und sonst so?
 * Socialee wird (derzeit noch) gehostet bei:
 	* Staging [https://socialee-stage.herokuapp.com](https://socialee-stage.herokuapp.com)

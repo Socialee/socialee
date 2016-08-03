@@ -1,5 +1,5 @@
 {% extends "offcanvas.html" %}
-{% load cms_tags static %}
+{% load static %}
 
 {% block content %}
 
@@ -20,7 +20,7 @@
 
       <div class="row lp-header">
         <div class="large-12 columns text-center">
-          <a href="#manifest">
+          <a class="white-orange" href="#manifest">
             <span class="fa-stack">
               <i class="fa fa-chevron-down fa-stack-1x" aria-hidden="true"></i>
               <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
@@ -28,8 +28,6 @@
           </a>
         </div>
       </div>
-    
-  
   </section>
 
   <section id="manifest" class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/manifest_2.jpg' %}, small], [{% static 'img/landingpage_bg/manifest_2.jpg' %}, medium], [{% static 'img/landingpage_bg/manifest_2.jpg' %}, large]">
@@ -43,7 +41,7 @@
           <h3>Wir sind digital und analog.</h3><p>So fühlt sich unsere Lebensrealität jedenfalls an. Digital und analog, online und offline. Wir wollen das sinnvoll verbinden.</p>
           <h3>Wir machen das jetzt mal.</h3><p>Es gibt viele gute Menschen mit guten Ideen, gewöhnen wir uns daran, diese Ideen auch umzusetzen. Socialee ist auch so eine Idee, wir fangen jetzt mal an.</p>
           <h3>Wir sind diejenigen, auf die wir gewartet haben.</h3><p>Wenn wir es nicht machen, wer macht es dann. Der alte Hut, der immer wieder richtig ist und gut auf unsere Köpfe passt.</p>
-          <h3>Ich will dabei sein!</a></h3><p>Wenn du mehr wissen willst, <a class="s-button orange" href="{% url 'invite_me' %}">klick jetzt mal hier.</a></p>
+          <h3>Ich will dabei sein!</a></h3><p>Wenn du mehr wissen willst, <a href="{% url 'invite_me' %}">klick jetzt mal hier.</a></p>
         </div>
       </div>
     </div>

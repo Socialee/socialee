@@ -1,4 +1,4 @@
-{% load sekizai_tags staticfiles cms_tags %}
+{% load i18n sekizai_tags staticfiles cms_tags %}
 
 <!DOCTYPE html>
 <html class="no-js {{ view.template_name | cut:'.html' }}" lang="de">
@@ -7,31 +7,37 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {# The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags #}
+        
         <meta name="description" content="Socialee. Es fehlt an nichts.">
         <meta name="author" content="">
         <link rel="icon" href="#">
-        <title>Socialee | Wir machen das jetzt mal</title>
-        
-        {# <script src="https://use.fontawesome.com/6261c3fed5.js"></script> #}
+        <title> Socialee</title>
+
+        {# Font Awesome #}
         <link rel="stylesheet" href="{% static 'font-awesome-4.6.3/css/font-awesome.min.css' %}">
 
+        {# Slick Slider #}
         <link rel="stylesheet" type="text/css" href="{% static 'bower_components/slick.js/slick/slick.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'bower_components/slick.js/slick/slick-theme.css' %}"/>
         
-<script>
-  (function(d) {
-    var config = {
-      kitId: 'def1wap',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
-</script>
-
+        {# Socialee CSS #}
+        <link type="text/css" rel="stylesheet" href="{% static 'css/socialee_global.css' %}" />
+        
+        {# CSS & JS via Sekizai #}
         {% render_block "css" %}
         {% render_block "js_head" %}
-        <link type="text/css" rel="stylesheet" href="{% static 'css/socialee.css' %}" />
+
+        {# Font via Adobe #}
+        <script>
+          (function(d) {
+            var config = {
+              kitId: 'def1wap',
+              scriptTimeout: 3000,
+              async: true
+            },
+            h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+          })(document);
+        </script>
 
         <!-- Piwik -->
         <script type="text/javascript">
@@ -48,18 +54,24 @@
         </script>
         <noscript><p><img src="//www.socialee.org/analytics/piwik/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
         <!-- End Piwik Code -->
-            
+
     </head>
 
     <body>
+        {# start of content #}
         {% block before_content %}
         {% endblock before_content %}
+
         {% include "messages.html" %}
+        
         {% block content %}
         {% endblock content %}
+        
         {% include "footer.html" %}
+        
         {% block after_content %}
         {% endblock after_content %}
+        {# end of content #}
 
         {% if debug %}
             <script src="//localhost:35729/livereload.js"></script>
@@ -67,16 +79,15 @@
 
         {# jQuery #}
         <script src="{% static 'bower_components/jquery/dist/jquery.js' %}"></script>
+        {# jQuery UI#}
         <script src="{% static 'bower_components/jquery-ui/jquery-ui.min.js' %}"></script>
         {# Slick Slider #}
         <script type="text/javascript" src="{% static 'bower_components/slick.js/slick/slick.js' %}"></script>
         {# Foundation Sites #}
         <script src="{% static 'bower_components/foundation-sites/dist/foundation.js' %}"></script>
-        {# Markdown #}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
-        {# Socialee javascript #}
+        {# Socialee custom javascript #}
         <script src="{% static 'js/main.js' %}"></script>
-        
+        {# javascript via sekizai #}
         {% render_block "js" %}
 
     </body>

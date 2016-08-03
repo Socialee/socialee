@@ -56,7 +56,7 @@ BOWER_COMPONENTS_ROOT:=socialee/static
 BOWER_COMPONENTS:=$(BOWER_COMPONENTS_ROOT)/bower_components
 STAMP_BOWER_COMPONENTS_INSTALLED:=$(BOWER_COMPONENTS)/.installed_stamp
 
-MAIN_SCSS:=socialee.scss
+MAIN_SCSS:=socialee_global.scss
 
 SCSS_DIR=$(PROJECT_ROOT_SRC)/static/scss
 CSS_DIR=$(PROJECT_ROOT_SRC)/static/css
