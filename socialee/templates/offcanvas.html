@@ -15,11 +15,11 @@
 
         <!-- Menu -->
         <ul class="vertical menu">
-            <li><a class="button" href="{% url 'account_signup' %}">Sign Up</a></li>
+            <li><a class="button" href="#">Sign Up</a></li>
             <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'project_overview' %}">Übersicht der Projekte</a></li>
-            <li><a href="{% url 'question_single' 1 %}">Frage &amp; Antwort</a></li>
-            <li><a href="{% url 'make_quote' %}">Zitat erstellen</a></li>
+            <li><a href="#">Übersicht der Projekte</a></li>
+            <li><a href="#">Frage &amp; Antwort</a></li>
+            <li><a href="#">Zitat erstellen</a></li>
             <li><a href="#">Blog</a></li>
             {% if request.user.is_authenticated and request.user.is_staff %}
             <li><a href="#"></a></li>
