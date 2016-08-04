@@ -49,7 +49,7 @@ Sehera hatte noch folgende Issues:
 ###und sonst so?
 * Socialee wird (derzeit noch) gehostet bei:
 	* Staging [https://socialee-stage.herokuapp.com](https://socialee-stage.herokuapp.com)
-	* Production [https://socialee.herokuapp.com](https://socialee.herokuapp.com)
-* Lokal verwenden wir sqlite, in staging und production postgresql 
+	* Production [https://socialee-prod.herokuapp.com](https://socialee-prod.herokuapp.com)
+* Lokal verwenden wir sqlite, in staging und production postgresql
 * Müssen noch eine bestpractice im Umgang mit Datenbanken und migrations entwickeln, bisher wird die db.sqlite nicht committet, was im Grunde auch Sinn macht aber oft zu Konflikten mit migrations führt. Any ideas anyone?
 * Dieses Readme darf von jedem erweitert werden :-)
