@@ -38,6 +38,7 @@ if ! [ -f .heroku/python/bin/bower ]; then
   ln -sf ../../vendor/node/bin/node .heroku/python/bin/node
   ln -sf ../../vendor/node/bin/node-waf .heroku/python/bin/node-waf
   ln -sf ../../vendor/node/bin/npm .heroku/python/bin/npm
+  ln -sf ../../vendor/node/bin/bower .heroku/python/bin/bower
 
   echo "-----> Installing bower"
   npm install -g bower
