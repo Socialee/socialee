@@ -41,9 +41,9 @@ Sehera hatte noch folgende Issues:
 
 -
 ###Liste der addons, plugins, apps, snippets
-* Sekizai (inheritance/verschachtelung für css/js)
-	*[https://django-sekizai.readthedocs.io/en/latest](https://django-sekizai.readthedocs.io/en/latest/)
-* 
+* Sekizai (inheritance/verschachtelung für css/js)[https://django-sekizai.readthedocs.io/en/latest](https://django-sekizai.readthedocs.io/en/latest/)
+* Django-Allauth (User-Verwaltung, onboarding, facebook-login, etc.) [https://github.com/pennersr/django-allauth](https://github.com/pennersr/django-allauth)
+* Zinnia (Blog-System) [https://github.com/Fantomas42/django-blog-zinnia](https://github.com/Fantomas42/django-blog-zinnia)
 
 -
 ###und sonst so?
