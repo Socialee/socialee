@@ -160,7 +160,7 @@ $(STAMP_BOWER_COMPONENTS_INSTALLED): $(BOWER_COMPONENTS_ROOT)/bower.json
 	@# Create registry cache for bower manually, otherwise it fails silently.
 	mkdir -p $(bower_storage__registry)
 	cd $(BOWER_COMPONENTS_ROOT) \
-		&& bower install --force-latest $(BOWER_OPTIONS) \
+		&& bower install -f --force-latest $(BOWER_OPTIONS) \
 		&& bower prune
 	touch $@
 
