@@ -41,6 +41,7 @@ if ! [ -f .heroku/python/bin/bower ]; then
 
   echo "-----> Installing bower"
   npm install -g bower
+  bower -v
 fi
 
 echo "-----> Running heroku_post_compile Makefile task"
