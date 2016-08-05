@@ -279,3 +279,11 @@ LOGGING = {
 CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3', 'foundation-5') # F5 works for F6 as well
 # Default layout to use with "crispy_forms"
 CRISPY_TEMPLATE_PACK = 'foundation-5'
+
+# Zinnia Blog Settings
+ZINNIA_ENTRY_CONTENT_TEMPLATES = [
+            ('zinnia/_entry_detail_alternate.html', gettext('Alternative template')),
+            ]
+ZINNIA_ENTRY_DETAIL_TEMPLATES = [
+            ('entry_detail_alternate.html', gettext('Alternative template')),
+            ]
