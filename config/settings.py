@@ -89,7 +89,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'crispy_forms_foundation',
     'django_summernote',
-    # 'simple_auth',
+    'simple_auth',
     'taggit',
     'zinnia',
 
@@ -102,7 +102,6 @@ INSTALLED_APPS = (
 if DEBUG:
     INSTALLED_APPS += (
         'django_extensions',
-        #'debug_toolbar',
     )
 
 DEBUG_TOOLBAR_CONFIG = {
@@ -127,10 +126,20 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.admindocs.middleware.XViewMiddleware',
 ]
 
-if not DEBUG:
+# Password Protection for Staging Server
+SIMPLE_AUTH = False
+if SIMPLE_AUTH: # set in socialee-stage.herokuapp.com
     MIDDLEWARE_CLASSES += [
-    #'simple_auth.middleware.SimpleAuthMiddleware',
+    'simple_auth.middleware.SimpleAuthMiddleware',
     ]
+
+SIMPLE_AUTH_IGNORE = [
+    r'^admin/',
+]
+
+SIMPLE_AUTH_PROTECT = [
+    r'^$',
+]
 
 ROOT_URLCONF = 'config.urls'
 
@@ -268,52 +277,3 @@ LOGGING = {
 CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3', 'foundation-5') # F5 works for F6 as well
 # Default layout to use with "crispy_forms"
 CRISPY_TEMPLATE_PACK = 'foundation-5'
-
-print ("ROOT_DIR is: ", ROOT_DIR)
-print ('DEBUG is: ', DEBUG)
-
-
-SUMMERNOTE_CONFIG = {
-    # Using SummernoteWidget - iframe mode
-    'iframe': False,  # or set False to use SummernoteInplaceWidget - no iframe mode
-
-    # Using Summernote Air-mode
-    'airMode': False,
-
-    # Use native HTML tags (`<b>`, `<i>`, ...) instead of style attributes
-    # (Firefox, Chrome only)
-    'styleWithTags': True,
-
-    # Set text direction : 'left to right' is default.
-    'direction': 'ltr',
-
-    # Change editor size
-    'width': '100%',
-    'height': '380',
-
-    # Use proper language setting automatically (default)
-    'lang': None,
-
-    # Or, set editor language/locale forcely
-    'lang': 'de-DE',
-
-    # Customize toolbar buttons
-    'toolbar': [
-    ['style', ['style']],
-    ['font', ['bold', 'italic', 'underline', 'clear']],
-    ['fontname', ['fontname']],
-    ['color', ['color']],
-    ['para', ['ul', 'ol', 'paragraph']],
-    ['height', ['height']],
-    ['table', ['table']],
-    ['insert', ['link', 'picture', 'hr']],
-    ['view', ['fullscreen', 'codeview']],
-    ['help', ['help']]
-  ],
-
-    # Need authentication while uploading attachments.
-    'attachment_require_authentication': False,
-
-    # You can disable file upload feature.
-    'disable_upload': False,
-}
