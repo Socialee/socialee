@@ -38,6 +38,7 @@ SECRET_KEY = env.str('DJANGO_SECRET_KEY',
                      'gx)-+#9(hotw=qt@swr170k3!l*!=a%6&+)siw4$0q35egtj(1')
 
 DEBUG = env.bool('DJANGO_DEBUG', False)
+SIMPLE_AUTH = env.bool('SIMPLE_AUTH', False)
 INTERNAL_IPS = ('127.0.0.1',)
 
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
@@ -127,19 +128,19 @@ MIDDLEWARE_CLASSES = [
 ]
 
 # Password Protection for Staging Server
-SIMPLE_AUTH = False
-if SIMPLE_AUTH: # set in socialee-stage.herokuapp.com
+# SIMPLE_AUTH = False
+if SIMPLE_AUTH==True: # set in socialee-stage.herokuapp.com
     MIDDLEWARE_CLASSES += [
     'simple_auth.middleware.SimpleAuthMiddleware',
     ]
 
-SIMPLE_AUTH_IGNORE = [
-    r'^admin/',
-]
+    SIMPLE_AUTH_IGNORE = [
+        r'^admin/',
+    ]
 
-SIMPLE_AUTH_PROTECT = [
-    r'^$',
-]
+    SIMPLE_AUTH_PROTECT = [
+        r'^$',
+    ]
 
 ROOT_URLCONF = 'config.urls'
 
