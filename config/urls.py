@@ -37,7 +37,7 @@ if settings.DEBUG or settings.SIMPLE_AUTH:
         url(r'^', include('cms.urls')),
     ]
 
-if not settings.DEBUG:
+if not settings.DEBUG and not settings.SIMPLE_AUTH:
     urlpatterns = [
         
         url(r'^$', views.Home.as_view(), name='home'),
