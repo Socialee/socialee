@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 
 from socialee import views
 
-if settings.DEBUG:
+if settings.DEBUG or settings.SIMPLE_AUTH:
     urlpatterns = [
         
         url(r'^$', views.Home.as_view(), name='home'),
