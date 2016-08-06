@@ -57,12 +57,17 @@
 			</div>
 			<div class="small-2 large-2 columns">
 				<div class="row align-spaced align-middle text-center">
-					{% if request.user.profile.picture %}
-        				<img src="{{ request.user.profile.picture.url }}" width="80px"/> 
+					<a href="{% url 'profile_view' project.created_by  %}">
+					{% if project.created_by.profile.picture %}
+        				<img src="{{ project.created_by.profile.picture.url }}" width="80px"/> 
         			{% else %}
         			<i class="fa fa-user" aria-hidden="true"></i>
         			{% endif %}					
-					<a href="{% url 'profile_view' project.created_by  %}">{{ project.created_by.first_name }} {{ project.created_by.last_name }}</a>
+					{% if project.created_by.first_name or project.created_by.last_name %}
+						{{ project.created_by.first_name }} {{ project.created_by.last_name }}
+					{% else %}
+						{{ project.created_by }}
+					{% endif %}</a>
 				</div>
 			</div>
 		</div>
