@@ -1,0 +1,69 @@
+// Socialee Blog scss
+
+
+@import "settings";
+// @import "foundation-sites/scss/foundation";
+// @include foundation-everything(true);
+
+
+$light-blue: #edf5f3;
+
+.blog-layout {
+  @include flex-align($x: center, $y: stretch);
+}
+
+.blog-info {
+  margin-bottom: 1rem;
+}
+
+.blog-category {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0 0.5rem;
+  background-color: $light-blue;
+}
+
+.blog-time-published {
+  // text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 700;  
+}
+
+h2 {
+  font-size: 3rem;
+}
+
+.entry-summary {
+  text-transform: uppercase;
+  p {
+    font-size: 1.1rem;
+  }
+}
+
+.entry-content {
+  p {
+  display: inline;
+  line-height: 2.2rem;
+  }
+}
+
+.blog-image {
+  margin: 1rem 0;
+}
+
+.entry-image {
+
+}
+
+.continue-reading {
+  display: inline;
+  text-align: right;
+}
+
+.write-author {
+  text-align: right;
+  a {
+    font-weight: 900;
+  }
+}
