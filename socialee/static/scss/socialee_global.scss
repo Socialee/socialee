@@ -12,6 +12,10 @@
     font-size: 1.5rem;
   }
 
+  .white {
+    color: $white;
+  }
+
   // Callout for messages e.g. "Thanks, your message has been sent!"
   .message-callout {
     @include callout-base;
@@ -37,10 +41,10 @@
     padding: 3rem;
     width: 100%;
     p {
-      color: $socialee-darkgreen!important;
+      color: $socialee-darkgreen;
     }
     a {
-      color: $socialee-orange!important;
+      color: $socialee-orange;
     }
     @include breakpoint(small only) {
     padding: 1rem;

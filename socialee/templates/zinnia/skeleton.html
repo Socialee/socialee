@@ -1,14 +1,18 @@
 {% extends "offcanvas.html" %}
-{% load static %}
+{% load static sekizai_tags %}
 
 {% block content %}
+
+	{% addtoblock "css" %}
+		<link type="text/css" rel="stylesheet" href="{% static 'css/socialee_blog.css' %}" />
+	{% endaddtoblock %}
 
 <section class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, medium], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, large]">
 
 <div class="s-space show show-for-medium"></div>
-	<div class="row lp-header">
+	<div class="row blog-layout">
 		<div class="small-9 columns">
-		<h1 class="text-center">Socialee Blog</h1>
+		<h1 class="text-center white">Socialee Blog</h1>
 		
 			{% block blog-content %}{% endblock blog-content %}
 		
