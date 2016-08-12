@@ -1,6 +1,6 @@
 {% extends "offcanvas.html" %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 
 <section class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, medium], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, large]">
@@ -12,25 +12,9 @@
           <h1 class="text-center">Melde dich an ...</h1>
           <p class="text-center">... und wir halten dich auf dem Laufenden!</p>
           <div class="socialee-callout">
-            <form method="POST" action=""> {% csrf_token %}
-                    <div class="fieldWrapper">
-                        {{ form.full_name.label_tag }}
-                        {# <span class="socialee-form-label">Wenn du Lust hast</span> #}
-                        {{ form.full_name }}
-                        {{ form.full_name.errors }}
-                        {{ form.email.label_tag }}
-                        {# <span class="socialee-form-label">Das muss sein</span> #}
-                        {{ form.email }}
-                        {{ form.email.errors }}
-                        {{ form.message.label_tag }}
-                        {# <span class="socialee-form-label">Das muss sein</span> #}
-                        {{ form.message }}
-                        {{ form.message.errors }}
-                    </div>
-                    <div class="row align-center">
-                      <input class="s-button-form self" type="submit" value="Und ab dafür!">
-                    </div>
-            </form>
+            {% crispy form %}
+            
+            
           </div>
         </div>
       </div>

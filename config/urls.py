@@ -20,7 +20,7 @@ if settings.DEBUG or settings.SIMPLE_AUTH:
         url(r'^blog/', include('zinnia.urls')),
         url(r'^comments/', include('django_comments.urls')),
         url(r'^protect/', include('simple_auth.urls')),
-        url(r'^invite_me/$', views.Invite_me, name='invite_me'),
+        url(r'^invite_me/$', views.NewsletterSignup.as_view(), name='invite_me'),
         url(r'^impressum/$', views.Impressum.as_view(), name='impressum'),
         url(r'^welcome/(?P<slug>[\w.@+-]+)/$', login_required(views.WelcomePage.as_view()), name='welcome'), # login required!
         url(r'^startproject/$', login_required(views.StartProject.as_view()), name='startproject'), # login required!
@@ -49,7 +49,7 @@ if not settings.DEBUG and not settings.SIMPLE_AUTH:
         # url(r'^quotes/', include('quotes.urls')),
         # url(r'^blog/', include('zinnia.urls')),
         # url(r'^comments/', include('django_comments.urls')),
-        url(r'^invite_me/$', views.Invite_me, name='invite_me'),
+        url(r'^invite_me/$', views.NewsletterSignup.as_view(), name='invite_me'),
         url(r'^impressum/$', views.Impressum.as_view(), name='impressum'),
         # url(r'^welcome/(?P<slug>[\w.@+-]+)/$', login_required(views.WelcomePage.as_view()), name='welcome'), # login required!
         # url(r'^startproject/$', login_required(views.StartProject.as_view()), name='startproject'), # login required!

@@ -228,7 +228,8 @@ SOCIALACCOUNT_PROVIDERS = \
         }
     }
 ACCOUNT_FORMS = {
-    'login': 'socialee.forms.SocialeeLoginForm'
+    'login': 'socialee.forms.SocialeeLoginForm',
+    'signup': 'socialee.forms.NewsletterForm'
 }
 
 LOGIN_REDIRECT_URL = '/'
@@ -236,7 +237,7 @@ SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
 

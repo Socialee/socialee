@@ -52,21 +52,23 @@ class Home(BaseView, TemplateView):
 
         return context
 
+class NewsletterSignup(SignupView):
+    form_class = NewsletterForm
+    template_name = 'invite_me.html'
 
-def Invite_me(request):
-    form = InviteForm(request.POST or None)
-    context = {
-        "form": form,
-    }
-
-    if request.method=='POST':
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
         if form.is_valid():
-            instance = form.save(commit=False)
-            instance.save()
+            ret = super(NewsletterSignup, self).post(request, *args, **kwargs)
             messages.success(request, 'Danke für Deine Nachricht! Wir melden uns ganz bald.')
             form_email = form.cleaned_data.get("email")
             form_message = form.cleaned_data.get("message")
             form_full_name = form.cleaned_data.get("full_name")
+
+            # TODO: save in mailchimp
+            
+            # send the email
             subject = 'Ladet mich ein!'
             from_email = settings.EMAIL_HOST_USER
             to_email = [from_email, 'hello@socialee.de']
@@ -82,10 +84,15 @@ def Invite_me(request):
                     from_email, 
                     to_email,
                     fail_silently=True)
+            return ret
 
-            return HttpResponseRedirect(reverse('home'))
+        else:
+            return self.form_invalid(form)
 
-    return render(request, 'invite_me.html', context)
+    def get_context_data(self, **kwargs):
+        context = super(NewsletterSignup, self).get_context_data(**kwargs)
+
+        return context
 
 
 class Impressum(BaseView, TemplateView):
