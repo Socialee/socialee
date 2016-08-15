@@ -1,6 +1,7 @@
 import os, random
 import requests
 import random
+import mailchimp
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -15,11 +16,13 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, FormView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import SingleObjectMixin
+from django.dispatch import receiver
 
 
 from allauth.account.views import *
 from allauth.account.forms import *
 from allauth.account.decorators import verified_email_required
+from allauth.account.signals import email_confirmed
 
 from .models import Project, Input, Output, Profile
 from .forms import *
@@ -52,6 +55,7 @@ class Home(BaseView, TemplateView):
 
         return context
 
+
 class NewsletterSignup(SignupView):
     form_class = NewsletterForm
     template_name = 'invite_me.html'
@@ -59,23 +63,25 @@ class NewsletterSignup(SignupView):
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
+        #TODO fix naming let the user type in any name
+        # unique username 
+        # do this in  is_valid function?
         if form.is_valid():
-            ret = super(NewsletterSignup, self).post(request, *args, **kwargs)
             messages.success(request, 'Danke für Deine Nachricht! Wir melden uns ganz bald.')
-            form_email = form.cleaned_data.get("email")
-            form_message = form.cleaned_data.get("message")
-            form_full_name = form.cleaned_data.get("full_name")
+            raw_email = form.cleaned_data.get("email")
+            message = form.cleaned_data.get("message")
+            name = form.cleaned_data.get("username")
 
-            # TODO: save in mailchimp
-            
-            # send the email
-            subject = 'Ladet mich ein!'
             from_email = settings.EMAIL_HOST_USER
             to_email = [from_email, 'hello@socialee.de']
+
+
+            # send the email
+            subject = 'Ladet mich ein!'
             contact_message = "%s via %s schreibt:\n\n %s"%( 
-                    form_full_name, 
-                    form_email,
-                    form_message)
+                    name, 
+                    raw_email,
+                    message)
             some_html_message = """
             <h1>Hallo Mo!</h1>
             """
@@ -84,7 +90,7 @@ class NewsletterSignup(SignupView):
                     from_email, 
                     to_email,
                     fail_silently=True)
-            return ret
+            return super(NewsletterSignup, self).post(request, *args, **kwargs)
 
         else:
             return self.form_invalid(form)
@@ -93,6 +99,46 @@ class NewsletterSignup(SignupView):
         context = super(NewsletterSignup, self).get_context_data(**kwargs)
 
         return context
+
+
+#mailchimp stuff
+MAILCHIMP_API_KEY = '115737b5c3cf0d9a848011ab122b5c7f-us9'
+MAILCHIMP_LIST_ID = '360a5e921a'
+
+@receiver(email_confirmed, dispatch_uid="socialee.allauth.email_confirmed")
+def email_confirmed_(email_address, **kwargs):
+    # try to add user to mailchimp
+
+    #TODO fix naming
+            
+    email = {'email': email_address.email}
+
+    fname = email_address.user.username
+    lname = email_address.user.last_name
+
+    merge_vars = {
+        'FNAME': fname,
+        'LNAME': lname,
+        }
+
+    m = mailchimp.Mailchimp(MAILCHIMP_API_KEY)
+
+    from_email = settings.EMAIL_HOST_USER
+    to_email = [from_email, 'hello@socialee.de']
+
+    try:
+        m.lists.subscribe(id=MAILCHIMP_LIST_ID, email=email, merge_vars=merge_vars, double_optin=False)
+    #This is the worst error handling ever
+    except mailchimp.Error as e:
+        send_mail("Faild to sign up", 
+            "%s via %s \n%s"%( 
+            "name", 
+            email,
+            e
+            ), 
+            from_email, 
+            to_email,
+            fail_silently=True)
 
 
 class Impressum(BaseView, TemplateView):

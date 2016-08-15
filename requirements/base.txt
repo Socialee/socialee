@@ -52,6 +52,7 @@ requests==2.10.0          # via django-allauth, requests-oauthlib
 six==1.10.0               # via django-app-namespace-template-loader, django-betterforms, django-environ, djangocms-snippet, html5lib
 sqlparse==0.2.0           # via django-debug-toolbar
 Unidecode==0.4.19         # via django-filer
+mailchimp
 
 # The following packages are commented out because they are
 # considered to be unsafe in a requirements file:
