@@ -70,7 +70,7 @@ class NewsletterSignup(SignupView):
             messages.success(request, 'Danke für Deine Nachricht! Wir melden uns ganz bald.')
             raw_email = form.cleaned_data.get("email")
             message = form.cleaned_data.get("message")
-            name = form.cleaned_data.get("username")
+            name = form.cleaned_data.get("first_name")
 
             from_email = settings.EMAIL_HOST_USER
             to_email = [from_email, 'hello@socialee.de']
@@ -103,7 +103,7 @@ class NewsletterSignup(SignupView):
 
 #mailchimp stuff
 MAILCHIMP_API_KEY = '115737b5c3cf0d9a848011ab122b5c7f-us9'
-MAILCHIMP_LIST_ID = '360a5e921a'
+MAILCHIMP_LIST_ID = 'c5c441594e'
 
 @receiver(email_confirmed, dispatch_uid="socialee.allauth.email_confirmed")
 def email_confirmed_(email_address, **kwargs):
@@ -113,7 +113,7 @@ def email_confirmed_(email_address, **kwargs):
             
     email = {'email': email_address.email}
 
-    fname = email_address.user.username
+    fname = email_address.user.first_name
     lname = email_address.user.last_name
 
     merge_vars = {

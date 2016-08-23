@@ -70,23 +70,21 @@ class EditProfileForm(forms.ModelForm):
 
 class NewsletterForm(BaseSignupForm):
     class Meta:
-         fields = ('username', 'email')
+         fields = ('email')
 
+    first_name = forms.CharField(label= _('Dein Name'), required=False, widget = forms.TextInput( 
+            attrs={'placeholder': _('Name'), 'autofocus': 'autofocus'}))
     message = forms.CharField(label= _('Deine Nachricht'), required=False, widget=forms.Textarea)
     def __init__(self, *args, **kwargs):
         super(NewsletterForm, self).__init__(*args, **kwargs)
 
-        self.fields['username'].label = _('Dein Name')
-        self.fields['username'].required = False
-        self.fields['username'].widget = forms.TextInput( 
-            attrs={'placeholder': _('Name'), 'autofocus': 'autofocus'})
         self.fields['email'].label = _('Deine Email-Adresse')
 
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Div( Fieldset(
                  '',
-                'username', 
+                'first_name', 
                 'email',
                 'message'
             ), css_class="fieldWrapper"),
@@ -100,6 +98,15 @@ class NewsletterForm(BaseSignupForm):
         super(NewsletterForm, self).clean()
 
         return self.cleaned_data
+
+    def custom_signup(self, request, user):
+        if user.first_name:
+            names = user.first_name.split(" ")
+            if len(names)>1:
+                user.last_name = names[-1]
+                user.first_name = " ".join(names[:-1])
+                user.save()
+        return super(NewsletterForm, self).custom_signup(request, user)
 
     def save(self, request):
         # this is copied from allauth SignupForm
