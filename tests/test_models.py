@@ -1,11 +1,11 @@
 import pytest
 from allauth.account.models import EmailAddress
-from socialee.models import Profile, UserEntry
+from socialee.models import Profile, User
 
 
 @pytest.fixture
 def user(db):
-    user, created = UserEntry.objects.get_or_create(email="test-user@example.com")
+    user, created = User.objects.get_or_create(email="test-user@example.com")
     return user
 
 @pytest.fixture

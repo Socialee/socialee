@@ -19,16 +19,6 @@ from allauth.account.models import EmailAddress
 from taggit.managers import TaggableManager
 
 
-class UserEntry(User):
-    class Meta(User.Meta):
-        proxy = True
-        verbose_name = "manuelle User Erfassung"
-        verbose_name_plural = "manuelle User Erfassungen"
-
-    def __str__(self):
-        return "User ({})".format(self.username)
-
-
 class Origin(models.Model):
     title = models.CharField(max_length=100)
     location = models.CharField(max_length=100, blank=True, null=True)

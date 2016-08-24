@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from allauth.account.forms import *
 
 from django import forms
-from .models import Project, Profile, UserEntry, Input, Output, User
+from .models import Project, Profile, Input, Output, User
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import *

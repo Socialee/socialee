@@ -4,7 +4,7 @@ import pytest
 from django.core.urlresolvers import reverse
 from selenium.webdriver.support.ui import WebDriverWait
 
-from socialee.models import UserEntry
+from socialee.models import User
 
 pytestmark = pytest.mark.skipif(int(os.environ.get("SKIP_BROWSER_TESTS", 0)) == 1,
                                 reason="Browser tests are skipped (SKIP_BROWSER_TESTS=1)")
@@ -29,7 +29,7 @@ def test_signup_on_home_email_only(browser):
     browser.click_link_by_text(SIGNUP_SUBMIT_TEXT)
     assert_signup_success(browser)
 
-    assert UserEntry.objects.get(email="user@example.com")
+    assert User.objects.get(email="user@example.com")
 
 
 def test_signup_on_home_complete(browser):
@@ -53,7 +53,7 @@ def test_signup_on_home_complete(browser):
     browser.click_link_by_text(SIGNUP_SUBMIT_TEXT)
     assert_signup_success(browser)
 
-    user = UserEntry.objects.get(email="user@example.com")
+    user = User.objects.get(email="user@example.com")
     profile = user.profile
 
     assert profile.project_set.count() == 1
@@ -74,7 +74,7 @@ def test_signup_on_home_complete(browser):
 #         "user@example.com\r")
 #     assert_signup_success(browser)
 
-#     profile = UserEntry.objects.get(email="user@example.com").profile
+#     profile = User.objects.get(email="user@example.com").profile
 
 #     assert profile.user.email == "user@example.com"
 #     assert profile.plz == "12345"
