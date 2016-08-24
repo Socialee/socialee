@@ -19,15 +19,6 @@ from allauth.account.models import EmailAddress
 from taggit.managers import TaggableManager
 
 
-class Origin(models.Model):
-    title = models.CharField(max_length=100)
-    location = models.CharField(max_length=100, blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
-
-    def __str__(self):
-        return 'Origin: {}'.format(self.title)
-
-
 def upload_location(instance, filename):
     location = str(instance.user.username)
     return "%s/%s" % (location, filename)
@@ -45,8 +36,6 @@ class Profile(models.Model):
         return (self.user.is_authenticated and
                 EmailAddress.objects.filter(email=self.user.email,
                                             verified=True).exists())
-
-    origin = models.ForeignKey(Origin, blank=True, null=True)
 
     def user_first_name(self):
         return self.user.first_name if self.user else None
@@ -142,15 +131,6 @@ class Output(InputOutput):
         return 'Output "{}" from profile {}'.format(
           self.title, self.profile)
 
-
-class Tag(InputOutput):
-    title = models.CharField(verbose_name="Tag-Beschreibung",
-                             max_length=200)
-    description = models.TextField(max_length=5000, null=True, blank=True)
-
-    def __str__(self):
-        return 'Output "{}" from profile {}'.format(
-          self.title, self.profile)
 
 
 class Project(models.Model):
