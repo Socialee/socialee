@@ -30,7 +30,7 @@ class Profile(models.Model):
     phone = models.CharField(max_length=50, blank=True)
     plz = models.CharField(max_length=5, null=True, blank=True)
     newsletter = models.BooleanField(default=False)
-    liked_projects = models.ManyToManyField('Project', related_name='likes')
+    
 
     def is_email_verified(self):
         return (self.user.is_authenticated and
