@@ -12,7 +12,6 @@ if settings.DEBUG or settings.SIMPLE_AUTH:
     urlpatterns = [
         
         url(r'^$', views.Home.as_view(), name='home'),
-        url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
         url(r'^accounts/', include('allauth.urls')),
         url(r'^admin/', include(admin.site.urls)),
         url(r'^summernote/', include('django_summernote.urls')),
