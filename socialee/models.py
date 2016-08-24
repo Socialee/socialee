@@ -25,7 +25,7 @@ def upload_location(instance, filename):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, blank=True, null=True)
-    slug = models.SlugField(default='slug')
+    slug = models.SlugField(primary_key=True)
     picture = models.ImageField(upload_to=upload_location, null=True, blank=True)
     phone = models.CharField(max_length=50, blank=True)
     plz = models.CharField(max_length=5, null=True, blank=True)
@@ -134,11 +134,11 @@ class Output(InputOutput):
 
 
 class Project(models.Model):
+    slug = models.SlugField(primary_key=True)
     title = models.CharField(max_length=60)
     tagline = models.CharField(max_length=140, null= True)
     description = models.TextField(max_length=5000, null=True, blank=True)
     header_img = models.ImageField(upload_to=upload_location, null=True, blank=True)
-    slug = models.SlugField()
     profiles = models.ManyToManyField(User, related_name='Socialeebhaber') # follower/beobachter
     managers = models.ManyToManyField(User, related_name='Project_Managers', blank=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
