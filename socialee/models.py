@@ -194,27 +194,6 @@ def pre_save_project(sender, instance, *args, **kwargs):
 pre_save.connect(pre_save_project, sender = Project)
 
 
-class Invite(models.Model):
-    full_name = models.CharField(max_length=120, blank=True, null=True, verbose_name='Name')
-    email = models.EmailField()
-    message = models.TextField(max_length=1200, blank=True, null=True, verbose_name='Nachricht')
-    timestamp = models.DateTimeField(auto_now_add=True)
-    done = models.BooleanField(default=False, verbose_name='erledigt?')
-
-    class Meta:
-        verbose_name = 'Bitte ladet mich ein!'
-        verbose_name_plural = 'Bitte ladet mich ein!'
-
-    def was_submitted_recently(self):
-        now = timezone.now()
-        return now - datetime.timedelta(hours=24) <= self.timestamp <= now
-    was_submitted_recently.admin_order_field = 'timestamp'
-    was_submitted_recently.boolean = True
-    was_submitted_recently.short_description = 'Neu?'
-
-    def __str__(self):
-        return self.full_name
-
 
 
 
