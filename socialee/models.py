@@ -18,14 +18,95 @@ from allauth.account.models import EmailAddress
 
 from taggit.managers import TaggableManager
 
+class CommonGround(models.Model):
+    slug = models.SlugField(primary_key=True)
+    inputs = models.ManyToManyField('Input', blank=True)
+    outputs = models.ManyToManyField('Output', blank=True)
+
 
 def upload_location(instance, filename):
     location = str(instance.user.username)
     return "%s/%s" % (location, filename)
 
-class Profile(models.Model):
+class InputOutput(models.Model):
+    UNKNOWN = ''
+    KNOWLEDGE = 'knowledge'
+    SKILL = 'skill'
+    PROBLEM = 'problem'
+    RESOURCE = 'resource'
+    SOLUTION = 'solution'
+    TYPES = (
+        (UNKNOWN, 'sonstige'),
+        (KNOWLEDGE, 'Wissen'),
+        (SKILL, 'Fähigkeit'),
+        (PROBLEM, 'Problem'),
+        (RESOURCE, 'Resource'),
+        (SOLUTION, 'Lösung'),
+    )
+
+    class Meta:
+        abstract = True
+
+    owner = models.ForeignKey(CommonGround, null=True)
+    type = models.CharField(max_length=25,
+                            choices=list(TYPES),
+                            default=UNKNOWN)
+
+    def itemclass(self):
+        return self.__class__()
+
+
+class Input(InputOutput):
+    title = models.CharField(verbose_name="Was ist der Input?",
+                             max_length=200)
+    description = models.TextField(max_length=5000, null=True, blank=True)
+
+    def __str__(self):
+        return 'Input "{}" from profile {}'.format(
+          self.title, self.profile)
+
+
+class Output(InputOutput):
+    title = models.CharField(verbose_name="Was ist der Output?",
+                             max_length=200)
+    description = models.TextField(max_length=5000, null=True, blank=True)
+
+    def __str__(self):
+        return 'Output "{}" from profile {}'.format(
+          self.title, self.profile)
+
+
+
+class Project(CommonGround):
+    title = models.CharField(max_length=60)
+    tagline = models.CharField(max_length=140, null= True)
+    description = models.TextField(max_length=5000, null=True, blank=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    header_img = models.ImageField(upload_to=upload_location, null=True, blank=True)
+    profiles = models.ManyToManyField(User, related_name='Socialeebhaber') # follower/beobachter
+    managers = models.ManyToManyField(User, related_name='Project_Managers', blank=True)
+    tags = TaggableManager()
+    
+    
+    def __str__(self):
+        return 'Project "{}"'.format(self.title)
+
+    def itemclass(self):
+        return self.__class__()
+
+    def get_absolute_url(self):
+        return reverse('project_detailview', kwargs = {"slug": self.slug})
+
+
+def pre_save_project(sender, instance, *args, **kwargs):
+    slug = slugify(instance.title)
+    instance.slug = slug
+
+pre_save.connect(pre_save_project, sender = Project)
+
+
+class Profile(CommonGround):
     user = models.OneToOneField(User, blank=True, null=True)
-    slug = models.SlugField(primary_key=True)
     picture = models.ImageField(upload_to=upload_location, null=True, blank=True)
     phone = models.CharField(max_length=50, blank=True)
     plz = models.CharField(max_length=5, null=True, blank=True)
@@ -83,85 +164,6 @@ class Profile(models.Model):
 
 
 User.profile = property(lambda u: Profile.objects.get_or_create(user=u, slug=u.username)[0])
-
-class InputOutput(models.Model):
-    UNKNOWN = ''
-    KNOWLEDGE = 'knowledge'
-    SKILL = 'skill'
-    PROBLEM = 'problem'
-    RESOURCE = 'resource'
-    SOLUTION = 'solution'
-    TYPES = (
-        (UNKNOWN, 'sonstige'),
-        (KNOWLEDGE, 'Wissen'),
-        (SKILL, 'Fähigkeit'),
-        (PROBLEM, 'Problem'),
-        (RESOURCE, 'Resource'),
-        (SOLUTION, 'Lösung'),
-    )
-
-    class Meta:
-        abstract = True
-
-    profile = models.ForeignKey(Profile, null=True)
-    type = models.CharField(max_length=25,
-                            choices=list(TYPES),
-                            default=UNKNOWN)
-
-    def itemclass(self):
-        return self.__class__()
-
-
-class Input(InputOutput):
-    title = models.CharField(verbose_name="Was ist der Input?",
-                             max_length=200)
-    description = models.TextField(max_length=5000, null=True, blank=True)
-
-    def __str__(self):
-        return 'Input "{}" from profile {}'.format(
-          self.title, self.profile)
-
-
-class Output(InputOutput):
-    title = models.CharField(verbose_name="Was ist der Output?",
-                             max_length=200)
-    description = models.TextField(max_length=5000, null=True, blank=True)
-
-    def __str__(self):
-        return 'Output "{}" from profile {}'.format(
-          self.title, self.profile)
-
-
-
-class Project(models.Model):
-    slug = models.SlugField(primary_key=True)
-    title = models.CharField(max_length=60)
-    tagline = models.CharField(max_length=140, null= True)
-    description = models.TextField(max_length=5000, null=True, blank=True)
-    header_img = models.ImageField(upload_to=upload_location, null=True, blank=True)
-    profiles = models.ManyToManyField(User, related_name='Socialeebhaber') # follower/beobachter
-    managers = models.ManyToManyField(User, related_name='Project_Managers', blank=True)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    inputs = models.ManyToManyField(Input, blank=True)
-    outputs = models.ManyToManyField(Output, blank=True)
-    tags = TaggableManager()
-    
-    
-    def __str__(self):
-        return 'Project "{}"'.format(self.title)
-
-    def itemclass(self):
-        return self.__class__()
-
-    def get_absolute_url(self):
-        return reverse('project_detailview', kwargs = {"slug": self.slug})
-
-
-def pre_save_project(sender, instance, *args, **kwargs):
-    slug = slugify(instance.title)
-    instance.slug = slug
-
-pre_save.connect(pre_save_project, sender = Project)
 
 
 
