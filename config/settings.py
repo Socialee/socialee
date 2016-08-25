@@ -67,6 +67,7 @@ INSTALLED_APPS = (
     'mptt',  # utilities for implementing a tree
     'tagging',
     'django_comments',
+    'ckeditor',
 
     # 'reversion', # version-conflicts with cms (http://docs.django-cms.org/en/latest/how_to/install.html)
     'djangocms_file',
@@ -93,6 +94,7 @@ INSTALLED_APPS = (
     'simple_auth',
     'taggit',
     'zinnia',
+    'zinnia_ckeditor',
 
     # SOCIALEE CUSTOM APPS
     'questions.apps.QuestionsConfig',
@@ -287,3 +289,27 @@ ZINNIA_ENTRY_CONTENT_TEMPLATES = [
 ZINNIA_ENTRY_DETAIL_TEMPLATES = [
             ('entry_detail_alternate.html', gettext('Alternative template')),
             ]
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full',
+    },
+    'zinnia-content': {
+        'toolbar_Zinnia': [
+            ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord'],
+            ['Undo', 'Redo'],
+            ['Scayt'],
+            ['Link', 'Unlink', 'Anchor'],
+            ['Image', 'Table', 'HorizontalRule', 'SpecialChar'],
+            ['Source'],
+            ['Maximize'],
+            '/',
+            ['Bold', 'Italic', 'Underline', 'Strike',
+             'Subscript', 'Superscript', '-', 'RemoveFormat'],
+            ['NumberedList', 'BulletedList', '-',
+             'Outdent', 'Indent', '-', 'Blockquote'],
+            ['Styles', 'Format'],
+        ],
+        'toolbar': 'Zinnia',
+    },
+}

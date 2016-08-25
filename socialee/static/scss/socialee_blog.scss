@@ -2,11 +2,64 @@
 
 
 @import "settings";
-// @import "foundation-sites/scss/foundation";
+@import "foundation-sites/scss/foundation";
 // @include foundation-everything(true);
 
 
 $light-blue: #edf5f3;
+
+// @include breakpoint(small only){
+//       p {
+//         font-size: 1rem;
+//         line-height: 1.5rem;
+//       }
+//       h2 {
+//         font-size: 2rem;
+//         margin: 2.5rem 0 1.2rem 0;
+//       }
+// }
+
+// @include breakpoint(retina) {
+//       p {
+//         font-size: 1rem;
+//         line-height: 1.5rem;
+//       }
+//       h2 {
+//         font-size: 2rem;
+//         margin: 2.5rem 0 1.2rem 0;
+//       }
+//   }
+
+.blog-background {
+  background-image: url('../img/landingpage_bg/background-assets/background.jpg'), url('../img/landingpage_bg/background-assets/pattern.jpg');
+  background-repeat: no-repeat, repeat;
+  @include breakpoint(small only) {
+    background-image: url('../img/landingpage_bg/background-assets/pattern.jpg');
+    background-repeat: repeat;
+    }
+}
+
+.blog-callout {
+  @include callout-base;
+    background-color: white;
+    padding: 3rem;
+    width: 100%;
+    p {
+      color: $socialee-darkgreen;
+    }
+    a {
+      color: $socialee-orange;
+    }
+  
+  @include breakpoint(small only) {
+    padding: 0.25rem;
+      img {
+      max-height: 25vh;
+      padding: 1.2rem 0 0 0;
+      margin: 0 auto;
+      }
+    }
+  } 
 
 .blog-layout {
   @include flex-align($x: center, $y: stretch);
@@ -14,6 +67,12 @@ $light-blue: #edf5f3;
 
 .blog-info {
   margin-bottom: 1rem;
+  a {
+    color: white;
+    &:hover {
+      text-decoration: none; 
+    }
+  }
 }
 
 .blog-category {
@@ -21,7 +80,7 @@ $light-blue: #edf5f3;
   font-weight: 700;
   font-size: 0.9rem;
   padding: 0 0.5rem;
-  background-color: $light-blue;
+  background-color: $socialee-orange;
 }
 
 .blog-time-published {
@@ -35,7 +94,6 @@ h2 {
 }
 
 .entry-summary {
-  text-transform: uppercase;
   p {
     font-size: 1.1rem;
   }
@@ -43,8 +101,8 @@ h2 {
 
 .entry-content {
   p {
-  display: inline;
-  line-height: 2.2rem;
+  // display: inline;
+  // line-height: 2.2rem;
   }
 }
 

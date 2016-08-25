@@ -4,21 +4,29 @@
 {% block content %}
 
 	{% addtoblock "css" %}
-		<link type="text/css" rel="stylesheet" href="{% static 'css/socialee_blog.css' %}" />
+		<link type="text/css" rel="stylesheet" href="{% static 'css/socialee_global.css' %}"  />
+		<link type="text/css" rel="stylesheet" href="{% static 'css/socialee_blog.css' %}"  />
 	{% endaddtoblock %}
 
-<section class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, medium], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, large]">
+<section class="blog-background">
 
-<div class="s-space show show-for-medium"></div>
-	<div class="row blog-layout">
-		<div class="small-9 columns">
-		<h1 class="text-center white">Socialee Blog</h1>
-		
-			{% block blog-content %}{% endblock blog-content %}
-		
+	<div class="s-space show show-for-medium"></div>
+		<div class="row blog-layout">
+			<div class="small-11 large-9 columns">
+			<h1 class="text-center white">Socialee Blog</h1>
+			
+				{% block blog-content %}
+				{# Content is being rendered here #}
+				{% endblock blog-content %}
+			
+			</div>
 		</div>
-	</div>
-<div class="s-space"></div>
+
+	<div class="s-space"></div>
+
 </section>
 
 {% endblock content %}
+
+
+data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, medium], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, large]"

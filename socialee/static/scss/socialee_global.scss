@@ -8,6 +8,8 @@
 
 /* GLOBAL STYLES AND HELPERS*/
 
+  $s-button-hover: scale-color($socialee-orange, $lightness: 33%);
+
   p, a {
     font-size: 1.5rem;
   }
@@ -68,11 +70,11 @@
     font-size: 1.5rem;
     font-weight: bold;
     transition: border-bottom 0.5s ease, color 0.5s ease;
-    border-bottom: 5px solid #fff;
+    border-bottom: 5px solid $socialee-orange;
     color: #fff;
     &:hover {
-      color: $socialee-orange;
-      border-bottom: 5px solid $socialee-orange;
+      color: $s-button-hover;
+      border-bottom: 5px solid $s-button-hover;
       text-decoration: none;
     }
     @include breakpoint(small only) {
