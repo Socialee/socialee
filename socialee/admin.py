@@ -16,7 +16,7 @@ class ProjectAdmin(admin.ModelAdmin):
 class ProfileAdmin(admin.ModelAdmin):
     model = Profile
     list_display = ['user', 'slug']
-    fields = ('user', 'slug', 'picture', 'phone', 'plz', 'newsletter')
+    fields = ('user', 'slug', 'picture', 'phone', 'plz', 'newsletter', 'liked_projects')
 
 
 # def mark_as_done(modeladmin, request, queryset):
