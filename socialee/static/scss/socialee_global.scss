@@ -130,9 +130,8 @@
 .lp-header {
   @include flex-align($x: center, $y: stretch);
   img {
-    max-width: 200px;
-    max-height: 50vh;
-    padding: 4rem 0 2rem 0;
+    height: 45vh;
+    padding: 5rem 0 2rem 0;
     margin: 0 auto; 
   }
   h1 {
