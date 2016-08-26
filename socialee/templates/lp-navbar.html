@@ -3,9 +3,8 @@
   </div>
   <div class="top-bar-right">
     <ul class="dropdown menu" data-dropdown-menu>
-    <li><a class="s-button" href="/blog/">Blog</a></li>
     {% if request.user.is_superuser %}
-      <li><a class="s-button" data-toggle="offCanvas">Menü</a></li>
+      <li><a class="s-button" data-toggle="offCanvas">Hallo Admin!</a></li>
     {% endif %}
       
     </ul>
