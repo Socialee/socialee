@@ -40,21 +40,18 @@
     {% include object.content_template with object_content=object.html_content %}
   {% endblock entry-content %}
 
-  {% if author.first_name %}
   <div class="write-author">
   {% with authors=object.authors.all %}
-  {% if authors|length %}
-  {% trans "Verfasst von" %}
   {% for author in authors %}
-  {{ author.first_name }}.
-  <span class="vcard author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <span class="vcard author" itemprop="author" itemscope itemtype="http://schema.org/Person">Lies
     <a href="{{ author.get_absolute_url }}" class="fn url{% if not author.get_full_name %} nickname{% endif %}" rel="author"
-       title="{% blocktrans %}Show all {{ author }}'s entries{% endblocktrans %}" itemprop="url"> Schreibe ihm!</a></span>{% if not forloop.last %}, {% endif %}
+       title="{% blocktrans %}Show all {{ author }}'s entries{% endblocktrans %}" itemprop="url">mehr Artikel von {{ author.first_name }}</a>, oder
+    <a href="mailto:{{author.email}}?subject=Hier%20steht%20der%20Betreff">schreibe eine Email.</a>
+  </span>
   {% endfor %}
-  {% endif %}
   {% endwith %}
   </div>
-  {% endif %}
+  
 
   
   {% get_tags as entry_tags %}
