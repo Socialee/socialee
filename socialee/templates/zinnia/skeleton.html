@@ -1,5 +1,5 @@
 {% extends "offcanvas.html" %}
-{% load static sekizai_tags %}
+{% load static sekizai_tags zinnia i18n %}
 
 {% block content %}
 
@@ -8,12 +8,17 @@
 		<link type="text/css" rel="stylesheet" href="{% static 'css/socialee_blog.css' %}"  />
 	{% endaddtoblock %}
 
-<section class="blog-background">
+	{% addtoblock "blog_js" %}
+		<script src="{% static 'js/blog.js' %}"></script>
+	{% endaddtoblock %}
 
+<section class="blog-background">
+{% include "blognavbar.html" %}
 	<div class="s-space show show-for-medium"></div>
 		<div class="row blog-layout">
 			<div class="small-11 large-9 columns">
-			<h1 class="text-center white">Socialee Blog</h1>
+
+				{% zinnia_breadcrumbs "Blog" "zinnia/blog-breadcrumbs.html" %}	
 			
 				{% block blog-content %}
 				{# Content is being rendered here #}

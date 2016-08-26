@@ -5,7 +5,6 @@
 @import "foundation-sites/scss/foundation";
 // @include foundation-everything(true);
 
-
 $light-blue: #edf5f3;
 
 // @include breakpoint(small only){
@@ -30,7 +29,19 @@ $light-blue: #edf5f3;
 //       }
 //   }
 
+.top-bar-blog {
+  @include top-bar-container;
+  ,.top-bar-blog ul {
+    background-color: rgba($topbar-background, 0.6);
+  }
+  span {
+    color: $primary-color;
+  }
+  #welcomeblog { margin:auto; }
+}
+
 .blog-background {
+  min-height: 100vh;
   background-image: url('../img/landingpage_bg/background-assets/background.jpg'), url('../img/landingpage_bg/background-assets/pattern.jpg');
   background-repeat: no-repeat, repeat;
   @include breakpoint(small only) {
@@ -80,17 +91,29 @@ $light-blue: #edf5f3;
   font-weight: 700;
   font-size: 0.9rem;
   padding: 0 0.5rem;
+  margin-right: 0.5rem;
   background-color: $socialee-orange;
+  &:hover {
+      background-color: $s-button-hover;
+    }
 }
 
 .blog-time-published {
-  // text-transform: uppercase;
+  text-transform: uppercase;
   font-size: 1rem;
-  font-weight: 700;  
+  font-weight: 100;  
 }
 
-h2 {
-  font-size: 3rem;
+h2.entry-title {
+  font-weight: bold;
+  margin-bottom: 0;
+  a {
+    color: inherit;
+    font-size: inherit;
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 .entry-summary {
@@ -106,8 +129,12 @@ h2 {
   }
 }
 
+.infosbelowcontent {
+  margin-top: 5rem;
+}
+
 .blog-image {
-  margin: 1rem 0;
+  margin: 3rem 0;
 }
 
 .entry-image {
@@ -123,5 +150,33 @@ h2 {
   text-align: right;
   a {
     font-weight: 900;
+  }
+}
+
+.blog-tag {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-right: 0.65rem;
+  &:hover {
+      color: $s-button-hover;
+      text-decoration: none;
+    }
+}
+
+.breadcrumbs {
+  // padding: 0.5rem 3rem;
+  // background-color: rgba($topbar-background, 0.6);
+  @include breadcrumbs-container;
+  a {
+  font-size: 1.1rem;
+  }
+  li {
+  font-size: 1.1rem;
+  color: $primary-color;
+  }
+  li:not(:last-child)::after {
+    color: $primary-color;
   }
 }

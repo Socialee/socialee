@@ -2,7 +2,7 @@
 {% load zinnia %}
 
 <article id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %}" itemscope itemtype="http://schema.org/Article">
-  
+
   <div class="blog-info">
     {% block entry-categories %}
       {% with categories=object.categories.all %}
@@ -22,9 +22,25 @@
 
     {% block entry-title %}
       <h2 class="entry-title" itemprop="name">
-        {{ object.title|widont }}
+        <a href="{{ object.get_absolute_url }}">{{ object.title|widont }}</a>
       </h2>
     {% endblock entry-title %}
+
+        {% block entry-image %}
+        {% if object.image %}
+        <div class="entry-image">
+            <figure class="blog-image" itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+              <img src="{{ object.image.url }}" alt="{{ object.image_caption|default:object.title }}" itemprop="contentUrl" />
+              {% if object.image_caption %}
+              <figcaption itemprop="caption">{{ object.image_caption }}</figcaption>
+              {% endif %}
+            </figure>
+            {% if continue_reading %}
+          </a>
+          {% endif %}
+        </div>
+        {% endif %}
+        {% endblock entry-image %}
 
     {% block entry-body %}
       <div class="entry-body">
@@ -32,13 +48,6 @@
         <meta itemprop="wordCount" content="{{ object.word_count }}" />
         {% endblock entry-word-count %}
 
-        {% block entry-lead %}
-        {% if not continue_reading and object.lead %}
-        <div class="entry-summary" itemprop="headline">
-          {{ object.html_lead|safe }}
-        </div>
-        {% endif %}
-        {% endblock entry-lead %}
 
         {% block entry-content %}
         <div class="entry-content" itemprop="articleBody">
@@ -56,24 +65,6 @@
         {% endblock continue-reading %}
         </div>
         {% endblock entry-content %}
-
-
-
-        {% block entry-image %}
-        {% if object.image %}
-        <div class="entry-image">
-            <figure class="blog-image" itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-              <img src="{{ object.image.url }}" alt="{{ object.image_caption|default:object.title }}" itemprop="contentUrl" />
-              {% if object.image_caption %}
-              <figcaption itemprop="caption">{{ object.image_caption }}</figcaption>
-              {% endif %}
-            </figure>
-            {% if continue_reading %}
-          </a>
-          {% endif %}
-        </div>
-        {% endif %}
-        {% endblock entry-image %}
 
       </div>
     {% endblock entry-body %}

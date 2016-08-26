@@ -39,6 +39,7 @@
 //  34. Title Bar
 //  35. Tooltip
 //  36. Top Bar
+//  37. Socialeeeeeee Custom
 
 @import 'util/util';
 
@@ -578,3 +579,7 @@ $topbar-title-spacing: 1rem;
 $topbar-input-width: 200px;
 $topbar-unstack-breakpoint: medium;
 
+// 37. Socialeeeeeeee
+// -----------
+
+$s-button-hover: scale-color($socialee-orange, $lightness: -20%);
