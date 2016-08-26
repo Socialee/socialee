@@ -65,6 +65,7 @@ $foundation-palette: (
   alert: #ec5840,
 );
 $socialee-orange: #FF9E1A; 
+$socialee-hover: #CD931F;
 $socialee-gray: #eaeaea;
 $socialee-superlightgreen: #EDF5F3;
 $socialee-darkgreen: #264A42;
@@ -154,7 +155,7 @@ $code-background: $light-gray;
 $code-border: 1px solid $medium-gray;
 $code-padding: rem-calc(2 5 1);
 $anchor-color: $socialee-orange;
-$anchor-color-hover: $socialee-orange;
+$anchor-color-hover: $socialee-hover;
 $anchor-text-decoration: none;
 $anchor-text-decoration-hover: underline;
 $hr-width: $global-width;

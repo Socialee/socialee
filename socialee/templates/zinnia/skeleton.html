@@ -17,9 +17,11 @@
 	<div class="s-space show show-for-medium"></div>
 		<div class="row blog-layout">
 			<div class="small-11 large-9 columns">
-
-				{% zinnia_breadcrumbs "Blog" "zinnia/blog-breadcrumbs.html" %}	
-			
+				
+				<div class="hide-for-small-only">
+					{% zinnia_breadcrumbs "Blog" "zinnia/blog-breadcrumbs.html" %}	
+				</div>
+				
 				{% block blog-content %}
 				{# Content is being rendered here #}
 				{% endblock blog-content %}

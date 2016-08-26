@@ -38,6 +38,12 @@ $light-blue: #edf5f3;
     color: $primary-color;
   }
   #welcomeblog { margin:auto; }
+  @include breakpoint(small only) {
+    span {
+    font-size: 0.9rem;
+    }
+    
+  }
 }
 
 .blog-background {
@@ -63,7 +69,7 @@ $light-blue: #edf5f3;
     }
   
   @include breakpoint(small only) {
-    padding: 0.25rem;
+    padding: 0.85rem 0.85rem 1.5rem 0.85rem;
       img {
       max-height: 25vh;
       padding: 1.2rem 0 0 0;
@@ -96,17 +102,24 @@ $light-blue: #edf5f3;
   &:hover {
       background-color: $s-button-hover;
     }
+  @include breakpoint(small only) {
+    font-size: 0.7rem;
+    padding: 0 0.25rem;
+  }
 }
 
 .blog-time-published {
   text-transform: uppercase;
   font-size: 1rem;
-  font-weight: 100;  
+  font-weight: 100;
+    @include breakpoint(small only) {
+    font-size: 0.7rem;
+    }  
 }
 
 h2.entry-title {
   font-weight: bold;
-  margin-bottom: 0;
+  margin-bottom: 0rem;
   a {
     color: inherit;
     font-size: inherit;
@@ -123,36 +136,51 @@ h2.entry-title {
 }
 
 .entry-content {
-  p {
-  // display: inline;
-  // line-height: 2.2rem;
-  }
-}
+  @include breakpoint(small only) {
+  p, a {
+    font-size: 1.2rem;
+    }  
+}}
 
 .infosbelowcontent {
-  margin-top: 5rem;
+  margin-top: 4rem;
+  @include breakpoint(small only) {
+    margin-top: 1rem;
+  }
 }
 
 .blog-image {
   margin: 3rem 0;
-}
-
-.entry-image {
-
+  @include breakpoint(small only) {
+  margin: 0 0 2rem 0;    
+  }
 }
 
 .continue-reading {
   display: inline;
   text-align: right;
+  @include breakpoint(small only) {
+  a {
+    font-size: 1.2rem;
+  }
+  }
 }
 
 .write-author {
-  margin-top: 0rem;
+  margin-top: 0;
   text-align: right;
   font-size: 1.2rem;
   a {
     font-size: 1.2rem;
     font-weight: 900;
+  }
+  @include breakpoint(small only) {
+    margin-top: 2rem;
+    text-align: left;
+    a {
+    font-size: 1.2rem;
+    font-weight: 100;
+  }
   }
 }
 
