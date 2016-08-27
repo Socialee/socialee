@@ -72,9 +72,9 @@ class NewsletterForm(BaseSignupForm):
     class Meta:
          fields = ('email')
 
-    first_name = forms.CharField(label= _('Dein Name'), required=False, widget = forms.TextInput( 
+    first_name = forms.CharField(label= _('Vor & Nachname'), required=False, widget = forms.TextInput( 
             attrs={'placeholder': _('Name'), 'autofocus': 'autofocus'}))
-    message = forms.CharField(label= _('Deine Nachricht'), required=False, widget=forms.Textarea)
+    message = forms.CharField(label= _('Was würdest du tun, wenn Du wüsstest,</br> Du könntest nicht scheitern?'), required=False, widget=forms.Textarea(attrs={'cols': 80, 'rows': 5, 'style':'resize: none;'}))
     def __init__(self, *args, **kwargs):
         super(NewsletterForm, self).__init__(*args, **kwargs)
 
@@ -90,9 +90,10 @@ class NewsletterForm(BaseSignupForm):
             ), css_class="fieldWrapper"),
             Div(
             ButtonHolder(
-                Submit('submit', 'Save', css_class='s-button-form self')
+                Submit('submit', 'Ich will dabei sein', css_class='s-button-form self')
             ), css_class="row align-center")
         )
+        self.helper.field_template = 'field.html'
 
     def clean(self):
         super(NewsletterForm, self).clean()
