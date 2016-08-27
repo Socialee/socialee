@@ -6,6 +6,9 @@
 {% block before_content %}
   <div class="off-canvas-wrapper">
     <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+    
+    {% if request.user.is_superuser %}
+      
       <div class="off-canvas position-right" id="offCanvas" data-off-canvas data-position="right">
 
         <!-- Close button -->
@@ -28,6 +31,8 @@
         </ul>
 
       </div>
+
+      {% endif %}
 
       <div class="off-canvas-content" data-off-canvas-content>
 {% endblock before_content %}
