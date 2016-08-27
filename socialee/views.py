@@ -139,7 +139,7 @@ def email_confirmed_(email_address, **kwargs):
         m.lists.subscribe(id=MAILCHIMP_LIST_ID, email=email, merge_vars=merge_vars, double_optin=False)
     #This is the worst error handling ever
     except mailchimp.Error as e:
-        send_mail("Faild to sign up", 
+        send_mail("Faild to sign up -> mailchimp", 
             "%s via %s \n%s"%( 
             "name", 
             email,
