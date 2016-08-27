@@ -6,13 +6,14 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required, permission_required
 
 from socialee import views
+from . import allauth_urls
 
 if settings.DEBUG or settings.SIMPLE_AUTH:
     urlpatterns = [
         
         url(r'^$', views.Home.as_view(), name='home'),
         url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
-        url(r'^accounts/', include('allauth.urls')),
+        url(r'^accounts/', include(allauth_urls.allauth_patterns)),
         url(r'^admin/', include(admin.site.urls)),
         url(r'^summernote/', include('django_summernote.urls')),
         url(r'^question/', include('questions.urls')),
