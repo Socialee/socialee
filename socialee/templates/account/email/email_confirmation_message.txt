@@ -1,8 +1,8 @@
-{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Hello from {{ site_name }}!
+{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Hallo!
 
-You're receiving this e-mail because user {{ user_display }} at {{ site_domain }} has given yours as an e-mail address to connect their account.
+Du hast Dich bei Socialee auf in den Newsletter eingetragen. Vielen Dank!
 
-To confirm this is correct, go to {{ activate_url }}
+Bestätige jetzt noch Deine Email-Adresse und Du bekommst bald was zu Lesen von uns. 
+Klicke hier: {{ activate_url }}
 {% endblocktrans %}{% endautoescape %}
-{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Thank you from {{ site_name }}!
-{{ site_domain }}{% endblocktrans %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Schöne Grüße von Socialee!{% endblocktrans %}

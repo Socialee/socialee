@@ -130,15 +130,15 @@ h2.entry-title {
 }
 
 .entry-summary {
-  p {
-    font-size: 1.1rem;
+  p, a {
+    font-size: 1.25rem;
   }
 }
 
 .entry-content {
   @include breakpoint(small only) {
   p, a {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     }  
 }}
 
