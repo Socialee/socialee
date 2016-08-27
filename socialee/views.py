@@ -67,10 +67,19 @@ class NewsletterSignup(SignupView):
         # unique username 
         # do this in  is_valid function?
         if form.is_valid():
-            messages.success(request, 'Danke für Deine Nachricht! Wir melden uns ganz bald.')
+            ret = super(NewsletterSignup, self).post(request, *args, **kwargs)
             raw_email = form.cleaned_data.get("email")
             message = form.cleaned_data.get("message")
             name = form.cleaned_data.get("first_name")
+            names = name.split(" ")
+            msg = 'Danke'
+            if message:
+                msg += ' für Deine Nachricht'
+            if name:
+                msg += ', '+names[0].capitalize()
+            msg +='! Wir halten Dich auf dem laufenden.'
+
+            messages.success(request, msg)
 
             from_email = settings.EMAIL_HOST_USER
             to_email = [from_email, 'hello@socialee.de']
@@ -90,7 +99,7 @@ class NewsletterSignup(SignupView):
                     from_email, 
                     to_email,
                     fail_silently=True)
-            return super(NewsletterSignup, self).post(request, *args, **kwargs)
+            return ret
 
         else:
             return self.form_invalid(form)
