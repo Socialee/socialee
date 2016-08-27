@@ -4,7 +4,7 @@ from allauth.account import *
 
 allauth_patterns = [
     # url(r"^signup/$", views.signup, name="account_signup"),
-    # url(r"^login/$", views.login, name="account_login"),
+    url(r"^login/$", views.login, name="account_login"),
     # url(r"^logout/$", views.logout, name="account_logout"),
 
     # url(r"^password/change/$", views.password_change,
