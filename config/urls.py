@@ -13,7 +13,7 @@ if settings.DEBUG or settings.SIMPLE_AUTH:
         
         url(r'^$', views.Home.as_view(), name='home'),
         url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
-        url(r'^accounts/', include(allauth_urls.allauth_patterns)),
+        url(r'^accounts/', include('allauth.urls')),
         url(r'^admin/', include(admin.site.urls)),
         url(r'^summernote/', include('django_summernote.urls')),
         url(r'^question/', include('questions.urls')),
@@ -43,7 +43,7 @@ if not settings.DEBUG and not settings.SIMPLE_AUTH:
         
         url(r'^$', views.Home.as_view(), name='home'),
         url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
-        url(r'^accounts/', include('allauth.urls')),
+        url(r'^accounts/', include(allauth_urls.allauth_patterns)),
         url(r'^admin/', include(admin.site.urls)),
         # url(r'^summernote/', include('django_summernote.urls')),
         # url(r'^question/', include('questions.urls')),
