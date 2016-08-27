@@ -6,9 +6,9 @@ $(document).ready(function(){
   var hours = now.getHours();
   var msg;
   if ( hours > 5 && hours < 11 ) msg = "Einen schönen guten Morgen beim Socialee Blog.";
-  else if (hours < 14) msg = "Einen schönen guten Mittag beim Socialee Blog.";
-  else if (hours < 18) msg = "Einen schönen guten Tag beim Socialee Blog.";
-  else if (hours < 23) msg = "Einen schönen guten Abend beim Socialee Blog.";
+  else if ( hours > 5 && hours < 14) msg = "Einen schönen guten Mittag beim Socialee Blog.";
+  else if ( hours > 5 && hours < 18) msg = "Einen schönen guten Tag beim Socialee Blog.";
+  else if ( hours > 5 && hours < 23) msg = "Einen schönen guten Abend beim Socialee Blog.";
   else msg = "Es ist schon spät, noch einen Artikel und ab ins Bett!";
 
   $("#daytime").html(msg);   
