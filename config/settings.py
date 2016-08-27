@@ -230,9 +230,10 @@ SOCIALACCOUNT_PROVIDERS = \
         }
     }
 ACCOUNT_FORMS = {
-    'login': 'socialee.forms.SocialeeLoginForm',
-    'signup': 'socialee.forms.NewsletterForm'
+    'login': 'socialee.forms.SocialeeLoginForm'
 }
+
+SOCIALACCOUNT_ENABLED = False
 
 LOGIN_REDIRECT_URL = '/'
 SOCIALACCOUNT_QUERY_EMAIL = True
