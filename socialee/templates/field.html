@@ -11,12 +11,12 @@
             {% endif %}
 
             <label for="{{ field.id_for_label }}" {% if field.field.required %}class="required"{% endif %}>
-                {{ field.label|safe }}<span class="requirements">
+                {{ field.label|safe }}<small class="requirements">
                 {% if field.field.required %}
                     Das brauchen wir
                 {% else %}
                     Wenn Du Lust hast
-                {% endif %}</span>
+                {% endif %}</small>
             </label>
         {% endif %}
 

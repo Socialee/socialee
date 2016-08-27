@@ -73,7 +73,7 @@ class NewsletterForm(BaseSignupForm):
          fields = ('email')
 
     first_name = forms.CharField(label= _('Vor & Nachname'), required=False, widget = forms.TextInput( 
-            attrs={'placeholder': _('Name'), 'autofocus': 'autofocus'}))
+            attrs={ 'autofocus': 'autofocus'}))
     message = forms.CharField(label= _('Was würdest du tun, wenn Du wüsstest,</br> Du könntest nicht scheitern?'), required=False, widget=forms.Textarea(attrs={'cols': 80, 'rows': 5, 'style':'resize: none;'}))
     def __init__(self, *args, **kwargs):
         super(NewsletterForm, self).__init__(*args, **kwargs)

@@ -39,6 +39,7 @@
     @include callout-base;
     background-color: white;
     padding: 3rem;
+    padding-top: 8px;
     width: 100%;
     p {
       color: $socialee-darkgreen;
@@ -344,10 +345,28 @@
   right: 1.8rem;
 }
 
-.requirements {
-  float:right;
-  margin-top: 1rem;
-  line-height: 70%;
-  font-size: 70%;
-  font-weight: normal;
+.fieldWrapper
+{
+  padding-top: 0px;
+  .requirements 
+  {
+    float:right;
+    font-size: 70%;
+    font-weight: normal;
+  }
+  label
+  {
+    line-height: 100%;
+    margin-bottom: 8px;
+    margin-top: 32px;
+  }
+  .error
+  {
+    margin-top: 0;
+  }
+
+  input 
+  {
+    margin:0;
+  }
 }
