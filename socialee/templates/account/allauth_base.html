@@ -1,11 +1,19 @@
 {% extends "offcanvas.html" %}
 
+{% load static %}
+
 {% block content %}
+
+<section class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, medium], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, large]">
+
 <div class="row align-center align-middle">
 <div class="full-height"></div>
-    <div class="large-8 columns">
+    <div class="large-8 columns socialee-callout">
 		{% block allauth_content %}
 		{% endblock allauth_content %}
     </div>
 </div>
+
+</section>
+
 {% endblock content %}

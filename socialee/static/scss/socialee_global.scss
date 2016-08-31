@@ -51,6 +51,12 @@
     }
   }
 
+  .callout-form {
+    @include callout-base;
+    background-color: white;
+    padding: 0.8rem 3rem 3rem 3rem;
+  }
+
   .scroll-down {
     background-color: red;
     width: 100px;
