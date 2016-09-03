@@ -21,11 +21,6 @@ APPS_DIR = ROOT_DIR.path('socialee')
 
 assert os.path.exists(str(ROOT_DIR.path("Makefile"))), "ROOT_DIR is (not?) set properly."
 
-CMS_TEMPLATES = (
-    ('home.html', 'Home / Landingpage'),
-    ('project_template.html', 'Project Template'),
-)
-
 env = environ.Env()
 
 SITE_ID = 1
@@ -48,7 +43,7 @@ ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
 
 INSTALLED_APPS = (
     # DJANGO APPS
-    'djangocms_admin_style',  # for the admin skin. Before 'django.contrib.admin'.
+    'djangocms_admin_style',  # css for admin skin. Before 'django.contrib.admin'.
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,41 +52,22 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
-    # Base django-cms requirements.
-    'cms',  # django CMS itself
-    'treebeard',  # utilities for implementing a tree
-    'menus',  # helper for model independent hierarchical website navigation
-    'sekizai',  # for JavaScript and CSS management
-
     # Zinnia requirements.
     'mptt',  # utilities for implementing a tree
     'tagging',
     'django_comments',
     'ckeditor',
 
-    # 'reversion', # version-conflicts with cms (http://docs.django-cms.org/en/latest/how_to/install.html)
-    'djangocms_file',
-    'djangocms_flash',
-    #'djangocms_googlemap',
-    'djangocms_inherit',
-    'djangocms_picture',
-    'djangocms_teaser',
-    'djangocms_video',
-    'djangocms_link',
-    'djangocms_text_ckeditor',
-    'djangocms_snippet',
-
+    # THIRD PARTY APPS
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    #'allauth.socialaccount.providers.facebook',
-
-    # THIRD PARTY APPS
-    'betterforms', # works only in Version 1.1.2
+    # 'allauth.socialaccount.providers.facebook', # not in use right now
     'crispy_forms',
     'crispy_forms_foundation',
     'django_summernote',
     'simple_auth',
+    'sekizai',  # for JavaScript and CSS management
     'taggit',
     'zinnia',
     'zinnia_ckeditor',
@@ -107,12 +83,8 @@ if DEBUG:
         'django_extensions',
     )
 
-DEBUG_TOOLBAR_CONFIG = {
-    'JQUERY_URL': '',  # use always included jQuery.
-}
-
 MIDDLEWARE_CLASSES = [
-    # 'cms.middleware.utils.ApphookReloadMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -122,15 +94,12 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    'cms.middleware.user.CurrentUserMiddleware',
-    'cms.middleware.page.CurrentPageMiddleware',
-    'cms.middleware.toolbar.ToolbarMiddleware',
-    'cms.middleware.language.LanguageCookieMiddleware',
     'django.contrib.admindocs.middleware.XViewMiddleware',
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Password Protection for Staging Server
-# SIMPLE_AUTH = False
 if SIMPLE_AUTH==True: # set in socialee-stage.herokuapp.com
     MIDDLEWARE_CLASSES += [
     'simple_auth.middleware.SimpleAuthMiddleware',
@@ -168,7 +137,6 @@ TEMPLATES = [
                 'django.core.context_processors.static',
                 'django.core.context_processors.request',
                 'sekizai.context_processors.sekizai',
-                'cms.context_processors.cms_settings',
                 'zinnia.context_processors.version',  # Optional
             ],
             'debug': env.bool('DJANGO_TEMPLATE_DEBUG', DEBUG),

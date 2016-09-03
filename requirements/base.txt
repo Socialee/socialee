@@ -1,63 +1,35 @@
 beautifulsoup4==4.5.1     # via django-blog-zinnia
-cmsplugin-filer==1.1.2
 crispy-forms-foundation==0.5.4
 defusedxml==0.4.1         # via python3-openid
 django-allauth==0.27.0
 django-app-namespace-template-loader==0.4.1
-django-appconf==1.0.2     # via cmsplugin-filer
-django-betterforms==1.1.2
 django-blog-zinnia==0.17
 django-ckeditor==5.1.0    # via zinnia-wysiwyg-ckeditor
-django-classy-tags==0.7.2  # via django-cms, django-sekizai
-django-cms==3.3.2
 django-contrib-comments==1.7.2  # via django-blog-zinnia
 django-crispy-forms==1.6.0
 django-debug-toolbar==1.5
 django-environ==0.4.0
-django-filer==1.2.4
-django-formtools==1.0     # via django-cms
-django-mptt==0.8.6        # via django-blog-zinnia, django-filer
-django-polymorphic==0.8.1  # via django-filer
-django-reversion==2.0.6
-django-sekizai==0.9.0     # via cmsplugin-filer, django-cms
-django-select2==4.3.2     # via djangocms-link
+django-mptt==0.8.6        # via django-blog-zinnia
 django-simple-auth==0.1.5
 django-summernote==0.8.5
 django-tagging==0.4.3     # via django-blog-zinnia
-django-taggit==0.21.0
-django-treebeard==4.0.1
+django-taggit==0.21.2
 django-xmlrpc==0.1.5      # via django-blog-zinnia
-Django==1.9.9             # via cmsplugin-filer, django-allauth, django-betterforms, django-ckeditor, django-classy-tags, django-cms, django-contrib-comments, django-debug-toolbar, django-environ, django-filer, django-formtools, django-reversion, django-summernote, django-treebeard, djangocms-attributes-field, djangocms-picture, easy-thumbnails
-djangocms-admin-style==1.2.3  # via django-cms
-djangocms-attributes-field==0.1.1  # via cmsplugin-filer, djangocms-link
-djangocms-file==1.0
-djangocms-flash==0.3.0
-djangocms-inherit==0.2.1
-djangocms-link==1.8.2
-djangocms-picture==1.0.0
-djangocms-snippet==1.8.2
-djangocms-teaser==0.2.0
-djangocms-text-ckeditor==3.1.0
-djangocms-video==1.0.0
+Django==1.9.9             # via django-allauth, django-ckeditor, django-contrib-comments, django-debug-toolbar, django-environ, django-summernote
+djangocms-admin-style==1.2.3
 docopt==0.4.0             # via mailchimp
-easy-thumbnails==2.3      # via cmsplugin-filer, django-filer
-html5lib==0.9999999       # via djangocms-text-ckeditor
 mailchimp==2.0.9
 mots-vides==2015.5.11     # via django-blog-zinnia
-oauthlib==1.1.2           # via requests-oauthlib
-Pillow==3.3.1             # via django-blog-zinnia, djangocms-text-ckeditor, easy-thumbnails
+oauthlib==2.0.0           # via requests-oauthlib
+Pillow==3.3.1             # via django-blog-zinnia
 psycopg2==2.6.2
 pyparsing==2.1.8          # via django-blog-zinnia
 python3-openid==3.0.10    # via django-allauth
 pytz==2016.6.1
-regex==2016.7.21          # via django-blog-zinnia
+regex==2016.8.27          # via django-blog-zinnia
 requests-oauthlib==0.6.2  # via django-allauth
 requests==2.11.1          # via django-allauth, mailchimp, requests-oauthlib
-six==1.10.0               # via django-app-namespace-template-loader, django-betterforms, django-environ, djangocms-snippet, html5lib
+six==1.10.0               # via django-app-namespace-template-loader, django-environ
 sqlparse==0.2.1           # via django-debug-toolbar
-Unidecode==0.4.19         # via django-filer
+whitenoise==3.2.1
 zinnia-wysiwyg-ckeditor==1.3
-
-# The following packages are commented out because they are
-# considered to be unsafe in a requirements file:
-# setuptools                # via django-polymorphic
