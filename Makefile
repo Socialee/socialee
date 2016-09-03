@@ -231,19 +231,19 @@ deploy_staging:
 	git push staging staging:master
 
 # Gets run via bin/post_compile for Heroku.
-HEROKU_ZETTELS_MEDIA:=$(CURDIR)/.heroku/media-zettels
+# NOT IN USE ANYMORE: HEROKU_ZETTELS_MEDIA:=$(CURDIR)/.heroku/media-zettels
 heroku_post_compile: check static test_heroku migrate_deploy
 
-# Fetch zettels media from separate repo (via https mirror (manually synced)).
-heroku_fetch_zettels:
-	mkdir -p $(HEROKU_ZETTELS_MEDIA) \
-		&& cd $(HEROKU_ZETTELS_MEDIA) \
-		&& wget -A '*.jpg' -r -nc -np --no-check-certificate \
-			https://codeprobe.de/spool/i/socialee-zettels-kae6cesh7laeFah/ \
-		&& mkdir -p $$BUILD_DIR/media \
-		&& cd $$BUILD_DIR/media \
-		&& ! test -e zettels \
-		&& ln -s $(HEROKU_ZETTELS_MEDIA)/codeprobe.de/spool/i/socialee-zettels-kae6cesh7laeFah zettels
+# NOT IN USE ANYMORE:  Fetch zettels media from separate repo (via https mirror (manually synced)).
+# heroku_fetch_zettels:
+# 	mkdir -p $(HEROKU_ZETTELS_MEDIA) \
+# 		&& cd $(HEROKU_ZETTELS_MEDIA) \
+# 		&& wget -A '*.jpg' -r -nc -np --no-check-certificate \
+# 			https://codeprobe.de/spool/i/socialee-zettels-kae6cesh7laeFah/ \
+# 		&& mkdir -p $$BUILD_DIR/media \
+# 		&& cd $$BUILD_DIR/media \
+# 		&& ! test -e zettels \
+# 		&& ln -s $(HEROKU_ZETTELS_MEDIA)/codeprobe.de/spool/i/socialee-zettels-kae6cesh7laeFah zettels
 
 # Requirements files. {{{
 # Define different requirements files.
