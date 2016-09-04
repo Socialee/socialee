@@ -32,6 +32,9 @@ if settings.DEBUG or settings.SIMPLE_AUTH:
         url(r'^(?P<slug>[\w.@+-]+)/$', login_required(views.ProfileView.as_view()), name='profile_view'),
         url(r'^(?P<slug>[\w.@+-]+)/socialeebhaber/$', login_required(views.Socialeebhaber.as_view()), name='socialeebhaber'),
 
+        # At the end, for django-cms.
+        # Ref: https://django-cms.readthedocs.org/en/latest/how_to/install.html#url-configuration
+        url(r'^', include('cms.urls')),
     ]
 
 if not settings.DEBUG and not settings.SIMPLE_AUTH:
@@ -57,6 +60,10 @@ if not settings.DEBUG and not settings.SIMPLE_AUTH:
         # url(r'^(?P<slug>[\w.@+-]+)/profile/detail/$', login_required(views.ProfileDetailView.as_view()), name='profile_detail'),
         # url(r'^(?P<slug>[\w.@+-]+)/$', login_required(views.ProfileView.as_view()), name='profile_view'),
         # url(r'^(?P<slug>[\w.@+-]+)/socialeebhaber/$', login_required(views.Socialeebhaber.as_view()), name='socialeebhaber'),
+
+        # At the end, for django-cms.
+        # Ref: https://django-cms.readthedocs.org/en/latest/how_to/install.html#url-configuration
+        url(r'^', include('cms.urls')),
     ]
 
 if settings.DEBUG:

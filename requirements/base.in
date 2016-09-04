@@ -1,5 +1,5 @@
 # Base requirements.
-Django == 1.9.9
+Django
 Pillow
 
 pytz
@@ -7,11 +7,30 @@ django-environ
 
 django-app-namespace-template-loader  # (namespaced) inheritence for "extends" in templates.
 
+# Django CMS.
+django-cms
+django-filer
+cmsplugin-filer
+django-reversion
+django-treebeard
+djangocms_file
+djangocms_flash
+# djangocms_googlemap
+djangocms_inherit
+djangocms_picture
+djangocms_teaser
+djangocms_video
+djangocms_link
+
+# Moved from dev.
+djangocms_snippet
+djangocms_text_ckeditor
 django-allauth
 django-blog-zinnia
 
 django-crispy-forms
 crispy-forms-foundation
+django-betterforms==1.1.2
 
 django-simple-auth
 
@@ -25,7 +44,3 @@ django-debug-toolbar
 mailchimp
 
 zinnia-wysiwyg-ckeditor
-
-whitenoise
-
-djangocms_admin_style    # for a niceer admin styles
