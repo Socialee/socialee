@@ -84,7 +84,7 @@ if DEBUG:
     )
 
 MIDDLEWARE_CLASSES = [
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -97,7 +97,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.admindocs.middleware.XViewMiddleware',
 ]
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Password Protection for Staging Server
 if SIMPLE_AUTH==True: # set in socialee-stage.herokuapp.com
