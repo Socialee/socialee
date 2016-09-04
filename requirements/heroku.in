@@ -7,5 +7,4 @@
 
 gunicorn
 dj-static
-django-storages
-boto
+django_s3_storage

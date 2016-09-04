@@ -74,7 +74,7 @@ INSTALLED_APPS = (
     'taggit',
     'zinnia',
     'zinnia_ckeditor',
-    'storages',
+    'django_s3_storage',
 
     # SOCIALEE CUSTOM APPS
     'questions.apps.QuestionsConfig',
@@ -102,21 +102,27 @@ MIDDLEWARE_CLASSES = [
 ]
 
 if not DEBUG:
-    DEFAULT_FILE_STORAGE = 'socialee.s3utils.MediaS3BotoStorage' 
-    STATICFILES_STORAGE = 'socialee.s3utils.StaticS3BotoStorage'
+    DEFAULT_FILE_STORAGE = 'django_s3_storage.storage.S3Storage' 
+    STATICFILES_STORAGE = 'django_s3_storage.storage.StaticS3Storage'
+
+    AWS_REGION = "eu-central-1"
 
     AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
     AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
     if PROD: # set in socialee-stage.herokuapp.com
-        AWS_STORAGE_BUCKET_NAME = 'socialee'
+        AWS_S3_BUCKET_NAME  = "socialee-media"
+        AWS_S3_BUCKET_NAME_STATIC = "socialee-static"
     else:
-        AWS_STORAGE_BUCKET_NAME = 'socialee-stage'
+        AWS_S3_BUCKET_NAME = "socialee-stage-media"
+        AWS_S3_BUCKET_NAME_STATIC = "socialee-stage-static"
 
-    S3_URL = 'http://%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+    S3_URL = 'http://%s.s3.amazonaws.com' % AWS_S3_BUCKET_NAME
     STATIC_DIRECTORY = '/static/'
     MEDIA_DIRECTORY = '/media/'
     STATIC_URL = S3_URL + STATIC_DIRECTORY
     MEDIA_URL = S3_URL + MEDIA_DIRECTORY
+    AWS_S3_BUCKET_AUTH = False
+
 else:
     STATIC_URL = '/static/'
     MEDIA_URL = '/media/'

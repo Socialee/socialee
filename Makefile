@@ -146,6 +146,7 @@ run_heroku:
 
 # Main target for development.
 # TODO: start tmux with watch process.
+dev: DJANGO_DEBUG?=1
 dev: install_dev_requirements migrate static run
 
 install_dev_requirements:
