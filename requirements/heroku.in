@@ -6,4 +6,4 @@
 # Includes: Django, psycopg2, gunicorn, dj-database-url, dj-static, static
 
 gunicorn
-# dj-static
+dj-static
