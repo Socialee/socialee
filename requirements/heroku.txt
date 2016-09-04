@@ -1,8 +1,5 @@
 -r testing.txt
 -r production.txt
-boto==2.42.0              # via django-s3-storage
 dj-static==0.0.6
-django-s3-storage==0.9.10
-django==1.10.1            # via django-s3-storage
 gunicorn==19.6.0
 static3==0.7.0            # via dj-static

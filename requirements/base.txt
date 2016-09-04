@@ -1,4 +1,5 @@
 beautifulsoup4==4.5.1     # via django-blog-zinnia
+boto==2.42.0              # via django-s3-storage
 crispy-forms-foundation==0.5.4
 defusedxml==0.4.1         # via python3-openid
 django-allauth==0.27.0
@@ -10,12 +11,13 @@ django-crispy-forms==1.6.0
 django-debug-toolbar==1.5
 django-environ==0.4.0
 django-mptt==0.8.6        # via django-blog-zinnia
+django-s3-storage==0.9.10
 django-simple-auth==0.1.5
 django-summernote==0.8.5
 django-tagging==0.4.3     # via django-blog-zinnia
 django-taggit==0.21.2
 django-xmlrpc==0.1.5      # via django-blog-zinnia
-Django==1.9.9             # via django-allauth, django-ckeditor, django-contrib-comments, django-debug-toolbar, django-environ, django-summernote
+Django==1.9.9             # via django-allauth, django-ckeditor, django-contrib-comments, django-debug-toolbar, django-environ, django-s3-storage, django-summernote
 docopt==0.4.0             # via mailchimp
 mailchimp==2.0.9
 mots-vides==2015.5.11     # via django-blog-zinnia

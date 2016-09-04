@@ -25,3 +25,4 @@ django-debug-toolbar
 mailchimp
 
 zinnia-wysiwyg-ckeditor
+django_s3_storage
