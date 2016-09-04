@@ -25,6 +25,9 @@ env = environ.Env()
 
 SITE_ID = 1
 
+# set to True in production
+PROD = False
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
@@ -104,7 +107,10 @@ if not DEBUG:
 
     AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
     AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-    AWS_STORAGE_BUCKET_NAME = 'socialee'
+    if PROD: # set in socialee-stage.herokuapp.com
+        AWS_STORAGE_BUCKET_NAME = 'socialee'
+    else:
+        AWS_STORAGE_BUCKET_NAME = 'socialee-stage'
 
     S3_URL = 'http://%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
     STATIC_DIRECTORY = '/static/'
