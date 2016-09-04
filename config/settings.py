@@ -71,6 +71,7 @@ INSTALLED_APPS = (
     'taggit',
     'zinnia',
     'zinnia_ckeditor',
+    'storages',
 
     # SOCIALEE CUSTOM APPS
     'questions.apps.QuestionsConfig',
@@ -84,7 +85,7 @@ if DEBUG:
     )
 
 MIDDLEWARE_CLASSES = [
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -97,7 +98,19 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.admindocs.middleware.XViewMiddleware',
 ]
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+if not DEBUG:
+
+    AWS_QUERYSTRING_AUTH = False
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+    AWS_STORAGE_BUCKET_NAME = os.environ['S3_BUCKET_NAME']
+    DEFAULT_FILE_STORAGE = "storages.backends.s3boto.S3BotoStorage"
+    MEDIA_URL = 'http://%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
+    STATIC_URL = 'http://%s.s3.amazonaws.com/static/' % AWS_STORAGE_BUCKET_NAME
+else:
+    STATIC_URL = '/static/'
+    MEDIA_URL = '/media/'
+
 
 # Password Protection for Staging Server
 if SIMPLE_AUTH==True: # set in socialee-stage.herokuapp.com
@@ -216,9 +229,6 @@ ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
-
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
 
 MEDIA_ROOT = str(ROOT_DIR('media'))
 STATIC_ROOT = str(ROOT_DIR('build', 'static'))
