@@ -116,8 +116,8 @@ if not DEBUG:
         AWS_S3_BUCKET_NAME = "socialee-stage-media"
         AWS_S3_BUCKET_NAME_STATIC = "socialee-stage-static"
 
-    STATIC_URL = 'http://%s.s3.amazonaws.com' % AWS_S3_BUCKET_NAME_STATIC
-    MEDIA_URL = 'http://%s.s3.amazonaws.com' % AWS_S3_BUCKET_NAME
+    STATIC_URL = 'http://%s.s3.amazonaws.com/' % AWS_S3_BUCKET_NAME_STATIC
+    MEDIA_URL = 'http://%s.s3.amazonaws.com/' % AWS_S3_BUCKET_NAME
     AWS_S3_BUCKET_AUTH = False
 
 else:
