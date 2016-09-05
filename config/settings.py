@@ -35,7 +35,7 @@ PROD = False
 SECRET_KEY = env.str('DJANGO_SECRET_KEY',
                      'gx)-+#9(hotw=qt@swr170k3!l*!=a%6&+)siw4$0q35egtj(1')
 
-DEBUG = env.bool('DJANGO_DEBUG', False)
+DEBUG = env.bool('DJANGO_DEBUG', True)
 SIMPLE_AUTH = env.bool('SIMPLE_AUTH', False)
 INTERNAL_IPS = ('127.0.0.1',)
 
@@ -101,6 +101,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.admindocs.middleware.XViewMiddleware',
 ]
 
+# AWS S3 Settings
 if not DEBUG:
     DEFAULT_FILE_STORAGE = 'django_s3_storage.storage.S3Storage' 
     STATICFILES_STORAGE = 'django_s3_storage.storage.StaticS3Storage'
