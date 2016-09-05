@@ -35,7 +35,7 @@ PROD = False
 SECRET_KEY = env.str('DJANGO_SECRET_KEY',
                      'gx)-+#9(hotw=qt@swr170k3!l*!=a%6&+)siw4$0q35egtj(1')
 
-DEBUG = env.bool('DJANGO_DEBUG', True)
+DEBUG = env.bool('DJANGO_DEBUG', False)
 SIMPLE_AUTH = env.bool('SIMPLE_AUTH', False)
 INTERNAL_IPS = ('127.0.0.1',)
 
