@@ -129,24 +129,26 @@ scss_force:
 watch: scss
 	bin/devserver livereload_only
 
-run: DJANGO_DEBUG?=1
+run: DJANGO_DEBUG=1
 run:
 	DJANGO_DEBUG=$(DJANGO_DEBUG) python manage.py runserver $(RUNSERVER_ARGS)
 
 run_public: RUNSERVER_ARGS=0.0.0.0:8001
 run_public: DJANGO_DEBUG=0
-run_public: run
+run_public: 
+	DJANGO_DEBUG=$(DJANGO_DEBUG) python manage.py runserver $(RUNSERVER_ARGS)
 
 run_public_debug: RUNSERVER_ARGS=0.0.0.0:8001
 run_public_debug: DJANGO_DEBUG=1
-run_public_debug: run
+run_public_debug:
+	DJANGO_DEBUG=$(DJANGO_DEBUG) python manage.py runserver $(RUNSERVER_ARGS)
 
 run_heroku:
 	gunicorn config.wsgi:application_with_static
 
 # Main target for development.
 # TODO: start tmux with watch process.
-dev: DJANGO_DEBUG?=1
+dev: DJANGO_DEBUG=1
 dev: install_dev_requirements migrate static run
 
 install_dev_requirements:
