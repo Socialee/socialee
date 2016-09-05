@@ -3,6 +3,10 @@
 
 @import "settings";
 @import "foundation-sites/scss/foundation";
+
+// testing partials folder, works just fine :-) 
+@import "partials/test";
+
 @include foundation-everything(true);
 
 

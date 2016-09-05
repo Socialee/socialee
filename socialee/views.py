@@ -192,7 +192,7 @@ class ProjectOverview(BaseView, ListView):
 
 # CRUD RETRIEVE PARTICULAR PROJECT
 class ProjectDetailView(BaseView, DetailView):
-    template_name = 'project_template.html'
+    template_name = 'project_view.html'
     model = Project
 
     def get_context_data(self, **kwargs):
@@ -313,7 +313,7 @@ class ProfileDetailView(BaseView, DetailView):
 
 
 class ProfileView(BaseView, DetailView):
-    template_name = 'user_profile_view.html'
+    template_name = 'profile_view.html'
     model = Profile
 
     def get_context_data(self, **kwargs):

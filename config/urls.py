@@ -27,10 +27,10 @@ if settings.DEBUG or settings.SIMPLE_AUTH:
         url(r'^project_overview/$', views.ProjectOverview.as_view(), name='project_overview'),
         url(r'^project/(?P<slug>[-\w]+)/$', login_required(views.ProjectDetailView.as_view()), name='project_detailview'),
         url(r'^project/(?P<slug>[-\w]+)/edit/$', login_required(views.ProjectUpdateView.as_view()), name='project_updateview'),
-        url(r'^(?P<slug>[\w.@+-]+)/profile/update/$', login_required(views.ProfileUpdateView.as_view()), name='update_profile'),
-        url(r'^(?P<slug>[\w.@+-]+)/profile/detail/$', login_required(views.ProfileDetailView.as_view()), name='profile_detail'),
-        url(r'^(?P<slug>[\w.@+-]+)/$', login_required(views.ProfileView.as_view()), name='profile_view'),
-        url(r'^(?P<slug>[\w.@+-]+)/socialeebhaber/$', login_required(views.Socialeebhaber.as_view()), name='socialeebhaber'),
+        url(r'^profile/(?P<slug>[\w.@+-]+)/profile/update/$', login_required(views.ProfileUpdateView.as_view()), name='update_profile'),
+        url(r'^profile/(?P<slug>[\w.@+-]+)/profile/detail/$', login_required(views.ProfileDetailView.as_view()), name='profile_detail'),
+        url(r'^profile/(?P<slug>[\w.@+-]+)/$', login_required(views.ProfileView.as_view()), name='profile_view'),
+        url(r'^profile/(?P<slug>[\w.@+-]+)/socialeebhaber/$', login_required(views.Socialeebhaber.as_view()), name='socialeebhaber'),
 
     ]
 

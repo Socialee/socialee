@@ -144,7 +144,11 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [str(APPS_DIR('templates'))],
+        'DIRS': [
+                str(APPS_DIR('templates/')), 
+                str(APPS_DIR('templates/project/')),
+                str(APPS_DIR('templates/profile/')),
+                ],
         'OPTIONS': {
             # NOTE: app_namespace.Loader can not work properly if you use it in conjunction with django.template.loaders.cached.Loader and inheritance based on empty namespaces.
             #       (README at https://github.com/Fantomas42/django-app-namespace-template-loader)
