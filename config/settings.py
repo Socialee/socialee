@@ -278,30 +278,32 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3', 'foundat
 CRISPY_TEMPLATE_PACK = 'foundation-5'
 
 # Zinnia Blog Settings
-ZINNIA_ENTRY_CONTENT_TEMPLATES = [
-            ('zinnia/_entry_detail_alternate.html', gettext('Alternative template')),
-            ]
-ZINNIA_ENTRY_DETAIL_TEMPLATES = [
-            ('entry_detail_alternate.html', gettext('Alternative template')),
-            ]
+# ZINNIA_ENTRY_CONTENT_TEMPLATES = [
+#             ('zinnia/_video_entry.html', gettext('Artikel mit Video')),
+#             ]
+# ZINNIA_ENTRY_DETAIL_TEMPLATES = [
+#             ('entry_detail_alternate.html', gettext('Artikel mit Video')),
+#             ]
 
 CKEDITOR_CONFIGS = {
+
     'default': {
         'toolbar': 'Full',
     },
+
     'zinnia-content': {
         'toolbar_Zinnia': [
             ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord'],
             ['Undo', 'Redo'],
             ['Scayt'],
             ['Link', 'Unlink', 'Anchor'],
-            ['Image', 'Table', 'HorizontalRule', 'SpecialChar'],
+            ['Image', 'Table', 'HorizontalRule', 'SpecialChar', 'Smiley', 'Iframe'],
             ['Source'],
             ['Maximize'],
             '/',
             ['Bold', 'Italic', 'Underline', 'Strike',
              'Subscript', 'Superscript', '-', 'RemoveFormat'],
-            ['NumberedList', 'BulletedList', '-',
+            ['CreateDiv','NumberedList', 'BulletedList', '-',
              'Outdent', 'Indent', '-', 'Blockquote'],
             ['Styles', 'Format'],
         ],
