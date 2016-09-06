@@ -4,8 +4,6 @@
 {% block content %}
 
   <section id="welcome" class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, medium], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, large]">
-      
-      {% include "lp-navbar.html" %}
 
       <div class="row lp-header">
         <img src="{% static 'img/symbole/noun_217781_cc.svg' %}">
@@ -17,7 +15,6 @@
           <p>Wir glauben, dass alle guten Ideen wahr werden sollten. Darum bauen wir eine Internetseite, die hilft, die richtigen Menschen zu finden und gemeinsam etwas zu bewegen.<br><br>Bald geht's los, lies mehr dazu in unserem <a href="{% url 'zinnia:entry_archive_index' %}">Blog.</a></p>
         </div>
       </div>
-
 
       <div class="row lp-header">
         <div class="large-12 columns text-center">

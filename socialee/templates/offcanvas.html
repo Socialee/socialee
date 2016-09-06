@@ -5,44 +5,33 @@
 
 {% block before_content %}
   <div class="off-canvas-wrapper">
-    <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
-    
-    {% if request.user.is_superuser %}
-      
-      <div class="off-canvas position-right" id="offCanvas" data-off-canvas data-position="right">
+  <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
 
+    {% if request.user.is_authenticated and request.user.is_staff %}
+
+      <div class="off-canvas position-right" id="offCanvas" data-off-canvas data-position="right">
         <!-- Close button -->
         <button class="close-button" aria-label="Close menu" type="button" data-close>
           <span aria-hidden="true">&times;</span>
         </button>
-
         <!-- Menu -->
         <ul class="vertical menu">
-            <li><a class="button" href="{% url 'admin:logout' %}">Logout</a></li>
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="#">Übersicht der Projekte</a></li>
-            <li><a href="#">Frage &amp; Antwort</a></li>
-            <li><a href="#">Zitat erstellen</a></li>
-            <li><a href="#">Blog</a></li>
-            {% if request.user.is_authenticated and request.user.is_staff %}
-            <li><a href="#"></a></li>
-            <li><a href="/admin">Socialee Admin</a></li>
-            {% endif %}
+          <li><a href="{% url 'admin:logout' %}">Logout</a></li>
+          <li><a href="/admin">Socialee Admin</a></li>
         </ul>
-
       </div>
 
-      {% endif %}
+    {% endif %}
 
-      <div class="off-canvas-content" data-off-canvas-content>
+  <div class="off-canvas-content" data-off-canvas-content>
 {% endblock before_content %}
 
-    {% block content %}
-    {# Content from all other templates goes here #}
-    {% endblock content %}
+  {# Content from all other templates goes here #}
+  {% block content %}  
+  {% endblock content %}
 
 {% block after_content %}
-      </div>
-    </div>
+  </div>
+  </div>
   </div>
 {% endblock after_content %}
