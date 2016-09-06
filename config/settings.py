@@ -25,9 +25,6 @@ env = environ.Env()
 
 SITE_ID = 1
 
-# set to True in production
-PROD = False
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
@@ -37,6 +34,7 @@ SECRET_KEY = env.str('DJANGO_SECRET_KEY',
 
 DEBUG = env.bool('DJANGO_DEBUG', False)
 SIMPLE_AUTH = env.bool('SIMPLE_AUTH', False)
+PROD = env.bool('PROD', False)
 INTERNAL_IPS = ('127.0.0.1',)
 
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
@@ -110,7 +108,7 @@ if not DEBUG:
 
     AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
     AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-    if PROD: # set in socialee-stage.herokuapp.com
+    if PROD==True: # set in socialee-stage.herokuapp.com
         AWS_S3_BUCKET_NAME  = "socialee-media"
         AWS_S3_BUCKET_NAME_STATIC = "socialee-static"
     else:
