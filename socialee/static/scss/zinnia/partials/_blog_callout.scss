@@ -1,0 +1,21 @@
+.blog-callout {
+  @include callout-base;
+    background-color: white;
+    padding: 3rem;
+    width: 100%;
+    p {
+      color: $socialee-darkgreen;
+    }
+    a {
+      color: $socialee-orange;
+    }
+  
+  @include breakpoint(small only) {
+    padding: 0.85rem 0.85rem 1.5rem 0.85rem;
+      img {
+      max-height: 25vh;
+      padding: 1.2rem 0 0 0;
+      margin: 0 auto;
+      }
+    }
+  }

@@ -100,7 +100,7 @@ MIDDLEWARE_CLASSES = [
 ]
 
 # AWS S3 Settings
-if not DEBUG:
+if DEBUG==False:
     DEFAULT_FILE_STORAGE = 'django_s3_storage.storage.S3Storage' 
     STATICFILES_STORAGE = 'django_s3_storage.storage.StaticS3Storage'
 

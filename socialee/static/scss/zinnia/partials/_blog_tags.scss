@@ -1,0 +1,11 @@
+.blog-tag {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-right: 0.65rem;
+  &:hover {
+      color: $s-button-hover;
+      text-decoration: none;
+    }
+}

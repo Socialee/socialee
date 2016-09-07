@@ -1,0 +1,24 @@
+.infosbelowcontent {
+  margin-top: 4rem;
+  @include breakpoint(small only) {
+    margin-top: 1rem;
+  }
+}
+
+.write-author {
+  margin-top: 0;
+  text-align: right;
+  font-size: 1.2rem;
+  a {
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
+  @include breakpoint(small only) {
+    margin-top: 2rem;
+    text-align: left;
+    a {
+    font-size: 1.2rem;
+    font-weight: 100;
+  }
+  }
+}

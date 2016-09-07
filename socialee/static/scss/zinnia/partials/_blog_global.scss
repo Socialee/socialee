@@ -1,0 +1,55 @@
+.blog-layout {
+  @include flex-align($x: center, $y: stretch);
+}
+
+.blog-background {
+  min-height: 100vh;
+  background-image: url('../img/landingpage_bg/background-assets/background.jpg'), url('../img/landingpage_bg/background-assets/pattern.jpg');
+  background-repeat: no-repeat, repeat;
+  @include breakpoint(small only) {
+    background-image: url('../img/landingpage_bg/background-assets/pattern.jpg');
+    background-repeat: repeat;
+    }
+}
+
+.blog-image {
+  margin: 3rem 0;
+  @include breakpoint(small only) {
+  margin: 0 0 2rem 0;    
+  }
+}
+
+.continue-reading {
+  display: inline;
+  text-align: right;
+  @include breakpoint(small only) {
+  a {
+    font-size: 1.2rem;
+  }
+  }
+}
+
+h2.entry-title {
+  font-weight: bold;
+  margin-bottom: 0rem;
+  a {
+    color: inherit;
+    font-size: inherit;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.entry-summary {
+  p, a {
+    font-size: 1.25rem;
+  }
+}
+
+.entry-content {
+  @include breakpoint(small only) {
+  p, a {
+    font-size: 1.25rem;
+    }  
+}}
