@@ -4,17 +4,14 @@
 {% block content %}
 
 <section class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, medium], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, large]">
-      
-      {# {% include "lp-navbar.html" %} #}
+
     <div class="s-space show show-for-medium"></div>
       <div class="row lp-header">
         <div class="large-6 columns">
           <h1 class="text-center">Melde dich an ...</h1>
-          <p class="text-center">... und wir halten dich auf dem Laufenden!</p>
+          <p class="text-center">... und wir sagen dir bescheid, wenn es losgeht.</p>
           <div class="callout-form">
             {% crispy form %}
-            
-            
           </div>
         </div>
       </div>

@@ -14,11 +14,11 @@
 
     {% user_display confirmation.email_address.user as user_display %}
 
-    <p>{% blocktrans with confirmation.email_address.email as email %}Hallo! Möchtest Du die Email-Adresse <a href="mailto:{{ email }}">{{ email }}</a> bestätigen? {% endblocktrans %}</p>
+    <p>{% blocktrans with confirmation.email_address.email as email %}Hallo! Möchtest Du die Email-Adresse {{ email }} bestätigen? {% endblocktrans %}</p>
 
     <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
     {% csrf_token %}
-        <button class="button" type="submit">Ja, bestätigen!</button>
+        <button class="s-button" type="submit">Ja, bestätigen!</button>
     </form>
 
     {% else %}
