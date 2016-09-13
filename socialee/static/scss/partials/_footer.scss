@@ -2,7 +2,7 @@
   z-index: 0;
   position: relative;
   background-color: #3F3E47;
-  padding: 3rem;
+  padding: 2rem;
   display: table;
   width: 100%;
   height: auto;
@@ -31,7 +31,7 @@
 
 .quote {
     color: white;
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: bold;
     @include breakpoint(small only) {
       font-size: 2rem;
@@ -39,7 +39,8 @@
 }
 
 .author {
-  padding-top: 2rem;
+  font-size: 1.5rem;
+  padding-top: 1rem;
   letter-spacing: 0.2rem;
   text-transform: uppercase;
   color: $socialee-transparent;
@@ -47,6 +48,7 @@
     font-size: 1rem;
   }
   a {
+    font-size: 1.5rem;
     font-weight: bold;
     border-bottom: 5px solid;
     @include breakpoint(small only) {
