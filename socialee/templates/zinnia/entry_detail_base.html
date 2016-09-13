@@ -43,10 +43,10 @@
   <div class="write-author">
   {% with authors=object.authors.all %}
   {% for author in authors %}
-  <span class="vcard author" itemprop="author" itemscope itemtype="http://schema.org/Person">Lies
+  <span itemprop="author" itemscope itemtype="http://schema.org/Person">Lies
     <a href="{{ author.get_absolute_url }}" class="fn url{% if not author.get_full_name %} nickname{% endif %}" rel="author"
        title="{% blocktrans %}Show all {{ author }}'s entries{% endblocktrans %}" itemprop="url">mehr Artikel von {{ author.first_name }}</a>, oder
-    <a href="mailto:{{author.email}}?subject=Hier%20steht%20der%20Betreff">schreibe eine Email.</a>
+    <a href="mailto:{{author.email}}?subject=Hallo!">schreibe eine Email.</a>
   </span>
   {% endfor %}
   {% endwith %}
