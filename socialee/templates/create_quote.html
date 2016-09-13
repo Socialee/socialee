@@ -1,18 +1,28 @@
 {% extends "offcanvas.html" %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
 
-  <div class="row align-center align-middle">
-    <div class="full-height"></div>
-    <div class="large-8 columns">
-      <h2>Schreibe uns Dein schönes Zitat!</h2>
-      <p>Wir gucken es uns an und schalten es frei, wenn es jugendfrei ist.</p>
-      <form method="POST" action=""> {% csrf_token %}
-        {{ form|crispy }} 
-        <input class="button" type="submit" value="Und ab dafür!" ></input>
-        <a href="{% url 'home' %}">Raus hier.</a>
-      </form>
-    </div>
-  </div>
+<section class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, medium], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, large]">
+
+    <div class="s-space show show-for-medium"></div>
+      <div class="row lp-header">
+        <div class="large-6 columns">
+          <h1 class="text-center">Schicke uns Dein Zitat!</h1>
+          <p class="text-center">Wir gucken es uns an und schalten es frei, sofern es jugendfrei ist.</p>
+          <div class="socialee-callout">
+          <form method="post"> {% csrf_token %}
+            {{ form|crispy }}
+            <div class="row align-center">
+              <input class="s-button-form" type="submit" value="Und weg damit!" />
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+  <div class="s-space"></div>
+  </section>
 
 {% endblock content %}
+
+

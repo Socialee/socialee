@@ -1,4 +1,15 @@
-{% load static sekizai_tags %}
+{% load static sekizai_tags quote_tags %}
+
+
+<div class="zitate-footer">
+  <div class="row expanded align-middle">
+    <div class="columns text-center">
+    {% random_quote as random_quote %}
+      <p class="quote">{{ random_quote.title }}</p>
+      <p class="author">Das hat <strong>{{ random_quote.author }}</strong> gesagt. <br class="show-for-small-only"><a href="{% url 'make_quote' %}">Was sagst Du?</a></p>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div class="footer-bottom">
