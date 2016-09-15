@@ -7,6 +7,7 @@ from __future__ import print_function, absolute_import
 import fnmatch
 import os
 import sys
+import glob
 
 from livereload import Server
 from livereload.watcher import INotifyWatcher
@@ -14,10 +15,9 @@ from livereload.handlers import LiveReloadHandler
 
 
 def recursive_glob(rootdir='.', pattern='*'):
-    return [os.path.join(walkdir, filename)
-            for walkdir, _, filenames in os.walk(rootdir)
-            for filename in filenames
-            if fnmatch.fnmatch(filename, pattern)]
+    return [ filename
+            for filename in glob.iglob(pattern, recursive=True)
+            ]
 
 try:
     watcher = INotifyWatcher()
@@ -36,7 +36,7 @@ else:
 
 server = Server(application, watcher)
 
-for filepath in recursive_glob("socialee/static", "*.scss"):
+for filepath in recursive_glob("socialee/static", "**/*.scss"):
     assert os.path.exists(filepath)
     print("Watching: %s" % filepath)
     # server.watch(filepath, 'make scss')
@@ -45,18 +45,18 @@ for filepath in recursive_glob("socialee/static", "*.scss"):
     server.watch(filepath, 'make scss', delay='forever')
 
 # Watch .css:
-for filepath in recursive_glob("socialee/static", "*.css"):
+for filepath in recursive_glob("socialee/static", "**/*.css"):
     assert os.path.exists(filepath)
     print("Watching: %s" % filepath)
     server.watch(filepath)
 
 # Watch .js:
-for filepath in recursive_glob("socialee/static", "*.js"):
+for filepath in recursive_glob("socialee/static", "**/*.js"):
     assert os.path.exists(filepath)
     print("Watching: %s" % filepath)
     server.watch(filepath)
 
-for filepath in recursive_glob("socialee/templates", "*.html"):
+for filepath in recursive_glob("socialee/templates", "**/*.html"):
     assert os.path.exists(filepath)
     print("Watching: %s" % filepath)
     server.watch(filepath)
