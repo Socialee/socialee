@@ -39,6 +39,9 @@ INTERNAL_IPS = ('127.0.0.1',)
 
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
 
+CMS_TEMPLATES = (
+    ('home.html', 'Startseite'),
+)
 
 # Application definition
 
@@ -59,11 +62,25 @@ INSTALLED_APPS = (
     'django_comments',
     'ckeditor',
 
+    # DjangoCMS
+    'cms',  # django CMS itself
+    'treebeard',  # utilities for implementing a tree
+    'menus',  # helper for model independent hierarchical website navigation
+    'djangocms_text_ckeditor',
+    # NOTE: djangocms-Plugins are not being distributed with DjangoCMS, but the can be found at https://github.com/divio
+    # 'djangocms_file',
+    # 'djangocms_googlemap',
+    # 'djangocms_inherit',
+    # 'djangocms_picture',
+    # 'djangocms_teaser',
+    # 'djangocms_video',
+    # 'djangocms_link',
+    # 'djangocms_snippet',
+
     # THIRD PARTY APPS
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.facebook', # not in use right now
     'crispy_forms',
     'crispy_forms_foundation',
     'django_summernote',
@@ -87,6 +104,7 @@ if DEBUG:
 
 MIDDLEWARE_CLASSES = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'cms.middleware.utils.ApphookReloadMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -97,6 +115,10 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.admindocs.middleware.XViewMiddleware',
+    'cms.middleware.user.CurrentUserMiddleware',
+    'cms.middleware.page.CurrentPageMiddleware',
+    'cms.middleware.toolbar.ToolbarMiddleware',
+    'cms.middleware.language.LanguageCookieMiddleware',
 ]
 
 # AWS S3 Settings
@@ -166,6 +188,7 @@ TEMPLATES = [
                 'django.core.context_processors.request',
                 'sekizai.context_processors.sekizai',
                 'zinnia.context_processors.version',  # Optional
+                'cms.context_processors.cms_settings',
             ],
             'debug': env.bool('DJANGO_TEMPLATE_DEBUG', DEBUG),
         },

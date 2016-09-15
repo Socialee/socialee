@@ -4,32 +4,40 @@ crispy-forms-foundation==0.5.4
 defusedxml==0.4.1         # via python3-openid
 django-allauth==0.27.0
 django-app-namespace-template-loader==0.4.1
-django-blog-zinnia==0.17
-django-ckeditor==5.1.0    # via zinnia-wysiwyg-ckeditor
-django-contrib-comments==1.7.2  # via django-blog-zinnia
+django-blog-zinnia==0.18
+django-ckeditor==5.1.1    # via zinnia-wysiwyg-ckeditor
+django-classy-tags==0.8.0  # via django-cms, django-sekizai
+django-cms==3.4.0
+django-contrib-comments==1.7.3  # via django-blog-zinnia
 django-crispy-forms==1.6.0
 django-debug-toolbar==1.5
 django-environ==0.4.0
+django-formtools==1.0     # via django-cms
 django-mptt==0.8.6        # via django-blog-zinnia
 django-s3-storage==0.9.10
+django-sekizai==0.10.0    # via django-cms
 django-simple-auth==0.1.5
 django-summernote==0.8.5
-django-tagging==0.4.3     # via django-blog-zinnia
+django-tagging==0.4.5     # via django-blog-zinnia
 django-taggit==0.21.2
+django-treebeard==4.0.1   # via django-cms
 django-xmlrpc==0.1.5      # via django-blog-zinnia
-Django==1.9.9             # via django-allauth, django-ckeditor, django-contrib-comments, django-debug-toolbar, django-environ, django-s3-storage, django-summernote
+Django==1.9.9             # via django-allauth, django-ckeditor, django-classy-tags, django-cms, django-contrib-comments, django-debug-toolbar, django-environ, django-formtools, django-s3-storage, django-summernote, django-treebeard
+djangocms-admin-style==1.2.4  # via django-cms
+djangocms-text-ckeditor==3.2.1
 docopt==0.4.0             # via mailchimp
+html5lib==0.9999999       # via djangocms-text-ckeditor
 mailchimp==2.0.9
 mots-vides==2015.5.11     # via django-blog-zinnia
 oauthlib==2.0.0           # via requests-oauthlib
-Pillow==3.3.1             # via django-blog-zinnia
+Pillow==3.3.1             # via django-blog-zinnia, djangocms-text-ckeditor
 psycopg2==2.6.2
-pyparsing==2.1.8          # via django-blog-zinnia
+pyparsing==2.1.9          # via django-blog-zinnia
 python3-openid==3.0.10    # via django-allauth
 pytz==2016.6.1
 regex==2016.8.27          # via django-blog-zinnia
 requests-oauthlib==0.6.2  # via django-allauth
 requests==2.11.1          # via django-allauth, mailchimp, requests-oauthlib
-six==1.10.0               # via django-app-namespace-template-loader, django-environ
+six==1.10.0               # via django-app-namespace-template-loader, django-environ, html5lib
 sqlparse==0.2.1           # via django-debug-toolbar
 zinnia-wysiwyg-ckeditor==1.3
