@@ -26,3 +26,6 @@ mailchimp
 
 zinnia-wysiwyg-ckeditor
 django_s3_storage
+
+django-cms
+djangocms-text-ckeditor
