@@ -40,4 +40,5 @@ requests-oauthlib==0.6.2  # via django-allauth
 requests==2.11.1          # via django-allauth, mailchimp, requests-oauthlib
 six==1.10.0               # via django-app-namespace-template-loader, django-environ, html5lib
 sqlparse==0.2.1           # via django-debug-toolbar
+whitenoise==3.2.1
 zinnia-wysiwyg-ckeditor==1.3
