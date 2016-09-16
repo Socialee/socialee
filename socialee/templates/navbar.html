@@ -1,3 +1,6 @@
+{# switch off navbar in production for now #}
+{% if not PROD %}
+
 <div class="top-bar">
   
   <div class="top-bar-left">
@@ -34,5 +37,6 @@
       </li>
     </ul>
   </div>
-
 </div>
+
+{% endif %}

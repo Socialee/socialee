@@ -7,11 +7,6 @@
           <div class="large-8 columns">
           <h3>{{ project.title }}</h3> {# Titel #}
           <p class="tagline">{{ project.tagline }}</p> {# Tagline #}
-          <ul class="fa-ul"> {# Tags #}
-            {% for tag in project.tags.all %}
-              <li><i class="fa-li fa fa-tag"></i>{{ tag }}</li>
-            {% endfor %}
-          </ul>
           </div>
           <div class="columns text-center">
             <p class="s-icon-text">ein Projekt von:</p>
