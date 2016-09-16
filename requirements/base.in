@@ -26,6 +26,7 @@ mailchimp
 
 zinnia-wysiwyg-ckeditor
 django_s3_storage
+whitenoise
 
 django-cms
 djangocms-text-ckeditor
