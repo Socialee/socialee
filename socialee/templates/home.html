@@ -1,9 +1,40 @@
 {% extends "offcanvas.html" %}
-{% load static %}
+{% load static landingpage_tags %}
 
 {% block content %}
 
-  <section id="welcome" class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, medium], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, large]">
+{% random_landingpagecontent as landingpage %}
+
+  {% if landingpage.active = True %}
+
+    <section id="welcome" class="fullscreen-img" data-interchange="[{{ MEDIA_URL }}{{ landingpage.bg_img }}, small]">
+
+        <div class="row lp-header">
+          <img src="{{ MEDIA_URL }}{{ landingpage.symbol }}">
+        </div>
+
+        <div class="row lp-header">
+          <div class="large-7 medium-8 small-11 columns text-center">
+            <h1>{{ landingpage.claim }}</h1>
+            <p>{{ landingpage.tagline }}<br><br>{{ landingpage.cta|safe }}</a></p>
+          </div>
+        </div>
+
+        <div class="row lp-header">
+          <div class="large-12 columns text-center">
+            <a class="white-orange" href="#manifest">
+              <span class="fa-stack">
+                <i class="fa fa-chevron-down fa-stack-1x" aria-hidden="true"></i>
+                <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+    </section>
+  
+  {% else %}
+
+    <section id="welcome" class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small]">
 
       <div class="row lp-header">
         <img src="{% static 'img/symbole/noun_217781_cc.svg' %}">
@@ -11,22 +42,14 @@
 
       <div class="row lp-header">
         <div class="large-7 medium-8 small-11 columns text-center">
-          <h1>Wir machen das jetzt mal</h1>
+          <h1>Ey, wir machen das jetzt mal</h1>
           <p>Wir glauben, dass alle guten Ideen wahr werden sollten. Darum bauen wir eine Internetseite, die dir hilft, die richtigen Menschen zu finden und gemeinsam etwas zu bewegen.<br><br>Bald geht's los, lies mehr dazu in unserem <a href="{% url 'zinnia:entry_archive_index' %}">Blog.</a></p>
         </div>
       </div>
+    </section>
 
-      <div class="row lp-header">
-        <div class="large-12 columns text-center">
-          <a class="white-orange" href="#manifest">
-            <span class="fa-stack">
-              <i class="fa fa-chevron-down fa-stack-1x" aria-hidden="true"></i>
-              <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
-            </span>
-          </a>
-        </div>
-      </div>
-  </section>
+  {% endif %}
+
 
   <section id="manifest" class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/manifest_2.jpg' %}, small], [{% static 'img/landingpage_bg/manifest_2.jpg' %}, medium], [{% static 'img/landingpage_bg/manifest_2.jpg' %}, large]">
 

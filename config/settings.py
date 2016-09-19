@@ -92,7 +92,8 @@ INSTALLED_APPS = (
     'django_s3_storage',
 
     # SOCIALEE CUSTOM APPS
-    'questions.apps.QuestionsConfig',
+    'landingpage.apps.LandingpageConfig',
+    'questions.apps.QuestionsConfig', 
     'quotes.apps.QuotesConfig',
     'socialee.apps.SocialeeConfig',
 )
