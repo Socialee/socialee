@@ -125,6 +125,10 @@ scss_force:
 	for f in $(SCSS_FILES); do test -f $$f && touch $$f; done
 	$(MY_MAKE) scss
 
+scss_with_dep:
+	touch $(SCSS_DIR)/$(MAIN_SCSS)
+	$(MY_MAKE) scss
+
 # Watch
 watch: scss
 	bin/devserver livereload_only
