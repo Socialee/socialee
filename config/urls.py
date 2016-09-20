@@ -14,6 +14,7 @@ if settings.DEBUG or settings.SIMPLE_AUTH:
         url(r'^$', views.Home.as_view(), name='home'), # ID 000
 
         url(r'^accounts/', include('allauth.urls')), # IDs 081, 082, 083, etc
+        url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
         url(r'^admin/', include(admin.site.urls)), # ID 900
         url(r'^blog/', include('zinnia.urls')), # IDs 050, 051, 052, etc
         url(r'^comments/', include('django_comments.urls')), # für Blog

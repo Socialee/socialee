@@ -46,6 +46,7 @@ CMS_TEMPLATES = (
 # Application definition
 
 INSTALLED_APPS = (
+    'collectfast',
     # DJANGO APPS
     'djangocms_admin_style',  # for the admin skin. Before 'django.contrib.admin'.
     'django.contrib.admin',
@@ -89,7 +90,7 @@ INSTALLED_APPS = (
     'taggit',
     'zinnia',
     'zinnia_ckeditor',
-    'django_s3_storage',
+    'storages',
 
     # SOCIALEE CUSTOM APPS
     'landingpage.apps.LandingpageConfig',
@@ -101,6 +102,7 @@ INSTALLED_APPS = (
 if DEBUG:
     INSTALLED_APPS += (
         'django_extensions',
+        'django.contrib.admindocs',
     )
 
 MIDDLEWARE_CLASSES = [
@@ -124,25 +126,28 @@ MIDDLEWARE_CLASSES = [
 
 # AWS S3 Settings
 if DEBUG==False:
-    DEFAULT_FILE_STORAGE = 'django_s3_storage.storage.S3Storage' 
-    STATICFILES_STORAGE = 'django_s3_storage.storage.StaticS3Storage'
-
-    AWS_REGION = "eu-central-1"
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATICFILES_STORAGE = 'path.to.storage.S3StaticStorage'
+    THUMBNAIL_DEFAULT_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
     AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
     AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
-    if PROD==True: # set in socialee-stage.herokuapp.com
-        AWS_S3_BUCKET_NAME  = "socialee-media"
-        AWS_S3_BUCKET_NAME_STATIC = "socialee-static"
-    else:
-        AWS_S3_BUCKET_NAME = "socialee-stage-media"
-        AWS_S3_BUCKET_NAME_STATIC = "socialee-stage-static"
-
-    STATIC_URL = 'http://%s.s3.amazonaws.com/' % AWS_S3_BUCKET_NAME_STATIC
-    MEDIA_URL = 'http://%s.s3.amazonaws.com/' % AWS_S3_BUCKET_NAME
-    AWS_S3_BUCKET_AUTH = False
+    AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    AWS_QUERYSTRING_AUTH = False
+    AWS_HEADERS = {
+      'Cache-Control': 'max-age=86400',
+    }
+    AWS_S3_HOST = "s3-eu-west-1.amazonaws.com"
+    AWS_PRELOAD_METADATA = True
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    # these next two aren't used, but staticfiles will complain without them
+    STATIC_URL = "https://%s.s3.amazonaws.com/" % os.environ['AWS_STATIC_BUCKET_NAME']
+    MEDIA_URL = "https://%s.s3.amazonaws.com/" % os.environ['AWS_STORAGE_BUCKET_NAME']
+    STATIC_ROOT = ''
 
 else:
+    COLLECTFAST_ENABLED = False
     STATIC_URL = '/static/'
     MEDIA_URL = '/media/'
 
