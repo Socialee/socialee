@@ -130,6 +130,7 @@ if DEBUG==False:
     AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
     AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
     AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
+    AWS_STATIC_BUCKET_NAME = os.environ['AWS_STATIC_BUCKET_NAME']
     AWS_QUERYSTRING_AUTH = False
     AWS_HEADERS = {
       'Cache-Control': 'max-age=86400',
@@ -139,8 +140,8 @@ if DEBUG==False:
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     STATICFILES_STORAGE = 'config.storage.S3StaticStorage'
     # these next two aren't used, but staticfiles will complain without them
-    STATIC_URL = "https://%s.s3.amazonaws.com/" % os.environ['AWS_STATIC_BUCKET_NAME']
-    MEDIA_URL = "https://%s.s3.amazonaws.com/" % os.environ['AWS_STORAGE_BUCKET_NAME']
+    STATIC_URL = "https://%s.s3.amazonaws.com/" % AWS_STATIC_BUCKET_NAME
+    MEDIA_URL = "https://%s.s3.amazonaws.com/" % AWS_STORAGE_BUCKET_NAME
     STATIC_ROOT = ''
 
 else:
