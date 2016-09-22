@@ -9,3 +9,5 @@ pip-tools
 livereload
 
 django-extensions
+
+docutils

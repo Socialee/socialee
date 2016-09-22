@@ -37,7 +37,7 @@ python-dateutil==2.5.3    # via collectfast
 python3-openid==3.0.10    # via django-allauth
 pytz==2016.6.1
 regex==2016.8.27          # via django-blog-zinnia
-requests-oauthlib==0.6.2  # via django-allauth
+requests-oauthlib==0.7.0  # via django-allauth
 requests==2.11.1          # via django-allauth, mailchimp, requests-oauthlib
 six==1.10.0               # via django-app-namespace-template-loader, django-environ, html5lib, python-dateutil
 sqlparse==0.2.1           # via django-debug-toolbar
