@@ -19,9 +19,19 @@ from allauth.account.models import EmailAddress
 from taggit.managers import TaggableManager
 
 class CommonGround(models.Model):
+    """
+    Stores all the common fields for :model:`Profile` and :model:`Project`.
+    """
     slug = models.SlugField(primary_key=True)
     inputs = models.ManyToManyField('Input', blank=True)
     outputs = models.ManyToManyField('Output', blank=True)
+    tagline = models.CharField(max_length=140, null= True)
+    description = models.TextField(max_length=5000, null=True, blank=True)
+    conversation = models.OneToOneField('Conversation', blank=True, null=True)
+    liked_profiles = models.ManyToManyField(User, related_name='profile_likes') # follower/beobachter
+    liked_projects = models.ManyToManyField('Project', related_name='project_likes')
+    liked_messages = models.ManyToManyField('Message', related_name='message_likes')
+    tags = TaggableManager()
 
 
 def upload_location(instance, filename):
@@ -75,17 +85,21 @@ class Output(InputOutput):
         return 'Output "{}" from profile {}'.format(
           self.title, self.profile)
 
+class Conversation(models.Model):
+    slug = models.SlugField(primary_key=True)
+
+class Message(models.Model):
+    conversation = models.ForeignKey(Conversation, related_name='messages') # message Replys
+    by_user = models.ForeignKey(User, null=True)
+    message = models.TextField(max_length=5000, null=True, blank=True)
+    reply_to = models.ForeignKey('Message', related_name='replys') # message Replys
 
 
 class Project(CommonGround):
     title = models.CharField(max_length=60)
-    tagline = models.CharField(max_length=140, null= True)
-    description = models.TextField(max_length=5000, null=True, blank=True)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    header_img = models.ImageField(upload_to=upload_location, null=True, blank=True)
-    profiles = models.ManyToManyField(User, related_name='Socialeebhaber') # follower/beobachter
+    created_by = models.ForeignKey(User, null=True)
+    header_img = models.ImageField(upload_to=upload_location, null=True, blank=True)    
     managers = models.ManyToManyField(User, related_name='Project_Managers', blank=True)
-    tags = TaggableManager()
     
     
     def __str__(self):
@@ -111,7 +125,6 @@ class Profile(CommonGround):
     phone = models.CharField(max_length=50, blank=True)
     plz = models.CharField(max_length=5, null=True, blank=True)
     newsletter = models.BooleanField(default=False)
-    liked_projects = models.ManyToManyField('Project', related_name='likes')
 
     def is_email_verified(self):
         return (self.user.is_authenticated and
