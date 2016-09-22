@@ -137,7 +137,7 @@ if DEBUG==False:
     AWS_S3_HOST = "s3-eu-central-1.amazonaws.com"
     AWS_PRELOAD_METADATA = True
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    STATICFILES_STORAGE = 'storage.S3StaticStorage'
+    STATICFILES_STORAGE = 'config.storage.S3StaticStorage'
     # these next two aren't used, but staticfiles will complain without them
     STATIC_URL = "https://%s.s3.amazonaws.com/" % os.environ['AWS_STATIC_BUCKET_NAME']
     MEDIA_URL = "https://%s.s3.amazonaws.com/" % os.environ['AWS_STORAGE_BUCKET_NAME']
