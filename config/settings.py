@@ -137,7 +137,7 @@ if DEBUG==False:
     AWS_HEADERS = {
       'Cache-Control': 'max-age=86400',
     }
-    AWS_S3_HOST = "s3-eu-west-1.amazonaws.com"
+    AWS_S3_HOST = "s3-eu-central-1.amazonaws.com"
     AWS_PRELOAD_METADATA = True
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
