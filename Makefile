@@ -239,7 +239,7 @@ deploy_staging:
 
 # Gets run via bin/post_compile for Heroku.
 HEROKU_ZETTELS_MEDIA:=$(CURDIR)/.heroku/media-zettels
-heroku_post_compile: check test_heroku static migrate_deploy 
+heroku_post_compile: check test_heroku migrate_deploy
 
 # Fetch zettels media from separate repo (via https mirror (manually synced)).
 heroku_fetch_zettels:
@@ -293,7 +293,19 @@ $(PIP_REQUIREMENTS_DIR)/%.txt: $(PIP_REQUIREMENTS_DIR)/%.in
 # }}}
 
 OPEN=$(shell hash xdg-open 2>/dev/null && echo xdg-open || echo open)
-models.png:
-	python manage.py graph_models socialee auth | dot -Tpng > models.png
-	$(OPEN) models.png
-.PHONY: models.png
+
+models:
+	# DOWNLOAD AND INSTALL: http://www.graphviz.org/pub/graphviz/stable/macos/mountainlion/graphviz-2.36.0.pkg
+	# python manage.py graph_models --help
+	
+	# python manage.py graph_models -a -g | dot -Tpng > models.png
+	python manage.py graph_models socialee auth allauth account landingpage quotes taggit tagging django_comments -g | dot -Tpng > models.png
+
+show_urls:
+	python manage.py show_urls
+
+validate_templates:
+	python manage.py validate_templates
+
+
+
