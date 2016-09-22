@@ -98,8 +98,7 @@ class Message(models.Model):
 class Project(CommonGround):
     title = models.CharField(max_length=60)
     created_by = models.ForeignKey(User, null=True)
-    header_img = models.ImageField(upload_to=upload_location, null=True, blank=True)    
-    managers = models.ManyToManyField(User, related_name='Project_Managers', blank=True)
+    header_img = models.ImageField(upload_to=upload_location, null=True, blank=True)
     
     
     def __str__(self):

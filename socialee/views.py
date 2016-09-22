@@ -170,7 +170,7 @@ class StartProject(BaseView, CreateView):
         user = self.request.user
         form.instance.created_by = user
         valid_data = super(StartProject, self).form_valid(form)
-        form.instance.managers.add(user)
+        #form.instance.managers.add(user)
         return valid_data
 
     def get_context_data(self, **kwargs):
