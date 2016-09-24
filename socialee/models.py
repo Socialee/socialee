@@ -18,20 +18,20 @@ from allauth.account.models import EmailAddress
 
 from taggit.managers import TaggableManager
 
-class CommonGround(models.Model):
-    """
-    Stores all the common fields for :model:`Profile` and :model:`Project`.
-    """
-    slug = models.SlugField(primary_key=True)
-    inputs = models.ManyToManyField('Input', blank=True)
-    outputs = models.ManyToManyField('Output', blank=True)
-    tagline = models.CharField(max_length=140, null= True)
-    description = models.TextField(max_length=5000, null=True, blank=True)
-    conversation = models.OneToOneField('Conversation', blank=True, null=True)
-    liked_profiles = models.ManyToManyField(User, related_name='profile_likes') # follower/beobachter
-    liked_projects = models.ManyToManyField('Project', related_name='project_likes')
-    liked_messages = models.ManyToManyField('Message', related_name='message_likes')
-    tags = TaggableManager()
+# class CommonGround(models.Model):
+#     """
+#     Stores all the common fields for :model:`Profile` and :model:`Project`.
+#     """
+#     slug = models.SlugField(primary_key=True)
+#     inputs = models.ManyToManyField('Input', blank=True)
+#     outputs = models.ManyToManyField('Output', blank=True)
+#     tagline = models.CharField(max_length=140, null= True)
+#     description = models.TextField(max_length=5000, null=True, blank=True)
+#     conversation = models.OneToOneField('Conversation', blank=True, null=True)
+#     liked_profiles = models.ManyToManyField(User, related_name='profile_likes') # follower/beobachter
+#     liked_projects = models.ManyToManyField('Project', related_name='project_likes')
+#     liked_messages = models.ManyToManyField('Message', related_name='message_likes')
+#     tags = TaggableManager()
 
 
 def upload_location(instance, filename):
@@ -57,7 +57,7 @@ class InputOutput(models.Model):
     class Meta:
         abstract = True
 
-    owner = models.ForeignKey(CommonGround, null=True)
+    #owner = models.ForeignKey(CommonGround, null=True)
     type = models.CharField(max_length=25,
                             choices=list(TYPES),
                             default=UNKNOWN)
@@ -95,7 +95,7 @@ class Message(models.Model):
     reply_to = models.ForeignKey('Message', related_name='replys') # message Replys
 
 
-class Project(CommonGround):
+class Project_fake(models.Model):
     title = models.CharField(max_length=60)
     created_by = models.ForeignKey(User, null=True)
     header_img = models.ImageField(upload_to=upload_location, null=True, blank=True)
@@ -115,10 +115,10 @@ def pre_save_project(sender, instance, *args, **kwargs):
     slug = slugify(instance.title)
     instance.slug = slug
 
-pre_save.connect(pre_save_project, sender = Project)
+pre_save.connect(pre_save_project, sender = Project_fake)
 
 
-class Profile(CommonGround):
+class Profile_fake(models.Model):
     user = models.OneToOneField(User, blank=True, null=True)
     picture = models.ImageField(upload_to=upload_location, null=True, blank=True)
     phone = models.CharField(max_length=50, blank=True)
