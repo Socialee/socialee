@@ -31,16 +31,16 @@ class Migration(migrations.Migration):
         migrations.RunPython(
             generate_id,
         ),
+        migrations.AlterField(
+            model_name='commonground',
+            name='slug',
+            field=models.SlugField(),
+        )
 	migrations.AlterField(
             model_name='commonground',
             name='id',
             field=models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID'),
             preserve_default=False,
-        ),
-        migrations.AlterField(
-            model_name='commonground',
-            name='slug',
-            field=models.SlugField(),
         ),
         migrations.AlterField(
             model_name='commonground',
