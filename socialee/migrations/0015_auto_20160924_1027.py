@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
             model_name='commonground',
             name='slug',
             field=models.SlugField(),
-        )
+        ),
 	migrations.AlterField(
             model_name='commonground',
             name='id',
