@@ -24,7 +24,7 @@ from allauth.account.forms import *
 from allauth.account.decorators import verified_email_required
 from allauth.account.signals import email_confirmed
 
-from .models import Project, Input, Output, Profile
+from .models import Project_fake, Input, Output, Profile_fake
 from .forms import *
 
 User = get_user_model()
@@ -163,14 +163,14 @@ class Impressum(BaseView, TemplateView):
 # CRUD CREATE PROJECT
 class StartProject(BaseView, CreateView):
     template_name = 'start_project.html'
-    model = Project
+    model = Project_fake
     form_class = StartProjectForm
 
     def form_valid(self, form):
         user = self.request.user
         form.instance.created_by = user
         valid_data = super(StartProject, self).form_valid(form)
-        form.instance.managers.add(user)
+        #form.instance.managers.add(user)
         return valid_data
 
     def get_context_data(self, **kwargs):
@@ -182,7 +182,7 @@ class StartProject(BaseView, CreateView):
 # CRUD LIST OF ALL PROJECTS
 class ProjectOverview(BaseView, ListView):
     template_name = 'project_overview.html'
-    model = Project
+    model = Project_fake
 
     def get_context_data(self, **kwargs):
         context = super(ProjectOverview, self).get_context_data(**kwargs)
@@ -193,7 +193,7 @@ class ProjectOverview(BaseView, ListView):
 # CRUD RETRIEVE PARTICULAR PROJECT
 class ProjectDetailView(BaseView, DetailView):
     template_name = 'project_view.html'
-    model = Project
+    model = Project_fake
 
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailView, self).get_context_data(**kwargs)
@@ -204,7 +204,7 @@ class ProjectDetailView(BaseView, DetailView):
 # CRUD UPDATE PARTICULAR PROJECT
 class ProjectUpdateView(BaseView, UpdateView):
     template_name = 'edit_project.html'
-    model = Project
+    model = Project_fake
     form_class = EditProjectForm
 
     def get_context_data(self, **kwargs):
@@ -229,7 +229,7 @@ class Socialeebhaber(BaseView, UpdateView):
     def post(self, request, *args, **kwargs):
         project_id = request.POST.get('project_id')
 
-        project = Project.objects.get(id=project_id)
+        project = Project_fake.objects.get(id=project_id)
         if project in request.user.profile.liked_projects.all():
             request.user.profile.liked_projects.remove(project)
             project.profiles.remove(request.user)
@@ -255,7 +255,7 @@ class Socialeebhaber(BaseView, UpdateView):
 # Update Profile: User updates own profile
 class ProfileUpdateView(BaseView, UpdateView):
     template_name = 'user_profile_update.html'
-    model = Profile
+    model = Profile_fake
     # form_class = EditProfileForm
     form_class = EditProfileForm
 
@@ -304,7 +304,7 @@ class ProfileUpdateView(BaseView, UpdateView):
 # Retrieve Profile: User watches detail-view of own profile or profile of others
 class ProfileDetailView(BaseView, DetailView):
     template_name = 'user_profile_detail.html'
-    model = Profile
+    model = Profile_fake
 
     def get_context_data(self, **kwargs):
         context = super(ProfileDetailView, self).get_context_data(**kwargs)
@@ -314,11 +314,11 @@ class ProfileDetailView(BaseView, DetailView):
 
 class ProfileView(BaseView, DetailView):
     template_name = 'profile_view.html'
-    model = Profile
+    model = Profile_fake
 
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
-        context['user_project_list'] = Project.objects.filter(created_by=context["profile"].user)
+        context['user_project_list'] = Project_fake.objects.filter(created_by=context["profile"].user)
 
         return context
 
@@ -326,13 +326,13 @@ class ProfileView(BaseView, DetailView):
 # Welcome View: Landing-Page for User and overview
 class WelcomePage(BaseView, ListView):
     template_name = 'welcome.html'
-    model = Project
+    model = Project_fake
 
     def get_context_data(self, **kwargs):
         # make sure the profile exists
         if self.request.user.is_authenticated():
             self.request.user.profile
         context = super(WelcomePage, self).get_context_data(**kwargs)
-        context['user_project_list'] = Project.objects.filter(created_by=self.request.user)
+        context['user_project_list'] = Project_fake.objects.filter(created_by=self.request.user)
 
         return context
