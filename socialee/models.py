@@ -22,7 +22,7 @@ class CommonGround(models.Model):
     """
     Stores all the common fields for :model:`Profile` and :model:`Project`.
     """
-    slug = models.SlugField()
+    slug = models.SlugField(primary_key=True)
     inputs = models.ManyToManyField('Input', blank=True)
     outputs = models.ManyToManyField('Output', blank=True)
     tagline = models.CharField(max_length=140, null= True)
@@ -98,8 +98,7 @@ class Message(models.Model):
 class Project(CommonGround):
     title = models.CharField(max_length=60)
     created_by = models.ForeignKey(User, null=True)
-    header_img = models.ImageField(upload_to=upload_location, null=True, blank=True)    
-    managers = models.ManyToManyField(User, related_name='Project_Managers', blank=True)
+    header_img = models.ImageField(upload_to=upload_location, null=True, blank=True)
     
     
     def __str__(self):
@@ -110,13 +109,6 @@ class Project(CommonGround):
 
     def get_absolute_url(self):
         return reverse('project_detailview', kwargs = {"slug": self.slug})
-
-
-def pre_save_project(sender, instance, *args, **kwargs):
-    slug = slugify(instance.title)
-    instance.slug = slug
-
-pre_save.connect(pre_save_project, sender = Project)
 
 
 class Profile(CommonGround):
