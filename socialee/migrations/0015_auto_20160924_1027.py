@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='commonground',
             name='id',
-            field=models.AutoField(primary_key=False, auto_created=True, serialize=False, verbose_name='ID'),
+            field=models.AutoField(auto_created=True, serialize=False, verbose_name='ID'),
             preserve_default=False,
         ),
         migrations.RunPython(
