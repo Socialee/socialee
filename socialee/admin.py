@@ -7,29 +7,29 @@ from django.utils.translation import ugettext_lazy as _
 from .models import *
 
 
-# class ProjectAdmin(admin.ModelAdmin):
-#     model = Project
-#     list_display = ['title', 'created_by']
-#     fields = ('created_by', 'title', 'tagline', 'description', 'header_img', 'tags')
+class ProjectAdmin(admin.ModelAdmin):
+    model = Project
+    list_display = ['title', 'created_by']
+    fields = ('created_by', 'title', 'tagline', 'description', 'header_img', 'tags', 'managers')
 
 
-# class ProfileAdmin(admin.ModelAdmin):
-#     model = Profile
-#     list_display = ['user', 'slug']
-#     fields = ('user', 'slug', 'picture', 'phone', 'plz', 'newsletter', 'liked_projects')
+class ProfileAdmin(admin.ModelAdmin):
+    model = Profile
+    list_display = ['user', 'slug']
+    fields = ('user', 'slug', 'picture', 'phone', 'plz', 'newsletter', 'liked_projects')
 
 
-# # def mark_as_done(modeladmin, request, queryset):
-# #     queryset.update(done=True)
-# # mark_as_done.short_description = "Alle markierten als erledigt markieren"
+# def mark_as_done(modeladmin, request, queryset):
+#     queryset.update(done=True)
+# mark_as_done.short_description = "Alle markierten als erledigt markieren"
 
-# # class InviteAdmin(admin.ModelAdmin):
-# #     list_display = ('was_submitted_recently','done','full_name', 'email', 'message')
-# #     list_display_links = ['email']
-# #     # list_editable = ['done']
-# #     actions = [mark_as_done]
+# class InviteAdmin(admin.ModelAdmin):
+#     list_display = ('was_submitted_recently','done','full_name', 'email', 'message')
+#     list_display_links = ['email']
+#     # list_editable = ['done']
+#     actions = [mark_as_done]
 
 
-# admin.site.register(Project, ProjectAdmin)
-# admin.site.register(Profile, ProfileAdmin)
+admin.site.register(Project, ProjectAdmin)
+admin.site.register(Profile, ProfileAdmin)
 #admin.site.register(Invite, InviteAdmin)
