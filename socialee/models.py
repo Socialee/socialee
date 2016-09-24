@@ -27,7 +27,7 @@ class CommonGround(models.Model):
     outputs = models.ManyToManyField('Output', blank=True)
     tagline = models.CharField(max_length=140, null= True)
     description = models.TextField(max_length=5000, null=True, blank=True)
-    conversation = models.OneToOneField('Conversation', blank=True, null=True)
+    #conversation = models.OneToOneField('Conversation', blank=True, null=True)
     liked_profiles = models.ManyToManyField(User, related_name='profile_likes') # follower/beobachter
     liked_projects = models.ManyToManyField('Project', related_name='project_likes')
     liked_messages = models.ManyToManyField('Message', related_name='message_likes')
@@ -85,11 +85,11 @@ class Output(InputOutput):
         return 'Output "{}" from profile {}'.format(
           self.title, self.profile)
 
-class Conversation(models.Model):
-    slug = models.SlugField(null=True, blank=True)
+# class Conversation(models.Model):
+#     slug = models.SlugField(null=True, blank=True)
 
 class Message(models.Model):
-    conversation = models.ForeignKey(Conversation, related_name='messages') # message Replys
+    #conversation = models.ForeignKey(Conversation, related_name='messages') # message Replys
     by_user = models.ForeignKey(User, null=True)
     message = models.TextField(max_length=5000, null=True, blank=True)
     reply_to = models.ForeignKey('Message', related_name='replys') # message Replys
