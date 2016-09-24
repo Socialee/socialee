@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from allauth.account.forms import *
 
 from django import forms
-from .models import Project, Profile, Input, Output, User
+from .models import Project_fake, Profile_fake, Input, Output, User
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import *
@@ -13,8 +13,9 @@ from crispy_forms.layout import *
 
 class StartProjectForm(forms.ModelForm):
     class Meta:
-        model = Project
-        fields = ('title', 'tagline')
+        model = Project_fake
+        #fields = ('title', 'tagline')
+        fields = ('title',)
         labels = {
             'title': _('Projekttitel'),
             'tagline': _('Untertitel'),
@@ -26,8 +27,9 @@ class StartProjectForm(forms.ModelForm):
 
 class EditProjectForm(forms.ModelForm):
     class Meta:
-        model = Project
-        fields = ('title', 'tagline', 'description', 'tags')
+        model = Project_fake
+        #fields = ('title', 'tagline', 'description', 'tags')
+        fields = ('title',)
         labels = {
             'title': _('Gib deiner Idee einen Namen...'),
             'tagline': _('... und einen Untertitel.'),
@@ -39,7 +41,7 @@ class EditProjectForm(forms.ModelForm):
 
 
 class EditProfileForm(forms.ModelForm):
-    model = Profile
+    model = Profile_fake
     fields = ('picture', 'phone', 'plz', 'newsletter')
     username = forms.CharField(required=True)
     email = forms.EmailField(required=True)
@@ -64,7 +66,7 @@ class EditProfileForm(forms.ModelForm):
             )
         )
     class Meta:
-        model = Profile
+        model = Profile_fake
         #fields = '__all__'
         fields = ('picture', 'phone', 'plz', 'newsletter')
 
