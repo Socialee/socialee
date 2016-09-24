@@ -111,6 +111,13 @@ class Project(CommonGround):
         return reverse('project_detailview', kwargs = {"slug": self.slug})
 
 
+def pre_save_project(sender, instance, *args, **kwargs):
+    slug = slugify(instance.title)
+    instance.slug = slug
+
+pre_save.connect(pre_save_project, sender = Project)
+
+
 class Profile(CommonGround):
     user = models.OneToOneField(User, blank=True, null=True)
     picture = models.ImageField(upload_to=upload_location, null=True, blank=True)

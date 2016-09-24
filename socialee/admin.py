@@ -10,7 +10,7 @@ from .models import *
 class ProjectAdmin(admin.ModelAdmin):
     model = Project
     list_display = ['title', 'created_by']
-    fields = ('slug', 'created_by', 'title', 'tagline', 'description', 'header_img', 'tags')
+    fields = ('created_by', 'title', 'tagline', 'description', 'header_img', 'tags')
 
 
 class ProfileAdmin(admin.ModelAdmin):
