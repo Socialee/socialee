@@ -124,10 +124,6 @@ MIDDLEWARE_CLASSES = [
     'cms.middleware.language.LanguageCookieMiddleware',
 ]
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/dev/howto/static-files/
-# and https://gist.github.com/richleland/1324335
-
 # AWS S3 Settings
 if DEBUG==False:
 
@@ -146,16 +142,12 @@ if DEBUG==False:
     # these next two aren't used, but staticfiles will complain without them
     STATIC_URL = "https://%s.s3.amazonaws.com/" % AWS_STATIC_BUCKET_NAME
     MEDIA_URL = "https://%s.s3.amazonaws.com/" % AWS_STORAGE_BUCKET_NAME
+    STATIC_ROOT = ''
 
 else:
     COLLECTFAST_ENABLED = False
     STATIC_URL = '/static/'
     MEDIA_URL = '/media/'
-
-MEDIA_ROOT = str(ROOT_DIR('media'))
-STATIC_ROOT = str(ROOT_DIR('build', 'static'))
-STATICFILES_DIRS = (str(APPS_DIR('static')), )
-
 
 # Password Protection for Staging Server
 if SIMPLE_AUTH==True: # set in socialee-stage.herokuapp.com
@@ -277,6 +269,13 @@ ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/'
 
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/dev/howto/static-files/
+
+MEDIA_ROOT = str(ROOT_DIR('media'))
+STATIC_ROOT = str(ROOT_DIR('build', 'static'))
+STATICFILES_DIRS = (str(APPS_DIR('static')), )
+
 # Configure SSL for Heroku and force redirect to https.
 # > heroku config:set --app socialee-staging DJANGO_SECURE_PROXY_SSL_HEADER=HTTP_X_FORWARDED_PROTO,https
 # > heroku config:set --app socialee-staging DJANGO_SECURE_SSL_REDIRECT=1
@@ -338,5 +337,3 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'Zinnia',
     },
 }
-
-TAGGIT_CASE_INSENSITIVE = True
