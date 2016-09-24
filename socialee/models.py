@@ -17,16 +17,12 @@ from django.dispatch import receiver
 from allauth.account.models import EmailAddress
 
 from taggit.managers import TaggableManager
-from taggit.models import CommonGenericTaggedItemBase, TaggedItemBase
-
-class GenericSlugTaggedItem(CommonGenericTaggedItemBase, TaggedItemBase):
-    object_id = models.SlugField(verbose_name=_('Object id'), db_index=True)
 
 class CommonGround(models.Model):
     """
     Stores all the common fields for :model:`Profile` and :model:`Project`.
     """
-    slug = models.SlugField(primary_key=True)
+    slug = models.SlugField()
     inputs = models.ManyToManyField('Input', blank=True)
     outputs = models.ManyToManyField('Output', blank=True)
     tagline = models.CharField(max_length=140, null= True)
@@ -35,7 +31,7 @@ class CommonGround(models.Model):
     liked_profiles = models.ManyToManyField(User, related_name='profile_likes') # follower/beobachter
     liked_projects = models.ManyToManyField('Project', related_name='project_likes')
     liked_messages = models.ManyToManyField('Message', related_name='message_likes')
-    tags = TaggableManager(through=GenericSlugTaggedItem)
+    tags = TaggableManager()
 
 
 def upload_location(instance, filename):
@@ -103,6 +99,7 @@ class Project(CommonGround):
     title = models.CharField(max_length=60)
     created_by = models.ForeignKey(User, null=True)
     header_img = models.ImageField(upload_to=upload_location, null=True, blank=True)    
+    managers = models.ManyToManyField(User, related_name='Project_Managers', blank=True)
     
     
     def __str__(self):
