@@ -35,7 +35,7 @@ class CommonGround(models.Model):
 
 
 def upload_location(instance, filename):
-    location = str(instance.user.username)
+    location = str(instance.id)
     return "%s/%s" % (location, filename)
 
 class InputOutput(models.Model):
@@ -100,6 +100,9 @@ class Project(CommonGround):
     created_by = models.ForeignKey(User, null=True)
     header_img = models.ImageField(upload_to=upload_location, null=True, blank=True) 
     managers = models.ManyToManyField(User, related_name='Project_Managers', blank=True)
+    video = models.FileField(upload_to=upload_location, null=True, blank=True) 
+    longdescription = models.TextField(max_length=2500, null=True, blank=True)
+    history = models.TextField(max_length=1000, null=True, blank=True)
     
     
     def __str__(self):
