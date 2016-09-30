@@ -94,7 +94,7 @@ INSTALLED_APPS = (
 
     # SOCIALEE CUSTOM APPS
     'landingpage.apps.LandingpageConfig',
-    'questions.apps.QuestionsConfig', 
+    'questions.apps.QuestionsConfig',
     'quotes.apps.QuotesConfig',
     'socialee.apps.SocialeeConfig',
 )
@@ -169,7 +169,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-                str(APPS_DIR('templates/')), 
+                str(APPS_DIR('templates/')),
                 str(APPS_DIR('templates/project/')),
                 str(APPS_DIR('templates/profile/')),
                 ],

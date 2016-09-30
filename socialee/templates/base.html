@@ -7,11 +7,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {# The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags #}
-        
+
         <meta name="description" content="Socialee. Es fehlt an nichts.">
         <meta name="author" content="Socialee GmbH">
         <link rel="icon" href="#">
-        <title>Socialee</title>
+        <title>SocialeeA</title>
 
         {# Font Awesome #}
         <link rel="stylesheet" href="{% static 'font-awesome-4.6.3/css/font-awesome.min.css' %}">
@@ -19,17 +19,18 @@
         {# Slick Slider #}
         <link rel="stylesheet" type="text/css" href="{% static 'bower_components/slick.js/slick/slick.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'bower_components/slick.js/slick/slick-theme.css' %}"/>
-        
+
         {# Socialee CSS #}
         <link type="text/css" rel="stylesheet" href="{% static 'css/socialee_global.css' %}" />
-        
+        <link type="text/css" rel="stylesheet" href="{% static 'css/socialee_app.css' %}"  />
+
         {# CSS & JS via Sekizai #}
         {% render_block "css" %}
         {% render_block "js_head" %}
         {# Font via Adobe #}
         <script src="https://use.typekit.net/def1wap.js"></script>
         <script>try{Typekit.load({ async: false });}catch(e){}</script>
-        
+
 
         <!-- Piwik -->
         <script type="text/javascript">
@@ -51,21 +52,21 @@
 
     <body>
         {# start of content #}
-        
+
         {# {% cms_toolbar %} #}
 
         {% include "navbar.html" %}
 
         {% block before_content %}
         {% endblock before_content %}
-        
+
         {% include "messages.html" %}
-        
+
         {% block content %}
         {% endblock content %}
-        
+
         {% include "footer.html" %}
-        
+
         {% block after_content %}
         {% endblock after_content %}
         {# end of content #}

@@ -1,0 +1,64 @@
+.comment__input {
+    padding-bottom: 80px;
+}
+
+.comment--indented {
+  margin-left: 40px;
+  padding-top: 80px;
+}
+
+.comment__avatar img {
+  float: left;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.comment__content {
+  border-bottom: 4px solid #F8F8F8;
+  padding-bottom: 20px;
+}
+
+.comment__input .comment__content {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.comment__input .comment__actions p {
+  font-size: 22px;
+  padding-top: 10px;
+}
+
+.comment__wrap {
+  padding-left: 40px;
+  border-left: 4px solid #ebebeb;
+}
+
+.comment__top {
+  padding-bottom: 20px;
+}
+
+.comment__actions {
+
+  .inline-list {
+    margin-left: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-top: 5px;
+    display: inline-block;
+  }
+
+  .inline-list i {
+    padding-right: 5px;
+  }
+
+  .inline-list li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+
+  .inline-list li a {
+    font-size: 14px;
+  }
+
+}

@@ -126,7 +126,7 @@
 
 .fullscreen-img {
   min-height: 100vh;
-  background: no-repeat top center; 
+  background: no-repeat top center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -141,7 +141,7 @@
   img {
     height: 45vh;
     padding: 6rem 0 2rem 0;
-    margin: 0 auto; 
+    margin: 0 auto;
   }
   h1 {
     font-weight: bold;
@@ -211,7 +211,7 @@
 }
 
 .lp-nav {
-  @include top-bar-container;  
+  @include top-bar-container;
 }
 
 .lp-nav, .lp-nav ul {
@@ -308,7 +308,7 @@
     border-right: solid 1px $light-gray;
   }
   div:last-child {
-   border-right: none; 
+   border-right: none;
   }
   .row {
     min-height: 5rem;
@@ -356,7 +356,7 @@
 .fieldWrapper
 {
   padding-top: 0px;
-  .requirements 
+  .requirements
   {
     float:right;
     font-size: 70%;
@@ -373,7 +373,7 @@
     margin-top: 0;
   }
 
-  input 
+  input
   {
     margin:0;
   }
