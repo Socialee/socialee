@@ -7,7 +7,7 @@
 		<form method="POST" action="">{% csrf_token %}
 			{{ form|crispy }}
 			<input class="button float-right" type="submit" value="Und los!"></input>
-			<a href="{% url 'project_detailview' project.slug %}">zurück zum Projekt</a>
+			<a href="{% url 'project_view' project.slug %}">zurück zum Projekt</a>
 		</form>
 		
 	</div>

@@ -44,18 +44,6 @@ class BaseView:
         return context
 
 
-class Home(BaseView, TemplateView):
-    template_name = 'home.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(Home, self).get_context_data(**kwargs)
-        # make sure the profile exists
-        if self.request.user.is_authenticated():
-            self.request.user.profile
-
-        return context
-
-
 class NewsletterSignup(SignupView):
     form_class = NewsletterForm
     template_name = 'invite_me.html'
@@ -191,7 +179,7 @@ class ProjectOverview(BaseView, ListView):
 
 
 # CRUD RETRIEVE PARTICULAR PROJECT
-class ProjectDetailView(BaseView, DetailView):
+class ProjectView(BaseView, DetailView):
     template_name = 'project_view.html'
     model = Project
 
@@ -203,7 +191,7 @@ class ProjectDetailView(BaseView, DetailView):
 
 # CRUD UPDATE PARTICULAR PROJECT
 class ProjectUpdateView(BaseView, UpdateView):
-    template_name = 'edit_project.html'
+    template_name = 'project_update.html'
     model = Project
     form_class = EditProjectForm
 
@@ -246,7 +234,6 @@ class Socialeebhaber(BaseView, UpdateView):
 # Profile-Views
 
 # Update Profile: User updates own profile
-# Retrieve Profile: User watches detail-view of own profile or profile of others
 # Delete Profile: User deletes own profile
 # Profile View: Public Profile View for other users
 # Welcome View: Landing-Page for User and overview
@@ -254,9 +241,8 @@ class Socialeebhaber(BaseView, UpdateView):
 
 # Update Profile: User updates own profile
 class ProfileUpdateView(BaseView, UpdateView):
-    template_name = 'user_profile_update.html'
+    template_name = 'profile_update.html'
     model = Profile
-    # form_class = EditProfileForm
     form_class = EditProfileForm
 
     def get_context_data(self, **kwargs):
@@ -299,17 +285,6 @@ class ProfileUpdateView(BaseView, UpdateView):
     #     else:
     #         raise Http404
 
-
-
-# Retrieve Profile: User watches detail-view of own profile or profile of others
-class ProfileDetailView(BaseView, DetailView):
-    template_name = 'user_profile_detail.html'
-    model = Profile
-
-    def get_context_data(self, **kwargs):
-        context = super(ProfileDetailView, self).get_context_data(**kwargs)
-
-        return context
 
 
 class ProfileView(BaseView, DetailView):

@@ -109,7 +109,7 @@ class Project(CommonGround):
         return self.__class__()
 
     def get_absolute_url(self):
-        return reverse('project_detailview', kwargs = {"slug": self.slug})
+        return reverse('project_view', kwargs = {"slug": self.slug})
 
 
 def pre_save_project(sender, instance, *args, **kwargs):
