@@ -39,8 +39,8 @@ class EditProjectForm(forms.ModelForm):
 
 
 class EditProfileForm(forms.ModelForm):
-    model = Profile
-    fields = ('picture', 'phone', 'plz', 'newsletter')
+    # model = Profile
+    # fields = '__all__'
     username = forms.CharField(required=True)
     email = forms.EmailField(required=True)
     first_name = forms.CharField(required=False)
@@ -53,6 +53,8 @@ class EditProfileForm(forms.ModelForm):
             Fieldset(
                 'Ändere hier Dein Profil.',
                 'username', 'email', 'first_name', 'last_name',
+                'tagline',
+                'description',
                 'picture',
                 'phone',
                 'plz',
@@ -65,8 +67,8 @@ class EditProfileForm(forms.ModelForm):
         )
     class Meta:
         model = Profile
-        #fields = '__all__'
-        fields = ('picture', 'phone', 'plz', 'newsletter')
+        fields = '__all__'
+        # fields = ('picture', 'phone', 'plz', 'newsletter')
 
 class NewsletterForm(BaseSignupForm):
     class Meta:

@@ -7,13 +7,30 @@
             <div class="media-object">
               <div class="media-object-section">
                 <div class="thumbnail">
-                  <img src="/static/img/app/210.jpg" alt="profile image">
+                  <img src="{{ MEDIA_URL }}{{ object.picture }}" alt="profile image">
                 </div>
               </div>
               <div class="media-object-section">
-                <a class="hollow button float-right" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge Moritz</a>
-                <h2>{{ object.user.username }}</h2>
-                <h5>Socialee Gründer & Experte</h5>
+              {% if not request.user == object.user %}
+                <a class="hollow button float-right" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge {% if user.first_name %} {{ object.user.first_name }} {% else %} {{ user.username }} {% endif %} </a>
+              {% else %}
+              <a class="hollow button float-right" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
+              {% endif %}
+
+                <h2>
+                {% if object.user.first_name and object.user.last_name %}
+                  {{ object.user.first_name }} {{ object.user.last_name }}
+                  {% elif object.user.first_name and not object.user.last_name %}
+                  {{ object.user.first_name }}
+                  {% else %}
+                  {{ object.user.username }}
+                {% endif %} 
+                </h2>
+                <h5>{% if object.tagline %}
+                  {{ object.tagline }}
+                  {% else %}
+                  Hier steht eigentlich eine Tagline.
+                {% endif %}</h5>
                 <div class="small-12 columns">
                   <div class="tags tags--is">
                     <a class="label"><i class="fi-x-circle"></i>Audio</a>
@@ -24,14 +41,18 @@
                     <a class="label"><i class="fi-x-circle"></i>App</a>
                   </div>
                 </div>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                <p>{% if object.description %}
+                  {{ object.description }}
+                {% else %}
+                  Hier steht deine Projektbeschreibung.
+                {% endif %}</p>
               </div>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="small-12 large-6 columns columns">
-            <h4>Moritz bietet</h4>
+            <h4>{{ object.user.first_name }} bietet</h4>
             <div class="tags">
               <a class="label"><i class="fi-x-circle"></i><span>4</span>Audio</a>
               <a class="label"><i class="fi-x-circle"></i>App</a>
@@ -42,7 +63,7 @@
             </div>
           </div>
           <div class="small-12 large-6 columns columns">
-            <h4>Moritz benötigt</h4>
+            <h4>{{ object.user.first_name }} benötigt</h4>
             <div class="tags">
               <a class="label"><i class="fi-x-circle"></i>Audio</a>
               <a class="label"><i class="fi-x-circle"></i>App</a>

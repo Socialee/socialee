@@ -1,12 +1,37 @@
-<div class="row top-bar-app">
+{# switch off navbar in production for now #}
+{% if not PROD %}
+
+<div class="row expanded top-bar-app">
   <div class="top-bar-left">
     <ul class="menu">
       <li class="menu-text">Guten Abend bei Socialee</li>
     </ul>
   </div>
+
   <div class="top-bar-right">
-    <ul class="menu">
-      <li class="menu-text">Don Ludwig</li>
+    <ul class="dropdown menu" data-dropdown-menu>
+      {% if not request.user.is_authenticated %}
+      <li class="menu-text"><a href="{% url 'account_login' %}">Log In</a></li>
+      {% else %}
+      <li class="menu-text">
+        <a href="#">
+            <i class="fa fa-home" aria-hidden="true"></i>
+            {% if request.user.first_name %}
+              {{ request.user.first_name }}
+            {% else %}
+              {{ request.user }}
+            {% endif %}
+          </a>
+        <ul class="menu">
+          <li><a href="{% url 'profile_view' request.user %}">Profil anzeigen</a></li>
+          <li><a href="{% url 'profile_updateview' request.user %}">Profil bearbeiten</a></li>
+        </ul>
+      </li>
+      <li class="menu-text"><a href="{% url 'account_logout' %}">Log out</a></li>
+      {% endif %}
     </ul>
   </div>
+
 </div>
+
+{% endif %}
