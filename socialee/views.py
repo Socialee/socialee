@@ -24,7 +24,7 @@ from allauth.account.forms import *
 from allauth.account.decorators import verified_email_required
 from allauth.account.signals import email_confirmed
 
-from .models import Project, Input, Output, Profile
+from .models import Project, Input, Output, Profile, CommonGround
 from .forms import *
 
 User = get_user_model()
@@ -294,6 +294,10 @@ class ProfileView(BaseView, DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
         context['user_project_list'] = Project.objects.filter(created_by=context["profile"].user)
+        context['tags_list'] = CommonGround.tags.all()
+        context['input_list'] = Input.objects.all()
+        context['output_list'] = Output.objects.all()
+        context['badge_count'] = 1 # TODO welchem Konzept folgt der Counter, erst mal weglassen???
 
         return context
 

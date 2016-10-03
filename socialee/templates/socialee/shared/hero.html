@@ -32,12 +32,11 @@
                 </h5>
                 <div class="small-12 columns">
                   <div class="tags tags--is tags--orange">
-                    <a class="label label--orange"><i class="fi-x-circle"></i>§Audio</a>
-                    <a class="label label--orange"><i class="fi-x-circle"></i>App</a>
-                    <a class="label label--orange"><i class="fi-x-circle"></i>Book</a>
-                    <a class="label label--orange"><i class="fi-x-circle"></i>Door</a>
+                    {% for tags in tags_list %}
+                    <a class="label label--orange"><i class="fi-x-circle"></i>{{ tags }}</a>
+                    {% endfor %}
                     <a class="label label--grey label--more"><i class="fa fa-plus"></i> §7 Mehr</a>
-                    </div>
+                  </div>
                 </div>
                 <p>{% if object.description %}
                   {{ object.description }}
@@ -45,7 +44,7 @@
                   Hier steht deine Projektbeschreibung.
                 {% endif %}
                 </p>
-                <p>Klingt interessant, <a href="">schreib {{ object.user_first_name }} mal</a></p>
+                <p>Klingt interessant, <a href="">schreib {{ object.user.first_name }} mal.</a></p>
               </div>
             </div>
           </div>
@@ -57,28 +56,20 @@
                 <div class="small-12 medium-6 columns">
                   <div class="tags tags--green">
                     <h4>{{ object.user.first_name }} bietet</h4>
-                    <a class="label label--green"><i class="fi-x-circle"></i><span>§4</span>§Audio</a>
-                    <a class="label label--green"><i class="fi-x-circle"></i>App</a>
-                    <a class="label label--green"><i class="fi-x-circle"></i>Book</a>
-                    <a class="label label--green"><i class="fi-x-circle"></i>Book</a>
-                    <a class="label label--green"><i class="fi-x-circle"></i>Image</a>
-                    <a class="label label--green"><i class="fi-x-circle"></i>App</a>
-                    <a class="label label--green"><i class="fi-x-circle"></i>Image</a>
-                    <a class="label label--green"><i class="fi-x-circle"></i>App</a>
+                    {% for input in input_list %}                                                                                            
+                    <a class="label label--green"><i class="fi-x-circle"></i>{{ input.title }}{% if badge_count >= 1 %}
+                    <span>{{ badge_count }}</span>{% endif %}</a>
+                    {% endfor %}
                     <a class="label label--white label--more"><i class="fa fa-plus"></i> §7 Mehr</a>
                   </div>
                 </div>
                 <div class="small-12 medium-6 columns">
                   <div class="tags tags--blue">
                     <h4>{{ object.user.first_name }} benötigt</h4>
-                    <a class="label label--blue"><i class="fi-x-circle"></i>§Audio</a>
-                    <a class="label label--blue"><i class="fi-x-circle"></i>App</a>
-                    <a class="label label--blue"><i class="fi-x-circle"></i>Book</a>
-                    <a class="label label--blue"><i class="fi-x-circle"></i>Door</a>
-                    <a class="label label--blue"><i class="fi-x-circle"></i>Image</a>
-                    <a class="label label--blue"><i class="fi-x-circle"></i>App</a>
-                    <a class="label label--blue"><i class="fi-x-circle"></i>Image</a>
-                    <a class="label label--blue"><i class="fi-x-circle"></i>App</a>
+                    {% for output in output_list %}                                                                        
+                    <a class="label label--blue"><i class="fi-x-circle"></i>{{ output.title }}{% if badge_count >= 1 %}
+                    <span>{{ badge_count }}</span>{% endif %}</a>
+                    {% endfor %}
                     <a class="label label--white label--more"><i class="fa fa-plus"></i> §7 Mehr</a>
                   </div>
                 </div>
