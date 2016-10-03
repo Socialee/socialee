@@ -1,22 +1,20 @@
-<div class="section__hero" style="background-image: url(/static/img/app/pattern.jpg);">
+<section class="hero">
   <div class="row">
     <div class="columns large-12">
       <div class="hero__profile">
         <div class="row">
           <div class="small-12 columns">
-            <div class="media-object">
+            <div class="media-object stack-for-small">
               <div class="media-object-section">
-                <div class="thumbnail">
-                  <img src="{{ MEDIA_URL }}{{ object.picture }}" alt="profile image">
-                </div>
+                {% load static %}
+                <img src="{{ MEDIA_URL }}{{ object.picture }}" alt="profile image">
               </div>
               <div class="media-object-section">
               {% if not request.user == object.user %}
-                <a class="hollow button float-right" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge {% if user.first_name %} {{ object.user.first_name }} {% else %} {{ user.username }} {% endif %} </a>
+              <a class="hollow button float-right" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge {% if user.first_name %} {{ object.user.first_name }} {% else %} {{ user.username }} {% endif %} </a>
               {% else %}
               <a class="hollow button float-right" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
               {% endif %}
-
                 <h2>
                 {% if object.user.first_name and object.user.last_name %}
                   {{ object.user.first_name }} {{ object.user.last_name }}
@@ -24,215 +22,62 @@
                   {{ object.user.first_name }}
                   {% else %}
                   {{ object.user.username }}
-                {% endif %} 
+                {% endif %}
                 </h2>
                 <h5>{% if object.tagline %}
                   {{ object.tagline }}
                   {% else %}
                   Hier steht eigentlich eine Tagline.
-                {% endif %}</h5>
+                {% endif %}
+                </h5>
                 <div class="small-12 columns">
-                  <div class="tags tags--is">
-                    <a class="label"><i class="fi-x-circle"></i>Audio</a>
-                    <a class="label"><i class="fi-x-circle"></i>App</a>
-                    <a class="label"><i class="fi-x-circle"></i>Book</a>
-                    <a class="label"><i class="fi-x-circle"></i>Door</a>
-                    <a class="label"><i class="fi-x-circle"></i>Image</a>
-                    <a class="label"><i class="fi-x-circle"></i>App</a>
+                  <div class="tags tags--is tags--orange">
+                    {% for tags in tags_list %}
+                    <a class="label label--orange"><i class="fi-x-circle"></i>{{ tags }}</a>
+                    {% endfor %}
+                    <a class="label label--grey label--more"><i class="fa fa-plus"></i> §7 Mehr</a>
                   </div>
                 </div>
                 <p>{% if object.description %}
                   {{ object.description }}
                 {% else %}
                   Hier steht deine Projektbeschreibung.
-                {% endif %}</p>
+                {% endif %}
+                </p>
+                <p>Klingt interessant, <a href="">schreib {{ object.user.first_name }} mal.</a></p>
               </div>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="small-12 large-6 columns columns">
-            <h4>{{ object.user.first_name }} bietet</h4>
-            <div class="tags">
-              <a class="label"><i class="fi-x-circle"></i><span>4</span>Audio</a>
-              <a class="label"><i class="fi-x-circle"></i>App</a>
-              <a class="label"><i class="fi-x-circle"></i>Book</a>
-              <a class="label"><i class="fi-x-circle"></i>Door</a>
-              <a class="label"><i class="fi-x-circle"></i>Image</a>
-              <a class="label"><i class="fi-x-circle"></i>App</a>
-            </div>
-          </div>
-          <div class="small-12 large-6 columns columns">
-            <h4>{{ object.user.first_name }} benötigt</h4>
-            <div class="tags">
-              <a class="label"><i class="fi-x-circle"></i>Audio</a>
-              <a class="label"><i class="fi-x-circle"></i>App</a>
-              <a class="label"><i class="fi-x-circle"></i>Book</a>
-              <a class="label"><i class="fi-x-circle"></i>Door</a>
-              <a class="label"><i class="fi-x-circle"></i>Image</a>
-              <a class="label"><i class="fi-x-circle"></i>App</a>
+          <div class="small-12 columns">
+            <div class="tags-wrapper">
+              <div class="row">
+                <div class="small-12 medium-6 columns">
+                  <div class="tags tags--green">
+                    <h4>{{ object.user.first_name }} bietet</h4>
+                    {% for input in input_list %}                                                                                            
+                    <a class="label label--green"><i class="fi-x-circle"></i>{{ input.title }}{% if badge_count >= 1 %}
+                    <span>{{ badge_count }}</span>{% endif %}</a>
+                    {% endfor %}
+                    <a class="label label--white label--more"><i class="fa fa-plus"></i> §7 Mehr</a>
+                  </div>
+                </div>
+                <div class="small-12 medium-6 columns">
+                  <div class="tags tags--blue">
+                    <h4>{{ object.user.first_name }} benötigt</h4>
+                    {% for output in output_list %}                                                                        
+                    <a class="label label--blue"><i class="fi-x-circle"></i>{{ output.title }}{% if badge_count >= 1 %}
+                    <span>{{ badge_count }}</span>{% endif %}</a>
+                    {% endfor %}
+                    <a class="label label--white label--more"><i class="fa fa-plus"></i> §7 Mehr</a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="columns large-12">
-      <ul class="tabs header-subnav" data-tabs id="example-tabs">
-        <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Dialoge</a></li>
-        <li class="tabs-title"><a href="#panel2">Verbindungen</a></li>
-      </ul>
-
-    </div>
-  </div>
-
-  <div class="site-content">
-    <div class="row">
-      <div class="columns large-12">
-        <div class="tabs-content" data-tabs-content="example-tabs">
-          <div class="tabs-panel is-active" id="panel1">
-           <div class="row">
-            <div class="large-8 large-offset-2 small-12 columns">
-
-              <div class="comment comment__input">
-                <section class="comment__top">
-                  <h6 class="byline">
-                    <a href="#">
-                      <div class="comment__avatar"><img src="/static/img/app/user_moritz_small.png" alt="1"></div>
-                      Moritz Jüdes</a>
-                      <div class="time grey">
-                        <span class="data">
-                          NEUEN KOMMENTAR SCHREIBEN
-                        </span>
-                      </div>
-                    </h6>
-
-                  </section>
-                  <section class="comment__content">
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
-                  </section>
-                  <section class="comment__actions">
-                    <ul class="inline-list float-right">
-                      <a class="secondary button float-right" href="#">Kommentieren</a>
-                    </ul>
-                    <p class="grey">Übrigens: Personen können mit @username erwähnt werden.</p>
-                  </section>
-                </div>
-
-                <div class="comment">
-                  <section class="comment__top">
-                    <a class="hollow button float-right" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge Moritz</a>
-                    <h6 class="byline">
-                      <a href="#">
-                        <div class="comment__avatar"><img src="/static/img/app/user_moritz_small.png" alt="1"></div>
-                        Moritz Jüdes</a>
-                        <div class="time grey">vor
-                          <span class="data">
-                            24 Minuten
-                          </span>
-                        </div>
-                      </h6>
-
-                    </section>
-                    <section class="comment__content">
-                      <p>Donec sed odio dui. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. <a href="#">@Don Ludwig</a> Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Maecenas sed diam eget risus varius.</p>
-                      <img src="/static/img/app/ralph1.jpg" alt="">
-                    </section>
-                    <section class="comment__actions">
-
-                      <ul class="inline-list">
-                        <li><a href="#"><i class="fa fa-reply"></i>Antworten </a></li>
-                        <li><a href="#"><i class="fa fa-heart"></i>3</a></li>
-                      </ul>
-                      <ul class="inline-list float-right">
-                        <li><a href="#">Zeige Verbindungen</a></li>
-                        <li><a href="#">Das ist eine Idee!</a></li>
-                      </ul>
-
-                    </section>
-
-                  </div>
-
-                  <div class="comment--indented">
-                    <div class="comment__wrap">
-                      <section class="comment__top">
-                        <a class="hollow button float-right" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge Moritz</a>
-                        <h6 class="byline">
-                          <a href="#">
-                            <div class="comment__avatar"><img src="/static/img/app/user_moritz_small.png" alt="1"></div>
-                            Moritz Jüdes</a>
-                            <div class="time grey">vor
-                              <span class="data">
-                                24 Minuten
-                              </span>
-                            </div>
-                          </h6>
-                        </section>
-                        <section class="comment__content">
-                          <p>Wow, guys. Lots of great feedback.</p>
-                          <p>First, <a href="#">@Milkmusket</a>, I agree. I've struggled with that section and might take advice for <a href="#">@albanesetr</a> and focus on a single feature rather than the whole screenshot.</p>
-                        </section>
-                        <section class="comment__actions">
-
-                          <ul class="inline-list">
-                            <li><a href="#"><i class="fa fa-reply"></i>Antworten </a></li>
-                            <li><a href="#"><i class="fa fa-heart"></i>3</a></li>
-                          </ul>
-
-                          <ul class="inline-list float-right">
-                            <li><a href="#">Zeige Verbindungen</a></li>
-                            <li><a href="#">Das ist eine Idee!</a></li>
-                          </ul>
-
-                        </section>
-                      </div>
-                    </div>
-
-                    <div class="comment--indented">
-                      <div class="comment__wrap">
-                        <section class="comment__top">
-                          <a class="hollow button float-right" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge Moritz</a>
-                          <h6 class="byline">
-                            <a href="#">
-                              <div class="comment__avatar"><img src="/static/img/app/user_moritz_small.png" alt="1"></div>
-                              Moritz Jüdes</a>
-                              <div class="time grey">vor
-                                <span class="data">
-                                  24 Minuten
-                                </span>
-                              </div>
-                            </h6>
-                          </section>
-                          <section class="comment__content">
-                            <p>Wow, guys. Lots of great feedback.</p>
-                            <p>First, <a href="#">@Milkmusket</a>, I agree. I've struggled with that section and might take advice for <a href="#">@albanesetr</a> and focus on a single feature rather than the whole screenshot.</p>
-                          </section>
-                          <section class="comment__actions">
-
-                            <ul class="inline-list">
-                              <li><a href="#"><i class="fa fa-reply"></i>Antworten </a></li>
-                              <li><a href="#"><i class="fa fa-heart"></i>3</a></li>
-                            </ul>
-
-                            <ul class="inline-list float-right">
-                              <li><a href="#">Zeige Verbindungen</a></li>
-                              <li><a href="#">Das ist eine Idee!</a></li>
-                            </ul>
-
-                          </section>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="tabs-panel" id="panel2">
-                  <p>Suspendisse dictum feugiat nisl ut dapibus.  Vivamus hendrerit arcu sed erat molestie vehicula. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor.  Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
+</section>
