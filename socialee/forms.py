@@ -40,7 +40,7 @@ class EditProjectForm(forms.ModelForm):
 
 class EditProfileForm(forms.ModelForm):
     model = Profile
-    fields = ('tagline', 'picture', 'phone', 'plz', 'newsletter')
+    fields = ('tagline', 'description', 'picture', 'phone', 'plz', 'newsletter')
     username = forms.CharField(required=True)
     email = forms.EmailField(required=True)
     first_name = forms.CharField(required=False)
@@ -67,7 +67,7 @@ class EditProfileForm(forms.ModelForm):
         )
     class Meta:
         model = Profile
-        fields = ('tagline', 'picture', 'phone', 'plz', 'newsletter')
+        fields = ('tagline', 'description', 'picture', 'phone', 'plz', 'newsletter')
 
 class NewsletterForm(BaseSignupForm):
     class Meta:
