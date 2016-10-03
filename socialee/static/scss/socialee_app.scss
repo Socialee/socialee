@@ -1,11 +1,18 @@
 // Socialee App scss
 
+$grey: #F8F8F8;
+
 @import "settings";
+@import "vendor/_card.scss";
 @import "foundation-sites/scss/foundation";
+
 
 @import "components/_top-bar";
 @import "components/_hero";
 @import "components/_tabs";
 @import "components/_comments";
+@import "components/_cards";
+@import "components/_connections";
+@import "components/_connections-footer";
 @import "components/_misc";
 
