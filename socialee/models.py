@@ -25,8 +25,8 @@ class CommonGround(models.Model):
     slug = models.SlugField( db_index=True )
     inputs = models.ManyToManyField('Input', blank=True)
     outputs = models.ManyToManyField('Output', blank=True)
-    tagline = models.CharField(max_length=140, null= True)
-    description = models.TextField(max_length=5000, null=True, blank=True)
+    tagline = models.CharField(max_length=140, null= True, blank=True, verbose_name="Kurzbeschreibung oder Motto")
+    description = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Beschreibung")
     conversation = models.OneToOneField('Conversation', blank=True, null=True)
     liked_profiles = models.ManyToManyField(User, related_name='profile_likes') # follower/beobachter
     liked_projects = models.ManyToManyField('Project', related_name='project_likes')
@@ -39,19 +39,15 @@ def upload_location(instance, filename):
     return "%s/%s" % (location, filename)
 
 class InputOutput(models.Model):
-    UNKNOWN = ''
-    KNOWLEDGE = 'knowledge'
-    SKILL = 'skill'
+    UNKNOWN = '...'
+    SKILL = 'knowledge'
     PROBLEM = 'problem'
     RESOURCE = 'resource'
-    SOLUTION = 'solution'
     TYPES = (
         (UNKNOWN, 'sonstige'),
-        (KNOWLEDGE, 'Wissen'),
-        (SKILL, 'Fähigkeit'),
+        (SKILL, 'Wissen und Fähigkeit'),
         (PROBLEM, 'Problem'),
-        (RESOURCE, 'Resource'),
-        (SOLUTION, 'Lösung'),
+        (RESOURCE, 'Ressource'),
     )
 
     class Meta:
@@ -60,30 +56,30 @@ class InputOutput(models.Model):
     owner = models.ForeignKey(CommonGround, null=True)
     type = models.CharField(max_length=25,
                             choices=list(TYPES),
-                            default=UNKNOWN)
+                            default=UNKNOWN, 
+                            blank=True, null=True,
+                            verbose_name="Typ")
 
     def itemclass(self):
         return self.__class__()
 
 
 class Input(InputOutput):
-    title = models.CharField(verbose_name="Was ist der Input?",
-                             max_length=200)
-    description = models.TextField(max_length=5000, null=True, blank=True)
+    title = models.CharField(verbose_name="benötigen & nehmen",
+                             max_length=200, blank=True, null=True)
+    description = models.TextField(max_length=1000, null=True, blank=True, verbose_name="Beschreibung")
 
     def __str__(self):
-        return 'Input "{}" from profile {}'.format(
-          self.title, self.profile)
+        return self.title
 
 
 class Output(InputOutput):
-    title = models.CharField(verbose_name="Was ist der Output?",
-                             max_length=200)
-    description = models.TextField(max_length=5000, null=True, blank=True)
+    title = models.CharField(verbose_name="bieten & geben",
+                             max_length=200, blank=True, null=True)
+    description = models.TextField(max_length=1000, null=True, blank=True, verbose_name="Beschreibung")
 
     def __str__(self):
-        return 'Output "{}" from profile {}'.format(
-          self.title, self.profile)
+        return self.title
 
 class Conversation(models.Model):
     slug = models.SlugField(null=True, blank=True)
@@ -136,11 +132,15 @@ class Profile(CommonGround):
 
     def user_first_name(self):
         return self.user.first_name if self.user else None
-    user_first_name.short_description = _("First name")
+    user_first_name.short_description = _("Vorname")
 
     def user_last_name(self):
         return self.user.last_name if self.user else None
-    user_last_name.short_description = _("Last name")
+    user_last_name.short_description = _("Nachname")
+
+    def user_full_name(self):
+        return self.user.first_name + ' ' + self.user.last_name if self.user else None
+    user_full_name.short_description = _("Name")
 
     def user_email(self):
         return self.user.email if self.user else None
