@@ -36,8 +36,8 @@ class ProjectAdmin(admin.ModelAdmin):
 
 class ProfileAdmin(admin.ModelAdmin):
     model = Profile
-    list_display = ['user_full_name', 'user_email', 'user']
-    fields = (('user', 'picture'), 'tags', 'tagline', 'description', ('phone', 'plz', 'newsletter'))
+    list_display = ['user', 'user_email', 'user_full_name']
+    fields = (('user', 'picture'), 'tags', 'tagline', 'description', ('phone', 'plz', 'newsletter'), 'inputs', 'outputs')
     inlines = [
         OutputInline,
         InputInline,

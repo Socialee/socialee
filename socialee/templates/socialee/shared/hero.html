@@ -32,8 +32,8 @@
                 </h5>
                 <div class="small-12 columns">
                   <div class="tags tags--is tags--orange">
-                    {% for tags in tags_list %}
-                    <a class="label label--orange"><i class="fi-x-circle"></i>{{ tags }}</a>
+                    {% for tag in object.tags.all %}
+                    <a class="label label--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
                     {% endfor %}
                     <a class="label label--grey label--more"><i class="fa fa-plus"></i> §7 Mehr</a>
                   </div>
@@ -41,7 +41,7 @@
                 <p>{% if object.description %}
                   {{ object.description }}
                 {% else %}
-                  Hier steht deine Projektbeschreibung.
+                  Hier steht deine Beschreibung.
                 {% endif %}
                 </p>
                 <p>Klingt interessant, <a href="">schreib {{ object.user.first_name }} mal.</a></p>
@@ -56,8 +56,8 @@
                 <div class="small-12 medium-6 columns">
                   <div class="tags tags--green">
                     <h4>{{ object.user.first_name }} bietet</h4>
-                    {% for input in input_list %}                                                                                            
-                    <a class="label label--green"><i class="fi-x-circle"></i>{{ input.title }}{% if badge_count >= 1 %}
+                    {%  for input in object.outputs.all %}
+                    <a class="label label--green"><i class="fi-x-circle"></i>{{ input }}{% if badge_count >= 1 %}
                     <span>{{ badge_count }}</span>{% endif %}</a>
                     {% endfor %}
                     <a class="label label--white label--more"><i class="fa fa-plus"></i> §7 Mehr</a>
@@ -66,7 +66,7 @@
                 <div class="small-12 medium-6 columns">
                   <div class="tags tags--blue">
                     <h4>{{ object.user.first_name }} benötigt</h4>
-                    {% for output in output_list %}                                                                        
+                    {% for output in object.inputs.all %}
                     <a class="label label--blue"><i class="fi-x-circle"></i>{{ output.title }}{% if badge_count >= 1 %}
                     <span>{{ badge_count }}</span>{% endif %}</a>
                     {% endfor %}
