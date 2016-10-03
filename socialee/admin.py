@@ -1,10 +1,31 @@
 import datetime
 from django import forms
 from django.contrib import admin, auth
+from django.forms import TextInput, Textarea
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from .models import *
+
+
+
+
+class InputInline(admin.TabularInline):
+    model = Input
+    extra = 3
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size':'60'})},
+        models.TextField: {'widget': Textarea(attrs={'rows':1, 'cols':50})},
+    }
+
+
+class OutputInline(admin.TabularInline):
+    model = Output
+    extra = 3
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size':'60'})},
+        models.TextField: {'widget': Textarea(attrs={'rows':1, 'cols':50})},
+    }
 
 
 class ProjectAdmin(admin.ModelAdmin):
@@ -15,9 +36,28 @@ class ProjectAdmin(admin.ModelAdmin):
 
 class ProfileAdmin(admin.ModelAdmin):
     model = Profile
-    list_display = ['user', 'slug']
-    fields = ('user', 'tagline', 'description', 'slug', 'picture', 'phone', 'plz', 'newsletter')
+    list_display = ['user_full_name', 'user_email', 'user']
+    fields = (('user', 'picture'), 'tags', 'tagline', 'description', ('phone', 'plz', 'newsletter'))
+    inlines = [
+        OutputInline,
+        InputInline,
+        ]
 
+
+
+
+admin.site.register(Project, ProjectAdmin)
+admin.site.register(Profile, ProfileAdmin)
+# admin.site.register(Input, InputAdmin)
+# admin.site.register(Invite, InviteAdmin)
+
+
+
+### Not in use right now but still here for as an example
+
+# class CommonGroundAdmin(admin.ModelAdmin):
+#     model = CommonGround
+#     fields = ('slug', 'tagline', 'tags', 'inputs', 'outputs')
 
 # def mark_as_done(modeladmin, request, queryset):
 #     queryset.update(done=True)
@@ -28,8 +68,3 @@ class ProfileAdmin(admin.ModelAdmin):
 #     list_display_links = ['email']
 #     # list_editable = ['done']
 #     actions = [mark_as_done]
-
-
-admin.site.register(Project, ProjectAdmin)
-admin.site.register(Profile, ProfileAdmin)
-#admin.site.register(Invite, InviteAdmin)
