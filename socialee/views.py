@@ -24,7 +24,7 @@ from allauth.account.forms import *
 from allauth.account.decorators import verified_email_required
 from allauth.account.signals import email_confirmed
 
-from .models import Project, Input, Output, Profile, CommonGround
+from .models import Project, Input, Output, Profile, CommonGround, Conversation, Message
 from .forms import *
 
 User = get_user_model()
@@ -230,6 +230,27 @@ class Socialeebhaber(BaseView, UpdateView):
         return render(request, self.template_name, {'project' : project} )
 
 
+class Comment(BaseView, CreateView):
+    template_name = 'comment.html'
+
+    def post(self, request, *args, **kwargs):
+        comment = request.POST.get('comment')
+        common_id = request.POST.get('common_id')
+        reply_id = request.POST.get('reply_id')
+
+        if reply_id:
+            reply = Message.objects.get(id=reply_id)
+        else:
+            common = CommonGround.objects.get(id=common_id)
+            conv, created = Conversation.objects.get_or_create(slug=common.slug)
+            if created:
+                common.conversation = conv
+                common.save()
+        message = Message.objects.create(conversation=conv, by_user=request.user, message=comment )
+        message.save()
+            
+
+        return render(request, self.template_name, {'comment' : message} )
 
 # Profile-Views
 
