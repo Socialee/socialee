@@ -69,6 +69,37 @@ function change_socialeebhaber(id, user_id) {
 
 };
 
+function post_comment(comment, page_id, reply_id) {
+    $.ajax({
+        beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        },
+        url : "/comment/", // the endpoint
+        type : "POST", // http method
+        data : { comment : comment,
+                 common_id: page_id,
+                 reply_id: reply_id }, // data sent with the post request
+
+        // handle a successful response
+        success : function(data) {
+            $('#object'+page_id).append(data);
+        },
+
+        // handle a non-successful response
+        error : function(xhr,errmsg,err) {
+            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+    });
+
+};
+
+$(document).on("click", ".comment_button", function(event) {
+     post_comment($("#comment_value").val(), $(this).attr('page_id'), null)
+ });
 
 $(document).on("dblclick", ".socialeebhaber", function(event) {
      change_socialeebhaber($(this).attr('id'), $(this).attr('user_id'))

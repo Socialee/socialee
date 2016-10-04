@@ -1,0 +1,28 @@
+<div class="comment" id="comment{{ comment.id }}">
+  <section class="comment__top">
+    <a class="hollow button float-right" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge {{ comment.by_user.username }}</a>
+    <h6 class="byline">
+      <a href="#">
+        <div class="comment__avatar"><img src="{{ MEDIA_URL }}{{ comment.by_user.profile.picture }}" alt="profile image"></div>
+        {{ comment.by_user.first_name }} {{ comment.by_user.last_name }}</a>
+      <div class="time grey">vor
+        <span class="data">
+          {{ comment.date|timesince }}
+        </span>
+      </div>
+    </h6>
+  </section>
+  <section class="comment__content">
+    <p>{{ comment.message }}</p>
+  </section>
+  <section class="comment__actions">
+    <ul class="inline-list">
+      <li><a href="#"><i class="fa fa-reply"></i>Antworten </a></li>
+      <li><a href="#"><i class="fa fa-heart"></i>§3</a></li>
+    </ul>
+    <ul class="inline-list float-right">
+      <li><a href="#">§Zeige Verbindungen</a></li>
+      <li><a href="#">§Das ist eine Idee!</a></li>
+    </ul>
+  </section>
+</div>
