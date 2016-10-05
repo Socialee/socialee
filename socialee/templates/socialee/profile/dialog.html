@@ -2,6 +2,7 @@
 <div class="tabs-panel" id="panel1">
  <div class="row">
   <div class="large-8 large-offset-2 small-12 columns" id="object{{ object.id }}">
+
     <div class="comment comment__input">
       <section class="comment__top">
         <h6 class="byline">
@@ -29,7 +30,7 @@
 
     {% for message in object.conversation.messages.all %}
 
-      
+
         {% include "comment.html" with comment=message %}
 
         {% for reply in message.replys.all %}
@@ -39,7 +40,7 @@
             </div>
           </div>
         {% endfor %}
-    {% endfor %}          
+    {% endfor %}
 
     </div>
   </div>
