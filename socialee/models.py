@@ -23,8 +23,6 @@ class CommonGround(models.Model):
     Stores all the common fields for :model:`Profile` and :model:`Project`.
     """
     slug = models.SlugField( db_index=True )
-    inputs = models.ManyToManyField('Input', blank=True)
-    outputs = models.ManyToManyField('Output', blank=True)
     tagline = models.CharField(max_length=140, null= True, blank=True, verbose_name="Kurzbeschreibung oder Motto")
     description = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Beschreibung")
     conversation = models.OneToOneField('Conversation', blank=True, null=True)
@@ -53,7 +51,7 @@ class InputOutput(models.Model):
     class Meta:
         abstract = True
 
-    owner = models.ForeignKey(CommonGround, null=True)
+    owner = models.ForeignKey(CommonGround, null=True, related_name="%(app_label)s_%(class)s")
     type = models.CharField(max_length=25,
                             choices=list(TYPES),
                             default=UNKNOWN, 

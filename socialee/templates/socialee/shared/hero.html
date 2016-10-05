@@ -56,7 +56,7 @@
                 <div class="small-12 medium-6 columns">
                   <div class="tags tags--green">
                     <h4>{{ object.user.first_name }} bietet</h4>
-                    {%  for input in object.outputs.all %}
+                    {%  for input in object.socialee_output.all %}
                     <a class="label label--green"><i class="fi-x-circle"></i>{{ input }}{% if badge_count >= 1 %}
                     <span>{{ badge_count }}</span>{% endif %}</a>
                     {% endfor %}
@@ -66,7 +66,7 @@
                 <div class="small-12 medium-6 columns">
                   <div class="tags tags--blue">
                     <h4>{{ object.user.first_name }} benötigt</h4>
-                    {% for output in object.inputs.all %}
+                    {% for output in object.socialee_input.all %}
                     <a class="label label--blue"><i class="fi-x-circle"></i>{{ output.title }}{% if badge_count >= 1 %}
                     <span>{{ badge_count }}</span>{% endif %}</a>
                     {% endfor %}

@@ -31,13 +31,17 @@ class OutputInline(admin.TabularInline):
 class ProjectAdmin(admin.ModelAdmin):
     model = Project
     list_display = ['title', 'created_by']
-    fields = ('created_by', 'title', 'tagline', 'description', 'header_img', 'tags', 'managers', 'inputs', 'outputs')
+    fields = ('created_by', 'title', 'tagline', 'description', 'header_img', 'tags', 'managers')
+    inlines = [
+        OutputInline,
+        InputInline,
+        ]
 
 
 class ProfileAdmin(admin.ModelAdmin):
     model = Profile
     list_display = ['user', 'user_email', 'user_full_name']
-    fields = (('user', 'picture'), 'tags', 'tagline', 'description', ('phone', 'plz', 'newsletter'), 'inputs', 'outputs')
+    fields = (('user', 'picture'), 'tags', 'tagline', 'description', ('phone', 'plz', 'newsletter'))
     inlines = [
         OutputInline,
         InputInline,
