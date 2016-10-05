@@ -9,33 +9,43 @@
                 {% load static %}
                 <img src="{{ MEDIA_URL }}{{ object.picture }}" alt="profile image">
               </div>
-              <div class="media-object-section">
-              {% if not request.user == object.user %}
-              <a class="hollow button float-right" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge {% if user.first_name %} {{ object.user.first_name }} {% else %} {{ user.username }} {% endif %} </a>
-              {% else %}
-              <a class="hollow button float-right" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
+              <div class="media-object-section main-section">
+              <div class="row align-justify">
+                <div class="column small-8 profile__name">
+                  {% if object.user.first_name and object.user.last_name %}
+                    {{ object.user.first_name }} {{ object.user.last_name }}
+                    {% elif object.user.first_name and not object.user.last_name %}
+                    {{ object.user.first_name }}
+                    {% else %}
+                    {{ object.user.username }}
+                  {% endif %}
+                </div>
+                {% if not request.user == object.user %}
+                  <div class="column small-4">
+                    <a class="hollow button float-right" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge {% if user.first_name %} {{ object.user.first_name }} {% else %} {{ user.username }} {% endif %}
+                    </a>
+                  </div>
+                {% else %}
+                <div class="column align-middle small-4">
+                  <a class="hollow button float-right" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
+                </div>
               {% endif %}
-                <h2>
-                {% if object.user.first_name and object.user.last_name %}
-                  {{ object.user.first_name }} {{ object.user.last_name }}
-                  {% elif object.user.first_name and not object.user.last_name %}
-                  {{ object.user.first_name }}
+                </div>
+                <div class="row">
+                  <div class="column small-12 profile__tagline">
+                  {% if object.tagline %}
+                    {{ object.tagline }}
                   {% else %}
-                  {{ object.user.username }}
-                {% endif %}
-                </h2>
-                <h5>{% if object.tagline %}
-                  {{ object.tagline }}
-                  {% else %}
-                  Hier steht eigentlich eine Tagline.
-                {% endif %}
-                </h5>
-                <div class="small-12 columns">
-                  <div class="tags tags--is tags--orange">
-                    {% for tag in object.tags.all %}
-                    <a class="label label--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
-                    {% endfor %}
-                    <a class="label label--grey label--more"><i class="fa fa-plus"></i> §7 Mehr</a>
+                    Hier steht eigentlich eine Tagline.
+                  {% endif %}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="column small-12 profile__tagline tags tags--is tags--orange">
+                      {% for tag in object.tags.all %}
+                      <a class="label label--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
+                      {% endfor %}
+                      <a class="label label--grey label--more"><i class="fa fa-plus"></i> §7 Mehr</a>
                   </div>
                 </div>
                 <p>{% if object.description %}

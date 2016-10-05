@@ -10,7 +10,34 @@
     border-radius: 4px;
   }
 
+
+
     &__profile img {
       border-radius: 100%;
     }
 }
+
+.profile {
+
+  &__name {
+    font-size: 54px;
+    font-weight: 700;
+    color: $socialee-black;
+  }
+
+  &__tagline {
+    font-size: 28px;
+    letter-spacing: 0px;
+    line-height: 38px;
+    font-weight: 700;
+    color: $socialee-black;
+    margin-bottom: 20px;
+  }
+
+  &__tags {
+    font-size: 28px;
+    font-weight: 700;
+    color: $socialee-black;
+  }
+}
+
