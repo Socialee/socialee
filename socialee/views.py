@@ -184,7 +184,7 @@ class ProjectView(BaseView, DetailView):
     model = Project
 
     def get_context_data(self, **kwargs):
-        context = super(ProjectDetailView, self).get_context_data(**kwargs)
+        context = super(ProjectView, self).get_context_data(**kwargs)
 
         return context
 
