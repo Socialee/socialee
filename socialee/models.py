@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import PIL
 from PIL import Image
 from django.conf import settings
@@ -23,8 +23,6 @@ class CommonGround(models.Model):
     Stores all the common fields for :model:`Profile` and :model:`Project`.
     """
     slug = models.SlugField( db_index=True )
-    inputs = models.ManyToManyField('Input', blank=True)
-    outputs = models.ManyToManyField('Output', blank=True)
     tagline = models.CharField(max_length=140, null= True, blank=True, verbose_name="Kurzbeschreibung oder Motto")
     description = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Beschreibung")
     conversation = models.OneToOneField('Conversation', blank=True, null=True)
@@ -53,7 +51,7 @@ class InputOutput(models.Model):
     class Meta:
         abstract = True
 
-    owner = models.ForeignKey(CommonGround, null=True)
+    owner = models.ForeignKey(CommonGround, null=True, related_name="%(app_label)s_%(class)s")
     type = models.CharField(max_length=25,
                             choices=list(TYPES),
                             default=UNKNOWN, 
@@ -88,7 +86,8 @@ class Message(models.Model):
     conversation = models.ForeignKey(Conversation, related_name='messages', null=True, blank=True) # message Replys
     by_user = models.ForeignKey(User, null=True)
     message = models.TextField(max_length=5000, null=True, blank=True)
-    reply_to = models.ForeignKey('Message', related_name='replys') # message Replys
+    reply_to = models.ForeignKey('Message', null=True, blank=True, related_name='replys') # message Replys
+    date = models.DateTimeField(auto_now=False, auto_now_add=True)
 
 
 class Project(CommonGround):

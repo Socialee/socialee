@@ -36,6 +36,7 @@ if settings.DEBUG or settings.SIMPLE_AUTH:
 
         #face view for user interagtion
         url(r'^profile/(?P<slug>[\w.@+-]+)/socialeebhaber/$', login_required(views.Socialeebhaber.as_view()), name='socialeebhaber'),
+        url(r'^comment/$', login_required(views.Comment.as_view()), name='comment'),
 
         # DjangoCMS, keep this always at the end
         url(r'^', include('cms.urls')), 
