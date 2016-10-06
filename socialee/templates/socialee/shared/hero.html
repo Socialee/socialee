@@ -1,3 +1,4 @@
+{% load socialee_filters %}
 <section class="hero">
   <div class="row">
     <div class="columns large-12">
@@ -12,17 +13,11 @@
               <div class="media-object-section main-section">
               <div class="row align-justify">
                 <div class="column small-8 profile__name">
-                  {% if object.user.first_name and object.user.last_name %}
-                    {{ object.user.first_name }} {{ object.user.last_name }}
-                    {% elif object.user.first_name and not object.user.last_name %}
-                    {{ object.user.first_name }}
-                    {% else %}
-                    {{ object.user.username }}
-                  {% endif %}
+                  {{ object | long_name  }}
                 </div>
                 {% if not request.user == object.user %}
                   <div class="column small-4">
-                    <a class="hollow button float-right" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge {% if user.first_name %} {{ object.user.first_name }} {% else %} {{ user.username }} {% endif %}
+                    <a class="hollow button float-right" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge {{ object | short_name }}
                     </a>
                   </div>
                 {% else %}
@@ -54,7 +49,7 @@
                   Hier steht deine Beschreibung.
                 {% endif %}
                 </p>
-                <p>Klingt interessant, <a href="">schreib {{ object.user.first_name }} mal.</a></p>
+                <p>Klingt interessant, <a href="">schreib {{ object | short_name }} mal.</a></p>
               </div>
             </div>
           </div>
@@ -65,7 +60,7 @@
               <div class="row">
                 <div class="small-12 medium-6 columns">
                   <div class="tags tags--green">
-                    <h4>{{ object.user.first_name }} bietet</h4>
+                    <h4>{{ object | short_name }} bietet</h4>
                     {%  for input in object.socialee_output.all %}
                     <a class="label label--green"><i class="fi-x-circle"></i>{{ input }}{% if badge_count >= 1 %}
                     <span>{{ badge_count }}</span>{% endif %}</a>
@@ -75,7 +70,7 @@
                 </div>
                 <div class="small-12 medium-6 columns">
                   <div class="tags tags--blue">
-                    <h4>{{ object.user.first_name }} benötigt</h4>
+                    <h4>{{ object | short_name }} benötigt</h4>
                     {% for output in object.socialee_input.all %}
                     <a class="label label--blue"><i class="fi-x-circle"></i>{{ output.title }}{% if badge_count >= 1 %}
                     <span>{{ badge_count }}</span>{% endif %}</a>

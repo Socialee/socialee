@@ -189,10 +189,8 @@ TEMPLATES = [
                 'django.template.context_processors.i18n',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.core.context_processors.i18n',
-                'django.core.context_processors.media',
-                'django.core.context_processors.static',
-                'django.core.context_processors.request',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
                 'sekizai.context_processors.sekizai',
                 'zinnia.context_processors.version',  # Optional
                 'cms.context_processors.cms_settings',

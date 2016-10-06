@@ -1,4 +1,4 @@
-{% load static %}
+{% load static socialee_filters %}
 <div class="tabs-panel" id="panel1">
  <div class="row">
   <div class="large-8 large-offset-2 small-12 columns" id="object{{ object.id }}">
@@ -8,7 +8,7 @@
         <h6 class="byline">
           <a href="#">
             <div class="comment__avatar"><img src="{{ MEDIA_URL }}{{ request.user.profile.picture }}" alt="1"></div>
-            {{ request.user.username }} {{ request.user.last_name }}</a>
+            {{ request.user.profile | long_name }} </a>
             <div class="time grey">
               <span class="data">
                 NEUEN KOMMENTAR SCHREIBEN

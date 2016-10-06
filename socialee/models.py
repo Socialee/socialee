@@ -18,6 +18,11 @@ from allauth.account.models import EmailAddress
 
 from taggit.managers import TaggableManager
 
+
+def upload_location(instance, filename):
+    location = str(instance.id)
+    return "%s/%s" % (location, filename)
+
 class CommonGround(models.Model):
     """
     Stores all the common fields for :model:`Profile` and :model:`Project`.
@@ -30,11 +35,23 @@ class CommonGround(models.Model):
     liked_projects = models.ManyToManyField('Project', related_name='project_likes')
     liked_messages = models.ManyToManyField('Message', related_name='message_likes')
     tags = TaggableManager( blank=True )
+    picture = models.ImageField(upload_to=upload_location, null=True, blank=True)
 
+    def long_name(self):
+        if hasattr(self, 'profile'):
+            return self.profile.long_name()
+        elif hasattr(self, 'project'):
+            return self.project.long_name()
+        else:
+            return self.slug
 
-def upload_location(instance, filename):
-    location = str(instance.id)
-    return "%s/%s" % (location, filename)
+    def short_name(self):
+        if hasattr(self, 'profile'):
+            return self.profile.short_name()
+        elif hasattr(self, 'project'):
+            return self.project.short_name()
+        else:
+            return self.slug
 
 class InputOutput(models.Model):
     UNKNOWN = '...'
@@ -84,7 +101,7 @@ class Conversation(models.Model):
 
 class Message(models.Model):
     conversation = models.ForeignKey(Conversation, related_name='messages', null=True, blank=True) # message Replys
-    by_user = models.ForeignKey(User, null=True)
+    by_user = models.ForeignKey(CommonGround, null=True)
     message = models.TextField(max_length=5000, null=True, blank=True)
     reply_to = models.ForeignKey('Message', null=True, blank=True, related_name='replys') # message Replys
     date = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -93,7 +110,6 @@ class Message(models.Model):
 class Project(CommonGround):
     title = models.CharField(max_length=60)
     created_by = models.ForeignKey(User, null=True)
-    header_img = models.ImageField(upload_to=upload_location, null=True, blank=True) 
     managers = models.ManyToManyField(User, related_name='Project_Managers', blank=True)
     video = models.FileField(upload_to=upload_location, null=True, blank=True) 
     longdescription = models.TextField(max_length=2500, null=True, blank=True)
@@ -109,6 +125,12 @@ class Project(CommonGround):
     def get_absolute_url(self):
         return reverse('project_view', kwargs = {"slug": self.slug})
 
+    def long_name(self):
+       return self.title
+
+    def short_name(self):
+       return self.title
+
 
 def pre_save_project(sender, instance, *args, **kwargs):
     slug = slugify(instance.title)
@@ -119,7 +141,6 @@ pre_save.connect(pre_save_project, sender = Project)
 
 class Profile(CommonGround):
     user = models.OneToOneField(User, blank=True, null=True)
-    picture = models.ImageField(upload_to=upload_location, null=True, blank=True)
     phone = models.CharField(max_length=50, blank=True)
     plz = models.CharField(max_length=5, null=True, blank=True)
     newsletter = models.BooleanField(default=False)
@@ -144,6 +165,20 @@ class Profile(CommonGround):
     def user_email(self):
         return self.user.email if self.user else None
     user_email.short_description = _("E-Mail")
+
+    def long_name(self):
+        if self.user.first_name and self.user.last_name:
+            return self.user.first_name + " " + self.user.last_name
+        elif self.user.first_name or self.user.last_name:
+            return self.user.first_name + self.user.last_name
+        else:
+            return self.user.username
+
+    def short_name(self):
+        if self.user.first_name:
+            return self.user.first_name
+        else:
+            return self.user.username
 
     def __str__(self):
         return 'Profil von {}'.format(self.user)

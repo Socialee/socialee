@@ -1,10 +1,11 @@
+{% load socialee_filters %}
 <div class="comment" id="comment{{ comment.id }}">
   <section class="comment__top">
-    <a class="hollow button float-right" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge {{ comment.by_user.username }}</a>
+    <a class="hollow button float-right" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge {{ comment.by_user | short_name }}</a>
     <h6 class="byline">
       <a href="#">
-        <div class="comment__avatar"><img src="{{ MEDIA_URL }}{{ comment.by_user.profile.picture }}" alt="profile image"></div>
-        {{ comment.by_user.first_name }} {{ comment.by_user.last_name }}</a>
+        <div class="comment__avatar"><img src="{{ MEDIA_URL }}{{ comment.by_user.picture }}" alt="profile image"></div>
+        {{ comment.by_user | long_name }} </a>
       <div class="time grey">vor
         <span class="data">
           {{ comment.date|timesince }}
@@ -13,7 +14,7 @@
     </h6>
   </section>
   <section class="comment__content">
-    <p>{{ comment.message }}</p>
+    <p>{{ comment.message| link_ats }}</p>
   </section>
   <section class="comment__actions">
     <ul class="inline-list">
