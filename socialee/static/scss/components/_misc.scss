@@ -1,3 +1,7 @@
+html.profile_view body {
+    background-color: #302F35;
+}
+
 .off-canvas-content {
     background-repeat: repeat;
     background-image: url(../img/app/pattern.jpg);
@@ -118,7 +122,7 @@ h6.byline .label {
   margin-bottom: 10px;
 
   &:first-child {
-    margin-left: 12px;
+   // margin-left: 12px;
   }
   }
 
