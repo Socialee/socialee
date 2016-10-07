@@ -93,6 +93,7 @@ INSTALLED_APPS = (
     'storages',
 
     # SOCIALEE CUSTOM APPS
+    'ideas.apps.IdeasConfig',
     'landingpage.apps.LandingpageConfig',
     'questions.apps.QuestionsConfig',
     'quotes.apps.QuotesConfig',
@@ -175,6 +176,7 @@ TEMPLATES = [
                 str(APPS_DIR('templates/socialee/profile/')),
                 str(APPS_DIR('templates/socialee/shared/')),
                 str(APPS_DIR('templates/landingpage/')),
+                str(APPS_DIR('templates/ideas/')),
                 ],
         'OPTIONS': {
             # NOTE: app_namespace.Loader can not work properly if you use it in conjunction with django.template.loaders.cached.Loader and inheritance based on empty namespaces.
