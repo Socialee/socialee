@@ -1,34 +1,27 @@
 {% extends "offcanvas.html" %}
 {% load static %}
-{% load crispy_forms_tags %}
+
 {% block content %}
 
-<section class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, medium], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, large]">
+<section>
 
-    <div class="s-space show show-for-medium"></div>
-      <div class="row lp-header">
-        <div class="large-6 columns">
-          <h1 class="text-center">Galerie der Ideen</h1>
-          <p class="text-center">Es werden {{ idea_list|length }} Ideen angezeigt. <a href="{% url 'create_idea' %}">Eigene Idee abgeben!</a></p>
-          
-          <div class="socialee-callout">
+<div class="row align-center">
+  <div class="large-12 columns text-center">
+    <h2>Galerie der Ideen</h2>
+    <p>Es werden {{ idea_list|length }} Ideen angezeigt. <a href="{% url 'create_idea' %}">Eigene Idee abgeben!</a></p>
+  </div>
+</div>
 
-          {% if idea_list|length >= 1 %}
-            {% for idea in idea_list %}
-              {{ idea.title }}<br>
-              {{ idea.description }}<br>
-              <img src="{{ MEDIA_URL }}{{ idea.picture }}"><br>
-              +++++<br><br><br>
-            {% endfor %}
-          {% else %}
-          <h2>Hm, da gibt's noch keine Idee anzuzeigen....</h2>
-          <a href="{% url 'create_idea' %}">Trage die erste Idee ein!</a>
-          {% endif %}
-          
-          </div>
-        </div>
-      </div>
-  <div class="s-space"></div>
-  </section>
+  <div class="row">
+    {% if idea_list|length >= 1 %}
+      {% for idea in idea_list %}
+        {% include "idea_card.html" %}
+      {% endfor %}
+    {% else %}
+    <h2>Hm, da gibt's noch keine Idee anzuzeigen....</h2>
+    <a href="{% url 'create_idea' %}">Trage die erste Idee ein!</a>
+    {% endif %}
+  </div>
+</section>
 
 {% endblock content %}
