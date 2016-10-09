@@ -28,11 +28,13 @@ class CommonGround(models.Model):
     Stores all the common fields for :model:`Profile` and :model:`Project`.
     """
     slug = models.SlugField( db_index=True )
+    created_by = models.ForeignKey(User, null=True, related_name='instances')
+    current = models.BooleanField(default=False)
     tagline = models.CharField(max_length=140, null= True, blank=True, verbose_name="Kurzbeschreibung oder Motto")
     description = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Beschreibung")
     conversation = models.OneToOneField('Conversation', blank=True, null=True)
-    liked_profiles = models.ManyToManyField(User, related_name='profile_likes') # follower/beobachter
-    liked_projects = models.ManyToManyField('Project', related_name='project_likes')
+    follows_profiles = models.ManyToManyField('Profile', related_name='profile_follower') # follower/beobachter
+    follows_projects = models.ManyToManyField('Project', related_name='project_follower')
     liked_messages = models.ManyToManyField('Message', related_name='message_likes')
     tags = TaggableManager( blank=True )
     picture = models.ImageField(upload_to=upload_location, null=True, blank=True)
@@ -101,7 +103,7 @@ class Conversation(models.Model):
 
 class Message(models.Model):
     conversation = models.ForeignKey(Conversation, related_name='messages', null=True, blank=True) # message Replys
-    by_user = models.ForeignKey(CommonGround, null=True)
+    by_instance = models.ForeignKey(CommonGround, null=True)
     message = models.TextField(max_length=5000, null=True, blank=True)
     reply_to = models.ForeignKey('Message', null=True, blank=True, related_name='replys') # message Replys
     date = models.DateTimeField(auto_now=False, auto_now_add=True)
@@ -109,7 +111,6 @@ class Message(models.Model):
 
 class Project(CommonGround):
     title = models.CharField(max_length=60)
-    created_by = models.ForeignKey(User, null=True)
     managers = models.ManyToManyField(User, related_name='Project_Managers', blank=True)
     video = models.FileField(upload_to=upload_location, null=True, blank=True) 
     longdescription = models.TextField(max_length=2500, null=True, blank=True)
@@ -140,48 +141,47 @@ pre_save.connect(pre_save_project, sender = Project)
 
 
 class Profile(CommonGround):
-    user = models.OneToOneField(User, blank=True, null=True)
     phone = models.CharField(max_length=50, blank=True)
     plz = models.CharField(max_length=5, null=True, blank=True)
     newsletter = models.BooleanField(default=False)
 
     def is_email_verified(self):
-        return (self.user.is_authenticated and
-                EmailAddress.objects.filter(email=self.user.email,
+        return (self.created_by.is_authenticated and
+                EmailAddress.objects.filter(email=self.created_by.email,
                                             verified=True).exists())
 
     def user_first_name(self):
-        return self.user.first_name if self.user else None
+        return self.created_by.first_name if self.created_by else None
     user_first_name.short_description = _("Vorname")
 
     def user_last_name(self):
-        return self.user.last_name if self.user else None
+        return self.created_by.last_name if self.created_by else None
     user_last_name.short_description = _("Nachname")
 
     def user_full_name(self):
-        return self.user.first_name + ' ' + self.user.last_name if self.user else None
+        return self.created_by.first_name + ' ' + self.created_by.last_name if self.created_by else None
     user_full_name.short_description = _("Name")
 
     def user_email(self):
-        return self.user.email if self.user else None
+        return self.created_by.email if self.created_by else None
     user_email.short_description = _("E-Mail")
 
     def long_name(self):
-        if self.user.first_name and self.user.last_name:
-            return self.user.first_name + " " + self.user.last_name
-        elif self.user.first_name or self.user.last_name:
-            return self.user.first_name + self.user.last_name
+        if self.created_by.first_name and self.created_by.last_name:
+            return self.created_by.first_name + " " + self.created_by.last_name
+        elif self.created_by.first_name or self.created_by.last_name:
+            return self.created_by.first_name + self.created_by.last_name
         else:
-            return self.user.username
+            return self.created_by.username
 
     def short_name(self):
-        if self.user.first_name:
-            return self.user.first_name
+        if self.created_by.first_name:
+            return self.created_by.first_name
         else:
-            return self.user.username
+            return self.created_by.username
 
     def __str__(self):
-        return 'Profil von {}'.format(self.user)
+        return 'Profil von {}'.format(self.created_by)
 
 
     #saving picture in small size
@@ -211,9 +211,12 @@ class Profile(CommonGround):
         image = image.crop((0, 0, small, small))
         image.save(self.picture.path)
 
+def pre_save_profile(sender, instance, *args, **kwargs):
+    instance.slug = instance.created_by.username
 
+pre_save.connect(pre_save_profile, sender = Profile)
 
-User.profile = property(lambda u: Profile.objects.get_or_create(user=u, slug=u.username)[0])
+User.current_instance = property(lambda u: u.instances.get(current=True))
 
 
 

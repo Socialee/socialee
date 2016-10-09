@@ -1,4 +1,4 @@
-{% load socialee_filters %}
+{% load static socialee_filters %}
 <section class="hero">
   <div class="row">
     <div class="columns large-12">
@@ -7,7 +7,6 @@
           <div class="small-12 columns">
             <div class="media-object stack-for-small">
               <div class="media-object-section">
-                {% load static %}
                 <img src="{{ MEDIA_URL }}{{ object.picture }}" alt="profile image">
               </div>
               <div class="media-object-section main-section">
@@ -15,15 +14,14 @@
                 <div class="column small-8 profile__name">
                   {{ object | long_name  }}
                 </div>
-                {% if not request.user == object.user %}
-                  <div class="column small-4">
-                    <a class="hollow button float-right" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge {{ object | short_name }}
-                    </a>
+                {% if request.user == object.created_by %}
+                  <div class="column align-middle small-4">
+                  <a class="hollow button float-right" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
                   </div>
                 {% else %}
-                <div class="column align-middle small-4">
-                  <a class="hollow button float-right" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
-                </div>
+                  <div class="column small-4 follow{{ object.id }}">
+                    {% include "follow.html" with to_follow=object %}
+                  </div>
               {% endif %}
                 </div>
                 <div class="row">

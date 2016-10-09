@@ -3,7 +3,9 @@
   {% block content %}
 
     {% include "hero.html" %}
-    {% include "tabs.html" %}
-    {% include "site_content.html" %}
+    {% if request.user.current_instance %}
+        {% include "tabs.html" %}
+        {% include "site_content.html" %}
+    {% endif %}
 
   {% endblock content %}

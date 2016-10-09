@@ -36,8 +36,9 @@ if settings.DEBUG or settings.SIMPLE_AUTH:
         url(r'^profile/(?P<slug>[\w.@+-]+)/edit/$', login_required(views.ProfileUpdateView.as_view()), name='profile_updateview'), # ID 201
 
         #face view for user interagtion
-        url(r'^profile/(?P<slug>[\w.@+-]+)/socialeebhaber/$', login_required(views.Socialeebhaber.as_view()), name='socialeebhaber'),
+        #url(r'^profile/(?P<slug>[\w.@+-]+)/socialeebhaber/$', login_required(views.Socialeebhaber.as_view()), name='socialeebhaber'),
         url(r'^comment/$', login_required(views.Comment.as_view()), name='comment'),
+        url(r'^follow/$', login_required(views.Follow.as_view()), name='comment'),
 
         # DjangoCMS, keep this always at the end
         url(r'^', include('cms.urls')), 

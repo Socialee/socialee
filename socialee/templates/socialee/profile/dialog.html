@@ -7,8 +7,8 @@
       <section class="comment__top">
         <h6 class="byline">
           <a href="#">
-            <div class="comment__avatar"><img src="{{ MEDIA_URL }}{{ request.user.profile.picture }}" alt="1"></div>
-            {{ request.user.profile | long_name }} </a>
+            <div class="comment__avatar"><img src="{{ MEDIA_URL }}{{ request.user.current_instance.picture }}" alt="1"></div>
+            {{ request.user.current_instance | long_name }} </a>
             <div class="time grey">
               <span class="data">
                 NEUEN KOMMENTAR SCHREIBEN
