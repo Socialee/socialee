@@ -4,7 +4,7 @@
     {% include "follow.html" with to_follow=comment.by_instance %}
     <h6 class="byline">
       <a href="#">
-        <div class="comment__avatar"><img src="{{ MEDIA_URL }}{{ comment.by_user.picture }}" alt="profile image"></div>
+        <div class="comment__avatar"><img src="{{ MEDIA_URL }}{{ comment.by_instance.picture }}" alt="profile image"></div>
         {{ comment.by_instance | long_name }} </a>
       <div class="time grey">vor
         <span class="data">

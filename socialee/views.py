@@ -116,71 +116,6 @@ class ProjectUpdateView(BaseView, UpdateView):
 
 
 
-# class Socialeebhaber(BaseView, UpdateView):
-#     template_name = 'project_card_element.html'
-
-#     def post(self, request, *args, **kwargs):
-#         project_id = request.POST.get('project_id')
-
-#         project = Project.objects.get(id=project_id)
-#         if project in request.user.profile.liked_projects.all():
-#             request.user.profile.liked_projects.remove(project)
-#             project.profiles.remove(request.user)
-#         else:
-#             project.profiles.add(request.user)
-#             request.user.profile.liked_projects.add(project)
-
-            
-
-#         return render(request, self.template_name, {'project' : project} )
-
-
-class Follow(BaseView, CreateView):
-    template_name = 'follow.html'
-
-    def post(self, request, *args, **kwargs):
-        instance_id = request.POST.get('instance_id')
-
-        instance = CommonGround.objects.get(id=instance_id)
-        if hasattr(instance, 'profile'):
-            instance = Profile.objects.get(id=instance_id)
-            if instance in self.request.user.current_instance.follows_profiles.all():
-                self.request.user.current_instance.follows_profiles.remove(instance)
-            else:
-                self.request.user.current_instance.follows_profiles.add(instance)
-        elif hasattr(self, 'project'):
-            instance = Project.objects.get(id=instance_id)
-            if instance in self.request.user.current_instance.follows_projects.all():
-                self.request.user.current_instance.follows_profiles.remove(instance)
-            else:
-                self.request.user.current_instance.follows_projects.add(instance)
-
-        return render(request, self.template_name, {'to_follow' : instance} )
-
-class Comment(BaseView, UpdateView):
-    template_name = 'follow.html'
-
-    def post(self, request, *args, **kwargs):
-        comment = request.POST.get('comment')
-        common_id = request.POST.get('common_id')
-        reply_id = request.POST.get('reply_id')
-
-        if reply_id:
-            reply = Message.objects.get(id=reply_id)
-        else:
-            common = CommonGround.objects.get(id=common_id)
-            conv, created = Conversation.objects.get_or_create(slug=common.slug)
-            if created:
-                common.conversation = conv
-                common.save()
-        instance = self.request.user.current_instance
-        message = Message.objects.create(conversation=conv, by_instance=instance, message=comment )
-        message.save()
-            
-
-        return render(request, self.template_name, {'comment' : message} )
-
-
 # Profile-Views
 
 # Update Profile: User updates own profile
@@ -276,3 +211,55 @@ class WelcomePage(BaseView, ListView):
             instance.save()
 
         return context
+
+
+
+class Follow(BaseView, CreateView):
+    template_name = 'follow.html'
+
+    def post(self, request, *args, **kwargs):
+        instance_id = request.POST.get('instance_id')
+
+        instance = CommonGround.objects.get(id=instance_id)
+        if hasattr(instance, 'profile'):
+            instance = Profile.objects.get(id=instance_id)
+            if instance in self.request.user.current_instance.follows_profiles.all():
+                self.request.user.current_instance.follows_profiles.remove(instance)
+            else:
+                self.request.user.current_instance.follows_profiles.add(instance)
+        elif hasattr(self, 'project'):
+            instance = Project.objects.get(id=instance_id)
+            if instance in self.request.user.current_instance.follows_projects.all():
+                self.request.user.current_instance.follows_profiles.remove(instance)
+            else:
+                self.request.user.current_instance.follows_projects.add(instance)
+
+        return render(request, self.template_name, {'to_follow' : instance} )
+
+
+
+class Comment(BaseView, UpdateView):
+    template_name = 'comment.html'
+
+    def post(self, request, *args, **kwargs):
+        comment = request.POST.get('comment')
+        instance_id = request.POST.get('instance_id')
+        reply_id = request.POST.get('reply_id')
+
+        by_instance = self.request.user.current_instance
+
+        if reply_id:
+            reply = Message.objects.get(id=reply_id)
+            message = Message.objects.create(reply=reply, by_instance=by_instance, message=comment )
+            message.save()
+        else:
+            instance = CommonGround.objects.get(id=instance_id)
+            conv, created = Conversation.objects.get_or_create(slug=instance.slug)
+            if created:
+                instance.conversation = conv
+                instance.save()
+            message = Message.objects.create(conversation=conv, by_instance=by_instance, message=comment )
+            message.save()
+            
+
+        return render(request, self.template_name, {'comment' : message} )

@@ -1,5 +1,5 @@
 {% load socialee_filters %}
-{% if request.user.current_instance %}
+{% if request.user.current_instance and to_follow != request.user.current_instance %}
 {% if to_follow in request.user.current_instance.follows_profiles.all or to_follow in request.user.current_instance.follows_projects.all %}
 <a class="hollow button float-right follow" href="#" instance_id="{{ to_follow.id }}">
 	<i class="fa fa-minus-circle" aria-hidden="true"></i> Du Folgst {{ to_follow | short_name }}</a>
