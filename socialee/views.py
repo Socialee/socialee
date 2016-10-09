@@ -136,7 +136,7 @@ class ProjectUpdateView(BaseView, UpdateView):
 
 
 class Follow(BaseView, CreateView):
-    template_name = 'comment.html'
+    template_name = 'follow.html'
 
     def post(self, request, *args, **kwargs):
         instance_id = request.POST.get('instance_id')
@@ -144,10 +144,16 @@ class Follow(BaseView, CreateView):
         instance = CommonGround.objects.get(id=instance_id)
         if hasattr(instance, 'profile'):
             instance = Profile.objects.get(id=instance_id)
-            self.request.user.current_instance.follows_profiles.add(instance)
+            if instance in self.request.user.current_instance.follows_profiles.all():
+                self.request.user.current_instance.follows_profiles.remove(instance)
+            else:
+                self.request.user.current_instance.follows_profiles.add(instance)
         elif hasattr(self, 'project'):
             instance = Project.objects.get(id=instance_id)
-            self.request.user.current_instance.follows_projects.add(instance)
+            if instance in self.request.user.current_instance.follows_projects.all():
+                self.request.user.current_instance.follows_profiles.remove(instance)
+            else:
+                self.request.user.current_instance.follows_projects.add(instance)
 
         return render(request, self.template_name, {'to_follow' : instance} )
 
