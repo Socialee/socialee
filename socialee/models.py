@@ -197,10 +197,11 @@ class Profile(CommonGround):
         image = Image.open(self.picture)
         (width, height) = image.size
     
+        #resize to 210x210
         if ( width < height):
-            factor =  200 / height 
+            factor =  210.0 / height 
         else:
-            factor =  200 / width
+            factor =  210.0 / width
 
         size = ( int(width * factor), int(height * factor))
         image = image.resize(size, Image.ANTIALIAS)
