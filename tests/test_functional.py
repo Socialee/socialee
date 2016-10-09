@@ -11,59 +11,59 @@ pytestmark = pytest.mark.skipif(int(os.environ.get("SKIP_BROWSER_TESTS", 0)) == 
 
 SIGNUP_SUBMIT_TEXT = "ab die Post!"
 
-def assert_signup_success(browser):
-    assert "Klasse, das hat geklappt!" in browser.html
+# def assert_signup_success(browser):
+#     assert "Klasse, das hat geklappt!" in browser.html
 
 
-def test_signup_on_home_email_only(browser):
-    browser.visit(reverse("home"))
-    browser.click_link_by_text(SIGNUP_SUBMIT_TEXT)
+# def test_signup_on_home_email_only(browser):
+#     browser.visit(reverse("home"))
+#     browser.click_link_by_text(SIGNUP_SUBMIT_TEXT)
 
-    email_errorlist = browser.find_by_xpath("//form[@id='signup_form']"
-                                            "//input[@id='id_email']"
-                                            "/following-sibling::ul[@class='errorlist']")
-    assert len(email_errorlist) == 1
-    assert email_errorlist[0].text == "Dieses Feld ist zwingend erforderlich."
+#     email_errorlist = browser.find_by_xpath("//form[@id='signup_form']"
+#                                             "//input[@id='id_email']"
+#                                             "/following-sibling::ul[@class='errorlist']")
+#     assert len(email_errorlist) == 1
+#     assert email_errorlist[0].text == "Dieses Feld ist zwingend erforderlich."
 
-    browser.fill("email", "user@example.com")
-    browser.click_link_by_text(SIGNUP_SUBMIT_TEXT)
-    assert_signup_success(browser)
+#     browser.fill("email", "user@example.com")
+#     browser.click_link_by_text(SIGNUP_SUBMIT_TEXT)
+#     assert_signup_success(browser)
 
-    assert User.objects.get(email="user@example.com")
+#     assert User.objects.get(email="user@example.com")
 
 
-def test_signup_on_home_complete(browser):
-    browser.visit(reverse("home"))
+# def test_signup_on_home_complete(browser):
+#     browser.visit(reverse("home"))
 
-    next_button = browser.find_by_id("questionnavright")
-    def click_and_is_scrolled_off(x, name):
-        next_button.click()
-        return not x.find_element_by_name(name).is_displayed()
+#     next_button = browser.find_by_id("questionnavright")
+#     def click_and_is_scrolled_off(x, name):
+#         next_button.click()
+#         return not x.find_element_by_name(name).is_displayed()
 
-    def fill_and_click_to_next(name, text):
-        browser.fill(name, text)
-        WebDriverWait(browser.driver, 10).until(
-            lambda x: click_and_is_scrolled_off(x, name))
+#     def fill_and_click_to_next(name, text):
+#         browser.fill(name, text)
+#         WebDriverWait(browser.driver, 10).until(
+#             lambda x: click_and_is_scrolled_off(x, name))
 
-    fill_and_click_to_next("output_title", "Output")
-    fill_and_click_to_next("input_title", "Input")
-    browser.fill("project_title", "Projekt")
+#     fill_and_click_to_next("output_title", "Output")
+#     fill_and_click_to_next("input_title", "Input")
+#     browser.fill("project_title", "Projekt")
 
-    browser.fill("email", "user@example.com")
-    browser.click_link_by_text(SIGNUP_SUBMIT_TEXT)
-    assert_signup_success(browser)
+#     browser.fill("email", "user@example.com")
+#     browser.click_link_by_text(SIGNUP_SUBMIT_TEXT)
+#     assert_signup_success(browser)
 
-    user = User.objects.get(email="user@example.com")
-    profile = user.profile
+#     user = User.objects.get(email="user@example.com")
+#     profile = user.profile
 
-    assert profile.project_set.count() == 1
-    assert profile.project_set.first().title == "Projekt"
+#     assert profile.project_set.count() == 1
+#     assert profile.project_set.first().title == "Projekt"
 
-    assert profile.input_set.count() == 1
-    assert profile.input_set.first().title == "Input"
+#     assert profile.input_set.count() == 1
+#     assert profile.input_set.first().title == "Input"
 
-    assert profile.output_set.count() == 1
-    assert profile.output_set.first().title == "Output"
+#     assert profile.output_set.count() == 1
+#     assert profile.output_set.first().title == "Output"
 
 
 # def test_signup_from_fluechtlingspaten(browser):
