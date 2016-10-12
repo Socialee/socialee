@@ -1,27 +1,29 @@
 {% extends "offcanvas.html" %}
-{% load static %}
+{% load static sekizai_tags %}
 
 {% block content %}
 
-<section>
-
-<div class="row align-center">
-  <div class="large-12 columns text-center">
-    <h2>Galerie der Ideen</h2>
-    <p>Es werden {{ idea_list|length }} Ideen angezeigt. <a href="{% url 'create_idea' %}">Eigene Idee abgeben!</a></p>
-  </div>
+<div class="grid">
+    {% for idea in idea_list %}  
+      {% include "idea_card.html" %}
+    {% endfor %}
 </div>
 
-  <div class="row">
-    {% if idea_list|length >= 1 %}
-      {% for idea in idea_list %}
-        {% include "idea_card.html" %}
-      {% endfor %}
-    {% else %}
-    <h2>Hm, da gibt's noch keine Idee anzuzeigen....</h2>
-    <a href="{% url 'create_idea' %}">Trage die erste Idee ein!</a>
-    {% endif %}
-  </div>
-</section>
+
+
+{% addtoblock 'js' %}
+
+  <script type="text/javascript">
+    $('.grid').packery({
+      // options
+      itemSelector: '.idea-card',
+      gutter: 10
+    });
+  </script>
+
+{% endaddtoblock %}
+
 
 {% endblock content %}
+
+

@@ -20,7 +20,7 @@ class IdeaAdmin(admin.ModelAdmin):
     list_display_links = ['title']
     # list_editable = ['active']
     list_filter = ['subm_date', 'author']
-    search_fields = ['author', 'title']
+    search_fields = ['title', 'author']
     actions = [make_published, make_unpublished]
 
 admin.site.register(Idea, IdeaAdmin)

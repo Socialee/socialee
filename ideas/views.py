@@ -8,12 +8,12 @@ from .models import Idea
 
 
 def create_idea(request):
-    form = IdeaForm_first(request.POST or None, request.FILES or None)
+    form = IdeaForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         instance = form.save(commit = False)
         instance.save()
         messages.success(request, 'neue Idee gespeichert')
-        next_url = str(instance.id) + '/details'
+        next_url = 'galerie'
         return HttpResponseRedirect(next_url)
     
     context = {
@@ -21,41 +21,6 @@ def create_idea(request):
     }
     
     return render(request, "create_idea.html", context)
-
-
-def idea_details(request, id=None):
-    instance = get_object_or_404(Idea, id=id)
-    form = IdeaForm_second(request.POST or None, request.FILES or None, instance=instance)
-
-    if form.is_valid():
-        instance = form.save(commit = False)
-        instance.save()
-        messages.success(request, 'Super, deine Details wurden gespeichert!')
-
-        return HttpResponseRedirect(reverse('idea_author', args=[instance.id]))
-    
-    context = {
-        "form": form,
-        "idee": instance,
-    }
-    
-    return render(request, "idea_details.html", context)
-
-
-def idea_author(request, id=None):
-    instance = get_object_or_404(Idea, id=id)
-    form = IdeaForm_third(request.POST or None, request.FILES or None, instance=instance)
-    if form.is_valid():
-        instance = form.save(commit = False)
-        instance.save()
-        messages.success(request, 'Danke! Wir gucken uns Deine Idee an und veröffentlichen sie dann.')
-        return HttpResponseRedirect('/')
-    
-    context = {
-        "form": form,
-    }
-    
-    return render(request, "idea_email.html", context)
 
 
 def idea_list(request):
