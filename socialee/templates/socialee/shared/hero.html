@@ -17,12 +17,12 @@
                 </div>
                 {% if not request.user == object.user %}
                   <div class="column small-4">
-                    <a class="hollow button float-right" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge {{ object | short_name }}
+                    <a class="button button--yellow button--icon float-right" href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge {{ object | short_name }}
                     </a>
                   </div>
                 {% else %}
                 <div class="column align-middle small-4">
-                  <a class="hollow button float-right" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
+                  <a class="button button--yellow button--icon float-right" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
                 </div>
               {% endif %}
                 </div>
