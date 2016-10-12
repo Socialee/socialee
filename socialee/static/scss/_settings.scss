@@ -58,12 +58,18 @@ $global-font-size: 100%;
 $global-width: rem-calc(1400);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #6ED0BA,
+  primary: #000,
   secondary: #777,
+  orange: #ff9e1a,
+  green: #377a6d,
+  blue: #54abc7,
+  black: #302f35,
   success: #3adb76,
   warning: #ffae00,
   alert: #ec5840,
 );
+
+// keep these due to compatibility reasons
 $socialee-transparent: rgba(#fff, 0.48);
 $socialee-orange: #FF9E1A;
 $socialee-hover: #CD931F;
@@ -72,11 +78,13 @@ $socialee-superlightgreen: #EDF5F3;
 $socialee-darkgreen: #264A42;
 $socialee-mediumgreen: #4EA18F;
 $socialee-black: #302F35;
+
 $light-gray: #bfbfbf;
 $medium-gray: #7f7f7f;
 $dark-gray: #3f3f3f;
 $black: #0a0a0a;
 $white: #fefefe;
+
 $body-background: $socialee-black;
 $body-font-color: $socialee-darkgreen;
 $body-font-family: 'brandon-grotesque', Open Sans, sans-serif;
