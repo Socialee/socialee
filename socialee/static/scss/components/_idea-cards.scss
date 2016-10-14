@@ -1,10 +1,25 @@
+.idea-callout {
+  @include callout;
+  margin: 0 6rem;
+}
+
+.grid {
+  
+}
+
 .idea-card {
   float: left;
+  max-width: 23.1%;
   text-align: center;
   background: #F8F8F9;
   border: 3px solid #F4F4F5;
   border-radius: 3px;
-  margin: 1rem 1rem 2rem 1rem; 
+  margin: 0.8rem;
+  margin-bottom: 1.2rem; 
+
+  @include breakpoint(small only) {
+  max-width: 40%;
+  }
 
   h2 {
     font-family: BrandonGrotesque-Bold;
@@ -36,9 +51,9 @@
     color: #FF9E1A;
     position:relative;
     bottom:-25px;
-
+    font-size: 0.9rem;
     strong {
-      font-size: 1rem;
+      font-size: 0.8rem;
       color: white;
     }
   }

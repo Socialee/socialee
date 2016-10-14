@@ -3,21 +3,27 @@
 
 {% block content %}
 
-<div class="grid">
-    {% for idea in idea_list %}  
-      {% include "idea_card.html" %}
-    {% endfor %}
+<br>
+<div class="idea-callout">
+
+<h1 class="text-center">Viele Projekte und noch mehr Ideen.</h1>
+<p class="text-center">Es werden 8 Ideen angezeigt. <a href="">Gib deine Idee ab.</a></p>
+
+  <div class="grid">
+      {% for idea in idea_list %}  
+        {% include "idea_card.html" %}
+      {% endfor %}
+  </div>
 </div>
-
-
 
 {% addtoblock 'js' %}
 
   <script type="text/javascript">
-    $('.grid').packery({
-      // options
-      itemSelector: '.idea-card',
-      gutter: 10
+    var $grid = $('.grid').imagesLoaded( function() {
+      // init Packery after all images have loaded
+      $grid.packery({
+        itemSelector: '.idea-card',
+      });
     });
   </script>
 
