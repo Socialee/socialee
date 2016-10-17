@@ -5,7 +5,6 @@
 }
 
 .grid {
-  // max-width: 1140px;
   margin: 0 auto;
 }
 
@@ -20,11 +19,9 @@
   background-color: white;
   border-radius: 3px;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08);
-  margin-bottom: 3rem; 
-
-  @include breakpoint(small only) {
-  max-width: 40%;
-  }
+  margin-bottom: 3rem;
+  transition: box-shadow 0.3s;
+  // transition: width 0.3s;
 
   h2 {
     font-family: BrandonGrotesque-Bold;
@@ -55,15 +52,25 @@
   .idea-heart {
     color: #FF9E1A;
     position: relative;
-    bottom:-17px;
+    bottom:-27px;
     font-size: 0.9rem;
     strong {
       font-size: 0.8rem;
       color: white;
     }
+    &:hover {
+      color: $socialee-hover;
+      cursor: pointer;
+    }
   }
+
   &:hover {
     box-shadow: 0px 0px 28px 0px rgba(0, 0, 0, 0.18);
+    cursor: pointer;
+  }
+  &.is-expanded {
+    width: 555px;
+    z-index: 2;
   }
 }
 
@@ -75,5 +82,4 @@
   &:hover {
     text-decoration: none; 
   }
-
 }

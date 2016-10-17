@@ -3,6 +3,8 @@
 
 {% block content %}
 
+<br>
+
 <div class="idea-callout">
 
 <br><br>
@@ -22,22 +24,32 @@
 
 <br><br>
 <p class="text-center"><a class="text-link-special" href="{% url 'create_idea' %}">Trag Deine eigene Idee ein.</a></p>
+
 <br><br><br>
+
 </div>
 
+<br>
 
 {% addtoblock 'js' %}
 
   <script type="text/javascript">
-    var $grid = $('.grid').imagesLoaded(function() {
-      // init Packery after all images have loaded
-      $grid.masonry({
-        columnWidth: '.grid-sizer',
-        gutter: '.gutter-sizer',
-        itemSelector: '.idea-card',
-        // percentPosition: true,
-        fitWidth: true,
-      });
+  // init Masonry
+    var $grid = $('.grid').masonry({
+      columnWidth: '.grid-sizer',
+      gutter: '.gutter-sizer',
+      itemSelector: '.idea-card',
+      // percentPosition: true,
+      fitWidth: true,
+    });
+    $grid.on( 'click', '.idea-image', function( event ) {
+      $( event.currentTarget ).parent('.idea-card').toggleClass('is-expanded');
+      $grid.masonry('layout');
+    });
+
+    // layout Masonry after each image loads
+    $grid.imagesLoaded().progress( function() {
+      $grid.masonry('layout');
     });
   </script>
 
