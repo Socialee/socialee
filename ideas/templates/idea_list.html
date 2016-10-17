@@ -3,11 +3,14 @@
 
 {% block content %}
 
-<br>
 <div class="idea-callout">
 
-<h1 class="text-center">Viele Projekte und noch mehr Ideen.</h1>
-<p class="text-center">Es werden 8 Ideen angezeigt. <a href="">Gib deine Idee ab.</a></p>
+<br><br>
+
+<h3 class="text-center">Viele Projekte und noch mehr Ideen.</h3>
+<p class="text-center">Es werden {{ idea_list|length }} Ideen angezeigt. <a class="text-link-special" href="{% url 'create_idea' %}">Trag Deine eigene Idee ein.</a></p>
+
+<br><br>
 
   <div class="grid">
   <div class="grid-sizer"></div>
@@ -16,19 +19,24 @@
         {% include "idea_card.html" %}
       {% endfor %}
   </div>
+
+<br><br>
+<p class="text-center"><a class="text-link-special" href="{% url 'create_idea' %}">Trag Deine eigene Idee ein.</a></p>
+<br><br><br>
 </div>
+
 
 {% addtoblock 'js' %}
 
   <script type="text/javascript">
-    var $grid = $('.grid').imagesLoaded( function() {
+    var $grid = $('.grid').imagesLoaded(function() {
       // init Packery after all images have loaded
       $grid.masonry({
         columnWidth: '.grid-sizer',
         gutter: '.gutter-sizer',
         itemSelector: '.idea-card',
-        percentPosition: true,
-        // columnWidth: 263,
+        // percentPosition: true,
+        fitWidth: true,
       });
     });
   </script>

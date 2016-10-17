@@ -5,22 +5,22 @@
 }
 
 .grid {
-  max-width: 1140px;
+  // max-width: 1140px;
   margin: 0 auto;
 }
 
 .gutter-sizer { 
-  width: 1.93%;
+  width: 30px;
 }
 
 .grid-sizer,
 .idea-card {
-  width: 23.5%;
+  width: 263px;
   text-align: center;
   background-color: white;
   border-radius: 3px;
-  box-shadow: 5px 10px 35px rgba(0, 0, 0, 0.15);
-  margin-bottom: 1.5rem; 
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08);
+  margin-bottom: 3rem; 
 
   @include breakpoint(small only) {
   max-width: 40%;
@@ -32,6 +32,7 @@
     color: #302F35;
     letter-spacing: 0px;
     line-height: 30px;
+    margin-top: 0.8rem;
   }
 
   p {
@@ -44,22 +45,35 @@
   }
 
   .idea-image img {
-    padding: 0 0 0.6rem 0;
-    display: block;
+    padding: 0;
   } 
 
   .idea-details {
-    padding: 0.6rem;
+    padding: 0.9rem;
   }
 
   .idea-heart {
     color: #FF9E1A;
-    position:relative;
-    bottom:-25px;
+    position: relative;
+    bottom:-17px;
     font-size: 0.9rem;
     strong {
       font-size: 0.8rem;
       color: white;
     }
   }
+  &:hover {
+    box-shadow: 0px 0px 28px 0px rgba(0, 0, 0, 0.18);
+  }
+}
+
+// TODO // Transition for shadow
+
+.text-link-special {
+  border-bottom: 4px solid;
+  font-weight: bold;
+  &:hover {
+    text-decoration: none; 
+  }
+
 }

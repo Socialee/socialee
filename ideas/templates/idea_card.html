@@ -4,6 +4,7 @@
     <img src="{{ MEDIA_URL }}{{ idea.picture }}"> 
   </div>
 {% endif %}
+{% if idea.title or idea.description %}
   <div class="idea-details">
     <h2>{{ idea.title }}</h2>
     <p>{{ idea.description }}</p>
@@ -13,5 +14,13 @@
       <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
       <strong class="fa-stack-1x">27</strong>
     </span>
-  </div>
+  </div>  
+{% else %}
+  <div class="idea-heart">
+    <span class="fa-stack fa-lg">
+      <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
+      <strong class="fa-stack-1x">27</strong>
+    </span>
+  </div> 
+{% endif %}
 </div>
