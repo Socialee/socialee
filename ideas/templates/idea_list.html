@@ -10,6 +10,8 @@
 <p class="text-center">Es werden 8 Ideen angezeigt. <a href="">Gib deine Idee ab.</a></p>
 
   <div class="grid">
+  <div class="grid-sizer"></div>
+  <div class="gutter-sizer"></div>
       {% for idea in idea_list %}  
         {% include "idea_card.html" %}
       {% endfor %}
@@ -21,8 +23,12 @@
   <script type="text/javascript">
     var $grid = $('.grid').imagesLoaded( function() {
       // init Packery after all images have loaded
-      $grid.packery({
+      $grid.masonry({
+        columnWidth: '.grid-sizer',
+        gutter: '.gutter-sizer',
         itemSelector: '.idea-card',
+        percentPosition: true,
+        // columnWidth: 263,
       });
     });
   </script>

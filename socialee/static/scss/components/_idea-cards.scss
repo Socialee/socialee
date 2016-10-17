@@ -1,21 +1,26 @@
 .idea-callout {
   @include callout;
-  margin: 0 6rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .grid {
-  
+  max-width: 1140px;
+  margin: 0 auto;
 }
 
+.gutter-sizer { 
+  width: 1.93%;
+}
+
+.grid-sizer,
 .idea-card {
-  float: left;
-  max-width: 23.1%;
+  width: 23.5%;
   text-align: center;
-  background: #F8F8F9;
-  border: 3px solid #F4F4F5;
+  background-color: white;
   border-radius: 3px;
-  margin: 0.8rem;
-  margin-bottom: 1.2rem; 
+  box-shadow: 5px 10px 35px rgba(0, 0, 0, 0.15);
+  margin-bottom: 1.5rem; 
 
   @include breakpoint(small only) {
   max-width: 40%;
