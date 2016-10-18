@@ -15,8 +15,6 @@
 <br><br>
 
   <div class="grid">
-  <div class="grid-sizer"></div>
-  <div class="gutter-sizer"></div>
       {% for idea in idea_list %}  
         {% include "idea_card.html" %}
       {% endfor %}
@@ -34,23 +32,30 @@
 {% addtoblock 'js' %}
 
   <script type="text/javascript">
-  // init Masonry
+
+    var delay=150; // TODO das hier ist ein quick and dirty workaround....
     var $grid = $('.grid').masonry({
-      columnWidth: '.grid-sizer',
-      gutter: '.gutter-sizer',
-      itemSelector: '.idea-card',
-      // percentPosition: true,
+      columnWidth: 263,
+      gutter: 30,
+      itemSelector: '.grid-item',
       fitWidth: true,
-    });
-    $grid.on( 'click', '.idea-image', function( event ) {
-      $( event.currentTarget ).parent('.idea-card').toggleClass('is-expanded');
-      $grid.masonry('layout');
+      transitionDuration: '1s',
+      stagger: 10,
     });
 
-    // layout Masonry after each image loads
     $grid.imagesLoaded().progress( function() {
       $grid.masonry('layout');
     });
+
+    $grid.on( 'click', '.idea-image', function( event ) {
+      $( event.currentTarget ).parent().parent('.grid-item').toggleClass('is-expanded');
+        setTimeout(function() {
+        $grid.masonry();
+        }, delay);
+    });
+
+
+
   </script>
 
 {% endaddtoblock %}
