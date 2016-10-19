@@ -24,6 +24,7 @@ if settings.DEBUG or settings.SIMPLE_AUTH:
         url(r'^protect/', include('simple_auth.urls')), # password-protection for staging-server
         url(r'^question/', include('questions.urls')), # inaktiv, future feature
         url(r'^summernote/', include('django_summernote.urls')), # für Blog
+        url(r'^feedback/', include("feedback.urls")), # Feedback-App
         url(r'^zitat/', include('quotes.urls')), # ID 024
 
         url(r'^startproject/$', login_required(views.StartProject.as_view()), name='startproject'), # ID 100
@@ -60,6 +61,7 @@ if not settings.DEBUG and not settings.SIMPLE_AUTH:
         url(r'^warteliste/', include('waitinglist.urls')), # ID 080
         # url(r'^question/', include('questions.urls')), # inaktiv, future feature
         url(r'^summernote/', include('django_summernote.urls')), # für Blog
+        url(r'^feedback/', include("feedback.urls")), # Feedback-App
         url(r'^zitat/', include('quotes.urls')), # ID 024
 
         # url(r'^startproject/$', login_required(views.StartProject.as_view()), name='startproject'), # ID 100
