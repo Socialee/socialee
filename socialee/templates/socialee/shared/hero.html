@@ -12,7 +12,7 @@
               <div class="media-object-section main-section">
               <div class="row align-justify">
                 <div class="column small-8 profile__name">
-                  {{ object | long_name  }}
+                  {{ object.long_name  }}
                 </div>
                 {% if request.user == object.created_by %}
                   <div class="column align-middle small-4">
@@ -46,7 +46,7 @@
                   Hier steht deine Beschreibung.
                 {% endif %}
                 </p>
-                <p>Klingt interessant, <a class="thick" href="">schreib {{ object | short_name }} mal.</a></p>
+                <p>Klingt interessant, <a class="thick" href="">schreib {{ object.short_name }} mal.</a></p>
               </div>
             </div>
           </div>
@@ -57,7 +57,7 @@
               <div class="row">
                 <div class="small-12 medium-6 columns">
                   <div class="tags green">
-                    <h6 class="green">{{ object | short_name }} bietet</h6>
+                    <h6 class="green">{{ object.short_name }} bietet</h6>
                     {%  for input in object.socialee_output.all %}
                     <a class="tag tag--green"><i class="fi-x-circle"></i>{{ input }}{% if badge_count >= 1 %}
                     <span>{{ badge_count }}</span>{% endif %}</a>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="small-12 medium-6 columns">
                   <div class="tags blue">
-                    <h6 class="blue">{{ object | short_name }} benötigt</h6>
+                    <h6 class="blue">{{ object.short_name }} benötigt</h6>
                     {% for output in object.socialee_input.all %}
                     <a class="tag tag--blue"><i class="fi-x-circle"></i>{{ output.title }}{% if badge_count >= 1 %}
                     <span>{{ badge_count }}</span>{% endif %}</a>

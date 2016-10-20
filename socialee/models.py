@@ -111,7 +111,7 @@ class Message(models.Model):
 
 class Project(CommonGround):
     title = models.CharField(max_length=60)
-    managers = models.ManyToManyField(User, related_name='Project_Managers', blank=True)
+    managers = models.ManyToManyField(User, related_name='managed_projects', blank=True)
     video = models.FileField(upload_to=upload_location, null=True, blank=True) 
     longdescription = models.TextField(max_length=2500, null=True, blank=True)
     history = models.TextField(max_length=1000, null=True, blank=True)
@@ -183,6 +183,9 @@ class Profile(CommonGround):
     def __str__(self):
         return 'Profil von {}'.format(self.created_by)
 
+    def get_absolute_url(self):
+        return reverse('profile_view', kwargs = {"slug": self.slug})
+
 
     #saving picture in small size
     #TODO make this a bit nicer
@@ -213,6 +216,7 @@ class Profile(CommonGround):
         image.save(self.picture.path)
 
 def pre_save_profile(sender, instance, *args, **kwargs):
+    # right now there is only one profile per user
     instance.slug = instance.created_by.username
 
 pre_save.connect(pre_save_profile, sender = Profile)

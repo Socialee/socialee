@@ -1,7 +1,7 @@
 
 {# switch off navbar in production for now #}
 {% if not PROD %}
-
+{% load socialee_filters %}
 <div class="row top-bar-app">
   <div class="top-bar-left">
     <ul class="menu">
@@ -15,19 +15,27 @@
       {% if not request.user.is_authenticated %}
       <li class="menu-text"><a href="{% url 'account_login' %}">Log In</a></li>
       {% else %}
+      {% profiles request.user as user_profiles %}
+      <li class="menu-text"><a href="{% url 'startproject' %}">Starte Projekt</a></li>
+      {% if user_profiles.count == 0 %}
+        <li class="menu-text"><a href="{% url 'startprofile' %}">Starte Individum</a></li>
+      {% endif %}
       <li class="menu-text">
         <a href="#">
             <i class="fa fa-home" aria-hidden="true"></i>
-            {% if request.user.first_name %}
-              {{ request.user.first_name }}
-            {% else %}
-              {{ request.user }}
-            {% endif %}
+              {{ request.user.current_instance.short_name }}
           </a>
         <ul class="menu">
-          <li><a href="{% url 'profile_view' request.user %}">Profil anzeigen</a></li>
-          <li><a href="{% url 'profile_updateview' request.user %}">Profil bearbeiten</a></li>
+          {% for profile in user_profiles %}
+            <li><a href="{% url 'profile_view' slug=profile.slug %}">{{ profile.short_name }} anzeigen</a></li>
+            <li><a href="{% url 'profile_updateview' slug=profile.slug %}">{{ profile.short_name }} bearbeiten</a></li>
+          {% endfor %}
+          {% for project in request.user.managed_projects.all %}
+            <li><a href="{% url 'project_view' slug=project.slug %}">{{ project.short_name }} anzeigen</a></li>
+            <li><a href="{% url 'project_updateview' slug=project.slug %}">{{ project.short_name }} bearbeiten</a></li>
+          {% endfor %}
         </ul>
+
       </li>
       <li class="menu-text"><a href="{% url 'account_logout' %}">Log out</a></li>
       {% endif %}

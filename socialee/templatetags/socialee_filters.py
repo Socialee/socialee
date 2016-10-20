@@ -1,6 +1,6 @@
 from django import template
 from django.template import Context, Template
-from socialee.models import User
+from socialee.models import User, Profile
 import re
 
 register = template.Library()
@@ -18,11 +18,6 @@ def link_ats(value):
 		r'{% if \1 %}<a href="{% url "profile_view" \1 %}">@\1</a>{% else %}@\1{% endif %}', value))
 	return t.render(c)
 
-
-@register.filter
-def long_name(object):
-	return object.long_name()
-
-@register.filter
-def short_name(object):
-	return object.short_name()
+@register.simple_tag
+def profiles(user):
+	return Profile.objects.filter(slug=user)
