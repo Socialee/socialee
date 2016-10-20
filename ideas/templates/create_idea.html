@@ -1,26 +1,34 @@
 {% extends "offcanvas.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
+
 {% block content %}
 
-<section class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, medium], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, large]">
+<div class="row align-center">
+  <div class="small-6 columns callout-form">
+    <h2>Gute Idee!</h2>
+    <p>Es gibt viele gute Menschen mit guten Ideen. Was ist Deine?</p>
+  
+    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
 
-    <div class="s-space show show-for-medium"></div>
-      <div class="row lp-header">
-        <div class="large-6 columns">
-          <h1 class="text-center">Gute Idee!</h1>
-          <p>Es gibt viele gute Menschen mit guten Ideen. Was ist Deine?</p>
-          <div class="socialee-callout">
-          <form method="POST" action='' enctype='multipart/form-data'> {% csrf_token %}
-            {{ form | crispy }}
-            <div class="row align-center">
-              <input class="s-button-form" type="submit" value="Und weg damit!" />
-            </div>
-          </form>
-          </div>
+      {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            <div class="form-label">{{ field.label }}</div>
+              {% if field.help_text %}
+                <div class="second-form-label">{{ field.help_text|safe }}</div>
+              {% endif %}
+            {{ field }}
         </div>
+      {% endfor %}
+
+      <div class="row align-center">
+        <input class="button" type="submit" value="Vorschau Deiner Idee" />
       </div>
-  <div class="s-space"></div>
-  </section>
+
+    </form>
+
+  </div>
+</div>
 
 {% endblock content %}

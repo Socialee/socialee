@@ -352,29 +352,3 @@
   top: 1rem;
   right: 1.8rem;
 }
-
-.fieldWrapper
-{
-  padding-top: 0px;
-  .requirements
-  {
-    float:right;
-    font-size: 70%;
-    font-weight: normal;
-  }
-  label
-  {
-    line-height: 100%;
-    margin-bottom: 8px;
-    margin-top: 32px;
-  }
-  .error
-  {
-    margin-top: 0;
-  }
-
-  input
-  {
-    margin:0;
-  }
-}

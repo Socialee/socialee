@@ -12,15 +12,22 @@ def create_idea(request):
     if form.is_valid():
         instance = form.save(commit = False)
         instance.save()
-        messages.success(request, 'neue Idee gespeichert')
-        next_url = 'galerie'
-        return HttpResponseRedirect(next_url)
+        # messages.success(request, 'neue Idee gespeichert')
+        return HttpResponseRedirect(reverse(review_idea, args=(instance.id,)))
     
     context = {
         "form": form,
     }
     
     return render(request, "create_idea.html", context)
+
+
+def review_idea(request,id):
+    instance = get_object_or_404(Idea, id=id)
+    context = {
+        "idea": instance,
+        }
+    return render(request, "review_idea.html", context)
 
 
 def idea_list(request):
