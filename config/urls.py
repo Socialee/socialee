@@ -18,8 +18,9 @@ if settings.DEBUG or settings.SIMPLE_AUTH:
         url(r'^admin/', include(admin.site.urls)), # ID 900
         url(r'^blog/', include('zinnia.urls')), # IDs 050, 051, 052, etc
         url(r'^comments/', include('django_comments.urls')), # für Blog
+        url(r'^ideen/', include('ideas.urls')), # TODO IDs vergeben
         url(r'^impressum/$', views.Impressum.as_view(), name='impressum'), # ID 021
-        url(r'^warteliste/$', views.NewsletterSignup.as_view(), name='invite_me'), # ID 080
+        url(r'^warteliste/', include('waitinglist.urls')), # ID 080
         url(r'^protect/', include('simple_auth.urls')), # password-protection for staging-server
         url(r'^question/', include('questions.urls')), # inaktiv, future feature
         url(r'^summernote/', include('django_summernote.urls')), # für Blog
@@ -35,8 +36,9 @@ if settings.DEBUG or settings.SIMPLE_AUTH:
         url(r'^profile/(?P<slug>[\w.@+-]+)/edit/$', login_required(views.ProfileUpdateView.as_view()), name='profile_updateview'), # ID 201
 
         #face view for user interagtion
-        url(r'^profile/(?P<slug>[\w.@+-]+)/socialeebhaber/$', login_required(views.Socialeebhaber.as_view()), name='socialeebhaber'),
+        #url(r'^profile/(?P<slug>[\w.@+-]+)/socialeebhaber/$', login_required(views.Socialeebhaber.as_view()), name='socialeebhaber'),
         url(r'^comment/$', login_required(views.Comment.as_view()), name='comment'),
+        url(r'^follow/$', login_required(views.Follow.as_view()), name='comment'),
 
         # DjangoCMS, keep this always at the end
         url(r'^', include('cms.urls')), 
@@ -55,7 +57,7 @@ if not settings.DEBUG and not settings.SIMPLE_AUTH:
         url(r'^blog/', include('zinnia.urls')), # IDs 050, 051, 052, etc
         url(r'^comments/', include('django_comments.urls')), # für Blog
         url(r'^impressum/$', views.Impressum.as_view(), name='impressum'), # ID 021
-        url(r'^warteliste/$', views.NewsletterSignup.as_view(), name='invite_me'), # ID 080
+        url(r'^warteliste/', include('waitinglist.urls')), # ID 080
         # url(r'^question/', include('questions.urls')), # inaktiv, future feature
         url(r'^summernote/', include('django_summernote.urls')), # für Blog
         url(r'^zitat/', include('quotes.urls')), # ID 024

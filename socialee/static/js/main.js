@@ -42,50 +42,20 @@ function csrfSafeMethod(method) {
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
 
-
-function change_socialeebhaber(id, user_id) {
-    $.ajax({
-    	beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-	            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-	        }
-	    },
-        url : "/" + user_id + "/socialeebhaber/", // the endpoint
-        type : "POST", // http method
-        data : { project_id : id}, // data sent with the post request
-
-        // handle a successful response
-        success : function(data) {
-            $('#'+id).html(data);
-        },
-
-        // handle a non-successful response
-        error : function(xhr,errmsg,err) {
-            $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
-                " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
-            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-        }
-    });
-
-};
-
-function post_comment(comment, page_id, reply_id) {
+function post_to_url(url, data, success_fct)
+{
     $.ajax({
         beforeSend: function(xhr, settings) {
         if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
             }
         },
-        url : "/comment/", // the endpoint
+        url : url, // the endpoint
         type : "POST", // http method
-        data : { comment : comment,
-                 common_id: page_id,
-                 reply_id: reply_id }, // data sent with the post request
+        data : data, // data sent with the post request
 
         // handle a successful response
-        success : function(data) {
-            $('#object'+page_id).append(data);
-        },
+        success : success_fct,
 
         // handle a non-successful response
         error : function(xhr,errmsg,err) {
@@ -94,13 +64,30 @@ function post_comment(comment, page_id, reply_id) {
             console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
         }
     });
+}
 
+function post_comment(comment, instance_id, reply_id) {
+    post_to_url( "/comment/", 
+                { comment : comment,
+                instance_id: instance_id,
+                reply_id: reply_id },
+                function(data){
+                    $('#object'+instance_id).append(data);
+                });
+};
+
+function follow(object, instance_id) {
+    post_to_url( "/follow/", 
+                { instance_id : instance_id },
+                function(data){
+                    object.replaceWith(data);
+                });
 };
 
 $(document).on("click", ".comment_button", function(event) {
-     post_comment($("#comment_value").val(), $(this).attr('page_id'), null)
+     post_comment($("#comment_value").val(), $(this).attr('instance_id'), $(this).attr('message_id'))
  });
 
-$(document).on("dblclick", ".socialeebhaber", function(event) {
-     change_socialeebhaber($(this).attr('id'), $(this).attr('user_id'))
+$(document).on("click", ".follow", function(event) {
+    follow($(this), $(this).attr('instance_id'))
  });

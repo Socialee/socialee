@@ -11,6 +11,7 @@
 
   <div class="top-bar-right">
     <ul class="dropdown menu" data-dropdown-menu>
+      <li class="menu-text"><a href="{% url 'idea_list' %}">Galerie der Ideen</a></li>
       {% if not request.user.is_authenticated %}
       <li class="menu-text"><a href="{% url 'account_login' %}">Log In</a></li>
       {% else %}

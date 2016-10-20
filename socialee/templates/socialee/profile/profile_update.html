@@ -1,13 +1,13 @@
 {% extends "offcanvas.html" %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags socialee_filters %}
 {% block content %}
 
 <div class="row align-middle">
   <div class="full-height"></div>
     <div class="large-12 columns">
-        <h2>Hallo {% if request.user.first_name %}{{ request.user.first_name }}{% else %}{{ request.user }}{% endif %}!</h2>
-        {% if request.user.profile.picture %}
-        <img src="{{ request.user.profile.picture.url }}" /> 
+        <h2>Hallo {{ request.user.current_instance | long_name }}!</h2>
+        {% if request.user.current_instance.picture %}
+        <img src="{{ request.user.current_instance.picture.url }}" /> 
         {% endif %}
         {% crispy form %}
         

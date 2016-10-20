@@ -1,7 +1,8 @@
 import os, random
 import requests
 import random
-import mailchimp
+
+from allauth.account.views import RedirectAuthenticatedUserMixin
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -17,12 +18,6 @@ from django.views.generic import TemplateView, FormView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import SingleObjectMixin
 from django.dispatch import receiver
-
-
-from allauth.account.views import *
-from allauth.account.forms import *
-from allauth.account.decorators import verified_email_required
-from allauth.account.signals import email_confirmed
 
 from .models import Project, Input, Output, Profile, CommonGround, Conversation, Message
 from .forms import *
@@ -42,100 +37,6 @@ class BaseView:
         context = super(BaseView, self).get_context_data(**kwargs)
 
         return context
-
-
-class NewsletterSignup(SignupView):
-    form_class = NewsletterForm
-    template_name = 'invite_me.html'
-
-    def post(self, request, *args, **kwargs):
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        #TODO fix naming let the user type in any name
-        # unique username 
-        # do this in  is_valid function?
-        if form.is_valid():
-            ret = super(NewsletterSignup, self).post(request, *args, **kwargs)
-            raw_email = form.cleaned_data.get("email")
-            message = form.cleaned_data.get("message")
-            name = form.cleaned_data.get("first_name")
-            names = name.split(" ")
-            msg = 'Danke'
-            if message:
-                msg += ' für Deine Nachricht'
-            if name:
-                msg += ', '+names[0].capitalize()
-            msg +='! Wir halten Dich auf dem laufenden.'
-
-            messages.success(request, msg)
-
-            from_email = settings.EMAIL_HOST_USER
-            to_email = [from_email, 'hello@socialee.de']
-
-
-            # send the email
-            subject = 'Ladet mich ein!'
-            contact_message = "%s via %s schreibt:\n\n %s"%( 
-                    name, 
-                    raw_email,
-                    message)
-            some_html_message = """
-            <h1>Hallo Mo!</h1>
-            """
-            send_mail(subject, 
-                    contact_message, 
-                    from_email, 
-                    to_email,
-                    fail_silently=True)
-            return ret
-
-        else:
-            return self.form_invalid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super(NewsletterSignup, self).get_context_data(**kwargs)
-
-        return context
-
-
-#mailchimp stuff
-MAILCHIMP_API_KEY = '115737b5c3cf0d9a848011ab122b5c7f-us9'
-MAILCHIMP_LIST_ID = 'c5c441594e'
-
-@receiver(email_confirmed, dispatch_uid="socialee.allauth.email_confirmed")
-def email_confirmed_(email_address, **kwargs):
-    # try to add user to mailchimp
-
-    #TODO fix naming
-            
-    email = {'email': email_address.email}
-
-    fname = email_address.user.first_name
-    lname = email_address.user.last_name
-
-    merge_vars = {
-        'FNAME': fname,
-        'LNAME': lname,
-        }
-
-    m = mailchimp.Mailchimp(MAILCHIMP_API_KEY)
-
-    from_email = settings.EMAIL_HOST_USER
-    to_email = [from_email, 'hello@socialee.de']
-
-    try:
-        m.lists.subscribe(id=MAILCHIMP_LIST_ID, email=email, merge_vars=merge_vars, double_optin=False)
-    #This is the worst error handling ever
-    except mailchimp.Error as e:
-        send_mail("Faild to sign up -> mailchimp", 
-            "%s via %s \n%s"%( 
-            "name", 
-            email,
-            e
-            ), 
-            from_email, 
-            to_email,
-            fail_silently=True)
 
 
 class Impressum(BaseView, TemplateView):
@@ -185,6 +86,10 @@ class ProjectView(BaseView, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ProjectView, self).get_context_data(**kwargs)
+        if self.object.created_by == self.request.user:
+            self.request.user.instances.update(current=False)
+            self.object.current = True
+            self.object.save()
 
         return context
 
@@ -211,47 +116,6 @@ class ProjectUpdateView(BaseView, UpdateView):
 
 
 
-class Socialeebhaber(BaseView, UpdateView):
-    template_name = 'project_card_element.html'
-
-    def post(self, request, *args, **kwargs):
-        project_id = request.POST.get('project_id')
-
-        project = Project.objects.get(id=project_id)
-        if project in request.user.profile.liked_projects.all():
-            request.user.profile.liked_projects.remove(project)
-            project.profiles.remove(request.user)
-        else:
-            project.profiles.add(request.user)
-            request.user.profile.liked_projects.add(project)
-
-            
-
-        return render(request, self.template_name, {'project' : project} )
-
-
-class Comment(BaseView, CreateView):
-    template_name = 'comment.html'
-
-    def post(self, request, *args, **kwargs):
-        comment = request.POST.get('comment')
-        common_id = request.POST.get('common_id')
-        reply_id = request.POST.get('reply_id')
-
-        if reply_id:
-            reply = Message.objects.get(id=reply_id)
-        else:
-            common = CommonGround.objects.get(id=common_id)
-            conv, created = Conversation.objects.get_or_create(slug=common.slug)
-            if created:
-                common.conversation = conv
-                common.save()
-        message = Message.objects.create(conversation=conv, by_user=request.user, message=comment )
-        message.save()
-            
-
-        return render(request, self.template_name, {'comment' : message} )
-
 # Profile-Views
 
 # Update Profile: User updates own profile
@@ -277,7 +141,7 @@ class ProfileUpdateView(BaseView, UpdateView):
             'last_name': request.user.last_name,
             'email': request.user.email,
             'username': request.user.username
-                    }, instance=request.user.profile)
+                    }, instance=request.user.current_instance)
         return self.render_to_response(self.get_context_data(
             object=self.object, form=form))
 
@@ -295,7 +159,7 @@ class ProfileUpdateView(BaseView, UpdateView):
         
 
     def get_success_url(self):
-        return reverse('profile_view', kwargs = {"slug": self.request.user.profile.slug})
+        return reverse('profile_view', kwargs = {"slug": self.request.user.current_instance.slug})
 
     # Nur der Admin und die Manager des Projektes kann Änderungen vornehmen
     # def get_object(self, *args, **kwargs):
@@ -314,8 +178,24 @@ class ProfileView(BaseView, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
-        #context['user_project_list'] = Project.objects.filter(created_by=context["profile"].user)
+        print(context)
+
+        if self.object.created_by == self.request.user:
+            self.request.user.instances.update(current=False)
+            self.object.current = True
+            self.object.save()
         return context
+
+    # this should go once we can create profiles and projects
+    def get(self, request, *args, **kwargs):
+        try:
+            return super(ProfileView, self).get(request, *args, **kwargs)
+        except:
+            self.object = Profile.objects.create(created_by=self.request.user)
+            return self.render_to_response(self.get_context_data(
+                object=self.object))
+
+
 
 
 # Welcome View: Landing-Page for User and overview
@@ -324,10 +204,62 @@ class WelcomePage(BaseView, ListView):
     model = Project
 
     def get_context_data(self, **kwargs):
-        # make sure the profile exists
-        if self.request.user.is_authenticated():
-            self.request.user.profile
         context = super(WelcomePage, self).get_context_data(**kwargs)
-        context['user_project_list'] = Project.objects.filter(created_by=self.request.user)
+        if self.request.user.instances.count() and not self.request.user.instances.filter(current=True):
+            instance = self.request.user.instances[0]
+            instance.current = True
+            instance.save()
 
         return context
+
+
+
+class Follow(BaseView, CreateView):
+    template_name = 'follow.html'
+
+    def post(self, request, *args, **kwargs):
+        instance_id = request.POST.get('instance_id')
+
+        instance = CommonGround.objects.get(id=instance_id)
+        if hasattr(instance, 'profile'):
+            instance = Profile.objects.get(id=instance_id)
+            if instance in self.request.user.current_instance.follows_profiles.all():
+                self.request.user.current_instance.follows_profiles.remove(instance)
+            else:
+                self.request.user.current_instance.follows_profiles.add(instance)
+        elif hasattr(self, 'project'):
+            instance = Project.objects.get(id=instance_id)
+            if instance in self.request.user.current_instance.follows_projects.all():
+                self.request.user.current_instance.follows_profiles.remove(instance)
+            else:
+                self.request.user.current_instance.follows_projects.add(instance)
+
+        return render(request, self.template_name, {'to_follow' : instance} )
+
+
+
+class Comment(BaseView, UpdateView):
+    template_name = 'comment.html'
+
+    def post(self, request, *args, **kwargs):
+        comment = request.POST.get('comment')
+        instance_id = request.POST.get('instance_id')
+        reply_id = request.POST.get('reply_id')
+
+        by_instance = self.request.user.current_instance
+
+        if reply_id:
+            reply = Message.objects.get(id=reply_id)
+            message = Message.objects.create(reply=reply, by_instance=by_instance, message=comment )
+            message.save()
+        else:
+            instance = CommonGround.objects.get(id=instance_id)
+            conv, created = Conversation.objects.get_or_create(slug=instance.slug)
+            if created:
+                instance.conversation = conv
+                instance.save()
+            message = Message.objects.create(conversation=conv, by_instance=by_instance, message=comment )
+            message.save()
+            
+
+        return render(request, self.template_name, {'comment' : message} )

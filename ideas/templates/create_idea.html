@@ -1,0 +1,26 @@
+{% extends "offcanvas.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<section class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, medium], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, large]">
+
+    <div class="s-space show show-for-medium"></div>
+      <div class="row lp-header">
+        <div class="large-6 columns">
+          <h1 class="text-center">Gute Idee!</h1>
+          <p>Es gibt viele gute Menschen mit guten Ideen. Was ist Deine?</p>
+          <div class="socialee-callout">
+          <form method="POST" action='' enctype='multipart/form-data'> {% csrf_token %}
+            {{ form | crispy }}
+            <div class="row align-center">
+              <input class="s-button-form" type="submit" value="Und weg damit!" />
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+  <div class="s-space"></div>
+  </section>
+
+{% endblock content %}
