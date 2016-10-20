@@ -1,8 +1,8 @@
 {% load socialee_filters %}
 {% if request.user.current_instance and to_follow != request.user.current_instance %}
 {% if to_follow in request.user.current_instance.follows_profiles.all or to_follow in request.user.current_instance.follows_projects.all %}
-<a class="button button--yellow button--icon float-right" href="#" instance_id="{{ to_follow.id }}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Du Folgst {{ to_follow.short_name }}</a>
+<a class="button button--yellow button--icon float-right follow" href="#" instance_id="{{ to_follow.id }}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Du Folgst {{ to_follow.short_name }}</a>
 {% else %}
-<a class="button button--yellow button--icon float-right" href="#" instance_id="{{ to_follow.id }}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge {{ to_follow.short_name }}</a>
+<a class="button button--yellow button--icon float-right follow" href="#" instance_id="{{ to_follow.id }}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge {{ to_follow.short_name }}</a>
 {% endif %}
 {% endif %}
