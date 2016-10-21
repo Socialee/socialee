@@ -3,7 +3,6 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.create_idea, name='create_idea'),
-    url(r'^(?P<id>\d+)/review/$', views.review_idea, name='review_idea'),
+    url(r'^$', views.CreateIdea.as_view(), name='create_idea'),
     url(r'^galerie/$', views.idea_list, name='idea_list'),
 ]
