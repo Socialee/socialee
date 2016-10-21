@@ -54,6 +54,20 @@
         }, delay);
     });
 
+    function like(object, idea_id) {
+        post_to_url( "../like/", 
+                    { idea_id : idea_id },
+                    function(data){
+                        object.html(data);
+                    });
+      }
+
+    $(".idea-heart").click(
+      function()
+      {
+        var id = $(this).attr('idea_id');
+        like($(this).find("#"+id), id);
+      });
 
 
   </script>

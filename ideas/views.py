@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import FormView
 
 from .forms import *
@@ -23,3 +23,18 @@ def idea_list(request):
     }
     
     return render(request, "idea_list.html", context)
+
+
+class Like(UpdateView):
+    template_name = 'like_counts.html'
+
+    def post(self, request, *args, **kwargs):
+        idea_id = request.POST.get('idea_id')
+
+        instance = Idea.objects.get(id=idea_id)
+        if self.request.user in instance.likes.all():
+            instance.likes.remove(self.request.user)
+        else:
+            instance.likes.add(self.request.user)
+
+        return render(request, self.template_name, {'idea' : instance} )
