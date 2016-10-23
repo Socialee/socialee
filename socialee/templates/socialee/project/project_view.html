@@ -2,7 +2,10 @@
 
 
 {% block content %}
-ID 102
-Projektseite
+    {% include "hero.html" %}
+    {% if request.user.current_instance %}
+        {% include "tabs.html" %}
+        {% include "site_content.html" %}
+    {% endif %}
 
 {% endblock %}

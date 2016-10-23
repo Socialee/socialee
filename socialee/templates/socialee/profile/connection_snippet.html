@@ -1,0 +1,54 @@
+<div class="row align-justify card-row">
+  <div class="small-12 medium-6">
+    <div class="card">
+      <div class="row align-center card-img">
+        <img src="{{ MEDIA_URL }}{{ you.picture }}" alt="{{ you.short_name }}">
+      </div>
+      <div class="card-section text-center">
+        <h4>{{ you.long_name }}</h4>
+        <div class="small-12 columns">
+          <div class="tags">
+            {% for tag in you.tags.all %}
+              <a class="tag tag--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
+            {% endfor %}
+          </div>
+          {% include "open_instance_button.html" with instance=you %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="small-12 medium-6">
+    <div class="card">
+      <div class="row align-center card-img">
+        <img src="{{ MEDIA_URL }}{{ other.picture }}" alt="{{other.short_name}}">
+      </div>
+      <div class="card-section text-center">
+        <h4>{{ other.long_name  }}</h4>
+        <div class="small-12 columns">
+          <div class="tags">
+            {% for tag in other.tags.all %}
+              <a class="tag tag--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
+            {% endfor %}
+          </div>
+          {% include "open_instance_button.html" with instance=other %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row align-justify">
+  <div class="small-12 medium-6 card-section">
+    {% include "inout.html" with input_output=you.socialee_input title="Du benötigst" color="blue" %}
+  </div>
+  <div class="small-12 medium-6 card-section">
+    {% include "inout.html" with input_output=other.socialee_output title=other.short_name|add:" bietet" color="green" %}
+  </div>
+</div>
+<div class="row align-justify">
+  <div class="small-12 medium-6 card-section">
+    {% include "inout.html" with input_output=you.socialee_output title="Du bietest" color="green" %}
+  </div>
+  <div class="small-12 medium-6 card-section">
+    {% include "inout.html" with input_output=other.socialee_input title=other.short_name|add:" benötigt" color="blue" %}
+  </div>
+</div>
