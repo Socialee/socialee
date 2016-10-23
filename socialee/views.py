@@ -123,6 +123,35 @@ class ProjectUpdateView(BaseView, UpdateView):
 # Profile View: Public Profile View for other users
 # Welcome View: Landing-Page for User and overview
 
+class StartProfile(BaseView, CreateView):
+    template_name = 'profile_update.html'
+    model = Profile
+    form_class = EditProfileForm
+
+    def get(self, request, *args, **kwargs):
+        super(StartProfile, self).get(request, *args, **kwargs)
+        form = self.form_class(initial={
+            'first_name': request.user.first_name,
+            'last_name': request.user.last_name,
+            'email': request.user.email,
+            'username': request.user.username
+                    })
+        return self.render_to_response(self.get_context_data(
+            object=self.object, form=form))
+
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.created_by = user
+        valid_data = super(StartProfile, self).form_valid(form)
+        user.instances.update(current=False)
+        form.instance.current = True
+        return valid_data
+
+    def get_context_data(self, **kwargs):
+        context = super(StartProfile, self).get_context_data(**kwargs)
+
+        return context
+
 
 # Update Profile: User updates own profile
 class ProfileUpdateView(BaseView, UpdateView):
@@ -136,6 +165,9 @@ class ProfileUpdateView(BaseView, UpdateView):
 
     def get(self, request, *args, **kwargs):
         super(ProfileUpdateView, self).get(request, *args, **kwargs)
+        self.request.user.instances.update(current=False)
+        self.object.current = True
+        self.object.save()
         form = self.form_class(initial={
             'first_name': request.user.first_name,
             'last_name': request.user.last_name,
@@ -178,24 +210,12 @@ class ProfileView(BaseView, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
-        print(context)
 
         if self.object.created_by == self.request.user:
             self.request.user.instances.update(current=False)
             self.object.current = True
             self.object.save()
         return context
-
-    # this should go once we can create profiles and projects
-    def get(self, request, *args, **kwargs):
-        try:
-            return super(ProfileView, self).get(request, *args, **kwargs)
-        except:
-            self.object = Profile.objects.create(created_by=self.request.user)
-            return self.render_to_response(self.get_context_data(
-                object=self.object))
-
-
 
 
 # Welcome View: Landing-Page for User and overview

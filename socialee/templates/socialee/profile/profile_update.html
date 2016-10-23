@@ -5,7 +5,7 @@
 <div class="row align-middle">
   <div class="full-height"></div>
     <div class="large-12 columns">
-        <h2>Hallo {{ request.user.current_instance | long_name }}!</h2>
+        <h2>Hallo {{ request.user.current_instance.long_name }}!</h2>
         {% if request.user.current_instance.picture %}
         <img src="{{ request.user.current_instance.picture.url }}" /> 
         {% endif %}

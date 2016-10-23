@@ -8,7 +8,7 @@
         <h6 class="byline">
           <a href="#">
             <div class="comment__avatar"><img src="{{ MEDIA_URL }}{{ request.user.current_instance.picture }}" alt="1"></div>
-            {{ request.user.current_instance | long_name }} </a>
+            {{ request.user.current_instance.long_name }} </a>
             <div class="time grey">
               <span class="data">
                 NEUEN KOMMENTAR SCHREIBEN
@@ -21,9 +21,7 @@
           <textarea name="" id="comment_value" cols="30" rows="10"></textarea>
         </section>
         <section class="comment__actions">
-          <ul class="inline-list float-right">
-            <a class="secondary button float-right comment_button" instance_id="{{ object.id }}" href="#">Kommentieren</a>
-          </ul>
+            <a class="large button button--yellow float-right comment_button" instance_id="{{ object.id }}" href="#">Kommentieren</a>
           <p class="grey">Übrigens: Personen können mit @username erwähnt werden.</p>
         </section>
     </div>

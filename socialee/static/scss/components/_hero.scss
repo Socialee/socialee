@@ -5,7 +5,7 @@
   background-image: url(../img/app/pattern.jpg);
 
   &__profile {
-    padding: 4rem;
+    padding: rem-calc(60px) rem-calc(130px) rem-calc(50px) rem-calc(130px);
     background-color: $white;
     border-radius: 4px;
   }
@@ -41,3 +41,6 @@
   }
 }
 
+.media-object-section.main-section {
+    padding-bottom: 40px;
+}

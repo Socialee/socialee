@@ -31,6 +31,7 @@ if settings.DEBUG or settings.SIMPLE_AUTH:
         url(r'^project/(?P<slug>[-\w]+)/$', login_required(views.ProjectView.as_view()), name='project_view'), # ID 102
         url(r'^project/(?P<slug>[-\w]+)/edit/$', login_required(views.ProjectUpdateView.as_view()), name='project_updateview'), # ID 103
         
+        url(r'^startprofile/$', login_required(views.StartProfile.as_view()), name='startprofile'),
         url(r'^profile/(?P<slug>[\w.@+-]+)/willkommen/$', login_required(views.WelcomePage.as_view()), name='welcome'), # ID 200
         url(r'^profile/(?P<slug>[\w.@+-]+)/$', login_required(views.ProfileView.as_view()), name='profile_view'), # ID 203
         url(r'^profile/(?P<slug>[\w.@+-]+)/edit/$', login_required(views.ProfileUpdateView.as_view()), name='profile_updateview'), # ID 201

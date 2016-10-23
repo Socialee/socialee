@@ -1,0 +1,121 @@
+.tags-wrapper {
+  padding: 20px;
+  background-color: #F8F8F8;
+  border: 3px solid #F4F4F4;
+}
+
+.tags {
+  display: inline-block;
+}
+
+.tags--attribute {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+}
+
+.tag {
+  float:left;
+  height:24px;
+  line-height:24px;
+  position:relative;
+  font-size:11px;
+
+  font-weight: 700;
+  margin-left:25px;
+  padding:0 10px 0 12px;
+  color:#fff;
+  text-decoration:none;
+  -moz-border-radius-bottomright:4px;
+  -webkit-border-bottom-right-radius:4px;
+  border-bottom-right-radius:4px;
+  -moz-border-radius-topright:4px;
+  -webkit-border-top-right-radius:4px;
+  border-top-right-radius:4px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.tag:before {
+  content:"";
+  float:left;
+  position:absolute;
+  top:0;
+  left:-12px;
+  width:0;
+  height:0;
+  border-color:transparent #264A42 transparent transparent;
+  border-style:solid;
+  border-width:12px 12px 12px 0;
+}
+
+.tag:after{
+  content:"";
+  position:absolute;
+  top:10px;
+  left:0;
+  float:left;
+  width:4px;
+  height:4px;
+  -moz-border-radius:2px;
+  -webkit-border-radius:2px;
+  border-radius:2px;
+  background:#fff;
+}
+
+.tag--orange {
+  background-color: map-get($foundation-palette, orange)
+}
+
+.tag--green {
+  background-color: map-get($foundation-palette, green)
+}
+
+.tag--grey {
+  background-color: #f8f8f8;
+  color: map-get($foundation-palette, orange)
+}
+
+.tag--white {
+  background-color: #fff;
+}
+
+.tag--blue {
+  background-color: #54ABC7;
+}
+
+.tag--orange:before {
+  border-color:transparent map-get($foundation-palette, orange) transparent transparent;
+}
+
+.tag--green:before {
+  border-color:transparent map-get($foundation-palette, green) transparent transparent;
+}
+
+.tag--grey:before {
+  border-color:transparent #f8f8f8 transparent transparent;
+}
+
+.tag--white:before {
+  border-color:transparent #fff transparent transparent;
+}
+
+.tag--blue:before {
+  border-color:transparent #54ABC7 transparent transparent;
+}
+
+.tags.green .tag--white {
+    color: map-get($foundation-palette, green);
+}
+
+.tags.blue .tag--white {
+    color: map-get($foundation-palette, blue);
+}
+
+a.tag {
+  text-decoration: none;
+}
+
+a.tag:hover{
+  color: #fff;
+}

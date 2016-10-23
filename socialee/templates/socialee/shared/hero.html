@@ -12,12 +12,11 @@
               <div class="media-object-section main-section">
               <div class="row align-justify">
                 <div class="column small-8 profile__name">
-                  {{ object | long_name  }}
+                  {{ object.long_name  }}
                 </div>
                 {% if request.user == object.created_by %}
                   <div class="column align-middle small-4">
-                  <a class="hollow button float-right" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
-                  </div>
+                  <a class="button button--yellow button--icon float-right" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
                 {% else %}
                   <div class="column small-4 follow{{ object.id }}">
                     {% include "follow.html" with to_follow=object %}
@@ -34,11 +33,11 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="column small-12 profile__tagline tags tags--is tags--orange">
+                  <div class="column small-12 profile__tagline tags tags--attribute tags--orange">
                       {% for tag in object.tags.all %}
-                      <a class="label label--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
+                      <a class="tag tag--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
                       {% endfor %}
-                      <a class="label label--grey label--more"><i class="fa fa-plus"></i> §7 Mehr</a>
+                      <a class="tag tag--grey tag--more"><i class="fa fa-plus"></i> §7 Mehr</a>
                   </div>
                 </div>
                 <p>{% if object.description %}
@@ -47,7 +46,7 @@
                   Hier steht deine Beschreibung.
                 {% endif %}
                 </p>
-                <p>Klingt interessant, <a href="">schreib {{ object | short_name }} mal.</a></p>
+                <p>Klingt interessant, <a class="thick" href="">schreib {{ object.short_name }} mal.</a></p>
               </div>
             </div>
           </div>
@@ -57,23 +56,23 @@
             <div class="tags-wrapper">
               <div class="row">
                 <div class="small-12 medium-6 columns">
-                  <div class="tags tags--green">
-                    <h4>{{ object | short_name }} bietet</h4>
+                  <div class="tags green">
+                    <h6 class="green">{{ object.short_name }} bietet</h6>
                     {%  for input in object.socialee_output.all %}
-                    <a class="label label--green"><i class="fi-x-circle"></i>{{ input }}{% if badge_count >= 1 %}
+                    <a class="tag tag--green"><i class="fi-x-circle"></i>{{ input }}{% if badge_count >= 1 %}
                     <span>{{ badge_count }}</span>{% endif %}</a>
                     {% endfor %}
-                    <a class="label label--white label--more"><i class="fa fa-plus"></i> §7 Mehr</a>
+                    <a class="tag tag--white tag--more"><i class="fa fa-plus"></i> §7 Mehr</a>
                   </div>
                 </div>
                 <div class="small-12 medium-6 columns">
-                  <div class="tags tags--blue">
-                    <h4>{{ object | short_name }} benötigt</h4>
+                  <div class="tags blue">
+                    <h6 class="blue">{{ object.short_name }} benötigt</h6>
                     {% for output in object.socialee_input.all %}
-                    <a class="label label--blue"><i class="fi-x-circle"></i>{{ output.title }}{% if badge_count >= 1 %}
+                    <a class="tag tag--blue"><i class="fi-x-circle"></i>{{ output.title }}{% if badge_count >= 1 %}
                     <span>{{ badge_count }}</span>{% endif %}</a>
                     {% endfor %}
-                    <a class="label label--white label--more"><i class="fa fa-plus"></i> §7 Mehr</a>
+                    <a class="tag tag--white tag--more"><i class="fa fa-plus"></i> §7 Mehr</a>
                   </div>
                 </div>
               </div>

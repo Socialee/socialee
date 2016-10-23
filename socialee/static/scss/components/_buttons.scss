@@ -1,0 +1,38 @@
+$button-background-hover: #CD931F;
+
+.button { // TODO: how to not use f6 button base class?
+  font-weight: 900;
+  border-radius: 4px !important;
+  text-transform: uppercase !important;
+  //padding: rem-calc(13px) rem-calc(17px) rem-calc(15px) rem-calc(20px); TODO: right sizes MEGA BUTTON BIG (ICON)
+
+    &.hollow {
+      border: 2px solid map-get($foundation-palette, orange);
+      color: map-get($foundation-palette, orange);
+
+        &:hover {
+          border-color: $button-background-hover;
+          color: $button-background-hover;
+          text-decoration: none;
+        }
+    }
+}
+
+.button--yellow {
+  //@include button-base();
+  @include button-style(map-get($foundation-palette, orange), $button-background-hover , #fff );
+
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &.large {
+    font-size: map-get($button-sizes, large);
+    padding: rem-calc(26px) rem-calc(55px) rem-calc(22px) rem-calc(55px);
+  }
+}
+
+.button--icon i {
+  padding-right: 5px;
+}

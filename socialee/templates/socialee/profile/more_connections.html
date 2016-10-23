@@ -1,0 +1,28 @@
+<section class="more-connections">
+  <div class="row">
+    <div class="small-12 medium-10 medium-offset-1 columns">
+      <div class="row text-center">
+        <div class="small-12 columns">
+          <h3 style="margin-bottom: 8rem">{{ object.short_name }} weitere Verbindungen</h3>
+        </div>
+      </div>
+      <div class="row align-justify">
+        {% for friend in object.created_by.managed_projects.all %}
+          {% include "friend_card.html" with friend=friend %}
+        {% endfor %}
+        {% for friend in object.follows_profiles.all %}
+          {% include "friend_card.html" with friend=friend %}
+        {% endfor %}
+        {% for friend in object.follows_projects.all %}
+          {% include "friend_card.html" with friend=friend %}
+        {% endfor %}
+      </div>
+      <div class="row text-center">
+        <div class="small-12 columns">
+          <a class="small hollow button" href="#">§Weitere laden</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% include "connections_footer.html" %}
