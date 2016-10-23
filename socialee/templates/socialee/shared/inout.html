@@ -1,5 +1,7 @@
-<div class="text-center tags {{ color }}">
-	<h6 class="{{ color }}">{{ title }}</h6>
+<div class="card-section__title text-center">
+  <h6 class="{{ color }}">{{ title }}</h6>
+</div>
+<div class="tags {{ color }}">
 {% for inout in input_output.all %}
 	<a class="tag tag--{{ color }}"><i class="fi-x-circle"></i>{{ inout.title }}
 		{% if inout.badge_count >= 1 %}

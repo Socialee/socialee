@@ -7,7 +7,9 @@
           <h3 style="margin-bottom: 8rem">Deine Verbindung zu {{ object.short_name  }} </h3>
         </div>
       </div>
-      {% include "connection_snippet.html" with you=request.user.current_instance other=object %}
+      <div class="card-wrapper">
+        {% include "connection_snippet.html" with you=request.user.current_instance other=object %}
+      </div>
     </div>
   </div>
 </section>
