@@ -4,16 +4,33 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import FormView
+from allauth.account.views import SignupView
 
 from .forms import *
 from .models import Idea
 
 
-class CreateIdea(CreateView):
+class CreateIdea(SignupView):
     model = Idea
     template_name = 'create_idea.html'
     form_class = IdeaForm
     success_url = reverse_lazy('idea_list')
+
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+
+        if form.is_valid():
+            pic = request.FILES['picture']
+            title = form.cleaned_data.get('title')
+            description = form.cleaned_data.get('description')
+            ret = super(CreateIdea, self).post(request, *args, **kwargs)
+            if pic or title or description:
+                newPic = Idea.objects.create( picture = pic, title = title, description = description )
+                newPic.save()
+            return ret
+        else:
+            return self.form_invalid(form)
 
 
 def idea_list(request):

@@ -1,8 +1,22 @@
-{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Hallo!
+{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}
+{% if idea_signup %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Hallo!
+
+
+Bestätige jetzt noch Deine Email-Adresse indem du den folgenden link klickst.
+{{ activate_url }}
+Dann kannst du dich mit deinerEmail-Adresse und dem folgenden Password anmelden:
+password: {{ pass }}
+{% endblocktrans %}
+{% else %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Hallo!
 
 Du hast Dich bei Socialee auf in den Newsletter eingetragen. Vielen Dank!
 
 Bestätige jetzt noch Deine Email-Adresse und Du bekommst bald was zu Lesen von uns. 
 Klicke hier: {{ activate_url }}
-{% endblocktrans %}{% endautoescape %}
+
+{% endblocktrans %}
+{% endif %}
+{% endautoescape %}
 {% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Schöne Grüße von Socialee!{% endblocktrans %}

@@ -50,10 +50,10 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="row align-center">
-        <input class="button" type="submit" value="Speichern" />
+        <div class="row align-center">
+          <input class="button" type="submit" value="Speichern" />
+        </div>
       </div>
 
     </form>
@@ -71,13 +71,16 @@ function readURL(input) {
 
         reader.onload = function (e) {
           $("#idea_img").attr("src", e.target.result);
+          $("#blah").show();
           $("#blah").attr("src", e.target.result);
         }
 
         reader.readAsDataURL(input.files[0]);
     }
 }
+$("#blah").hide();
 $("#review").hide();
+$("#id_email").parent().hide();
 
 $("#id_picture").change(function(){
     readURL(this);
@@ -85,11 +88,13 @@ $("#id_picture").change(function(){
 
 $("#review_button").click(function()
   {
-    $("#idea_form").hide();
+    $("#idea_form").children().hide();
+    $("#id_email").parent().show();
     $("#idea_title").html($("#id_title").val());
     $("#idea_description").html($("#id_description").val());
     readURL($("#id_picture"));
     $("#review").show();
+    
   });
 
 </script>
