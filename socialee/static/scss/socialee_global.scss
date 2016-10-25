@@ -1,6 +1,6 @@
 @import "settings";
 @import "foundation-sites/scss/foundation";
-@include foundation-everything(true);
+@include foundation-everything(false);
 
 // global Socialee scss
 @import "partials/footer";
