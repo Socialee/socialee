@@ -35,6 +35,10 @@
 
 .card {
 	overflow: visible;
+	@include breakpoint(small only) {
+	margin-bottom: 5rem;
+	}
+	//min-height: 320px;
 	// margin-right: 2rem;
 	// margin-bottom: 4rem;
 }

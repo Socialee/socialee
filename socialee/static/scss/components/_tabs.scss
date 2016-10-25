@@ -1,26 +1,28 @@
 .hero__tabs {
-  float: none;
-  position: relative;
+  // float: none;
+  // position: relative;
   text-align: center;
   margin: 0 auto;
   bottom: 0;
-  width: 100%;
+  // width: 100%;
   padding-top: 2.5rem;
   background: transparent;
   border: 0;
 }
 
 .hero__tabs li {
-  float: none;
-  display: inline-flex;
-  flex-grow: 1;
-  text-align: center;
-  width: 49.8%;
+  // float: none;
+  // display: inline-flex;
+  // flex-grow: 1;
+  // text-align: center;
+  // width: 49.8%;
 }
 
 .hero__tabs li a {
-  padding: 2.1rem 1rem;
-  font-size: 34px;
+  @include breakpoint(medium) {
+    padding: 2.1rem 1rem;
+    font-size: 34px;
+  }
   color: #ffe;
   text-transform: normal;
   display: block;

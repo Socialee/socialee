@@ -1,5 +1,5 @@
 .connections-footer {
-	background-color: $grey;
+  background-color: $grey;
   padding-top: 10rem;
   padding-bottom: 10rem;
 }
@@ -11,6 +11,6 @@
 .connections-footer img {
     position: absolute;
     top: -260px;
-    left: -45px;
-    max-width: none;
+    left: 50%;
+    margin-left: -44px;
 }
