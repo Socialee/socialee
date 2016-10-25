@@ -10,8 +10,8 @@ from django.core.mail import send_mail
 class IdeaForm(BaseSignupForm):
 
     picture = forms.ImageField( required=False )
-    title = forms.CharField( required=False, widget = forms.TextInput( attrs={ 'autofocus': 'autofocus'}))
-    description = forms.CharField( required=False, widget=forms.TextInput())
+    title = forms.CharField( required=False, widget = forms.TextInput( attrs={ 'autofocus': 'autofocus' }))
+    description = forms.CharField( required=False, widget=forms.Textarea(attrs={'cols': 80, 'rows': 5}))
 
     def __init__(self, *args, **kwargs):
         super(IdeaForm, self).__init__(*args, **kwargs)
@@ -19,6 +19,14 @@ class IdeaForm(BaseSignupForm):
         self.fields = OrderedDict((k, self.fields[k]) for k in fields_key_order)
 
         self.fields['email'].required = False
+
+        self.fields['picture'].label = _('Idee als Bild')
+        self.fields['title'].label = _('Titel')
+        self.fields['description'].label = _('Beschreibung')
+
+        self.fields['picture'].help_text = _('Wenn Du magst')
+        self.fields['title'].help_text = _('Wenn Du magst')
+        self.fields['description'].help_text = _('Wenn Du magst')
 
     def clean(self):
         super(IdeaForm, self).clean()
@@ -30,7 +38,7 @@ class IdeaForm(BaseSignupForm):
             password = User.objects.make_random_password()
             user.set_password(password)
             user.save()
-        request.session["pass"] = password
+            request.session["pass"] = password
         request.session["idea_signup"] = True
         return super(IdeaForm, self).custom_signup(request, user)
 

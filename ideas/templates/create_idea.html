@@ -5,30 +5,52 @@
 {% block content %}
 
 <div class="row align-center">
-  <div class="small-6 columns callout-form">
+  <div class="small-8 columns callout-form">
     
-    <h2>Gute Idee!</h2>
-    <p>Es gibt viele gute Menschen mit guten Ideen. Was ist Deine?</p>
+    <h2 id="top_titel">Gute Idee!</h2>
+    <p id="top_desc">Es gibt viele gute Menschen mit guten Ideen. Was ist Deine?</p>
+    <p id="top_all">Es werden übrigens schon {{ ideas_count }} Ideen angezeigt, ich will zurück zur 
+      <a href="{% url 'idea_list' %}">Übersichtsseite</a></p>
   
     <form method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
 
+     <!--  {{ form.as_p }}
+    <input type="submit" value="Submit" /> -->
+
       <div id="idea_form">
-        <img id="blah" src="#" alt="your image" />
+        <img id="idea_image" src="#" alt="Your Idea Image" />
 
-      {% for field in form %}
         <div class="fieldWrapper">
-            {{ field.errors }}
-            <div class="form-label">{{ field.label }}</div>
-              {% if field.help_text %}
-                <div class="second-form-label">{{ field.help_text|safe }}</div>
+            {{ form.picture.errors }}
+            <div class="form-label">{{ form.picture.label }}</div>
+              {% if form.picture.help_text %}
+                <div class="second-form-label">{{ form.picture.help_text|safe }}</div>
               {% endif %}
-            {{ field }}
+            {{ form.picture }}
         </div>
-      {% endfor %}
+        <label for="id_picture" id="upload" class="button button--yellow hollow"><i class="fa fa-upload" aria-hidden="true"></i> Bild Hochladen </label>
 
-      <div class="row align-center">
-        <input id="review_button" class="button" value="Vorschau deiner Idee" />
-      </div>
+        <div class="fieldWrapper">
+            {{ form.title.errors }}
+            <div class="form-label">{{ form.title.label }}</div>
+              {% if form.title.help_text %}
+                <div class="second-form-label">{{ form.title.help_text|safe }}</div>
+              {% endif %}
+            {{ form.title }}
+        </div>
+
+        <div class="fieldWrapper">
+            {{ form.description.errors }}
+            <div class="form-label">{{ form.description.label }}</div>
+              {% if form.description.help_text %}
+                <div class="second-form-label">{{ form.description.help_text|safe }}</div>
+              {% endif %}
+            {{ form.description }}
+        </div>
+
+        <div class="fieldWrapper">
+          <div id="review_button" class="button button--yellow" >Vorschau deiner Idee</div>
+        </div>
 
       </div>
 
@@ -51,8 +73,18 @@
           </div>
         </div>
 
-        <div class="row align-center">
-          <input class="button" type="submit" value="Speichern" />
+        <div class="fieldWrapper">
+          {{ form.email.errors }}
+          <div class="form-label">{{ form.email.label }}</div>
+            {% if form.email.help_text %}
+              <div class="second-form-label">{{ form.email.help_text|safe }}</div>
+            {% endif %}
+          {{ form.email }}
+        </div>
+
+        <div class="fieldWrapper">
+          <input class="button button--yellow" type="submit" value="Idee Absenden" />
+          <div class="float-right" >Ich will die Idee <a id="change">nochmal ändern</a>.</div>
         </div>
       </div>
 
@@ -71,14 +103,13 @@ function readURL(input) {
 
         reader.onload = function (e) {
           $("#idea_img").attr("src", e.target.result);
-          $("#blah").show();
-          $("#blah").attr("src", e.target.result);
+          $("#idea_image").show();
+          $("#idea_image").attr("src", e.target.result);
         }
 
         reader.readAsDataURL(input.files[0]);
     }
 }
-$("#blah").hide();
 $("#review").hide();
 $("#id_email").parent().hide();
 
@@ -88,13 +119,26 @@ $("#id_picture").change(function(){
 
 $("#review_button").click(function()
   {
-    $("#idea_form").children().hide();
-    $("#id_email").parent().show();
-    $("#idea_title").html($("#id_title").val());
-    $("#idea_description").html($("#id_description").val());
-    readURL($("#id_picture"));
-    $("#review").show();
+    if($("#id_title").val() || $("#id_description").val() || $("#id_picture").val())
+    {
+      $("#idea_form").children().hide();
+      $("#id_email").parent().show();
+      $("#idea_title").html($("#id_title").val());
+      $("#idea_description").html($("#id_description").val());
+      readURL($("#id_picture"));
+      $("#review").show();
+    }
+    else
+    {
+      $("#top_desc").html("Du hast keine Idee?");
+    }
     
+  });
+$("#change").click(function()
+  {
+    $("#review").hide();
+    $("#idea_form").children().show();
+    $("#id_email").parent().hide();    
   });
 
 </script>

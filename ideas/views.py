@@ -27,6 +27,7 @@ class CreateIdea(SignupView):
             email = form.cleaned_data.get('email')
             ret = super(CreateIdea, self).post(request, *args, **kwargs)
             if pic or title or description:
+                messages.success(request, 'Danke! Wir gucken uns Deine Idee an und veröffentlichen sie so schnell wie möglich.')
                 newIdea = Idea.objects.create( picture = pic, title = title, description = description, author=email )
                 newIdea.save()
             else:
@@ -34,6 +35,12 @@ class CreateIdea(SignupView):
             return ret
         else:
             return self.form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(CreateIdea, self).get_context_data(**kwargs)
+        context['ideas_count'] = Idea.objects.all().count()
+        return context
+
 
 
 def idea_list(request):
