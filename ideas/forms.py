@@ -26,9 +26,10 @@ class IdeaForm(BaseSignupForm):
         return self.cleaned_data
 
     def custom_signup(self, request, user):
-        password = User.objects.make_random_password()
-        user.set_password(password)
-        user.save()
+        if user.email:
+            password = User.objects.make_random_password()
+            user.set_password(password)
+            user.save()
         request.session["pass"] = password
         request.session["idea_signup"] = True
         return super(IdeaForm, self).custom_signup(request, user)

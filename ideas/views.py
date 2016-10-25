@@ -24,10 +24,13 @@ class CreateIdea(SignupView):
             pic = request.FILES['picture']
             title = form.cleaned_data.get('title')
             description = form.cleaned_data.get('description')
+            email = form.cleaned_data.get('email')
             ret = super(CreateIdea, self).post(request, *args, **kwargs)
             if pic or title or description:
-                newPic = Idea.objects.create( picture = pic, title = title, description = description )
-                newPic.save()
+                newIdea = Idea.objects.create( picture = pic, title = title, description = description, author=email )
+                newIdea.save()
+            else:
+                return self.form_invalid(form)
             return ret
         else:
             return self.form_invalid(form)
