@@ -21,7 +21,9 @@ class CreateIdea(SignupView):
         form = self.get_form(form_class)
 
         if form.is_valid():
-            pic = request.FILES['picture']
+            pic = None
+            if len(request.FILES) != 0:
+                pic = request.FILES['picture']
             title = form.cleaned_data.get('title')
             description = form.cleaned_data.get('description')
             email = form.cleaned_data.get('email')

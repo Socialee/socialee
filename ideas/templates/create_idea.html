@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="row align-center">
-  <div class="small-8 columns callout-form">
+  <div class="small-12 large-8 columns callout-form">
     
     <h2 id="top_titel">Gute Idee!</h2>
     <p id="top_desc">Es gibt viele gute Menschen mit guten Ideen. Was ist Deine?</p>
@@ -14,11 +14,8 @@
   
     <form method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
 
-     <!--  {{ form.as_p }}
-    <input type="submit" value="Submit" /> -->
-
       <div id="idea_form">
-        <img id="idea_image" src="#" alt="Your Idea Image" />
+        <img id="idea_image" src="#" alt="Deine Idee als Bild" />
 
         <div class="fieldWrapper">
             {{ form.picture.errors }}
@@ -127,6 +124,8 @@ $("#review_button").click(function()
       $("#idea_description").html($("#id_description").val());
       readURL($("#id_picture"));
       $("#review").show();
+      $("#top_desc").hide();
+      $("#top_titel").html("Vorschau deiner guten Idee");
     }
     else
     {
@@ -138,7 +137,10 @@ $("#change").click(function()
   {
     $("#review").hide();
     $("#idea_form").children().show();
-    $("#id_email").parent().hide();    
+    $("#id_email").parent().hide();
+    $("#top_desc").show();
+    $("#top_desc").html("Mach sie nochmal hübscher...");  
+    $("#top_titel").html("Gute Idee!");  
   });
 
 </script>
