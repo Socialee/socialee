@@ -97,3 +97,18 @@ h6 {
 .tags-wrapper h6 {
     margin-left: 10px;
 }
+
+.text-box {
+	background-color: map-get($foundation-palette, black);
+	color: $white;
+	@include breakpoint(large) {
+	    padding-top: rem-calc(87px);
+		padding-bottom: rem-calc(116px);
+		padding-left: rem-calc(230px);
+		padding-right: rem-calc(230px);
+  }
+}
+
+.section {
+	padding: rem-calc(80px) 0;
+}
