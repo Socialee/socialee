@@ -1,1 +1,7 @@
+{% if type == "like" %}
 {{ idea.likes.count }}
+{% elif type == "hand" %}
+{{ idea.hands.count }}
+{% elif type == "money" %}
+{{ idea.money.count }}
+{% endif %}

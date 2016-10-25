@@ -63,9 +63,21 @@ class Like(UpdateView):
         idea_id = request.POST.get('idea_id')
 
         instance = Idea.objects.get(id=idea_id)
-        if self.request.user in instance.likes.all():
-            instance.likes.remove(self.request.user)
-        else:
-            instance.likes.add(self.request.user)
+        like_type = request.POST.get('type')
+        if like_type=="like":
+            if self.request.user in instance.likes.all():
+                instance.likes.remove(self.request.user)
+            else:
+                instance.likes.add(self.request.user)
+        elif like_type=="hand":
+            if self.request.user in instance.hands.all():
+                instance.hands.remove(self.request.user)
+            else:
+                instance.hands.add(self.request.user)
+        elif like_type=="money":
+            if self.request.user in instance.money.all():
+                instance.money.remove(self.request.user)
+            else:
+                instance.money.add(self.request.user)
 
-        return render(request, self.template_name, {'idea' : instance} )
+        return render(request, self.template_name, {'idea' : instance, 'type':like_type} )
