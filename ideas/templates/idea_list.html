@@ -15,6 +15,9 @@
 <br><br>
 
   <div class="grid">
+      {% for idea in own_idea_list %}  
+        {% include "idea_card.html" %}
+      {% endfor %}
       {% for idea in idea_list %}  
         {% include "idea_card.html" %}
       {% endfor %}

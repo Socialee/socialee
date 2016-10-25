@@ -25,6 +25,8 @@ class CreateIdea(SignupView):
             title = form.cleaned_data.get('title')
             description = form.cleaned_data.get('description')
             email = form.cleaned_data.get('email')
+            if not email and request.user.email:
+                email = request.user.email
             ret = super(CreateIdea, self).post(request, *args, **kwargs)
             if pic or title or description:
                 messages.success(request, 'Danke! Wir gucken uns Deine Idee an und veröffentlichen sie so schnell wie möglich.')
@@ -44,9 +46,11 @@ class CreateIdea(SignupView):
 
 
 def idea_list(request):
-    idea_list = Idea.objects.filter(active=True).order_by('-subm_date')
+    idea_list = Idea.objects.filter(active=True).exclude(author=request.user.email).order_by('-subm_date')
+    own_idea_list = Idea.objects.filter(author=request.user.email).order_by('-subm_date')
     context = {
         "idea_list": idea_list,
+        "own_idea_list": own_idea_list,
     }
     
     return render(request, "idea_list.html", context)

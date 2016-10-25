@@ -9,6 +9,9 @@
     <div class="idea-details">
       <h2>{{ idea.title }}</h2>
       <p>{{ idea.description }}</p>
+      {% if not idea.active %}
+      <p style="color:red;">noch nicht veröffentlicht</p>
+      {% endif %}
     </div>
     <div class="idea-heart" idea_id="{{ idea.id }}">
       <span class="fa-stack fa-lg">
