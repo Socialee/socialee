@@ -8,13 +8,13 @@
       </div>
       <div class="row align-justify">
         {% for friend in object.created_by.managed_projects.all %}
-          {% include "friend_card.html" with friend=friend %}
+          {% include "snippet_instance_card.html" with instance=friend %}
         {% endfor %}
         {% for friend in object.follows_profiles.all %}
-          {% include "friend_card.html" with friend=friend %}
+          {% include "snippet_instance_card.html" with instance=friend %}
         {% endfor %}
         {% for friend in object.follows_projects.all %}
-          {% include "friend_card.html" with friend=friend %}
+          {% include "snippet_instance_card.html" with instance=friend %}
         {% endfor %}
       </div>
       <div class="row text-center">

@@ -2,7 +2,9 @@
   <div class="row">
     <div class="small-12 column">
       <ul class="row tabs hero__tabs" data-tabs data-options="data-auto-focus:false" id="example-tabs">
+        {% if object.project %}
         <li class="small-12 medium-4 column tabs-title"><a href="#panel3">Informationen</a></li>
+        {% endif %}
         <li class="small-12 medium-4 column tabs-title"><a href="#panel1">Dialoge</a></li>
         <li class="small-12 medium-4 column tabs-title"><a href="#panel2">Verbindungen</a></li>
       </ul>

@@ -177,6 +177,7 @@ TEMPLATES = [
                 str(APPS_DIR('templates/socialee/project/')),
                 str(APPS_DIR('templates/socialee/profile/')),
                 str(APPS_DIR('templates/socialee/shared/')),
+                str(APPS_DIR('templates/socialee/snippets/')),
                 ],
         'OPTIONS': {
             # NOTE: app_namespace.Loader can not work properly if you use it in conjunction with django.template.loaders.cached.Loader and inheritance based on empty namespaces.

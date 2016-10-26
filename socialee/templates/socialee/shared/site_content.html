@@ -2,6 +2,8 @@
   <div class="tabs-content" data-tabs-content="example-tabs">
     {% include "dialog.html" %}
     {% include "connections.html" %}
-    {% include "information.html" %}
+    {% if object.project %}
+        {% include "information.html" %}
+    {% endif %}
   </div>
 </div>

@@ -12,7 +12,7 @@
                 <a class="tag tag--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
               {% endfor %}
             </div>
-          <!-- {% include "open_instance_button.html" with instance=you %} -->
+          <!-- {% include "snippet_open_instance.html" with instance=you %} -->
         </div>
       </div>
     </div>
@@ -30,7 +30,7 @@
               <a class="tag tag--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
             {% endfor %}
           </div>
-          <!-- {% include "open_instance_button.html" with instance=other %} -->
+          <!-- {% include "snippet_open_instance.html" with instance=other %} -->
         </div>
       </div>
     </div>
@@ -38,17 +38,17 @@
 </div>
 <div class="row align-justify">
   <div class="small-12 medium-6 columns card-section">
-    {% include "inout.html" with input_output=you.socialee_input title="Du benötigst" color="blue" %}
+    {% include "snippet_input_output_tags.html" with input_output=you.socialee_input title="Du benötigst" color="blue" %}
   </div>
   <div class="small-12 medium-6 columns card-section">
-    {% include "inout.html" with input_output=other.socialee_output title=other.short_name|add:" bietet" color="green" %}
+    {% include "snippet_input_output_tags.html" with input_output=other.socialee_output title=other.short_name|add:" bietet" color="green" %}
   </div>
 </div>
 <div class="row align-justify">
   <div class="small-12 medium-6 columns card-section">
-    {% include "inout.html" with input_output=you.socialee_output title="Du bietest" color="green" %}
+    {% include "snippet_input_output_tags.html" with input_output=you.socialee_output title="Du bietest" color="green" %}
   </div>
   <div class="small-12 medium-6 columns card-section">
-    {% include "inout.html" with input_output=other.socialee_input title=other.short_name|add:" benötigt" color="blue" %}
+    {% include "snippet_input_output_tags.html" with input_output=other.socialee_input title=other.short_name|add:" benötigt" color="blue" %}
   </div>
 </div>

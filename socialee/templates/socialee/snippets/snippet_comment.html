@@ -1,7 +1,7 @@
 {% load socialee_filters %}
 <div class="comment" id="comment{{ comment.id }}">
   <section class="comment__top">
-    {% include "follow.html" with to_follow=comment.by_instance %}
+    {% include "snippet_follow.html" with to_follow=comment.by_instance %}
     <h6 class="byline">
       <a href="#">
         <div class="comment__avatar"><img src="{{ MEDIA_URL }}{{ comment.by_instance.picture }}" alt="profile image"></div>

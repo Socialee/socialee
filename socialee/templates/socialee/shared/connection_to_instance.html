@@ -8,7 +8,7 @@
         </div>
       </div>
       <div class="card-wrapper">
-        {% include "connection_snippet.html" with you=request.user.current_instance other=object %}
+        {% include "snippet_you_other.html" with you=request.user.current_instance other=object %}
       </div>
     </div>
   </div>

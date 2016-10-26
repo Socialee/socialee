@@ -81,7 +81,7 @@ class ProjectOverview(BaseView, ListView):
 
 # CRUD RETRIEVE PARTICULAR PROJECT
 class ProjectView(BaseView, DetailView):
-    template_name = 'project_view.html'
+    template_name = 'instance_view.html'
     model = Project
 
     def get_context_data(self, **kwargs):
@@ -205,7 +205,7 @@ class ProfileUpdateView(BaseView, UpdateView):
 
 
 class ProfileView(BaseView, DetailView):
-    template_name = 'profile_view.html'
+    template_name = 'instance_view.html'
     model = Profile
 
     def get_context_data(self, **kwargs):
@@ -235,7 +235,7 @@ class WelcomePage(BaseView, ListView):
 
 
 class Follow(BaseView, CreateView):
-    template_name = 'follow.html'
+    template_name = 'snippet_follow.html'
 
     def post(self, request, *args, **kwargs):
         instance_id = request.POST.get('instance_id')
@@ -259,7 +259,7 @@ class Follow(BaseView, CreateView):
 
 
 class Comment(BaseView, UpdateView):
-    template_name = 'comment.html'
+    template_name = 'snippet_comment.html'
 
     def post(self, request, *args, **kwargs):
         comment = request.POST.get('comment')

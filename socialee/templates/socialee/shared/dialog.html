@@ -33,12 +33,12 @@
     {% for message in object.conversation.messages.all %}
 
 
-        {% include "comment.html" with comment=message %}
+        {% include "snippet_comment.html" with comment=message %}
 
         {% for reply in message.replys.all %}
         <div class="comment--indented">
           <div class="comment__wrap">
-            {% include "comment.html" with comment=reply %}
+            {% include "snippet_comment.html" with comment=reply %}
             </div>
           </div>
         {% endfor %}

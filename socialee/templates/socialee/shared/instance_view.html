@@ -1,11 +1,11 @@
 {% extends "offcanvas.html" %}
 
+  {% block content %}
 
-{% block content %}
     {% include "hero.html" %}
     {% if request.user.current_instance %}
-        {% include "tabs-project.html" %}
+        {% include "tabs.html" %}
         {% include "site_content.html" %}
     {% endif %}
 
-{% endblock %}
+  {% endblock content %}

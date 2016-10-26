@@ -8,21 +8,15 @@
         </div>
       </div>
 
-      {% for friend in object.created_by.managed_projects.all %}
-        <div class="card-wrapper">
-          {% include "connection_snippet.html" with you=request.user.current_instance other=friend %}
-        </div>
-      {% endfor %}
-
       {% for friend in object.follows_profiles.all %}
         <div class="card-wrapper">
-          {% include "connection_snippet.html" with you=request.user.current_instance other=friend %}
+          {% include "snippet_you_other.html" with you=request.user.current_instance other=friend %}
         </div>
       {% endfor %}
 
       {% for friend in object.follows_projects.all %}
         <div class="card-wrapper">
-          {% include "connection_snippet.html" with you=request.user.current_instance other=friend %}
+          {% include "snippet_you_other.html" with you=request.user.current_instance other=friend %}
         </div>
       {% endfor %}
 

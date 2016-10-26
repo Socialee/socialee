@@ -19,7 +19,7 @@
                     <a class="button button--yellow button--icon float-right-lg show-for-medium" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
                   {% else %}
                     <div class="column small-4 show-for-medium follow{{ object.id }}">
-                      {% include "follow.html" with to_follow=object %}
+                      {% include "snippet_follow.html" with to_follow=object %}
                     </div>
                 {% endif %}
                   </div>
