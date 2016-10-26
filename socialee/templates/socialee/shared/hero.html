@@ -6,22 +6,29 @@
         <div class="row">
           <div class="small-12 column">
             <div class="media-object stack-for-small">
+              {% if object.profile %}
               <div class="media-object-section">
                 <img src="{{ MEDIA_URL }}{{ object.picture }}" alt="profile image">
               </div>
+              {% endif %}
               <div class="small-12 media-object-section main-section">
                 <div class="row">
                   <div class="small-12 medium-12 large-8 column profile__name">
                     {{ object.long_name  }}
                   </div>
+                  <div class="small-12 medium-12 large-4 column ">
                   {% if request.user == object.created_by %}
-                    <div class="small-12 medium-12 large-4 column ">
-                    <a class="button button--yellow button--icon float-right-lg show-for-medium" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
+                    {% if object.profile %}
+                      <a class="button button--yellow button--icon float-right-lg show-for-medium" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
+                    {% else %}
+                      <a class="button button--yellow button--icon float-right-lg show-for-medium" href="{% url 'project_updateview' slug=project.slug %}"><i class="fa fa-pencil" aria-hidden="true"></i> Projekt bearbeiten</a>
+                    {% endif %}
+
                   {% else %}
                     <div class="column small-4 show-for-medium follow{{ object.id }}">
                       {% include "snippet_follow.html" with to_follow=object %}
                     </div>
-                {% endif %}
+                  {% endif %}
                   </div>
                   <div class="column small-12 profile__tagline">
                   {% if object.tagline %}
