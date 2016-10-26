@@ -29,7 +29,9 @@ $button-background-hover: #CD931F;
 
   &.large {
     font-size: map-get($button-sizes, large);
-    padding: rem-calc(26px) rem-calc(55px) rem-calc(22px) rem-calc(55px);
+    @include breakpoint(medium) {
+    	padding: rem-calc(26px) rem-calc(55px) rem-calc(22px) rem-calc(55px);
+	}
   }
 }
 

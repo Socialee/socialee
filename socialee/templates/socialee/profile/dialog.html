@@ -20,9 +20,13 @@
         <section class="comment__content">
           <textarea name="" id="comment_value" cols="30" rows="10"></textarea>
         </section>
-        <section class="comment__actions">
-            <a class="large button button--yellow float-right comment_button" instance_id="{{ object.id }}" href="#">Kommentieren</a>
-          <p class="grey">Übrigens: Personen können mit @username erwähnt werden.</p>
+        <section class="row comment__actions">
+          <div class="small-12 medium-8 column">
+            <p class="grey">Übrigens: Personen können mit @username erwähnt werden.</p>
+          </div>
+          <div class="small-12 medium-4 column">
+            <a class="large button expanded-sm float-right-md button--yellow comment_button" instance_id="{{ object.id }}" href="#">Kommentieren</a>
+          </div>
         </section>
     </div>
 

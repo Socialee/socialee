@@ -9,7 +9,10 @@ html.profile_view body {
 
 .site-content {
     background-color: #fff;
-    padding-top: 80px;
+    padding-top: rem-calc(20px);
+    @include breakpoint(large) {
+    padding-top: rem-calc(80px);
+	}
 }
 
 .grey {
@@ -96,4 +99,47 @@ h6 {
 
 .tags-wrapper h6 {
     margin-left: 10px;
+}
+
+.text-box {
+	background-color: map-get($foundation-palette, black);
+	color: $white;
+	@include breakpoint(large) {
+	    padding-top: rem-calc(87px);
+		padding-bottom: rem-calc(116px);
+		padding-left: rem-calc(230px);
+		padding-right: rem-calc(230px);
+  }
+}
+
+.section {
+	padding: rem-calc(80px) 0;
+}
+
+.text-center-sm {
+	@include breakpoint(small only) {
+		text-align: center;
+	}
+
+}
+
+.expanded-sm {
+    @include breakpoint(small only) {
+		display: block;
+    	width: 100%;
+    	margin-left: 0;
+   		margin-right: 0;
+	}
+}
+
+.float-right-md {
+    @include breakpoint(medium) {
+   		float: right !important;
+    }
+}
+
+.float-right-lg {
+    @include breakpoint(large only) {
+   		float: right !important;
+    }
 }

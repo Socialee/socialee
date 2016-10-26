@@ -95,7 +95,7 @@ $global-weight-normal: normal;
 $global-weight-bold: bold;
 $global-radius: 0rem;
 $global-text-direction: ltr;
-$global-flexbox: true;
+$global-flexbox: false;
 $print-transparent-backgrounds: true;
 
 @include add-foundation-colors;

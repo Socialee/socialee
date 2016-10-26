@@ -1,0 +1,66 @@
+{% load static socialee_filters %}
+<div class="tabs-panel" id="panel3">
+  <div class="row">
+    <div class="small-12 large-8 large-offset-2 columns section">
+      <h3 class="text-center-sm">Socialee in 60 Sekunden</h3>
+       <img src="http://placehold.it/1400x641/302F35/ffffff">
+    </div>
+    <div class="small-12 large-8 large-offset-2 columns section">
+      <h3 class="text-center-sm">Worum geht es in diesem Projekt?</h3>
+        <div class="row">
+          <div class="small-12 large-6 column">
+          <p>
+            Es gibt viele gute Menschen mit guten Ideen, gewöhnen wir uns daran, diese Ideen auch umzusetzen. Socialee ist auch so eine Idee. Und das ist ein reiner dritter Satz!
+            Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id ligula porta felis euismod semper. Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.
+            Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id ligula porta felis euismod semper. Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.
+          </p>
+          </div>
+           <div class="small-12 large-6 column">
+            <p>
+              Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id ligula porta felis euismod semper. Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.
+              Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id ligula porta felis euismod semper. Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.
+            </p>
+          </div>
+        </div>
+    </div>
+    <div class="small-12 columns text-box">
+      <h3 class="text-center-sm">Wie ist dieses Projekt enstanden?</h3>
+      <div class="row">
+        <div class="small-12 column">
+        <p>
+          Es gibt viele gute Menschen mit guten Ideen, gewöhnen wir uns daran, diese Ideen auch umzusetzen. Socialee ist auch so eine Idee. Und das ist ein reiner dritter Satz!
+          Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id ligula porta felis euismod semper. Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.
+          Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id ligula porta felis euismod semper. Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.
+        </p>
+        </div>
+      </div>
+    </div>
+    <div class="small-12 large-8 large-offset-2 columns section">
+      <h3 class="text-center-sm">Wer betreut diese Projekt?</h3>
+
+      <div class="small-12 medium-6 large-4">
+        <div class="card">
+          <div class="row align-center card-img">
+            <img src="{{ MEDIA_URL }}{{ friend.picture }}" alt="{{ friend.short_name }}">
+          </div>
+          <div class="card-section text-center">
+            <h4>{{ friend.long_name }}</h4>
+            <div class="small-12 columns">
+              <div class="tags">
+                {% for tag in friend.tags.all %}
+                  <a class="tag tag--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
+                {% endfor %}
+              </div>
+              {% include "open_instance_button.html" with instance=friend %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="small-12 large-8 large-offset-2 columns end section">
+      <h3 class="text-center-sm">Wieviel Geld brauchen wir?</h3>
+    </div>
+  </div>
+</div>
+

@@ -4,18 +4,28 @@
     <div class="small-12 medium-10 medium-offset-1 columns">
       <div class="row text-center">
         <div class="small-12 columns">
-          <h3 style="margin-bottom: 8rem">So stehen {{ object.short_name  }} Freunde in Verbindung zu dir</h3>
+          <h3>So stehen {{ object.short_name  }} Freunde in Verbindung zu dir</h3>
         </div>
       </div>
+
       {% for friend in object.created_by.managed_projects.all %}
-        {% include "connection_snippet.html" with you=request.user.current_instance other=friend %}
+        <div class="card-wrapper">
+          {% include "connection_snippet.html" with you=request.user.current_instance other=friend %}
+        </div>
       {% endfor %}
+
       {% for friend in object.follows_profiles.all %}
-        {% include "connection_snippet.html" with you=request.user.current_instance other=friend %}
+        <div class="card-wrapper">
+          {% include "connection_snippet.html" with you=request.user.current_instance other=friend %}
+        </div>
       {% endfor %}
+
       {% for friend in object.follows_projects.all %}
-        {% include "connection_snippet.html" with you=request.user.current_instance other=friend %}
+        <div class="card-wrapper">
+          {% include "connection_snippet.html" with you=request.user.current_instance other=friend %}
+        </div>
       {% endfor %}
+
     </div>
   </div>
 </section>
