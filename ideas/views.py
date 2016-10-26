@@ -11,7 +11,6 @@ from .models import Idea
 
 
 class CreateIdea(SignupView):
-    model = Idea
     template_name = 'create_idea.html'
     form_class = IdeaForm
     success_url = reverse_lazy('idea_list')

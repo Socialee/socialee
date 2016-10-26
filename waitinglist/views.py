@@ -1,10 +1,9 @@
 import mailchimp
 
+from django.contrib.auth.models import Group
 from allauth.account.decorators import verified_email_required
-from allauth.account.forms import *
 from allauth.account.signals import email_confirmed
 from allauth.account.views import SignupView
-from django.db import models
 from django.dispatch import receiver
 from django.shortcuts import render
 from django.contrib import messages
@@ -77,33 +76,42 @@ MAILCHIMP_LIST_ID = 'c5c441594e'
 def email_confirmed_(email_address, **kwargs):
     # try to add user to mailchimp
 
-    #TODO fix naming
+    if email_address.user.groups.filter(name='signed_up_for_newsletter').exists():
             
-    email = {'email': email_address.email}
+        email = {'email': email_address.email}
 
-    fname = email_address.user.first_name
-    lname = email_address.user.last_name
+        fname = email_address.user.first_name
+        lname = email_address.user.last_name
 
-    merge_vars = {
-        'FNAME': fname,
-        'LNAME': lname,
-        }
+        merge_vars = {
+            'FNAME': fname,
+            'LNAME': lname,
+            }
 
-    m = mailchimp.Mailchimp(MAILCHIMP_API_KEY)
+        m = mailchimp.Mailchimp(MAILCHIMP_API_KEY)
 
-    from_email = settings.EMAIL_HOST_USER
-    to_email = [from_email, 'hello@socialee.de']
+        from_email = settings.EMAIL_HOST_USER
+        to_email = [from_email, 'hello@socialee.de']
 
-    try:
-        m.lists.subscribe(id=MAILCHIMP_LIST_ID, email=email, merge_vars=merge_vars, double_optin=False)
-    #This is the worst error handling ever
-    except mailchimp.Error as e:
-        send_mail("Faild to sign up -> mailchimp", 
-            "%s via %s \n%s"%( 
-            "name", 
-            email,
-            e
-            ), 
-            from_email, 
-            to_email,
-            fail_silently=True)
+        try:
+            m.lists.subscribe(id=MAILCHIMP_LIST_ID, email=email, merge_vars=merge_vars, double_optin=False)
+            send_mail("Sign up -> mailchimp", 
+                "%s via %s \n%s"%( 
+                "name", 
+                email,
+                e
+                ), 
+                from_email, 
+                to_email,
+                fail_silently=True)
+        #This is the worst error handling ever
+        except mailchimp.Error as e:
+            send_mail("Faild to sign up -> mailchimp", 
+                "%s via %s \n%s"%( 
+                "name", 
+                email,
+                e
+                ), 
+                from_email, 
+                to_email,
+                fail_silently=True)

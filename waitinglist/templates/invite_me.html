@@ -8,10 +8,27 @@
     <div class="s-space show show-for-medium"></div>
       <div class="row lp-header">
         <div class="large-6 columns">
-          <h1 class="text-center">Melde dich an ...</h1>
-          <p class="text-center">... und wir sagen dir bescheid, wenn es losgeht.</p>
+          <h1 class="text-center">Registriere dich ...</h1>
           <div class="callout-form">
-            {% crispy form %}
+
+            <form method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
+
+            <div class="fieldWrapper"></br></div>
+            {% for field in form %}
+            <div class="fieldWrapper">
+              {{ field.errors }}
+              <div class="form-label">{{ field.label | safe }}</div>
+                {% if field.help_text %}
+                  <div class="second-form-label">{{ field.help_text|safe }}</div>
+                {% endif %}
+              {{ field }}
+            </div>
+            {% endfor %}
+            <div class="fieldWrapper">
+              <input class="button button--yellow" type="submit" value="Registrieren" />
+            </div>
+
+            </form>
           </div>
         </div>
       </div>

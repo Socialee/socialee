@@ -99,6 +99,7 @@ INSTALLED_APPS = (
     'quotes.apps.QuotesConfig',
     'socialee.apps.SocialeeConfig',
     'waitinglist.apps.WaitinglistConfig',
+    'register',
 )
 
 if DEBUG:
@@ -270,7 +271,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/'
 
-ACCOUNT_ADAPTER = "socialee.utils.advancedMailAdapter.AdvancedMailAccountAdapter"
+ACCOUNT_ADAPTER = "register.adapter.AdvancedMailAccountAdapter"
 
 
 # Static files (CSS, JavaScript, Images)

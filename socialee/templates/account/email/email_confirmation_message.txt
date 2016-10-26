@@ -1,22 +1,50 @@
 {% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}
-{% if idea_signup %}
 {% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Hallo!
+{% endblocktrans %}
+{% endautoescape %}
 
 
+
+{% if newsletter %}
+{% autoescape off %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+Du hast Dich bei Socialee auf in den Newsletter eingetragen. Vielen Dank!
+{% endblocktrans %}
+{% endautoescape %}
+{% endif %}
+
+
+{% if idea_register %}
+{% autoescape off %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+Danke für deine Idee! Wir versuchen sie bald online zu stellen. Du kannst sie dir schon ansehen, wenn du dich anmeldest.
+{% endblocktrans %}
+{% endautoescape %}
+{% endif %}
+
+
+
+{% if message_register %}
+{% autoescape off %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+Danke für deine Nachricht!
+{% endblocktrans %}
+{% endautoescape %}
+{% endif %}
+
+
+
+{% if email_register %}
+{% autoescape off %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
 Bestätige jetzt noch Deine Email-Adresse indem du den folgenden link klickst.
 {{ activate_url }}
+
 Dann kannst du dich mit deinerEmail-Adresse und dem folgenden Password anmelden:
 password: {{ pass }}
 {% endblocktrans %}
-{% else %}
-{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Hallo!
-
-Du hast Dich bei Socialee auf in den Newsletter eingetragen. Vielen Dank!
-
-Bestätige jetzt noch Deine Email-Adresse und Du bekommst bald was zu Lesen von uns. 
-Klicke hier: {{ activate_url }}
-
-{% endblocktrans %}
+{% endautoescape %}
 {% endif %}
 {% endautoescape %}
+
 {% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Schöne Grüße von Socialee!{% endblocktrans %}

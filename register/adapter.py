@@ -5,9 +5,16 @@ from django.core.urlresolvers import reverse
 class AdvancedMailAccountAdapter(DefaultAccountAdapter):
     
     def send_mail(self, template_prefix, email, context):
-        if self.request.session["idea_signup"]:
-            context["pass"] = self.request.session["pass"]
-            context["idea_signup"] = True
+        if 'email_register' in self.request.session:
+            self.request.session.pop('email_register')
+            context["email_register"] = True
+        if 'idea_register' in self.request.session:
+            self.request.session.pop('idea_register')
+            context["idea_register"] = True
+        if 'message_register' in self.request.session:
+            self.request.session.pop('message_register')
+            context["message_register"] = True
+        context["pass"] = self.request.session.pop('pass')
         msg = self.render_mail(template_prefix, email, context)
         msg.send()
 

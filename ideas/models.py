@@ -3,7 +3,7 @@ import datetime
 from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils import timezone
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 
 def upload_location(instance, filename):
