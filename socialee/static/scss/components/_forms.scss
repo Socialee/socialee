@@ -8,3 +8,22 @@
 	margin-left: 2rem;
 	color: grey;
 }
+
+
+#id_picture
+{
+    width:0px;height:0px;
+}
+
+#idea_image
+{
+    display: none;
+    max-width: 200px;
+    max-height: 80px;
+    float:right;
+}
+
+textarea
+{
+    resize: none;
+}

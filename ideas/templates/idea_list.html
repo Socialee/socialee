@@ -10,11 +10,14 @@
 <br><br>
 
 <h3 class="text-center">Viele Projekte und noch mehr Ideen.</h3>
-<p class="text-center">Es werden {{ idea_list|length }} Ideen angezeigt. <a class="text-link-special" href="{% url 'create_idea' %}">Trag Deine eigene Idee ein.</a></p>
+<p class="text-center">Es werden {{ idea_list.count| add:own_idea_list.count }} Ideen angezeigt. <a class="text-link-special" href="{% url 'create_idea' %}">Trag Deine eigene Idee ein.</a></p>
 
 <br><br>
 
   <div class="grid">
+      {% for idea in own_idea_list %}  
+        {% include "idea_card.html" %}
+      {% endfor %}
       {% for idea in idea_list %}  
         {% include "idea_card.html" %}
       {% endfor %}
@@ -54,9 +57,10 @@
         }, delay);
     });
 
-    function like(object, idea_id) {
+    function like(object, idea_id, type) {
         post_to_url( "../like/", 
-                    { idea_id : idea_id },
+                    { idea_id : idea_id,
+                      type: type },
                     function(data){
                         object.html(data);
                     });
@@ -66,7 +70,20 @@
       function()
       {
         var id = $(this).attr('idea_id');
-        like($(this).find("#"+id), id);
+        like($(this).find("#"+id), id, "like");
+      });
+
+    $(".idea-money").click(
+      function()
+      {
+        var id = $(this).attr('idea_id');
+        like($(this).find("#"+id), id, "money");
+      });
+    $(".idea-hand").click(
+      function()
+      {
+        var id = $(this).attr('idea_id');
+        like($(this).find("#"+id), id, "hand");
       });
 
 
