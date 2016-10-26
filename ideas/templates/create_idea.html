@@ -69,7 +69,7 @@
             </div>
           </div>
         </div>
-
+        {% if not request.user.is_authenticated %}
         <div class="fieldWrapper">
           {{ form.email.errors }}
           <div class="form-label">{{ form.email.label }}</div>
@@ -78,6 +78,7 @@
             {% endif %}
           {{ form.email }}
         </div>
+        {% endif %}
 
         <div class="fieldWrapper">
           <input class="button button--yellow" type="submit" value="Idee Absenden" />
