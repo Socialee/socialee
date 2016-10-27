@@ -38,6 +38,7 @@
   .socialee-callout {
     @include callout-base;
     background-color: white;
+    margin-top: 5rem;
     padding: 3rem;
     width: 100%;
     p {
@@ -137,8 +138,8 @@
 }
 
 .lp-header {
-  @include flex-align($x: center, $y: stretch);
   img {
+    width: 100%;
     height: 45vh;
     padding: 6rem 0 2rem 0;
     margin: 0 auto;
