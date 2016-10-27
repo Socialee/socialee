@@ -7,14 +7,14 @@
 
     <div class="s-space show show-for-medium"></div>
       <div class="row lp-header">
-        <div class="large-6 columns">
-          <h1 class="text-center">Schicke uns Dein Zitat!</h1>
+        <div class="large-6 columns small-centered">
+          <h2 class="text-center white">Schicke uns Dein Zitat!</h2>
           <p class="text-center">Wir gucken es uns an und schalten es frei, sofern es jugendfrei ist.</p>
           <div class="socialee-callout">
           <form method="post"> {% csrf_token %}
-            {{ form|crispy }}
-            <div class="row align-center">
-              <input class="s-button-form" type="submit" value="Und weg damit!" />
+            {{ form }}
+            <div class="row">
+                <input class="s-button-form" type="submit" value="Und weg damit!" />
             </div>
           </form>
           </div>
