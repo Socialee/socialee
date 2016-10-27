@@ -9,8 +9,8 @@ from django.contrib.auth.models import User
 
 
 def upload_location(instance, filename):
-    location = str("ideas")
-    return "%s/%s" % (location, filename)
+    location = str(instance.id)
+    return "%s/%s/%s" % (str("ideas"), location, filename)
 
 
 class Idea(models.Model):
