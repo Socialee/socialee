@@ -10,10 +10,7 @@
         {% for friend in object.created_by.managed_projects.all %}
           {% include "snippet_instance_card.html" with instance=friend %}
         {% endfor %}
-        {% for friend in object.follows_profiles.all %}
-          {% include "snippet_instance_card.html" with instance=friend %}
-        {% endfor %}
-        {% for friend in object.follows_projects.all %}
+        {% for friend in object.follows.all %}
           {% include "snippet_instance_card.html" with instance=friend %}
         {% endfor %}
       </div>

@@ -33,8 +33,7 @@ class CommonGround(models.Model):
     tagline = models.CharField(max_length=140, null= True, blank=True, verbose_name="Kurzbeschreibung oder Motto")
     description = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Beschreibung")
     conversation = models.OneToOneField('Conversation', blank=True, null=True)
-    follows_profiles = models.ManyToManyField('Profile', related_name='profile_follower') # follower/beobachter
-    follows_projects = models.ManyToManyField('Project', related_name='project_follower')
+    follows = models.ManyToManyField('CommonGround', related_name='follower')
     liked_messages = models.ManyToManyField('Message', related_name='message_likes')
     tags = TaggableManager( blank=True )
     picture = models.ImageField(upload_to=upload_location, null=True, blank=True)
@@ -54,6 +53,9 @@ class CommonGround(models.Model):
             return self.project.short_name()
         else:
             return self.slug
+
+    def __str__(self):
+        return self.slug
 
 class InputOutput(models.Model):
     UNKNOWN = '...'

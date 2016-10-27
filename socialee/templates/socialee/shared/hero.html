@@ -16,20 +16,20 @@
                   <div class="small-12 medium-12 large-8 column profile__name">
                     {{ object.long_name  }}
                   </div>
-                  <div class="small-12 medium-12 large-4 column ">
-                  {% if request.user == object.created_by %}
+                  {% if request.user.current_instance.id == object.id %}
+                  <div class="small-12 medium-12 large-4 column">
                     {% if object.profile %}
                       <a class="button button--yellow button--icon float-right-lg show-for-medium" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
                     {% else %}
                       <a class="button button--yellow button--icon float-right-lg show-for-medium" href="{% url 'project_updateview' slug=project.slug %}"><i class="fa fa-pencil" aria-hidden="true"></i> Projekt bearbeiten</a>
                     {% endif %}
-
+                  </div>
                   {% else %}
-                    <div class="column small-4 show-for-medium follow{{ object.id }}">
-                      {% include "snippet_follow.html" with to_follow=object %}
+                    <div class="small-12 medium-12 large-4 column follow{{ object.id }}">
+                      {% include "snippet_follow.html" with to_follow=object.commonground_ptr %}
                     </div>
                   {% endif %}
-                  </div>
+                  
                   <div class="column small-12 profile__tagline">
                   {% if object.tagline %}
                     {{ object.tagline }}

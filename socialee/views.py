@@ -210,6 +210,10 @@ class ProfileView(BaseView, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
+        follower = self.object.follower.all()
+        friends = self.object.follows.filter( id__in=follower ).exclude(id=self.request.user.current_instance.id)
+
+        context['friends'] = friends
 
         if self.object.created_by == self.request.user:
             self.request.user.instances.update(current=False)
@@ -241,18 +245,13 @@ class Follow(BaseView, CreateView):
         instance_id = request.POST.get('instance_id')
 
         instance = CommonGround.objects.get(id=instance_id)
-        if hasattr(instance, 'profile'):
-            instance = Profile.objects.get(id=instance_id)
-            if instance in self.request.user.current_instance.follows_profiles.all():
-                self.request.user.current_instance.follows_profiles.remove(instance)
-            else:
-                self.request.user.current_instance.follows_profiles.add(instance)
-        elif hasattr(self, 'project'):
-            instance = Project.objects.get(id=instance_id)
-            if instance in self.request.user.current_instance.follows_projects.all():
-                self.request.user.current_instance.follows_profiles.remove(instance)
-            else:
-                self.request.user.current_instance.follows_projects.add(instance)
+        if instance in self.request.user.current_instance.follows.all():
+            print(instance.follows.first().short_name())
+            self.request.user.current_instance.follows.remove(instance)
+        else:
+            print("nicht mehr "+instance.follows.first().short_name())
+            self.request.user.current_instance.follows.add(instance)
+        
 
         return render(request, self.template_name, {'to_follow' : instance} )
 
