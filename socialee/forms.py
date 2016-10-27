@@ -10,6 +10,8 @@ from .models import Project, Profile, Input, Output, User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import *
 
+from taggit.forms import TagWidget
+
 
 class StartProjectForm(forms.ModelForm):
     class Meta:
@@ -40,34 +42,21 @@ class EditProjectForm(forms.ModelForm):
 
 class EditProfileForm(forms.ModelForm):
     model = Profile
-    fields = ('tagline', 'description', 'picture', 'phone', 'plz', 'newsletter')
+    fields = ('tagline', 'description', 'picture', 'phone', 'plz', 'newsletter', 'tags')
     username = forms.CharField(required=True)
-    email = forms.EmailField(required=True)
+    email = forms.EmailField(required=False)
     first_name = forms.CharField(required=False)
     last_name = forms.CharField(required=False)
+    socialee_outputs = forms.CharField(required=False)
+    socialee_inputs = forms.CharField(required=False)
     def __init__(self, *args, **kwargs):
         super(EditProfileForm, self).__init__(*args, **kwargs)
-
-        self.helper = FormHelper()
-        self.helper.layout = Layout(
-            Fieldset(
-                'Ändere hier Dein Profil.',
-                'username', 'email', 'first_name', 'last_name',
-                'tagline',
-                'description',
-                'picture',
-                'phone',
-                'plz',
-                'newsletter'
-
-            ),
-            ButtonHolder(
-                Submit('submit', 'Save')
-            )
-        )
     class Meta:
         model = Profile
-        fields = ('tagline', 'description', 'picture', 'phone', 'plz', 'newsletter')
+        fields = ('tagline', 'description', 'picture', 'phone', 'plz', 'newsletter', 'tags')
+        widgets = {
+            'tags': TagWidget(),
+        }
 
 
 # class InviteForm(forms.ModelForm):

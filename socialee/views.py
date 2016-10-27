@@ -22,6 +22,9 @@ from django.dispatch import receiver
 from .models import Project, Input, Output, Profile, CommonGround, Conversation, Message
 from .forms import *
 
+from taggit.utils import parse_tags, edit_string_for_tags
+
+
 User = get_user_model()
 
 # Overwrite/disable dispatch method of RedirectAuthenticatedUserMixin (endless redirect on /).
@@ -172,22 +175,39 @@ class ProfileUpdateView(BaseView, UpdateView):
             'first_name': request.user.first_name,
             'last_name': request.user.last_name,
             'email': request.user.email,
-            'username': request.user.username
-                    }, instance=request.user.current_instance)
+            'username': request.user.username,
+            'socialee_outputs': ', '.join([str(o.title) for o in request.user.current_instance.socialee_output.all()]),
+            'socialee_inputs': ', '.join([str(i.title) for i in request.user.current_instance.socialee_input.all()])
+                    }, instance=request.user.current_instance.profile)
         return self.render_to_response(self.get_context_data(
             object=self.object, form=form))
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = self.form_class(request.POST)
+        if form.is_valid():
+            request.user.username = form.cleaned_data['username']
+            request.user.first_name = form.cleaned_data['first_name']
+            request.user.last_name = form.cleaned_data['last_name']
+            request.user.email = form.cleaned_data['email']
+            request.user.save()
 
-        request.user.username = request.POST['username']
-        request.user.first_name = request.POST['first_name']
-        request.user.last_name = request.POST['last_name']
-        request.user.email = request.POST['email']
-        request.user.save()
+            tags = form.cleaned_data['tags']
+            self.object.tags.add(*tags)
 
-        return super(ProfileUpdateView, self).post(request, *args, **kwargs)
+            outputs = form.cleaned_data['socialee_outputs'].split(",")
+            outputs = list(filter(None, outputs))
+            for i in outputs:
+                Output.objects.get_or_create(title=i.strip(), owner=request.user.current_instance)
+
+            inputs = form.cleaned_data['socialee_inputs'].split(",")
+            inputs = list(filter(None, inputs))
+            for i in inputs:
+                Input.objects.get_or_create(title=i.strip(), owner=request.user.current_instance)
+
+            return super(ProfileUpdateView, self).post(request, *args, **kwargs)
+        else:
+            return self.form_invalid(form)
         
 
     def get_success_url(self):
@@ -246,10 +266,8 @@ class Follow(BaseView, CreateView):
 
         instance = CommonGround.objects.get(id=instance_id)
         if instance in self.request.user.current_instance.follows.all():
-            print(instance.follows.first().short_name())
             self.request.user.current_instance.follows.remove(instance)
         else:
-            print("nicht mehr "+instance.follows.first().short_name())
             self.request.user.current_instance.follows.add(instance)
         
 
