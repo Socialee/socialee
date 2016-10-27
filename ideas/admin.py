@@ -16,11 +16,14 @@ def make_unpublished(modeladmin, request, queryset):
 
 
 class IdeaAdmin(admin.ModelAdmin):
-    list_display = ('was_submitted_recently', 'active', 'author', 'title')
+    list_display = ('was_submitted_recently', 'active', 'title',  'author', 'thumb')
     list_display_links = ['title']
     # list_editable = ['active']
+    fields = [('active', 'thumb', 'picture'), ('title', 'author'), 'description', 'likes']
     list_filter = ['subm_date', 'author']
-    search_fields = ['title', 'author']
+    search_fields = ['title', 'author', 'description']
+    readonly_fields = ('likes', 'thumb')
+
     actions = [make_published, make_unpublished]
 
 admin.site.register(Idea, IdeaAdmin)

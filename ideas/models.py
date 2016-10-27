@@ -4,6 +4,8 @@ from django.db import models
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User, Group
+from django.utils.safestring import mark_safe
+from django.contrib.auth.models import User
 
 
 def upload_location(instance, filename):
@@ -26,12 +28,22 @@ class Idea(models.Model):
         verbose_name = 'Idee'
         verbose_name_plural = 'Ideen'
 
+
     def was_submitted_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(hours=24) <= self.subm_date <= now
     was_submitted_recently.admin_order_field = 'subm_date'
     was_submitted_recently.boolean = True
     was_submitted_recently.short_description = 'Neu?'
+
+
+    def thumb(self):
+        if self.picture:
+            return mark_safe(u'<img src="%s" width=60 height=60 />' % (self.picture.url))
+        else:
+            return u''
+
+    thumb.short_description = 'Vorschau'
 
     def __str__(self):
         return format(self.title)
