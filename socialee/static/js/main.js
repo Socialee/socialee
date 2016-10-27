@@ -72,7 +72,7 @@ function post_comment(comment, instance_id, reply_id) {
                 instance_id: instance_id,
                 reply_id: reply_id },
                 function(data){
-                    $('#object'+instance_id).append(data);
+                    $('#object'+instance_id).children().first().after(data);
                 });
 };
 

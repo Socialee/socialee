@@ -109,6 +109,8 @@ class Message(models.Model):
     message = models.TextField(max_length=5000, null=True, blank=True)
     reply_to = models.ForeignKey('Message', null=True, blank=True, related_name='replys') # message Replys
     date = models.DateTimeField(auto_now=False, auto_now_add=True)
+    class Meta:
+        ordering = ['-date']
 
 
 class Project(CommonGround):
