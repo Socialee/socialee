@@ -45,6 +45,5 @@ password: {{ pass }}
 {% endblocktrans %}
 {% endautoescape %}
 {% endif %}
-{% endautoescape %}
 
 {% blocktrans with site_name=current_site.name site_domain=current_site.domain %}Schöne Grüße von Socialee!{% endblocktrans %}
