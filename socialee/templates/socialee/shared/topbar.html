@@ -1,11 +1,11 @@
-
-{# switch off navbar in production for now #}
-{% if not PROD %}
 {% load socialee_filters %}
+
+
 <div class="row top-bar-app">
   <div class="top-bar-left">
     <ul class="menu">
-      <li class="menu-text"><a href="/">Guten Abend bei Socialee</a></li>
+      <li><a data-toggle="offCanvas"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
+      <li class="menu-text"><a href="/">Hallo bei Socialee</a></li>
     </ul>
   </div>
 
@@ -13,18 +13,15 @@
     <ul class="dropdown menu" data-dropdown-menu>
       <li class="menu-text"><a href="{% url 'idea_list' %}">Galerie der Ideen</a></li>
       {% if not request.user.is_authenticated %}
-      <li class="menu-text"><a href="{% url 'account_login' %}">Log In</a></li>
-      {% else %}
-      {% profiles request.user as user_profiles %}
-      <li class="menu-text"><a href="{% url 'startproject' %}">Starte Projekt</a></li>
-      {% if user_profiles.count == 0 %}
-        <li class="menu-text"><a href="{% url 'startprofile' %}">Starte Individum</a></li>
-      {% endif %}
+        <li class="menu-text"><a href="{% url 'account_login' %}">Log In</a></li>
+        {% else %}
       <li class="menu-text">
         <a href="#">
             <i class="fa fa-home" aria-hidden="true"></i>
               {{ request.user.current_instance.short_name }}
           </a>
+
+        {% if request.user.is_staff %}
         <ul class="menu">
           {% for profile in user_profiles %}
             <li><a href="{% url 'profile_view' slug=profile.slug %}">{{ profile.short_name }} anzeigen</a></li>
@@ -35,6 +32,8 @@
             <li><a href="{% url 'project_updateview' slug=project.slug %}">{{ project.short_name }} bearbeiten</a></li>
           {% endfor %}
         </ul>
+        {% endif %}
+
 
       </li>
       <li class="menu-text"><a href="{% url 'account_logout' %}">Log out</a></li>
@@ -43,7 +42,4 @@
     </ul>
 
   </div>
-
 </div>
-
-{% endif %}

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load socialee_filters %}
 {% block head_extra %}
 {% endblock head_extra %}
 
@@ -7,21 +7,40 @@
   <div class="off-canvas-wrapper">
   <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
 
-    {% if request.user.is_authenticated and request.user.is_staff %}
-
-      <div class="off-canvas position-right" id="offCanvas" data-off-canvas data-position="right">
+      <div class="off-canvas position-left" id="offCanvas" data-off-canvas data-position="left">
+        
         <!-- Close button -->
-        <button class="close-button" aria-label="Close menu" type="button" data-close>
+        <!--<button class="close-button" aria-label="Close menu" type="button" data-close>
           <span aria-hidden="true">&times;</span>
-        </button>
+        </button>-->
+
         <!-- Menu -->
         <ul class="vertical menu">
-          <li><a href="{% url 'admin:logout' %}">Logout</a></li>
-          <li><a href="/admin">Socialee Admin</a></li>
+
+          <li class="title">Ideen</li>
+          <li><a href="#">coming soon</a></li>
+
+          <li class="title">Projekte</li>
+          <li><a href="#">coming soon</a></li>
+
+          <li class="title">Und sonst so?</li>
+          <li><a href="{% url 'zinnia:entry_archive_index' %}">Blog lesen</a></li>
+          <li><a href="{% url 'make_quote' %}">Zitat abgeben</a></li>
+
+          {% if request.user.is_staff %}
+          <li class="title">Admin</li>
+          <li><a href="{% url 'startproject' %}">Starte Projekt</a></li>
+            {% profiles request.user as user_profiles %}
+            {% if user_profiles.count == 0 %}
+            <li class="menu-text"><a href="{% url 'startprofile' %}">Profil anlegen</a></li>
+            {% endif %}
+          <li><a href="/admin/">Socialee-Admin</a></li>
+            {% if not PROD %}
+              <li><a href="/admin/doc/">Socialee-Docs</a></li>  
+            {% endif %}
+          {% endif %}
         </ul>
       </div>
-
-    {% endif %}
 
   <div class="off-canvas-content" data-off-canvas-content>
 {% endblock before_content %}

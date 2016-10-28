@@ -422,12 +422,12 @@ $meter-fill-bad: $alert-color;
 // --------------
 
 $offcanvas-size: 250px;
-$offcanvas-background: #377A6D;
+$offcanvas-background: $socialee-black;
 $offcanvas-zindex: -1;
 $offcanvas-transition-length: 0.75s;
 $offcanvas-transition-timing: ease;
 $offcanvas-fixed-reveal: true;
-$offcanvas-exit-background: rgba($white, 0.5);
+$offcanvas-exit-background: rgba($white, 0);
 $maincontent-class: 'off-canvas-content';
 $maincontent-shadow: 0 0 10px rgba($black, 0.5);
 

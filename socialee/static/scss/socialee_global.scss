@@ -2,9 +2,6 @@
 @import "foundation-sites/scss/foundation";
 @include foundation-everything(false);
 
-// global Socialee scss
-@import "partials/footer";
-
 
 /* GLOBAL STYLES AND HELPERS*/
 
@@ -248,36 +245,6 @@
 }
 .s-projectcard:hover {
   border: solid 2px orange;
-}
-
-
-/*OFFCANVAS STYLES*/
-
-.off-canvas {
-  padding-top: 0em;
-  height: 100%;
-}
-
-.menu.vertical .button {
-    @include button-hollow;
-    margin: 0.6rem 4rem 1rem 1rem;
-    border: solid 1px black;
-    color: black;
-}
-
-.menu.vertical :hover .button{
-    background-color: rgba(255, 255, 255, 0.8);
-    border: solid 1px black;
-    color: $dark-gray;
-}
-
-.menu.vertical > li a {
-    text-decoration: none;
-    border-bottom: solid 1px white;
-}
-
-.menu.vertical > li a:hover {
-  background-color: rgba(255, 255, 255, 0.5);
 }
 
 

@@ -22,9 +22,6 @@
           <a href="{% url 'home' %}#manifest">Manifest</a>
           <a href="{% url 'impressum' %}">Impressum</a>
           <a href="{% url 'waitinglist' %}">Newsletter</a>
-          {% if request.user.is_superuser %}
-          <a data-toggle="offCanvas">Admin</a>
-          {% endif %}
         </p>
       </div>
     </div>
