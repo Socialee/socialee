@@ -8,10 +8,9 @@
   <div class="small-12 large-8 columns small-centered">
   <div class="callout-form">
     
-    <h2 id="top_titel">Gute Idee!</h2>
-    <p id="top_desc">Es gibt viele gute Menschen mit guten Ideen. Was ist Deine?</p>
-    <p id="top_all">Es werden übrigens schon {{ ideas_count }} Ideen angezeigt, ich will zurück zur 
-      <a href="{% url 'idea_list' %}">Übersichtsseite</a></p>
+    <br>
+    <h3 id="top_titel">Was ist dein Beitrag zur Ideensammlung?</h3>
+    <p id="top_desc">Egal, ob groß oder klein. Mit einer Idee fängt alles an.</p>
   
     <form method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
 
@@ -48,6 +47,7 @@
 
         <div class="fieldWrapper">
           <div id="review_button" class="button button--yellow" >Vorschau deiner Idee</div>
+          <p>Ich will zurück zur <a href="{% url 'idea_list' %}">Übersichtsseite</a></p>
         </div>
 
       </div>
@@ -127,12 +127,12 @@ $("#review_button").click(function()
       $("#idea_description").html($("#id_description").val());
       readURL($("#id_picture"));
       $("#review").show();
-      $("#top_desc").hide();
-      $("#top_titel").html("Vorschau deiner guten Idee");
+      $("#top_desc").html("Du kannst noch deine E-Mail-Adresse eintragen, so findest du deine Idee besser wieder und kannst bald ein Projekt daraus machen.");
+      $("#top_titel").html("Sieht gut aus, oder?!");
     }
     else
     {
-      $("#top_desc").html("Du hast keine Idee?");
+      $("#top_desc").html("Egal, ob groß oder klein. Mit einer Idee fängt alles an. Eines der Felder musst du aber schon ausfüllen ;-) Oder einfach nur ein Bild hochladen.");
     }
     
   });

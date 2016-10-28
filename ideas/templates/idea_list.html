@@ -9,9 +9,8 @@
 
 <br><br>
 
-<h3 class="text-center">Viele Projekte und noch mehr Ideen.</h3>
-<p class="text-center">Es werden {{ idea_list.count| add:own_idea_list.count }} Ideen angezeigt. <a class="text-link-special" href="{% url 'create_idea' %}">Trag Deine eigene Idee ein.</a></p>
-<p class="text-center">Oder <a class="text-link-special" href="{% url 'waitinglist' %}">registriere</a> dich.</p>
+<h3 class="text-center">Mach mit beim Sammeln aller guter Ideen der Welt.</h3>
+<p class="text-center">{{ idea_list.count| add:own_idea_list.count }} sind es schon. <a class="text-link-special" href="{% url 'create_idea' %}">Trag Deine eigene Idee ein.</a></p>
 
 <br><br>
 
