@@ -1,7 +1,11 @@
 .tags-wrapper {
-  padding: 20px;
-  background-color: #F8F8F8;
-  border: 3px solid #F4F4F4;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: c(grey, f8);
+  border: 3px solid solid c(grey, f4);
+  @include breakpoint(medium) {
+    padding: 20px;
+  }
 }
 
 .tags {
@@ -20,7 +24,6 @@
   line-height:24px;
   position:relative;
   font-size:11px;
-
   font-weight: 700;
   margin-left:25px;
   padding:0 10px 0 12px;
@@ -64,32 +67,52 @@
 }
 
 .tag--orange {
-  background-color: map-get($foundation-palette, orange)
+  background-color: c(orange, 1);
+
+  &:hover {
+    background-color: c(orange, 2);
+  }
 }
 
 .tag--green {
-  background-color: map-get($foundation-palette, green)
+  background-color: c(green, 1);
+
+  &:hover {
+    background-color: c(green, 2);
+  }
+}
+
+.tag--blue {
+  background-color: c(blue, 1);
+
+  &:hover {
+    background-color: c(blue, 2);
+  }
 }
 
 .tag--grey {
   background-color: #f8f8f8;
-  color: map-get($foundation-palette, orange)
+  color: c(orange, 1)
 }
 
 .tag--white {
   background-color: #fff;
 }
 
-.tag--blue {
-  background-color: #54ABC7;
+.tag--orange:before {
+  border-color:transparent c(orange, 1) transparent transparent;
 }
 
-.tag--orange:before {
-  border-color:transparent map-get($foundation-palette, orange) transparent transparent;
+.tag--orange:hover::before {
+  border-color:transparent c(orange, 2) transparent transparent;
 }
 
 .tag--green:before {
-  border-color:transparent map-get($foundation-palette, green) transparent transparent;
+  border-color:transparent c(green, 1) transparent transparent;
+}
+
+.tag--green:hover::before {
+  border-color:transparent c(green, 2) transparent transparent;
 }
 
 .tag--grey:before {
@@ -101,7 +124,11 @@
 }
 
 .tag--blue:before {
-  border-color:transparent #54ABC7 transparent transparent;
+  border-color:transparent c(blue, 1) transparent transparent;
+}
+
+.tag--blue:hover::before {
+  border-color:transparent c(blue, 2) transparent transparent;
 }
 
 .tags.green .tag--white {

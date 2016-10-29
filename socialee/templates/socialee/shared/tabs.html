@@ -1,12 +1,16 @@
 <section class="s-tabs">
   <div class="row">
     <div class="small-12 column">
-      <ul class="row tabs hero__tabs" data-tabs data-options="data-auto-focus:false" id="example-tabs">
+      <ul class="small-collapse tabs hero__tabs" data-tabs data-options="data-auto-focus:false" id="example-tabs">
         {% if object.project %}
-        <li class="small-12 medium-4 column tabs-title"><a href="#panel3">Informationen</a></li>
+        <li class="small-4 column tabs-title _34-18"><a href="#panel3">Informationen</a></li>
+        <li class="small-4 column tabs-title _34-18"><a href="#panel1">Dialoge</a></li>
+        <li class="small-4 column tabs-title _34-18"><a href="#panel2">Verbindungen</a></li>
         {% endif %}
-        <li class="small-12 medium-4 column tabs-title"><a href="#panel1">Dialoge</a></li>
-        <li class="small-12 medium-4 column tabs-title"><a href="#panel2">Verbindungen</a></li>
+        {% if object.profile %}
+        <li class="small-6 column tabs-title _34-18"><a href="#panel1">Dialoge</a></li>
+        <li class="small-6 column tabs-title _34-18"><a href="#panel2">Verbindungen</a></li>
+        {% endif %}
       </ul>
     </div>
   </div>
