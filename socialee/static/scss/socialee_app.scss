@@ -1,15 +1,19 @@
 // Socialee App scss
 
-$grey: #F8F8F8;
+// $grey: #F8F8F8;
 
 @import "settings";
-@import "vendor/_card.scss";
-@import "foundation-sites/scss/foundation";
+//@import "_settings-overwrite"; Todo: cant be overwritten here. instead at the end of _settings.scss. why?
 
+@import "general/_mixins";
+@import "general/_colors";
+@import "general/_typography";
+
+@import "vendor/_card";
+@import "foundation-sites/scss/foundation";
 
 @import "components/_buttons";
 @import "components/_tags";
-
 @import "components/_top-bar";
 @import "components/_hero";
 @import "components/_tabs";
