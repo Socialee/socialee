@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)), # ID 900
     url(r'^blog/', include('zinnia.urls')), # IDs 050, 051, 052, etc
     url(r'^comments/', include('django_comments.urls')), # für Blog
+    url(r'^feedback/', include("feedback.urls")), # Feedback-App
     url(r'^ideen/', include('ideas.urls')), # TODO IDs vergeben
     url(r'^impressum/$', views.Impressum.as_view(), name='impressum'), # ID 021
     url(r'^registrieren/', include('waitinglist.urls')), # ID 080
@@ -44,7 +45,6 @@ urlpatterns = [
     # DjangoCMS, keep this always at the end
     url(r'^', include('cms.urls')), 
 ]
-
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,

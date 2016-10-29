@@ -1,0 +1,9 @@
+{% load i18n %}
+<div id="feedback-welcome">
+    <div class="feedback-logo">{% trans 'Hinweise, Lob, Kritik.' %}</div>
+    <p>{% trans 'Sag, was Du zu sagen hast:' %}</p><textarea id="feedback-note-tmp"></textarea>
+    <button id="feedback-welcome-next" class="feedback-next-btn feedback-btn-gray">{% trans 'weiter' %}</button>
+    <div id="feedback-welcome-error">{% trans 'Schreib noch was!' %}</div>
+    <div class="feedback-wizard-close"></div>
+</div>
+
