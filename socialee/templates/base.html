@@ -23,7 +23,7 @@
         {# Socialee CSS #}
         <link type="text/css" rel="stylesheet" href="{% static 'css/socialee_global.css' %}" />
         <link type="text/css" rel="stylesheet" href="{% static 'css/socialee_app.css' %}"  />
-
+        
         {# CSS & JS via Sekizai #}
         {% render_block "css" %}
         {% render_block "js_head" %}
@@ -61,6 +61,8 @@
 
         {% include "messages.html" %}
 
+        {% include "feedback-button.html" %}
+
         {% block content %}
         {% endblock content %}
 
@@ -88,6 +90,8 @@
         <script type="text/javascript" src="{% static 'js/masonry.pkgd.min.js' %}"></script>
         {# Socialee custom javascript #}
         <script src="{% static 'js/main.js' %}"></script>
+        {# Feedback-App (based on https://github.com/ludrao/django-tellme) #}
+        {%  include 'js_inc.html' %}
         {# javascript for Blog via sekizai #}
         {% render_block "blog_js" %}
         {# javascript via sekizai #}

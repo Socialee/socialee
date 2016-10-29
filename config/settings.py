@@ -93,6 +93,7 @@ INSTALLED_APPS = (
     'storages',
 
     # SOCIALEE CUSTOM APPS
+    'feedback.apps.FeedbackConfig',
     'ideas.apps.IdeasConfig',
     'landingpage.apps.LandingpageConfig',
     'questions.apps.QuestionsConfig',
