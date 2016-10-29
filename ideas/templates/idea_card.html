@@ -1,5 +1,10 @@
 <div class="grid-item">
   <div class="idea-card">
+      {% if not idea.active %}
+      <div class="status-unpublished">
+        <p class"text-center">Noch nicht veröffentlicht</p>
+      </div>
+      {% endif %}
   {% if idea.picture %}
     <div class="idea-image">
       <img src="{{ MEDIA_URL }}{{ idea.picture }}"> 
@@ -9,9 +14,6 @@
     <div class="idea-details">
       <h2>{{ idea.title }}</h2>
       <p>{{ idea.description }}</p>
-      {% if not idea.active %}
-      <p style="color:red;">noch nicht veröffentlicht</p>
-      {% endif %}
     </div>
   {% endif %}
     <div class="row align-center">
