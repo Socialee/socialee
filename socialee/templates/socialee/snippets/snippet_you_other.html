@@ -6,7 +6,7 @@
       </div>
       <div class="card-section text-center">
         <div class="small-12 columns">
-          <h4>{{ you.long_name }}</h4>
+          <h4 class="mb-20">{{ you.long_name }}</h4>
             <div class="tags">
               {% for tag in you.tags.all %}
                 <a class="tag tag--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
@@ -23,7 +23,7 @@
         <img src="{{ MEDIA_URL }}{{ other.picture }}" alt="{{other.short_name}}">
       </div>
       <div class="card-section text-center">
-        <h4>{{ other.long_name  }}</h4>
+        <h4 class="mb-20">{{ other.long_name  }}</h4>
         <div class="small-12 columns">
           <div class="tags">
             {% for tag in other.tags.all %}

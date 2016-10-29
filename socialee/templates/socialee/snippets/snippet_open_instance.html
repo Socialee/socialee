@@ -1,5 +1,7 @@
+<div class="small-12">
 {% if instance.profile %}
   <a class="small hollow button" href="{% url 'profile_view' slug=instance.slug %}">Profil öffnen</a>
 {% elif instance.project %}
   <a class="small hollow button" href="{% url 'project_view' slug=instance.slug %}">Project öffnen</a>
 {% endif %}
+</div>

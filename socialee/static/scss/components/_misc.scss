@@ -27,6 +27,10 @@ html.profile_view body {
 	color: map-get($foundation-palette, blue);
 }
 
+.strong {
+	font-weight: 700;
+}
+
 i.icon {
   display: inline-block;
   width: 32px;
@@ -142,4 +146,26 @@ h6 {
     @include breakpoint(large only) {
    		float: right !important;
     }
+}
+
+.mb-10 {
+	margin-bottom: 10px;
+}
+
+.mb-20 {
+	margin-bottom: 20px;
+}
+
+hr {
+    max-width: 87.5rem;
+    height: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 3px solid c(grey, ea);
+    border-left: 0;
+    margin: 1.25rem auto;
+    clear: both;
+    max-width: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }

@@ -13,15 +13,15 @@
               {% endif %}
               <div class="small-12 media-object-section main-section">
                 <div class="row">
-                  <div class="small-12 medium-12 large-8 column profile__name">
+                  <div class="small-12 medium-12 large-8 column profile__name header-text-h2 header-text-sm-h2">
                     {{ object.long_name  }}
                   </div>
                   {% if request.user.current_instance.id == object.id %}
-                  <div class="small-12 medium-12 large-4 column">
+                  <div class="small-12 medium-12 large-4 column header-text-h2 header-text-sm-h2">
                     {% if object.profile %}
-                      <a class="button button--yellow button--icon float-right-lg show-for-medium" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
+                      <a class="button button--yellow button--icon float-right-md show-for-medium" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
                     {% else %}
-                      <a class="button button--yellow button--icon float-right-lg show-for-medium" href="{% url 'project_updateview' slug=project.slug %}"><i class="fa fa-pencil" aria-hidden="true"></i> Projekt bearbeiten</a>
+                      <a class="button button--yellow button--icon float-right-md show-for-medium" href="{% url 'project_updateview' slug=project.slug %}"><i class="fa fa-pencil" aria-hidden="true"></i> Projekt bearbeiten</a>
                     {% endif %}
                   </div>
                   {% else %}
@@ -29,8 +29,8 @@
                       {% include "snippet_follow.html" with to_follow=object.commonground_ptr %}
                     </div>
                   {% endif %}
-                  
-                  <div class="column small-12 profile__tagline">
+
+                  <div class="column small-12 profile__tagline header-text-h6 header-text-sm-h6">
                   {% if object.tagline %}
                     {{ object.tagline }}
                   {% else %}
@@ -63,7 +63,7 @@
                 <div class="row">
                   <div class="small-12 medium-6 columns">
                     <div class="tags green">
-                      <h6 class="green">{{ object.short_name }} bietet</h6>
+                      <div class="column h5 mb-10 strong green">{{ object.short_name }} bietet</div>
                       {%  for input in object.socialee_output.all %}
                       <a class="tag tag--green"><i class="fi-x-circle"></i>{{ input }}{% if badge_count >= 1 %}
                       <span>{{ badge_count }}</span>{% endif %}</a>
@@ -74,7 +74,7 @@
                   <hr class="show-for-small-only">
                   <div class="small-12 medium-6 columns">
                     <div class="tags blue">
-                      <h6 class="blue">{{ object.short_name }} benötigt</h6>
+                      <div class="column h5 mb-10 strong blue">{{ object.short_name }} benötigt</div>
                       {% for output in object.socialee_input.all %}
                       <a class="tag tag--blue"><i class="fi-x-circle"></i>{{ output.title }}{% if badge_count >= 1 %}
                       <span>{{ badge_count }}</span>{% endif %}</a>
