@@ -61,8 +61,10 @@
 
         {% include "messages.html" %}
 
+        {% if request.user.is_authenticated %}
         {% include "feedback-button.html" %}
-
+        {% endif %}
+        
         {% block content %}
         {% endblock content %}
 
