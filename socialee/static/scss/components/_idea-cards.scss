@@ -92,3 +92,13 @@
     text-decoration: none; 
   }
 }
+
+.status-unpublished {
+  background-color: #302f35;
+  p { 
+    font-weight: bold;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: white; 
+  }
+}
