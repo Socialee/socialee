@@ -5,8 +5,8 @@
 {% block allauth_content %}
 
 
-  <h1>Schön, dass du dabei bist!</h1>
-  <p>Willkommen bei Socialee! Wir sind in der Entwicklungs-Phase, hab Nachsicht mit allem, was noch keinen Sinn macht. Du kannst dir gerne ein Konto eröffnen und alles austesten. Du kannst uns auch <a href="mailto:hello@socialee.de">schreiben</a>.</p>
+  <h2>Schön, dass du da bist!</h2>
+  <p>Willkommen bei Socialee! Wir sind in der Entwicklungs-Phase, hab Nachsicht mit allem, was noch keinen Sinn macht. Du kannst dir gerne ein Konto eröffnen und alles austesten. Wenn du schon ein Konto hast, <a href="{% url 'account_login' %}"> hier lang.</a></p>
 
     <form method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
 
@@ -25,7 +25,7 @@
     <div class="fieldWrapper">
       <input class="button button--yellow" type="submit" value="Registrieren" />
     </div>
-    <p>Ach nee, ich hab ja schon ein Konto.<a href="{% url 'account_login' %}"> Ich will mich anmelden.</a></p>
+    
     </form>
 
 
