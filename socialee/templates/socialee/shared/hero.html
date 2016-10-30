@@ -8,7 +8,7 @@
             <div class="media-object stack-for-small">
               {% if object.profile %}
               <div class="media-object-section">
-                <img src="{{ MEDIA_URL }}{{ object.picture }}" alt="profile image">
+                <img class="" src="{{ MEDIA_URL }}{{ object.picture }}" alt="profile image">
               </div>
               {% endif %}
               <div class="small-12 media-object-section main-section">
@@ -17,15 +17,16 @@
                     {{ object.long_name  }}
                   </div>
                   {% if request.user.current_instance.id == object.id %}
-                  <div class="small-12 medium-12 large-4 column header-text-h2 header-text-sm-h2">
+                  <div class="small-12 medium-12 large-4 column show-for-medium header-text-h2 header-text-sm-h2">
                     {% if object.profile %}
-                      <a class="button button--yellow button--icon float-right-md show-for-medium" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
+                      <a class="button button--yellow button--icon float-right-lg" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
                     {% else %}
-                      <a class="button button--yellow button--icon float-right-md show-for-medium" href="{% url 'project_updateview' slug=project.slug %}"><i class="fa fa-pencil" aria-hidden="true"></i> Projekt bearbeiten</a>
+                      <a class="button button--yellow button--icon float-right-lg" href="{% url 'project_updateview' slug=project.slug %}"><i class="fa fa-pencil" aria-hidden="true"></i> Projekt bearbeiten</a>
+
                     {% endif %}
                   </div>
                   {% else %}
-                    <div class="small-12 medium-12 large-4 column follow{{ object.id }}">
+                    <div class="small-12 medium-12 large-4 column show-for-medium follow{{ object.id }}">
                       {% include "snippet_follow.html" with to_follow=object.commonground_ptr %}
                     </div>
                   {% endif %}
@@ -42,7 +43,22 @@
                       <a class="tag tag--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
                       {% endfor %}
                       <a class="tag tag--grey tag--more"><i class="fa fa-plus"></i> §7 Mehr</a>
+                    </div>
+
+                  {% if request.user.current_instance.id == object.id %}
+                  <div class="small-12 medium-12 large-4 column header-text-h2 header-text-sm-h2 show-for-small-only">
+                    {% if object.profile %}
+                      <a class="button button--yellow button--icon float-right-lg" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
+                    {% else %}
+                      <a class="button button--yellow button--icon float-right-lg" href="{% url 'project_updateview' slug=project.slug %}"><i class="fa fa-pencil" aria-hidden="true"></i> Projekt bearbeiten</a>
+                    {% endif %}
                   </div>
+                  {% else %}
+                    <div class="small-12 medium-12 large-4 column show-for-small-only follow{{ object.id }}">
+                      {% include "snippet_follow.html" with to_follow=object.commonground_ptr %}
+                    </div>
+                  {% endif %}
+
                   <div class="column small-12">
                     <p>{% if object.description %}
                       {{ object.description }}
@@ -57,11 +73,11 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="small-12 columns">
-              <div class="tags-wrapper">
-                <div class="row">
-                  <div class="small-12 medium-6 columns">
+          <div class="small-12 columns">
+            <div class="column tags-wrapper">
+              <div class="">
+                <div class="small-12 medium-6 columns">
+                  <div class="row">
                     <div class="tags green">
                       <div class="column h5 mb-10 strong green">{{ object.short_name }} bietet</div>
                       {%  for input in object.socialee_output.all %}
@@ -71,8 +87,12 @@
                       <a class="tag tag--white tag--more"><i class="fa fa-plus"></i> §7 Mehr</a>
                     </div>
                   </div>
-                  <hr class="show-for-small-only">
-                  <div class="small-12 medium-6 columns">
+                </div>
+
+                <hr class="show-for-small-only">
+
+                <div class="small-12 medium-6 columns">
+                  <div class="row">
                     <div class="tags blue">
                       <div class="column h5 mb-10 strong blue">{{ object.short_name }} benötigt</div>
                       {% for output in object.socialee_input.all %}
@@ -83,6 +103,7 @@
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
