@@ -7,7 +7,7 @@
   &__profile {
     background-color: $white;
     border-radius: 4px;
-    padding: rem-calc(40px);
+    padding: rem-calc(0);
     @include breakpoint(medium) {
     	padding: rem-calc(60px) rem-calc(130px) rem-calc(50px) rem-calc(130px);
 	}
@@ -17,6 +17,14 @@
 
     &__profile img {
       border-radius: 100%;
+      @include breakpoint(small only) {
+    	 max-width: 180px;
+    	 position: absolute;
+    	 top: -35px;
+    	 left: 50%;
+    	 margin-left: -90px;
+		}
+
     }
 }
 
@@ -44,6 +52,13 @@
   }
 }
 
+.media-object {
+    @include breakpoint(small only) {
+    	padding: rem-calc(40px);
+	}
+}
+
 .media-object-section.main-section {
     padding-bottom: 40px;
 }
+
