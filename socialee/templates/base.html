@@ -54,12 +54,12 @@
 
         {# {% cms_toolbar %} #}
 
+        {% include "messages.html" %}
+
         {% include "topbar.html" %}
 
         {% block before_content %}
         {% endblock before_content %}
-
-        {% include "messages.html" %}
 
         {% if request.user.is_authenticated %}
         {% include "feedback-button.html" %}
