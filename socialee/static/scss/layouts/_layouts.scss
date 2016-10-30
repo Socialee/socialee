@@ -1,0 +1,9 @@
+.l-section {
+  padding: 0;
+  background-color: c(special, white);
+}
+
+.l-section--grey {
+  @extend .l-section;
+  background-color: c(grey, f8);
+}
