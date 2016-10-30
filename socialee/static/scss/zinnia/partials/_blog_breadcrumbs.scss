@@ -1,13 +1,17 @@
 .breadcrumbs {
   @include breadcrumbs-container;
+  margin-bottom: 0.5rem;
   a {
-  font-size: 1.1rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: rgba(38, 74, 66, 0.85);
   }
   li {
-  font-size: 1.1rem;
-  color: $primary-color;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: rgba(38, 74, 66, 0.85);
   }
   li:not(:last-child)::after {
-    color: $primary-color;
+    color: rgba(38, 74, 66, 0.85);
   }
 }

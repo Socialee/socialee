@@ -12,7 +12,6 @@
 	{% endaddtoblock %}
 
 <section class="blog-background">
-{% include "zinnia/blognavbar.html" %}
 	<div class="s-space show show-for-medium"></div>
 		<div class="row blog-layout">
 			<div class="small-11 large-9 columns small-centered">
@@ -34,5 +33,4 @@
 
 {% endblock content %}
 
-
-data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, medium], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, large]"
+{% include "zinnia/blognavbar.html" %}
