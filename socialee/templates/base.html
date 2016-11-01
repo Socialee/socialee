@@ -61,10 +61,12 @@
         {% block before_content %}
         {% endblock before_content %}
 
+        <div class="show-for-large">
         {% if request.user.is_authenticated %}
         {% include "feedback-button.html" %}
         {% endif %}
-        
+        </div>
+
         {% block content %}
         {% endblock content %}
 
