@@ -344,3 +344,6 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'Zinnia',
     },
 }
+
+# TODO: das funktioniert nicht....
+# TELLME_FEEDBACK_EMAIL = 'hello@socialee.de' 
