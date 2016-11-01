@@ -41,9 +41,6 @@ urlpatterns = [
     #url(r'^profile/(?P<slug>[\w.@+-]+)/socialeebhaber/$', login_required(views.Socialeebhaber.as_view()), name='socialeebhaber'),
     url(r'^comment/$', login_required(views.Comment.as_view()), name='comment'),
     url(r'^follow/$', login_required(views.Follow.as_view()), name='comment'),
-
-    # DjangoCMS, keep this always at the end
-    url(r'^', include('cms.urls')), 
 ]
 
 if settings.DEBUG:

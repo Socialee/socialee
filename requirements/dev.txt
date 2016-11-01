@@ -7,4 +7,4 @@ first==2.0.1              # via pip-tools
 livereload==2.4.1
 pip-tools==1.7.0
 six==1.10.0               # via django-extensions, livereload, pip-tools
-tornado==4.4.1            # via livereload
+tornado==4.4.2            # via livereload

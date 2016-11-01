@@ -1,4 +1,4 @@
-{% load i18n cms_tags sekizai_tags staticfiles %}
+{% load i18n sekizai_tags staticfiles %}
 
 <!DOCTYPE html>
 <html class="no-js {{ view.template_name | cut:'.html' }}" lang="de">
@@ -51,9 +51,6 @@
 
     <body>
         {# start of content #}
-
-        {# {% cms_toolbar %} #}
-
         {% include "messages.html" %}
 
         {% include "topbar.html" %}
