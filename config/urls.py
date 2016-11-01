@@ -43,8 +43,15 @@ urlpatterns = [
     url(r'^follow/$', login_required(views.Follow.as_view()), name='comment'),
 ]
 
+if settings.DEBUG or not settings.PROD:
+    import debug_toolbar
+    urlpatterns += [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ]
+
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,
                           document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
+

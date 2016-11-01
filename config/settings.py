@@ -63,6 +63,7 @@ INSTALLED_APPS = (
     'allauth.socialaccount',
     'crispy_forms',
     'crispy_forms_foundation',
+    'debug_toolbar',
     'django_summernote',
     'simple_auth',
     'sekizai',  # for JavaScript and CSS management
@@ -100,6 +101,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.admindocs.middleware.XViewMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 # AWS S3 Settings
@@ -320,3 +322,12 @@ CKEDITOR_CONFIGS = {
 
 # TODO: das funktioniert nicht....
 # TELLME_FEEDBACK_EMAIL = 'hello@socialee.de' 
+
+# Debug Toolbar settings / http://django-debug-toolbar.readthedocs.io/en/stable/configuration.html
+CONFIG_DEFAULTS = {
+    # Toolbar options
+    'JQUERY_URL': '',
+    'SHOW_COLLAPSED': True,
+    # Panel options
+    # 'SQL_WARNING_THRESHOLD': 100,   # milliseconds
+}
