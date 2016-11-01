@@ -32,23 +32,6 @@
     }
   }
 
-  .socialee-callout {
-    @include callout-base;
-    background-color: white;
-    margin-top: 5rem;
-    padding: 3rem;
-    width: 100%;
-    p {
-      color: $socialee-darkgreen;
-    }
-    a {
-      color: $socialee-orange;
-    }
-    @include breakpoint(small only) {
-    padding: 1rem;
-    }
-  }
-
   .callout-form {
     @include callout-base;
     margin-top: 3rem;

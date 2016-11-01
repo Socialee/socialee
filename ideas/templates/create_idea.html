@@ -6,92 +6,92 @@
 
 <div class="row">
   <div class="small-12 medium-10 large-8 columns small-centered">
-  <div class="callout-form">
+    <div class="callout">
+      
+      <h3 id="top_titel">Was ist dein Beitrag zur Ideensammlung?</h3>
+      <p id="top_desc">Egal, ob groß oder klein. Mit einer Idee fängt alles an.</p>
     
-    <br>
-    <h3 id="top_titel">Was ist dein Beitrag zur Ideensammlung?</h3>
-    <p id="top_desc">Egal, ob groß oder klein. Mit einer Idee fängt alles an.</p>
-  
-    <form method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
+      <form method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
 
-      <div id="idea_form">
-        <img id="idea_image" src="#" alt="Deine Idee als Bild" />
+        <div id="idea_form">
+          <img id="idea_image" src="#" alt="Deine Idee als Bild" />
 
-        <div class="fieldWrapper">
-            {{ form.picture.errors }}
-            <div class="form-label">{{ form.picture.label }}</div>
-              {% if form.picture.help_text %}
-                <div class="second-form-label">{{ form.picture.help_text|safe }}</div>
-              {% endif %}
-            {{ form.picture }}
-        </div>
-        <label for="id_picture" id="upload" class="button button--yellow hollow"><i class="fa fa-upload" aria-hidden="true"></i> Bild Hochladen </label>
+          <div class="fieldWrapper">
+              {{ form.picture.errors }}
+              <div class="form-label">{{ form.picture.label }}</div>
+                {% if form.picture.help_text %}
+                  <div class="second-form-label">{{ form.picture.help_text|safe }}</div>
+                {% endif %}
+              {{ form.picture }}
+          </div>
+          <label for="id_picture" id="upload" class="button button--yellow hollow"><i class="fa fa-upload" aria-hidden="true"></i> Bild Hochladen </label>
 
-        <div class="fieldWrapper">
-            {{ form.title.errors }}
-            <div class="form-label">{{ form.title.label }}</div>
-              {% if form.title.help_text %}
-                <div class="second-form-label">{{ form.title.help_text|safe }}</div>
-              {% endif %}
-            {{ form.title }}
-        </div>
+          <div class="fieldWrapper">
+              {{ form.title.errors }}
+              <div class="form-label">{{ form.title.label }}</div>
+                {% if form.title.help_text %}
+                  <div class="second-form-label">{{ form.title.help_text|safe }}</div>
+                {% endif %}
+              {{ form.title }}
+          </div>
 
-        <div class="fieldWrapper">
-            {{ form.description.errors }}
-            <div class="form-label">{{ form.description.label }}</div>
-              {% if form.description.help_text %}
-                <div class="second-form-label">{{ form.description.help_text|safe }}</div>
-              {% endif %}
-            {{ form.description }}
-        </div>
+          <div class="fieldWrapper">
+              {{ form.description.errors }}
+              <div class="form-label">{{ form.description.label }}</div>
+                {% if form.description.help_text %}
+                  <div class="second-form-label">{{ form.description.help_text|safe }}</div>
+                {% endif %}
+              {{ form.description }}
+          </div>
 
-        <div class="fieldWrapper">
-          <div id="review_button" class="button button--yellow" >Vorschau deiner Idee</div>
-          <p>Ich will zurück zur <a href="{% url 'idea_list' %}">Übersichtsseite</a></p>
+          <div class="fieldWrapper">
+            <div id="review_button" class="button button--yellow" >Vorschau deiner Idee</div>
+            <p>Ich will zurück zur <a href="{% url 'idea_list' %}">Ideen-Galerie.</a></p>
+          </div>
+
         </div>
 
-      </div>
-
-      <div id="review">
-        <div class="grid-item">
-          <div class="idea-card">
-            <div class="idea-image">
-              <img id="idea_img" src=""> 
-            </div>
-            <div class="idea-details">
-              <h2 id="idea_title"></h2>
-              <p id="idea_description"></p>
-            </div>
-            <div class="idea-heart">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
-                <strong class="fa-stack-1x">0</strong>
-              </span>
+        <div id="review">
+          <div class="grid-item">
+            <div class="idea-card">
+              <div class="idea-image">
+                <img id="idea_img" src=""> 
+              </div>
+              <div class="idea-details">
+                <h2 id="idea_title"></h2>
+                <p id="idea_description"></p>
+              </div>
+              <div class="idea-heart">
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
+                  <strong class="fa-stack-1x">0</strong>
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-        {% if not request.user.is_authenticated %}
-        <div class="fieldWrapper">
-          {{ form.email.errors }}
-          <div class="form-label">{{ form.email.label }}</div>
-            {% if form.email.help_text %}
-              <div class="second-form-label">{{ form.email.help_text|safe }}</div>
-            {% endif %}
-          {{ form.email }}
-        </div>
-        {% endif %}
+          {% if not request.user.is_authenticated %}
+          <div class="fieldWrapper">
+            {{ form.email.errors }}
+            <div class="form-label">{{ form.email.label }}</div>
+              {% if form.email.help_text %}
+                <div class="second-form-label">{{ form.email.help_text|safe }}</div>
+              {% endif %}
+            {{ form.email }}
+          </div>
+          {% endif %}
 
-        <div class="fieldWrapper">
-          <input class="button button--yellow" type="submit" value="Idee Absenden" />
-          <div class="float-right" >Ich will die Idee <a id="change">nochmal ändern</a>.</div>
+          <div class="fieldWrapper">
+            <input class="button button--yellow" type="submit" value="Idee Absenden" />
+            <p>Ich will die Idee <a id="change">nochmal ändern</a>.</p>
+          </div>
         </div>
-      </div>
 
-    </form>
+      </form>
 
-  </div> 
+    </div> 
+  </div>
 </div>
-</div>
+
 
 {% addtoblock "js" %}
 <script>
@@ -132,7 +132,7 @@ $("#review_button").click(function()
     }
     else
     {
-      $("#top_desc").html("Egal, ob groß oder klein. Mit einer Idee fängt alles an. Eines der Felder musst du aber schon ausfüllen ;-) Oder einfach nur ein Bild hochladen.");
+      $("#top_desc").html("Eines der Felder musst du aber schon ausfüllen ;-) Oder einfach nur ein Bild hochladen.");
     }
     
   });
