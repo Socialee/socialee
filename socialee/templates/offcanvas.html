@@ -17,14 +17,13 @@
         <!-- Menu -->
         <ul class="vertical menu">
 
-          <li class="title">Ideen</li>
-          <li><a href="#">coming soon</a></li>
-
-          <li class="title">Projekte</li>
-          <li><a href="#">coming soon</a></li>
-
           <li class="title">Dein Profil</li>
+          {% if not request.user.is_authenticated %}
+          <li><a href="{% url 'account_login' %}">Anmelden</a></li>
+          {% else %}
           <li><a href="{% url 'account_change_password' %}">Passwort ändern</a></li>
+          <li><a href="{% url 'account_logout' %}">Abmelden</a></li>
+          {% endif %}
 
           <li class="title">Und sonst so?</li>
           <li><a href="{% url 'home' %}">Landingpage</a></li>
