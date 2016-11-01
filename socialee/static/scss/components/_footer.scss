@@ -11,7 +11,7 @@
   background-size: cover;
   -o-background-size: cover;
   @include breakpoint(small only) {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 }
 
@@ -35,7 +35,8 @@
     font-size: 2.5rem;
     font-weight: bold;
     @include breakpoint(small only) {
-      font-size: 2rem;
+      font-size: 1.5rem;
+      line-height: 2.5rem;
     }
 }
 
@@ -46,14 +47,15 @@
   text-transform: uppercase;
   color: $socialee-transparent;
   @include breakpoint(small only) {
-    font-size: 1rem;
+    font-size: 0.8rem;
+    padding-top: 0;
   }
   a {
     font-size: 1rem;
     font-weight: bold;
     border-bottom: 4px solid;
     @include breakpoint(small only) {
-      font-size: 1rem;
+      font-size: 0.8rem;
       border-bottom: 3px solid;
     }
     &:hover {
