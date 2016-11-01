@@ -35,7 +35,7 @@
           <li><a href="{% url 'startproject' %}">Starte Projekt</a></li>
             {% profiles request.user as user_profiles %}
             {% if user_profiles.count == 0 %}
-            <li class="menu-text"><a href="{% url 'startprofile' %}">Profil anlegen</a></li>
+            <li><a href="{% url 'startprofile' %}">Profil anlegen</a></li>
             {% endif %}
           <li><a href="/admin/">Socialee-Admin</a></li>
             {% if not PROD %}
