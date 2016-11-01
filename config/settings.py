@@ -83,13 +83,14 @@ INSTALLED_APPS = (
     'register',
 )
 
-if DEBUG:
+if not PROD:
     INSTALLED_APPS += (
         'django_extensions',
         'django.contrib.admindocs',
     )
 
 MIDDLEWARE_CLASSES = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -101,7 +102,6 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.admindocs.middleware.XViewMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 # AWS S3 Settings
@@ -324,10 +324,10 @@ CKEDITOR_CONFIGS = {
 # TELLME_FEEDBACK_EMAIL = 'hello@socialee.de' 
 
 # Debug Toolbar settings / http://django-debug-toolbar.readthedocs.io/en/stable/configuration.html
+from debug_toolbar import settings as dt_settings
 CONFIG_DEFAULTS = {
     # Toolbar options
+    'DISABLE_PANELS': set(['debug_toolbar.panels.redirects.RedirectsPanel']),
     'JQUERY_URL': '',
     'SHOW_COLLAPSED': True,
-    # Panel options
-    # 'SQL_WARNING_THRESHOLD': 100,   # milliseconds
 }

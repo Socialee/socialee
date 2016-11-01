@@ -43,7 +43,7 @@ urlpatterns = [
     url(r'^follow/$', login_required(views.Follow.as_view()), name='comment'),
 ]
 
-if settings.DEBUG or not settings.PROD:
+if not settings.PROD:
     import debug_toolbar
     urlpatterns += [
         url(r'^__debug__/', include(debug_toolbar.urls)),
