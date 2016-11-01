@@ -39,7 +39,7 @@
             <li><a href="{% url 'startprofile' %}">Profil anlegen</a></li>
             {% endif %}
           <li><a href="/admin/">Socialee-Admin</a></li>
-            {% if not PROD %}
+            {% if DEBUG %}
               <li><a href="/admin/doc/">Socialee-Docs</a></li>  
             {% endif %}
           {% endif %}

@@ -83,7 +83,7 @@ INSTALLED_APPS = (
     'register',
 )
 
-if not PROD:
+if DEBUG:
     INSTALLED_APPS += (
         'django_extensions',
         'django.contrib.admindocs',
