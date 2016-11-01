@@ -27,9 +27,10 @@
           <li><a href="{% url 'account_change_password' %}">Passwort ändern</a></li>
 
           <li class="title">Und sonst so?</li>
+          <li><a href="{% url 'home' %}">Landingpage</a></li>
           <li><a href="{% url 'zinnia:entry_archive_index' %}">Blog lesen</a></li>
           <li><a href="{% url 'make_quote' %}">Zitat abgeben</a></li>
-
+          
           {% if request.user.is_staff %}
           <li class="title">Admin</li>
           <li><a href="{% url 'startproject' %}">Starte Projekt</a></li>
