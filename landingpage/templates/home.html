@@ -1,5 +1,5 @@
 {% extends "offcanvas.html" %}
-{% load static landingpage_tags %}
+{% load sekizai_tags static landingpage_tags idea_tags %}
 
 {% block content %}
 
@@ -34,6 +34,12 @@
   
   {% else %}
 
+      
+      {% for idea in idea_list %}
+      {% include "idea_card.html" %}
+      {% endfor %}  
+  
+
     <section id="welcome" class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small]">
 
       <div class="row lp-header">
@@ -50,6 +56,24 @@
 
   {% endif %}
 
+  <div class="row">
+    <div class="small-12 small-centered">
+      <div class="callout">
+
+        <h3 class="text-center">Mach mit beim Sammeln aller guter Ideen der Welt.</h3>
+
+          <div class="grid">
+              {% idea_list as idea_list %}
+              {% for idea in idea_list %}  
+                {% include "idea_card.html" %}
+              {% endfor %}
+          </div>
+
+        <p class="text-center"><a class="text-link-special" href="{% url 'create_idea' %}">Trag Deine eigene Idee ein.</a></p>
+
+      </div>
+    </div>
+  </div>
 
   <section id="manifest" class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/manifest_2.jpg' %}, small], [{% static 'img/landingpage_bg/manifest_2.jpg' %}, medium], [{% static 'img/landingpage_bg/manifest_2.jpg' %}, large]">
 
@@ -68,5 +92,64 @@
     </div>
 
   </section>
+
+{% addtoblock 'js' %}
+
+  <script type="text/javascript">
+
+    var delay=150; // TODO das hier ist ein quick and dirty workaround....
+    var $grid = $('.grid').masonry({
+      columnWidth: 263,
+      gutter: 30,
+      itemSelector: '.grid-item',
+      fitWidth: true,
+      transitionDuration: '1s',
+      stagger: 10,
+    });
+
+    $grid.imagesLoaded().progress( function() {
+      $grid.masonry('layout');
+    });
+
+    $grid.on( 'click', '.idea-image', function( event ) {
+      $( event.currentTarget ).parent().parent('.grid-item').toggleClass('is-expanded');
+        setTimeout(function() {
+        $grid.masonry();
+        }, delay);
+    });
+
+    function like(object, idea_id, type) {
+        post_to_url( "../like/", 
+                    { idea_id : idea_id,
+                      type: type },
+                    function(data){
+                        object.html(data);
+                    });
+      }
+
+    $(".idea-heart").click(
+      function()
+      {
+        var id = $(this).attr('idea_id');
+        like($(this).find("#"+id), id, "like");
+      });
+
+    $(".idea-money").click(
+      function()
+      {
+        var id = $(this).attr('idea_id');
+        like($(this).find("#"+id), id, "money");
+      });
+    $(".idea-hand").click(
+      function()
+      {
+        var id = $(this).attr('idea_id');
+        like($(this).find("#"+id), id, "hand");
+      });
+
+
+  </script>
+
+{% endaddtoblock %}
 
 {% endblock content %}
