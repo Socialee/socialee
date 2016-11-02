@@ -10,7 +10,7 @@ from . import allauth_urls
 
 urlpatterns = [
     
-    url(r'^landingpage/', include('landingpage.urls')), # ID 000
+    url(r'^', include('landingpage.urls')), # ID 000
 
     url(r'^accounts/', include('allauth.urls')), # IDs 081, 082, 083, etc
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^blog/', include('zinnia.urls')), # IDs 050, 051, 052, etc
     url(r'^comments/', include('django_comments.urls')), # für Blog
     url(r'^feedback/', include("feedback.urls")), # Feedback-App
-    url(r'^', include('ideas.urls')), # TODO IDs vergeben
+    url(r'^galerie/', include('ideas.urls')), # TODO IDs vergeben
     url(r'^impressum/$', views.Impressum.as_view(), name='impressum'), # ID 021
     url(r'^registrieren/', include('waitinglist.urls')), # ID 080
     url(r'^protect/', include('simple_auth.urls')), # password-protection for staging-server
