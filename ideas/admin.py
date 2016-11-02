@@ -19,7 +19,7 @@ class IdeaAdmin(admin.ModelAdmin):
     list_display = ('was_submitted_recently', 'active', 'featured', 'title',  'author', 'thumb')
     list_display_links = ['title']
     list_editable = ['featured']
-    fields = [('active', 'featured', 'thumb', 'picture'), ('title', 'author'), 'description', 'likes', 'link']
+    fields = [('active', 'featured', 'thumb', 'picture'), ('title', 'author'), 'description', 'likes']
     list_filter = ['subm_date', 'author']
     search_fields = ['title', 'author', 'description']
     readonly_fields = ('likes', 'thumb')
