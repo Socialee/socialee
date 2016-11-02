@@ -13,7 +13,7 @@
   {% if idea.title or idea.description %}
     <div class="idea-details">
       <h2>{{ idea.title }}</h2>
-      <p>{{ idea.description }}</p>
+      <p>{{ idea.description|urlizetrunc:25 }}</p>
     </div>
   {% endif %}
     <div class="row align-center">
