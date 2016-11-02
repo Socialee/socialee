@@ -3,64 +3,23 @@
 
 {% block content %}
 
-{% random_landingpagecontent as landingpage %}
+    <div class="lp-header full-height">
+      <!--<img src="{% static 'img/symbole/noun_217781_cc.svg' %}">-->
 
-  {% if landingpage.active = True %}
-
-    <section id="welcome" class="fullscreen-img" data-interchange="[{{ MEDIA_URL }}{{ landingpage.bg_img }}, small]">
-
-        <div class="row lp-header">
-          <img src="{{ MEDIA_URL }}{{ landingpage.symbol }}">
-        </div>
-
-        <div class="row lp-header">
-          <div class="large-7 medium-8 small-11 columns text-center">
-            <h1>{{ landingpage.claim }}</h1>
-            <p>{{ landingpage.tagline }}<br><br>{{ landingpage.cta|safe }}</a></p>
-          </div>
-        </div>
-
-        <div class="row lp-header">
-          <div class="large-12 columns text-center">
-            <a class="white-orange" href="#manifest">
-              <span class="fa-stack">
-                <i class="fa fa-chevron-down fa-stack-1x" aria-hidden="true"></i>
-                <i class="fa fa-circle-thin fa-stack-2x" aria-hidden="true"></i>
-              </span>
-            </a>
-          </div>
-        </div>
-    </section>
-  
-  {% else %}
-
-      
-      {% for idea in idea_list %}
-      {% include "idea_card.html" %}
-      {% endfor %}  
-  
-
-    <section id="welcome" class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small]">
-
-      <div class="row lp-header">
-          <img src="{% static 'img/symbole/noun_217781_cc.svg' %}">
-      </div>
-
-      <div class="row lp-header ">
-        <div class="large-7 medium-8 small-11 columns small-centered text-center">
-          <h1>Wir machen das jetzt mal</h1>
-          <p>Wir glauben, dass alle guten Ideen wahr werden sollten. Darum bauen wir eine Internetseite, die dir hilft, die richtigen Menschen zu finden und gemeinsam etwas zu bewegen.<br><br>Bald geht's los. Lies mehr dazu in unserem <a href="{% url 'zinnia:entry_archive_index' %}">Blog.</a></p>
+      <div class="row">
+        <div class="small-12 medium-10 large-10 columns small-centered text-center">
+          <h1>Alle guten Ideen können wahr werden.</h1>
+          <p class="pull-right"><em>Denn es fehlt ja weder an guten Ideen noch an guten Menschen...</em></p>
         </div>
       </div>
-    </section>
-
-  {% endif %}
+    </div>
 
   <div class="row">
     <div class="small-12 small-centered">
       <div class="callout">
 
-        <h3 class="text-center">Mach mit beim Sammeln aller guter Ideen der Welt.</h3>
+        <h3 class="text-center">Wir sammeln alle guten Ideen der Welt.</h3>
+        <p class="text-center">Und weil das allein nicht reicht, bauen wir eine <em>Plattform</em>, die dir hilft, deine Ideen auch umzusetzen. Du kannst schon jetzt was tun und deine <a class="text-link-special" href="{% url 'create_idea' %}">Idee für eine bessere Welt abgeben.</a></p>
 
           <div class="grid">
               {% idea_list as idea_list %}
@@ -69,29 +28,12 @@
               {% endfor %}
           </div>
 
-        <p class="text-center"><a class="text-link-special" href="{% url 'create_idea' %}">Trag Deine eigene Idee ein.</a></p>
+        <p class="text-center"><a class="button button--yellow" href="{% url 'create_idea' %}">Idee abgeben</a></p>
+        <p class="text-center"><a class="text-link-special" href="{% url 'idea_list' %}">mehr Ideen angucken</a></p>
 
       </div>
     </div>
   </div>
-
-  <section id="manifest" class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/manifest_2.jpg' %}, small], [{% static 'img/landingpage_bg/manifest_2.jpg' %}, medium], [{% static 'img/landingpage_bg/manifest_2.jpg' %}, large]">
-
-    <div class="row align-center">
-      <div class="large-10 columns small-centered">
-        <h2 class="text-center lp-headline">Das kleine Manifest</h2>
-        <div class="manifest">
-          <h3>Wir bauen Werkzeuge.</h3> <p>Das Socialee-Team besteht aus Handwerkern, Künstlern, Business-Menschen, Programmierern und Designern. Gemeinsam bauen wir digitale Werkzeuge für analogen Wandel.</p>
-          <h3>Es fehlt an nichts.</h3><p>Das stimmt zwar nicht ganz, aber wir wollen auch das Gegenteil nicht mehr glauben. Es ist alles da, wir müssen es nur besser verteilen. Fangen wir an.</p>
-          <h3>Wir sind digital und analog.</h3><p>Wir lieben die analoge Begegnung und bauen eine digitale Plattform. Wir nutzen digitale Möglichkeiten, um die analoge Welt zu verbessern.</p>
-          <h3>Wir machen das jetzt mal.</h3><p>Es gibt viele gute Menschen mit guten Ideen, gewöhnen wir uns daran, diese Ideen auch umzusetzen. Die Welt kann eine gute sein.</p>
-          <h3>Wir sind diejenigen, auf die wir gewartet haben.</h3><p>Wir können nicht warten, dass irgendjemand anders die Dinge für uns regelt. Wenn wir es nicht machen, wir alle, wer macht es dann? Der alte Hut, der gut auf unsere Köpfe passt.</p>
-          <h3>Ich will auch!</a></h3><p>Wenn dich das interessiert, <a href="{% url 'waitinglist' %}">klick mal hier.</a></p>
-        </div>
-      </div>
-    </div>
-
-  </section>
 
 {% addtoblock 'js' %}
 
