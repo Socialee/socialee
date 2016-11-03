@@ -35,4 +35,18 @@
     </div>
   </div>
 
+{# Moritz moved the rest of this to main.js / this part needs to stay here because of url-template-tag #}
+{% addtoblock 'js' %}
+<script type="text/javascript">
+function like(object, idea_id, type) {
+    post_to_url( '{% url "like" %}', 
+                { idea_id : idea_id,
+                  type: type },
+                function(data){
+                    object.html(data);
+                });
+  }
+</script>
+{% endaddtoblock %}
+
 {% endblock content %}

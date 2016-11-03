@@ -115,15 +115,6 @@ $grid.on( 'click', '.idea-image', function( event ) {
     }, delay);
 });
 
-function like(object, idea_id, type) {
-    post_to_url( "{% url 'like' %}", 
-                { idea_id : idea_id,
-                  type: type },
-                function(data){
-                    object.html(data);
-                });
-  }
-
 $(".idea-heart").click(
   function()
   {
