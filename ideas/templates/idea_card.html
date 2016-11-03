@@ -16,15 +16,14 @@
       <p>{{ idea.description|urlizetrunc:25 }}</p>
     </div>
   {% endif %}
+  {% if not request.user.is_authenticated %}
+  <p id="login_{{ idea.id }}" class="show-login-option">Gefällt dir das? <a href="{% url 'account_login' %}">Melde dich an.</a></p>  
+  {% endif %}
     <div class="row align-center">
       <div class="idea-heart" idea_id="{{ idea.id }}">
         <span class="fa-stack fa-lg">
           <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
-          {% if request.user.is_authenticated %}
           <strong class="fa-stack-1x" id="{{ idea.id }}">{% include 'like_counts.html' with idea=idea type="like" %}</strong>  
-          {% else %}
-          <a href="{% url 'account_login' %}"><strong class="fa-stack-1x" id="{{ idea.id }}">{% include 'like_counts.html' with idea=idea type="like" %}</strong></a>
-          {% endif %}
         </span>
       </div>
     </div> 

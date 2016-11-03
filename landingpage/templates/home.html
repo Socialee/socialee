@@ -89,6 +89,17 @@
         like($(this).find("#"+id), id, "hand");
       });
 
+    // ask if user wants to login and rearrange layout
+    $(".idea-heart").click(
+      function()
+      {
+        var delay=300;
+        var id = $(this).attr('idea_id');
+        $("#login_"+id).slideToggle();
+        setTimeout(function() {
+        $grid.masonry('layout');
+        }, delay);
+      });
 
   </script>
 
