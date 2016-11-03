@@ -287,6 +287,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3', 'foundat
 CRISPY_TEMPLATE_PACK = 'foundation-5'
 
 # Zinnia Blog Settings
+ZINNIA_PREVIEW_MAX_WORDS = 22
 # ZINNIA_ENTRY_CONTENT_TEMPLATES = [
 #             ('zinnia/_video_entry.html', gettext('Artikel mit Video')),
 #             ]
