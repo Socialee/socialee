@@ -8,4 +8,7 @@
       color: $s-button-hover;
       text-decoration: none;
     }
+	@include breakpoint(small only){
+		font-size: 0.8rem;		
+	}
 }

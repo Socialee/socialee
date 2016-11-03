@@ -4,14 +4,14 @@
   a {
     font-weight: bold;
     font-size: 1.1rem;
-    color: rgba(38, 74, 66, 0.85);
+    color: rgba(165, 185, 181, 0.8);
   }
   li {
     font-weight: bold;
     font-size: 1.1rem;
-    color: rgba(38, 74, 66, 0.85);
+    color: rgba(165, 185, 181, 0.8);
   }
   li:not(:last-child)::after {
-    color: rgba(38, 74, 66, 0.85);
+   color: rgba(165, 185, 181, 0.8);
   }
 }

@@ -35,34 +35,32 @@
 
   {% block blog-content %}
 
-  <div class="blog-callout">
-  {% block entry-content %}
-    {% include object.content_template with object_content=object.html_content %}
-  {% endblock entry-content %}
+    <div class="blog-callout">
+      {% block entry-content %}
+        {% include object.content_template with object_content=object.html_content %}
+      {% endblock entry-content %}
 
-  <div class="write-author">
-  {% with authors=object.authors.all %}
-  {% for author in authors %}
-  <span itemprop="author" itemscope itemtype="http://schema.org/Person">Lies
-    <a href="{{ author.get_absolute_url }}" class="fn url{% if not author.get_full_name %} nickname{% endif %}" rel="author"
-       title="{% blocktrans %}Show all {{ author }}'s entries{% endblocktrans %}" itemprop="url">mehr Artikel von {{ author.first_name }}</a>, oder
-    <a href="mailto:{{author.email}}?subject=Hallo!">schreibe eine Email.</a>
-  </span>
-  {% endfor %}
-  {% endwith %}
-  </div>
-  
-
-  
-  {% get_tags as entry_tags %}
-  {% if entry_tags %}
-    <div class="infosbelowcontent">
-    <h4>Verwandte Themen</h4>
-    {% for tag in entry_tags %}
-      <a class="blog-tag" href="{% url 'zinnia:tag_detail' tag %}">{{ tag }}</a>  
-    {% endfor %}
+      <div class="write-author">
+        {% with authors=object.authors.all %}
+        {% for author in authors %}
+        <span itemprop="author" itemscope itemtype="http://schema.org/Person">Lies
+          <a href="{{ author.get_absolute_url }}" class="fn url{% if not author.get_full_name %} nickname{% endif %}" rel="author"
+             title="{% blocktrans %}Show all {{ author }}'s entries{% endblocktrans %}" itemprop="url">mehr Artikel von {{ author.first_name }}</a>, oder
+          <a href="mailto:{{author.email}}?subject=Hallo!">schreibe eine Email.</a>
+        </span>
+        {% endfor %}
+        {% endwith %}
+      </div>
+      
+      {% get_tags as entry_tags %}
+      {% if entry_tags %}
+        <div class="infosbelowcontent">
+        <h4>Verwandte Themen</h4>
+        {% for tag in entry_tags %}
+          <a class="blog-tag" href="{% url 'zinnia:tag_detail' tag %}">{{ tag }}</a>  
+        {% endfor %}
+        </div>
+      {% endif %}
     </div>
-  {% endif %}
 
-  </div>
   {% endblock blog-content %}

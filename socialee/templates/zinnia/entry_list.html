@@ -4,22 +4,19 @@
 
 {% block blog-content %}
 
-  {% for object in object_list %}
-
-    <div class="blog-callout">
-      {% zinnia_loop_template object.content_template as template %}
-      {% include template with object_content=object.html_preview continue_reading=1 %}
-    </div>   
-
-    {% empty %}
-
-      <div class="callout">
-        <p class="info">
-          <a href="{% url 'admin:zinnia_entry_add' %}">{% trans "No entries yet." %}</a>
-        </p>
-      </div>    
-
-  {% endfor %}
-
+<div class="row">
+  <div class="small-12 medium-12 large-12 small-centered">
+    <div class="grid">
+    {% for object in object_list %}
+      <div class="grid-item">
+        <div class="idea-card">
+          {% zinnia_loop_template object.content_template as template %}
+          {% include template with object_content=object.html_preview continue_reading=1 %}
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+</div>
 
 {% endblock blog-content %}
