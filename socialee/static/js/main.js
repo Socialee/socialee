@@ -91,3 +91,67 @@ $(document).on("click", ".comment_button", function(event) {
 $(document).on("click", ".follow", function(event) {
     follow($(this), $(this).attr('instance_id'))
  });
+
+
+// Start js for cards (idea-gallery and create-idea-forms)
+var delay=150; // TODO das hier ist ein quick and dirty workaround....
+var $grid = $('.grid').masonry({
+  columnWidth: 263,
+  gutter: 30,
+  itemSelector: '.grid-item',
+  fitWidth: true,
+  transitionDuration: '1s',
+  stagger: 10,
+});
+
+$grid.imagesLoaded().progress( function() {
+  $grid.masonry('layout');
+});
+
+$grid.on( 'click', '.idea-image', function( event ) {
+  $( event.currentTarget ).parent().parent('.grid-item').toggleClass('is-expanded');
+    setTimeout(function() {
+    $grid.masonry();
+    }, delay);
+});
+
+function like(object, idea_id, type) {
+    post_to_url( "{% url 'like' %}", 
+                { idea_id : idea_id,
+                  type: type },
+                function(data){
+                    object.html(data);
+                });
+  }
+
+$(".idea-heart").click(
+  function()
+  {
+    var id = $(this).attr('idea_id');
+    like($(this).find("#"+id), id, "like");
+  });
+
+$(".idea-money").click(
+  function()
+  {
+    var id = $(this).attr('idea_id');
+    like($(this).find("#"+id), id, "money");
+  });
+$(".idea-hand").click(
+  function()
+  {
+    var id = $(this).attr('idea_id');
+    like($(this).find("#"+id), id, "hand");
+  });
+
+// ask if user wants to login and rearrange layout
+$(".idea-heart").click(
+  function()
+  {
+    var delay=300;
+    var id = $(this).attr('idea_id');
+    $("#login_"+id).slideToggle();
+    setTimeout(function() {
+    $grid.masonry('layout');
+    }, delay);
+  });
