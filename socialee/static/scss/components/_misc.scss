@@ -143,7 +143,7 @@ h6 {
 }
 
 .float-right-lg {
-    @include breakpoint(large only) {
+    @include breakpoint(large) {
    		float: right !important;
     }
 }
