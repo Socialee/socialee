@@ -2,16 +2,24 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="row">
-	<div class="small-12 columns">
-		<form method="POST" action="">{% csrf_token %}
-			{{ form|crispy }}
-			<input class="button float-right" type="submit" value="Und los!"></input>
-			<a href="{% url 'project_view' project.slug %}">zurück zum Projekt</a>
-		</form>
-		
-	</div>
-</div>
+<section class="l-section hero">
+  <div class="row">
+    <div class="row column hero__wrapper">
+    	<div class="small-12 medium-10 medium-offset-1 column text-center-sm">
+    		<h2>Deine Projektdaten</h2>
+        <form method="POST" action="">{% csrf_token %}
+    			{{ form|crispy }}
+    			<div class="row">
+            <div class="small-12 column mt-20">
+              <input class="button button--yellow" type="submit" value="Und los!"></input>
+    			   <a class="float-right" href="{% url 'project_view' project.slug %}">zurück zum Projekt</a>
+    		    </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
 
-	
+
 {% endblock content %}

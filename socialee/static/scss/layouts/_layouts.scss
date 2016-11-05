@@ -1,5 +1,9 @@
 .l-section {
   padding: 0;
+}
+
+.l-section--white {
+  @extend .l-section;
   background-color: c(special, white);
 }
 
