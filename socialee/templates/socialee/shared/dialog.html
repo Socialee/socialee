@@ -9,11 +9,7 @@
           <a href="#">
             <div class="comment__avatar"><img src="{{ MEDIA_URL }}{{ request.user.current_instance.picture }}" alt="1"></div>
             {{ request.user.current_instance.long_name }} </a>
-            <div class="time grey">
-              <span class="data">
-                NEUEN KOMMENTAR SCHREIBEN
-              </span>
-            </div>
+            <div class="h-f15 greyblue-2 h-capital">Neuen Kommentar schreiben</div>
           </h6>
 
         </section>
@@ -22,7 +18,7 @@
         </section>
         <section class="row comment__actions">
           <div class="small-12 medium-8 column">
-            <p class="grey">Übrigens: Personen können mit @username erwähnt werden.</p>
+            <p class="h-f22 greyblue-2">Übrigens: Personen können mit @username erwähnt werden.</p>
           </div>
           <div class="small-12 medium-4 column">
             <a class="large button expanded-sm float-right-md button--yellow comment_button" instance_id="{{ object.id }}" href="#">Kommentieren</a>
