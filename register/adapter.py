@@ -2,7 +2,15 @@ from allauth.account.adapter import DefaultAccountAdapter
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
+from django.utils.translation import ugettext_lazy as _ 
+
+
 class AdvancedMailAccountAdapter(DefaultAccountAdapter):
+
+    error_messages = {
+        'email_taken':
+        _("Es gibt schon jemand mit dieser email"),
+    }
     
     def send_mail(self, template_prefix, email, context):
         if 'email_register' in self.request.session:

@@ -108,22 +108,33 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-$("#review").hide();
-$("#id_email").parent().hide();
 
 $("#id_picture").change(function(){
     readURL(this);
 });
 
+function fixPreview()
+{
+  $("#idea_form").children().hide();
+  $("#idea_title").html($("#id_title").val());
+  $("#idea_description").html($("#id_description").val());
+  readURL($("#id_picture"));
+}
+
+{% if not form.email.errors %}
+$("#review").hide();
+$("#id_email").parent().hide();
+{% else %}
+$("#idea_form").children().hide();
+fixPreview();
+{% endif %}
+
 $("#review_button").click(function()
   {
     if($("#id_title").val() || $("#id_description").val() || $("#id_picture").val())
     {
-      $("#idea_form").children().hide();
       $("#id_email").parent().show();
-      $("#idea_title").html($("#id_title").val());
-      $("#idea_description").html($("#id_description").val());
-      readURL($("#id_picture"));
+      fixPreview();
       $("#review").show();
       $("#top_desc").html("Du kannst noch deine E-Mail-Adresse eintragen, so findest du deine Idee besser wieder und kannst bald ein Projekt daraus machen.");
       $("#top_titel").html("Sieht gut aus, oder?!");
