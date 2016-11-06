@@ -1,2 +1,2 @@
 {% load i18n %}
-{% blocktrans %}Check dein Postfach. Wir haben eine Bestätigungs-Mail an {{email}} verschickt.{% endblocktrans %}
+{% blocktrans %}Check dein Postfach :-){% endblocktrans %}

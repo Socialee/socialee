@@ -1,16 +1,21 @@
-{% load account %}{% user_display user as user_display %}{% autoescape off %}
-Du hast dich bei Socialee angemeldet. Finden wir super!
+{% load account socialee_tags %}{% user_display user as user_display %}{% autoescape off %}
+Du hast dich bei Socialee angemeldet. Das ist super! Du bist einer von {% user_count %} Menschen, die sich um {% project_idea_count %} Ideen und Projekte kümmern. Das ist noch kein sehr guter Schnitt, aber du kannst helfen, das zu verbessern. Erzähle deinen Freunden diese Geschichte (oder eine ähnliche):
 
-Bestätige Deine Email-Adresse, indem du den folgenden Link klickst:
+Paula hat eine Idee. Sie möchte einen urbanen Gemüsegarten in ihrer Stadt anlegen. "Paulas Stadtgewächshaus". Klingt doch gut! Leider hat Paula noch nicht angefangen damit. „Ich habe ja gar keine Zeit, kein Geld, und auch keine Ahnung, wie so was geht. Alleine traue ich mir das gar nicht zu.“ Und so gibt Paula schon auf, bevor sie startet. Jeder kennt das.
 
-{{ activate_url }}
+Nur: Was Paula nicht weiß, ist, dass es in ihrer Stadt gerade 6 Leute gibt, die genau die gleiche Idee haben. Und 1000 Leute, die die Idee gut fänden, wenn sie davon hören würden. Die müsste Paula kennenlernen. Das ist Socialee.
 
-Danach kannst du dich anmelden:
+Also los. Hier kommen deine Zugangsdaten.
 
 E-Mail: {{ user.email }}
 Passwort: {{ pass }}
 
-Sobald du angemeldet bist, ändere aus Sicherheitsgründen bitte das Passwort.
+Sobald du angemeldet bist, ändere aus Sicherheitsgründen dein Passwort.
+
+Klicke jetzt auf folgenden Link und bestätige so deine E-Mail-Adresse. Danach kannst du dich anmelden.
+
+{{ activate_url }}
+
 
 Schöne Grüße aus Berlin,
 vom Socialee-Team
