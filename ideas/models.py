@@ -22,8 +22,6 @@ class Idea(models.Model):
     subm_date = models.DateTimeField(auto_now=True, verbose_name='Datum', null=True, blank=True)
     featured = models.BooleanField(default=False, verbose_name='featured?')
     active = models.BooleanField(default=False, verbose_name='veröffentlicht?')
-    money = models.ManyToManyField(User, related_name='gives_money_to')
-    hands = models.ManyToManyField(User, related_name='gives_hand_to')
     likes = models.ManyToManyField(User, related_name='likes_ideas')
 
     class Meta:
