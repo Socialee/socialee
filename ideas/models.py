@@ -9,8 +9,9 @@ from django.contrib.auth.models import User
 
 
 def upload_location(instance, filename):
-    location = str(instance.id)
-    return "%s/%s/%s" % (str("ideas"), location, filename)
+    location = str(instance.title)
+    date = str(instance.subm_date)
+    return "%s/%s/%s/%s" % (str("ideas"), date, location, filename)
 
 
 class Idea(models.Model):
@@ -19,6 +20,7 @@ class Idea(models.Model):
     description = models.TextField(max_length=1500, verbose_name='Beschreibung', null=True, blank=True)
     author = models.EmailField(max_length=254, verbose_name='Email des Autors', null=True, blank=True)
     subm_date = models.DateTimeField(auto_now=True, verbose_name='Datum', null=True, blank=True)
+    featured = models.BooleanField(default=False, verbose_name='featured?')
     active = models.BooleanField(default=False, verbose_name='veröffentlicht?')
     money = models.ManyToManyField(User, related_name='gives_money_to')
     hands = models.ManyToManyField(User, related_name='gives_hand_to')

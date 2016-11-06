@@ -6,12 +6,9 @@
 
 {% block allauth_content %}
 
-<div class="socialee-callout">
+	<h2>{% trans "Bestätige deine E-Mail-Adresse" %}</h2>
+	
+	<p>{% blocktrans %}Wir haben dir eine E-Mail geschickt, um deine Adresse zu verifizieren. Bitte folge dem Link in der E-Mail um den Anmeldeprozess abzuschließen. Kontaktiere uns, falls die E-Mail nicht in ein paar Minuten angekommen ist.{% endblocktrans %}</p>
 
-      <h1>{% trans "Verify Your E-mail Address" %}</h1>
-
-      <p>{% blocktrans %}Wir haben dir eine E-Mail geschickt, um deine Adresse zu verifizieren. Bitte folge dem Link in der E-Mail um den Anmeldeprozess abzuschließen. Und kontaktiere uns, falls die E-Mail nicht in ein paar Minuten angekommen ist.{% endblocktrans %}</p>
-
-</div>
 
 {% endblock %}

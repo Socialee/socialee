@@ -7,7 +7,7 @@
 
 {% block allauth_content %}
 
-    <h1>Neues Konto eröffnen.</h1>
+    <h2>Neues Konto eröffnen.</h2>
 
     <p>Wenn Du schon ein Konto hast, <a href="{{ login_url }}">logge Dich ein.</a></p>
 
@@ -17,7 +17,7 @@
       {% if redirect_field_value %}
       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"><input>
       {% endif %}
-      <button class="button button--yellow" type="submit">{% trans "Sign Up" %} &raquo;</button>
+      <button class="button button--yellow" type="submit">{% trans "Anmelden" %} &raquo;</button>
     </form>
 
 {% endblock %}

@@ -29,5 +29,5 @@ django-storages
 Collectfast
 whitenoise
 
-django-cms
-djangocms-text-ckeditor
+#django-cms
+#djangocms-text-ckeditor

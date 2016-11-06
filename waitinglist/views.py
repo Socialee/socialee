@@ -30,14 +30,14 @@ class NewsletterSignup(SignupView):
             message = form.cleaned_data.get("message")
             name = form.cleaned_data.get("first_name")
             names = name.split(" ")
-            msg = 'Danke'
-            if message:
-                msg += ' für Deine Nachricht'
-            if name:
-                msg += ', '+names[0].capitalize()
-            msg +='! Wir halten Dich auf dem laufenden.'
+            # msg = 'Danke'
+            # if message:
+            #     msg += ' für Deine Nachricht'
+            # if name:
+            #     msg += ', '+names[0].capitalize()
+            # msg +='! Wir freuen uns über dein Interesse.'
 
-            messages.success(request, msg)
+            # messages.success(request, msg)
 
             from_email = settings.EMAIL_HOST_USER
             to_email = [from_email, 'hello@socialee.de']

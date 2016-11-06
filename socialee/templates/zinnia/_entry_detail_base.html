@@ -16,7 +16,7 @@
     {% endblock entry-categories %}
 
     {% block entry-published %}
-      <time class="published blog-time-published" datetime="{{ object.publication_date|date:"l, d. F Y" }}" itemprop="datePublished">{{ object.publication_date|date:"l, d. F Y" }}</time>
+      <time class="published blog-time-published" datetime="{{ object.publication_date|date:"l, d. F Y" }}" itemprop="datePublished">{{ object.publication_date|date:"d. F" }}</time>
     {% endblock entry-published %}
   </div>
 
@@ -28,17 +28,17 @@
 
         {% block entry-image %}
         {% if object.image %}
-        <div class="entry-image">
-            <figure class="blog-image" itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
-              <img src="{{ object.image.url }}" alt="{{ object.image_caption|default:object.title }}" itemprop="contentUrl" />
-              {% if object.image_caption %}
-              <figcaption itemprop="caption">{{ object.image_caption }}</figcaption>
-              {% endif %}
-            </figure>
-            {% if continue_reading %}
-          </a>
-          {% endif %}
-        </div>
+          <div class="entry-image">
+              <figure class="blog-image" itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+                <img src="{{ object.image.url }}" alt="{{ object.image_caption|default:object.title }}" itemprop="contentUrl" />
+                {% if object.image_caption %}
+                <figcaption itemprop="caption">{{ object.image_caption }}</figcaption>
+                {% endif %}
+              </figure>
+              {% if continue_reading %}
+            </a>
+            {% endif %}
+          </div>
         {% endif %}
         {% endblock entry-image %}
 
@@ -57,7 +57,7 @@
         <p class="continue-reading">
           <a href="{{ object.get_absolute_url }}"
              title="{% blocktrans with object=object.title percent=object_content.remaining_percent|floatformat:0 %}{{ percent }}% of {{ object }} still remains to read.{% endblocktrans %}"
-             rel="bookmark" itemprop="url" class="s-button">
+             rel="bookmark" itemprop="url" class="button hollow small button--yellow">
              Lies hier weiter!
           </a>
         </p>

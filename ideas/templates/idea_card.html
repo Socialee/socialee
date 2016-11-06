@@ -13,26 +13,17 @@
   {% if idea.title or idea.description %}
     <div class="idea-details">
       <h2>{{ idea.title }}</h2>
-      <p>{{ idea.description }}</p>
+      <p>{{ idea.description|urlizetrunc:25 }}</p>
     </div>
   {% endif %}
+  {% if not request.user.is_authenticated %}
+  <p id="login_{{ idea.id }}" class="show-login-option">Gefällt dir das? <a href="{% url 'account_login' %}">Melde dich an.</a></p>  
+  {% endif %}
     <div class="row align-center">
-      <!-- <div class="idea-hand" idea_id="{{ idea.id }}">
-        <span class="fa-stack fa-lg">
-          <i class="fa fa-group fa-stack-2x" aria-hidden="true"></i>
-          <strong class="fa-stack-1x" id="{{ idea.id }}">{% include 'like_counts.html' with idea=idea type="hand"%}</strong>
-        </span>
-      </div>
-      <div class="idea-money" idea_id="{{ idea.id }}">
-        <span class="fa-stack fa-lg">
-          <i class="fa fa-diamond fa-stack-2x" aria-hidden="true"></i>
-          <strong class="fa-stack-1x" id="{{ idea.id }}">{% include 'like_counts.html' with idea=idea type="money" %}</strong>
-        </span>
-      </div> -->
       <div class="idea-heart" idea_id="{{ idea.id }}">
         <span class="fa-stack fa-lg">
           <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
-          <strong class="fa-stack-1x" id="{{ idea.id }}">{% include 'like_counts.html' with idea=idea type="like" %}</strong>
+          <strong class="fa-stack-1x" id="{{ idea.id }}">{% include 'like_counts.html' with idea=idea type="like" %}</strong>  
         </span>
       </div>
     </div> 

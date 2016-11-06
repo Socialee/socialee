@@ -1,4 +1,4 @@
-{% load i18n cms_tags sekizai_tags staticfiles %}
+{% load i18n sekizai_tags staticfiles %}
 
 <!DOCTYPE html>
 <html class="no-js {{ view.template_name | cut:'.html' }}" lang="de">
@@ -23,7 +23,7 @@
         {# Socialee CSS #}
         <link type="text/css" rel="stylesheet" href="{% static 'css/socialee_global.css' %}" />
         <link type="text/css" rel="stylesheet" href="{% static 'css/socialee_app.css' %}"  />
-
+        
         {# CSS & JS via Sekizai #}
         {% render_block "css" %}
         {% render_block "js_head" %}
@@ -51,15 +51,18 @@
 
     <body>
         {# start of content #}
-
-        {# {% cms_toolbar %} #}
+        {% include "messages.html" %}
 
         {% include "topbar.html" %}
 
         {% block before_content %}
         {% endblock before_content %}
 
-        {% include "messages.html" %}
+        <div class="show-for-large">
+        {% if request.user.is_authenticated %}
+        {% include "feedback-button.html" %}
+        {% endif %}
+        </div>
 
         {% include "feedback-button.html" %}
 

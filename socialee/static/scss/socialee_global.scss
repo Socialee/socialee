@@ -5,11 +5,7 @@
 
 /* GLOBAL STYLES AND HELPERS*/
 
-  p, a {
-    font-size: 1.5rem;
-  }
-
-  .white {
+ .white {
     color: $white;
   }
 
@@ -29,23 +25,6 @@
     color: $white;
     &:hover {
       color: $socialee-orange;
-    }
-  }
-
-  .socialee-callout {
-    @include callout-base;
-    background-color: white;
-    margin-top: 5rem;
-    padding: 3rem;
-    width: 100%;
-    p {
-      color: $socialee-darkgreen;
-    }
-    a {
-      color: $socialee-orange;
-    }
-    @include breakpoint(small only) {
-    padding: 1rem;
     }
   }
 
@@ -107,9 +86,9 @@
   }
 
   .full-height {
-    min-height: 85vh;
+    min-height: 75vh; 
   }
-
+  
   .s-container {
     padding: 10rem;
   }
@@ -139,13 +118,14 @@
 .lp-header {
   img {
     width: 100%;
-    height: 45vh;
-    padding: 6rem 0 2rem 0;
+    height: 40vh;
+    padding: 5rem 0 2rem 0;
     margin: 0 auto;
   }
   h1 {
-    font-weight: bold;
+    font-weight: 600;
     color: $white;
+    margin-top: 20vH;
   }
   p {
     line-height: 1.45;
@@ -169,7 +149,7 @@
     h1 {
     line-height: 2.5rem;
     font-size: 2.5rem;
-    margin: 2.5rem 0 1.2rem 0;
+    // margin: 2.5rem 0 1.2rem 0;
     }
   }
 }

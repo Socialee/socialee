@@ -3,26 +3,19 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-<section class="fullscreen-img" data-interchange="[{% static 'img/landingpage_bg/background-assets/background.jpg' %}, small], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, medium], [{% static 'img/landingpage_bg/background-assets/background.jpg' %}, large]">
-
-    <div class="s-space show show-for-medium"></div>
-      <div class="row lp-header">
-        <div class="large-6 columns small-centered">
-          <h2 class="text-center white">Schicke uns Dein Zitat!</h2>
-          <p class="text-center">Wir gucken es uns an und schalten es frei, sofern es jugendfrei ist.</p>
-          <div class="socialee-callout">
-          <form method="post"> {% csrf_token %}
-            {{ form }}
-            <div class="row">
-                <input class="s-button-form" type="submit" value="Und weg damit!" />
-            </div>
-          </form>
-          </div>
-        </div>
-      </div>
-  <div class="s-space"></div>
-  </section>
-
+<div class="row">
+  <div class="small-12 medium-10 large-8 columns small-centered">
+	  <div class="callout">
+	    <h2 class="text-center">Schicke uns ein Zitat!</h2>
+	    <p class="text-center">Wir gucken es uns an und veröffentlichen es, sofern es jugendfrei ist.</p>
+	    <form method="post"> {% csrf_token %}
+	      {{ form }}
+	      <input class="button button--yellow" type="submit" value="Abschicken" />
+	      <a class="text-link-special pull-right" onClick="javascript:history.go(-1);">Raus hier.</a>
+	    </form>
+	  </div>
+	</div>
+</div>
 {% endblock content %}
 
 

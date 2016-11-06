@@ -39,12 +39,6 @@ INTERNAL_IPS = ('127.0.0.1',)
 
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
 
-CMS_TEMPLATES = (
-    ('home.html', 'Startseite'),
-)
-
-# Application definition
-
 INSTALLED_APPS = (
     'collectfast',
     # DJANGO APPS
@@ -63,27 +57,13 @@ INSTALLED_APPS = (
     'django_comments',
     'ckeditor',
 
-    # DjangoCMS
-    'cms',  # django CMS itself
-    'treebeard',  # utilities for implementing a tree
-    'menus',  # helper for model independent hierarchical website navigation
-    'djangocms_text_ckeditor',
-    # NOTE: djangocms-Plugins are not being distributed with DjangoCMS, but the can be found at https://github.com/divio
-    # 'djangocms_file',
-    # 'djangocms_googlemap',
-    # 'djangocms_inherit',
-    # 'djangocms_picture',
-    # 'djangocms_teaser',
-    # 'djangocms_video',
-    # 'djangocms_link',
-    # 'djangocms_snippet',
-
     # THIRD PARTY APPS
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'crispy_forms',
     'crispy_forms_foundation',
+    'debug_toolbar',
     'django_summernote',
     'simple_auth',
     'sekizai',  # for JavaScript and CSS management
@@ -110,8 +90,8 @@ if DEBUG:
     )
 
 MIDDLEWARE_CLASSES = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'cms.middleware.utils.ApphookReloadMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -122,10 +102,6 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.admindocs.middleware.XViewMiddleware',
-    'cms.middleware.user.CurrentUserMiddleware',
-    'cms.middleware.page.CurrentPageMiddleware',
-    'cms.middleware.toolbar.ToolbarMiddleware',
-    'cms.middleware.language.LanguageCookieMiddleware',
 ]
 
 # AWS S3 Settings
@@ -197,7 +173,6 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'sekizai.context_processors.sekizai',
                 'zinnia.context_processors.version',  # Optional
-                'cms.context_processors.cms_settings',
             ],
             'debug': env.bool('DJANGO_TEMPLATE_DEBUG', DEBUG),
         },
@@ -312,6 +287,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3', 'foundat
 CRISPY_TEMPLATE_PACK = 'foundation-5'
 
 # Zinnia Blog Settings
+ZINNIA_PREVIEW_MAX_WORDS = 22
 # ZINNIA_ENTRY_CONTENT_TEMPLATES = [
 #             ('zinnia/_video_entry.html', gettext('Artikel mit Video')),
 #             ]
@@ -343,4 +319,16 @@ CKEDITOR_CONFIGS = {
         ],
         'toolbar': 'Zinnia',
     },
+}
+
+# TODO: das funktioniert nicht....
+# TELLME_FEEDBACK_EMAIL = 'hello@socialee.de' 
+
+# Debug Toolbar settings / http://django-debug-toolbar.readthedocs.io/en/stable/configuration.html
+from debug_toolbar import settings as dt_settings
+CONFIG_DEFAULTS = {
+    # Toolbar options
+    'DISABLE_PANELS': set(['debug_toolbar.panels.redirects.RedirectsPanel']),
+    'JQUERY_URL': '',
+    'SHOW_COLLAPSED': True,
 }

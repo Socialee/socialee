@@ -1,4 +1,4 @@
 {% load i18n %}
 {% autoescape off %}
-{% blocktrans %}Bitte bestätige Deine Email-Adresse.{% endblocktrans %}
+{% blocktrans %}Socialee | Bitte bestätige Deine Email-Adresse.{% endblocktrans %}
 {% endautoescape %}

@@ -1,11 +1,17 @@
-.idea-callout {
-  @include callout;
-  max-width: 1400px;
-  margin: 0 auto;
+.show-login-option {
+  padding: 0;
+  margin: 0;
+  position: relative; 
+  display: none;
 }
 
 .grid {
+  padding-top: 3rem;
+  padding-bottom: 3rem; 
   margin: 0 auto;
+  @include breakpoint(small only) {
+    padding-bottom: 1rem; 
+  }
 }
 
 /* item is invisible, but used for layout */
@@ -23,9 +29,11 @@
   transition: box-shadow 0.3s;
   -webkit-transition: width 0.2s; /* Safari */
     transition: width 0.2s;
+  @include breakpoint(small only) {
+    width: 263px;
+  }
 
   h2 {
-    font-family: BrandonGrotesque-Bold;
     font-size: 28px;
     color: #302F35;
     letter-spacing: 0px;
@@ -34,12 +42,15 @@
   }
 
   p {
-    font-family: BrandonGrotesque-Regular;
     font-size: 16px;
     color: #302F35;
     letter-spacing: 0px;
     line-height: 24px;
     margin-bottom: 0;
+  }
+
+  a {
+    font-size: 16px;
   }
 
   .idea-image img {
@@ -81,6 +92,10 @@
 .grid-item.is-expanded .idea-card {
   width: 555px;
   z-index: 2;
+  @include breakpoint(small only) {
+  width: 263px;
+  z-index: 2;
+  }
 }
 
 // TODO // Transition for shadow
