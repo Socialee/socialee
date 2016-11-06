@@ -47,14 +47,7 @@ class CreateIdea(SignupView):
 
 
 def idea_list(request):
-    idea_list = Idea.objects.filter(active=True).order_by('-subm_date')
-    own_idea_list = Idea.objects.none()
-    if hasattr(request.user, 'email'):
-        idea_list = idea_list.exclude(author=request.user.email)
-        own_idea_list = Idea.objects.filter(author=request.user.email).order_by('-subm_date')
     context = {
-        "idea_list": idea_list,
-        "own_idea_list": own_idea_list,
     }
     
     return render(request, "idea_list.html", context)

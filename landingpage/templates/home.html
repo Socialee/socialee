@@ -21,12 +21,8 @@
         <h3 class="text-center">Entdecke Ideen</h3>
         <p class="text-center"></p>
 
-          <div class="grid">
-              {% idea_list as idea_list %}
-              {% for idea in idea_list %}  
-                {% include "idea_card.html" %}
-              {% endfor %}
-          </div>
+          {% featured_idea_list as idea_list %}
+          {% include 'snippet_ideas.html'%}
 
         <p class="text-center"><a class="button button--yellow" href="{% url 'create_idea' %}">Idee abgeben</a></p>
         <p class="text-center"><a class="text-link-special" href="{% url 'idea_list' %}">mehr Ideen angucken</a></p>
@@ -34,19 +30,5 @@
       </div>
     </div>
   </div>
-
-{# Moritz moved the rest of this to main.js / this part needs to stay here because of url-template-tag #}
-{% addtoblock 'js' %}
-<script type="text/javascript">
-function like(object, idea_id, type) {
-    post_to_url( '{% url "like" %}', 
-                { idea_id : idea_id,
-                  type: type },
-                function(data){
-                    object.html(data);
-                });
-  }
-</script>
-{% endaddtoblock %}
 
 {% endblock content %}

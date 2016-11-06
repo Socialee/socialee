@@ -1,0 +1,73 @@
+{% load static sekizai_tags idea_tags %}
+
+<div class="grid">
+    {% if request.user.is_authenticated %}
+        {% own_idea_list request.user.email as own_idea_list %}
+        {% for idea in own_idea_list %}  
+            {% include "idea_card.html" %}
+        {% endfor %}
+    {% endif %}
+
+    {% for idea in idea_list %}  
+      {% include "idea_card.html" %}
+    {% endfor %}
+</div>
+
+
+{% addtoblock 'js' %}
+<script type="text/javascript">
+function like(object, idea_id, type) {
+    post_to_url( '{% url "like" %}', 
+                { idea_id : idea_id,
+                  type: type },
+                function(data){
+                    object.html(data);
+                });
+  }
+
+
+// Start js for cards (idea-gallery and create-idea-forms)
+var delay=150; // TODO das hier ist ein quick and dirty workaround....
+var $grid = $('.grid').masonry({
+  columnWidth: 263,
+  gutter: 30,
+  itemSelector: '.grid-item',
+  fitWidth: true,
+  transitionDuration: '1s',
+  stagger: 10,
+});
+
+$grid.imagesLoaded().progress( function() {
+  $grid.masonry('layout');
+});
+
+$grid.on( 'click', '.idea-image', function( event ) {
+  $( event.currentTarget ).parent().parent('.grid-item').toggleClass('is-expanded');
+    setTimeout(function() {
+    $grid.masonry();
+    }, delay);
+});
+
+$(".idea-heart").click(
+  function()
+  {
+    var id = $(this).attr('idea_id');
+    like($(this).find("#"+id), id, "like");
+  });
+</script>
+{% if not request.user.is_authenticated %}
+<script type="text/javascript">
+// ask if user wants to login and rearrange layout
+$(".idea-heart").click(
+  function()
+  {
+    var delay=300;
+    var id = $(this).attr('idea_id');
+    $("#login_"+id).slideToggle();
+    setTimeout(function() {
+    $grid.masonry('layout');
+    }, delay);
+  });
+</script>
+{% endif %}
+{% endaddtoblock %}
