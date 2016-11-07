@@ -16,11 +16,11 @@
 
 /* item is invisible, but used for layout */
 .grid-item {
-  width: 263px;
+  width: 350px;
 }
 
 .idea-card {
-  width: 263px;
+  width: 350px;
   text-align: center;
   background-color: white;
   border-radius: 3px;
@@ -30,7 +30,7 @@
   -webkit-transition: width 0.2s; /* Safari */
     transition: width 0.2s;
   @include breakpoint(small only) {
-    width: 263px;
+    width: 290px;
   }
 
   h2 {
@@ -90,10 +90,14 @@
 /* both item and item content change size */
 .grid-item.is-expanded,
 .grid-item.is-expanded .idea-card {
-  width: 555px;
+  width: 730px;
   z-index: 2;
   @include breakpoint(small only) {
-  width: 263px;
+  width: 290px;
+  z-index: 2;
+  }
+  @include breakpoint(medium only) {
+  width: 350px;
   z-index: 2;
   }
 }
