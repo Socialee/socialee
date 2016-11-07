@@ -1,24 +1,40 @@
 <div class="grid-item">
   <div class="idea-card">
-      {% if not idea.active %}
-      <div class="status-unpublished">
-        <p class"text-center">Noch nicht veröffentlicht</p>
+
+    <div id="{{ idea.id }}" class="card-icons">
+      <span class="fa-stack fa-lg expand-icon">
+        <i class="fa fa-square fa-stack-2x"></i>
+        <i class="fa fa-expand fa-stack-1x fa-inverse"></i>
+      </span>
+      <span class="fa-stack fa-lg turn-icon">
+        <i class="fa fa-square fa-stack-2x"></i>
+        <i class="fa fa-refresh fa-stack-1x fa-inverse"></i>
+      </span>
+    </div>
+
+    {% if not idea.active %}
+    <div class="status-unpublished">
+      <p class"text-center">Noch nicht veröffentlicht</p>
+    </div>
+    {% endif %}
+
+    {% if idea.picture %}
+      <div class="idea-image">
+        <img src="{{ MEDIA_URL }}{{ idea.picture }}"> 
       </div>
-      {% endif %}
-  {% if idea.picture %}
-    <div class="idea-image">
-      <img src="{{ MEDIA_URL }}{{ idea.picture }}"> 
-    </div>
-  {% endif %}
-  {% if idea.title or idea.description %}
-    <div class="idea-details">
-      <h2>{{ idea.title }}</h2>
-      <p>{{ idea.description|urlizetrunc:25 }}</p>
-    </div>
-  {% endif %}
-  {% if not request.user.is_authenticated %}
-  <p id="login_{{ idea.id }}" class="show-login-option">Gefällt dir das? <a href="{% url 'account_login' %}">Melde dich an.</a></p>  
-  {% endif %}
+    {% endif %}
+
+    {% if idea.title or idea.description %}
+      <div class="idea-details">
+        <h2>{{ idea.title }}</h2>
+        <p>{{ idea.description|urlizetrunc:25 }}</p>
+      </div>
+    {% endif %}
+
+    {% if not request.user.is_authenticated %}
+    <p id="login_{{ idea.id }}" class="show-login-option">Gefällt dir das? <a href="{% url 'account_login' %}">Melde dich an.</a></p>  
+    {% endif %}
+
     <div class="row align-center">
       <div class="idea-heart" idea_id="{{ idea.id }}">
         <span class="fa-stack fa-lg">

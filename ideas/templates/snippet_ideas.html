@@ -47,6 +47,12 @@ $grid.on( 'click', '.idea-image', function( event ) {
     $grid.masonry();
     }, delay);
 });
+$grid.on( 'click', '.expand-icon', function( event ) {
+  $( event.currentTarget ).parent().parent().parent('.grid-item').toggleClass('is-expanded');
+    setTimeout(function() {
+    $grid.masonry();
+    }, delay);
+});
 
 $(".idea-heart").click(
   function()
@@ -54,10 +60,12 @@ $(".idea-heart").click(
     var id = $(this).attr('idea_id');
     like($(this).find("#"+id), id, "like");
   });
+
 </script>
+
 {% if not request.user.is_authenticated %}
 <script type="text/javascript">
-// ask if user wants to login and rearrange layout
+// ask if user wants to login
 $(".idea-heart").click(
   function()
   {
@@ -70,4 +78,5 @@ $(".idea-heart").click(
   });
 </script>
 {% endif %}
+
 {% endaddtoblock %}
