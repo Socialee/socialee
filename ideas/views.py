@@ -7,7 +7,7 @@ from django.views.generic import FormView
 from allauth.account.views import SignupView
 
 from .forms import *
-from .models import Idea
+from .models import Idea,Comment
 
 
 class CreateIdea(SignupView):
@@ -54,27 +54,18 @@ def idea_list(request):
 
 
 class Like(UpdateView):
-    template_name = 'like_counts.html'
+    template_name = 'idea_card.html'
 
     def post(self, request, *args, **kwargs):
         idea_id = request.POST.get('idea_id')
+        comment = request.POST.get('comment')
 
         instance = Idea.objects.get(id=idea_id)
-        like_type = request.POST.get('type')
-        if like_type=="like":
-            if self.request.user in instance.likes.all():
-                instance.likes.remove(self.request.user)
-            else:
-                instance.likes.add(self.request.user)
-        elif like_type=="hand":
-            if self.request.user in instance.hands.all():
-                instance.hands.remove(self.request.user)
-            else:
-                instance.hands.add(self.request.user)
-        elif like_type=="money":
-            if self.request.user in instance.money.all():
-                instance.money.remove(self.request.user)
-            else:
-                instance.money.add(self.request.user)
+        
+        if self.request.user in instance.likes.all():
+            instance.likes.remove(self.request.user)
+        else:
+            Comment.objects.create(to_idea=instance, by_user=self.request.user, message=comment)
+            instance.likes.add(self.request.user)
 
-        return render(request, self.template_name, {'idea' : instance, 'type':like_type} )
+        return render(request, self.template_name, {'idea' : instance } )

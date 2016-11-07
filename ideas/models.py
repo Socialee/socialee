@@ -47,3 +47,11 @@ class Idea(models.Model):
 
     def __str__(self):
         return format(self.title)
+
+class Comment(models.Model):
+    to_idea = models.ForeignKey(Idea, null=True, blank=True, related_name='comments')
+    by_user = models.ForeignKey(User, null=True, blank=True)
+    message = models.TextField(max_length=140, null=True, blank=True)
+    date = models.DateTimeField(auto_now=False, auto_now_add=True)
+    class Meta:
+        ordering = ['-date']

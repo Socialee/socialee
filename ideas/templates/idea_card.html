@@ -1,47 +1,73 @@
 <div class="grid-item">
-  <div class="idea-card">
+    <div class="flip-card" id="flip_idea_{{ idea.id }}">
+      <div class="idea-card-front">
+        <div class="front_card">
+          <div class="card-icons">
+            <span class="fa-stack fa-lg expand-icon" expand_id="{{idea.id}}">
+              <i class="fa fa-square fa-stack-2x"></i>
+              <i class="fa fa-expand fa-stack-1x fa-inverse"></i>
+            </span>
+            <span class="fa-stack fa-lg turn-icon" turn_id="{{idea.id}}">
+              <i class="fa fa-square fa-stack-2x"></i>
+              <i class="fa fa-refresh fa-stack-1x fa-inverse"></i>
+            </span>
+          </div>
+          {% if not idea.active %}
+          <div class="status-unpublished">
+            <p class"text-center">Noch nicht veröffentlicht</p>
+          </div>
+          {% endif %}
 
-    <div id="{{ idea.id }}" class="card-icons">
-      <span class="fa-stack fa-lg expand-icon">
-        <i class="fa fa-square fa-stack-2x"></i>
-        <i class="fa fa-expand fa-stack-1x fa-inverse"></i>
-      </span>
-      <span class="fa-stack fa-lg turn-icon">
-        <i class="fa fa-square fa-stack-2x"></i>
-        <i class="fa fa-refresh fa-stack-1x fa-inverse"></i>
-      </span>
+          {% if idea.picture %}
+            <div class="idea-image">
+              <img src="{{ MEDIA_URL }}{{ idea.picture }}"> 
+            </div>
+          {% endif %}
+
+          {% if idea.title or idea.description %}
+            <div class="idea-details">
+              <h2>{{ idea.title }}</h2>
+              <p>{{ idea.description|urlizetrunc:25 }}</p>
+            </div>
+          {% endif %}
+
+          {% if not request.user.is_authenticated %}
+          <p id="login_{{ idea.id }}" class="show-login-option">Gefällt dir das? <a href="{% url 'account_login' %}">Melde dich an.</a></p>  
+          {% endif %}
+
+          <div class="row align-center">
+            <div class="idea-heart" idea_id="{{ idea.id }}">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
+              <strong class="fa-stack-1x" id="heart_{{ idea.id }}">{{ idea.likes.count }}</strong>  
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="idea-card-back">
+        <div class="card-icons">
+          <span class="fa-stack fa-lg expand-icon" expand_id="{{idea.id}}">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-expand fa-stack-1x fa-inverse"></i>
+          </span>
+          <span class="fa-stack fa-lg turn-icon" turn_id="{{idea.id}}">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-refresh fa-stack-1x fa-inverse"></i>
+          </span>
+        </div>
+        <div class="fieldWrapper">   
+            <div class="form-label">Kommentar</div>            
+            <input autofocus="autofocus" id="comment_{{idea.id}}" name="comment" type="text" />
+            <a class="button button--yellow button--icon float-right commentButton" idea_id="{{ idea.id }}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Leebhaben </a>
+        </div>
+        <div id="comments_{{ idea.id }}">
+          {% for comment in idea.comments.all %}
+          <div class="fieldWrapper">
+            {{ comment.message }}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
-
-    {% if not idea.active %}
-    <div class="status-unpublished">
-      <p class"text-center">Noch nicht veröffentlicht</p>
-    </div>
-    {% endif %}
-
-    {% if idea.picture %}
-      <div class="idea-image">
-        <img src="{{ MEDIA_URL }}{{ idea.picture }}"> 
-      </div>
-    {% endif %}
-
-    {% if idea.title or idea.description %}
-      <div class="idea-details">
-        <h2>{{ idea.title }}</h2>
-        <p>{{ idea.description|urlizetrunc:25 }}</p>
-      </div>
-    {% endif %}
-
-    {% if not request.user.is_authenticated %}
-    <p id="login_{{ idea.id }}" class="show-login-option">Gefällt dir das? <a href="{% url 'account_login' %}">Melde dich an.</a></p>  
-    {% endif %}
-
-    <div class="row align-center">
-      <div class="idea-heart" idea_id="{{ idea.id }}">
-        <span class="fa-stack fa-lg">
-          <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
-          <strong class="fa-stack-1x" id="{{ idea.id }}">{% include 'like_counts.html' with idea=idea type="like" %}</strong>  
-        </span>
-      </div>
-    </div> 
-  </div>
 </div>

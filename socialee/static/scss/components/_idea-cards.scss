@@ -1,5 +1,7 @@
 .card-icons {
   visibility: hidden;
+  
+
   color: $socialee-orange;
   
   .expand-icon {
@@ -24,12 +26,6 @@
 
 }
 
-.idea-card:hover > .card-icons
-{
-  visibility: visible;
-}
-
-
 .show-login-option {
   padding: 0;
   margin: 0;
@@ -51,7 +47,7 @@
   width: 350px;
 }
 
-.idea-card {
+.idea-card-front, .idea-card-back {
   width: 350px;
   text-align: center;
   background-color: white;
@@ -117,6 +113,20 @@
   &:hover {
     box-shadow: 0px 0px 28px 0px rgba(0, 0, 0, 0.18);
   }
+}
+
+.idea-card-back
+{
+  overflow: hidden;
+}
+.grid-item:hover .card-icons
+{
+  visibility: visible;
+}
+
+.front_card
+{
+  position: static;
 }
 
 /* both item and item content change size */
