@@ -1,6 +1,5 @@
 {% extends "zinnia/blog_base.html" %}
-{% load i18n %}
-{% load zinnia %}
+{% load i18n zinnia sekizai_tags %}
 
 {% block blog-content %}
 
@@ -9,7 +8,7 @@
     <div class="grid">
     {% for object in object_list %}
       <div class="grid-item">
-        <div class="idea-card">
+        <div class="idea-card blog-card">
           {% zinnia_loop_template object.content_template as template %}
           {% include template with object_content=object.html_preview continue_reading=1 %}
         </div>
@@ -18,5 +17,27 @@
     </div>
   </div>
 </div>
+
+{% addtoblock 'js' %}
+<script type="text/javascript">
+
+// Start js for cards
+var delay=150; // TODO das hier ist ein quick and dirty workaround....
+var $grid = $('.grid').masonry({
+  columnWidth: 350,
+  gutter: 30,
+  itemSelector: '.grid-item',
+  fitWidth: true,
+  transitionDuration: '1s',
+  stagger: 10,
+});
+
+$grid.imagesLoaded().progress( function() {
+  $grid.masonry('layout');
+});
+
+</script>
+
+{% endaddtoblock %}
 
 {% endblock blog-content %}
