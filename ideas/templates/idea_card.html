@@ -59,7 +59,9 @@
         <div class="fieldWrapper">   
             <div class="form-label">Kommentar</div>            
             <input autofocus="autofocus" id="comment_{{idea.id}}" name="comment" type="text" />
-            <a class="button button--yellow button--icon float-right commentButton" idea_id="{{ idea.id }}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Leebhaben </a>
+            <a class="button button--yellow button--icon float-right like_comment_button" id="like_comment_button_{{ idea.id }}" idea_id="{{ idea.id }}"><i class="fa fa-plus-circle" aria-hidden="true"></i> 
+              Leebhaben </a>
+            <a class="button button--yellow button--icon float-right comment_button" id="comment_button_{{ idea.id }}" idea_id="{{ idea.id }}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Kommentieren </a>
         </div>
         <div id="comments_{{ idea.id }}">
           {% for comment in idea.comments.all %}

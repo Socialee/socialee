@@ -64,8 +64,21 @@ class Like(UpdateView):
         
         if self.request.user in instance.likes.all():
             instance.likes.remove(self.request.user)
-        else:
+        elif comment:
             Comment.objects.create(to_idea=instance, by_user=self.request.user, message=comment)
             instance.likes.add(self.request.user)
 
+        return render(request, self.template_name, {'idea' : instance } )
+
+class Commentate(UpdateView):
+    template_name = 'idea_card.html'
+
+    def post(self, request, *args, **kwargs):
+        idea_id = request.POST.get('idea_id')
+        comment = request.POST.get('comment')
+
+        instance = Idea.objects.get(id=idea_id)
+        
+        Comment.objects.create(to_idea=instance, by_user=self.request.user, message=comment)
+        
         return render(request, self.template_name, {'idea' : instance } )
