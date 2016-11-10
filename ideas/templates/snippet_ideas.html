@@ -39,16 +39,16 @@ function like(idea_id) {
                   $("#heart_"+idea_id).html($(data).find("#heart_"+idea_id).html());
                   var do_comment_html = $(data).find("#do_comment_"+idea_id).html();
                   console.log(do_comment_html);
-                  // $("#do_comment_"+idea_id).html(do_comment_html);
-                  // adjustHeight(idea_id);
-                  // if($.trim( do_comment_html ) != '')
-                  // {
-                  //   setTimeout(function() {
-                  //   $("#flip_idea_"+idea_id).flip('toggle');
-                  //   $("#do_comment_"+idea_id).html('');
-                  //   adjustHeight(idea_id);
-                  //   }, 1000);
-                  // }
+                  $("#do_comment_"+idea_id).html(do_comment_html);
+                  adjustHeight(idea_id);
+                  if($.trim( do_comment_html ) != '')
+                  {
+                    setTimeout(function() {
+                    $("#flip_idea_"+idea_id).flip('toggle');
+                    $("#do_comment_"+idea_id).html('');
+                    adjustHeight(idea_id);
+                    }, 1000);
+                  }
                 });
   }
 
