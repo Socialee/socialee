@@ -11,19 +11,49 @@
 {% addtoblock 'js' %}
 <script type="text/javascript" src="{% static 'js/jquery.flip.js' %}"></script>
 <script type="text/javascript">
-function like(idea_id, comment) {
-    post_to_url( '{% url "like" %}', 
-                { idea_id : idea_id,
-                  comment: comment
+function adjustHeight(id)
+{
+  var $griditem = $("#flip_idea_"+id).parent('.grid-item');
+  var height = $('.front_card', $griditem).outerHeight(true);
+  $griditem.css('height', height + 50);
+  $griditem.find('.idea-card-front').css('height', height);
+  $griditem.find('.idea-card-back').css('height', height);
+}
+
+function expand( event ) {
+  var id = $(event.currentTarget).attr("expand_id");
+  var $griditem = $("#flip_idea_"+id).parent('.grid-item');
+  $griditem.toggleClass('is-expanded');
+  adjustHeight(id);
+  setTimeout(function() {
+    $grid.masonry();
+    }, delay);
+    
+}
+
+function like(idea_id) {
+    post_to_url( '{% url "idea_like" %}', 
+                { idea_id : idea_id
                 },
                 function(data){
-                  $("#comments_"+idea_id).html($(data).find("#comments_"+idea_id).html());
                   $("#heart_"+idea_id).html($(data).find("#heart_"+idea_id).html());
+                  var do_comment_html = $(data).find("#do_comment_"+idea_id).html();
+                  console.log(do_comment_html);
+                  $("#do_comment_"+idea_id).html(do_comment_html);
+                  adjustHeight(idea_id);
+                  if($.trim( do_comment_html ) != '')
+                  {
+                    setTimeout(function() {
+                    $("#flip_idea_"+idea_id).flip('toggle');
+                    $("#do_comment_"+idea_id).html('');
+                    adjustHeight(idea_id);
+                    }, 1000);
+                  }
                 });
   }
 
 function comment(idea_id, comment) {
-    post_to_url( '{% url "comment" %}', 
+    post_to_url( '{% url "idea_comment" %}', 
                 { idea_id : idea_id,
                   comment: comment
                 },
@@ -41,32 +71,11 @@ $(".turn-icon").click(
   }
   );
 
-$(".idea-heart").click(
-  function()
-  {
-    var id = $(this).attr('idea_id');
-    $('#comment_button_'+id).hide();
-    $('#like_comment_button_'+id).show();
-    $("#flip_idea_"+id).flip('toggle');
-  });
-
 $(".comment_button").click(
   function()
   {
     var id = $(this).attr('idea_id');
     comment(id, $("#comment_"+id).val());
-    $("#flip_idea_"+id).flip('toggle');
-  });
-
-$('.like_comment_button').hide();
-$(".like_comment_button").click(
-  function()
-  {
-    var id = $(this).attr('idea_id');
-    like(id, $("#comment_"+id).val());
-    $("#flip_idea_"+id).flip('toggle');
-    $('#comment_button_'+id).show();
-    $('#like_comment_button_'+id).hide();
   });
 
 
@@ -94,19 +103,6 @@ $grid.imagesLoaded().progress( function() {
     }, delay);
 });
 
-function expand( event ) {
-  var id = $(event.currentTarget).attr("expand_id");
-  var $griditem = $("#flip_idea_"+id).parent('.grid-item');
-  $griditem.toggleClass('is-expanded');
-  var height = $('.front_card', $griditem).outerHeight(true);
-  $griditem.css('height', height + 50);
-  $griditem.find('.idea-card-front').css('height', height);
-  $griditem.find('.idea-card-back').css('height', height);
-  setTimeout(function() {
-    $grid.masonry();
-    }, delay);
-    
-}
 
 $grid.on( 'click', '.idea-image', expand);
 $grid.on( 'click', '.expand-icon', expand);
@@ -115,16 +111,31 @@ $grid.on( 'click', '.expand-icon', expand);
 
 {% if not request.user.is_authenticated %}
 <script type="text/javascript">
+
+function progressHeight(animation, progress, remainingMs)
+{
+  var id = $(this).attr("idea_id");
+  adjustHeight(id);
+}
 // ask if user wants to login
 $(".idea-heart").click(
   function()
   {
     var delay=300;
     var id = $(this).attr('idea_id');
-    $("#login_"+id).slideToggle();
+    $("#login_"+id).slideToggle( { progress: progressHeight } );
     setTimeout(function() {
     $grid.masonry('layout');
     }, delay);
+  });
+</script>
+{% else %}
+<script type="text/javascript">
+$(".idea-heart").click(
+  function()
+  {
+    var id = $(this).attr('idea_id');
+    like(id);
   });
 </script>
 {% endif %}

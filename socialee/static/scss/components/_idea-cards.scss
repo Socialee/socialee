@@ -51,6 +51,7 @@
 
 .idea-card-front, .idea-card-back {
   width: 350px;
+  height:auto;
   text-align: center;
   background-color: white;
   border-radius: 3px;
@@ -128,7 +129,8 @@
 
 .front_card
 {
-  position: static;
+  position: relative;
+  height:auto;
 }
 
 /* both item and item content change size */
