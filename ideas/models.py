@@ -9,9 +9,10 @@ from django.contrib.auth.models import User
 
 
 def upload_location(instance, filename):
-    location = str(instance.title)
-    date = str(instance.subm_date)
-    return "%s/%s/%s/%s" % (str("ideas"), date, location, filename)
+    title = str(instance.title)
+    now = datetime.datetime.now()
+    date = now.strftime("%Y-%m-%d_%HUhr%M")
+    return "%s/%s/%s/%s" % (str("ideas"), title, date, filename)
 
 
 class Idea(models.Model):
