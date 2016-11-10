@@ -47,6 +47,9 @@
 /* item is invisible, but used for layout */
 .grid-item {
   width: 320px;
+  @include breakpoint(small only) {
+    width: 290px;
+  }
 }
 
 .idea-card-front, .idea-card-back {
@@ -143,7 +146,7 @@
   z-index: 2;
   }
   @include breakpoint(medium only) {
-  width: 350px;
+  width: 320px;
   z-index: 2;
   }
 }
