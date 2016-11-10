@@ -136,7 +136,7 @@
 /* both item and item content change size */
 .grid-item.is-expanded,
 .grid-item.is-expanded .idea-card {
-  width: 730px;
+  width: 670px;
   z-index: 2;
   @include breakpoint(small only) {
   width: 290px;
@@ -147,8 +147,6 @@
   z-index: 2;
   }
 }
-
-// TODO // Transition for shadow
 
 .text-link-special {
   border-bottom: 4px solid;

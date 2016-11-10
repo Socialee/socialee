@@ -1,6 +1,7 @@
 <div class="grid-item">
     <div class="flip-card" id="flip_idea_{{ idea.id }}">
       <div class="idea-card-front">
+      <!--CARD FRONT -->
         <div class="front_card">
           <div class="card-icons">
             <span class="fa-stack fa-lg expand-icon" expand_id="{{idea.id}}">
@@ -50,6 +51,7 @@
           </div>
         </div>
       </div>
+      <!--CARD BACK -->
       <div class="idea-card-back">
         <div class="card-icons">
           <span class="fa-stack fa-lg expand-icon" expand_id="{{idea.id}}">
@@ -63,11 +65,13 @@
         </div>
         <h2 class"text-center">{{ idea.title }}</h2>
         <div id="comments_{{ idea.id }}">
-          {% for comment in idea.comments.all %}
+          {% for comment in idea.comments.all|slice:":4" %}
           <div class="idea_comment">
             <p>{{ comment.date|timesince }}</p>
             <p>{{ comment.message }}</p>
           </div>
+          {% empty %} 
+          <p>Es gibt noch keine Kommentare</p>
           {% endfor %}
         </div>
         {% if request.user.is_authenticated %}
