@@ -1,5 +1,7 @@
 .card-icons {
   visibility: hidden;
+  position: relative;
+  z-index: 100;
   
 
   color: $socialee-orange;

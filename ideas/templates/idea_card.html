@@ -19,7 +19,7 @@
           {% endif %}
 
           {% if idea.picture %}
-            <div class="idea-image">
+            <div class="idea-image" expand_id="{{ idea.id }}">
               <img src="{{ MEDIA_URL }}{{ idea.picture }}"> 
             </div>
           {% endif %}

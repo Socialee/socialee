@@ -34,13 +34,6 @@ function comment(idea_id, comment) {
 
 $(".flip-card").flip({ front:'.idea-card-front', back:'.idea-card-back', trigger:'manual'});
 
-$('.grid-item').each(function(){
-  var height = $('.front_card', this).outerHeight();
-   $(this).css('height', height + 50);
-   $(this).find('.idea-card-front').css('height', height);
-   $(this).find('.idea-card-back').css('height', height);
-});
-
 $(".turn-icon").click(
   function()
   {
@@ -90,33 +83,33 @@ var $grid = $('.grid').masonry({
 });
 
 $grid.imagesLoaded().progress( function() {
-  $grid.masonry('layout');
+  $('.grid-item').each(function(){
+    var height = $('.front_card', this).outerHeight(true);
+     $(this).css('height', height + 50);
+     $(this).find('.idea-card-front').css('height', height);
+     $(this).find('.idea-card-back').css('height', height);
+  });
+  setTimeout(function() {
+    $grid.masonry('layout');
+    }, delay);
 });
 
-$grid.on( 'click', '.idea-image', function( event ) {
+function expand( event ) {
   var id = $(event.currentTarget).attr("expand_id");
   var $griditem = $("#flip_idea_"+id).parent('.grid-item');
   $griditem.toggleClass('is-expanded');
-  var height = $('.front_card', $griditem).outerHeight();
+  var height = $('.front_card', $griditem).outerHeight(true);
   $griditem.css('height', height + 50);
   $griditem.find('.idea-card-front').css('height', height);
   $griditem.find('.idea-card-back').css('height', height);
-    setTimeout(function() {
+  setTimeout(function() {
     $grid.masonry();
     }, delay);
-});
-$grid.on( 'click', '.expand-icon', function( event ) {
-  var id = $(event.currentTarget).attr("expand_id");
-  var $griditem = $("#flip_idea_"+id).parent('.grid-item');
-  $griditem.toggleClass('is-expanded');
-  var height = $('.front_card', $griditem).outerHeight();
-  $griditem.css('height', height + 50);
-  $griditem.find('.idea-card-front').css('height', height);
-  $griditem.find('.idea-card-back').css('height', height);
-    setTimeout(function() {
-    $grid.masonry();
-    }, delay);
-});
+    
+}
+
+$grid.on( 'click', '.idea-image', expand);
+$grid.on( 'click', '.expand-icon', expand);
 
 </script>
 
