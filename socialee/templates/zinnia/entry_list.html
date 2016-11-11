@@ -8,7 +8,7 @@
     <div class="grid">
     {% for object in object_list %}
       <div class="grid-item">
-        <div class="idea-card blog-card">
+        <div class="blog-card">
           {% zinnia_loop_template object.content_template as template %}
           {% include template with object_content=object.html_preview continue_reading=1 %}
         </div>
