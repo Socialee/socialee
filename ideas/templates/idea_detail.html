@@ -52,12 +52,11 @@
     <div class="">
       <div class="">
           <input autofocus="autofocus" id="comment_{{idea.id}}" name="comment" type="text"  />
-          <a class="button expanded button--yellow button--icon comment_button" id="comment_button_{{ idea.id }}" idea_id="{{ idea.id }}">
-            Kommentieren </a>
+          <a class="button button--yellow button--icon comment_button" id="comment_button_{{ idea.id }}" idea_id="{{ idea.id }}">Kommentieren</a>
       </div>
     </div>
     {% else %}
-    <a href="{% url 'accounts_login' %}">Melde dich an!</a>
+    <a href="{% url 'waitinglist' %}">Melde dich an!</a>
     {% endif %}
     </div>
 

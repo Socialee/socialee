@@ -38,14 +38,14 @@ function like(idea_id) {
                   console.log(do_comment_html);
                   $("#do_comment_"+idea_id).html(do_comment_html);
                   adjustHeight(idea_id);
-                  if($.trim( do_comment_html ) != '')
-                  {
-                    setTimeout(function() {
-                    $("#flip_idea_"+idea_id).flip('toggle');
-                    $("#do_comment_"+idea_id).html('');
-                    adjustHeight(idea_id);
-                    }, 1000);
-                  }
+                  // if($.trim( do_comment_html ) != '')
+                  // {
+                  //   setTimeout(function() {
+                  //   $("#flip_idea_"+idea_id).flip('toggle');
+                  //   $("#do_comment_"+idea_id).html('');
+                  //   adjustHeight(idea_id);
+                  //   }, 1000); // keine gute User Experience meiner Meinung nach (Moritz)
+                  // }
                 });
   }
 

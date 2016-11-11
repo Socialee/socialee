@@ -4,33 +4,15 @@
   <div class="top-bar-left">
     <ul class="menu">
       <li><a data-toggle="offCanvas"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
-      <li class="menu-text"><a href="/">Hallo bei Socialee</a></li>
+      <li class="menu-text"><a href="/">Socialee sagt: Hallo{% if request.user.first_name %} {{ request.user.first_name }}!{% else %} Welt!{% endif %}</a></li>
     </ul>
   </div>
 
   <div class="top-bar-right show-for-large">
     <ul class="dropdown menu" data-dropdown-menu>
       {% if not request.user.is_authenticated %}
-        <li class="menu-text"><a href="{% url 'account_login' %}">Anmelden</a></li>
-      
+        <li class="menu-text"><a href="{% url 'waitinglist' %}">Anmelden</a></li>
       {% else %}
-      
-      {% if request.user.is_staff %}
-      <li class="menu-text">
-        <a href="#"><i class="fa fa-home" aria-hidden="true"></i>{{ request.user.current_instance.short_name }}</a>
-        <ul class="menu">
-          {% for profile in user_profiles %}
-            <li><a href="{% url 'profile_view' slug=profile.slug %}">{{ profile.short_name }} anzeigen</a></li>
-            <li><a href="{% url 'profile_updateview' slug=profile.slug %}">{{ profile.short_name }} bearbeiten</a></li>
-          {% endfor %}
-          {% for project in request.user.managed_projects.all %}
-            <li><a href="{% url 'project_view' slug=project.slug %}">{{ project.short_name }} anzeigen</a></li>
-            <li><a href="{% url 'project_updateview' slug=project.slug %}">{{ project.short_name }} bearbeiten</a></li>
-          {% endfor %}
-        </ul>
-      </li>
-      {% endif %}
-
       <li class="menu-text"><a href="{% url 'account_logout' %}">Abmelden</a></li>
       {% endif %}
 

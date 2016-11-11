@@ -65,15 +65,15 @@
 
 
         {% if not request.user.is_authenticated %}
-        <p id="login_{{ idea.id }}" class="show-login-option" idea_id="{{ idea.id }}">Gefällt dir das? <a href="{% url 'account_login' %}">Melde dich an.</a></p>  
+        <p id="login_{{ idea.id }}" class="show-login-option" idea_id="{{ idea.id }}">Gefällt dir das? <a href="{% url 'waitinglist' %}">Melde dich an.</a></p>  
         {% endif %}
 
         <div class="row align-center">
-          <div id="do_comment_{{ idea.id }}">
+          <!--<div id="do_comment_{{ idea.id }}">
           {% if do_comment %}
-            Kommentier doch mal.
+            <p>Sag, was du davon hältst!</p>
           {% endif %}
-          </div>
+          </div>-->
           <div class="idea-heart" idea_id="{{ idea.id }}">
           <span class="fa-stack fa-lg">
             <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
@@ -119,21 +119,21 @@
 
         {% if request.user.is_authenticated %}
         <div class="comment-form">
-        <p>Ein Like macht mit Kommentar mehr Sinn!</p>
+        <p class="pull-left">Sag, was dir dazu einfällt!</p>
           <div class="idea_comment">
-              <div class="idea-heart-back" idea_id="{{ idea.id }}">
+              <!--<div class="idea-heart-back" idea_id="{{ idea.id }}">
                 <span class="fa-stack fa-lg">
                   <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
                   <strong class="fa-stack-1x" id="heart_{{ idea.id }}">{{ idea.likes.count }}</strong>  
                 </span>
-              </div>
+              </div>-->
               <input autofocus="autofocus" id="comment_{{idea.id}}" name="comment" type="text"  />
               <a class="button expanded button--yellow button--icon comment_button" id="comment_button_{{ idea.id }}" idea_id="{{ idea.id }}">
                 Kommentieren </a>
           </div>
         </div>
         {% else %}
-        <a href="{% url 'accounts_login' %}">Melde dich an!</a>
+        <p class="white text-center">Du willst was sagen? <a href="{% url 'waitinglist' %}">Melde dich an!</a></p>
         {% endif %}
 
     </div>
