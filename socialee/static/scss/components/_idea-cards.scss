@@ -80,6 +80,7 @@
   }
 
   .idea-image img {
+    min-height: 200px;
     padding: 0;
   } 
 
@@ -187,11 +188,12 @@
 }
 
 .green-card {
-  padding: 6rem 1rem 1rem 1rem;
+  padding: 4rem 1rem 1rem 1rem;
   width: 100%;
   min-height: 20rem;
   background-color: #264A42;
   h2, p {
+    vertical-align: middle;
     color: white;
   }
 }
@@ -261,7 +263,7 @@ img.center {
 }
 
 .detail-green-card {
-  padding: 6rem 1rem 1rem 1rem;
+  padding: 4rem 1rem 1rem 1rem;
   width: 100%;
   min-height: 20rem;
   background-color: #264A42;

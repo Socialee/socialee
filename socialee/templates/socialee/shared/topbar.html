@@ -7,7 +7,6 @@
       <li class="menu-text"><a href="/">Socialee sagt: Hallo{% if request.user.first_name %} {{ request.user.first_name }}!{% else %} Welt!{% endif %}</a></li>
     </ul>
   </div>
-
   <div class="top-bar-right show-for-large">
     <ul class="dropdown menu" data-dropdown-menu>
       {% if not request.user.is_authenticated %}
@@ -15,9 +14,6 @@
       {% else %}
       <li class="menu-text"><a href="{% url 'account_logout' %}">Abmelden</a></li>
       {% endif %}
-
     </ul>
-
   </div>
-
 </div>

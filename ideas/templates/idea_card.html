@@ -41,6 +41,10 @@
             <div class="idea-image" expand_id="{{ idea.id }}">
               <img src="{{ MEDIA_URL }}{{ idea.picture }}"> 
             </div>
+            <!-- kleiner workaround: falls es nur ein Bild gibt, sorgt ein bissche unsichtbarer Text für die Mindestgröße der Karte-->
+            <div class="idea-details">
+              <p style="visibility: hidden;">{% lorem 15 w %}</p>
+            </div>
           {% endif %}
         {% else %}<!-- kein Bild -->
           {% if idea.title and idea.description %}<!-- Titel und Beschreibung -->
