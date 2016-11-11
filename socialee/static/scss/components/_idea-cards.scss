@@ -1,9 +1,14 @@
+.idea-gradient {
+  position: absolute;
+  width: 100%;
+  height: 6rem;
+  background: linear-gradient(#302F35, rgba(0,0,0,0));
+}
+
 .card-icons {
   visibility: hidden;
   position: relative;
   z-index: 100;
-  
-
   color: $socialee-orange;
   
   .expand-icon {
@@ -11,7 +16,7 @@
     position: absolute;
     left: 0;
     &:hover {
-    color: red; // change this color!
+    color: $socialee-hover;
     cursor: pointer;
     }
   }
@@ -21,11 +26,10 @@
     position: absolute;
     right: 0;
     &:hover {
-    color: red;
+    color: $socialee-hover;
     cursor: pointer;
     }
   }
-
 }
 
 .show-login-option {
@@ -75,23 +79,8 @@
     margin-top: 0.8rem;
   }
 
-  p {
-    font-size: 16px;
-    color: #302F35;
-    letter-spacing: 0px;
-    line-height: 24px;
-    margin-bottom: 0;
-  }
-
-  a {
-    font-size: 16px;
-  }
-
   .idea-image img {
     padding: 0;
-    &:hover {
-      cursor: pointer;
-    }
   } 
 
   .idea-details {
@@ -101,7 +90,7 @@
     }
   }
 
-  .idea-heart, .idea-hand, .idea-money {
+  .idea-heart {
     color: #FF9E1A;
     position: relative;
     bottom:-27px;
@@ -121,19 +110,90 @@
   }
 }
 
-.idea-card-back
-{
-  overflow: hidden;
+.idea-heart-back {
+    color: #FF9E1A;
+    position: relative;
+    bottom:-20px;
+    font-size: 0.9rem;
+    strong {
+      font-size: 0.8rem;
+      color: white;
+    }
 }
-.grid-item:hover .card-icons
-{
+
+.idea-card-back {
+  text-align: left;
+  overflow: hidden;
+  background-color: #302F35;
+  h2 {
+    color: white;
+    text-align: center;
+  }
+}
+
+.idea-card-back-content {
+  padding: 1rem;
+}
+
+.idea-card-front:hover .card-icons {
   visibility: visible;
 }
 
-.front_card
-{
+.back-hover-area {
+  height:5rem;
+  width:100%;
+  position:absolute;
+}
+
+.back-hover-area:hover .card-icons {
+  visibility: visible;
+}
+
+.front_card {
   position: relative;
-  height:auto;
+  height: auto;
+}
+
+.idea_comment {
+  label {
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 0.7rem;
+    color: gray;
+  }
+  p {
+    margin-bottom: 0.7rem;
+    font-size: 1rem;
+    color: white;
+  }
+}
+
+.comment-form {
+  text-align: center;
+  width: 100%;
+  padding: 1rem;
+  background-color: #3F3E47;
+  position: absolute;
+  bottom: 0;
+  .form-label {
+    margin-bottom: 0;
+    color: white;
+  }
+  p {
+    margin-bottom: 0;
+    font-weight: bold;
+    color: white;
+  }
+}
+
+.green-card {
+  padding: 6rem 1rem 1rem 1rem;
+  width: 100%;
+  min-height: 20rem;
+  background-color: #264A42;
+  h2, p {
+    color: white;
+  }
 }
 
 /* both item and item content change size */

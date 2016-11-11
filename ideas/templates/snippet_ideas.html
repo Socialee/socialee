@@ -1,7 +1,6 @@
 {% load static sekizai_tags idea_tags %}
 
 <div class="grid">
-
     {% for idea in idea_list %}  
       {% include "idea_card.html" %}
     {% endfor %}
@@ -9,7 +8,6 @@
 
 
 {% addtoblock 'js' %}
-<script type="text/javascript" src="{% static 'js/jquery.flip.js' %}"></script>
 <script type="text/javascript">
 function adjustHeight(id)
 {
@@ -27,8 +25,7 @@ function expand( event ) {
   adjustHeight(id);
   setTimeout(function() {
     $grid.masonry();
-    }, delay);
-    
+    }, delay); 
 }
 
 function like(idea_id) {
@@ -67,7 +64,9 @@ $(".flip-card").flip({ front:'.idea-card-front', back:'.idea-card-back', trigger
 $(".turn-icon").click(
   function()
   {
+    var id = $(this).attr('idea_id');
     $("#flip_idea_"+$(this).attr("turn_id")).flip('toggle');
+    // $(".idea-heart").toggle(); // TODO only hide heart of this card
   }
   );
 
@@ -103,8 +102,6 @@ $grid.imagesLoaded().progress( function() {
     }, delay);
 });
 
-
-$grid.on( 'click', '.idea-image', expand);
 $grid.on( 'click', '.expand-icon', expand);
 
 </script>
