@@ -4,9 +4,12 @@
 <article id="entry-{{ object.pk }}" class="hentry{% if object.featured %} featured{% endif %}" itemscope itemtype="http://schema.org/Article">
 
   <div class="blog-info">
+    {% block entry-published %}
+      <time class="published blog-time-published" datetime="{{ object.publication_date|date:"l, d. F Y" }}" itemprop="datePublished">{{ object.publication_date|date:"d. F Y" }}</time>
+    {% endblock entry-published %}
     {% block entry-categories %}
       {% with categories=object.categories.all %}
-      {% if categories|length %}
+      {% if categories|length %}<br>
       {% for category in categories %}
       <a class="blog-category" 
          href="{{ category.get_absolute_url }}"
@@ -14,10 +17,6 @@
          rel="tag category" itemprop="articleSection">{{ category }}</a>{% if not forloop.last %} {% endif %}{% endfor %}{% endif %}
       {% endwith %}
     {% endblock entry-categories %}
-
-    {% block entry-published %}
-      <time class="published blog-time-published" datetime="{{ object.publication_date|date:"l, d. F Y" }}" itemprop="datePublished">{{ object.publication_date|date:"d. F" }}</time>
-    {% endblock entry-published %}
   </div>
 
     {% block entry-title %}

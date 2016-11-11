@@ -1,31 +1,87 @@
 <div class="grid-item">
-  <div class="idea-card">
-      {% if not idea.active %}
-      <div class="status-unpublished">
-        <p class"text-center">Noch nicht veröffentlicht</p>
+    <div class="flip-card" id="flip_idea_{{ idea.id }}">
+      <div class="idea-card-front">
+      <!--CARD FRONT -->
+        <div class="front_card">
+          <div class="card-icons">
+            <span class="fa-stack fa-lg expand-icon show-for-large" expand_id="{{idea.id}}">
+              <i class="fa fa-square fa-stack-2x"></i>
+              <i class="fa fa-expand fa-stack-1x fa-inverse"></i>
+            </span>
+            <span class="fa-stack fa-lg turn-icon" turn_id="{{idea.id}}">
+              <i class="fa fa-square fa-stack-2x"></i>
+              <i class="fa fa-refresh fa-stack-1x fa-inverse"></i>
+            </span>
+          </div>
+          {% if not idea.active %}
+          <div class="status-unpublished">
+            <p class"text-center">Noch nicht veröffentlicht</p>
+          </div>
+          {% endif %}
+
+          {% if idea.picture %}
+            <div class="idea-image" expand_id="{{ idea.id }}">
+              <img src="{{ MEDIA_URL }}{{ idea.picture }}"> 
+            </div>
+          {% endif %}
+
+          {% if idea.title or idea.description %}
+            <div class="idea-details">
+              <h2>{{ idea.title }}</h2>
+              <p>{{ idea.description|urlizetrunc:25 }}</p>
+            </div>
+          {% endif %}
+
+          {% if not request.user.is_authenticated %}
+          <p id="login_{{ idea.id }}" class="show-login-option" idea_id="{{ idea.id }}">Gefällt dir das? <a href="{% url 'account_login' %}">Melde dich an.</a></p>  
+          {% endif %}
+
+          <div class="row align-center">
+            <div id="do_comment_{{ idea.id }}">
+            {% if do_comment %}
+              Kommentier doch mal.
+            {% endif %}
+            </div>
+            <div class="idea-heart" idea_id="{{ idea.id }}">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
+              <strong class="fa-stack-1x" id="heart_{{ idea.id }}">{{ idea.likes.count }}</strong>  
+            </span>
+            </div>
+          </div>
+        </div>
       </div>
-      {% endif %}
-  {% if idea.picture %}
-    <div class="idea-image">
-      <img src="{{ MEDIA_URL }}{{ idea.picture }}"> 
-    </div>
-  {% endif %}
-  {% if idea.title or idea.description %}
-    <div class="idea-details">
-      <h2>{{ idea.title }}</h2>
-      <p>{{ idea.description|urlizetrunc:25 }}</p>
-    </div>
-  {% endif %}
-  {% if not request.user.is_authenticated %}
-  <p id="login_{{ idea.id }}" class="show-login-option">Gefällt dir das? <a href="{% url 'account_login' %}">Melde dich an.</a></p>  
-  {% endif %}
-    <div class="row align-center">
-      <div class="idea-heart" idea_id="{{ idea.id }}">
-        <span class="fa-stack fa-lg">
-          <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
-          <strong class="fa-stack-1x" id="{{ idea.id }}">{% include 'like_counts.html' with idea=idea type="like" %}</strong>  
-        </span>
+      <!--CARD BACK -->
+      <div class="idea-card-back">
+        <div class="card-icons">
+          <span class="fa-stack fa-lg expand-icon show-for-large" expand_id="{{idea.id}}">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-expand fa-stack-1x fa-inverse"></i>
+          </span>
+          <span class="fa-stack fa-lg turn-icon" turn_id="{{idea.id}}">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-refresh fa-stack-1x fa-inverse"></i>
+          </span>
+        </div>
+        <h2 class"text-center">{{ idea.title }}</h2>
+        <div id="comments_{{ idea.id }}">
+          {% for comment in idea.comments.all|slice:":4" %}
+          <div class="idea_comment">
+            <p>{{ comment.date|timesince }}</p>
+            <p>{{ comment.message }}</p>
+          </div>
+          {% empty %} 
+          <p>Es gibt noch keine Kommentare</p>
+          {% endfor %}
+        </div>
+        {% if request.user.is_authenticated %}
+        <div class="fieldWrapper idea_comment">   
+            <div class="form-label">Kommentar</div>            
+            <input autofocus="autofocus" id="comment_{{idea.id}}" name="comment" type="text" />
+            <a class="button button--yellow button--icon comment_button" id="comment_button_{{ idea.id }}" idea_id="{{ idea.id }}">
+              Kommentieren </a>
+        </div>
+        {% endif %}
       </div>
-    </div> 
-  </div>
+    </div>
 </div>

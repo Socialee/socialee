@@ -17,7 +17,6 @@ class IdeaForm(EmailRegisterForm):
         self.fields = OrderedDict((k, self.fields[k]) for k in fields_key_order)
 
         self.fields['email'].required = False
-
         self.fields['picture'].label = _('Idee als Bild')
         self.fields['title'].label = _('Ideen-Titel')
         self.fields['description'].label = _('Beschreibung der Idee')

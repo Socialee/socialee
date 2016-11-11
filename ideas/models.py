@@ -9,9 +9,10 @@ from django.contrib.auth.models import User
 
 
 def upload_location(instance, filename):
-    location = str(instance.title)
-    date = str(instance.subm_date)
-    return "%s/%s/%s/%s" % (str("ideas"), date, location, filename)
+    title = str(instance.title)
+    now = datetime.datetime.now()
+    date = now.strftime("%Y-%m-%d_%HUhr%M")
+    return "%s/%s/%s/%s" % (str("ideas"), title, date, filename)
 
 
 class Idea(models.Model):
@@ -22,8 +23,6 @@ class Idea(models.Model):
     subm_date = models.DateTimeField(auto_now=True, verbose_name='Datum', null=True, blank=True)
     featured = models.BooleanField(default=False, verbose_name='featured?')
     active = models.BooleanField(default=False, verbose_name='veröffentlicht?')
-    money = models.ManyToManyField(User, related_name='gives_money_to')
-    hands = models.ManyToManyField(User, related_name='gives_hand_to')
     likes = models.ManyToManyField(User, related_name='likes_ideas')
 
     class Meta:
@@ -49,3 +48,11 @@ class Idea(models.Model):
 
     def __str__(self):
         return format(self.title)
+
+class Comment(models.Model):
+    to_idea = models.ForeignKey(Idea, null=True, blank=True, related_name='comments')
+    by_user = models.ForeignKey(User, null=True, blank=True)
+    message = models.TextField(max_length=140, null=True, blank=True)
+    date = models.DateTimeField(auto_now=False, auto_now_add=True)
+    class Meta:
+        ordering = ['-date']

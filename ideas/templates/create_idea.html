@@ -53,7 +53,7 @@
 
         <div id="review">
           <div class="grid-item">
-            <div class="idea-card">
+            <div class="idea-card-front">
               <div class="idea-image">
                 <img id="idea_img" src=""> 
               </div>
@@ -91,5 +91,70 @@
     </div> 
   </div>
 </div>
+
+{% addtoblock 'js' %}
+<script type="text/javascript">
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $("#idea_img").attr("src", e.target.result);
+          $("#idea_image").show();
+          $("#idea_image").attr("src", e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#id_picture").change(function(){
+    readURL(this);
+});
+
+function fixPreview()
+{
+  $("#idea_form").children().hide();
+  $("#idea_title").html($("#id_title").val());
+  $("#idea_description").html($("#id_description").val());
+  readURL($("#id_picture"));
+}
+
+{% if not form.email.errors %}
+$("#review").hide();
+$("#id_email").parent().hide();
+{% else %}
+$("#idea_form").children().hide();
+fixPreview();
+{% endif %}
+
+$("#review_button").click(function()
+  {
+    if($("#id_title").val() || $("#id_description").val() || $("#id_picture").val())
+    {
+      $("#id_email").parent().show();
+      fixPreview();
+      $("#review").show();
+      $("#top_desc").html("Du kannst noch deine E-Mail-Adresse eintragen, so findest du deine Idee besser wieder und kannst bald ein Projekt daraus machen.");
+      $("#top_titel").html("Sieht gut aus, oder?!");
+    }
+    else
+    {
+      $("#top_desc").html("Eines der Felder musst du aber schon ausfüllen ;-) Oder einfach nur ein Bild hochladen.");
+    }
+    
+  });
+$("#change").click(function()
+  {
+    $("#review").hide();
+    $("#idea_form").children().show();
+    $("#id_email").parent().hide();
+    $("#top_desc").show();
+    $("#top_desc").html("Mach sie nochmal hübscher...");  
+    $("#top_titel").html("Gute Idee!");  
+  });
+</script>
+{% endaddtoblock %}
 
 {% endblock content %}

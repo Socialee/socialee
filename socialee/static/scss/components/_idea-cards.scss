@@ -1,3 +1,33 @@
+.card-icons {
+  visibility: hidden;
+  position: relative;
+  z-index: 100;
+  
+
+  color: $socialee-orange;
+  
+  .expand-icon {
+    margin: 0.5rem;
+    position: absolute;
+    left: 0;
+    &:hover {
+    color: red; // change this color!
+    cursor: pointer;
+    }
+  }
+
+  .turn-icon {
+    margin: 0.5rem;
+    position: absolute;
+    right: 0;
+    &:hover {
+    color: red;
+    cursor: pointer;
+    }
+  }
+
+}
+
 .show-login-option {
   padding: 0;
   margin: 0;
@@ -16,11 +46,15 @@
 
 /* item is invisible, but used for layout */
 .grid-item {
-  width: 263px;
+  width: 320px;
+  @include breakpoint(small only) {
+    width: 290px;
+  }
 }
 
-.idea-card {
-  width: 263px;
+.idea-card-front, .idea-card-back {
+  width: 320px;
+  height:auto;
   text-align: center;
   background-color: white;
   border-radius: 3px;
@@ -30,7 +64,7 @@
   -webkit-transition: width 0.2s; /* Safari */
     transition: width 0.2s;
   @include breakpoint(small only) {
-    width: 263px;
+    width: 290px;
   }
 
   h2 {
@@ -87,18 +121,35 @@
   }
 }
 
+.idea-card-back
+{
+  overflow: hidden;
+}
+.grid-item:hover .card-icons
+{
+  visibility: visible;
+}
+
+.front_card
+{
+  position: relative;
+  height:auto;
+}
+
 /* both item and item content change size */
 .grid-item.is-expanded,
 .grid-item.is-expanded .idea-card {
-  width: 555px;
+  width: 670px;
   z-index: 2;
   @include breakpoint(small only) {
-  width: 263px;
+  width: 290px;
+  z-index: 2;
+  }
+  @include breakpoint(medium only) {
+  width: 320px;
   z-index: 2;
   }
 }
-
-// TODO // Transition for shadow
 
 .text-link-special {
   border-bottom: 4px solid;

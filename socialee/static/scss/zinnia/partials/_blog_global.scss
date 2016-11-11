@@ -1,3 +1,7 @@
+.blog-time-published {
+  line-height: 1.7rem;
+}
+
 .blog-background {
   min-height: 100vh;
   background-image: url('../img/landingpage_bg/background-assets/background.jpg'), url('../img/landingpage_bg/background-assets/pattern.jpg');
@@ -8,8 +12,15 @@
     }
 }
 
+.blog-card {
+  padding: 1.5rem;
+  @include breakpoint(small only) {
+    width: 350px;
+  }
+}
+
 .blog-image {
-  margin: 0.5rem;
+  margin: 0 0 1rem 0;
   figcaption {
     font-size: 0.9rem;
     text-align: left;
@@ -23,8 +34,9 @@
 }
 
 h2.entry-title {
+  text-align: left;
   font-weight: bold;
-  margin-bottom: 0rem;
+  margin-bottom: 0.34rem;
   a {
     color: inherit;
     font-size: inherit;
@@ -35,21 +47,12 @@ h2.entry-title {
 }
 
 .entry-summary {
-  p, a {
-    font-size: 1.25rem;
-  }
+  // p, a {
+  //   font-size: 1rem;
+  // }
 }
 
 .entry-content {
+  p {margin: 0 0 1rem 0;}
   text-align: left;
-  font-size: 1.25rem;
-  p, a {
-    padding: 1rem;
-  }
-  @include breakpoint(small only){
-  font-size: 1.1rem;
-  p, a {
-    padding: 0.5rem;
-  }
-  }
 }

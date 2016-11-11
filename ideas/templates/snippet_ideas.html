@@ -1,0 +1,143 @@
+{% load static sekizai_tags idea_tags %}
+
+<div class="grid">
+
+    {% for idea in idea_list %}  
+      {% include "idea_card.html" %}
+    {% endfor %}
+</div>
+
+
+{% addtoblock 'js' %}
+<script type="text/javascript" src="{% static 'js/jquery.flip.js' %}"></script>
+<script type="text/javascript">
+function adjustHeight(id)
+{
+  var $griditem = $("#flip_idea_"+id).parent('.grid-item');
+  var height = $('.front_card', $griditem).outerHeight(true);
+  $griditem.css('height', height + 50);
+  $griditem.find('.idea-card-front').css('height', height);
+  $griditem.find('.idea-card-back').css('height', height);
+}
+
+function expand( event ) {
+  var id = $(event.currentTarget).attr("expand_id");
+  var $griditem = $("#flip_idea_"+id).parent('.grid-item');
+  $griditem.toggleClass('is-expanded');
+  adjustHeight(id);
+  setTimeout(function() {
+    $grid.masonry();
+    }, delay);
+    
+}
+
+function like(idea_id) {
+    post_to_url( '{% url "idea_like" %}', 
+                { idea_id : idea_id
+                },
+                function(data){
+                  $("#heart_"+idea_id).html($(data).find("#heart_"+idea_id).html());
+                  var do_comment_html = $(data).find("#do_comment_"+idea_id).html();
+                  console.log(do_comment_html);
+                  $("#do_comment_"+idea_id).html(do_comment_html);
+                  adjustHeight(idea_id);
+                  if($.trim( do_comment_html ) != '')
+                  {
+                    setTimeout(function() {
+                    $("#flip_idea_"+idea_id).flip('toggle');
+                    $("#do_comment_"+idea_id).html('');
+                    adjustHeight(idea_id);
+                    }, 1000);
+                  }
+                });
+  }
+
+function comment(idea_id, comment) {
+    post_to_url( '{% url "idea_comment" %}', 
+                { idea_id : idea_id,
+                  comment: comment
+                },
+                function(data){
+                  $("#comments_"+idea_id).html($(data).find("#comments_"+idea_id).html());
+                });
+  }
+
+$(".flip-card").flip({ front:'.idea-card-front', back:'.idea-card-back', trigger:'manual'});
+
+$(".turn-icon").click(
+  function()
+  {
+    $("#flip_idea_"+$(this).attr("turn_id")).flip('toggle');
+  }
+  );
+
+$(".comment_button").click(
+  function()
+  {
+    var id = $(this).attr('idea_id');
+    comment(id, $("#comment_"+id).val());
+  });
+
+
+
+// Start js for cards (idea-gallery and create-idea-forms)
+var delay=150; // TODO das hier ist ein quick and dirty workaround....
+var $grid = $('.grid').masonry({
+  columnWidth: 320,
+  gutter: 30,
+  itemSelector: '.grid-item',
+  fitWidth: true,
+  transitionDuration: '1s',
+  stagger: 10,
+});
+
+$grid.imagesLoaded().progress( function() {
+  $('.grid-item').each(function(){
+    var height = $('.front_card', this).outerHeight(true);
+     $(this).css('height', height + 50);
+     $(this).find('.idea-card-front').css('height', height);
+     $(this).find('.idea-card-back').css('height', height);
+  });
+  setTimeout(function() {
+    $grid.masonry('layout');
+    }, delay);
+});
+
+
+$grid.on( 'click', '.idea-image', expand);
+$grid.on( 'click', '.expand-icon', expand);
+
+</script>
+
+{% if not request.user.is_authenticated %}
+<script type="text/javascript">
+
+function progressHeight(animation, progress, remainingMs)
+{
+  var id = $(this).attr("idea_id");
+  adjustHeight(id);
+}
+// ask if user wants to login
+$(".idea-heart").click(
+  function()
+  {
+    var delay=300;
+    var id = $(this).attr('idea_id');
+    $("#login_"+id).slideToggle( { progress: progressHeight } );
+    setTimeout(function() {
+    $grid.masonry('layout');
+    }, delay);
+  });
+</script>
+{% else %}
+<script type="text/javascript">
+$(".idea-heart").click(
+  function()
+  {
+    var id = $(this).attr('idea_id');
+    like(id);
+  });
+</script>
+{% endif %}
+
+{% endaddtoblock %}

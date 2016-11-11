@@ -1,5 +1,5 @@
 {% extends "offcanvas.html" %}
-{% load static sekizai_tags %}
+{% load static sekizai_tags idea_tags %}
 
 {% block content %}
 
@@ -8,37 +8,17 @@
     <div class="callout">
 
       <h3 class="text-center">Mach mit beim Sammeln aller guter Ideen der Welt.</h3>
-      <p class="text-center">{{ idea_list.count| add:own_idea_list.count }} sind es schon. <br class="show-for-small-only">
+      <p class="text-center">{{ idea_count }} sind es schon. <br class="show-for-small-only">
       <a class="text-link-special" href="{% url 'create_idea' %}">Trag Deine eigene Idee ein.</a></p>
 
-        <div class="grid">
-            {% for idea in own_idea_list %}  
-              {% include "idea_card.html" %}
-            {% endfor %}
-            {% for idea in idea_list %}  
-              {% include "idea_card.html" %}
-            {% endfor %}
-        </div>
+        {% idea_list as idea_list %}
+        {% include 'snippet_ideas.html'%}
 
       <p class="text-center"><a class="text-link-special" href="{% url 'create_idea' %}">Trag Deine eigene Idee ein.</a></p>
 
     </div>
   </div>
 </div>
-
-{# Moritz moved the rest of this to main.js / this part needs to stay here because of url-template-tag #}
-{% addtoblock 'js' %}
-<script type="text/javascript">
-function like(object, idea_id, type) {
-    post_to_url( '{% url "like" %}', 
-                { idea_id : idea_id,
-                  type: type },
-                function(data){
-                    object.html(data);
-                });
-  }
-</script>
-{% endaddtoblock %}
 
 
 {% endblock content %}
