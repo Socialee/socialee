@@ -228,3 +228,49 @@
     color: white; 
   }
 }
+
+// for Idea-Detail-View
+.idea-details-white {
+  background-color: white;
+  padding: 2rem;
+  margin-top: 1rem;
+  h3 {
+    margin-top: 1.6rem;
+  }
+}
+
+.idea-details-dark {
+  background-color: $socialee-black;
+  color: white;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  p {
+  margin-bottom: 1.6rem;    
+  }
+}
+
+.detail-idea-image {
+  img {
+    max-height: 20rem;
+  }
+}
+
+img.center {
+    display: block;
+    margin: 0 auto;
+}
+
+.detail-green-card {
+  padding: 6rem 1rem 1rem 1rem;
+  width: 100%;
+  min-height: 20rem;
+  background-color: #264A42;
+  h2, p {
+    text-align: center;
+    color: white;
+  }
+  p {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+}

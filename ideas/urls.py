@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^neu/$', views.CreateIdea.as_view(), name='create_idea'),
     url(r'^idea_like/$', views.Like.as_view(), name='idea_like'),
     url(r'^idea_comment/$', views.Commentate.as_view(), name='idea_comment'),
+    url(r'^(?P<pk>\d+)$', views.IdeaDetailView.as_view(), name='idea_detail'),
 ]

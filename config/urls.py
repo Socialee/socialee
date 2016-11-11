@@ -18,7 +18,7 @@ urlpatterns = [
     url(r'^blog/', include('zinnia.urls')), # IDs 050, 051, 052, etc
     url(r'^comments/', include('django_comments.urls')), # für Blog
     url(r'^feedback/', include("feedback.urls")), # Feedback-App
-    url(r'^galerie/', include('ideas.urls')), # TODO IDs vergeben
+    url(r'^ideen/', include('ideas.urls')), # TODO IDs vergeben
     url(r'^impressum/$', views.Impressum.as_view(), name='impressum'), # ID 021
     url(r'^registrieren/', include('waitinglist.urls')), # ID 080
     url(r'^protect/', include('simple_auth.urls')), # password-protection for staging-server

@@ -37,8 +37,7 @@
                 <p style="visibility:hidden;">{% lorem %}</p>
               {% endif %}-->
             </div>
-          {% elif not idea.title and not idea.description %}
-            nur Bild
+          {% elif not idea.title and not idea.description %}<!--nur Bild-->
             <div class="idea-image" expand_id="{{ idea.id }}">
               <img src="{{ MEDIA_URL }}{{ idea.picture }}"> 
             </div>
@@ -104,17 +103,17 @@
       <h2>{{ idea.title|truncatechars:17 }}</h2>
       <div class="idea-card-back-content">
         <div id="comments_{{ idea.id }}">
-          {% for comment in idea.comments.all|slice:":3" %}
+          {% for comment in idea.comments.all|slice:":1" %}
           <div class="idea_comment">
-            <label>VOR {{ comment.date|timesince|upper }}{% if 1 %} VON {{ user|upper }}{% endif %}</label>
-            <p>{{ comment.message|truncatechars:90 }}</p>
+            <label>VOR {{ comment.date|timesince|upper }} VON {{ user|upper }}</label>
+            <p>{{ comment.message|urlizetrunc:25|truncatechars:90 }}</p>
           </div>
           {% empty %} 
           <p class="white text-center">Es gibt noch keine Kommentare</p>
           {% endfor %}
         </div>
-        {% if idea.comments.all|length > 3 %}
-        <a href="">Alle Kommentare anzeigen</a>
+        {% if idea.comments.all|length > 1 %} <!-- Wenn es mehr als x Kommentare gibt -->
+        <a href="{% url 'idea_detail' idea.pk %}">Alle {{ idea.comments.all|length }} Kommentare anzeigen</a>
         {% endif %}
       </div>
 

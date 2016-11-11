@@ -3,11 +3,11 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.edit import CreateView, UpdateView
-from django.views.generic import FormView
+from django.views.generic import FormView, DetailView
 from allauth.account.views import SignupView
 
 from .forms import *
-from .models import Idea,Comment
+from .models import Idea, Comment
 
 
 class CreateIdea(SignupView):
@@ -70,6 +70,7 @@ class Like(UpdateView):
 
         return render(request, self.template_name, {'idea' : instance, 'do_comment' : comment } )
 
+
 class Commentate(UpdateView):
     template_name = 'idea_card.html'
 
@@ -82,3 +83,15 @@ class Commentate(UpdateView):
         Comment.objects.create(to_idea=instance, by_user=self.request.user, message=comment)
         
         return render(request, self.template_name, {'idea' : instance } )
+
+
+class IdeaDetailView(DetailView):
+    model = Idea
+    template_name = 'idea_detail.html'
+
+
+
+
+
+
+
