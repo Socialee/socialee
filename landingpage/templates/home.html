@@ -19,7 +19,7 @@
     <div class="small-11 medium-11 large-11 small-centered">
       <div class="callout idea-gallery">
         <h3 class="text-center">Hier kannst du Ideen entdecken...</h3>
-        <p class="text-center">...oder <a href=""><a href="{% url 'create_idea' %}">deine eigene Idee teilen</a></a>.</p>
+        <h6 class="text-center">...oder <a href=""><a href="{% url 'create_idea' %}">deine eigene Idee teilen</a></a>.</h6>
         {% featured_idea_list as idea_list %}
         {% include 'snippet_ideas.html'%}
       </div>
