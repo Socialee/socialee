@@ -30,9 +30,9 @@
 }
 
 .quote {
-    line-height: 4rem;
+    font-size: 2rem;
+    line-height: 3rem;
     color: white;
-    font-size: 2.5rem;
     font-weight: bold;
     @include breakpoint(small only) {
       font-size: 1.5rem;

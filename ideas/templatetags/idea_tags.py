@@ -12,8 +12,12 @@ def idea_list():
 
 @register.simple_tag
 def featured_idea_list():
+    '''
+    Das ist jetzt so gebaut, dass von allen gefeaturten Ideen 9 zufällige ausgesucht und angezeigt werden.
+    Heißt, dass bei jedem Neuladen der Seite andere Ideen angezeigt werden, sofern mehr als acht featured = True sind.
+    '''
     ideas = Idea.objects.filter(active=True).filter(featured=True)
-    random_ideas = ideas.order_by('?')[:8]
+    random_ideas = ideas.order_by('?')[:9]
 
     return random_ideas
 
@@ -25,6 +29,3 @@ def own_idea_list(email):
 @register.simple_tag
 def idea_count():
     return Idea.objects.filter(active=True).count()
-
-# Das ist jetzt so gebaut, dass von allen gefeaturten Ideen 8 zufällige ausgesucht und angezeigt werden.
-# Heißt, dass bei jedem Neuladen der Seite andere Ideen angezeigt werden, sofern mehr als acht featured = True sind.

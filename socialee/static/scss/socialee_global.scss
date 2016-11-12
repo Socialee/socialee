@@ -115,44 +115,7 @@
   }
 }
 
-.lp-header {
-  img {
-    width: 100%;
-    height: 40vh;
-    padding: 5rem 0 2rem 0;
-    margin: 0 auto;
-  }
-  h1 {
-    font-weight: 600;
-    color: $white;
-    margin-top: 20vH;
-  }
-  p {
-    line-height: 1.45;
-    font-size: 1.6rem;
-    color: $white;
-    text-shadow: rgba(#000, 0.9) 0px 1px 1px;
-  }
-  i {
-    margin-top: 2rem;
-  }
-  @include breakpoint(small only) {
-    img {
-    max-height: 25vh;
-    padding: 1.2rem 0 0 0;
-    margin: 0 auto;
-    }
-    p, a {
-    font-size: 1.2rem;
-    line-height: 1.625rem;
-    }
-    h1 {
-    line-height: 2.5rem;
-    font-size: 2.5rem;
-    // margin: 2.5rem 0 1.2rem 0;
-    }
-  }
-}
+
 
 .lp-headline {
   margin: 3rem 0 3rem 0;

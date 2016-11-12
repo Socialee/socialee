@@ -2,10 +2,9 @@
 {% load sekizai_tags static landingpage_tags idea_tags %}
 
 {% block content %}
-
-    <div class="lp-header full-height">
-      <!--<img src="{% static 'img/symbole/noun_217781_cc.svg' %}">-->
-
+  
+  <section class="lp-header full-height">
+    <div>
       <div class="row">
         <div class="small-12 medium-10 large-10 columns small-centered text-center">
           <h1>Alle guten Ideen werden wahr.</h1>
@@ -13,22 +12,28 @@
         </div>
       </div>
     </div>
+  </section>
 
+  <section class="white">
   <div class="row">
     <div class="small-11 medium-11 large-11 small-centered">
-      <div class="callout">
-
-        <h3 class="text-center">Entdecke Ideen</h3>
-        <p class="text-center"></p>
-
-          {% featured_idea_list as idea_list %}
-          {% include 'snippet_ideas.html'%}
-
-        <p class="text-center"><a class="button button--yellow" href="{% url 'create_idea' %}">Idee abgeben</a></p>
-        <p class="text-center"><a class="text-link-special" href="{% url 'idea_list' %}">mehr Ideen angucken</a></p>
-
+      <div class="callout idea-gallery">
+        <h3 class="text-center">Hier kannst du Ideen entdecken...</h3>
+        <p class="text-center">...oder <a href=""><a href="{% url 'create_idea' %}">deine eigene Idee teilen</a></a>.</p>
+        {% featured_idea_list as idea_list %}
+        {% include 'snippet_ideas.html'%}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-11 medium-11 large-11 small-centered">
+      <div class="callout dark">
+        <h4 class="white">Wir machen das jetzt mal.</h4>
+        <p class="white">Wir finden, dass jede Idee zählt. Deshalb bauen wir Socialee: Eine Webseite für Ideen, die wahr werden sollen. Einfache und komplizierte. Lang gehegte und ganz spontane. Verrückte und ernste. Eben alle, die was werden sollten.<br>Diese Ideen sammeln wir und zeigen sie euch auf den Ideenkarten. Aber das ist erst der Anfang. Unser Ziel ist eine Plattform, auf der sich Ideengeber vernetzen mit denen, die sie unterstützen möchten. Also in etwa: Idee trifft Ressourcen und wird Projekt. Daran arbeiten wir. Demnächst bietet Socialee also alles, damit jede Idee ein Stückchen weiterkommt.<br>Soviel zu uns. Jetzt brauchen wir dich: Stell deine eigene Idee ein oder entdecke andere Ideen. Wenn dir Socialee gefällt, mach mit.</p>
+        <p><a class="button button--yellow" href="{% url 'create_idea' %}">Teile deine Idee auf Socialee!</a></p>
       </div>
     </div>
   </div>
 
+</section>
 {% endblock content %}
