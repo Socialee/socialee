@@ -51,15 +51,12 @@ function idea_like(idea_id) {
                   $("#heart_"+idea_id).html($(data).find("#heart_"+idea_id).html());
                   var do_comment_html = $(data).find("#do_comment_"+idea_id).html();
                   $("#do_comment_"+idea_id).html(do_comment_html);
-                  adjustHeight(idea_id);
-                  // if($.trim( do_comment_html ) != '')
-                  // {
-                  //   setTimeout(function() {
-                  //   $("#flip_idea_"+idea_id).flip('toggle');
-                  //   $("#do_comment_"+idea_id).html('');
-                  //   adjustHeight(idea_id);
-                  //   }, 1000); // keine gute User Experience meiner Meinung nach (Moritz)
-                  // }
+                  $("#login_"+idea_id).fadeToggle();
+                  $("#login_"+idea_id).click(
+                    function(){setTimeout(function() {
+                    $("#flip_idea_"+idea_id).flip('toggle');
+                    },500);
+                  });
                 });
   }
 
@@ -85,14 +82,27 @@ function idea_comment(idea_id, comment) {
                 });
   }
 
-$(".flip-card").flip({ front:'.idea-card-front', back:'.idea-card-back', trigger:'manual'});
+$(".flip-card").flip({ 
+  front:'.idea-card-front',
+  back:'.idea-card-back',
+  trigger:'manual'
+});
+
+$(".flip-card").on('flip:done',function() {
+  var flip = $(".flip-card").data("flip-model");
+  // alert(flip.isFlipped);
+  var id = $(this).attr('idea_id');
+  var isflipped = flip.isFlipped;
+      if (isflipped = true ) {
+        $("#id_heart_"+id).fadeToggle(200);
+      }
+});
 
 $(".turn-icon").click(
   function()
   {
     var id = $(this).attr('idea_id');
     $("#flip_idea_"+$(this).attr("turn_id")).flip('toggle');
-    // $(".idea-heart").toggle(); // TODO only hide heart of this card
   }
   );
 
@@ -118,12 +128,12 @@ $(".idea_comments").each(function () {
 });
 
 function setNum() {
-  if($(this).val().length > 70)
+  if($(this).val().length > 140)
   {
-    $(this).val($(this).val().substring(0,70));
+    $(this).val($(this).val().substring(0,140));
   }
-  var num = 70-$(this).val().length;
-  $(this).parent().find("label").html("you have " + num +" characters left");
+  var num = 140-$(this).val().length;
+  $(this).parent().find("label").html(num +" Zeichen übrig");
 }
 $('.idea_comment_input').each(setNum);
 
@@ -171,7 +181,7 @@ $(".idea-heart").click(
   {
     var delay=300;
     var id = $(this).attr('idea_id');
-    $("#login_"+id).slideToggle( { progress: progressHeight } );
+    $("#login_"+id).fadeToggle( { progress: progressHeight } );
     setTimeout(function() {
     $grid.masonry('layout');
     }, delay);
