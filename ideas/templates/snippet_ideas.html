@@ -110,6 +110,18 @@ $(".idea_comments").each(function () {
   }
 });
 
+function setNum() {
+  if($(this).val().length > 70)
+  {
+    $(this).val($(this).val().substring(0,70));
+  }
+  var num = 70-$(this).val().length;
+  $(this).parent().find("label").html("you have " + num +" characters left");
+}
+$('.idea_comment_input').each(setNum);
+
+$('.idea_comment_input').bind('input propertychange', setNum);
+
 
 // Start js for cards (idea-gallery and create-idea-forms)
 var delay=150; // TODO das hier ist ein quick and dirty workaround....

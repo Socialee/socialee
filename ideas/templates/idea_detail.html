@@ -41,7 +41,7 @@
       {% endif %}
     </div>  
 
-    <div class="idea-details-dark">
+    <div class="idea-details-dark" id="idea_comments_{{idea.id}}">
       {% for comment in idea.comments.all %}
         <div class="idea_comment">
           <label>VOR {{ comment.date|timesince|upper }}{% if request.user.email = idea.author %} VON {{ user|upper }}{% endif %}</label>
@@ -50,9 +50,10 @@
       {% endfor %}
     {% if request.user.is_authenticated %}
     <div class="">
-      <div class="">
-          <input autofocus="autofocus" id="comment_{{idea.id}}" name="comment" type="text"  />
-          <a class="button button--yellow button--icon comment_button" id="comment_button_{{ idea.id }}" idea_id="{{ idea.id }}">Kommentieren</a>
+      <div class="idea_comment_area">
+        <label>you have 70 characters left</label>
+          <textarea autofocus="autofocus" class="idea_comment_input" id="idea_comment_{{idea.id}}" name="idea_comment" rows="2" cols="70" ></textarea>
+          <a class="button button--yellow button--icon idea_comment_button" id="idea_comment_button_{{ idea.id }}" idea_id="{{ idea.id }}">Kommentieren</a>
       </div>
     </div>
     {% else %}
@@ -63,5 +64,46 @@
   </div>
 </div>
 
+{% addtoblock 'js' %}
+<script type="text/javascript">
+function idea_comment(idea_id, comment) {
+    post_to_url( '{% url "idea_comment" %}', 
+                { idea_id : idea_id,
+                  comment: comment
+                },
+                function(data){
+                  
+                  var new_comment = $(data).find("#idea_comments_"+idea_id).first().children().first();
+                  $(new_comment).css({ display: 'none'});
+                  $("#idea_comments_"+idea_id).prepend(new_comment);
+                  $(new_comment).slideDown('fast');
+                  $('html, body').animate({
+                      scrollTop: ($(new_comment).offset().top-20)
+                  },500);
+                });
+  }
+
+$(".idea_comment_button").click(
+  function()
+  {
+    var id = $(this).attr('idea_id');
+    if(  $.trim( $("#idea_comment_"+id).val()) )
+      idea_comment(id, $("#idea_comment_"+id).val());
+    $("#idea_comment_"+id).val("");
+  });
+
+function setNum() {
+  if($(this).val().length > 70)
+  {
+    $(this).val($(this).val().substring(0,70));
+  }
+  var num = 70-$(this).val().length;
+  $(this).parent().find("label").html("you have " + num +" characters left");
+}
+$('.idea_comment_input').each(setNum);
+
+$('.idea_comment_input').bind('input propertychange', setNum);
+</script>
+{% endaddtoblock %}
 
 {% endblock content %}
