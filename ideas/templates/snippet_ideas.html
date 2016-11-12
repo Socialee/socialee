@@ -28,14 +28,13 @@ function expand( event ) {
     }, delay); 
 }
 
-function like(idea_id) {
+function idea_like(idea_id) {
     post_to_url( '{% url "idea_like" %}', 
                 { idea_id : idea_id
                 },
                 function(data){
                   $("#heart_"+idea_id).html($(data).find("#heart_"+idea_id).html());
                   var do_comment_html = $(data).find("#do_comment_"+idea_id).html();
-                  console.log(do_comment_html);
                   $("#do_comment_"+idea_id).html(do_comment_html);
                   adjustHeight(idea_id);
                   // if($.trim( do_comment_html ) != '')
@@ -49,13 +48,16 @@ function like(idea_id) {
                 });
   }
 
-function comment(idea_id, comment) {
+function idea_comment(idea_id, comment) {
     post_to_url( '{% url "idea_comment" %}', 
                 { idea_id : idea_id,
                   comment: comment
                 },
                 function(data){
-                  $("#comments_"+idea_id).html($(data).find("#comments_"+idea_id).html());
+                  var new_comment = $(data).find("#idea_comments_"+idea_id).first().children().first();
+                  $(new_comment).css({ display: 'none'});
+                  $("#idea_comments_"+idea_id).prepend(new_comment);
+                  $(new_comment).slideDown('fast');
                 });
   }
 
@@ -74,7 +76,9 @@ $(".comment_button").click(
   function()
   {
     var id = $(this).attr('idea_id');
-    comment(id, $("#comment_"+id).val());
+    if(  $.trim( $("#idea_comment_"+id).val()) )
+      idea_comment(id, $("#idea_comment_"+id).val());
+    $("#idea_comment_"+id).val("");
   });
 
 
@@ -132,7 +136,7 @@ $(".idea-heart").click(
   function()
   {
     var id = $(this).attr('idea_id');
-    like(id);
+    idea_like(id);
   });
 </script>
 {% endif %}
