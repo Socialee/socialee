@@ -238,12 +238,12 @@
 .card-notification-wrapper {
   width: 100%;
   position: absolute;
+  left:3px; // because of border shadow
 }
 
 .card-notification {
   font-size: 0.95rem;
   text-align: center;
-  padding: 0;
   position: relative; 
   display: none;
 }

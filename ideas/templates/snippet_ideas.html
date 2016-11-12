@@ -51,9 +51,7 @@ function idea_like(idea_id) {
                   $("#heart_"+idea_id).html($(data).find("#heart_"+idea_id).html());
                   var do_comment_html = $(data).find("#do_comment_"+idea_id).html();
                   $("#do_comment_"+idea_id).html(do_comment_html);
-                  $("#make_comment_"+idea_id).slideDown('slow');
-                  adjustHeight(idea_id);
-                  $grid.masonry();
+                  $("#make_comment_"+idea_id).fadeToggle();
                   $("#make_comment_"+idea_id).click(
                     function(){setTimeout(function() {
                     $("#flip_idea_"+idea_id).flip('toggle');
