@@ -73,6 +73,7 @@ function idea_comment(idea_id, comment) {
                   $("#idea_comments_"+idea_id).prepend(new_comment);
                   $(new_comment).slideDown('fast', function(){
                     $("#idea_comment_more_"+idea_id).html($(data).find("#idea_comment_more_"+idea_id).html());
+                    $("#idea_comments_"+idea_id).children(".idea_comment").show();
                     $("#idea_comments_"+idea_id).children(".idea_comment").each(showIfSmall);
                     if ( $("#idea_comments_"+idea_id).children(".idea_comment:visible").length != $("#idea_comments_"+idea_id).children(".idea_comment").length)
                     { 
