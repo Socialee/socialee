@@ -55,6 +55,7 @@ function idea_like(idea_id) {
                   $("#make_comment_"+idea_id).click(
                     function(){setTimeout(function() {
                     $("#flip_idea_"+idea_id).flip('toggle');
+                    $("#make_comment_"+idea_id).fadeOut();
                     },500);
                   });
                 });
