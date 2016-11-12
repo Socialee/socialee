@@ -24,6 +24,13 @@ function expand( event ) {
   $griditem.toggleClass('is-expanded');
   adjustHeight(id);
   setTimeout(function() {
+    $("#idea_comments_"+id).children(".idea_comment").show();
+    $("#idea_comment_more_"+id).hide();
+    $("#idea_comments_"+id).children(".idea_comment").each(showIfSmall);
+    if ( $("#idea_comments_"+id).children(".idea_comment:visible").length != $("#idea_comments_"+id).children(".idea_comment").length)
+    { 
+      $("#idea_comment_more_"+id).toggle(true);
+    }
     $grid.masonry();
     }, delay); 
 }
