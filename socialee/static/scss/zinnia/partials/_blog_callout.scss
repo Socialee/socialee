@@ -3,8 +3,9 @@
     background-color: white;
     padding: 3rem;
     width: 100%;
-    p {
-      color: $socialee-darkgreen;
+    p, a, li {
+      color: $socialee-black;
+      font-size: 1.2rem;
     }
     a {
       color: $socialee-orange;
