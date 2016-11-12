@@ -106,33 +106,32 @@
       </div>
       <h2>{{ idea.title|truncatechars:17 }}</h2>
       <div class="idea-card-back-content">
-        <div id="comments_{{ idea.id }}">
-          {% for comment in idea.comments.all|slice:":1" %}
-          <div class="idea_comment">
+        <div class="idea_comments" id="idea_comments_{{ idea.id }}" idea_id="{{ idea.id }}">
+          {% for comment in idea.comments.all %}
+          <div class="idea_comment" idea_id="{{ idea.id }}">
             <label>VOR {{ comment.date|timesince|upper }} VON {{ user|upper }}</label>
             <p>{{ comment.message|urlizetrunc:25|truncatechars:90 }}</p>
           </div>
           {% empty %} 
-          <p class="white text-center">Es gibt noch keine Kommentare</p>
+          <p class="white text-center" id="idea_comment_empty_{{idea.id}}">Es gibt noch keine Kommentare</p>
           {% endfor %}
         </div>
-        {% if idea.comments.all|length > 1 %} <!-- Wenn es mehr als x Kommentare gibt -->
-        <a href="{% url 'idea_detail' idea.pk %}">Alle {{ idea.comments.all|length }} Kommentare anzeigen</a>
-        {% endif %}
+        <div class="idea_comment_more" id="idea_comment_more_{{idea.id}}"> <!-- Wenn es mehr als x Kommentare gibt -->
+          <a href="{% url 'idea_detail' idea.pk %}">Alle {{ idea.comments.all|length }} Kommentare anzeigen</a>
+        </div>
       </div>
-
         {% if request.user.is_authenticated %}
         <div class="comment-form">
         <p class="pull-left">Sag, was dir dazu einfällt!</p>
-          <div class="idea_comment">
+          <div class="idea_comment_form">
               <!--<div class="idea-heart-back" idea_id="{{ idea.id }}">
                 <span class="fa-stack fa-lg">
                   <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
                   <strong class="fa-stack-1x" id="heart_{{ idea.id }}">{{ idea.likes.count }}</strong>  
                 </span>
               </div>-->
-              <input autofocus="autofocus" id="comment_{{idea.id}}" name="comment" type="text"  />
-              <a class="button expanded button--yellow button--icon comment_button" id="comment_button_{{ idea.id }}" idea_id="{{ idea.id }}">
+              <input autofocus="autofocus" id="idea_comment_{{idea.id}}" name="idea_comment" type="text"  />
+              <a class="button expanded button--yellow button--icon idea_comment_button" id="idea_comment_button_{{ idea.id }}" idea_id="{{ idea.id }}">
                 Kommentieren </a>
           </div>
         </div>

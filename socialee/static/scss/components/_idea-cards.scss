@@ -133,6 +133,7 @@
 }
 
 .idea-card-back-content {
+  overflow: hidden;
   padding: 1rem;
 }
 
@@ -167,6 +168,11 @@
     font-size: 1rem;
     color: white;
   }
+}
+
+.idea_comment_more
+{
+  display: none;
 }
 
 .comment-form {

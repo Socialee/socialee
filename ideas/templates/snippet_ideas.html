@@ -28,6 +28,14 @@ function expand( event ) {
     }, delay); 
 }
 
+function showIfSmall() {
+    var id = $(this).attr('idea_id');
+    var $griditem = $("#flip_idea_"+id).parent('.grid-item');
+    var height = $('.front_card', $griditem).outerHeight(true);
+    $(this).toggle(!($(this).position().top + this.offsetHeight > height-118-2*this.offsetHeight));
+}
+
+
 function idea_like(idea_id) {
     post_to_url( '{% url "idea_like" %}', 
                 { idea_id : idea_id
@@ -54,10 +62,19 @@ function idea_comment(idea_id, comment) {
                   comment: comment
                 },
                 function(data){
+                  $("#idea_comment_empty_"+idea_id).hide();
+                  
                   var new_comment = $(data).find("#idea_comments_"+idea_id).first().children().first();
                   $(new_comment).css({ display: 'none'});
                   $("#idea_comments_"+idea_id).prepend(new_comment);
-                  $(new_comment).slideDown('fast');
+                  $(new_comment).slideDown('fast', function(){
+                    $("#idea_comment_more_"+idea_id).html($(data).find("#idea_comment_more_"+idea_id).html());
+                    $("#idea_comments_"+idea_id).children(".idea_comment").each(showIfSmall);
+                    if ( $("#idea_comments_"+idea_id).children(".idea_comment:visible").length != $("#idea_comments_"+idea_id).children(".idea_comment").length)
+                    { 
+                      $("#idea_comment_more_"+idea_id).toggle(true);
+                    }
+                  });
                 });
   }
 
@@ -72,7 +89,7 @@ $(".turn-icon").click(
   }
   );
 
-$(".comment_button").click(
+$(".idea_comment_button").click(
   function()
   {
     var id = $(this).attr('idea_id');
@@ -81,6 +98,17 @@ $(".comment_button").click(
     $("#idea_comment_"+id).val("");
   });
 
+
+$(".idea_comment").each(showIfSmall);
+
+$(".idea_comments").each(function () {
+  var id = $(this).attr('idea_id');
+  if ( $(".idea_comment:visible", this).length != $(".idea_comment", this).length)
+  { 
+    //$(this).last(".idea_comment").toggle(false);
+    $("#idea_comment_more_"+id).toggle(true);
+  }
+});
 
 
 // Start js for cards (idea-gallery and create-idea-forms)
