@@ -84,7 +84,11 @@ $_34-18: (
 	@include generate-sizes("header-text-sm", s(small, h1), s(small, h2), s(small, h3), s(small, h4), s(small, h5), s(small, h6) );
 }
 
-p, a {
+// p, a {
+//   @include font-size($p-font-sizes);
+// }
+
+p {
   @include font-size($p-font-sizes);
 }
 

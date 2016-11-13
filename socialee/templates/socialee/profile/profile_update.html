@@ -7,35 +7,28 @@
   <div class="row">
     <div class="row column hero__wrapper">
       <div class="small-12 medium-10 medium-offset-1 column text-center-sm">
-        <h1>Deine Daten</h1>
-        <div class="hero__profile">
+        <h3 class="text-center">Deine Daten</h3>
+        <div class="">
           <form method="POST" enctype="multipart/form-data">{% csrf_token %}
-          <div class="">
             <div class="small-12 column">
-              <div class="row media-object stack-for-small">
+              <div class="row">
                 {% if object.profile %}
-                <div class="small-12 column media-object-section" style="overflow:hidden">
-                  <img id="profile_pic" src="{{ MEDIA_URL }}{{ object.picture }}" alt="profile image">
+                <div class="small-12 medium-6 column">
+                  <img class="h-round" id="profile_pic" src="{{ MEDIA_URL }}{{ object.picture }}" alt="profile image">
                   <label for="id_picture" id="upload" class="button button--yellow hollow"><i class="fa fa-upload" aria-hidden="true"></i> Bild Hochladen </label>
-                  {% include "snippet_formfield.html" with field=form.picture %}
+                  {% include "snippet_formfield.html" with field=form.picture size="medium-0 p-0" %}
                 </div>
                 {% endif %}
-                <div class="small-12 column media-object-section main-section">
+                <div class="small-12 column">
                   <div class="row">
                     <div class="">
-                      {% include "snippet_formfield.html" with field=form.username %}
-                      {% include "snippet_formfield.html" with field=form.email %}
-                      {% include "snippet_formfield.html" with field=form.first_name %}
-                      {% include "snippet_formfield.html" with field=form.last_name %}
+                      {% include "snippet_formfield.html" with field=form.username size="medium-6" %}
+                      {% include "snippet_formfield.html" with field=form.email size="medium-6"  %}
+                      {% include "snippet_formfield.html" with field=form.first_name size="medium-6" %}
+                      {% include "snippet_formfield.html" with field=form.last_name size="medium-6" %}
                     </div>
                     <div class="">
-                      <div class="column small-12">
-                        <input class="button button--yellow" type="submit" value="Save" />
-                      </div>
-                    </div>
-
-                    <div class="column small-12 ">
-                    {% include "snippet_formfield.html" with field=form.tagline %}
+                    {% include "snippet_formfield.html" with field=form.tagline size="medium-12" %}
                     </div>
                       <div class="column small-12 tags tags--attribute tags--orange">
                         {% include "snippet_formfield.html" with field=form.tags %}
@@ -43,45 +36,45 @@
                           <a class="tag tag--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
                         {% endfor %}
                     </div>
-                    <div class="column small-12">
-                      <p>
-                          {% include "snippet_formfield.html" with field=form.description %}
-                      </p>
+                    <div class="">
+                        {% include "snippet_formfield.html" with field=form.description size="medium-12" %}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="small-12 columns">
-                <div class="tags-wrapper">
-                  <div class="row">
-                    <div class="small-12 medium-6 columns">
-                      <div class="tags green">
-                        <h6 class="green">{{ object.short_name }} bietet</h6>
-                        {% include "snippet_formfield.html" with field=form.socialee_outputs %}
-                        {%  for input in object.socialee_output.all %}
-                        <a class="tag tag--green"><i class="fi-x-circle"></i>{{ input }}{% if badge_count >= 1 %}
+            <div class="small-12 columns">
+              <div class="tags-wrapper">
+                <div class="row">
+                  <div class="small-12 medium-6 columns">
+                    <div class="tags green">
+                      <h6 class="green">{{ object.short_name }} bietet</h6>
+                      {% include "snippet_formfield.html" with field=form.socialee_outputs %}
+                      {%  for input in object.socialee_output.all %}
+                      <a class="tag tag--green"><i class="fi-x-circle"></i>{{ input }}{% if badge_count >= 1 %}
+                      <span>{{ badge_count }}</span>{% endif %}</a>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <hr class="show-for-small-only">
+                  <div class="small-12 medium-6 columns">
+                    <div class="tags blue">
+                      <h6 class="blue">{{ object.short_name }} benötigt</h6>
+                      {% include "snippet_formfield.html" with field=form.socialee_inputs %}
+                      {% for output in object.socialee_input.all %}
+                         <a class="tag tag--blue"><i class="fi-x-circle"></i>{{ output.title }}{% if badge_count >= 1 %}
                         <span>{{ badge_count }}</span>{% endif %}</a>
-                        {% endfor %}
-                      </div>
-                    </div>
-                    <hr class="show-for-small-only">
-                    <div class="small-12 medium-6 columns">
-                      <div class="tags blue">
-                        <h6 class="blue">{{ object.short_name }} benötigt</h6>
-                        {% include "snippet_formfield.html" with field=form.socialee_inputs %}
-                        {% for output in object.socialee_input.all %}
-                           <a class="tag tag--blue"><i class="fi-x-circle"></i>{{ output.title }}{% if badge_count >= 1 %}
-                          <span>{{ badge_count }}</span>{% endif %}</a>
-                        {% endfor %}
-                      </div>
+                      {% endfor %}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+            <div class="">
+              <div class="column small-12">
+                <input class="button button--yellow" type="submit" value="Save" />
+              </div>
+            </div>
           </form>
         </div>
       </div>

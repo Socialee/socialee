@@ -1,8 +1,8 @@
-<div class="medium-6 column fieldWrapper">
+<div class="column {{size}}">
     {{ field.errors }}
     <label>{{ field.label }}</label>
       {% if field.help_text %}
-        <div class="second-form-label">{{ field.help_text|safe }}</div>
+       <!--  <div class="second-form-label">{{ field.help_text|safe }}</div> -->
       {% endif %}
-    {{ field }}
+    {{ field }} <!-- add placeholder -->
 </div>

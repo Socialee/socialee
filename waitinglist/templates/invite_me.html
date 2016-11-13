@@ -5,28 +5,29 @@
 {% block allauth_content %}
 
 
-  <h2>Schön, dass du da bist!</h2>
+  <h1 class="h-mb-40">Schön, dass du da bist!</h1>
   <p>Willkommen bei Socialee! Wir sind in der Entwicklungs-Phase, hab Nachsicht mit allem, was noch keinen Sinn macht. Du kannst dir gerne ein Konto eröffnen und alles austesten. Wenn du schon ein Konto hast, <a href="{% url 'account_login' %}"> hier lang.</a></p>
 
-    <form method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
+  <form method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
 
-    <div class="fieldWrapper"></br></div>
-    {% for field in form %}
-    <div class="fieldWrapper">
-      {{ field.errors }}
-      <div class="form-label">{{ field.label | safe }}</div>
-        {% if field.help_text %}
-          <div class="second-form-label">{{ field.help_text|safe }}</div>
-        {% endif %}
-      {{ field }}
-    </div>
-    {% endfor %}
+    <div class="row">
+    <!-- <div class="fieldWrapper"></br></div> -->
+      {% for field in form %}
+      <div class="medium-6 columns">
+        <label>{{ field.label | safe }}</label>
+          {% if field.help_text %}
+            <!-- <div class="second-form-label">{{ field.help_text|safe }}</div> -->
+          {% endif %}
+        {{ field }}
+        {{ field.errors }}
+      </div>
+      {% endfor %}
 
-    <div class="fieldWrapper">
-      <input class="button button--yellow" type="submit" value="Registrieren" />
+      <div class="fieldWrapper">
+        <input class="button button--yellow large" type="submit" value="Registrieren" />
+      </div>
     </div>
-    
-    </form>
+  </form>
 
 
 {% endblock allauth_content %}

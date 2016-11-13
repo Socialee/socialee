@@ -34,8 +34,16 @@
 	margin-bottom: 20px;
 }
 
+.h-mb-40 {
+	margin-bottom: rem-calc(40px);
+}
+
 .mt-20 {
 	margin-top: 10px;
+}
+
+.p-0 {
+	padding:0px;
 }
 
 .greyblue-2 {
@@ -66,3 +74,17 @@
 .h-f22 {
 	font-size: rem-calc(22px);
 }
+
+.h-round {
+	border-radius: 100%;
+}
+.h-wrapper {
+	background-color: #fff;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    margin-bottom: 6rem;
+    width: 100%;
+    float: left;
+    border-radius: 4px;
+}
+
