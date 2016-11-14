@@ -11,6 +11,9 @@
   padding-top: 80px;
 }
 
+.comment__avatar-text {
+	padding-top: rem-calc(15px);
+}
 .comment__avatar img {
   float: left;
   margin-right: 20px;
@@ -37,8 +40,9 @@
   border-left: 4px solid #ebebeb;
 }
 
-.comment__top {
-  padding-bottom: 20px;
+.comment__header {
+  margin-bottom: rem-calc(10px);
+  font-weight: 900;
 }
 
 .comment__actions {
