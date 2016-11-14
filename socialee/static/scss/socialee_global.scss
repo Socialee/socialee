@@ -5,6 +5,8 @@
 
 /* GLOBAL STYLES AND HELPERS*/
 
+.button:focus { outline:0 !important; }
+
  .white {
     color: $white;
   }

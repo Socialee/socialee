@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load socialee_filters %}
+{% load socialee_filters idea_tags %}
 {% block head_extra %}
 {% endblock head_extra %}
 
@@ -16,20 +16,18 @@
 
         <!-- Menu -->
         <ul class="vertical menu">
-
-          <li class="title">Dein Profil</li>
           {% if not request.user.is_authenticated %}
-          <li><a href="{% url 'account_login' %}">Anmelden</a></li>
+          <a class="button button--yellow" href="{% url 'waitinglist' %}">Registrieren</a>
           {% else %}
+          <li class="title">Dein Profil</li>
           <li><a href="{% url 'account_change_password' %}">Passwort ändern</a></li>
           <li><a href="{% url 'account_logout' %}">Abmelden</a></li>
           {% endif %}
 
-          <li class="title">Und sonst so?</li>
-          <li><a href="{% url 'home' %}">Landingpage</a></li>
-          <li><a href="{% url 'idea_list' %}">Ideengalerie</a></li>
-          <li><a href="{% url 'zinnia:entry_archive_index' %}">Blog lesen</a></li>
-          <li><a href="{% url 'make_quote' %}">Zitat abgeben</a></li>
+          <li class="title">Weitere Seiten</li>
+          <li><a href="{% url 'home' %}">Startseite</a></li>
+          <li><a href="{% url 'idea_list' %}">Alle Ideen ({% idea_count %})</a></li>
+          <li><a href="{% url 'zinnia:entry_archive_index' %}">Blog</a></li>
           
           {% if request.user.is_staff %}
           <li class="title">Admin</li>
