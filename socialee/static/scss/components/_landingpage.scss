@@ -4,21 +4,8 @@ section.white {
 
 .callout.idea-gallery {
   top: -10rem;
-
-}
-
-.callout.dark {
-  background-color: $socialee-black;
-  padding: 4rem 8rem;
-  position: relative;
-  top: -10rem;
-    p {
-      line-height: 2rem;
-      font-size: 1.4rem;
-      font-weight: normal;
-  }
   @include breakpoint(small only) {
-    padding: 2rem 2rem;
+  top: -5rem;
   }
 }
 
@@ -33,6 +20,13 @@ section.white {
     font-size: 1.6rem;
     color: $white;
   }
+  @include breakpoint(medium only) {
+    h1 {
+    line-height: 3rem;
+    font-size: 3rem;
+    margin-top: 5rem;
+    }
+  }
   @include breakpoint(small only) {
     p, a {
     font-size: 1.2rem;
@@ -40,7 +34,24 @@ section.white {
     }
     h1 {
     line-height: 2.5rem;
-    font-size: 2.5rem;
+    font-size: 2.1rem;
+    margin-top: 3rem;
     }
+  }
+}
+
+.callout.dark {
+  background-color: $socialee-black;
+  padding: 4rem 8rem;
+  position: relative;
+  top: -10rem;
+    p {
+      line-height: 2rem;
+      font-size: 1.4rem;
+      font-weight: normal;
+  }
+  @include breakpoint(small only) {
+    padding: 2rem 2rem;
+    top: -5rem;
   }
 }
