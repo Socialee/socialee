@@ -1,19 +1,46 @@
-{% load socialee_filters %}
+{% load socialee_filters sekizai_tags %}
 
-<div class="row top-bar-app">
+<div class="row expanded top-bar-app">
   <div class="top-bar-left">
     <ul class="menu">
       <li><a data-toggle="offCanvas"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
-      <li class="menu-text"><a href="/">Socialee sagt: Hallo{% if request.user.first_name %} {{ request.user.first_name }}!{% else %} Welt!{% endif %}</a></li>
+      <li class="menu-text show-for-medium"><a id="daytime" href="/">Hallo bei Socialee!</a></li>
+      <li class="menu-text show-for-small-only"><a href="/">Hallo bei Socialee!</a></li>
     </ul>
   </div>
   <div class="top-bar-right show-for-large">
+    {% if request.user.is_authenticated %}
     <ul class="dropdown menu" data-dropdown-menu>
-      {% if not request.user.is_authenticated %}
-        <li class="menu-text"><a href="{% url 'waitinglist' %}">Anmelden</a></li>
-      {% else %}
-      <li class="menu-text"><a href="{% url 'account_logout' %}">Abmelden</a></li>
-      {% endif %}
+      <li class="menu-text">
+        <a href="">{% if request.user.first_name %}{{ request.user.first_name }}{% else %}{{ request.user.email }}{% endif %}</a>
+        <ul class="menu">
+          <li><a href="{% url 'account_change_password' %}">Passwort ändern</a></li>
+          <li><a href="{% url 'account_logout' %}">Abmelden</a></li>
+        </ul>
+      </li>
     </ul>
+    {% else %}
+    <ul class="menu">
+      <li class="menu-text"><a href="{% url 'waitinglist' %}">Registrieren</a></li>
+    </ul>
+    {% endif %}
   </div>
 </div>
+
+{% addtoblock 'js' %}
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    var now = new Date();
+    var hours = now.getHours();
+    var msg;
+    if ( hours > 5 && hours < 11 ) msg = "Guten Morgen bei Socialee";
+    else if ( hours > 5 && hours < 14) msg = "Mahlzeit bei Socialee";
+    else if ( hours > 5 && hours < 18) msg = "Guten Tag bei Socialee";
+    else if ( hours > 5 && hours < 23) msg = "Schönen Abend bei Socialee";
+    else msg = "Gute Nacht bei Socialee";
+
+    $("#daytime").html(msg);   
+  });
+</script>
+{% endaddtoblock %}

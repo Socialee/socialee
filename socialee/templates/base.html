@@ -53,11 +53,13 @@
         {# start of content #}
         {% include "messages.html" %}
 
-        {% include "topbar.html" %}
+        
 
         {% block before_content %}
         {% endblock before_content %}
-
+        
+        {% include "topbar.html" %}
+        
         <div class="show-for-large">
         {% if request.user.is_authenticated %}
         {% include "feedback-button.html" %}
