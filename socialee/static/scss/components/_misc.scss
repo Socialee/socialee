@@ -37,3 +37,23 @@
     background-image: url(../img/app/pattern.jpg);
     padding-top: rem-calc(40px);
 }
+
+hr {
+  max-width: 87.5rem;
+  height: 0;
+  border-right: 0;
+  border-top: 0;
+  border-bottom: 3px solid c(grey, ea);
+  border-left: 0;
+  margin: 1.25rem auto;
+  clear: both;
+  max-width: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+// misc
+.section:not(:first-child) {
+  padding-top: rem-calc(80px);
+  padding-bottom: rem-calc(80px);
+}
