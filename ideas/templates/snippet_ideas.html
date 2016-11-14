@@ -1,9 +1,11 @@
 {% load static sekizai_tags idea_tags %}
 
 <div class="grid">
-    {% for idea in idea_list %}  
-      {% include "idea_card.html" %}
-    {% endfor %}
+  <div class="grid-sizer"></div>
+  <div class="gutter-sizer"></div>
+      {% for idea in idea_list %}  
+        {% include "idea_card.html" %}
+      {% endfor %}
 </div>
 
 
@@ -108,6 +110,22 @@ $(".turn-icon").click(
   }
   );
 
+$(".idea-image").click(
+  function()
+  {
+    var id = $(this).attr('idea_id');
+    $("#flip_idea_"+$(this).attr("expand_id")).flip('toggle');
+  }
+  );
+
+$(".green-card").click(
+  function()
+  {
+    var id = $(this).attr('idea_id');
+    $("#flip_idea_"+$(this).attr("expand_id")).flip('toggle');
+  }
+  );
+
 $(".idea_comment_button").click(
   function()
   {
@@ -145,12 +163,12 @@ $('.idea_comment_input').bind('input propertychange', setNum);
 // Start js for cards (idea-gallery and create-idea-forms)
 var delay=150; // TODO das hier ist ein quick and dirty workaround....
 var $grid = $('.grid').masonry({
-  columnWidth: 320,
-  gutter: 30,
+  gutter: '.gutter-sizer',
   itemSelector: '.grid-item',
-  fitWidth: true,
+  columnWidth: '.grid-sizer',
   transitionDuration: '1s',
   stagger: 10,
+  percentPosition: true,
 });
 
 $grid.imagesLoaded().progress( function() {

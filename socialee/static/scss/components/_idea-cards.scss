@@ -30,27 +30,55 @@
     cursor: pointer;
     }
   }
+  @include breakpoint(small only) {
+    visibility: visible;
+  }
 }
 
 .grid {
   padding-top: 3rem;
   padding-bottom: 3rem; 
   margin: 0 auto;
-  @include breakpoint(small only) {
-    padding-bottom: 1rem; 
-  }
 }
 
 /* item is invisible, but used for layout */
+.grid-sizer,
 .grid-item {
-  width: 320px;
+  width: 31%;
+  @include breakpoint(medium only) {
+    width: 48%;
+  }
   @include breakpoint(small only) {
-    width: 290px;
+    width: 100%;
+  }
+}
+.gutter-sizer {
+  width: 3.5%;
+  @include breakpoint(medium only) {
+    width: 4%;
+  }
+  @include breakpoint(small only) {
+    width: 0%;
+  }
+}
+
+/* both item and item content change size */
+.grid-item.is-expanded,
+.grid-item.is-expanded .idea-card {
+  width: 65.5%;
+  z-index: 2;
+  @include breakpoint(medium only) {
+  width: 100%;
+  z-index: 2;
+  }
+  @include breakpoint(small only) {
+  width: 100%;
+  z-index: 2;
   }
 }
 
 .idea-card-front, .idea-card-back {
-  width: 320px;
+  // width: 350px;
   height:auto;
   text-align: center;
   background-color: white;
@@ -61,7 +89,7 @@
   -webkit-transition: width 0.2s; /* Safari */
     transition: width 0.2s;
   @include breakpoint(small only) {
-    width: 290px;
+    // width: 92vW;
   }
 
   h2 {
@@ -199,21 +227,6 @@
   }
   h2 {
     margin: 20% 1rem;
-  }
-}
-
-/* both item and item content change size */
-.grid-item.is-expanded,
-.grid-item.is-expanded .idea-card {
-  width: 670px;
-  z-index: 2;
-  @include breakpoint(small only) {
-  width: 290px;
-  z-index: 2;
-  }
-  @include breakpoint(medium only) {
-  width: 320px;
-  z-index: 2;
   }
 }
 

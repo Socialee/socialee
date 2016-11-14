@@ -5,7 +5,7 @@
       <div class="front_card">
           <div class="card-icons">
           <div class="idea-gradient"></div>
-            <span class="fa-stack fa-lg expand-icon show-for-large" expand_id="{{idea.id}}">
+            <span class="fa-stack fa-lg expand-icon show-for-medium" expand_id="{{idea.id}}">
               <i class="fa fa-square fa-stack-2x"></i>
               <i class="fa fa-expand fa-stack-1x fa-inverse"></i>
             </span>
@@ -48,7 +48,7 @@
           {% endif %}
         {% else %}<!-- kein Bild -->
           {% if idea.title and idea.description %}<!-- Titel und Beschreibung -->
-              <div class="green-card">
+              <div class="green-card" expand_id="{{ idea.id }}">
                 <h2>{{ idea.title }}</h2>
               </div>  
             <div class="idea-details">
@@ -56,12 +56,12 @@
             </div>
           {% endif %}
           {% if idea.title and not idea.description %}<!-- nur Titel -->
-            <div class="green-card">
+            <div class="green-card" expand_id="{{ idea.id }}">
               <h2>{{ idea.title }}</h2>
             </div>
           {% endif %}
           {% if idea.description and not idea.title %}<!-- nur Beschreibung -->
-            <div class="green-card">
+            <div class="green-card" expand_id="{{ idea.id }}">
               <p>{{ idea.description|urlizetrunc:25 }}</p>
             </div>
           {% endif %}
@@ -96,7 +96,7 @@
       <div class="back-hover-area">
         <div class="card-icons">
         <div class="idea-gradient"></div>
-          <span class="fa-stack fa-lg expand-icon show-for-large" expand_id="{{idea.id}}">
+          <span class="fa-stack fa-lg expand-icon show-for-medium" expand_id="{{idea.id}}">
             <i class="fa fa-square fa-stack-2x"></i>
             <i class="fa fa-expand fa-stack-1x fa-inverse"></i>
           </span>
