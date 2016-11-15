@@ -57,8 +57,15 @@
 
         {% block before_content %}
         {% endblock before_content %}
+
+        {% if request.path == '/' %}
+        <div class="top-bar-app-wrap">
+            {% include "topbar.html" %}
+        </div>
+        {% else %}    
+            {% include "topbar.html" %}
+        {% endif %}
         
-        {% include "topbar.html" %}
         
         <div class="show-for-large">
         {% if request.user.is_authenticated %}

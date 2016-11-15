@@ -3,7 +3,7 @@
 
 <div class="zitate-footer">
   <div class="row">
-    <div class="small-12 columns text-center">
+    <div class="small-12 medium-8 large-6 columns small-centered text-center">
     {% random_quote as random_quote %}
       <p class="quote">{{ random_quote.title }}</p>
       <p class="author">Das hat {{ random_quote.author }} gesagt. <br class="show-for-small-only"><a href="{% url 'make_quote' %}">Was sagst Du?</a></p>

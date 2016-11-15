@@ -3,39 +3,37 @@
 
 {% block content %}
   
-  <section class="lp-header full-height">
-    <div>
-      <div class="row">
-        <div class="small-12 medium-10 large-10 columns small-centered text-center">
-          <h1>Alle guten Ideen werden wahr.</h1>
-          <p>Socialee ist ein Netzwerk für Ideen und die Menschen dahinter. Hier treffen sich alle, die mitgestalten möchten. Damit aus guten Einfällen auch was Gutes werden kann.</p>
+  <section class="lp-header">
+    <div class="row">
+      <div class="small-12 medium-10 large-10 columns small-centered text-center">
+        <h1>Alle guten Ideen werden wahr.</h1>
+        <p class="small-12 medium-10 large-8 small-centered">Socialee ist ein Netzwerk für Ideen und die Menschen dahinter. Hier treffen sich alle, die mitgestalten möchten. Damit aus guten Einfällen auch was Gutes werden kann.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <div class="row">
+      <div class="small-12 medium-11 large-11 small-centered">
+        <div class="callout idea-gallery">
+          <h6 class="text-center">Hier kannst du Ideen entdecken oder <a class="" href="{% url 'create_idea' %}">deine eigene Idee teilen.</a></h6>
+            <div class="small-12 medium-12 large-11 small-centered">
+              {% featured_idea_list as idea_list %}
+              {% include 'snippet_ideas.html'%}
+            </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="white">
+<section class="lp-bottom">
   <div class="row">
-    <div class="small-12 medium-11 large-11 small-centered">
-      <div class="callout idea-gallery">
-        <h3 class="text-center">Hier kannst du Ideen entdecken,</h3>
-        <h6 class="text-center">oder <a href=""><a class="" href="{% url 'create_idea' %}">deine eigene Idee teilen.</a></a></h6>
-          <div class="small-12 medium-12 large-11 small-centered">
-            {% featured_idea_list as idea_list %}
-            {% include 'snippet_ideas.html'%}
-          </div>
-      </div>
+    <div class="small-10 medium-8 large-7 small-centered text-center">
+        <h2 class="white">Wir machen das jetzt mal.</h2>
+        <p class="white">Wir finden, dass jede Idee zählt. Deshalb bauen wir Socialee: Eine Webseite für Ideen, die wahr werden sollen. Einfache und komplizierte. Lang gehegte und ganz spontane. Verrückte und ernste. Eben alle, die was werden sollten.<br><br>Diese Ideen sammeln wir und zeigen sie euch auf den Ideenkarten. Aber das ist erst der Anfang. Unser Ziel ist eine Plattform, auf der sich Ideengeber vernetzen mit denen, die sie unterstützen möchten. Also in etwa: Idee trifft Ressourcen und wird Projekt. Daran arbeiten wir. Demnächst bietet Socialee also alles, damit jede Idee ein Stückchen weiterkommt.<br><br>Soviel zu uns. Jetzt brauchen wir dich: Stell deine eigene Idee ein oder entdecke andere Ideen. Wenn dir Socialee gefällt, mach mit.</p><br>
+        <p><a class="button button--yellow" href="{% url 'create_idea' %}">Teile deine Idee!</a></p>
     </div>
   </div>
-  <div class="row">
-    <div class="small-12 medium-11 large-11 small-centered">
-      <div class="callout dark">
-        <h4 class="white">Wir machen das jetzt mal.</h4>
-        <p class="white">Wir finden, dass jede Idee zählt. Deshalb bauen wir Socialee: Eine Webseite für Ideen, die wahr werden sollen. Einfache und komplizierte. Lang gehegte und ganz spontane. Verrückte und ernste. Eben alle, die was werden sollten.<br>Diese Ideen sammeln wir und zeigen sie euch auf den Ideenkarten. Aber das ist erst der Anfang. Unser Ziel ist eine Plattform, auf der sich Ideengeber vernetzen mit denen, die sie unterstützen möchten. Also in etwa: Idee trifft Ressourcen und wird Projekt. Daran arbeiten wir. Demnächst bietet Socialee also alles, damit jede Idee ein Stückchen weiterkommt.<br>Soviel zu uns. Jetzt brauchen wir dich: Stell deine eigene Idee ein oder entdecke andere Ideen. Wenn dir Socialee gefällt, mach mit.</p>
-        <p><a class="button button--yellow" href="{% url 'create_idea' %}">Teile deine Idee auf Socialee!</a></p>
-      </div>
-    </div>
-  </div>
-
 </section>
+
 {% endblock content %}
