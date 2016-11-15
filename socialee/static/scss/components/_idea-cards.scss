@@ -103,6 +103,9 @@
   .idea-image img {
     min-height: 200px;
     padding: 0;
+      @include breakpoint(small only) {
+      min-height: 100px;
+    }
   } 
 
   .idea-details {
