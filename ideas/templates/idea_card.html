@@ -70,7 +70,7 @@
 
         {% if not request.user.is_authenticated %}
         <div class="card-notification-wrapper">
-          <p id="login_{{ idea.id }}" class="card-notification" idea_id="{{ idea.id }}">Findest du gut? Zum Gutfinden <a href="{% url 'waitinglist' %}">melde dich an.</a></p>
+          <p id="login_{{ idea.id }}" class="card-notification" idea_id="{{ idea.id }}">Findest du gut? Zum Gutfinden <a href="{% url 'register' %}">melde dich an.</a></p>
         </div>
         {% endif %}
 
@@ -139,7 +139,7 @@
           </div>
         </div>
         {% else %}
-        <p class="white text-center">Du willst was sagen? <a href="{% url 'waitinglist' %}">Melde dich an!</a></p>
+        <p class="white text-center">Du willst was sagen? <a href="{% url 'register' %}">Melde dich an!</a></p>
         {% endif %}
 
     </div>

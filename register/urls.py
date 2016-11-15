@@ -1,3 +1,7 @@
-from django.conf.urls import include, url
+from django.conf.urls import url
 
-# place app url patterns here
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.NewsletterSignup.as_view(), name='register'), # ID 080
+]

@@ -17,11 +17,11 @@
         <!-- Menu -->
         <ul class="vertical menu">
           {% if not request.user.is_authenticated %}
-          <a class="button button--yellow" href="{% url 'waitinglist' %}">Registrieren</a>
+          <a class="button button--yellow" href="{% url 'register' %}">anmelden</a>
           {% else %}
           <li class="title">Dein Profil</li>
           <li><a href="{% url 'account_change_password' %}">Passwort ändern</a></li>
-          <li><a href="{% url 'account_logout' %}">Abmelden</a></li>
+          <li><a href="{% url 'account_logout' %}">Ausloggen</a></li>
           {% endif %}
 
           <li class="title">Weitere Seiten</li>

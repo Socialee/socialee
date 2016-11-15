@@ -8,7 +8,7 @@ Passwort: {{ pass }}
 
 Sobald du angemeldet bist, ändere aus Sicherheitsgründen dein Passwort.
 
-Klicke jetzt auf folgenden Link und bestätige so deine E-Mail-Adresse. Danach kannst du dich anmelden.
+Klicke jetzt auf folgenden Link und bestätige so deine E-Mail-Adresse. Danach kannst du dich einloggen.
 
 {{ activate_url }}
 

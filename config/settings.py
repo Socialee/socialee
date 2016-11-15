@@ -79,8 +79,8 @@ INSTALLED_APPS = (
     'questions.apps.QuestionsConfig',
     'quotes.apps.QuotesConfig',
     'socialee.apps.SocialeeConfig',
-    'waitinglist.apps.WaitinglistConfig',
-    'register',
+    # 'waitinglist.apps.WaitinglistConfig',
+    'register.apps.RegisterConfig',
 )
 
 if DEBUG:
