@@ -44,7 +44,7 @@
     <div class="idea-details-dark" id="idea_comments_{{idea.id}}">
       {% for comment in idea.comments.all %}
         <div class="idea_comment">
-          <label>VOR {{ comment.date|timesince|upper }}{% if request.user.email = idea.author %} {# VON {{ user|upper }} #}{% endif %}</label>
+        <label>VOR {{ comment.date|timesince|upper }} VON {% if comment.by_user.is_superuser %}SOCIALEE{% else %}{{ comment.by_user|upper|truncatechars:6 }}{% endif %}</label>
           <p>{{ comment.message|urlizetrunc:25 }}</p>
         </div>
       {% endfor %}
