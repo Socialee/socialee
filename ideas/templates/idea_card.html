@@ -112,7 +112,7 @@
           {% for comment in idea.comments.all %}
           <div class="idea_comment" idea_id="{{ idea.id }}">
             <label>VOR {{ comment.date|timesince|upper }} VON {% if comment.by_user.is_superuser %}SOCIALEE{% else %}{{ comment.by_user|upper|truncatechars:6 }}{% endif %}</label>
-            <p>{{ comment.message|urlizetrunc:25|escape|truncatechars:90 }}{% if comment.message|length > 90 %} <a href="{% url 'idea_detail' idea.pk %}">mehr</a>{% endif %}</p>
+            <p>{{ comment.message|urlizetrunc:25|escape|truncatechars_html:90 }}{% if comment.message|length > 90 %} <a href="{% url 'idea_detail' idea.pk %}">mehr</a>{% endif %}</p>
           </div>
           {% empty %} 
           <p class="white text-center" id="idea_comment_empty_{{idea.id}}">Es gibt noch keine Kommentare</p>
