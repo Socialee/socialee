@@ -26,12 +26,16 @@ def post_feedback(request):
             f = form.save()
 
             if hasattr(settings, 'TELLME_FEEDBACK_EMAIL'):
-                message = _("Your site %(host)s received feedback from %(user)s.\n"
-                            "The comments were:\n"
+                message = _("Socialee hat Feedback von %(firstname)s %(lastname)s erhalten.\n\nusername: %(username)s\nemail: %(email)s\n\n"
+                            "Das Feedback lautet:\n\n"
                             "%(note)s.\n\n"
-                            "See the full feedback content here: %(url)s")\
-                          % {'host': request.get_host(), 'user': str(request.user), 'note': feedback['note'],
-                             'url': request.build_absolute_uri(
+                            "Link zum Feedback in unserer Admin: %(url)s")\
+                          % {   'firstname': str(request.user.first_name),
+                                'lastname': str(request.user.last_name),
+                                'username': str(request.user),
+                                'email': str(request.user.email),
+                                'note': feedback['note'],
+                                'url': request.build_absolute_uri(
                                  urlresolvers.reverse('admin:feedback_feedback_change', args=(f.id,)))}
                 send_mail(
                         _('[%(host)s] Received feedback') % {'host': request.get_host()},
