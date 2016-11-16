@@ -7,7 +7,7 @@ section.gallery {
 }
 
 section.lp-bottom {
-  background-image: url("/static/img/landingpage_bg/ship.jpg");
+  background-image: url("../img/landingpage_bg/ship.jpg");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -36,7 +36,7 @@ section.lp-bottom {
 }
 
 section.lp-header {
-    background-image: url("/static/img/landingpage_bg/lilienthal.png"), url("/static/img/landingpage_bg/landingpage_bg.jpg");
+    background-image: url("../img/landingpage_bg/lilienthal.png"), url("../img/landingpage_bg/landingpage_bg.jpg");
     background-repeat: no-repeat, no-repeat;
     background-position: 500% 68%, center center;
     background-size: 110%, cover;
