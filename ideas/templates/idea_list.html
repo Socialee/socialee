@@ -4,17 +4,17 @@
 {% block content %}
 
 <div class="row">
-  <div class="small-12 medium-11 large-11 callout small-centered">
-    
+  <div class="small-12 medium-11 large-11 small-centered">
+    <div class="callout">
       <h3 class="text-center">Mach mit beim Sammeln aller guter Ideen der Welt.</h3>
       <p class="text-center">{% idea_count %} sind es schon. <br class="show-for-small-only">
-      <a class="text-link-special" href="{% url 'create_idea' %}">Trag Deine eigene Idee ein.</a></p>
+      <a class="text-link-special" href="{% url 'create_idea' %}">Teile deine Idee</a></p>
 
         {% idea_list as idea_list %}
         {% include 'snippet_ideas.html'%}
 
-      <p class="text-center"><a class="text-link-special" href="{% url 'create_idea' %}">Trag Deine eigene Idee ein.</a></p>
-
+      <p class="text-center"><a class="button button--yellow" href="{% url 'create_idea' %}">Teile deine Idee!</a></p>
+  	</div>
   </div>
 </div>
 
