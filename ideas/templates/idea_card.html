@@ -111,7 +111,7 @@
         <div class="idea_comments" id="idea_comments_{{ idea.id }}" idea_id="{{ idea.id }}">
           {% for comment in idea.comments.all %}
           <div class="idea_comment" idea_id="{{ idea.id }}">
-            <label>VOR {{ comment.date|timesince|upper }} VON {{ user|upper|truncatechars:5 }}</label>
+            <label>VOR {{ comment.date|timesince|upper }} VON {% if comment.by_user.is_superuser %}SOCIALEE{% else %}{{ comment.by_user|upper|truncatechars:6 }}{% endif %}</label>
             <p>{{ comment.message|urlizetrunc:25|escape|truncatechars:90 }}</p>
           </div>
           {% empty %} 
