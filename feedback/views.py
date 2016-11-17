@@ -38,7 +38,7 @@ def post_feedback(request):
                                 'url': request.build_absolute_uri(
                                  urlresolvers.reverse('admin:feedback_feedback_change', args=(f.id,)))}
                 send_mail(
-                        _('[%(host)s] Received feedback') % {'host': request.get_host()},
+                        _('Neues Feedback von %(user)s') % {'user': request.user},
                         message,
                         settings.SERVER_EMAIL,
                         [settings.TELLME_FEEDBACK_EMAIL],
