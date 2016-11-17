@@ -1,5 +1,4 @@
 {% extends "offcanvas.html" %}
-{% load crispy_forms_tags %}
 
 {% block content %}
 <section class="l-section">
@@ -9,7 +8,7 @@
     		<h3 class="c-form__title">Deine Projektdaten</h3>
         <form method="POST" action="">{% csrf_token %}
           <fieldset class="c-form__fieldset">
-      			{{ form|crispy }}
+      			{{ form }}
       			<div class="row">
               <div class="small-12 column c-form__footer">
                 <input class="button button--yellow large" type="submit" value="Und los!"></input>

@@ -1,13 +1,11 @@
 beautifulsoup4==4.5.1     # via django-blog-zinnia
 Collectfast==0.2.3
-crispy-forms-foundation==0.5.4
 defusedxml==0.4.1         # via python3-openid
 django-allauth==0.28.0
 django-app-namespace-template-loader==0.4.1
 django-blog-zinnia==0.17
 django-ckeditor==5.1.1    # via zinnia-wysiwyg-ckeditor
 django-contrib-comments==1.7.3  # via django-blog-zinnia
-django-crispy-forms==1.6.1
 django-debug-toolbar==1.6
 django-environ==0.4.0
 django-mptt==0.8.6        # via django-blog-zinnia
