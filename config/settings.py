@@ -323,8 +323,8 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-# TODO: use feedback speciffic email
 TELLME_FEEDBACK_EMAIL = 'feedback@socialee.de'
+NEW_IDEA_EMAIL = 'hello@socialee.de'
 
 # Debug Toolbar settings / http://django-debug-toolbar.readthedocs.io/en/stable/configuration.html
 from debug_toolbar import settings as dt_settings

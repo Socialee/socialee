@@ -1,10 +1,14 @@
+from allauth.account.views import SignupView
+
 from django.http import HttpResponse, HttpResponseRedirect
+from django.conf import settings
 from django.contrib import messages
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import FormView, DetailView
-from allauth.account.views import SignupView
 
 from .forms import *
 from .models import Idea, Comment
@@ -26,6 +30,17 @@ class CreateIdea(SignupView):
             title = form.cleaned_data.get('title')
             description = form.cleaned_data.get('description')
             email = form.cleaned_data.get('email')
+            message = _("Es gibt eine neue Idee auf Socialee.\n\nTitel: %(title)s\nBeschreibung: %(description)s\n\n")\
+            % {'title': str(title),
+            'description': str(description),
+            }
+            send_mail(
+                'Neue Idee auf Socialee!',
+                message,
+                settings.SERVER_EMAIL,
+                [settings.NEW_IDEA_EMAIL],
+                fail_silently=True,
+            )
             if not email and hasattr(request.user, 'email'):
                 email = request.user.email
             ret = super(CreateIdea, self).post(request, *args, **kwargs)
