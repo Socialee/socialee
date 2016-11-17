@@ -5,6 +5,21 @@ import re
 
 register = template.Library()
 
+
+@register.simple_tag
+'''
+Ich habe diesen tag schon in socialee_tags.py kopiert. 
+Kann hier raus, wenn klar ist, ob der nicht mehr über {{ load socialee_filters }} gedaden werden muss.
+'''
+def profiles(user):
+    return Profile.objects.filter(slug=user)
+
+
+@register.filter
+def url_target_blank(text):
+    return text.replace('<a ', '<a target="_blank" ')
+
+
 @register.filter
 def link_ats(value):
 	c = Context()
@@ -18,11 +33,6 @@ def link_ats(value):
 		r'{% if \1.profile %}<a href="{% url "profile_view" slug=\1.slug %}">@\1</a>' +
 		r'{% elif \1.project %}<a href="{% url "project_view" slug=\1.slug %}">@\1</a>{% else %}@\1{% endif %}', value))
 	return t.render(c)
-
-@register.simple_tag
-def profiles(user):
-	return Profile.objects.filter(slug=user)
-
 
 
 @register.filter
@@ -57,6 +67,7 @@ def truncatesmart(value, limit=80):
 
     # Join the words and return
     return ' '.join(words) + '...'
+
 
 @register.filter
 def truncatelist(tlist, limit=8):

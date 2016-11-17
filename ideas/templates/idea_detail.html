@@ -1,5 +1,5 @@
 {% extends "offcanvas.html" %}
-{% load static sekizai_tags idea_tags %}
+{% load static sekizai_tags idea_tags socialee_filters %}
 
 {% block content %}
 
@@ -13,7 +13,7 @@
               <img class="center" src="{{ MEDIA_URL }}{{ idea.picture }}"> 
           </div>
             <h3 class="text-center">{{ idea.title }}</h3>
-            <p class="text-center">{{ idea.description|urlizetrunc:25 }}</p>
+            <p class="text-center">{{ idea.description|urlizetrunc:25|url_target_blank|safe }}</p>
         {% elif not idea.title and not idea.description %}<!--nur Bild-->
           <div class="detail-idea-image">
             <img src="{{ MEDIA_URL }}{{ idea.picture }}"> 
@@ -25,7 +25,7 @@
               <h2>{{ idea.title }}</h2>
             </div>  
           <div class="idea-details">
-            <p>{{ idea.description|urlizetrunc:25 }}</p>
+            <p>{{ idea.description|urlizetrunc:25|url_target_blank|safe }}</p>
           </div>
         {% endif %}
         {% if idea.title and not idea.description %}<!-- nur Titel -->
@@ -35,7 +35,7 @@
         {% endif %}
         {% if idea.description and not idea.title %}<!-- nur Beschreibung -->
           <div class="detail-green-card">
-            <p>{{ idea.description|urlizetrunc:25 }}</p>
+            <p>{{ idea.description|urlizetrunc:25|url_target_blank|safe }}</p>
           </div>
         {% endif %}
       {% endif %}
