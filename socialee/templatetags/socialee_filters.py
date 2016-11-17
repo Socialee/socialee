@@ -7,11 +7,11 @@ register = template.Library()
 
 
 @register.simple_tag
-'''
-Ich habe diesen tag schon in socialee_tags.py kopiert. 
-Kann hier raus, wenn klar ist, ob der nicht mehr über {{ load socialee_filters }} gedaden werden muss.
-'''
 def profiles(user):
+    '''
+    Ich habe diesen tag schon in socialee_tags.py kopiert. 
+    Kann hier raus, wenn klar ist, ob der nicht mehr über {{ load socialee_filters }} gedaden werden muss.
+    '''
     return Profile.objects.filter(slug=user)
 
 
