@@ -30,14 +30,7 @@
             </div>
             <div class="idea-details">
               <h2>{{ idea.title }}</h2>
-              <p>{{ idea.description|urlizetrunc:25|url_target_blank|safe }}</p>
-              <!-- Das hier ist der schlimmste workaround ever seen, ich weiß. Mo -->
-              <!--{% if idea.description|length < 100 and idea.picture %} 
-                <p style="visibility:hidden;">{% lorem %}</p>
-              {% endif %}
-              {% if idea.description|length < 1000 and not idea.picture %}
-                <p style="visibility:hidden;">{% lorem %}</p>
-              {% endif %}-->
+              <p>{{ idea.description|truncatechars:800|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 800 %} <a href="{% url 'idea_detail' idea.pk %}">| mehr</a>{% endif %}</p>
             </div>
           {% elif not idea.title and not idea.description %}<!--nur Bild-->
             <div class="idea-image" expand_id="{{ idea.id }}">
@@ -54,7 +47,7 @@
                 <h2>{{ idea.title }}</h2>
               </div>  
             <div class="idea-details">
-              <p>{{ idea.description|urlizetrunc:25|url_target_blank|safe }}</p>
+              <p>{{ idea.description|truncatechars:800|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 800 %} <a href="{% url 'idea_detail' idea.pk %}">| mehr</a>{% endif %}</p>
             </div>
           {% endif %}
           {% if idea.title and not idea.description %}<!-- nur Titel -->
@@ -64,7 +57,7 @@
           {% endif %}
           {% if idea.description and not idea.title %}<!-- nur Beschreibung -->
             <div class="green-card" expand_id="{{ idea.id }}">
-              <p>{{ idea.description|urlizetrunc:25|url_target_blank|safe }}</p>
+              <p>{{ idea.description|truncatechars:800|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 800 %} <a href="{% url 'idea_detail' idea.pk %}">| mehr</a>{% endif %}</p>
             </div>
           {% endif %}
         {% endif %}
@@ -114,7 +107,7 @@
           {% for comment in idea.comments.all %}
           <div class="idea_comment" idea_id="{{ idea.id }}">
             <label>VOR {{ comment.date|timesince|upper }} VON {% if comment.by_user.is_superuser %}SOCIALEE{% else %}{{ comment.by_user|upper|truncatechars:6 }}{% endif %}</label>
-            <p>{{ comment.message|urlizetrunc:25|escape|truncatechars_html:90 }}{% if comment.message|length > 90 %} <a href="{% url 'idea_detail' idea.pk %}">mehr</a>{% endif %}</p>
+            <p>{{ comment.message|urlizetrunc:25|escape|truncatechars_html:90 }}{% if comment.message|length > 90 %} <a href="{% url 'idea_detail' idea.pk %}">| mehr</a>{% endif %}</p>
           </div>
           {% empty %} 
           <p class="white text-center" id="idea_comment_empty_{{idea.id}}">Es gibt noch keine Kommentare</p>
