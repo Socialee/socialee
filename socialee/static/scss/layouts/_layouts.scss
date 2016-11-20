@@ -7,35 +7,6 @@
   }
 }
 
-.l-section {
-  padding: 0;
-}
-
-.l-section--white {
-  @extend .l-section;
-  background-color: c(special, white);
-}
-
-.l-section--grey {
-  @extend .l-section;
-  background-color: c(grey, f8);
-}
-
-.l-section--img {
-	position: relative;
-	padding-top: 10rem;
-	padding-bottom: 10rem;
-}
-
-.l-section-img-wrapper {
-	position: relative;
-}
-
-.l-section-img-wrapper .section-img {
-	position: absolute;
-    left: 50%;
-}
-
 .l-tabs {
   background-repeat: repeat;
   background-image: url(../img/app/pattern.jpg);
