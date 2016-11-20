@@ -58,3 +58,22 @@
 	position: absolute;
     left: 50%;
 }
+
+.c-section--quotes {
+background-color: c(blue, 3);
+
+}
+
+.c-section--quotes::after {
+background-image: url(../img/landingpage_bg/Landingpage_Footer.jpg);
+}
+
+.c-section--connections-footer .section-img {
+    top: -280px;
+    margin-left: -44px;
+}
+
+.c-section--quotes .section-img {
+    top: -280px;
+    margin-left: -44px;
+}
