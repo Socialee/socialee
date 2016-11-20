@@ -1,6 +1,5 @@
 {% load static sekizai_tags quote_tags %}
 
-
 <div class="c-section--bg-img c-section--img c-section--quotes">
   <div class="row">
      <div class="c-section-img-wrapper">
@@ -8,25 +7,20 @@
     </div>
     <div class="small-12 columns text-center">
     {% random_quote as random_quote %}
-      <p class="quote">{{ random_quote.title }}</p>
-      <p class="author">Das hat {{ random_quote.author }} gesagt. <br class="show-for-small-only"><a href="{% url 'make_quote' %}">Was sagst Du?</a></p>
+      <p class="quote white strong h1-super">{{ random_quote.title }}</p>
+      <p class="author white strong h4">Das hat {{ random_quote.author }} gesagt. <br class="show-for-small-only"><a class="text--underline" href="{% url 'make_quote' %}">Was sagst Du?</a></p>
     </div>
   </div>
 </div>
 
 <footer>
-  <div class="footer-bottom">
-    <div class="row">
-      <div class="small-12 columns">
-        <p class="slogan"></p>
-        <p class="links">
-          <a href="{% url 'home' %}">Home</a>
-          <a href="{% url 'zinnia:entry_archive_index' %}">Blog</a>
-          <a href="{% url 'home' %}#manifest">Manifest</a>
-          <a href="{% url 'impressum' %}">Impressum</a>
-          <a href="{% url 'waitinglist' %}">Newsletter</a>
-        </p>
-      </div>
-    </div>
+  <div class="menu-centered">
+    <ul class="vertical medium-horizontal menu">
+      <li><a href="{% url 'home' %}">Home</a></li>
+      <li><a href="{% url 'zinnia:entry_archive_index' %}">Blog</a></li>
+      <li><a href="{% url 'home' %}#manifest">Manifest</a></li>
+      <li><a href="{% url 'impressum' %}">Impressum</a></li>
+      <li><a href="{% url 'waitinglist' %}">Newsletter</a></li>
+    </ul>
   </div>
 </footer>
