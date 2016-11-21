@@ -10,8 +10,8 @@ django-app-namespace-template-loader  # (namespaced) inheritence for "extends" i
 django-allauth
 django-blog-zinnia == 0.17
 
-django-crispy-forms
-crispy-forms-foundation
+#django-crispy-forms
+#crispy-forms-foundation
 
 django-simple-auth
 

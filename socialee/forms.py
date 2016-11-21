@@ -7,6 +7,7 @@ from allauth.account.forms import *
 from django import forms
 from .models import Project, Profile, Input, Output, User
 
+# werden die crispys noch gebraucht???
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import *
 
@@ -51,13 +52,14 @@ class EditProfileForm(forms.ModelForm):
     socialee_inputs = forms.CharField(required=False)
     def __init__(self, *args, **kwargs):
         super(EditProfileForm, self).__init__(*args, **kwargs)
+        self.fields['tags'].widget.attrs['placeholder'] = 'Eine durch Komma getrennte Schlagwortliste.'
+        # self.fields['tags'].widget.attrs['placeholder'] = self.fields['tags'].label or 'Eine durch Komma getrennte Schlagwortliste.'
     class Meta:
         model = Profile
         fields = ('tagline', 'description', 'picture', 'phone', 'plz', 'newsletter', 'tags')
         widgets = {
-            'tags': TagWidget(),
+            'tags': TagWidget()
         }
-
 
 # class InviteForm(forms.ModelForm):
 #     class Meta:
@@ -74,7 +76,6 @@ class EditProfileForm(forms.ModelForm):
 #             'message': forms.Textarea(
 #                 attrs={'placeholder': ''}),
 #         }
-
 
 class SocialeeLoginForm(LoginForm): # Changing labels of default Allauth Login Form (note ACCOUNT_FORMS in settings.py)
     def __init__(self, *args, **kwargs):

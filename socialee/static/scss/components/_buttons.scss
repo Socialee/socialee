@@ -20,7 +20,7 @@ $button-background-hover: #CD931F;
 
 .button--yellow {
   //@include button-base();
-  @include button-style(map-get($foundation-palette, orange), $button-background-hover , #fff );
+  @include button-style( c(orange, 1), $button-background-hover , #fff );
 
 
   &:hover {
@@ -37,4 +37,8 @@ $button-background-hover: #CD931F;
 
 .button--icon i {
   padding-right: 5px;
+}
+
+.button--upload  {
+	margin-left: rem-calc(40px);
 }

@@ -1,5 +1,6 @@
 <div class="card-section__title text-center">
-  <h6 class="{{ color }}">{{ title }}</h6>
+  <!-- make title position aware with counter -->
+  <h5 class="{{ color }} show-for-medium">{{ title }}</h5>
 </div>
 <div class="tags {{ color }}">
 {% for inout in input_output.all %}
@@ -9,4 +10,8 @@
 		{% endif %}</a>
 {% endfor %}
 	<a class="tag tag--white tag--more"><i class="fa fa-plus"></i> §7 Mehr</a>
+</div>
+<div class="card-section__title text-center ">
+   <!-- make title position aware with counter -->
+  <h5 class="{{ color }} show-for-small-only">{{ title }}</h5>
 </div>

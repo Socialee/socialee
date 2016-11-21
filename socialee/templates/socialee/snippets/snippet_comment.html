@@ -1,22 +1,21 @@
 {% load socialee_filters %}
 <div class="comment" id="comment{{ comment.id }}">
-  <section class="comment__top">
+  <div class="comment__header">
     {% include "snippet_follow.html" with to_follow=comment.by_instance %}
-    <h6 class="byline">
-      <a href="#">
-        <div class="comment__avatar"><img src="{{ MEDIA_URL }}{{ comment.by_instance.picture }}" alt="profile image"></div>
-        {{ comment.by_instance.long_name }} </a>
-      <div class="time grey">vor
-        <span class="data">
-          {{ comment.date|timesince }}
-        </span>
+      <div class="row">
+        <div class="comment__avatar small-12 column">
+        <a href="#"><img src="{{ MEDIA_URL }}{{ comment.by_instance.picture }}" alt="profile image"></a>
+        <div class="comment__avatar-text">
+          <div class="h6">{{ comment.by_instance.long_name }} </div>
+          <div class="h-f15 greyblue-2 h-capital h-pt-5">vor {{ comment.date|timesince }}</div>
+        </div>
       </div>
-    </h6>
-  </section>
-  <section class="comment__content">
+    </div>
+  </div>
+  <div class="comment__content">
     <p>{{ comment.message| link_ats }}</p>
-  </section>
-  <section class="comment__actions">
+  </div>
+  <div class="comment__actions">
     <ul class="inline-list">
       <li><a href="#"><i class="fa fa-reply"></i>§Antworten </a></li>
       <li><a href="#"><i class="fa fa-heart"></i>§3</a></li>
@@ -34,5 +33,5 @@
         </ul>
       </li>
     </ul>
-  </section>
+  </div>
 </div>

@@ -1,5 +1,5 @@
 <div class="small-12 medium-6 large-4 column end">
-  <div class="card">
+  <div class="card card-white">
     <div class="card-img">
       {% if instance.picture %}
       <img src="{{ MEDIA_URL }}{{ instance.picture }}" alt="{{ instance.short_name }}">
@@ -8,8 +8,8 @@
       {% endif %}
     </div>
     <div class="card-section text-center">
-      <h4>{{ instance.long_name }}</h4>
-        <div class="tags">
+      <h5 class="mb-20">{{ instance.long_name }}</h5>
+        <div class="tags mb-20">
           {% for tag in instance.tags.all %}
             <a class="tag tag--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
           {% endfor %}

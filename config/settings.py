@@ -61,8 +61,8 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'crispy_forms',
-    'crispy_forms_foundation',
+    # 'crispy_forms',
+    # 'crispy_forms_foundation',
     'debug_toolbar',
     'django_summernote',
     'simple_auth',
@@ -283,10 +283,10 @@ LOGGING = {
     }
 }
 
-# Add 'foundation-5' layout pack
-CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3', 'foundation-5') # F5 works for F6 as well
-# Default layout to use with "crispy_forms"
-CRISPY_TEMPLATE_PACK = 'foundation-5'
+# # Add 'foundation-5' layout pack
+# CRISPY_ALLOWED_TEMPLATE_PACKS = ('bootstrap', 'uni_form', 'bootstrap3', 'foundation-5') # F5 works for F6 as well
+# # Default layout to use with "crispy_forms"
+# CRISPY_TEMPLATE_PACK = 'foundation-5'
 
 # Zinnia Blog Settings
 ZINNIA_PREVIEW_MAX_WORDS = 22

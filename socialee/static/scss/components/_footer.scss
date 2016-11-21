@@ -1,89 +1,14 @@
-.zitate-footer {
-  z-index: 0;
-  position: relative;
-  background-color: $socialee-black;
-  padding: 2rem;
-  display: table;
-  width: 100%;
-  height: auto;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
-  @include breakpoint(small only) {
-    padding: 1rem;
-  }
-}
-
-.zitate-footer:after {
-    content : "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-image: url('../img/landingpage_bg/Landingpage_Footer.jpg');
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-    opacity : 0.033;
-    z-index: -1;
-}
-
-.quote {
-    font-size: 1.5rem;
-    line-height: 2.2rem;
-    color: white;
-    font-weight: bold;
-    @include breakpoint(small only) {
-      font-size: 1.5rem;
-      line-height: 2.5rem;
-    }
-}
-
-.author {
-  font-size: 1.2rem;
-  // padding-top: 1rem;
-  letter-spacing: 0.1rem;
-  // text-transform: uppercase;
-  color: $socialee-transparent;
-  @include breakpoint(small only) {
-    font-size: 1rem;
-    padding-top: 0;
-  }
-  a {
-    font-size: 1rem;
-    font-weight: bold;
-    border-bottom: 2px solid;
-    @include breakpoint(small only) {
-      font-size: 1rem;
-      border-bottom: 3px solid;
-    }
-    &:hover {
-      text-decoration: none;
-    }
-  }
-}
-
-.footer-bottom {
-  background-color: #302F35;
-  text-align: center;
-  font-size: 0.8rem;
-  // padding: 0.5rem;
-  p {
-    &.slogan {
-      font-size: 1rem;
-      margin: 0 0 1rem;
-    }
-    &.copywrite {
-      font-size: 0.65rem;
-      color: $socialee-orange;
-    }
-  }
-  .links a {
-    color: $socialee-orange;
-    font-size: 1.1rem;
-    text-decoration: none;
-    list-style: none;
-    padding: 0.5rem;
-  }
+footer {
+	background-color: c(black, 1);
+	.menu {
+		padding:rem-calc(40px) 0;
+		@include breakpoint(medium) {
+				padding: 1rem 0 0.5rem 0;
+	  }
+		li a {
+			font-size: 28px;
+			font-weight: 700;
+			padding: 1rem 1rem;
+ 		}
+	}
 }

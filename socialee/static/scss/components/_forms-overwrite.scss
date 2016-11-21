@@ -1,0 +1,59 @@
+// 19. Forms
+// ---------
+
+// $fieldset-border: 1px solid $medium-gray;
+// $fieldset-padding: rem-calc(200);
+// $fieldset-margin: rem-calc(18 0);
+// $legend-padding: rem-calc(0 3);
+$form-spacing: rem-calc(16);
+$helptext-color: c(black, 1);
+// $helptext-font-size: rem-calc(13);
+// $helptext-font-style: italic;
+$input-prefix-color: c(black, 1);
+$input-prefix-background: #000;
+// $input-prefix-border: 1px solid $medium-gray;
+// $input-prefix-padding: rem-calc(20);
+$form-label-color: c(greyblue, 2);
+$form-label-font-size: rem-calc(20);
+$form-label-font-weight: 200;
+// $form-label-line-height: 1.8;
+// $select-background: $white;
+// $select-triangle-color: $dark-gray;
+// $select-radius: $global-radius;
+$input-color: c(black, 1);
+// $input-placeholder-color: $medium-gray;
+// $input-font-family: inherit;
+$input-font-size: rem-calc(28);
+$input-background: c(grey, f8);
+// $input-background-focus: $input-background;
+// $input-background-disabled: $light-gray;
+// $input-border: 0px solid $medium-gray;
+// $input-border-focus: 0px solid $dark-gray;
+// $input-shadow: none;
+// $input-shadow-focus: $input-shadow;
+// $input-cursor-disabled: not-allowed;
+// $input-transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
+// $input-number-spinners: true;
+// $input-radius: $global-radius;
+
+[type='text'], [type='password'], [type='date'], [type='datetime'], [type='datetime-local'], [type='month'], [type='week'], [type='email'], [type='number'], [type='search'], [type='tel'], [type='time'], [type='url'], [type='color'], textarea {
+    height: rem-calc(80);
+    padding: rem-calc(20);
+    border-radius: 0;
+}
+
+
+[type='text']:focus, [type='password']:focus, [type='date']:focus, [type='datetime']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='week']:focus, [type='email']:focus, [type='number']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='url']:focus, [type='color']:focus, textarea:focus {
+    outline: 1px solid c(grey, cb);
+    background-color: c(grey, f4);
+    box-shadow: 0px 4px 6px 0px #EAEAEA;
+}
+
+label {
+	letter-spacing: 0.2px;
+}
+
+.h-wrapper form {
+	padding-top: rem-calc(100px);
+
+}

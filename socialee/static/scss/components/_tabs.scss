@@ -21,7 +21,7 @@
 .hero__tabs li a {
   @include breakpoint(medium) {
     padding: 2.1rem 1rem;
-    font-size: 34px;
+    // font-size: 34px;
   }
   color: #ffe;
   text-transform: normal;
@@ -47,6 +47,10 @@
 .tabs-title > a:focus, .tabs-title > a[aria-selected='true'] {
     background: $socialee-darkgreen;
     color: $socialee-orange;
+}
+
+.tabs-title > a {
+   font-size: inherit;
 }
 
 .tabs-content {

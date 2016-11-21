@@ -1,0 +1,97 @@
+.h-text-center-sm {
+	@include breakpoint(small only) {
+		text-align: center;
+	}
+
+}
+
+.expanded-sm {
+    @include breakpoint(small only) {
+		display: block;
+    	width: 100%;
+    	margin-left: 0;
+   		margin-right: 0;
+	}
+}
+
+.float-right-md {
+    @include breakpoint(medium) {
+   		float: right !important;
+    }
+}
+
+.float-right-lg {
+    @include breakpoint(large) {
+   		float: right !important;
+    }
+}
+
+.mb-10 {
+	margin-bottom: 10px;
+}
+
+.mb-20 {
+	margin-bottom: 20px;
+}
+
+.h-mb-40 {
+	margin-bottom: rem-calc(40px);
+}
+
+.mt-20 {
+	margin-top: 10px;
+}
+
+.h-pt-5 {
+	padding-top:5px;
+}
+
+.p-0 {
+	padding:0px;
+}
+
+.greyblue-2 {
+  //color: #5D5C67;
+  color: c(greyblue, 2);
+}
+
+.green {
+	color: map-get($foundation-palette, green);
+}
+
+.blue {
+	color: map-get($foundation-palette, blue);
+}
+
+.strong {
+	font-weight: 700;
+}
+
+.h-capital {
+	text-transform: uppercase;
+}
+
+.h-f15 {
+	font-size: rem-calc(11px);
+	@include breakpoint(medium) {
+   		font-size: rem-calc(15px);
+    }
+}
+
+.h-f22 {
+	font-size: rem-calc(22px);
+}
+
+.h-round {
+	border-radius: 100%;
+}
+.h-wrapper {
+	background-color: #fff;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    margin-bottom: 6rem;
+    width: 100%;
+    float: left;
+    border-radius: 4px;
+}
+

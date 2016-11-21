@@ -1,29 +1,50 @@
-.form-label {
-	float: left;
-	font-weight: bold;
+// .form-label {
+// 	float: left;
+// 	font-weight: bold;
+// }
+
+// .second-form-label {
+// 	display: inline;
+// 	margin-left: 2rem;
+// 	color: grey;
+// }
+
+
+// #id_picture
+// {
+//     width:0px;height:0px;
+// }
+
+// #idea_image
+// {
+//     display: none;
+//     max-width: 200px;
+//     max-height: 80px;
+//     float:right;
+// }
+
+// textarea
+// {
+//     resize: none;
+// }
+
+.c-form {
+    background-color: #fff;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    margin-bottom: 6rem;
+    width: 100%;
+    float: left;
 }
 
-.second-form-label {
-	display: inline;
-	margin-left: 2rem;
-	color: grey;
+.c-form__fieldset {
+
 }
 
-
-#id_picture
-{
-    width:0px;height:0px;
+.c-form__title {
+	text-align: center;
 }
 
-#idea_image
-{
-    display: none;
-    max-width: 200px;
-    max-height: 80px;
-    float:right;
-}
-
-textarea
-{
-    resize: none;
+.c-form__footer {
+	padding-top: rem-calc(40px);
 }

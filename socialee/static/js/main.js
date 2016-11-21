@@ -67,7 +67,7 @@ function post_to_url(url, data, success_fct)
 }
 
 function post_comment(comment, instance_id, reply_id) {
-    post_to_url( "/comment/", 
+    post_to_url( "/comment/",
                 { comment : comment,
                 instance_id: instance_id,
                 reply_id: reply_id },
@@ -77,7 +77,7 @@ function post_comment(comment, instance_id, reply_id) {
 };
 
 function follow(object, instance_id) {
-    post_to_url( "/follow/", 
+    post_to_url( "/follow/",
                 { instance_id : instance_id },
                 function(data){
                     object.replaceWith(data);

@@ -1,0 +1,26 @@
+.l-site-content {
+  background-color: #fff;
+  padding-top: rem-calc(20px);
+
+  @include breakpoint(large) {
+    padding-top: rem-calc(80px);
+  }
+}
+
+.l-tabs {
+  background-repeat: repeat;
+  background-image: url(../img/app/pattern.jpg);
+}
+
+.l-text-box {
+  background-color: map-get($foundation-palette, black);
+  color: c(special, white);
+  padding-top: rem-calc(87px);
+  padding-bottom: rem-calc(116px);
+}
+
+.l-multi-column {
+  @include breakpoint(medium) {
+  	@include col-cstm(150px, 2, 20px, 1px outset transparent)
+  }
+}
