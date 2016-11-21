@@ -3,9 +3,9 @@
 <div class="c-section--bg-img c-section--img c-section--quotes">
   <div class="row">
      <div class="c-section-img-wrapper">
-      <img class="section-img" src="{{ STATIC_URL }}img/app/footer_guy.png" alt="1">
+      <!-- <img class="section-img" src="{{ STATIC_URL }}img/app/footer_guy.png" alt="1"> -->
     </div>
-    <div class="small-12 medium-8 large-6 columns text-center">
+    <div class="small-12 text-center">
     {% random_quote as random_quote %}
       <p class="quote white strong h1-super">{{ random_quote.title }}</p>
       <p class="author white strong h4">Das hat {{ random_quote.author }} gesagt. <br class="show-for-small-only"><a class="text--underline" href="{% url 'make_quote' %}">Was sagst Du?</a></p>
