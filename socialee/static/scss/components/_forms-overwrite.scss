@@ -51,6 +51,23 @@ $input-background: c(grey, f8);
 
 label {
 	letter-spacing: 0.2px;
+    display: inline;
+}
+
+input::-webkit-input-placeholder {
+  font-family: Arial,FontAwesome;
+}
+
+input:-ms-input-placeholder {
+  font-family: FontAwesome;
+}
+
+input:-moz-placeholder {
+  font-family: FontAwesome;
+}
+
+input::-moz-placeholder {
+  font-family: FontAwesome;
 }
 
 .h-wrapper form {

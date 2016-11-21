@@ -35,7 +35,9 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
 <form class="login" method="POST" action="{% url 'account_login' %}">
   {% csrf_token %}
-  {{ form }}
+  {% for item in form %}
+  {% include "snippet_formfield.html" with field=item size="medium-6" %}
+  {% endfor %}
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}

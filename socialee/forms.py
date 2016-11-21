@@ -6,10 +6,8 @@ from allauth.account.forms import *
 
 from django import forms
 from .models import Project, Profile, Input, Output, User
+from django.utils.safestring import mark_safe
 
-# werden die crispys noch gebraucht???
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import *
 
 from taggit.forms import TagWidget
 
@@ -61,24 +59,9 @@ class EditProfileForm(forms.ModelForm):
             'tags': TagWidget()
         }
 
-# class InviteForm(forms.ModelForm):
-#     class Meta:
-#         model = Invite
-#         fields = ('full_name', 'email', 'message')
-#         labels = {
-#             'full_name': _('Vor- & Nachname'),
-#             'email': _('Deine Email-Adresse'),
-#             'message': _('Deine Nachricht'),
-#         }
-#         widgets = {
-#             'full_name': forms.TextInput(attrs={'placeholder': ''}),
-#             'email': forms.TextInput(attrs={'placeholder': ''}),
-#             'message': forms.Textarea(
-#                 attrs={'placeholder': ''}),
-#         }
 
 class SocialeeLoginForm(LoginForm): # Changing labels of default Allauth Login Form (note ACCOUNT_FORMS in settings.py)
     def __init__(self, *args, **kwargs):
         super(SocialeeLoginForm, self).__init__(*args, **kwargs)
-        self.fields['password'].widget = forms.PasswordInput(attrs={'placeholder': 'tri tra trullala'})
+        self.fields['password'].widget = forms.PasswordInput(attrs={'placeholder': mark_safe("&#xf023; tri tra trullala")})
     password = PasswordField(label=_("Dein Passwort"))
