@@ -1,56 +1,40 @@
-// .form-label {
-// 	float: left;
-// 	font-weight: bold;
-// }
-
-// .second-form-label {
-// 	display: inline;
-// 	margin-left: 2rem;
-// 	color: grey;
-// }
-
-
-// #id_picture
-// {
-//     width:0px;height:0px;
-// }
-
-// #idea_image
-// {
-//     display: none;
-//     max-width: 200px;
-//     max-height: 80px;
-//     float:right;
-// }
-
-// textarea
-// {
-//     resize: none;
-// }
-
-.second-form-label {
- display: inline;
- margin-left: 2rem;
- color: grey;
-}
-
 .c-form {
-    background-color: #fff;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-    margin-bottom: 6rem;
-    width: 100%;
-    float: left;
+  background-color: c(special, white);
+  padding: 3rem 3.5rem;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+
+  @include breakpoint(medium) {
+      margin-bottom: 3rem;
+      margin-top: 3rem;
+    }
 }
+
+// .c-section__callout {
+//   background-color: c(special, white);
+//   padding: 3rem 3.5rem;
+//   margin-bottom: 1.5rem;
+//     margin-top: 1.5rem;
+//   @include breakpoint(medium) {
+//       margin-bottom: 3rem;
+//       margin-top: 3rem;
+//     }
+// }
 
 .c-form__fieldset {
 
 }
 
 .c-form__title {
-	text-align: center;
+  text-align: center;
 }
 
 .c-form__footer {
-	padding-top: rem-calc(40px);
+  padding-top: rem-calc(40px);
+}
+
+.second-form-label {
+ display: inline;
+ margin-left: 2rem;
+ color: grey;
 }

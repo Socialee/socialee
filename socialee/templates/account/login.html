@@ -12,7 +12,7 @@
 {% get_providers as socialaccount_providers %}
 
 {% if socialaccount_providers %}
-<p>{% blocktrans with site.name as site_name %}Please sign in with one
+<p class="-lead">{% blocktrans with site.name as site_name %}Please sign in with one
 of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
 for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
@@ -29,7 +29,7 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 {% include "socialaccount/snippets/login_extra.html" %}
 
 {% else %}
-<p>Wenn Du noch kein Konto bei Socialee hast,
+<p class="-lead">Wenn Du noch kein Konto bei Socialee hast,
 <a href="{% url 'register' %}">melde dich an!</a></p>
 {% endif %}
 

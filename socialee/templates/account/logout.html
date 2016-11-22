@@ -7,7 +7,7 @@
 {% block allauth_content %}
 <h2>{% trans 'Ausloggen' %}</h2>
 
-<p>{% trans 'Bist Du sicher, dass du Dich ausloggen möchtest?' %}</p>
+<p class="-lead">{% trans 'Bist Du sicher, dass du Dich ausloggen möchtest?' %}</p>
 
 <form method="post" action="{% url 'account_logout' %}">
   {% csrf_token %}
