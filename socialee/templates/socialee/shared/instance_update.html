@@ -1,0 +1,119 @@
+{% extends "offcanvas.html" %}
+{% load socialee_filters %}
+{% load static sekizai_tags %}
+{% block content %}
+
+<section class="hero">
+<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+  <div class="row">
+    <div class="row column hero__wrapper">
+      <div class="small-12 medium-10 medium-offset-1 columns h-text-center-sm">
+        <div class="hero__profile">
+          <div class="row">
+            <div class="small-12 column">
+              <div class="row column media-object stack-for-small">
+                {% if object.profile %}
+                <div class="media-object-section">
+                  <img class="" id="id_picture" src="{{ MEDIA_URL }}{{ object.picture }}" alt="profile image">
+                </div>
+                {% endif %}
+                <div class="small-12 media-object-section main-section">
+                  <div class="row">
+                    <div class="small-12 medium-12 large-8 column profile__name header-text-h2 header-text-sm-h2">
+                      {% if object.profile %}
+                        {% include "snippet_formfield.html" with field=form.first_name size="medium-6" %}
+                        {% include "snippet_formfield.html" with field=form.last_name size="medium-6" %}
+                      {% else %}
+                        {% include "snippet_formfield.html" with field=form.title size="medium-6" %}
+                      {% endif %}
+                    </div>
+                    {% if request.user == object.created_by %} <!-- saveguard -->
+                    <div class="small-12 medium-12 large-4 column show-for-medium header-text-h2 header-text-sm-h2">
+                      <input class="button button--yellow button--icon float-right-lg" type="submit" value="Save" />
+                    </div>
+                    {% endif %}
+
+                    <div class="column small-12 profile__tagline header-text-h6 header-text-sm-h6">
+                    {% include "snippet_formfield.html" with field=form.tagline size="medium-12" %}
+                    </div>
+
+                  </div>
+                </div>
+                <div class="column small-12">
+                {% include "snippet_formfield.html" with field=form.tags %}
+                </div>
+                <div class="column small-12 profile__tagline tags tags--attribute tags--orange">
+                      {% for tag in object.tags.all %}
+                        <a class="tag tag--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
+                      {% endfor %}
+                    </div>
+                <div class="column small-12">
+                  {% include "snippet_formfield.html" with field=form.description size="medium-12" %}
+                </div>
+              </div>
+            </div>
+            <div class="small-12 columns">
+              <div class="column tags-wrapper">
+                <div class="">
+                  <div class="small-12 medium-6 columns">
+                    <div class="row">
+                      {% include "snippet_formfield.html" with field=form.socialee_outputs %}
+                      <div class="tags green">
+                        <div class="column h5 mb-10 strong green">{{ object.short_name }} bietet</div>
+                        {%  for input in object.socialee_output.all %}
+                        <a class="tag tag--green"><i class="fi-x-circle"></i>{{ input }}{% if badge_count >= 1 %}
+                        <span>{{ badge_count }}</span>{% endif %}</a>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr class="show-for-small-only">
+
+                  <div class="small-12 medium-6 columns">
+                    <div class="row">
+                      {% include "snippet_formfield.html" with field=form.socialee_inputs %}
+                      <div class="tags blue">
+                        <div class="column h5 mb-10 strong blue">{{ object.short_name }} benötigt</div>
+                        {% for output in object.socialee_input.all %}
+                        <a class="tag tag--blue"><i class="fi-x-circle"></i>{{ output.title }}{% if badge_count >= 1 %}
+                        <span>{{ badge_count }}</span>{% endif %}</a>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</from>
+</section>
+
+{% addtoblock "js" %}
+<script>
+
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+          $("#profile_pic").attr("src", e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#id_picture").change(function(){
+    readURL(this);
+});
+</script>
+{% endaddtoblock %}
+
+{% endblock content %}

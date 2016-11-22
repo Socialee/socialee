@@ -13,9 +13,12 @@ from taggit.forms import TagWidget
 
 
 class StartProjectForm(forms.ModelForm):
+    fields = ('tagline', 'description', 'picture', 'tags')
+    socialee_outputs = forms.CharField(required=False)
+    socialee_inputs = forms.CharField(required=False)
     class Meta:
         model = Project
-        fields = ('title', 'tagline')
+        fields = ('title', 'tagline', 'description', 'picture', 'tags')
         labels = {
             'title': _('Projekttitel'),
             'tagline': _('Untertitel'),
@@ -23,12 +26,17 @@ class StartProjectForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Socialee'}),
             'tagline': forms.TextInput(attrs={'placeholder': 'Das soziale Netzwerk für Ideen und Projekte'}),
+            'description': forms.Textarea(attrs={'rows': 4}),
+            'tags': TagWidget(attrs={'placeholder': 'Eine durch Komma getrennte Schlagwortliste.'}),
         }
 
 class EditProjectForm(forms.ModelForm):
+    fields = ('tagline', 'description', 'picture', 'tags')
+    socialee_outputs = forms.CharField(required=False)
+    socialee_inputs = forms.CharField(required=False)
     class Meta:
         model = Project
-        fields = ('title', 'tagline', 'description', 'tags')
+        fields = ('title', 'tagline', 'description', 'picture', 'tags')
         labels = {
             'title': _('Gib deiner Idee einen Namen...'),
             'tagline': _('... und einen Untertitel.'),
@@ -36,27 +44,26 @@ class EditProjectForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Socialee'}),
             'tagline': forms.TextInput(attrs={'placeholder': 'Das soziale Netzwerk für Ideen und Projekte'}),
+            'description': forms.Textarea(attrs={'rows': 4}),
+            'tags': TagWidget(attrs={'placeholder': 'Eine durch Komma getrennte Schlagwortliste.'}),
         }
 
 
 class EditProfileForm(forms.ModelForm):
     model = Profile
     fields = ('tagline', 'description', 'picture', 'phone', 'plz', 'newsletter', 'tags')
-    username = forms.CharField(required=True)
-    email = forms.EmailField(required=False)
     first_name = forms.CharField(required=False)
     last_name = forms.CharField(required=False)
     socialee_outputs = forms.CharField(required=False)
     socialee_inputs = forms.CharField(required=False)
     def __init__(self, *args, **kwargs):
         super(EditProfileForm, self).__init__(*args, **kwargs)
-        self.fields['tags'].widget.attrs['placeholder'] = 'Eine durch Komma getrennte Schlagwortliste.'
-        # self.fields['tags'].widget.attrs['placeholder'] = self.fields['tags'].label or 'Eine durch Komma getrennte Schlagwortliste.'
     class Meta:
         model = Profile
         fields = ('tagline', 'description', 'picture', 'phone', 'plz', 'newsletter', 'tags')
         widgets = {
-            'tags': TagWidget()
+            'tags': TagWidget(attrs={'placeholder': 'Eine durch Komma getrennte Schlagwortliste.'}),
+            'description': forms.Textarea(attrs={'rows': 4}),
         }
 
 

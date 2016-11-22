@@ -99,7 +99,7 @@ class ProjectView(BaseView, DetailView):
 
 # CRUD UPDATE PARTICULAR PROJECT
 class ProjectUpdateView(BaseView, UpdateView):
-    template_name = 'project_update.html'
+    template_name = 'instance_update.html'
     model = Project
     form_class = EditProjectForm
 
@@ -127,7 +127,7 @@ class ProjectUpdateView(BaseView, UpdateView):
 # Welcome View: Landing-Page for User and overview
 
 class StartProfile(BaseView, CreateView):
-    template_name = 'profile_update.html'
+    template_name = 'instance_update.html'
     model = Profile
     form_class = EditProfileForm
 
@@ -158,7 +158,7 @@ class StartProfile(BaseView, CreateView):
 
 # Update Profile: User updates own profile
 class ProfileUpdateView(BaseView, UpdateView):
-    template_name = 'profile_update.html'
+    template_name = 'instance_update.html'
     model = Profile
     form_class = EditProfileForm
 
@@ -174,8 +174,6 @@ class ProfileUpdateView(BaseView, UpdateView):
         form = self.form_class(initial={
             'first_name': request.user.first_name,
             'last_name': request.user.last_name,
-            'email': request.user.email,
-            'username': request.user.username,
             'socialee_outputs': ', '.join([str(o.title) for o in request.user.current_instance.socialee_output.all()]),
             'socialee_inputs': ', '.join([str(i.title) for i in request.user.current_instance.socialee_input.all()])
                     }, instance=request.user.current_instance.profile)
@@ -186,15 +184,15 @@ class ProfileUpdateView(BaseView, UpdateView):
         self.object = self.get_object()
         form = self.form_class(request.POST)
         if form.is_valid():
-            request.user.username = form.cleaned_data['username']
+            #request.user.username = form.cleaned_data['username']
             request.user.first_name = form.cleaned_data['first_name']
             request.user.last_name = form.cleaned_data['last_name']
-            request.user.email = form.cleaned_data['email']
+            #request.user.email = form.cleaned_data['email']
             request.user.save()
 
             tags = form.cleaned_data['tags']
             self.object.tags.add(*tags)
-
+            
             outputs = form.cleaned_data['socialee_outputs'].split(",")
             outputs = list(filter(None, outputs))
             for i in outputs:
