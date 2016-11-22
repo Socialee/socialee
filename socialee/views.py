@@ -19,6 +19,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import SingleObjectMixin
 from django.dispatch import receiver
 
+from ideas.models import Idea
 from .models import Project, Input, Output, Profile, CommonGround, Conversation, Message
 from .forms import *
 
@@ -54,9 +55,20 @@ class Impressum(BaseView, TemplateView):
 
 # CRUD CREATE PROJECT
 class StartProject(BaseView, CreateView):
-    template_name = 'start_project.html'
+    template_name = 'instance_create.html'
     model = Project
     form_class = StartProjectForm
+
+    def get(self, request, *args, **kwargs):
+        super(StartProject, self).get(request, *args, **kwargs)
+        idea = Idea.objects.get(id=kwargs['idea'])
+        form = self.form_class(initial={
+            'title': idea.title,
+            'description': idea.description,
+            'picture': idea.picture,
+                    })
+        return self.render_to_response(self.get_context_data(
+            object=self.object, form=form))
 
     def form_valid(self, form):
         user = self.request.user

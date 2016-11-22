@@ -28,6 +28,7 @@ urlpatterns = [
 
     # LOGIN REQUIRED
     url(r'^startproject/$', login_required(views.StartProject.as_view()), name='startproject'), # ID 100
+    url(r'^startproject/(?P<idea>\w+)$', login_required(views.StartProject.as_view()), name='startprojectWithIdea'), 
     url(r'^project_overview/$', views.ProjectOverview.as_view(), name='project_overview'), # ID 101
     url(r'^project/(?P<slug>[-\w]+)/$', login_required(views.ProjectView.as_view()), name='project_view'), # ID 102
     url(r'^project/(?P<slug>[-\w]+)/edit/$', login_required(views.ProjectUpdateView.as_view()), name='project_updateview'), # ID 103
