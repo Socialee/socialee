@@ -46,20 +46,6 @@
                         <a class="tag tag--grey tag--more"><i class="fa fa-plus"></i> §7 Mehr</a>
                       </div>
 
-                    {% if request.user.current_instance.id == object.id %}
-                    <div class="small-12 medium-12 large-4 column header-text-h2 header-text-sm-h2 show-for-small-only">
-                      {% if object.profile %}
-                        <a class="button button--yellow button--icon float-right-lg" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
-                      {% else %}
-                        <a class="button button--yellow button--icon float-right-lg" href="{% url 'project_updateview' slug=project.slug %}"><i class="fa fa-pencil" aria-hidden="true"></i> Projekt bearbeiten</a>
-                      {% endif %}
-                    </div>
-                    {% else %}
-                      <div class="small-12 medium-12 large-4 column show-for-small-only follow{{ object.id }}">
-                        {% include "snippet_follow.html" with to_follow=object.commonground_ptr %}
-                      </div>
-                    {% endif %}
-
                     <div class="column small-12">
                       <p>{% if object.description %}
                         {{ object.description }}
