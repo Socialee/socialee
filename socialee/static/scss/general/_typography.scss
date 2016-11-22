@@ -8,24 +8,24 @@
 
 // $breakpoint-classes: (small medium large);
 
-$header-sizes: (
-  small: (
-    'h1': rem-calc(38px),
-    'h2': rem-calc(38px),
-    'h3': rem-calc(38px),
-    'h4': rem-calc(34px),
-    'h5': rem-calc(30px),
-    'h6': rem-calc(19px),
-  ),
-  medium: (
-    'h1': rem-calc(74px),
-    'h2': rem-calc(54px),
-    'h3': rem-calc(38px),
-    'h4': rem-calc(34px),
-    'h5': rem-calc(30px),
-    'h6': rem-calc(28px),
-  ),
-);
+// $header-sizes: (
+//   small: (
+//     'h1': rem-calc(38px),
+//     'h2': rem-calc(38px),
+//     'h3': rem-calc(38px),
+//     'h4': rem-calc(34px),
+//     'h5': rem-calc(30px),
+//     'h6': rem-calc(19px),
+//   ),
+//   medium: (
+//     'h1': rem-calc(74px),
+//     'h2': rem-calc(54px),
+//     'h3': rem-calc(38px),
+//     'h4': rem-calc(34px),
+//     'h5': rem-calc(30px),
+//     'h6': rem-calc(28px),
+//   ),
+// );
 
 $p-font-sizes: (
   null  : (16px, 24px),

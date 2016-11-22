@@ -5,7 +5,7 @@
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
 {% block allauth_content %}
-<h1>{% trans 'Ausloggen' %}</h1>
+<h2>{% trans 'Ausloggen' %}</h2>
 
 <p>{% trans 'Bist Du sicher, dass du Dich ausloggen möchtest?' %}</p>
 
@@ -14,8 +14,8 @@
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
   {% endif %}
-  <button class="button button--yellow large" type="submit">{% trans 'Ja, raus hier.' %}</button>
-  <a style="font-size: 28px;" class="text-link-special pull-right" onClick="javascript:history.go(-1);">Nee doch nicht.</a>
+  <button class="button button--yellow" type="submit">{% trans 'Ja, raus hier.' %}</button>
+  <a class="text-link-special pull-right" onClick="javascript:history.go(-1);">Nee doch nicht.</a>
 </form>
 
 
