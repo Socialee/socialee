@@ -1,21 +1,21 @@
 .top-bar-app-wrap {
-  position: absolute;
-  top: 0px;
-  width: 100%;
+  // position: absolute;
+  // top: 0px;
+  // width: 100%;
 }
 
 .top-bar-app {
   @include top-bar-container;
-    max-width: 75rem;
+    background-color: transparent;
     margin-left: auto;
     margin-right: auto;
     font-size: 1.25rem;
     padding: 0;
-    max-width: 1400px;
+    max-width: 85.625rem;
     li {padding:0.35rem}
   ,.top-bar-app ul li {
+    background-color: transparent;
     color: $white;
-    background-color: rgba(41,47,53,0.4);
   }
 
 }
@@ -27,6 +27,6 @@
 .top-bar-app .top-bar-right ul {
     background-color: rgba(0,0,0,0);
     .submenu {
-      background-color: rgba(41,47,53,0.4);   
+      background-color: rgba(41,47,53,0.4);
     }
 }

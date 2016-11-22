@@ -37,7 +37,7 @@ $input-background: c(grey, f8);
 // $input-radius: $global-radius;
 
 [type='text'], [type='password'], [type='date'], [type='datetime'], [type='datetime-local'], [type='month'], [type='week'], [type='email'], [type='number'], [type='search'], [type='tel'], [type='time'], [type='url'], [type='color'], textarea {
-    height: rem-calc(80);
+    height: rem-calc(60);
     padding: rem-calc(20);
     border-radius: 0;
 }

@@ -78,6 +78,17 @@ background-image: url(../img/landingpage_bg/Landingpage_Footer.jpg);
     margin-left: -44px;
 }
 
+.c-section__callout {
+	background-color: c(special, white);
+	padding: 3rem;
+	margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+	@include breakpoint(medium) {
+    	margin-bottom: 3rem;
+    	margin-top: 3rem;
+  	}
+}
+
 .home .c-section--quotes {
     background-color: c(black, 1);
 }

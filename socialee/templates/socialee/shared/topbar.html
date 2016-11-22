@@ -1,6 +1,6 @@
 {% load socialee_filters sekizai_tags %}
 
-<div class="row expanded top-bar-app">
+<div class="top-bar-app">
   <div class="top-bar-left">
     <ul class="menu">
       <li><a data-toggle="offCanvas"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
@@ -40,7 +40,7 @@
     else if ( hours > 5 && hours < 23) msg = "Schönen Abend bei Socialee";
     else msg = "Gute Nacht bei Socialee";
 
-    $("#daytime").html(msg);   
+    $("#daytime").html(msg);
   });
 </script>
 {% endaddtoblock %}

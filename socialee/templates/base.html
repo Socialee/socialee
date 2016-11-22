@@ -23,7 +23,7 @@
         {# Socialee CSS #}
         <link type="text/css" rel="stylesheet" href="{% static 'css/socialee_global.css' %}" />
         <link type="text/css" rel="stylesheet" href="{% static 'css/socialee_app.css' %}"  />
-        
+
         {# CSS & JS via Sekizai #}
         {% render_block "css" %}
         {% render_block "js_head" %}
@@ -53,7 +53,7 @@
         {# start of content #}
         {% include "messages.html" %}
 
-        
+
 
         {% block before_content %}
         {% endblock before_content %}
@@ -62,11 +62,11 @@
         <div class="top-bar-app-wrap">
             {% include "topbar.html" %}
         </div>
-        {% else %}    
+        {% else %}
             {% include "topbar.html" %}
         {% endif %}
-        
-        
+
+
         <div class="show-for-large">
         {% if request.user.is_authenticated %}
         {% include "feedback-button.html" %}

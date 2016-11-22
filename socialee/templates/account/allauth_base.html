@@ -3,14 +3,15 @@
 {% load static %}
 
 {% block content %}
-
-<div class="row column h-wrapper">
-    <div class="small-12 medium-10 medium-offset-1 columns h-text-center-sm">
-	    <div class="">
+<div class="c-section">
+  <div class="row">
+    <div class="medium-10 medium-offset-1 large-12 large-offset-0 column">
+	    <div class="c-section__callout">
 			{% block allauth_content %}
 			{% endblock allauth_content %}
 	    </div>
     </div>
+  </div>
 </div>
 
 {% endblock content %}
