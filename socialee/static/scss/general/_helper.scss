@@ -26,6 +26,14 @@
     }
 }
 
+.mt-10 {
+	margin-top: 10px;
+}
+
+.mb-0 {
+	margin-bottom: 0px;
+}
+
 .mb-10 {
 	margin-bottom: 10px;
 }
@@ -50,6 +58,18 @@
 	padding:0px;
 }
 
+.lh-120 {
+	line-height:120%;
+}
+
+.lh-130 {
+	line-height:130%;
+}
+
+.lh-140 {
+	line-height:140%;
+}
+
 .greyblue-2 {
   //color: #5D5C67;
   color: c(greyblue, 2);
@@ -61,6 +81,10 @@
 
 .blue {
 	color: map-get($foundation-palette, blue);
+}
+
+.white {
+	color: map-get($foundation-palette, white);
 }
 
 .strong {
