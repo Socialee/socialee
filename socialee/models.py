@@ -20,8 +20,10 @@ from taggit.managers import TaggableManager
 
 
 def upload_location(instance, filename):
-    location = str(instance.id)
-    return "%s/%s" % (location, filename)
+    slug = str(instance.slug)
+    now = datetime.datetime.now()
+    date = now.strftime("%Y-%m-%d_%HUhr%M")
+    return "%s/%s/%s/%s" % (str("instances"), slug, date, filename)
 
 class CommonGround(models.Model):
     """
