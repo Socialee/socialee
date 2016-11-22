@@ -3,91 +3,92 @@
 
 {% block content %}
 
-<div class="row">
-  <div class="small-12 medium-10 large-8 columns small-centered">
-    <div class="callout">
-      
-      <h3 id="top_titel">Was ist dein Beitrag zur Ideensammlung?</h3>
-      <p id="top_desc">Egal, ob groß oder klein. Mit einer Idee fängt alles an.</p>
-    
-      <form method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
+<div class="c-section -solo">
+  <div class="row">
+    <div class="medium-10 medium-offset-1 large-8 large-offset-2 column">
+      <div class="c-form">
 
-        <div id="idea_form">
-          <img id="idea_image" src="#" alt="Deine Idee als Bild" />
+        <h3 id="top_titel">Was ist dein Beitrag zur Ideensammlung?</h3>
+        <p class="lead">Egal, ob groß oder klein. Mit einer Idee fängt alles an.</p>
 
-          <div class="fieldWrapper">
-              {{ form.picture.errors }}
-              <div class="form-label">{{ form.picture.label }}</div>
-                {% if form.picture.help_text %}
-                  <div class="second-form-label">{{ form.picture.help_text|safe }}</div>
-                {% endif %}
-              {{ form.picture }}
+        <form method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
+
+          <div id="idea_form">
+            <img id="idea_image" src="#" alt="Deine Idee als Bild" />
+
+            <div class="fieldset">
+                {{ form.picture.errors }}
+                <div class="form-label">{{ form.picture.label }}</div>
+                  {% if form.picture.help_text %}
+<!--                     <div class="second-form-label">{{ form.picture.help_text|safe }}</div>
+ -->                  {% endif %}
+                {{ form.picture }}
+            <label for="id_picture" id="upload" class="button button--yellow"><i class="fa fa-upload" aria-hidden="true"></i> Bild hochladen </label>
+            </div>
+
+
+            <div class="fieldWrapper">
+                {{ form.title.errors }}
+                <div class="form-label">{{ form.title.label }}</div>
+                  {% if form.title.help_text %}
+<!--                     <div class="second-form-label">{{ form.title.help_text|safe }}</div>
+ -->                  {% endif %}
+                {{ form.title }}
+            </div>
+
+            <div class="fieldWrapper">
+                {{ form.description.errors }}
+                <div class="form-label">{{ form.description.label }}</div>
+                  {% if form.description.help_text %}
+<!--                     <div class="second-form-label">{{ form.description.help_text|safe }}</div>
+ -->                  {% endif %}
+                {{ form.description }}
+            </div>
+
+            <div class="c-form__footer">
+              <div id="review_button" class="button button--yellow" >Vorschau deiner Idee</div>
+              <a href="{% url 'idea_list' %}" class="text-link-special pull-right">Ich will zurück zur Ideen-Galerie.</a></p>
+            </div>
+
           </div>
-          <label for="id_picture" id="upload" class="button button--yellow hollow"><i class="fa fa-upload" aria-hidden="true"></i> Bild Hochladen </label>
 
-          <div class="fieldWrapper">
-              {{ form.title.errors }}
-              <div class="form-label">{{ form.title.label }}</div>
-                {% if form.title.help_text %}
-                  <div class="second-form-label">{{ form.title.help_text|safe }}</div>
-                {% endif %}
-              {{ form.title }}
-          </div>
-
-          <div class="fieldWrapper">
-              {{ form.description.errors }}
-              <div class="form-label">{{ form.description.label }}</div>
-                {% if form.description.help_text %}
-                  <div class="second-form-label">{{ form.description.help_text|safe }}</div>
-                {% endif %}
-              {{ form.description }}
-          </div>
-
-          <div class="fieldWrapper">
-            <div id="review_button" class="button button--yellow" >Vorschau deiner Idee</div>
-            <p>Ich will zurück zur <a href="{% url 'idea_list' %}">Ideen-Galerie.</a></p>
-          </div>
-
-        </div>
-
-        <div id="review">
-          <div class="grid-item">
-            <div class="idea-card-front">
-              <div class="idea-image">
-                <img id="idea_img" src=""> 
-              </div>
-              <div class="idea-details">
-                <h2 id="idea_title"></h2>
-                <p id="idea_description"></p>
-              </div>
-              <div class="idea-heart">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
-                  <strong class="fa-stack-1x">0</strong>
-                </span>
+          <div id="review">
+            <div class="grid-item">
+              <div class="idea-card-front">
+                <div class="idea-image">
+                  <img id="idea_img" src="">
+                </div>
+                <div class="idea-details">
+                  <h2 id="idea_title"></h2>
+                  <p id="idea_description"></p>
+                </div>
+                <div class="idea-heart">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
+                    <strong class="fa-stack-1x">0</strong>
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-          {% if not request.user.is_authenticated %}
-          <div class="fieldWrapper">
-            {{ form.email.errors }}
-            <div class="form-label">{{ form.email.label }}</div>
-              {% if form.email.help_text %}
-                <div class="second-form-label">{{ form.email.help_text|safe }}</div>
-              {% endif %}
-            {{ form.email }}
-          </div>
-          {% endif %}
+            {% if not request.user.is_authenticated %}
+            <div class="fieldWrapper">
+              {{ form.email.errors }}
+              <div class="form-label">{{ form.email.label }}</div>
+                {% if form.email.help_text %}
+<!--                   <div class="second-form-label">{{ form.email.help_text|safe }}</div>
+ -->                {% endif %}
+              {{ form.email }}
+            </div>
+            {% endif %}
 
-          <div class="fieldWrapper">
-            <input class="button button--yellow" type="submit" value="Idee Absenden" />
-            <p>Ich will die Idee <a id="change">nochmal ändern</a>.</p>
+            <div class="c-form__footer">
+              <input class="button button--yellow" type="submit" value="Idee Absenden" />
+              <a id="change" class="text-link-special float-right-md">Ich will die Idee nochmal ändern</a>
+            </div>
           </div>
-        </div>
-
-      </form>
-
-    </div> 
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -142,7 +143,7 @@ $("#review_button").click(function()
     {
       $("#top_desc").html("Eines der Felder musst du aber schon ausfüllen ;-) Oder einfach nur ein Bild hochladen.");
     }
-    
+
   });
 $("#change").click(function()
   {
@@ -150,8 +151,8 @@ $("#change").click(function()
     $("#idea_form").children().show();
     $("#id_email").parent().hide();
     $("#top_desc").show();
-    $("#top_desc").html("Mach sie nochmal hübscher...");  
-    $("#top_titel").html("Gute Idee!");  
+    $("#top_desc").html("Mach sie nochmal hübscher...");
+    $("#top_titel").html("Gute Idee!");
   });
 </script>
 {% endaddtoblock %}

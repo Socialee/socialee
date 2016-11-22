@@ -57,3 +57,19 @@ hr {
   padding-top: rem-calc(80px);
   padding-bottom: rem-calc(80px);
 }
+
+img#idea_image {
+    display: none;
+    max-width: 50%;
+    max-height: 50%;
+}
+
+input#id_picture {
+    display: none;
+}
+
+.fieldset {
+    border: 0;
+    padding: 0;
+    margin: 1.125rem 0;
+}
