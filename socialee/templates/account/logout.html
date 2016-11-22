@@ -14,8 +14,10 @@
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
   {% endif %}
-  <button class="button button--yellow" type="submit">{% trans 'Ja, raus hier.' %}</button>
-  <a class="text-link-special pull-right" onClick="javascript:history.go(-1);">Nee doch nicht.</a>
+  <div class="c-form__footer">
+    <button class="button button--yellow" type="submit">{% trans 'Ja, raus hier.' %}</button>
+    <a class="text-link-special pull-right" onClick="javascript:history.go(-1);">Nee doch nicht.</a>
+  </div>
 </form>
 
 

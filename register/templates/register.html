@@ -15,8 +15,8 @@
           {{ form.first_name.errors }}
           <label>{{ form.first_name.label }}</label>
             {% if form.first_name.help_text %}
-             <span class="second-form-label">{{ form.first_name.help_text|safe }}</span>
-            {% endif %}
+<!--              <span class="second-form-label">{{ form.first_name.help_text|safe }}</span>
+ -->            {% endif %}
           {{ form.first_name }}
       </div>
 
@@ -24,8 +24,8 @@
           {{ form.email.errors }}
           <label>{{ form.email.label }}</label>
             {% if form.email.help_text %}
-             <span class="second-form-label">{{ form.email.help_text|safe }}</span>
-            {% endif %}
+<!--              <span class="second-form-label">{{ form.email.help_text|safe }}</span>
+ -->            {% endif %}
           {{ form.email }}
       </div>
 
@@ -33,22 +33,22 @@
           {{ form.message.errors }}
           <label>{{ form.message.label|safe }}</label>
             {% if form.message.help_text %}
-             <span class="second-form-label">{{ form.message.help_text|safe }}</span>
-            {% endif %}
+<!--              <span class="second-form-label">{{ form.message.help_text|safe }}</span>
+ -->            {% endif %}
           {{ form.message }}
       </div>
       <div class="columns medium-12">
           {{ form.newsletter.errors }}
           <label>{{ form.newsletter.label }}</label>
             {% if form.newsletter.help_text %}
-             <label class="second-form-label">{{ form.newsletter.help_text|safe }}</label>
-            {% endif %}
+<!--              <label class="second-form-label">{{ form.newsletter.help_text|safe }}</label>
+ -->            {% endif %}
           {{ form.newsletter }}
       </div>
 
     </div>
 
-    <div class="fieldWrapper">
+    <div class="c-form__footer">
       <input class="button button--yellow" type="submit" value="anmelden" />
     </div>
 

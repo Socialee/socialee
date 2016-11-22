@@ -10,8 +10,10 @@
   	    <p class="-lead">Wir gucken es uns an und veröffentlichen es, sofern es jugendfrei ist.</p>
   	    <form method="post"> {% csrf_token %}
   	      {{ form }}
-  	      <input class="button button--yellow" type="submit" value="Abschicken" />
-  	      <a class="text-link-special pull-right" onClick="javascript:history.go(-1);">Raus hier.</a>
+  	      <div class="c-form__footer">
+            <input class="button button--yellow" type="submit" value="Abschicken" />
+    	      <a class="text-link-special pull-right" onClick="javascript:history.go(-1);">Raus hier.</a>
+          </div>
   	    </form>
       </div>
 	  </div>

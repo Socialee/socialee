@@ -8,6 +8,10 @@
       margin-bottom: 3rem;
       margin-top: 3rem;
     }
+
+  @include breakpoint(small only) {
+      padding: 2rem 2rem;
+    }
 }
 
 // .c-section__callout {
@@ -30,7 +34,7 @@
 }
 
 .c-form__footer {
-  padding-top: rem-calc(40px);
+  padding-top: rem-calc(20px);
 }
 
 .second-form-label {
