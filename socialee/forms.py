@@ -13,7 +13,7 @@ from taggit.forms import TagWidget
 
 
 class StartProjectForm(forms.ModelForm):
-    fields = ('tagline', 'description', 'picture', 'tags')
+    fields = ('title', 'tagline', 'description', 'picture', 'tags')
     socialee_outputs = forms.CharField(required=False)
     socialee_inputs = forms.CharField(required=False)
     class Meta:

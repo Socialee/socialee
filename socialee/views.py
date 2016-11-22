@@ -65,10 +65,30 @@ class StartProject(BaseView, CreateView):
         form = self.form_class(initial={
             'title': idea.title,
             'description': idea.description,
-            'picture': idea.picture,
                     })
         return self.render_to_response(self.get_context_data(
-            object=self.object, form=form))
+            object=self.object, form=form, idea=idea))
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            ret = super(StartProject, self).post(request, *args, **kwargs)
+            tags = form.cleaned_data['tags']
+            self.object.tags.add(*tags)
+            
+            outputs = form.cleaned_data['socialee_outputs'].split(",")
+            outputs = list(filter(None, outputs))
+            for i in outputs:
+                Output.objects.get_or_create(title=i.strip(), owner=request.user.current_instance)
+
+            inputs = form.cleaned_data['socialee_inputs'].split(",")
+            inputs = list(filter(None, inputs))
+            for i in inputs:
+                Input.objects.get_or_create(title=i.strip(), owner=request.user.current_instance)
+
+            return ret
+        else:
+            return self.form_invalid(form)
 
     def form_valid(self, form):
         user = self.request.user

@@ -121,6 +121,12 @@ class Project(CommonGround):
     video = models.FileField(upload_to=upload_location, null=True, blank=True) 
     longdescription = models.TextField(max_length=2500, null=True, blank=True)
     history = models.TextField(max_length=1000, null=True, blank=True)
+
+
+    def use_pic(self, idea):
+        img = Image.open(idea.picture)
+        img.save(upload_location(self,os.path.basename(idea.picture)))
+        self.picture = img
     
     
     def __str__(self):

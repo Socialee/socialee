@@ -8,28 +8,32 @@
   <div class="row">
     <div class="row column hero__wrapper">
       <div class="small-12 medium-10 medium-offset-1 columns h-text-center-sm">
-        <div class="hero__profile">
+        <div class="">
           <div class="row">
             <div class="small-12 column">
               <div class="row column media-object stack-for-small">
-                {% if object.profile %}
-                <div class="media-object-section">
-                  <img class="" id="id_picture" src="{{ MEDIA_URL }}{{ object.picture }}" alt="profile image">
+                <div class="media-object-section small-4">
+                  {% if idea.picture %}
+                  <img class="small-12" id="id_picture" src="{{ MEDIA_URL }}{{ idea.picture }}" alt="project image">
+                  {% endif %}
+                  {{ form.picture }}
                 </div>
-                {% endif %}
                 <div class="small-12 media-object-section main-section">
                   <div class="row">
-                    <div class="small-12 medium-12 large-8 column profile__name header-text-h2 header-text-sm-h2">
-                      {% if object.profile %}
-                        {% include "snippet_formfield.html" with field=form.first_name size="medium-6" %}
-                        {% include "snippet_formfield.html" with field=form.last_name size="medium-6" %}
-                      {% else %}
-                        {% include "snippet_formfield.html" with field=form.title size="medium-6" %}
-                      {% endif %}
-                    </div>
-                    <div class="small-12 medium-12 large-4 column show-for-medium header-text-h2 header-text-sm-h2">
+                    <div class="small-12 medium-12 large-12 column show-for-medium header-text-h2 header-text-sm-h2">
                       <input class="button button--yellow button--icon float-right-lg" type="submit" value="Save" />
                     </div>
+                  </row>
+                  <row>
+                    <div class="small-12 medium-12 large-12 column profile__name header-text-h2 header-text-sm-h2">
+                      {% if object.profile %}
+                        {% include "snippet_formfield.html" with field=form.first_name size="medium-12" %}
+                        {% include "snippet_formfield.html" with field=form.last_name size="medium-12" %}
+                      {% else %}
+                        {% include "snippet_formfield.html" with field=form.title size="medium-12" %}
+                      {% endif %}
+                    </div>
+                    
 
                     <div class="column small-12 profile__tagline header-text-h6 header-text-sm-h6">
                     {% include "snippet_formfield.html" with field=form.tagline size="medium-12" %}
