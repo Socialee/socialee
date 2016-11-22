@@ -18,11 +18,8 @@
 
 .c-section--bg-img {
   	@extend .c-section;
-  	padding-top: 10rem;
- 		padding-bottom: 10rem;
  		z-index: 0;
 		position: relative;
-	  // background-color: #3F3E47;
 	  display: table;
 	  width: 100%;
 	  height: auto;
@@ -65,7 +62,8 @@
 
 .c-section--quotes {
 background-color: c(blue, 3);
-
+padding-top: 5rem;
+padding-bottom: 5rem;
 }
 
 .c-section--quotes::after {
@@ -78,6 +76,8 @@ background-image: url(../img/landingpage_bg/Landingpage_Footer.jpg);
 }
 
 .c-section--quotes .section-img {
+    padding-top: 10rem;
+ 		padding-bottom: 10rem;
     top: -280px;
     margin-left: -44px;
 }
