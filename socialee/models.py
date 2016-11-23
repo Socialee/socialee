@@ -1,6 +1,7 @@
-from datetime import datetime
+import datetime
 import PIL
 from PIL import Image
+import os.path
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -11,6 +12,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
 from allauth.account.signals import email_confirmed
 from django.dispatch import receiver
+from django.core.files.images import ImageFile
 
 # from cms.admin.placeholderadmin import FrontendEditableAdminMixin
 
@@ -124,9 +126,10 @@ class Project(CommonGround):
 
 
     def use_pic(self, idea):
-        img = Image.open(idea.picture)
-        img.save(upload_location(self,os.path.basename(idea.picture)))
-        self.picture = img
+        name = os.path.basename(idea.picture.name)
+        idea_path = os.path.join(settings.MEDIA_ROOT, idea.picture.name)
+        image_file = ImageFile(open(idea_path, "rb"))
+        self.picture.save(name, image_file, save=True)
     
     
     def __str__(self):

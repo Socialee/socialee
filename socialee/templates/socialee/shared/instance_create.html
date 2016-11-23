@@ -11,19 +11,20 @@
           <div class="row">
             <div class="small-12 column">
               <div class="row column media-object stack-for-small">
+                {{ form.picture }}
                 <div class="media-object-section small-4">
                   {% if idea.picture %}
-                  <img class="small-12" id="id_picture" src="{{ MEDIA_URL }}{{ idea.picture }}" alt="project image">
+                  <img class="small-12" id="js-id-picture" src="{{ MEDIA_URL }}{{ idea.picture }}" alt="project image">
                   {% endif %}
-                  {{ form.picture }}
+                  <label for="id_picture" id="upload" class="button button--yellow"><i class="fa fa-upload" aria-hidden="true"></i> Bild hochladen </label>
                 </div>
                 <div class="small-12 media-object-section main-section">
                   <div class="row">
                     <div class="small-12 medium-12 large-12 column show-for-medium header-text-h2 header-text-sm-h2">
                       <input class="button button--yellow button--icon float-right-lg" type="submit" value="Save" />
                     </div>
-                  </row>
-                  <row>
+                  </div>
+                  <div class="row">
                     <div class="small-12 medium-12 large-12 column profile__name header-text-h2 header-text-sm-h2">
                       {% if object.profile %}
                         {% include "snippet_formfield.html" with field=form.first_name size="medium-12" %}
@@ -102,7 +103,7 @@ function readURL(input) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-          $("#profile_pic").attr("src", e.target.result);
+          $("#js-id-picture").attr("src", e.target.result);
         }
 
         reader.readAsDataURL(input.files[0]);
@@ -112,6 +113,7 @@ function readURL(input) {
 $("#id_picture").change(function(){
     readURL(this);
 });
+
 </script>
 {% endaddtoblock %}
 

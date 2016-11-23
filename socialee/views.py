@@ -61,11 +61,14 @@ class StartProject(BaseView, CreateView):
 
     def get(self, request, *args, **kwargs):
         super(StartProject, self).get(request, *args, **kwargs)
-        idea = Idea.objects.get(id=kwargs['idea'])
-        form = self.form_class(initial={
-            'title': idea.title,
-            'description': idea.description,
-                    })
+        form = self.form_class()
+        idea = None
+        if 'idea' in kwargs:
+            idea = Idea.objects.get(id=kwargs['idea'])
+            form = self.form_class(initial={
+                'title': idea.title,
+                'description': idea.description,
+                        })
         return self.render_to_response(self.get_context_data(
             object=self.object, form=form, idea=idea))
 
@@ -73,6 +76,8 @@ class StartProject(BaseView, CreateView):
         form = self.form_class(request.POST)
         if form.is_valid():
             ret = super(StartProject, self).post(request, *args, **kwargs)
+            if not self.object.picture:
+                self.object.use_pic(Idea.objects.get(id=kwargs['idea']))
             tags = form.cleaned_data['tags']
             self.object.tags.add(*tags)
             
