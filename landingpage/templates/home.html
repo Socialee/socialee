@@ -16,7 +16,7 @@
     <div class="row">
       <div class="small-12 medium-11 large-11 small-centered">
         <div class="callout idea-gallery">
-          <h6 class="text-center">Hier kannst du Ideen entdecken oder <a class="" href="{% url 'create_idea' %}">deine eigene Idee teilen.</a></h6>
+          <h6 class="text-center">Hier kannst du Ideen entdecken oder <a class="text--underline" href="{% url 'create_idea' %}">deine eigene Idee teilen.</a></h6>
             <div class="small-12 medium-12 large-11 small-centered">
               {% featured_idea_list as idea_list %}
               {% include 'snippet_ideas.html'%}
