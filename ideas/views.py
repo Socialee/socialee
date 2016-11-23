@@ -30,6 +30,9 @@ class CreateIdea(SignupView):
             title = form.cleaned_data.get('title')
             description = form.cleaned_data.get('description')
             email = form.cleaned_data.get('email')
+            user = request.user
+            if not email:
+                email = request.user.email
             message = _("Es gibt eine neue Idee auf Socialee.\n\nTitel: %(title)s\nBeschreibung: %(description)s\n\nvon Email-Adresse: %(email)s\n\n")\
             % {'title': str(title),
             'description': str(description),
