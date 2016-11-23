@@ -7,7 +7,7 @@
     </div>
     <div class="small-12 text-center">
     {% random_quote as random_quote %}
-      <h5 class="quote white strong">{{ random_quote.title }}</p>
+      <h5 class="quote white strong">{{ random_quote.title }}</h5>
       <p class="-lead white strong">Das hat {{ random_quote.author }} gesagt. <br class="show-for-small-only"><a class="text--underline" href="{% url 'make_quote' %}">Was sagst Du?</a></p>
     </div>
   </div>
