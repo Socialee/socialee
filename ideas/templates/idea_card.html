@@ -128,7 +128,11 @@
           </div>
         </div>
         {% else %}
-        <p class="white text-center">Du willst was sagen? <a href="{% url 'account_login' %}">Melde dich an!</a></p>
+        <div class="text-center mt-50">
+          <p class="white text-center mb-0">Willst du mitreden?</p>
+          <a class="button button--yellow" href="{% url 'register' %}">Jetzt registrieren!</a>
+          <p><a class="" href="{% url 'account_login' %}">oder anmelden</a></p>
+        </div>
         {% endif %}
 
     </div>
