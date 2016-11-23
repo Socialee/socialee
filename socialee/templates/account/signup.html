@@ -8,7 +8,7 @@
 
     <h2>Neues Konto eröffnen.</h2>
 
-    <p class="-lead">Wenn Du schon ein Konto hast, <a href="{{ login_url }}">logge Dich ein.</a></p>
+    <p class="-lead">Wenn Du schon ein Konto hast, <a href="{{ login_url }}">melde dich an.</a></p>
 
     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
       {% csrf_token %}
@@ -17,7 +17,7 @@
       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"><input>
       {% endif %}
       <div class="c-form__footer">
-        <button class="button button--yellow" type="submit">{% trans "Anmelden" %} &raquo;</button>
+        <button class="button button--yellow" type="submit">{% trans "Registrieren" %} &raquo;</button>
       </div>
     </form>
 

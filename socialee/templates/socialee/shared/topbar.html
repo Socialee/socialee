@@ -15,13 +15,14 @@
         <a href="">{% if request.user.first_name %}{{ request.user.first_name }}{% else %}{{ request.user.email }}{% endif %}</a>
         <ul class="menu">
           <li><a href="{% url 'account_change_password' %}">Passwort ändern</a></li>
-          <li><a href="{% url 'account_logout' %}">Ausloggen</a></li>
+          <li><a href="{% url 'account_logout' %}">Abmelden</a></li>
         </ul>
       </li>
     </ul>
     {% else %}
     <ul class="menu">
-      <li class="menu-text"><a href="{% url 'register' %}">Anmelden</a></li>
+      <li class="menu-text"><a class="" href="{% url 'account_login' %}">Anmelden</a></li>
+      <li class="menu-text"><a class="button button--yellow" href="{% url 'register' %}">Registrieren</a></li>
     </ul>
     {% endif %}
   </div>

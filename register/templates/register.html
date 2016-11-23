@@ -5,7 +5,7 @@
 
 
   <h2>Schön, dass du da bist!</h2>
-  <p class="-lead">Willkommen bei Socialee! Wir sind in der Entwicklungs-Phase, hab Nachsicht mit allem, was noch keinen Sinn macht. Du kannst dich gerne anmelden und alles austesten. Wenn du schon ein Konto hast, <a href="{% url 'account_login' %}"> logge dich ein.</a></p>
+  <p class="-lead">Willkommen bei Socialee! Wir sind in der Entwicklungs-Phase, hab Nachsicht mit allem, was noch keinen Sinn macht. Du kannst dich registrieren und alles austesten. Wenn du schon ein Konto hast, <a href="{% url 'account_login' %}"> melde dich an.</a></p>
 
     <form method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
 
@@ -49,7 +49,7 @@
     </div>
 
     <div class="c-form__footer">
-      <input class="button button--yellow" type="submit" value="anmelden" />
+      <input class="button button--yellow" type="submit" value="registrieren" />
     </div>
 
     </form>

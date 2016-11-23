@@ -5,9 +5,9 @@
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
 {% block allauth_content %}
-<h2>{% trans 'Ausloggen' %}</h2>
+<h2>{% trans 'Abmelden' %}</h2>
 
-<p class="-lead">{% trans 'Bist Du sicher, dass du Dich ausloggen möchtest?' %}</p>
+<p class="-lead">{% trans 'Bist Du sicher, dass du Dich abmelden möchtest?' %}</p>
 
 <form method="post" action="{% url 'account_logout' %}">
   {% csrf_token %}

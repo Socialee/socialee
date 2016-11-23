@@ -7,7 +7,7 @@
 
 {% block allauth_content %}
 
-<h2>{% blocktrans %}Hier kannst du dich anmelden...{% endblocktrans %}</h2>
+<h2>{% blocktrans %}Hier kannst du dich anmelden.{% endblocktrans %}</h2>
 
 {% get_providers as socialaccount_providers %}
 
@@ -29,8 +29,7 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 {% include "socialaccount/snippets/login_extra.html" %}
 
 {% else %}
-<p class="-lead">Wenn Du noch kein Konto bei Socialee hast,
-<a href="{% url 'register' %}">melde dich an!</a></p>
+<p class="-lead">Wenn Du noch kein Konto bei Socialee hast, <a class="text-link-special" href="{% url 'register' %}">registriere dich!</a></p>
 {% endif %}
 
 <form class="login" method="POST" action="{% url 'account_login' %}">
@@ -44,8 +43,8 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
     {% endif %}
   </div>
   <div class="c-form__footer">
-    <button class="button button--yellow" type="submit">{% trans "Einloggen" %}</button>
-    <a class="text-link-special pull-right" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+    <button class="button button--yellow" type="submit">{% trans "Anmelden" %}</button>
+    <a class="pull-right" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
   </div>
 </form>
 
