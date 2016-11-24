@@ -32,19 +32,33 @@ class CreateIdea(SignupView):
             email = form.cleaned_data.get('email')
             user = request.user
             if not email:
-                email = request.user.email
-            message = _("Es gibt eine neue Idee auf Socialee.\n\nTitel: %(title)s\nBeschreibung: %(description)s\n\nvon Email-Adresse: %(email)s\n\n")\
+                try:
+                    email = request.user.email
+                except:
+                    email = "Anonym"
+
+            message_to_us = _("Es gibt eine neue Idee auf Socialee.\n\nTitel: %(title)s\nBeschreibung: %(description)s\n\nvon Email-Adresse: %(email)s\n\n")\
             % {'title': str(title),
             'description': str(description),
             'email': str(email),
             }
-            send_mail(
-                'Neue Idee auf Socialee!',
-                message,
-                settings.SERVER_EMAIL,
-                [settings.NEW_IDEA_EMAIL],
-                fail_silently=True,
-            )
+            if settings.PROD:
+                send_mail(
+                    'Neue Idee auf Socialee!',
+                    message_to_us,
+                    settings.SERVER_EMAIL,
+                    ['team@socialee.de',],
+                    fail_silently=False,
+                )
+            message_to_them = _("Danke für deine Idee! Wir gucken sie uns an. Das dauert nicht länger als einen Tag.")
+            if not email == "Anonym":
+                send_mail(
+                    'Deine Idee auf Socialee!',
+                    message_to_them,
+                    settings.SERVER_EMAIL,
+                    [email,],
+                    fail_silently=False,
+                )
             if not email and hasattr(request.user, 'email'):
                 email = request.user.email
             ret = super(CreateIdea, self).post(request, *args, **kwargs)
