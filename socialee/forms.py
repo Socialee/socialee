@@ -68,7 +68,10 @@ class EditProfileForm(forms.ModelForm):
 
 
 class SocialeeLoginForm(LoginForm): # Changing labels of default Allauth Login Form (note ACCOUNT_FORMS in settings.py)
+    
     def __init__(self, *args, **kwargs):
         super(SocialeeLoginForm, self).__init__(*args, **kwargs)
-        self.fields['password'].widget = forms.PasswordInput(attrs={'placeholder': mark_safe("&#xf023; tri tra trullala")})
-    password = PasswordField(label=_("Dein Passwort"))
+        self.fields['login'].widget = forms.TextInput(attrs={'placeholder': ""})
+        self.fields['login'].label = "E-Mail-Adresse"
+        self.fields['password'].widget = forms.PasswordInput(attrs={'placeholder': mark_safe("***")})
+        self.fields['password'].label = "Passwort"
