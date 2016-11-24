@@ -15,7 +15,7 @@ class EmailRegisterForm(BaseSignupForm):
     def __init__(self, *args, **kwargs):
         super(EmailRegisterForm, self).__init__(*args, **kwargs)
 
-        self.fields['email'].label = _('Deine Email-Adresse')
+        self.fields['email'].label = _('E-Mail-Adresse')
 
     def clean(self):
         super(EmailRegisterForm, self).clean()
@@ -61,17 +61,20 @@ class NewsletterForm(EmailRegisterForm):
     def __init__(self, *args, **kwargs):
         super(NewsletterForm, self).__init__(*args, **kwargs)
 
-        self.fields['email'].label = _('Deine Email-Adresse')
-        self.fields['email'].help_text = _('Das brauchen wir')
-
         fields_key_order = ['first_name', 'email', 'message', 'newsletter']
         self.fields = OrderedDict((k, self.fields[k]) for k in fields_key_order)
 
-        self.fields['first_name'].label = _('Vor & Nachname')
-        self.fields['message'].label = _("Möchtest Du sonst noch was loswerden?<br class='show-for-medium'/> Dies ist die Gelegenheit.")
+        self.fields['email'].label = _('E-Mail-Adresse')
+        self.fields['email'].help_text = _('Das brauchen wir')
+        self.fields['email'].widget = forms.TextInput(attrs={'placeholder': ""})
 
+        self.fields['first_name'].label = _('Vor- & Nachname')
         self.fields['first_name'].help_text = _('Wenn Du magst')
+
+        self.fields['message'].label = _("Möchtest Du sonst noch was loswerden? Dies ist die Gelegenheit.")
         self.fields['message'].help_text = _('Wenn Du magst')
+
+        self.fields['newsletter'].label = _('Newsletter abonnieren')
 
     def custom_signup(self, request, user):
         request.session["message_register"] = True
