@@ -39,11 +39,11 @@
                       Hier steht eigentlich eine Tagline.
                     {% endif %}
                     </div>
-                      <div class="column small-12 profile__tagline tags tags--attribute tags--orange">
+                      <div class="column small-12 profile__tagline tags tags--attribute tags--orange js-content-sized">
                         {% for tag in object.tags.all %}
-                        <a class="tag tag--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
+                        <a class="tag tag--orange js-sized"><i class="fi-x-circle"></i>{{ tag }}</a>
                         {% endfor %}
-                        <a class="tag tag--grey tag--more"><i class="fa fa-plus"></i> §7 Mehr</a>
+                        <a class="tag tag--white tag--more js-sized-more"><i class="fa fa-plus"></i>  Mehr</a>
                       </div>
 
                     <div class="column small-12">
@@ -60,43 +60,20 @@
                 </div>
               </div>
             </div>
-            <div class="small-12 columns">
-              <div class="column tags-wrapper">
-                <div class="">
-                  <div class="small-12 medium-6 columns">
-                    <div class="row">
-                      <div class="tags green">
-                        <div class="column h5 mb-10 strong green">{{ object.short_name }} bietet</div>
-                        {%  for input in object.socialee_output.all %}
-                        <a class="tag tag--green"><i class="fi-x-circle"></i>{{ input }}{% if badge_count >= 1 %}
-                        <span>{{ badge_count }}</span>{% endif %}</a>
-                        {% endfor %}
-                        <a class="tag tag--white tag--more"><i class="fa fa-plus"></i> §7 Mehr</a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <hr class="show-for-small-only">
-
-                  <div class="small-12 medium-6 columns">
-                    <div class="row">
-                      <div class="tags blue">
-                        <div class="column h5 mb-10 strong blue">{{ object.short_name }} benötigt</div>
-                        {% for output in object.socialee_input.all %}
-                        <a class="tag tag--blue"><i class="fi-x-circle"></i>{{ output.title }}{% if badge_count >= 1 %}
-                        <span>{{ badge_count }}</span>{% endif %}</a>
-                        {% endfor %}
-                        <a class="tag tag--white tag--more"><i class="fa fa-plus"></i> §7 Mehr</a>
-                      </div>
-                    </div>
-                  </div>
-
+            <div class="small-12 columns tags-wrapper">
+              <div class="row align-justify">
+                <div class="small-12 medium-6 columns card-section">
+                  {% include "snippet_input_output_tags.html" with input_output=object.socialee_output title=object.short_name|add:" bietet" color="green" left="true" %}
+                </div>
+                <div class="small-12 medium-6 columns card-section">
+                  {% include "snippet_input_output_tags.html" with input_output=object.socialee_input title=object.short_name|add:" benötigt" color="blue" left="true" %}
                 </div>
               </div>
+
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>

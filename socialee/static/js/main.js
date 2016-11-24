@@ -17,6 +17,8 @@ $(document).ready(function(){
 	        window.location.hash = target;
 	    });
 	});
+
+  $(".js-content-sized").each(fixSizedElements);
 });
 
 // using jQuery
@@ -91,3 +93,30 @@ $(document).on("click", ".comment_button", function(event) {
 $(document).on("click", ".follow", function(event) {
     follow($(this), $(this).attr('instance_id'))
  });
+
+
+
+function showOnlyIfFit() {
+    var height = $(this).parent(".js-content-sized").position().top + $(this).parent(".js-content-sized").outerHeight(true);
+    console.log((this.parentElement.offsetHeight)+"/" + (this.offsetTop + this.offsetHeight));
+    $(this).toggle(this.offsetTop + this.offsetHeight < height);
+}
+
+function fixSizedElements()
+{
+    $(this).children(".js-sized").each(showOnlyIfFit);
+    $(this).find(".js-sized-more").hide();
+    var diff = $(this).children(".js-sized").length - $(this).children(".js-sized:visible").length
+    if ( diff>0 )
+    { 
+        $(this).children(".js-sized:visible").last().hide();
+        $(this).children(".js-sized-more").html("<i class='fa fa-plus'></i> "+(diff+1)+" Mehr");
+        $(this).children(".js-sized-more").show();
+        $(this).children(".js-sized-more").on("click", function() {
+            $(this).parent(".js-content-sized").children(".js-sized").show();
+            $(this).hide();
+        });
+    }
+}
+
+
