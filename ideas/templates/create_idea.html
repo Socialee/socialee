@@ -8,8 +8,8 @@
     <div class="medium-10 medium-offset-1 large-8 large-offset-2 column">
       <div class="c-form">
 
-        <h3 id="top_titel">Was ist dein Beitrag zur Ideensammlung?</h3>
-        <p class="lead">Egal, ob groß oder klein. Mit einer Idee fängt alles an.</p>
+        <h3 id="top_titel">Was ist deine Idee?</h3>
+        <p class="lead">Egal, ob groß oder klein. Mit einer Idee fängt es immmer an.</p>
 
         <form method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
 
@@ -26,7 +26,6 @@
             <label for="id_picture" id="upload" class="button button--yellow"><i class="fa fa-upload" aria-hidden="true"></i> Bild hochladen </label>
             </div>
 
-
             <div class="fieldWrapper">
                 {{ form.title.errors }}
                 <div class="form-label">{{ form.title.label }}</div>
@@ -38,16 +37,17 @@
 
             <div class="fieldWrapper">
                 {{ form.description.errors }}
-                <div class="form-label">{{ form.description.label }}</div>
+                <div class="form-label">{{ form.description.label }}
+                <label class="pull-right" for="id_description">70 Zeichen übrig</label>
                   {% if form.description.help_text %}
 <!--                     <div class="second-form-label">{{ form.description.help_text|safe }}</div>
- -->                  {% endif %}
+ -->                  {% endif %}</div>
                 {{ form.description }}
             </div>
 
             <div class="c-form__footer">
               <div id="review_button" class="button button--yellow" >Vorschau deiner Idee</div>
-              <a href="{% url 'idea_list' %}" class="text-link-special pull-right">Ich will zurück zur Ideen-Galerie.</a></p>
+              <a href="{% url 'idea_list' %}" class="text-link-special pull-right">zurück zur Übersicht</a></p>
             </div>
 
           </div>
@@ -83,7 +83,7 @@
 
             <div class="c-form__footer">
               <input class="button button--yellow" type="submit" value="Idee Absenden" />
-              <a id="change" class="text-link-special float-right-md">Ich will die Idee nochmal ändern</a>
+              <a id="change" class="text-link-special float-right-md">Idee nochmal ändern</a>
             </div>
           </div>
         </form>
@@ -94,6 +94,25 @@
 
 {% addtoblock 'js' %}
 <script type="text/javascript">
+
+function setNum() {
+  var max = $(this).attr("max_length");
+  if($(this).val().length > max)
+  {
+    $(this).val($(this).val().substring(0,max));
+  }
+  var num = max-$(this).val().length;
+  var $label = $("label[for='"+this.id+"']");
+  $label.html(num +" Zeichen übrig");
+  if(num == 0)
+    $label.css('color', 'red');
+  else 
+    $label.css('color', 'initial');
+  }
+$('.input_with_bound').each(setNum);
+$('.input_with_bound').bind('input propertychange', setNum);
+
+
 function readURL(input) {
 
     if (input.files && input.files[0]) {
@@ -136,7 +155,8 @@ $("#review_button").click(function()
       $("#id_email").parent().show();
       fixPreview();
       $("#review").show();
-      $("#top_desc").html("Du kannst noch deine E-Mail-Adresse eintragen, so findest du deine Idee besser wieder und kannst bald ein Projekt daraus machen.");
+      // TODO das hier darf nur angezeigt werden, wenn nicht angemeldet
+      $("#top_desc").html("Du kannst noch deine E-Mail-Adresse eintragen, so findest du deine Idee besser wieder und kannst bald ein Projekt daraus machen."); 
       $("#top_titel").html("Sieht gut aus, oder?!");
     }
     else

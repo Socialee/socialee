@@ -9,7 +9,7 @@ class IdeaForm(EmailRegisterForm):
 
     picture = forms.ImageField( required=False )
     title = forms.CharField( required=False, widget = forms.TextInput( attrs={ 'autofocus': 'autofocus' }))
-    description = forms.CharField( required=False, widget=forms.Textarea(attrs={'cols': 80, 'rows': 5}))
+    description = forms.CharField( required=False, widget=forms.Textarea(attrs={'cols': 80, 'rows': 5, 'max_length':1500, 'class':'input_with_bound'}))
 
     def __init__(self, *args, **kwargs):
         super(IdeaForm, self).__init__(*args, **kwargs)
