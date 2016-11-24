@@ -29,10 +29,10 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 {% include "socialaccount/snippets/login_extra.html" %}
 
 {% else %}
-<p class="-lead">Wenn Du noch kein Konto bei Socialee hast, <a class="text-link-special" href="{% url 'register' %}">registriere dich!</a></p>
+<p class="-lead mb-20">Wenn Du noch kein Konto bei Socialee hast, <a class="text-link-special" href="{% url 'register' %}">registriere dich!</a></p>
 {% endif %}
 
-<form class="login" method="POST" action="{% url 'account_login' %}">
+<form class="login mt-20" method="POST" action="{% url 'account_login' %}">
   <div class="row">
     {% csrf_token %}
     {% for item in form %}

@@ -26,8 +26,20 @@
     }
 }
 
+.mt-0 {
+	margin-top: 0px;
+}
+
 .mt-10 {
 	margin-top: 10px;
+}
+
+.mt-20 {
+	margin-top: 20px;
+}
+
+.mt-50 {
+	margin-top: 50px;
 }
 
 .mb-0 {
@@ -42,16 +54,12 @@
 	margin-bottom: 20px;
 }
 
+.mb-50 {
+	margin-bottom: 50px;
+}
+
 .h-mb-40 {
 	margin-bottom: rem-calc(40px);
-}
-
-.mt-20 {
-	margin-top: 20px;
-}
-
-.mt-50 {
-	margin-top: 50px;
 }
 
 .h-pt-5 {
