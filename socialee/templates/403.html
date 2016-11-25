@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+{% block title %}{% trans "Permission denied" %}{% endblock title %}
+
+{% block body-class %}error-403{% endblock body-class %}
+
+{% block content %}
+<div class="row">
+	<div class="medium-8 columns text-center full-height small-centered">
+		<div class="callout">
+			<h2>{% trans "Permission denied" %}</h2>
+			<p>{% trans "Sorry, but you don't have the permission to do this action." %}</p>
+		</div>
+	</div>
+</div>
+{{ block.super }}
+{% endblock content %}
