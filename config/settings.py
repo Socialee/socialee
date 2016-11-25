@@ -36,8 +36,10 @@ SECRET_KEY = env.str('DJANGO_SECRET_KEY',
                      'gx)-+#9(hotw=qt@swr170k3!l*!=a%6&+)siw4$0q35egtj(1')
 
 DEBUG = env.bool('DJANGO_DEBUG', False)
-SIMPLE_AUTH = env.bool('SIMPLE_AUTH', False)
+STAGE = env.bool('STAGE', False)
 PROD = env.bool('PROD', False)
+LIVE = env.bool('LIVE', False)
+
 INTERNAL_IPS = ('127.0.0.1',)
 
 ALLOWED_HOSTS = env.list('DJANGO_ALLOWED_HOSTS', default=['*'])
@@ -108,7 +110,7 @@ MIDDLEWARE_CLASSES = [
 ]
 
 # AWS S3 Settings
-if not DEBUG:
+if LIVE and not DEBUG:
 
     AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
     AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
@@ -133,7 +135,7 @@ else:
     MEDIA_URL = '/media/'
 
 # Password Protection for Staging Server
-if SIMPLE_AUTH==True: # set in socialee-stage.herokuapp.com
+if STAGE==True: # set in socialee-stage.herokuapp.com
     MIDDLEWARE_CLASSES += [
     'simple_auth.middleware.SimpleAuthMiddleware',
     ]
