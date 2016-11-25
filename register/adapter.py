@@ -1,6 +1,7 @@
 from allauth.account.adapter import DefaultAccountAdapter
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User, Group
 
 from django.utils.translation import ugettext_lazy as _ 
 
@@ -9,7 +10,7 @@ class AdvancedMailAccountAdapter(DefaultAccountAdapter):
 
     error_messages = {
         'email_taken':
-        _("Es gibt schon jemand mit dieser email"),
+        _("Es gibt schon jemand mit dieser Email"),
     }
     
     def send_mail(self, template_prefix, email, context):
@@ -28,6 +29,27 @@ class AdvancedMailAccountAdapter(DefaultAccountAdapter):
 
     def save_user(self, request, user, form, commit=True):
         super(AdvancedMailAccountAdapter, self).save_user(request, user, form, False)
+        # all infos stored in the session can be used in the email template
+        if user.email:
+            # give ths user the temp password to send to the user
+            password = User.objects.make_random_password()
+            user.set_password(password)
+            request.session["pass"] = password
+
+        request.session["email_register"] = True
+        newsletter = form.cleaned_data.get("newsletter")
+        if newsletter:
+            newsletter_group, created = Group.objects.get_or_create(name='signed_up_for_newsletter')
+            user.groups.add(newsletter_group)
+            request.session["newsletter"] = True
+
+        if user.first_name:
+            # try to get the last name out of the field
+            names = user.first_name.split(" ")
+            if len(names)>1:
+                user.last_name = names[-1]
+                user.first_name = " ".join(names[:-1])
+
         if user.email:
             user.save()
 
