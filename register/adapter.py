@@ -2,8 +2,11 @@ from allauth.account.adapter import DefaultAccountAdapter
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User, Group
+from django.forms import ValidationError
 
 from django.utils.translation import ugettext_lazy as _ 
+
+from allauth.utils import email_address_exists
 
 
 class AdvancedMailAccountAdapter(DefaultAccountAdapter):
@@ -12,6 +15,11 @@ class AdvancedMailAccountAdapter(DefaultAccountAdapter):
         'email_taken':
         _("Es gibt schon jemand mit dieser Email"),
     }
+
+    def validate_unique_email(self, email):
+        if email_address_exists(email):
+            raise ValidationError(self.error_messages['email_taken'], code='email_taken')
+        return email
     
     def send_mail(self, template_prefix, email, context):
         if 'email_register' in self.request.session:

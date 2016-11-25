@@ -11,6 +11,8 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import FormView, DetailView
 from django.core.validators import validate_email
 from django.template.loader import render_to_string
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 from .forms import *
 from .models import Idea, Comment
@@ -56,13 +58,37 @@ class CreateIdea(SignupView):
                 return self.form_invalid(form)
             return ret
         else:
-            
+            if form.has_error('email', code='email_taken'):
+                request.session['reload'] = 'true'
+                request.session['title'] = form.data['title']
+                request.session['description'] = form.data['description']
+                request.session['picturefile'] = form.data['picturefile']
+                return self.response_for_email_taken(request, form=form, login=form.data['email'])
             return self.form_invalid(form)
 
     def get_context_data(self, **kwargs):
         context = super(CreateIdea, self).get_context_data(**kwargs)
         context['ideas_count'] = Idea.objects.all().count()
+        if 'reload' in self.request.session:
+            context['reload'] = self.request.session.pop('reload')
+            if 'title' in self.request.session:
+                context['title'] = self.request.session.pop('title')
+            if 'description' in self.request.session:
+                context['description'] = self.request.session.pop('description')
+            if 'picturefile' in self.request.session:
+                context['picturefile'] = self.request.session.pop('picturefile')
         return context
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data()
+        form = self.form_class(initial={
+                'title': context.get('title'),
+                'description': context.get('description'),
+                'picturefile': context.get('picturefile')
+                        })
+        old_reload = context.get('reload')
+        super(CreateIdea, self).get(request, *args, **kwargs)
+        return self.render_to_response(self.get_context_data( form=form, reload=old_reload ))
 
     def send_mail_to_creator(self, email):
         message_to_them = render_to_string('email/email_thank_you_idea.txt')
@@ -84,6 +110,10 @@ class CreateIdea(SignupView):
             ['team@socialee.de',],
             fail_silently=True,
         )
+
+    @method_decorator(login_required)
+    def response_for_email_taken(self, request, *args, **kwargs):
+        return self.render_to_response(self.get_context_data(args, kwargs))
 
 
 def idea_list(request):

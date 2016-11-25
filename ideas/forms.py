@@ -8,12 +8,16 @@ from django.utils.translation import ugettext_lazy as _
 class IdeaForm(EmailRegisterForm):
 
     picture = forms.ImageField( required=False, widget = forms.FileInput( attrs={'class' : 'input_with_img'} ) )
+    picturefile = forms.CharField( #Add room throws DoesNotExist error
+                            widget=forms.HiddenInput,       
+                            required=False,
+                            label='')
     title = forms.CharField( required=False, widget = forms.TextInput( attrs={ 'autofocus': 'autofocus' }))
     description = forms.CharField( required=False, widget=forms.Textarea(attrs={'cols': 80, 'rows': 5, 'max_length':1500, 'class':'input_with_bound'}))
 
     def __init__(self, *args, **kwargs):
         super(IdeaForm, self).__init__(*args, **kwargs)
-        fields_key_order = ['picture', 'title', 'description', 'email']
+        fields_key_order = ['picture', 'picturefile', 'title', 'description', 'email']
         self.fields = OrderedDict((k, self.fields[k]) for k in fields_key_order)
 
         self.fields['email'].required = False

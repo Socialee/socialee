@@ -16,6 +16,7 @@
           <div id="idea_form">
             <div class="row">
             {% include "snippet_formfield.html" with field=form.picture size="medium-6" upload_val=" Bild hochladen " %}
+            {{ form.picturefile }}
             
             {% include "snippet_formfield.html" with field=form.title size="medium-12" %}
 
@@ -74,11 +75,14 @@ function fixPreview()
   $("#idea_img").attr("src", $("#id_picture").parent().find("img").attr("src"));
 }
 
-{% if not form.email.errors %}
+
+{% if reload %}
+$("#idea_form").children().hide();
+$("#idea_title").html($("#id_title").val());
+$("#idea_description").html($("#id_description").val());
+{% else %}
 $("#review").hide();
 $("#id_email").parent().hide();
-{% else %}
-$("#idea_form").children().hide();
 {% endif %}
 
 $("#review_button").click(function()
