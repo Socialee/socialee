@@ -9,6 +9,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import FormView, DetailView
+from django.core.validators import validate_email
+from django.template.loader import render_to_string
 
 from .forms import *
 from .models import Idea, Comment
@@ -29,47 +31,32 @@ class CreateIdea(SignupView):
                 pic = request.FILES['picture']
             title = form.cleaned_data.get('title')
             description = form.cleaned_data.get('description')
-            email = form.cleaned_data.get('email')
-            user = request.user
-            if not email:
-                try:
-                    email = request.user.email
-                except:
-                    email = "Anonym"
 
-            message_to_us = _("Es gibt eine neue Idee auf Socialee.\n\nTitel: %(title)s\nBeschreibung: %(description)s\n\nvon Email-Adresse: %(email)s\n\n")\
-            % {'title': str(title),
-            'description': str(description),
-            'email': str(email),
-            }
-            if settings.PROD:
-                send_mail(
-                    'Neue Idee auf Socialee!',
-                    message_to_us,
-                    settings.SERVER_EMAIL,
-                    ['team@socialee.de',],
-                    fail_silently=False,
-                )
-            message_to_them = _("Danke für deine Idee! Wir gucken sie uns an. Das dauert nicht länger als einen Tag.")
-            if not email == "Anonym":
-                send_mail(
-                    'Deine Idee auf Socialee!',
-                    message_to_them,
-                    settings.SERVER_EMAIL,
-                    [email,],
-                    fail_silently=False,
-                )
-            if not email and hasattr(request.user, 'email'):
-                email = request.user.email
             ret = super(CreateIdea, self).post(request, *args, **kwargs)
+
             if pic or title or description:
-                messages.success(request, 'Danke! Wir gucken uns Deine Idee an und veröffentlichen sie so schnell wie möglich.')
+                email = form.cleaned_data.get('email', 'Anonym')
+
+                if hasattr(request.user, 'email'):
+                    email = request.user.email
+
+                # check if we have a valid email to send to
+                if not email == 'Anonym':
+                    self.send_mail_to_creator(email)
+
+                if settings.PROD:
+                    self.send_mail_to_us(title, description, email)
+                
                 newIdea = Idea.objects.create( picture = pic, title = title, description = description, author=email )
                 newIdea.save()
+
+                # set message to inform user it was successful
+                messages.success(request, 'Danke! Wir gucken uns Deine Idee an und veröffentlichen sie so schnell wie möglich.')
             else:
                 return self.form_invalid(form)
             return ret
         else:
+            
             return self.form_invalid(form)
 
     def get_context_data(self, **kwargs):
@@ -77,6 +64,26 @@ class CreateIdea(SignupView):
         context['ideas_count'] = Idea.objects.all().count()
         return context
 
+    def send_mail_to_creator(self, email):
+        message_to_them = render_to_string('email/email_thank_you_idea.txt')
+        send_mail(
+            'Deine Idee auf Socialee!',
+            message_to_them,
+            settings.SERVER_EMAIL,
+            [email,],
+            fail_silently=True,
+        )
+
+    def send_mail_to_us(self, title, description, email):
+        context = {'title': str(title), 'description': str(description), 'email': str(email)}
+        message_to_us = render_to_string('email/email_new_idea.txt', context)
+        send_mail(
+            'Neue Idee auf Socialee!',
+            message_to_us,
+            settings.SERVER_EMAIL,
+            ['team@socialee.de',],
+            fail_silently=True,
+        )
 
 
 def idea_list(request):

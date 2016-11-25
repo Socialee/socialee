@@ -48,14 +48,7 @@
               </div>
             </div>
             {% if not request.user.is_authenticated %}
-            <div class="fieldWrapper">
-              {{ form.email.errors }}
-              <div class="form-label">{{ form.email.label }}</div>
-                {% if form.email.help_text %}
-<!--                   <div class="second-form-label">{{ form.email.help_text|safe }}</div>
- -->                {% endif %}
-              {{ form.email }}
-            </div>
+            {% include "snippet_formfield.html" with field=form.email size="medium-12" %}
             {% endif %}
 
             <div class="c-form__footer">

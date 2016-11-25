@@ -1,0 +1,3 @@
+{% autoescape off %}
+Danke für deine Idee! Wir gucken sie uns an. Das dauert nicht länger als einen Tag.
+{% endautoescape %}
