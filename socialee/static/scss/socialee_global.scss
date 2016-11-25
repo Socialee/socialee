@@ -61,8 +61,8 @@
     border-bottom: 5px solid $socialee-orange;
     color: #fff;
     &:hover {
-      color: $s-button-hover;
-      border-bottom: 5px solid $s-button-hover;
+      color: $socialee-hover;
+      border-bottom: 5px solid $socialee-hover;
       text-decoration: none;
     }
     @include breakpoint(small only) {

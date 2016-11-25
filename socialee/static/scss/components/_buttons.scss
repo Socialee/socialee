@@ -1,5 +1,3 @@
-$button-background-hover: #CD931F;
-
 .button { // TODO: how to not use f6 button base class?
   font-weight: 900;
   border-radius: 4px !important;
@@ -12,8 +10,8 @@ $button-background-hover: #CD931F;
       color: map-get($foundation-palette, orange);
 
         &:hover {
-          border-color: $button-background-hover;
-          color: $button-background-hover;
+          border-color: $socialee-hover;
+          color: $socialee-hover;
           text-decoration: none;
         }
     }
@@ -21,7 +19,7 @@ $button-background-hover: #CD931F;
 
 .button--yellow {
   //@include button-base();
-  @include button-style( c(orange, 1), $button-background-hover , #fff );
+  @include button-style( c(orange, 1), $socialee-hover , #fff );
 
 
   &:hover {
