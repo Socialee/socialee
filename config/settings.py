@@ -25,6 +25,9 @@ env = environ.Env()
 
 SITE_ID = 1
 
+# Error reporting messages are being sent to: (https://docs.djangoproject.com/en/1.9/howto/error-reporting/)
+ADMINS = [('Sehera', 'sehera.nawaz@gmail.com'), ('Moritz', 'mail@moritzjuedes.de')]
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
