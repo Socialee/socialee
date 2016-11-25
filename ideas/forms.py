@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class IdeaForm(EmailRegisterForm):
 
-    picture = forms.ImageField( required=False )
+    picture = forms.ImageField( required=False, widget = forms.FileInput( attrs={'class' : 'input_with_img'} ) )
     title = forms.CharField( required=False, widget = forms.TextInput( attrs={ 'autofocus': 'autofocus' }))
     description = forms.CharField( required=False, widget=forms.Textarea(attrs={'cols': 80, 'rows': 5, 'max_length':1500, 'class':'input_with_bound'}))
 

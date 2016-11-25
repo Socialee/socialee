@@ -14,37 +14,14 @@
         <form method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
 
           <div id="idea_form">
-            <img id="idea_image" src="#" alt="Deine Idee als Bild" />
+            <div class="row">
+            {% include "snippet_formfield.html" with field=form.picture size="medium-6" upload_val=" Bild hochladen " %}
+            
+            {% include "snippet_formfield.html" with field=form.title size="medium-12" %}
 
-            <div class="fieldset">
-                {{ form.picture.errors }}
-                <div class="form-label">{{ form.picture.label }}</div>
-                  {% if form.picture.help_text %}
-<!--                     <div class="second-form-label">{{ form.picture.help_text|safe }}</div>
- -->                  {% endif %}
-                {{ form.picture }}
-            <label for="id_picture" id="upload" class="button button--yellow"><i class="fa fa-upload" aria-hidden="true"></i> Bild hochladen </label>
+            {% include "snippet_formfield.html" with field=form.description size="medium-12" len_restricted="true" %}
+
             </div>
-
-            <div class="fieldWrapper">
-                {{ form.title.errors }}
-                <div class="form-label">{{ form.title.label }}</div>
-                  {% if form.title.help_text %}
-<!--                     <div class="second-form-label">{{ form.title.help_text|safe }}</div>
- -->                  {% endif %}
-                {{ form.title }}
-            </div>
-
-            <div class="fieldWrapper">
-                {{ form.description.errors }}
-                <div class="form-label">{{ form.description.label }}
-                <label class="pull-right" for="id_description">70 Zeichen übrig</label>
-                  {% if form.description.help_text %}
-<!--                     <div class="second-form-label">{{ form.description.help_text|safe }}</div>
- -->                  {% endif %}</div>
-                {{ form.description }}
-            </div>
-
             <div class="c-form__footer">
               <div id="review_button" class="button button--yellow" >Vorschau deiner Idee</div>
               <a href="{% url 'idea_list' %}" class="text-link-special pull-right">zurück zur Übersicht</a></p>
@@ -95,49 +72,13 @@
 {% addtoblock 'js' %}
 <script type="text/javascript">
 
-function setNum() {
-  var max = $(this).attr("max_length");
-  if($(this).val().length > max)
-  {
-    $(this).val($(this).val().substring(0,max));
-  }
-  var num = max-$(this).val().length;
-  var $label = $("label[for='"+this.id+"']");
-  $label.html(num +" Zeichen übrig");
-  if(num == 0)
-    $label.css('color', 'red');
-  else 
-    $label.css('color', 'initial');
-  }
-$('.input_with_bound').each(setNum);
-$('.input_with_bound').bind('input propertychange', setNum);
-
-
-function readURL(input) {
-
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-          $("#idea_img").attr("src", e.target.result);
-          $("#idea_image").show();
-          $("#idea_image").attr("src", e.target.result);
-        }
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-$("#id_picture").change(function(){
-    readURL(this);
-});
 
 function fixPreview()
 {
   $("#idea_form").children().hide();
   $("#idea_title").html($("#id_title").val());
   $("#idea_description").html($("#id_description").val());
-  readURL($("#id_picture"));
+  $("#idea_img").attr("src", $("#id_picture").parent().find("img").attr("src"));
 }
 
 {% if not form.email.errors %}
@@ -145,7 +86,6 @@ $("#review").hide();
 $("#id_email").parent().hide();
 {% else %}
 $("#idea_form").children().hide();
-fixPreview();
 {% endif %}
 
 $("#review_button").click(function()

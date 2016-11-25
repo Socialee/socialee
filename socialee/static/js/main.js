@@ -19,6 +19,9 @@ $(document).ready(function(){
 	});
 
   $(".js-content-sized").each(fixSizedElements);
+  $('.input_with_bound').each(setLimit);
+  $('.input_with_bound').bind('input propertychange', setLimit);
+  $(".input_with_img").change(function(){ readURLInputIntoImg(this); } );
 });
 
 // using jQuery
@@ -116,6 +119,34 @@ function fixSizedElements()
             $(this).parent(".js-content-sized").children(".js-sized").show();
             $(this).hide();
         });
+    }
+}
+
+function setLimit() {
+  var max = $(this).attr("max_length");
+  if($(this).val().length > max)
+  {
+    $(this).val($(this).val().substring(0,max));
+  }
+  var num = max-$(this).val().length;
+  var $label = $("label[for='"+this.id+"']");
+  $label.html(num +" Zeichen übrig");
+  if(num == 0)
+    $label.css('color', 'red');
+  else 
+    $label.css('color', 'initial');
+}
+
+
+function readURLInputIntoImg(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $(input).parent().find("img").attr("src", e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
     }
 }
 

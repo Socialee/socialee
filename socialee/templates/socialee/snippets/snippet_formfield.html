@@ -1,8 +1,23 @@
+{% load static %}
 <div class="column {{size}}">
     {{ field.errors }}
     <label>{{ field.label }}</label>
       {% if field.help_text %}
        <!--  <div class="second-form-label">{{ field.help_text|safe }}</div> -->
       {% endif %}
-    {{ field }} <!-- add placeholder -->
+      {% if len_restricted %}
+        
+        {% comment %}
+            if you want a length restriced input add this to the snippet and add the attr {"class":"input_with_bound"} to the input in forms.py 
+        {% endcomment %}
+
+        <label class="pull-right" for="{{field.id_for_label}}"></label>
+      {% endif %}
+    {{ field }} {# placeholders are set in forms.py #}
+    {% if upload_val %}
+        <div><img src="" />
+        <!-- if you have a picture to upload add upload_val to the snippet -->
+        <label for="{{field.id_for_label}}" class="button button--yellow"><i class="fa fa-upload" aria-hidden="true"></i> {{ upload_val }} </label>
+        </div>
+    {% endif %}
 </div>
