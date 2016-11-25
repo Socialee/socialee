@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required, permission_required
 
+from register.views import password_change
 from socialee import views
 from . import allauth_urls
 
@@ -12,6 +13,7 @@ urlpatterns = [
     
     url(r'^', include('landingpage.urls')), # ID 000
 
+    url(r'^accounts/password/change/$', login_required(password_change), name='password_change'),
     url(r'^accounts/', include('allauth.urls')), # IDs 081, 082, 083, etc
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)), # ID 900

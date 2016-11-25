@@ -3,7 +3,7 @@ import mailchimp
 from django.contrib.auth.models import Group
 from allauth.account.decorators import verified_email_required
 from allauth.account.signals import email_confirmed
-from allauth.account.views import SignupView
+from allauth.account.views import SignupView, PasswordChangeView
 from django.dispatch import receiver
 from django.shortcuts import render
 from django.contrib import messages
@@ -11,6 +11,15 @@ from django.conf import settings
 from django.core.mail import send_mail
 
 from .forms import *
+
+class HomePasswordChangeView(PasswordChangeView):
+    """
+    Custom class to override the password change view to redirect to "/" 
+    """
+
+    success_url = "/"
+
+password_change = HomePasswordChangeView.as_view()
 
 
 class NewsletterSignup(SignupView):
