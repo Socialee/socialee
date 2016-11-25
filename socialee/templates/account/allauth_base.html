@@ -3,15 +3,16 @@
 {% load static %}
 
 {% block content %}
-<div class="c-section -solo">
-  <div class="row">
-    <div class="medium-10 medium-offset-1 large-8 large-offset-2 column">
-	    <div class="c-form">
-			{% block allauth_content %}
-			{% endblock allauth_content %}
+<section class="bg-img">
+	<div class="c-section -solo">
+	  <div class="row">
+	    <div class="medium-10 medium-offset-1 large-8 large-offset-2 column">
+		    <div class="c-form">
+				{% block allauth_content %}
+				{% endblock allauth_content %}
+		    </div>
 	    </div>
-    </div>
-  </div>
-</div>
-
+	  </div>
+	</div>
+</section>
 {% endblock content %}

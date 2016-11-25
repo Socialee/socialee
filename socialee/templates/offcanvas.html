@@ -20,6 +20,7 @@
           {% endif %}
 
           <li class="title">Weitere Seiten</li>
+          <li class="show-for-small-only"><a href="{% url 'account_login' %}">Anmelden</a></li>
           <li><a href="{% url 'home' %}">Startseite</a></li>
           <li><a href="{% url 'idea_list' %}">Alle Ideen ({% idea_count %})</a></li>
           <li><a href="{% url 'zinnia:entry_archive_index' %}">Blog</a></li>

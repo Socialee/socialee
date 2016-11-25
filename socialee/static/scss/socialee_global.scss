@@ -7,101 +7,108 @@
 
 .button:focus { outline:0 !important; }
 
- .white {
-    color: $white;
-  }
+.bg-img {
+    background-image: url("../img/landingpage_bg/landingpage_bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
 
-  // Callout for messages e.g. "Thanks, your message has been sent!"
-  .message-callout {
-    @include callout-base;
-    background-color: $socialee-orange;
+.white {
+  color: $white;
+}
+
+// Callout for messages e.g. "Thanks, your message has been sent!"
+.message-callout {
+  @include callout-base;
+  background-color: $socialee-orange;
+  margin-bottom: 0;
+  color: $white;
+  font-weight: bold;
+  p {
     margin-bottom: 0;
-    color: $white;
-    font-weight: bold;
-    p {
-      margin-bottom: 0;
-    }
   }
+}
 
-  .white-orange {
-    color: $white;
-    &:hover {
-      color: $socialee-orange;
-    }
+.white-orange {
+  color: $white;
+  &:hover {
+    color: $socialee-orange;
   }
+}
 
-  .callout-form {
-    @include callout-base;
-    margin-top: 3rem;
-    margin-bottom: 5rem;
-    background-color: white;
-    padding: 0.8rem 3rem 3rem 3rem;
-    @include breakpoint(small only) {
-    padding: 0 1rem 1rem 1rem;
-    }
+.callout-form {
+  @include callout-base;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+  background-color: white;
+  padding: 0.8rem 3rem 3rem 3rem;
+  @include breakpoint(small only) {
+  padding: 0 1rem 1rem 1rem;
   }
+}
 
-  .scroll-down {
-    background-color: red;
-    width: 100px;
+.scroll-down {
+  background-color: red;
+  width: 100px;
+}
+
+.s-space {
+  height: 5rem;
+}
+
+.socialee-form-label {
+  background-color: red;
+}
+
+.s-button {
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: border-bottom 0.5s ease, color 0.5s ease;
+  border-bottom: 5px solid $socialee-orange;
+  color: #fff;
+  &:hover {
+    color: $socialee-hover;
+    border-bottom: 5px solid $socialee-hover;
+    text-decoration: none;
   }
-
-  .s-space {
-    height: 5rem;
+  @include breakpoint(small only) {
+    font-size: 2em;
+    border-bottom: 3px solid $socialee-orange;
+    color: $socialee-orange;
   }
+}
 
-  .socialee-form-label {
-    background-color: red;
-  }
-
-  .s-button {
-    font-size: 1.5rem;
-    font-weight: bold;
-    transition: border-bottom 0.5s ease, color 0.5s ease;
+.s-button-form {
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: border-bottom 0.5s ease, color 0.5s ease;
+  border: none;
+  border-bottom: 5px solid $socialee-mediumgreen;
+  color: $socialee-mediumgreen;
+  background-color: white;
+  &:hover {
+    color: $socialee-orange;
     border-bottom: 5px solid $socialee-orange;
-    color: #fff;
-    &:hover {
-      color: $socialee-hover;
-      border-bottom: 5px solid $socialee-hover;
-      text-decoration: none;
-    }
-    @include breakpoint(small only) {
-      font-size: 2em;
-      border-bottom: 3px solid $socialee-orange;
-      color: $socialee-orange;
-    }
+    text-decoration: none;
   }
+}
 
-  .s-button-form {
-    font-size: 1.5rem;
-    font-weight: bold;
-    transition: border-bottom 0.5s ease, color 0.5s ease;
-    border: none;
-    border-bottom: 5px solid $socialee-mediumgreen;
-    color: $socialee-mediumgreen;
-    background-color: white;
-    &:hover {
-      color: $socialee-orange;
-      border-bottom: 5px solid $socialee-orange;
-      text-decoration: none;
-    }
-  }
+.full-height {
+  min-height: 75vh; 
+}
 
-  .full-height {
-    min-height: 75vh; 
-  }
-  
-  .s-container {
-    padding: 10rem;
-  }
+.s-container {
+  padding: 10rem;
+}
 
-  @mixin vertical-align {
-    position: relative;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-  }
+@mixin vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
 
 /* LANDINGPAGE STYLES*/
 
