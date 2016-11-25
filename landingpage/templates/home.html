@@ -36,4 +36,23 @@
   </div>
 </section>
 
+{% if not PROD %}
+<section class="team">
+    <div class="expanded row small-collapse">
+
+      <div class="small-6 medium-2 columns"><img src="{% static 'img/team/Member_Moritz.jpg' %}" onmouseover="this.src='{% static 'img/team/Member_Moritz_Over.jpg' %}'" onmouseout="this.src='{% static 'img/team/Member_Moritz.jpg' %}'" /></div>
+
+      <div class="small-6 medium-2 columns"><img src="{% static 'img/team/Member_Sehera.jpg' %}" onmouseover="this.src='{% static 'img/team/Member_Sehera_Over.jpg' %}'" onmouseout="this.src='{% static 'img/team/Member_Sehera.jpg' %}'" /></div>
+
+      <div class="small-6 medium-2 columns"><img src="{% static 'img/team/Member_Kai.jpg' %}" onmouseover="this.src='{% static 'img/team/Member_Kai_Over.jpg' %}'" onmouseout="this.src='{% static 'img/team/Member_Kai.jpg' %}'" /></div>
+
+      <div class="small-6 medium-2 columns"><img src="{% static 'img/team/Member_Isa.jpg' %}" onmouseover="this.src='{% static 'img/team/Member_Isa_Over.jpg' %}'" onmouseout="this.src='{% static 'img/team/Member_Isa.jpg' %}'" /></div>
+
+      <div class="small-6 medium-2 columns"><img src="{% static 'img/team/Member_Adrian.jpg' %}" onmouseover="this.src='{% static 'img/team/Member_Adrian_Over.jpg' %}'" onmouseout="this.src='{% static 'img/team/Member_Adrian.jpg' %}'" /></div>
+
+      <div class="small-6 medium-2 columns"><img src="{% static 'img/team/Member_Don.jpg' %}" onmouseover="this.src='{% static 'img/team/Member_Don_Over.jpg' %}'" onmouseout="this.src='{% static 'img/team/Member_Don.jpg' %}'" /></div>
+  </div>
+</section>
+{% endif %}
+
 {% endblock content %}

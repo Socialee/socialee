@@ -1,3 +1,7 @@
+section.team {
+  background-color: c(greyblue, 3);
+}
+
 section.gallery {
   background-color: #F4F4F5;
   margin-bottom: -20rem;
@@ -11,8 +15,8 @@ section.lp-bottom {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  padding: 15rem 0;
-  // height: 100vH;
+  padding-top: 15rem;
+  padding-bottom: 5rem;
   z-index: 0;
   p {
     line-height: 1.45;
