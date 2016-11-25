@@ -255,6 +255,7 @@ ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = '/accounts/password/set'
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = '/'
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_SESSION_REMEMBER = False
+ACCOUNT_LOGOUT_ON_GET = True # SECURITY RISK??? See: http://django-allauth.readthedocs.io/en/latest/views.html#logout
 
 ACCOUNT_ADAPTER = "register.adapter.AdvancedMailAccountAdapter"
 
