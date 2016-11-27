@@ -25,7 +25,7 @@ class NewsletterForm(EmailRegisterForm):
     def __init__(self, *args, **kwargs):
         super(NewsletterForm, self).__init__(*args, **kwargs)
 
-        fields_key_order = ['first_name', 'email', 'message'] #, 'newsletter' DISABELD NEWSLETTER DUE TO ERROR ON 26.11.16 -> also see register.adapter line 49
+        fields_key_order = ['first_name', 'email', 'message', 'newsletter']
         self.fields = OrderedDict((k, self.fields[k]) for k in fields_key_order)
 
         self.fields['email'].label = _('E-Mail-Adresse')
@@ -38,7 +38,7 @@ class NewsletterForm(EmailRegisterForm):
         self.fields['message'].label = _("Möchtest Du sonst noch was loswerden? Dies ist die Gelegenheit.")
         self.fields['message'].help_text = _('Wenn Du magst')
 
-        # self.fields['newsletter'].label = _('Newsletter abonnieren')
+        self.fields['newsletter'].label = _('Newsletter abonnieren')
 
     def custom_signup(self, request, user):
         request.session["message_register"] = True

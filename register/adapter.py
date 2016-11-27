@@ -46,7 +46,7 @@ class AdvancedMailAccountAdapter(DefaultAccountAdapter):
 
         request.session["email_register"] = True
         newsletter = form.cleaned_data.get("newsletter")
-        if newsletter: # this part is causing trouble, so I DISABLE NEWSLETTTER FIELD IN FORMS FOR NOW
+        if newsletter:
             newsletter_group, created = Group.objects.get_or_create(name='signed_up_for_newsletter')
             user.groups.add(newsletter_group)
             request.session["newsletter"] = True
