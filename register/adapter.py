@@ -43,22 +43,22 @@ class AdvancedMailAccountAdapter(DefaultAccountAdapter):
             password = User.objects.make_random_password()
             user.set_password(password)
             request.session["pass"] = password
+            user.save()
 
-        request.session["email_register"] = True
-        newsletter = form.cleaned_data.get("newsletter")
-        if newsletter:
-            newsletter_group, created = Group.objects.get_or_create(name='signed_up_for_newsletter')
-            user.groups.add(newsletter_group)
-            request.session["newsletter"] = True
+            request.session["email_register"] = True
+            newsletter = form.cleaned_data.get("newsletter")
+            if newsletter:
+                newsletter_group, created = Group.objects.get_or_create(name='signed_up_for_newsletter')
+                user.groups.add(newsletter_group)
+                request.session["newsletter"] = True
 
-        if user.first_name:
-            # try to get the last name out of the field
-            names = user.first_name.split(" ")
-            if len(names)>1:
-                user.last_name = names[-1]
-                user.first_name = " ".join(names[:-1])
+            if user.first_name:
+                # try to get the last name out of the field
+                names = user.first_name.split(" ")
+                if len(names)>1:
+                    user.last_name = names[-1]
+                    user.first_name = " ".join(names[:-1])
 
-        if user.email:
             user.save()
 
     def respond_email_verification_sent(self, request, user):
