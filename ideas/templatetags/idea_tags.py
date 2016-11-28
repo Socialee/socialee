@@ -29,3 +29,9 @@ def own_idea_list(email):
 @register.simple_tag
 def idea_count():
     return Idea.objects.filter(active=True).count()
+
+@register.simple_tag
+def ideas_left():
+    all_ideas = Idea.objects.filter(active=True).count()
+    ideas_in_landingpage = 9
+    return all_ideas - ideas_in_landingpage

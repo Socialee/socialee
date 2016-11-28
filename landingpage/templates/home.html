@@ -20,6 +20,10 @@
             <div class="small-12 medium-12 large-11 small-centered">
               {% featured_idea_list as idea_list %}
               {% include 'snippet_ideas.html'%}
+              {% ideas_left as ideas_left %}
+              {% if ideas_left >= 1 %}
+              <p class="text-center -lead">Es gibt {% ideas_left %} weitere Ideen, <a href="{% url 'idea_list' %}">schau sie dir an!</a></p>  
+              {% endif %}
             </div>
         </div>
       </div>
