@@ -169,6 +169,8 @@ TEMPLATES = [
                         'django.template.loaders.app_directories.Loader',
                        ],
             'context_processors': [
+                'socialee.context_processors.prod',
+                'socialee.context_processors.live',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.template.context_processors.i18n',
