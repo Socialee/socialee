@@ -1,1 +1,3 @@
+{% if request.user.is_authenticated %}
 <div id="feedback-btn" class="button button--yellow vertical-right-aligned show-for-medium"><i class="fa fa-commenting-o" aria-hidden="true"></i>  Feedback</div>
+{% endif %}
