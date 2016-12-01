@@ -202,7 +202,7 @@ EMAIL_HOST_USER = env.str('DJANGO_EMAIL_HOST_USER', '')
 EMAIL_PORT = env.str('DJANGO_EMAIL_PORT', '')
 DEFAULT_FROM_EMAIL = env.str('DJANGO_FROM_EMAIL', 'webmaster@localhost')
 SERVER_EMAIL = env.str('DJANGO_FROM_EMAIL', 'root@localhost')
-EMAIL_SUBJECT_PREFIX = 'Socialee meldet: '
+EMAIL_SUBJECT_PREFIX = ''
 if EMAIL_PORT == '465':
     EMAIL_USE_SSL = True
 

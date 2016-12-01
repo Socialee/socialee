@@ -1,3 +1,18 @@
 {% autoescape off %}
-Danke für deine Idee! Wir gucken sie uns an. Das dauert nicht länger als einen Tag.
+Hallo!
+
+Du hast eine Idee bei Socialee geteilt. Das ist toll.
+Wie geht es jetzt weiter? Erstmal schauen wir uns deine Idee an und veröffentlichen sie. Das dauert etwa einen Tag. Sobald das passiert ist, schreiben wir dir und geben ein Feedback. Das ist immer der erste Schritt.
+
+Also, bis morgen!
+
+Schön, dass du dabei bist.  
+
+
+
++++ Wir machen das jetzt mal. +++
+
+Socialee GmbH
+Weisestr. 11
+12049 Berlin
 {% endautoescape %}

@@ -49,11 +49,11 @@ class NewsletterSignup(SignupView):
             # messages.success(request, msg)
 
             from_email = settings.EMAIL_HOST_USER
-            to_email = [from_email, 'hello@socialee.de']
+            to_email = ['hello@socialee.de']
 
 
             # send the email
-            subject = 'Ladet mich ein!'
+            subject = 'Ein neuer Nutzer hat sich registriert!'
             contact_message = "%s via %s schreibt:\n\n %s"%( 
                     name, 
                     raw_email,

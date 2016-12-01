@@ -2,4 +2,3 @@ Es gibt eine neue Idee auf Socialee.
 Titel: {{title}} 
 Beschreibung: {{description}}
 von Email-Adresse: {{email}}
-
