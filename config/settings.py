@@ -281,7 +281,7 @@ LOGGING = {
     "disable_existing_loggers": False,
     "handlers": {
         "console": {
-            "level": "INFO",
+            'level': env.str('DJANGO_LOG_LEVEL', 'INFO'),
             "class": "logging.StreamHandler",
         },
     },
