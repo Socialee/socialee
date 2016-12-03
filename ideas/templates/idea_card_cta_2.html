@@ -1,0 +1,53 @@
+{% load static socialee_filters %}
+
+<div class="grid-item">
+  <div class="flip-card" id="flip_idea_{{ idea.id }}" idea_id="{{ idea.id }}">
+    <!--CARD FRONT -->
+    <div class="idea-card-front">
+      <div class="front_card">
+          <div class="card-icons">
+          <div class="idea-gradient"></div>
+            <span class="fa-stack fa-lg expand-icon show-for-medium" expand_id="{{idea.id}}">
+              <i class="fa fa-square fa-stack-2x"></i>
+              <i class="fa fa-expand fa-stack-1x fa-inverse"></i>
+            </span>
+            <span class="fa-stack fa-lg turn-icon" turn_id="{{idea.id}}">
+              <i class="fa fa-square fa-stack-2x"></i>
+              <i class="fa fa-refresh fa-stack-1x fa-inverse"></i>
+            </span>
+          </div>
+
+            <div class="idea-image" expand_id="{{ idea.id }}">
+              <img src="{% static 'img/app/idea_card_cta_2.jpg' %}"> 
+            </div>
+            <div class="idea-details">
+              <p class="-lead strong">Hat jeder eine? Jeder hat eine!</p>
+              <p class="text-center"><a class="button hollow button--yellow" href="{% url 'create_idea' %}">Teile deine Ideen!</a></p>
+            </div>
+      </div>
+    </div>
+    <!-- END CARD FRONT -->
+
+    <!--CARD BACK -->
+    <div class="idea-card-back">
+      <div class="back-hover-area">
+        <div class="card-icons">
+        <div class="idea-gradient"></div>
+          <span class="fa-stack fa-lg expand-icon show-for-medium" expand_id="{{idea.id}}">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-expand fa-stack-1x fa-inverse"></i>
+          </span>
+          <span class="fa-stack fa-lg turn-icon" turn_id="{{idea.id}}">
+            <i class="fa fa-square fa-stack-2x"></i>
+            <i class="fa fa-refresh fa-stack-1x fa-inverse"></i>
+          </span>
+        </div>
+      </div>
+      <h3 class="text-center mt-10">...</h3>
+      <div class="idea-card-back-content">
+      test
+      </div>
+    </div>
+    <!-- END CARD BACK -->
+  </div>
+</div>
