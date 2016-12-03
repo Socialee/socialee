@@ -159,6 +159,13 @@ class IdeaDetailView(DetailView):
     model = Idea
     template_name = 'idea_detail.html'
 
+class IdeaEditView(UpdateView):
+    template_name = 'edit_idea.html'
+    model = Idea
+    fields = ['picture', 'title', 'description']
+    def get_success_url(self):
+        slug = self.request.user
+        return reverse('welcome', kwargs={'slug': slug})
 
 
 

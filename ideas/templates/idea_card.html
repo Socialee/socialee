@@ -16,7 +16,6 @@
               <i class="fa fa-refresh fa-stack-1x fa-inverse"></i>
             </span>
           </div>
-
         {% if not idea.active %}
         <div class="status-unpublished">
           <p class"text-center">Noch nicht veröffentlicht</p>
@@ -62,7 +61,11 @@
           {% endif %}
         {% endif %}
 
-
+        {% if request.user.email == idea.author %}
+        <p>Diese Idee ist von Dir! Du kannst sie <a href="{% url 'idea_edit' idea.pk %}">bearbeiten!</a></p>
+          
+        {% endif %}
+        
         {% if not request.user.is_authenticated %}
         <div class="card-notification-wrapper">
           <p id="login_{{ idea.id }}" class="card-notification" idea_id="{{ idea.id }}">Findest du gut? Zum Gutfinden <a href="{% url 'account_login' %}">melde dich an.</a></p>
