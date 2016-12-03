@@ -278,18 +278,19 @@ class ProfileView(BaseView, DetailView):
 
 
 # Welcome View: Landing-Page for User and overview
-class WelcomePage(BaseView, ListView):
+class WelcomePage(ListView):
     template_name = 'welcome.html'
-    # model = Idea
+    model = Idea
 
-    def get_context_data(self, **kwargs):
-        context = super(WelcomePage, self).get_context_data(**kwargs)
-        if self.request.user.instances.count() and not self.request.user.instances.filter(current=True):
-            instance = self.request.user.instances[0]
-            instance.current = True
-            instance.save()
+    # this causes an error in PRODUCTION: see logs
+    # def get_context_data(self, **kwargs):
+    #     context = super(WelcomePage, self).get_context_data(**kwargs)
+    #     if self.request.user.instances.count() and not self.request.user.instances.filter(current=True):
+    #         instance = self.request.user.instances[0]
+    #         instance.current = True
+    #         instance.save()
 
-        return context
+    #     return context
 
     def get_queryset(self):
         self.author = self.request.user.email

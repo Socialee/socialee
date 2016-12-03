@@ -16,12 +16,13 @@
               <i class="fa fa-refresh fa-stack-1x fa-inverse"></i>
             </span>
           </div>
-        {% if not idea.active %}
-        <div class="status-unpublished">
-          <p class"text-center">Noch nicht veröffentlicht</p>
-        </div>
-        {% endif %}
-
+          {% comment %}  
+          {% if not idea.active %}
+          <div class="status-unpublished">
+            <p class"text-center white">Noch nicht veröffentlicht</p>
+          </div>
+          {% endif %}
+          {% endcomment %}
         {% if idea.picture %}
           {% if idea.title or idea.description %}<!--Bild und Titel oder Bild und Beschreibung-->
             <div class="idea-image" expand_id="{{ idea.id }}">
