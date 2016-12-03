@@ -1,30 +1,26 @@
 {% extends "offcanvas.html" %}
-{% load staticfiles sekizai_tags%}
+{% load static sekizai_tags idea_tags %}
 
 {% block content %}
-<div class="row align-center align-middle">
-<div class="full-height"></div>
-  <div class="large-12 columns">
-    <h3>Deine Projekte</h3>
-    <div class="row align-center small-up-1 medium-up-2 large-up-3">
-      {% for project in user_project_list %}
-          {% include "project_card_element.html" %}
-      {% endfor %}
+
+<div class="c-section -solo">
+  <div class="row">
+    <div class="small-12 medium-11 large-11 small-centered">
+      <div class="c-form">
+        <h6 class="text-center">Hallo {% if request.user.first_name %}{{ request.user.first_name }}!{% else %}!{% endif %}</h6>
+        {% if request.user.first_name %}
+        <p class="-lead text-center">Hier entsteht eine Seite, die dir Übersicht über deine Ideen und Projekte gibt.</p>  
+        {% endif %}
+
+          {% include 'snippet_ideas.html'%}
+
+        <p class="text-center"><a class="button button--yellow" href="{% url 'create_idea' %}">Teile eine Idee</a></p>
+        
+     </div>
     </div>
   </div>
 </div>
 
-<div class="row full-height">
-
-</div>
-
-    <ul class="text-left">
-    <p><strong>ToDo</strong></p>
-      <li>Liste eigener Projekte + Counter Neuigkeiten</li>
-      <li>Liste beobachteter Projekte + Counter Neuigkeiten</li>
-      <li>Liste aller Freunde + Counter Neuigkeiten</li>
-      <li>Link zu Profildetails</li>
-    </ul>
 
 {% endblock content %}
 

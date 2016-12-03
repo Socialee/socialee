@@ -280,7 +280,7 @@ class ProfileView(BaseView, DetailView):
 # Welcome View: Landing-Page for User and overview
 class WelcomePage(BaseView, ListView):
     template_name = 'welcome.html'
-    model = Project
+    # model = Idea
 
     def get_context_data(self, **kwargs):
         context = super(WelcomePage, self).get_context_data(**kwargs)
@@ -291,6 +291,9 @@ class WelcomePage(BaseView, ListView):
 
         return context
 
+    def get_queryset(self):
+        self.author = self.request.user.email
+        return Idea.objects.filter(author=self.author)
 
 
 class Follow(BaseView, CreateView):

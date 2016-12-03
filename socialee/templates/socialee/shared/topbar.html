@@ -14,6 +14,7 @@
       <li class="menu-text">
         <a href="">{% if request.user.first_name %}{{ request.user.first_name }}{% else %}{{ request.user.email }}{% endif %}</a>
         <ul class="menu">
+          <li><a href="{% url 'welcome' request.user %}">Deine Übersicht</a></li>
           <li><a href="{% url 'account_change_password' %}">Passwort ändern</a></li>
           <li><a href="{% url 'account_logout' %}">Abmelden</a></li>
         </ul>
@@ -35,7 +36,7 @@
     var now = new Date();
     var hours = now.getHours();
     var msg;
-    if ( hours > 5 && hours < 11 ) msg = "Guten Morgen bei Socialee";
+    if ( hours > 5 && hours < 12 ) msg = "Guten Morgen bei Socialee";
     else if ( hours > 5 && hours < 14) msg = "Mahlzeit bei Socialee";
     else if ( hours > 5 && hours < 18) msg = "Guten Tag bei Socialee";
     else if ( hours > 5 && hours < 23) msg = "Schönen Abend bei Socialee";
