@@ -15,6 +15,7 @@
           <a class="button button--yellow" href="{% url 'register' %}">Registrieren</a>
           {% else %}
           <li class="title">Dein Profil</li>
+          <li><a href="{% url 'welcome' request.user %}">Deine Übersicht</a></li>
           <li><a href="{% url 'account_change_password' %}">Passwort ändern</a></li>
           <li><a href="{% url 'account_logout' %}">Abmelden</a></li>
           {% endif %}
