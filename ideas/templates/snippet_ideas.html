@@ -30,7 +30,8 @@
       {% include "idea_card_cta_2.html" %}
 </div>
 {% elif idea_list|length = 0 %}
-{% include "idea_card_cta.html" %}
+<h3 class="text-center">Hier gibt es noch nichts anzuzeigen.</h3>
+<p class="text-center -lead">Das ändert sich, sobald du eine Idee teilst.</p>
 {% endif %}
 
 {% addtoblock 'js' %}
