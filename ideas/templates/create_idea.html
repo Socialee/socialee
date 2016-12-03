@@ -15,12 +15,14 @@
 
           <div id="idea_form">
             <div class="row">
-            {% include "snippet_formfield.html" with field=form.picture size="medium-6" upload_val=" Bild hochladen " %}
+            {% include "snippet_formfield.html" with field=form.picture size="medium-12" upload_val=" Bild hochladen " %}
             {{ form.picturefile }}
             
             {% include "snippet_formfield.html" with field=form.title size="medium-12" %}
 
             {% include "snippet_formfield.html" with field=form.description size="medium-12" len_restricted="true" %}
+
+            {% include "snippet_formfield.html" with field=form.private size="medium-12" %}
 
             </div>
             <div class="c-form__footer">

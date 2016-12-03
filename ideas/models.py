@@ -22,6 +22,7 @@ class Idea(models.Model):
     author = models.EmailField(max_length=254, verbose_name='Email des Autors', null=True, blank=True)
     subm_date = models.DateTimeField(auto_now=True, verbose_name='Datum', null=True, blank=True)
     featured = models.BooleanField(default=False, verbose_name='featured?')
+    private = models.BooleanField('Privat: ', default=False)
     active = models.BooleanField(default=False, verbose_name='veröffentlicht?')
     likes = models.ManyToManyField(User, related_name='likes_ideas')
 

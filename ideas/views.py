@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse, reverse_lazy
+from django import forms
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, UpdateView
@@ -33,6 +34,7 @@ class CreateIdea(SignupView):
                 pic = request.FILES['picture']
             title = form.cleaned_data.get('title')
             description = form.cleaned_data.get('description')
+            private = form.cleaned_data.get('private')
 
             ret = super(CreateIdea, self).post(request, *args, **kwargs)
 
@@ -53,7 +55,7 @@ class CreateIdea(SignupView):
                 newIdea.save()
 
                 # set message to inform user it was successful
-                messages.success(request, 'Danke! Wir gucken uns Deine Idee an und veröffentlichen sie so schnell wie möglich.')
+                messages.success(request, 'Danke! Wir gucken uns Deine Idee an und geben dir so schnell wie möglich Feedback.')
             else:
                 return self.form_invalid(form)
             return ret
@@ -62,6 +64,7 @@ class CreateIdea(SignupView):
                 request.session['reload'] = 'true'
                 request.session['title'] = form.data['title']
                 request.session['description'] = form.data['description']
+                request.session['private'] = form.data['private']
                 request.session['picturefile'] = form.data['picturefile']
                 return self.response_for_email_taken(request, form=form, login=form.data['email'])
             return self.form_invalid(form)
@@ -77,6 +80,8 @@ class CreateIdea(SignupView):
                 context['description'] = self.request.session.pop('description')
             if 'picturefile' in self.request.session:
                 context['picturefile'] = self.request.session.pop('picturefile')
+            if 'private' in self.request.session:
+                context['private'] = self.request.session.pop('private')
         return context
 
     def get(self, request, *args, **kwargs):
@@ -84,7 +89,8 @@ class CreateIdea(SignupView):
         form = self.form_class(initial={
                 'title': context.get('title'),
                 'description': context.get('description'),
-                'picturefile': context.get('picturefile')
+                'picturefile': context.get('picturefile'),
+                # 'private': context.get('private'), # wenn das hier drin ist, werden choices nicht vorausgewählt
                         })
         old_reload = context.get('reload')
         super(CreateIdea, self).get(request, *args, **kwargs)
@@ -159,13 +165,16 @@ class IdeaDetailView(DetailView):
     model = Idea
     template_name = 'idea_detail.html'
 
+
 class IdeaEditView(UpdateView):
     template_name = 'edit_idea.html'
     model = Idea
-    fields = ['picture', 'title', 'description']
+    fields = ['picture', 'title', 'description', 'private']
+
     def get_success_url(self):
         slug = self.request.user
         return reverse('welcome', kwargs={'slug': slug})
+
 
 
 
