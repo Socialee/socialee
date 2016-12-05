@@ -21,9 +21,9 @@ class Idea(models.Model):
     description = models.TextField(max_length=1500, verbose_name='Beschreibung', null=True, blank=True)
     author = models.EmailField(max_length=254, verbose_name='Email des Autors', null=True, blank=True)
     subm_date = models.DateTimeField(auto_now=True, verbose_name='Datum', null=True, blank=True)
-    featured = models.BooleanField(default=False, verbose_name='featured?')
-    private = models.BooleanField('Privat: ', default=False)
-    active = models.BooleanField(default=False, verbose_name='veröffentlicht?')
+    featured = models.BooleanField(default=False, verbose_name='featured')
+    private = models.BooleanField(default=False, verbose_name='Privat ')
+    active = models.BooleanField(default=False, verbose_name='Freigegeben')
     likes = models.ManyToManyField(User, related_name='likes_ideas')
 
     class Meta:
@@ -36,7 +36,7 @@ class Idea(models.Model):
         return now - datetime.timedelta(hours=24) <= self.subm_date <= now
     was_submitted_recently.admin_order_field = 'subm_date'
     was_submitted_recently.boolean = True
-    was_submitted_recently.short_description = 'Neu?'
+    was_submitted_recently.short_description = 'Neu'
 
 
     def thumb(self):

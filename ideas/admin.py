@@ -8,19 +8,27 @@ from .models import Idea, Comment
 
 def make_published(modeladmin, request, queryset):
     queryset.update(active=True)
-    make_published.short_description = "Alle markierten Ideen veröffentlichen"
+make_published.short_description = "Idee veröffentlichen"
 
 def make_unpublished(modeladmin, request, queryset):
     queryset.update(active=False)
-    make_unpublished.short_description = "Veröffentlichung zurücknehmen"
+make_unpublished.short_description = "Veröffentlichung zurücknehmen"
+
+def feature(modeladmin, request, queryset):
+    queryset.update(featured=True)
+    queryset.update(active=True)
+feature.short_description = "Idee featuren"
+
+def unfeature(modeladmin, request, queryset):
+    queryset.update(featured=False)
+unfeature.short_description = "Idee unfeaturen"
 
 class CommentInline(admin.TabularInline):
     model = Comment
 
 class IdeaAdmin(admin.ModelAdmin):
-    list_display = ('was_submitted_recently', 'private', 'active', 'featured', 'title',  'author', 'thumb')
-    list_display_links = ['title']
-    list_editable = ['featured']
+    list_display = ('was_submitted_recently', 'active', 'featured', 'title', 'private', 'author', 'thumb')
+    list_display_links = ['title', 'was_submitted_recently', 'thumb']
     fields = [('private', 'active', 'featured', 'thumb', 'picture'), ('title', 'author'), 'description', 'likes']
     list_filter = ['subm_date', 'author']
     search_fields = ['title', 'author', 'description']
@@ -29,6 +37,6 @@ class IdeaAdmin(admin.ModelAdmin):
         CommentInline,
     ]
 
-    actions = [make_published, make_unpublished]
+    actions = [make_published, feature, unfeature, make_unpublished]
 
 admin.site.register(Idea, IdeaAdmin)
