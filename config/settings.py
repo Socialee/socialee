@@ -63,13 +63,12 @@ INSTALLED_APPS = (
     'ckeditor',
 
     # THIRD PARTY APPS
+    'admin_reorder',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    # 'crispy_forms',
-    # 'crispy_forms_foundation',
     'debug_toolbar',
-    'django_summernote',
+    # 'django_summernote',
     'simple_auth',
     'sekizai',  # for JavaScript and CSS management
     'taggit',
@@ -84,7 +83,6 @@ INSTALLED_APPS = (
     'questions.apps.QuestionsConfig',
     'quotes.apps.QuotesConfig',
     'socialee.apps.SocialeeConfig',
-    # 'waitinglist.apps.WaitinglistConfig',
     'register.apps.RegisterConfig',
 )
 
@@ -97,6 +95,7 @@ if DEBUG:
 MIDDLEWARE_CLASSES = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'admin_reorder.middleware.ModelAdminReorder',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -343,3 +342,72 @@ CONFIG_DEFAULTS = {
     'JQUERY_URL': '',
     'SHOW_COLLAPSED': True,
 }
+
+# Reorder Socialee Admin via: https://github.com/mishbahr/django-modeladmin-reorder
+ADMIN_REORDER = (
+
+    # Authentifcation
+    {
+    'app': 'auth',
+    'label': 'Socialee-Nutzer',
+    'models': (
+        {
+        'model': 'account.EmailAddress',
+        'label': 'E-Mail-Adressen',
+        },
+        {
+        'model': 'auth.User',
+        'label': 'User',
+        },
+        {
+        'model': 'auth.Group',
+        'label': 'User-Gruppe',
+        },
+        )},
+
+    # Ideen
+    {
+    'app': 'ideas',
+    'label': 'Ideen',
+    'models': ({
+        'model': 'ideas.Idea',
+        'label': 'Ideen auf Socialee'
+        },
+        )},
+
+    # Socialee Projekte & Profile
+    {
+    'app': 'socialee',
+    'label': 'Profile & Projekte',
+    'models': (
+        {
+        'model': 'socialee.Profile',
+        'label': 'Profile',
+        },
+        {
+        'model': 'socialee.Project',
+        'label': 'Projekte',
+        },
+        )},
+
+    # Blog
+    'zinnia',
+
+    # Sonstige
+    {
+    'app': 'quotes',
+    'label': 'Sonstige',
+    'models': (
+        {
+        'model': 'quotes.Quote',
+        'label': 'Zitate',
+        },
+        {
+        'model': 'feedback.Feedback',
+        'label': 'Feedback',
+        },
+        )},
+
+    # Put all other Apps here
+    'simple_auth',
+)

@@ -1,4 +1,6 @@
 from django.contrib import admin
 from .models import Password
+from config import settings
 
-admin.site.register(Password)
+if settings.STAGE:
+	admin.site.register(Password)

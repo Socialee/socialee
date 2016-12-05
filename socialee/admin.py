@@ -52,23 +52,22 @@ class ProfileAdmin(admin.ModelAdmin):
 
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Profile, ProfileAdmin)
-# admin.site.register(Input, InputAdmin)
-# admin.site.register(Invite, InviteAdmin)
 
+## unregister Apps that are not used in Admin
+# from django.contrib.sites.models import Site
+# admin.site.unregister(Site)
 
+# from django_comments.models import Comment
+# admin.site.unregister(Comment)
 
-### Not in use right now but still here for as an example
+# from allauth.socialaccount.models import *
+# admin.site.unregister(SocialAccount)
+# admin.site.unregister(SocialToken)
+# admin.site.unregister(SocialApp)
 
-# class CommonGroundAdmin(admin.ModelAdmin):
-#     model = CommonGround
-#     fields = ('slug', 'tagline', 'tags', 'inputs', 'outputs')
+# from tagging.models import *
+# admin.site.unregister(Tag)
+# admin.site.unregister(TaggedItem)
 
-# def mark_as_done(modeladmin, request, queryset):
-#     queryset.update(done=True)
-# mark_as_done.short_description = "Alle markierten als erledigt markieren"
-
-# class InviteAdmin(admin.ModelAdmin):
-#     list_display = ('was_submitted_recently','done','full_name', 'email', 'message')
-#     list_display_links = ['email']
-#     # list_editable = ['done']
-#     actions = [mark_as_done]
+# from taggit.models import *
+# admin.site.unregister(Tag)
