@@ -1,7 +1,7 @@
 {% load static socialee_filters %}
 <div class="c-section">
   <div class="row">
-    <div class="medium-10 medium-offset-1 large-10 large-offset-1 xlarge-10 xlarge-offset-1 xxlarge-12 xxlarge-offset-0 column">
+    <div class="small-12 medium-10 columns small-centered">
       <div class="c-form h-text-center-sm">
         <div class="hero__profile">
           <div class="row">
@@ -53,13 +53,16 @@
                         Hier steht deine Beschreibung.
                       {% endif %}
                       </p>
-                      <p>Klingt interessant, <br class="show-for-small-only"> <a class="text--underline" href="">schreib {{ object.short_name }} mal.</a>
+                      {% comment %}
+                      <p>Klingt interessant, <br class="show-for-small-only"> <a class="text--underline" href="">schreib {{ object.short_name }}</a>
                       </p>
+                      {% endcomment %}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            {% comment %}
             <div class="small-12 columns tags-wrapper">
               <div class="row align-justify">
                 <div class="small-12 medium-6 columns card-section">
@@ -69,8 +72,8 @@
                   {% include "snippet_input_output_tags.html" with input_output=object.socialee_input title=object.short_name|add:" benötigt" color="blue" left="true" %}
                 </div>
               </div>
-
             </div>
+            {% endcomment %}
           </div>
         </div>
       </div>

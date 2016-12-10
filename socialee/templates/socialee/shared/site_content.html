@@ -1,9 +1,7 @@
 <div class="l-site-content">
   <div class="tabs-content" data-tabs-content="example-tabs">
+    {% include "information.html" %}
     {% include "dialog.html" %}
     {% include "connections.html" %}
-    {% if object.project %}
-        {% include "information.html" %}
-    {% endif %}
   </div>
 </div>

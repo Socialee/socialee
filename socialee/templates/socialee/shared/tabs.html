@@ -1,16 +1,11 @@
+{# these are the actual tabs themselfes #}
 <section class="l-tabs">
-  <div class="row small-collapse medium-uncollapse">
-    <div class="small-12">
+  <div class="row expanded small-collapse medium-uncollapse">
+    <div class="small-12 small-centered">
       <ul class="small-collapse tabs hero__tabs" data-tabs data-options="data-auto-focus:false" id="example-tabs">
-        {% if object.project %}
-        <li class="small-4 column tabs-title _34-18"><a href="#panel3">Informationen</a></li>
-        <li class="small-4 column tabs-title _34-18"><a href="#panel1">Dialoge</a></li>
-        <li class="small-4 column tabs-title _34-18"><a href="#panel2">Verbindungen</a></li>
-        {% endif %}
-        {% if object.profile %}
-        <li class="small-6 column tabs-title _34-18"><a href="#panel1">Dialoge</a></li>
-        <li class="small-6 column tabs-title _34-18"><a href="#panel2">Verbindungen</a></li>
-        {% endif %}
+        <li class="small-4 column tabs-title is-active _34-18"><a href="#panel1" aria-selected="true">Info</a></li>
+        <li class="small-4 column tabs-title _34-18"><a href="#panel2">Gespräch</a></li>
+        <li class="small-4 column tabs-title _34-18"><a href="#panel3">Netzwerk</a></li>
       </ul>
     </div>
   </div>
