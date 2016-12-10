@@ -34,12 +34,12 @@ class CommonGround(models.Model):
     slug = models.SlugField( db_index=True )
     created_by = models.ForeignKey(User, null=True, related_name='instances')
     current = models.BooleanField(default=False)
-    tagline = models.CharField(max_length=140, null= True, blank=True, verbose_name="Kurzbeschreibung oder Motto")
-    description = models.TextField(max_length=5000, null=True, blank=True, verbose_name="Beschreibung")
+    tagline = models.CharField(max_length=140, null= True, blank=True, verbose_name="Tagline")
+    description = models.TextField(max_length=5000, null=True, blank=True, verbose_name='Kurzbeschreibung')
     conversation = models.OneToOneField('Conversation', blank=True, null=True)
     follows = models.ManyToManyField('CommonGround', related_name='follower')
     liked_messages = models.ManyToManyField('Message', related_name='message_likes')
-    tags = TaggableManager( blank=True )
+    tags = TaggableManager( blank=True, verbose_name='Tags' )
     picture = models.ImageField(upload_to=upload_location, null=True, blank=True)
 
     def long_name(self):
@@ -118,11 +118,11 @@ class Message(models.Model):
 
 
 class Project(CommonGround):
-    title = models.CharField(max_length=60)
+    title = models.CharField(max_length=60, verbose_name='Titel')
     managers = models.ManyToManyField(User, related_name='managed_projects', blank=True)
     video = models.FileField(upload_to=upload_location, null=True, blank=True) 
-    longdescription = models.TextField(max_length=2500, null=True, blank=True)
-    history = models.TextField(max_length=1000, null=True, blank=True)
+    longdescription = models.TextField(max_length=2500, null=True, blank=True, verbose_name="Worum geht es in diesem Projekt?")
+    history = models.TextField(max_length=1000, null=True, blank=True, verbose_name='Wie ist dieses Projekt enstanden?')
 
 
     def use_pic(self, idea):
