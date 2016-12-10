@@ -62,7 +62,7 @@
                 </div>
               </div>
             </div>
-            {% comment %}
+            {% if object.socialee_output or object.socialee_input %}
             <div class="small-12 columns tags-wrapper">
               <div class="row align-justify">
                 <div class="small-12 medium-6 columns card-section">
@@ -73,7 +73,11 @@
                 </div>
               </div>
             </div>
-            {% endcomment %}
+            {% else %}
+            <div class="small-12 columns tags-wrapper text-center">
+            Hier gibt es noch nichts zum Anzeigen.
+            </div>
+            {% endif %}
           </div>
         </div>
       </div>

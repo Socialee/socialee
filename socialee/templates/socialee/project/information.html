@@ -9,11 +9,11 @@
       <h3 class="h-text-center-sm">Worum geht es in diesem Projekt?</h3>
       <div class="row">
         <div class="small-12 column l-multi-column">
-          <p>
-            Es gibt viele gute Menschen mit guten Ideen, gewöhnen wir uns daran, diese Ideen auch umzusetzen. Socialee ist auch so eine Idee. Und das ist ein reiner dritter Satz!
-            Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id ligula porta felis euismod semper. Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.
-            Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id ligula porta felis euismod semper. Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.
-          </p>
+        {% if object.longdescription %}
+          <p>{{ object.longdescription }}</p>
+        {% else %}
+          <p>Es gibt noch keine ausführliche Beschreibung.</p>
+        {% endif %}
         </div>
       </div>
     </div>
@@ -21,11 +21,11 @@
       <div class="row">
         <div class="small-12 large-8 large-offset-2 columns section">
         <h3 class="h-text-center-sm">Wie ist dieses Projekt enstanden?</h3>
-        <p>
-          Es gibt viele gute Menschen mit guten Ideen, gewöhnen wir uns daran, diese Ideen auch umzusetzen. Socialee ist auch so eine Idee. Und das ist ein reiner dritter Satz!
-          Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id ligula porta felis euismod semper. Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.
-          Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Vestibulum id ligula porta felis euismod semper. Nullam quis risus eget urna mollis ornare vel eu leo. Donec id elit non mi porta gravida at eget metus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mattis consectetur purus sit amet fermentum.
-        </p>
+        {% if object.history %}
+          <p>{{ object.history }}</p>
+        {% else %}
+          <p>Es gibt noch keine Projektgeschichte.</p>
+        {% endif %}
         </div>
       </div>
     </div>
