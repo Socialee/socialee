@@ -19,6 +19,7 @@ from django.core.files.images import ImageFile
 from allauth.account.models import EmailAddress
 
 from taggit.managers import TaggableManager
+from taggit.models import GenericTaggedItemBase, TagBase
 
 
 def upload_location(instance, filename):
@@ -26,6 +27,13 @@ def upload_location(instance, filename):
     now = datetime.datetime.now()
     date = now.strftime("%Y-%m-%d_%HUhr%M")
     return "%s/%s/%s/%s" % (str("instances"), slug, date, filename)
+
+
+class LocationTag(TagBase):
+  pass
+class LocationTaggedItem(GenericTaggedItemBase):
+  tag = models.ForeignKey(LocationTag)
+
 
 class CommonGround(models.Model):
     """
@@ -40,6 +48,7 @@ class CommonGround(models.Model):
     follows = models.ManyToManyField('CommonGround', related_name='follower')
     liked_messages = models.ManyToManyField('Message', related_name='message_likes')
     tags = TaggableManager( blank=True, verbose_name='Tags' )
+    location = TaggableManager(verbose_name='Location', through=LocationTaggedItem, blank=True)
     picture = models.ImageField(upload_to=upload_location, null=True, blank=True)
 
     def long_name(self):

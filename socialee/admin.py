@@ -31,7 +31,7 @@ class OutputInline(admin.TabularInline):
 class ProjectAdmin(admin.ModelAdmin):
     model = Project
     list_display = ['title', 'created_by']
-    fields = ('picture', ('title', 'tagline'), 'description', 'tags', 'longdescription', 'history')
+    fields = ('picture', ('title', 'tagline'), 'description', 'location', 'tags', 'longdescription', 'history')
     inlines = [
         OutputInline,
         InputInline,
