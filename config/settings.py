@@ -68,6 +68,7 @@ INSTALLED_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'debug_toolbar',
+    'embed_video', # http://django-embed-video.readthedocs.io/en/v1.1.0/installation.html
     # 'django_summernote',
     'simple_auth',
     'sekizai',  # for JavaScript and CSS management
@@ -170,6 +171,7 @@ TEMPLATES = [
             'context_processors': [
                 'socialee.context_processors.prod',
                 'socialee.context_processors.live',
+                'django.core.context_processors.request',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.template.context_processors.i18n',

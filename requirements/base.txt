@@ -7,6 +7,7 @@ django-blog-zinnia==0.17
 django-ckeditor==5.1.1    # via zinnia-wysiwyg-ckeditor
 django-contrib-comments==1.7.3  # via django-blog-zinnia
 django-debug-toolbar==1.6
+django-embed-video==1.1.0
 django-environ==0.4.1
 django-modeladmin-reorder==0.2
 django-mptt==0.8.6        # via django-blog-zinnia
@@ -15,7 +16,7 @@ django-storages==1.5.1
 django-tagging==0.4.5     # via django-blog-zinnia
 django-taggit==0.21.3
 django-xmlrpc==0.1.7      # via django-blog-zinnia
-Django==1.9.9             # via collectfast, django-allauth, django-ckeditor, django-contrib-comments, django-debug-toolbar, django-environ, django-modeladmin-reorder
+Django==1.9.9             # via collectfast, django-allauth, django-ckeditor, django-contrib-comments, django-debug-toolbar, django-embed-video, django-environ, django-modeladmin-reorder
 docopt==0.4.0             # via mailchimp
 mailchimp==2.0.9
 mots-vides==2015.5.11     # via django-blog-zinnia
@@ -25,10 +26,10 @@ psycopg2==2.6.2
 pyparsing==2.1.10         # via django-blog-zinnia
 python-dateutil==2.6.0    # via collectfast
 python3-openid==3.0.10    # via django-allauth
-pytz==2016.7
+pytz==2016.10
 regex==2016.11.21         # via django-blog-zinnia
 requests-oauthlib==0.7.0  # via django-allauth
-requests==2.12.3          # via django-allauth, mailchimp, requests-oauthlib
+requests==2.12.3          # via django-allauth, django-embed-video, mailchimp, requests-oauthlib
 six==1.10.0               # via django-app-namespace-template-loader, django-environ, python-dateutil
 sqlparse==0.2.2           # via django-debug-toolbar
 whitenoise==3.2.2

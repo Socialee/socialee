@@ -27,3 +27,5 @@ Collectfast
 whitenoise
 
 django-modeladmin-reorder
+
+django-embed-video

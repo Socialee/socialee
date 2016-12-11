@@ -1,9 +1,13 @@
-{% load static socialee_filters %}
+{% load static socialee_filters embed_video_tags %}
 <div class="tabs-panel is-active" id="panel1">
   <div class="row">
     <div class="small-12 large-8 large-offset-2 columns section">
       <h3 class="h-text-center-sm">Socialee in 60 Sekunden</h3>
-       <img src="http://placehold.it/1400x641/302F35/ffffff">
+        <div class="flex-video widescreen">
+          {% video object.video as my_video %}
+              {% video my_video 'medium' %}
+          {% endvideo %}
+        </div>
     </div>
     <div class="small-12 large-8 large-offset-2 columns section">
       <h3 class="h-text-center-sm">Worum geht es in diesem Projekt?</h3>

@@ -2,7 +2,7 @@
 -r testing.txt
 click==6.6                # via pip-tools
 django-extensions==1.7.5
-docutils==0.12
+docutils==0.13.1
 first==2.0.1              # via pip-tools
 livereload==2.5.0
 pip-tools==1.8.0

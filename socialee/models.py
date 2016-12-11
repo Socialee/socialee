@@ -18,6 +18,8 @@ from django.core.files.images import ImageFile
 
 from allauth.account.models import EmailAddress
 
+from embed_video.fields import EmbedVideoField
+
 from taggit.managers import TaggableManager
 from taggit.models import GenericTaggedItemBase, TagBase
 
@@ -129,7 +131,7 @@ class Message(models.Model):
 class Project(CommonGround):
     title = models.CharField(max_length=60, verbose_name='Titel')
     managers = models.ManyToManyField(User, related_name='managed_projects', blank=True)
-    video = models.FileField(upload_to=upload_location, null=True, blank=True) 
+    video = EmbedVideoField(blank=True, null=True, verbose_name='Video-URL')
     longdescription = models.TextField(max_length=2500, null=True, blank=True, verbose_name="Worum geht es in diesem Projekt?")
     history = models.TextField(max_length=1000, null=True, blank=True, verbose_name='Wie ist dieses Projekt enstanden?')
 

@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from .models import *
 
-
+from embed_video.admin import AdminVideoMixin
 
 
 class InputInline(admin.TabularInline):
@@ -28,10 +28,10 @@ class OutputInline(admin.TabularInline):
     }
 
 
-class ProjectAdmin(admin.ModelAdmin):
+class ProjectAdmin(AdminVideoMixin, admin.ModelAdmin):
     model = Project
     list_display = ['title', 'created_by']
-    fields = ('picture', ('title', 'tagline'), 'description', 'location', 'tags', 'longdescription', 'history')
+    fields = ('picture', ('title', 'tagline'), 'description', 'tags', 'video', 'longdescription', 'history')
     inlines = [
         OutputInline,
         InputInline,
