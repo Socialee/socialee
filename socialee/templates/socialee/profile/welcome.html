@@ -7,12 +7,23 @@
   <div class="row">
     <div class="small-12 medium-11 large-11 small-centered">
       <div class="c-form">
-        <h6 class="text-center">Hallo {% if request.user.first_name %}{{ request.user.first_name }}!{% else %}!{% endif %}</h6>
+        <h6 class="text-center">Hallo {{ request.user.first_name }}!</h6>
         {% if request.user.first_name %}
-        <p class="-lead text-center">Hier entsteht eine Seite, die dir Übersicht über deine Ideen und Projekte gibt.</p>  
+          <p class="-lead text-center">Hier entsteht eine Seite, die dir Übersicht über deine Ideen und Projekte gibt.</p>  
         {% endif %}
 
+          {% own_idea_list request.user.email as idea_list %}
           {% include 'snippet_ideas.html' %}
+
+          {% if request.user.current_instance %} 
+            {% for project in request.user.current_instance.inst_follows.all %}
+              {% include "project_card_element.html" %}
+            {% endfor %}
+          {% else %}
+            {% for project in request.user.follows.all %}
+              {% include "project_card_element.html" %}
+            {% endfor %}
+          {% endif %}
 
         <p class="text-center"><a class="button button--yellow" href="{% url 'create_idea' %}">Teile eine Idee</a></p>
         

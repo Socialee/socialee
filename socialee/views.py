@@ -128,8 +128,8 @@ class ProjectView(BaseView, DetailView):
         context = super(ProjectView, self).get_context_data(**kwargs)
         if self.object.created_by == self.request.user:
             self.request.user.instances.update(current=False)
-            self.object.current = True
-            self.object.save()
+            # self.object.current = True
+            # self.object.save()
 
         return context
 
@@ -272,8 +272,8 @@ class ProfileView(BaseView, DetailView):
 
         if self.object.created_by == self.request.user:
             self.request.user.instances.update(current=False)
-            self.object.current = True
-            self.object.save()
+            #self.object.current = True
+            #self.object.save()
         return context
 
 
@@ -281,20 +281,6 @@ class ProfileView(BaseView, DetailView):
 class WelcomePage(ListView):
     template_name = 'welcome.html'
     model = Idea
-
-    # this causes an error in PRODUCTION: see logs
-    # def get_context_data(self, **kwargs):
-    #     context = super(WelcomePage, self).get_context_data(**kwargs)
-    #     if self.request.user.instances.count() and not self.request.user.instances.filter(current=True):
-    #         instance = self.request.user.instances[0]
-    #         instance.current = True
-    #         instance.save()
-
-    #     return context
-
-    def get_queryset(self):
-        self.author = self.request.user.email
-        return Idea.objects.filter(author=self.author)
 
 
 class Follow(BaseView, CreateView):
@@ -304,10 +290,16 @@ class Follow(BaseView, CreateView):
         instance_id = request.POST.get('instance_id')
 
         instance = CommonGround.objects.get(id=instance_id)
-        if instance in self.request.user.current_instance.follows.all():
-            self.request.user.current_instance.follows.remove(instance)
+        if self.request.user.instances.filter(current=True):
+            if instance in self.request.user.current_instance.inst_follows.all():
+                self.request.user.current_instance.inst_follows.remove(instance)
+            else:
+                self.request.user.current_instance.inst_follows.add(instance)
         else:
-            self.request.user.current_instance.follows.add(instance)
+            if instance in self.request.user.follows.all():
+                self.request.user.follows.remove(instance)
+            else:
+                self.request.user.follows.add(instance)
         
 
         return render(request, self.template_name, {'to_follow' : instance} )

@@ -8,14 +8,9 @@
           <h3>{{ project.title }}</h3> {# Titel #}
           <p class="tagline">{{ project.tagline }}</p> {# Tagline #}
           </div>
+          <i class="fa fa-5x" aria-hidden="true"><img src="{{ project.picture.url }}" /></i>
           <div class="columns text-center">
-            <p class="s-icon-text">ein Projekt von:</p>
-            {% if project.created_by.profile.picture %}
-              <i class="fa fa-5x" aria-hidden="true"><img src="{{ project.created_by.profile.picture.url }}" /></i>
-            {% else %} 
-              <i class="fa fa-user fa-5x" aria-hidden="true"></i> {# user-Bild #}     
-            {% endif %}
-            <p class="s-icon-text">{{ project.created_by }}</p> {# user-first_name #}
+            <p class="s-icon-text">ein Projekt von: {{ project.created_by }}</p> {# user-first_name #}
           </div>
         </div><hr>
 
@@ -33,8 +28,7 @@
             <i class="fa fa-heart-o fa-3x socialeebhaber" user_id="{{request.user.username}}" id="{{project.id}}" aria-hidden="true"></i>
             {% endif %}
 
-            <p class="s-icon-text">Socialeebhaber<br/>{{ project.profiles.all.count }}</p></div> {# zähler der socialeehaber #}
-          <div class="large-9 columns align-self-bottom"><a href="{{ project.get_absolute_url }}" class="expanded large button">Projekt anschauen</a></div> {# login only link zum projekt #}
+          <div class="large-9 columns align-self-bottom"><a href="{% url 'project_view' project.slug %}" class="expanded large button">Projekt anschauen</a></div> {# login only link zum projekt #}
         </div>
 
     </div>

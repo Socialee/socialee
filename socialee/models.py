@@ -30,6 +30,12 @@ def upload_location(instance, filename):
     date = now.strftime("%Y-%m-%d_%HUhr%M")
     return "%s/%s/%s/%s" % (str("instances"), slug, date, filename)
 
+def upload_location_user_pic(instance, filename):
+    slug = str(instance.user.username)
+    now = datetime.datetime.now()
+    date = now.strftime("%Y-%m-%d_%HUhr%M")
+    return "%s/%s/%s/%s" % (str("users"), slug, date, filename)
+
 
 class LocationTag(TagBase):
   pass
@@ -37,21 +43,27 @@ class LocationTaggedItem(GenericTaggedItemBase):
   tag = models.ForeignKey(LocationTag)
 
 
+class Creator(models.Model):
+    user = models.OneToOneField(User, default=None, related_name='creator')
+    picture = models.ImageField(upload_to=upload_location_user_pic, null=True, blank=True)
+
 class CommonGround(models.Model):
     """
     Stores all the common fields for :model:`Profile` and :model:`Project`.
     """
     slug = models.SlugField( db_index=True )
     created_by = models.ForeignKey(User, null=True, related_name='instances')
-    current = models.BooleanField(default=False)
     tagline = models.CharField(max_length=140, null= True, blank=True, verbose_name="Tagline")
     description = models.TextField(max_length=5000, null=True, blank=True, verbose_name='Kurzbeschreibung')
     conversation = models.OneToOneField('Conversation', blank=True, null=True)
-    follows = models.ManyToManyField('CommonGround', related_name='follower')
-    liked_messages = models.ManyToManyField('Message', related_name='message_likes')
     tags = TaggableManager( blank=True, verbose_name='Tags' )
     location = TaggableManager(verbose_name='Location', through=LocationTaggedItem, blank=True)
     picture = models.ImageField(upload_to=upload_location, null=True, blank=True)
+
+    current = models.BooleanField(default=False)
+    follower = models.ManyToManyField(User, related_name='follows')
+    inst_follower = models.ManyToManyField('CommonGround', related_name='inst_follows')
+    #liked_messages = models.ManyToManyField('Message', related_name='message_likes')
 
     def long_name(self):
         if hasattr(self, 'profile'):
@@ -248,6 +260,7 @@ def pre_save_profile(sender, instance, *args, **kwargs):
 pre_save.connect(pre_save_profile, sender = Profile)
 
 User.current_instance = property(lambda u: u.instances.get(current=True))
+User.creator = property(lambda u: Creator.objects.get_or_create(user=u)[1])
 
 
 
