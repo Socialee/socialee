@@ -1,11 +1,8 @@
 .tags-wrapper {
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   background-color: c(grey, f8);
   border: 3px solid c(grey, f4);
-  @include breakpoint(medium) {
-    padding: 20px;
-  }
 }
 
 .tags {

@@ -1,8 +1,14 @@
 {% load static socialee_filters %}
-<div class="c-section">
+<div class="c-section c-section--hero-bg-img  c-section--hero">
+  <div class="row">
+    <div class="small-12">
+    </div>
+  </div>
+</div>
+<div class="c-section c-section--grey-ea">
   <div class="row">
     <div class="small-12 medium-10 columns small-centered">
-      <div class="c-form h-text-center-sm">
+      <div class="c-form h-text-center-sm hero-content">
         <div class="hero__profile">
           <div class="row">
             <div class="small-12 column">
@@ -14,11 +20,11 @@
                 {% endif %}
                 <div class="small-12 media-object-section main-section">
                   <div class="row">
-                    <div class="small-12 medium-12 large-8 column profile__name header-text-h2 header-text-sm-h2">
+                    <div class="small-12 medium-12 large-8 column h2">
                       {{ object.long_name  }}
                     </div>
                     {% if request.user.current_instance.id == object.id %}
-                    <div class="small-12 medium-12 large-4 column show-for-medium header-text-h2 header-text-sm-h2">
+                    <div class="small-12 medium-12 large-4 column show-for-medium h6">
                       {% if object.profile %}
                         <a class="button button--yellow button--icon float-right-lg" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
                       {% else %}
@@ -32,7 +38,7 @@
                       </div>
                     {% endif %}
 
-                    <div class="column small-12 profile__tagline header-text-h6 header-text-sm-h6">
+                    <div class="column small-12 profile__tagline h6">
                     {% if object.tagline %}
                       {{ object.tagline }}
                     {% else %}
@@ -47,7 +53,7 @@
                       </div>
 
                     <div class="column small-12">
-                      <p>{% if object.description %}
+                      <p class="lead">{% if object.description %}
                         {{ object.description }}
                       {% else %}
                         Es gibt noch keine Beschreibung.
@@ -63,13 +69,17 @@
               </div>
             </div>
             {% if object.socialee_output or object.socialee_input %}
-            <div class="small-12 columns tags-wrapper">
-              <div class="row align-justify">
-                <div class="small-12 medium-6 columns card-section">
-                  {% include "snippet_input_output_tags.html" with input_output=object.socialee_output title=object.short_name|add:" bietet" color="green" left="true" %}
-                </div>
-                <div class="small-12 medium-6 columns card-section">
-                  {% include "snippet_input_output_tags.html" with input_output=object.socialee_input title=object.short_name|add:" benötigt" color="blue" left="true" %}
+            <div class="small-12 columns">
+              <div class="row column">
+                <div class="small-12 columns tags-wrapper">
+                  <div class="row">
+                    <div class="small-12 medium-6 columns">
+                      {% include "snippet_input_output_tags.html" with input_output=object.socialee_output title=object.short_name|add:" bietet" color="green" left="true" %}
+                    </div>
+                    <div class="small-12 medium-6 columns">
+                      {% include "snippet_input_output_tags.html" with input_output=object.socialee_input title=object.short_name|add:" benötigt" color="blue" left="true" %}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

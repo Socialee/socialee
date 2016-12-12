@@ -16,6 +16,11 @@
   background-color: c(grey, f8);
 }
 
+.c-section--grey-ea {
+  @extend .c-section;
+  background-color: c(grey, ea);
+}
+
 .c-section--bg-img {
   	@extend .c-section;
  		z-index: 0;
@@ -80,4 +85,18 @@ background-image: url(../img/landingpage_bg/Landingpage_Footer.jpg);
  		padding-bottom: 10rem;
     top: -280px;
     margin-left: -44px;
+}
+
+.hero-content {
+  @include breakpoint(medium) {
+    margin-top: -8rem !important;
+  }
+}
+
+.c-section--hero-bg-img {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-image: url(http://power.eecs.berkeley.edu/images/GroupPhoto2007.jpg);
 }

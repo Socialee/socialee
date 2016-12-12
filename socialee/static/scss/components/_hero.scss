@@ -41,18 +41,8 @@
 
 .profile {
 
-  &__name {
-    //font-size: 54px;
-    font-weight: 700;
-    color: $socialee-black;
-  }
-
   &__tagline {
-    //font-size: 28px;
-    letter-spacing: 0px;
     line-height: 38px;
-    font-weight: 700;
-    color: $socialee-black;
     margin-bottom: 20px;
   }
 
@@ -70,6 +60,22 @@
 }
 
 .media-object-section.main-section {
-    padding-bottom: 40px;
+    padding-bottom: rem-calc(0px);
 }
 
+.media-object-section:last-child:not(:nth-child(2)) {
+    padding-left: 0rem;
+}
+
+.media-object-section:first-child {
+    padding-right: 0rem;
+}
+
+.c-section--hero {
+    padding-top: 20% !important;
+    padding-bottom: 20% !important;
+}
+
+.c-section--hero::after {
+background-image: url(../img/landingpage_bg/Landingpage_Footer.jpg);
+}
