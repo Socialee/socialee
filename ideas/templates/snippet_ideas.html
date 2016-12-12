@@ -1,37 +1,21 @@
 {% load static sekizai_tags idea_tags socialee_filters %}
 
 {# place call-to-action-cards when there are less than 3 cards available (in order for grid to look nice) #}
-{% if idea_list|length >= 3 %}
+{% if idea_list|length == 0 %}
+  <h3 class="text-center">Hier gibt es noch nichts anzuzeigen.</h3>
+  <p class="text-center -lead">Das ändert sich, sobald du eine Idee teilst.</p>
+{% else %}
 <div class="grid">
   <div class="grid-sizer"></div>
   <div class="gutter-sizer"></div>
       {% for idea in idea_list %}  
         {% include "idea_card.html" %}
       {% endfor %}
+      {% if idea_list|length == 1 %}
+        {% include "idea_card_cta.html" %}
+      {% endif %}
       {% include "idea_card_cta_2.html" %}
 </div>
-{% elif idea_list|length = 2 %}
-<div class="grid">
-  <div class="grid-sizer"></div>
-  <div class="gutter-sizer"></div>
-      {% for idea in idea_list %}  
-        {% include "idea_card.html" %}
-      {% endfor %}
-      {% include "idea_card_cta_2.html" %}
-</div>
-{% elif idea_list|length = 1 %}
-<div class="grid">
-  <div class="grid-sizer"></div>
-  <div class="gutter-sizer"></div>
-      {% for idea in idea_list %}  
-        {% include "idea_card.html" %}
-      {% endfor %}
-      {% include "idea_card_cta.html" %}
-      {% include "idea_card_cta_2.html" %}
-</div>
-{% elif idea_list|length = 0 %}
-<h3 class="text-center">Hier gibt es noch nichts anzuzeigen.</h3>
-<p class="text-center -lead">Das ändert sich, sobald du eine Idee teilst.</p>
 {% endif %}
 
 {% addtoblock 'js' %}
