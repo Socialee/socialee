@@ -2,9 +2,7 @@
 
   {% block content %}
     {% include "hero.html" %}
-    {% if request.user.current_instance %} {# TODO: Wozu ist das gut? Ist das Kunst oder kann das weg? #}
-        {% include "tabs.html" %}
-        {% include "site_content.html" %}
-    {% endif %}
+    {% include "tabs.html" %}
+    {% include "site_content.html" %}
 
   {% endblock content %}
