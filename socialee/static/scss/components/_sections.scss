@@ -88,8 +88,10 @@ background-image: url(../img/landingpage_bg/Landingpage_Footer.jpg);
 }
 
 .hero-content {
+  position: relative;
   @include breakpoint(medium) {
     margin-top: -8rem !important;
+
   }
 }
 

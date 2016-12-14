@@ -145,3 +145,53 @@ a.tag {
 a.tag:hover{
   color: #fff;
 }
+
+.socialee-label {
+  float:left;
+  height:24px;
+  line-height:24px;
+  position:relative;
+  font-size:11px;
+  font-weight: 700;
+  padding: 0 20px 0 20px;
+  color:#fff;
+  text-decoration:none;
+  border-radius: 4px;
+  text-transform: uppercase;
+  background-color: #1f7f9e;
+  top:-12px;
+  left:50%;
+  margin-left: -44px;
+}
+
+.socialee-label:before {
+  content:"";
+  position:absolute;
+  top:10px;
+  right:10px;
+  float:right;
+  width:4px;
+  height:4px;
+  -moz-border-radius:2px;
+  -webkit-border-radius:2px;
+  border-radius:2px;
+  background:#fff;
+}
+
+.socialee-label:after{
+  content:"";
+  position:absolute;
+  top:10px;
+  left:10px;
+  float:left;
+  width:4px;
+  height:4px;
+  -moz-border-radius:2px;
+  -webkit-border-radius:2px;
+  border-radius:2px;
+  background:#fff;
+}
+
+.socialee-label > a:hover, a:focus {
+    color: white;
+}
