@@ -7,8 +7,8 @@
 </div>
 <div class="c-section c-section--grey-ea">
   <div class="row">
-    <div class="small-12 medium-10 columns small-centered">
-      <div class="c-form h-text-center-sm hero-content">
+    <div class="small-11 small-centered x-large-12"> <!-- small-12 medium-10 columns small-centered  -->
+      <div class="h-text-center-sm hero-content">
         <div class="hero__profile">
           <div class="row">
             <div class="small-12 column">
@@ -18,7 +18,7 @@
                   <img class="" src="{{ MEDIA_URL }}{{ object.picture }}" alt="profile image">
                 </div>
                 {% endif %}
-                <div class="small-12 media-object-section main-section">
+                <div class="small-12 medium-10 columns small-centered"> <!--  small-12 media-object-section main-section -->
                   <div class="row">
                     <div class="small-12 medium-12 large-8 column h2">
                       {{ object.long_name  }}
@@ -71,20 +71,24 @@
             {% if object.socialee_output or object.socialee_input %}
             <div class="small-12 columns">
               <div class="row column">
-                <div class="small-12 columns tags-wrapper">
+                <div class="small-12 medium-10 columns small-centered tags-wrapper">
                   <div class="row">
-                    <div class="small-12 medium-6 columns">
-                      {% include "snippet_input_output_tags.html" with input_output=object.socialee_output title=object.short_name|add:" bietet" color="green" left="true" %}
-                    </div>
-                    <div class="small-12 medium-6 columns">
-                      {% include "snippet_input_output_tags.html" with input_output=object.socialee_input title=object.short_name|add:" benötigt" color="blue" left="true" %}
+                    <div class="small-12">
+                       <div class="row">
+                        <div class="small-12 medium-6 columns">
+                          {% include "snippet_input_output_tags.html" with input_output=object.socialee_output title=object.short_name|add:" bietet" color="green" left="true" %}
+                        </div>
+                        <div class="small-12 medium-6 columns">
+                          {% include "snippet_input_output_tags.html" with input_output=object.socialee_input title=object.short_name|add:" benötigt" color="blue" left="true" %}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             {% else %}
-            <div class="small-12 columns tags-wrapper text-center">
+            <div class="small-12 medium-10 columns small-centered tags-wrapper text-center">
             Hier gibt es noch nichts zum Anzeigen.
             </div>
             {% endif %}
@@ -93,4 +97,5 @@
       </div>
     </div>
   </div>
+  {% include "tabs.html" %}
 </div>

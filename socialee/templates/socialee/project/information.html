@@ -1,7 +1,7 @@
 {% load static socialee_filters embed_video_tags %}
 <div class="tabs-panel is-active" id="panel1">
-  <div class="row">
-    <div class="small-12 medium-10 medium-offset-1 columns section">
+  <div class="NO-row">
+    <div class="small-11 medium-10 columns small-centered section">
       <h3 class="h-text-center-sm">Socialee in 60 Sekunden</h3>
         <div class="flex-video widescreen">
           {% video object.video as my_video %}
@@ -9,7 +9,7 @@
           {% endvideo %}
         </div>
     </div>
-    <div class="small-12 medium-10 medium-offset-1 columns section">
+    <div class="small-11 medium-10 columns small-centered section">
       <h3 class="h-text-center-sm">Worum geht es in diesem Projekt?</h3>
       <div class="row">
         <div class="small-12 column l-multi-column">
@@ -21,20 +21,36 @@
         </div>
       </div>
     </div>
-    <div class="small-12 columns l-text-box">
+    <div style="float:none" class="small-11 medium-10 columns small-centered section">
+      <h3 class="h-text-center-sm">Wie ist dieses Projekt enstanden?</h3>
       <div class="row">
-        <div class="small-12 medium-10 medium-offset-1 columns section">
-        <h3 class="h-text-center-sm">Wie ist dieses Projekt enstanden?</h3>
-        {% if object.history %}
-          <p>{{ object.history }}</p>
-        {% else %}
-          <p>Es gibt noch keine Projektgeschichte.</p>
-        {% endif %}
+        <div class="small-12 column">
+            {% if object.history %}
+              <p>{{ object.history }}</p>
+            {% else %}
+              <p>Es gibt noch keine Projektgeschichte.</p>
+            {% endif %}
         </div>
       </div>
     </div>
     {% comment %}
-    <div class="small-12 medium-10 medium-offset-1 columns section">
+    <div class="small-12 medium-10 columns small-centered section">  <!-- l-text-box -->
+      <div class="row">
+        <div class="small-12">
+          <div class="row">
+            <div class="small-12 medium-10 columns small-centered section">
+            <h3 class="h-text-center-sm">Wie ist dieses Projekt enstanden?</h3>
+            {% if object.history %}
+              <p>{{ object.history }}</p>
+            {% else %}
+              <p>Es gibt noch keine Projektgeschichte.</p>
+            {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="small-12 medium-10 columns small-centered section">
       <h3 class="h-text-center-sm">Wer betreut diese Projekt?</h3>
         <div class="row">
         <div class="small-12 medium-6 large-4">
@@ -57,7 +73,7 @@
         </div>
       </div>
     </div>
-    <div class="small-12 medium-10 medium-offset-1 columns end section">
+    <div class="small-12 medium-10 columns small-centered section end section">
       <h3 class="h-text-center-sm">Wieviel Geld brauchen wir?</h3>
     </div>
     {% endcomment %}
