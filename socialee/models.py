@@ -150,7 +150,7 @@ class Project(CommonGround):
 
     def use_pic(self, idea):
         name = os.path.basename(idea.picture.name)
-        idea_path = os.path.join(settings.MEDIA_ROOT, idea.picture.name)
+        idea_path = os.path.join(settings.MEDIA_URL, idea.picture.name)
         image_file = ImageFile(open(idea_path, "rb"))
         self.picture.save(name, image_file, save=True)
     
