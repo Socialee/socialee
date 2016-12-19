@@ -265,8 +265,10 @@ class ProfileView(BaseView, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
-        follower = self.object.follower.all()
-        friends = self.object.follows.filter( id__in=follower ).exclude(id=self.request.user.current_instance.id)
+        follower = self.object.inst_follower.all()
+        friends = None
+        if self.request.user.instances.filter(current=True):
+            friends = self.object.inst_follows.filter( id__in=follower ).exclude(id=self.request.user.current_instance.id)
 
         context['friends'] = friends
 

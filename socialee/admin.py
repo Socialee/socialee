@@ -41,7 +41,7 @@ class ProjectAdmin(AdminVideoMixin, admin.ModelAdmin):
 class ProfileAdmin(admin.ModelAdmin):
     model = Profile
     list_display = ['created_by', 'user_email', 'user_full_name']
-    fields = (('created_by', 'picture'), 'tags', 'tagline', 'description', 'follows', ('phone', 'plz', 'newsletter'))
+    fields = (('created_by', 'picture'), 'tags', 'tagline', 'description', 'inst_follows', ('phone', 'plz', 'newsletter'))
     inlines = [
         OutputInline,
         InputInline,
