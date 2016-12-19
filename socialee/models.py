@@ -2,6 +2,8 @@ import datetime
 import PIL
 from PIL import Image
 import os.path
+from urllib.request import urlopen
+from urllib.parse import urlparse
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -150,12 +152,14 @@ class Project(CommonGround):
 
     def use_pic(self, idea):
         name = os.path.basename(idea.picture.name)
-        # idea_path = os.path.join(settings.MEDIA_ROOT, idea.picture.name)
-        # if LIVE and not DEBUG:
-        idea_path = os.path.join(settings.MEDIA_URL, idea.picture.name)
-        print(idea_path)
-        image_file = ImageFile(open(idea_path, "rb"))
-        self.picture.save(name, image_file, save=True)
+        if urlparse(settings.MEDIA_URL).scheme != "":
+            idea_path = os.path.join(settings.MEDIA_URL, idea.picture.name)
+            image_file = ImageFile(urlopen(idea_path).read())
+            self.picture.save(name, image_file, save=True)
+        else:
+            idea_path = os.path.join(settings.MEDIA_ROOT, idea.picture.name)
+            image_file = ImageFile(open(idea_path, 'rb'))
+            self.picture.save(name, image_file, save=True)
     
     
     def __str__(self):
