@@ -2,6 +2,7 @@ import datetime
 import PIL
 from PIL import Image
 import os.path
+import ssl
 from urllib.request import urlopen
 from urllib.parse import urlparse
 from django.conf import settings
@@ -154,7 +155,7 @@ class Project(CommonGround):
         name = os.path.basename(idea.picture.name)
         if urlparse(settings.MEDIA_URL).scheme != "":
             idea_path = os.path.join(settings.MEDIA_URL, idea.picture.name)
-            image_file = ImageFile(urlopen(idea_path).read())
+            image_file = ImageFile(urlopen(idea_path, context=ssl.SSLContext(ssl.PROTOCOL_SSLv23)).read())
             self.picture.save(name, image_file, save=True)
         else:
             idea_path = os.path.join(settings.MEDIA_ROOT, idea.picture.name)
