@@ -3,7 +3,7 @@ import PIL
 from PIL import Image
 import os.path
 import ssl
-import urllib
+from urllib import urlretrieve
 from urllib.parse import urlparse
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -155,7 +155,7 @@ class Project(CommonGround):
         name = os.path.basename(idea.picture.name)
         if urlparse(settings.MEDIA_URL).scheme != "":
             idea_path = os.path.join(settings.MEDIA_URL, idea.picture.name).replace(" ", "%20")
-            result = urllib.urlretrieve(idea_path)
+            result = urlretrieve(idea_path)
             image_file = ImageFile(open(result[0]))
             self.picture.save(name, image_file, save=True)
         else:
