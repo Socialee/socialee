@@ -3,7 +3,7 @@ import PIL
 from PIL import Image
 import os.path
 import ssl
-from urllib.request import urlopen
+import urllib
 from urllib.parse import urlparse
 from django.conf import settings
 from django.contrib.auth.models import User
