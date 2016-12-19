@@ -155,7 +155,8 @@ class Project(CommonGround):
         name = os.path.basename(idea.picture.name)
         if urlparse(settings.MEDIA_URL).scheme != "":
             idea_path = os.path.join(settings.MEDIA_URL, idea.picture.name).replace(" ", "%20")
-            image_file = ImageFile(urlopen(idea_path, context=ssl.SSLContext(ssl.PROTOCOL_SSLv23)).read())
+            result = urllib.urlretrieve(idea_path)
+            image_file = ImageFile(open(result[0]))
             self.picture.save(name, image_file, save=True)
         else:
             idea_path = os.path.join(settings.MEDIA_ROOT, idea.picture.name)
