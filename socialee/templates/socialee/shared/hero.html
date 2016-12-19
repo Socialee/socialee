@@ -24,7 +24,7 @@
                     <div class="small-12 medium-12 large-8 column h2">
                       {{ object.long_name  }}
                     </div>
-                    {% if request.user.current_instance.id == object.id %}
+                    {% if request.user == object.created_by %}
                     <div class="small-12 medium-12 large-4 column show-for-medium h6">
                       {% if object.profile %}
                         <a class="button button--yellow button--icon float-right-lg" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
