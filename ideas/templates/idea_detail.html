@@ -3,19 +3,25 @@
 
 {% block content %}
 
+{% comment %}
+
+{% endcomment %}
+
 <div class="row">
+  {% if request.user.is_superuser %}
+    <p><a href="{% url 'startprojectWithIdea' idea.pk %}">zum Projekt machen</a></p>  
+  {% endif %}
   <div class="small-12 medium-10 large-8 small-centered">
-    <div class="idea-details-white">
-    {% if request.user.is_superuser %}
-      <p><a href="{% url 'startprojectWithIdea' idea.pk %}">zum Projekt machen</a></p>  
-    {% endif %}
-    <a href="{% url 'home' %}">zurück zur Startseite</a>
+  <a class="socialee-label">gute Idee</a>
+    <div class="idea-details-white">      
       {% if idea.picture %}
         {% if idea.title or idea.description %}<!--Bild und Titel oder Bild und Beschreibung-->
-          <div class="detail-idea-image">
-              <img class="center" src="{{ MEDIA_URL }}{{ idea.picture }}"> 
+          
+          <div class="small-12 medium-12 large-8 column small-centered">
+            <h2 class="text-center">{{ idea.title }}</h2>
           </div>
-            <h3 class="text-center">{{ idea.title }}</h3>
+
+            <img class="center" src="{{ MEDIA_URL }}{{ idea.picture }}">
             <p class="text-center">{{ idea.description|urlizetrunc:25|url_target_blank|safe }}</p>
         {% elif not idea.title and not idea.description %}<!--nur Bild-->
           <div class="detail-idea-image">
@@ -45,12 +51,6 @@
     </div>  
 
     <div class="idea-details-dark" id="idea_comments_{{idea.id}}">
-      {% for comment in idea.comments.all %}
-        <div class="idea_comment">
-        <label>VOR {{ comment.date|timesince|upper }} VON {% if comment.by_user.is_superuser %}SOCIALEE{% else %}{{ comment.by_user|upper|truncatechars:6 }}{% endif %}</label>
-          <p>{{ comment.message|urlizetrunc:25 }}</p>
-        </div>
-      {% endfor %}
     {% if request.user.is_authenticated %}
     <div class="">
       <div class="idea_comment_area">
@@ -62,8 +62,15 @@
     {% else %}
     <p class="white text-center">Du willst was sagen? <a href="{% url 'account_login' %}">Melde dich an!</a></p>
     {% endif %}
+      <div class="mt-50">
+      {% for comment in idea.comments.all %}
+        <div class="idea_comment">
+        <label>VOR {{ comment.date|timesince|upper }} VON {% if comment.by_user.is_superuser %}SOCIALEE{% else %}{{ comment.by_user|upper|truncatechars:6 }}{% endif %}</label>
+          <p>{{ comment.message|urlizetrunc:25 }}</p>
+        </div>
+      {% endfor %}
+      </div>
     </div>
-
   </div>
 </div>
 
