@@ -1,14 +1,21 @@
 {% load static socialee_filters embed_video_tags %}
 <div class="tabs-panel is-active" id="panel1">
   <div class="NO-row">
+  {% if object.video %}
     <div class="small-11 medium-10 columns small-centered section">
-      <h3 class="h-text-center-sm">Socialee in 60 Sekunden</h3>
+      <h3 class="h-text-center-sm">{{ object.title }} - das Video</h3>
         <div class="flex-video widescreen">
           {% video object.video as my_video %}
               {% video my_video 'medium' %}
           {% endvideo %}
         </div>
     </div>
+  {% else %}
+    <div class="small-11 medium-10 columns small-centered section">
+      <h3 class="h-text-center-sm">{{ object.title }} - das Video</h3>
+        <a href="{% url 'project_updateview' slug=project.slug %}"><p>Hier ist Platz für Dein Video.</p></a>
+    </div>
+  {% endif %}
     <div class="small-11 medium-10 columns small-centered section">
       <h3 class="h-text-center-sm">Worum geht es in diesem Projekt?</h3>
       <div class="row">
@@ -16,7 +23,7 @@
         {% if object.longdescription %}
           <p>{{ object.longdescription }}</p>
         {% else %}
-          <p>Es gibt noch keine ausführliche Beschreibung.</p>
+          <a href="{% url 'project_updateview' slug=project.slug %}"><p>Hier ist Platz für eine Ausführliche Beschreibung.</p></a>
         {% endif %}
         </div>
       </div>
@@ -28,7 +35,7 @@
             {% if object.history %}
               <p>{{ object.history }}</p>
             {% else %}
-              <p>Es gibt noch keine Projektgeschichte.</p>
+              <a href="{% url 'project_updateview' slug=project.slug %}"><p>Hier kannst Du erzählen, wie das Projekt {{ object.title }} entstanden ist.</p></a>
             {% endif %}
         </div>
       </div>

@@ -7,8 +7,9 @@
       <div class="comment__header">
         <div class="row">
           <div class="comment__avatar small-12 column">
-            <!-- <img src="{{ MEDIA_URL }}{{ request.user.current_instance.picture }}" alt="1"> -->
-            <a href="#"><img src="/media/avatar_profile-acc6c5a5a9d35bd7d292dfd776cfec76_mnGb9Tc.png" alt="profile image"></a>
+          {% if request.user.current_instance.picture %}
+            <a href="#"><img src="{{ MEDIA_URL }}{{ request.user.current_instance.picture }}" alt=""></a>
+          {% endif %}
             <div class="comment__avatar-text">
               <div class="h6">{{ request.user.current_instance.long_name }}</div>
               <div class="h-f15 greyblue-2 h-capital h-pt-5">Neuen Kommentar schreiben</div>

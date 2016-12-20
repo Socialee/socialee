@@ -43,7 +43,7 @@
                     {% if object.tagline %}
                       {{ object.tagline }}
                     {% else %}
-                      Es gibt noch keine Tagline.
+                      <p>Hey {{ request.user }}, hier kann der Slogan deines Projektes stehen. <a href="{% url 'project_updateview' slug=project.slug %}">Bearbeite das mal!</a></p>
                     {% endif %}
                     </div>
                       <div class="column small-12 profile__tagline tags tags--attribute tags--orange js-content-sized">
@@ -57,7 +57,7 @@
                       <p class="lead">{% if object.description %}
                         {{ object.description }}
                       {% else %}
-                        Es gibt noch keine Beschreibung.
+                      <p>Hey {{ request.user }}, hier sollte eine kurze Beschreibung deines Projektes stehen. <a href="{% url 'project_updateview' slug=project.slug %}">Bearbeite das mal!</a></p>
                       {% endif %}
                       </p>
                       {% comment %}
@@ -89,9 +89,7 @@
               </div>
             </div>
             {% else %}
-            <div class="small-12 medium-10 columns small-centered tags-wrapper text-center">
-            Hier gibt es noch nichts zum Anzeigen.
-            </div>
+            <a href="{% url 'project_updateview' slug=project.slug %}"><p class="text-center lead">Input & Output bearbeiten</p></a>
             {% endif %}
           </div>
         </div>
