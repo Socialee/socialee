@@ -10,7 +10,7 @@
   position: relative;
   z-index: 100;
   color: $socialee-orange;
-  
+
   .expand-icon {
     margin: 0.5rem;
     position: absolute;
@@ -37,7 +37,7 @@
 
 .grid {
   padding-top: 3rem;
-  padding-bottom: 3rem; 
+  padding-bottom: 3rem;
   margin: 0 auto;
 }
 
@@ -94,7 +94,7 @@
       @include breakpoint(small only) {
       min-height: 100px;
     }
-  } 
+  }
 
   .idea-details {
     padding: 0.9rem;
@@ -121,7 +121,7 @@
   &:hover {
     box-shadow: 0px 0px 28px 0px rgba(0, 0, 0, 0.18);
   }
-  
+
 }
 
 .idea-card-back {
@@ -195,7 +195,7 @@
   border-bottom: 4px solid;
   font-weight: bold;
   &:hover {
-    text-decoration: none; 
+    text-decoration: none;
   }
 }
 
@@ -213,7 +213,7 @@
   z-index: 100;
   font-size: 0.95rem;
   text-align: center;
-  position: relative; 
+  position: relative;
   display: none;
 }
 
@@ -228,7 +228,7 @@
   background-color: $socialee-black;
   color: white;
   padding: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
 }
 
 .detail-idea-image {
@@ -267,4 +267,76 @@ img.center {
     font-size: 0.7rem;
     color: gray;
   }
+}
+
+.idea-detail {
+  background-color: #fefefe;
+  border-radius: 4px;
+  padding: 0;
+  padding-bottom: 6rem;
+  padding-top: 6rem;
+  margin-bottom: 8rem;
+  margin-top: 0%;
+
+  @include breakpoint(small only) {
+      margin-top: 0%;
+    }
+
+  @include breakpoint(medium only) {
+      margin-top: -35%;
+    }
+
+  @include breakpoint(large only) {
+      margin-top: -35%;
+    }
+
+  @include breakpoint(x-large) {
+      margin-top: -42%;
+    }
+
+  &__title {
+    margin-bottom: rem-calc(40px);
+
+  }
+
+  &__image {
+    margin-bottom: rem-calc(40px);
+
+  }
+
+}
+
+.idea-comments {
+
+  &__title {
+    margin-bottom: rem-calc(20px);
+
+  }
+
+  &__comments {
+    margin-top: rem-calc(50px);
+    margin-bottom: rem-calc(50px);
+    //border-top:1px solid gray;
+    border-bottom:1px solid gray;
+  }
+
+  &__item:first-child {
+    //margin-top: rem-calc(10px);
+
+  }
+
+  &__label {
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 0.7rem;
+    color: gray;
+  }
+}
+
+.idea-details-dark-temp {
+  background-color: $socialee-black;
+  color: white;
+  padding: 2rem;
+  margin-top: 4rem;
+  padding-bottom: 0;
 }
