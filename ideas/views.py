@@ -55,7 +55,7 @@ class CreateIdea(SignupView):
                 newIdea.save()
 
                 # set message to inform user it was successful
-                messages.success(request, 'Danke! Wir gucken uns Deine Idee an und geben dir so schnell wie möglich Feedback.')
+                messages.success(request, 'Hey! Wir gucken uns Deine Idee an und geben dir so schnell wie möglich Feedback. Check dein E-Mail-Postfach.')
             else:
                 return self.form_invalid(form)
             return ret

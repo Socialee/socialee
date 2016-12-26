@@ -14,8 +14,8 @@
 
           <div id="idea_form">
             <div class="row">
-            {% include "snippet_formfield.html" with field=form.picture size="medium-6" upload_val=" Bild hochladen " %}
-            {{ form.picturefile }}
+            {% include "snippet_formfield.html" with field=form.picture size="medium-12" upload_val=" Bild hochladen " %}
+            <img class="small-12 medium-6 pull-right" src="{{ MEDIA_URL }}{{ object.picture }}">
             
             {% include "snippet_formfield.html" with field=form.title size="medium-12" %}
 
@@ -25,45 +25,15 @@
 
             </div>
             <div class="c-form__footer">
-              <div id="review_button" class="button button--yellow" >Vorschau</div>
-              <a class="pull-right" href="{% url 'welcome' request.user %}">zurück zur Übersicht</a>
+              <input class="button button--yellow" type="submit" value="Speichern" />
             </div>
 
-          </div>
-
-          <div id="review">
-            <div class="grid-item">
-              <div class="idea-card-front">
-                <div class="idea-image">
-                  <img id="idea_img" src="">
-                </div>
-                <div class="idea-details">
-                  <h2 id="idea_title"></h2>
-                  <p id="idea_description"></p>
-                </div>
-                <div class="idea-heart">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
-                    <strong class="fa-stack-1x">0</strong>
-                  </span>
-                </div>
-              </div>
-            </div>
-            {% if not request.user.is_authenticated %}
-            {% include "snippet_formfield.html" with field=form.email size="medium-12" %}
-            {% endif %}
-
-            <div class="c-form__footer">
-              <input class="button button--yellow" type="submit" value="Idee Absenden" />
-              <a id="change" class="text-link-special float-right-md">Idee nochmal ändern</a>
-            </div>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
-
 {% addtoblock 'js' %}
 <script type="text/javascript">
 
@@ -93,8 +63,7 @@ $("#review_button").click(function()
       $("#id_email").parent().show();
       fixPreview();
       $("#review").show();
-      // TODO das hier darf nur angezeigt werden, wenn nicht angemeldet
-      $("#top_desc").html("Du kannst noch deine E-Mail-Adresse eintragen, so findest du deine Idee besser wieder und kannst bald ein Projekt daraus machen."); 
+      $("#top_desc").html("");
       $("#top_titel").html("Sieht gut aus, oder?!");
     }
     else
@@ -109,10 +78,9 @@ $("#change").click(function()
     $("#idea_form").children().show();
     $("#id_email").parent().hide();
     $("#top_desc").show();
-    $("#top_desc").html("Mach sie nochmal hübscher...");
+    $("#top_desc").html("Mach deine Idee noch hübscher.");
     $("#top_titel").html("Gute Idee!");
   });
 </script>
 {% endaddtoblock %}
-
 {% endblock content %}
