@@ -28,7 +28,7 @@ class IdeaForm(EmailRegisterForm):
         self.fields['picture'].label = _('Idee als Bild')
         self.fields['title'].label = _('Ideen-Titel')
         self.fields['description'].label = _('Beschreibung der Idee')
-        self.fields['private'].label = _('Möchtest du, dass nur du diese Idee sehen kannst? Das kannst du später jederzeit ändern.')
+        self.fields['private'].label = _('Möchtest du, dass nur du diese Idee sehen kannst? Sie ist dann eine private Idee. Du kannst sie später jederzeit veröffentlichen.')
         self.fields['private'].initial = 0
 
         self.fields['picture'].help_text = _('Wenn du eins hast')
