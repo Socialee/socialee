@@ -2,9 +2,8 @@ import datetime
 import PIL
 from PIL import Image
 import os.path
-import ssl
-# from urllib import urlretrieve
-# from urllib.parse import urlparse
+import urllib.request
+from urllib.parse import urlparse
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -151,17 +150,17 @@ class Project(CommonGround):
     history = models.TextField(max_length=1000, null=True, blank=True, verbose_name='Wie ist dieses Projekt enstanden?')
 
 
-    # def use_pic(self, idea):
-    #     name = os.path.basename(idea.picture.name)
-    #     if urlparse(settings.MEDIA_URL).scheme != "":
-    #         idea_path = os.path.join(settings.MEDIA_URL, idea.picture.name).replace(" ", "%20")
-    #         result = urlretrieve(idea_path)
-    #         image_file = ImageFile(open(result[0]))
-    #         self.picture.save(name, image_file, save=True)
-    #     else:
-    #         idea_path = os.path.join(settings.MEDIA_ROOT, idea.picture.name)
-    #         image_file = ImageFile(open(idea_path, 'rb'))
-    #         self.picture.save(name, image_file, save=True)
+    def use_pic(self, idea):
+        name = os.path.basename(idea.picture.name)
+        if urlparse(settings.MEDIA_URL).scheme != "":
+            idea_path = os.path.join(settings.MEDIA_URL, idea.picture.name).replace(" ", "%20")
+            result, headers = urllib.request.urlretrieve(idea_path)
+            image_file = ImageFile(open(result))
+            self.picture.save(name, image_file, save=True)
+        else:
+            idea_path = os.path.join(settings.MEDIA_ROOT, idea.picture.name)
+            image_file = ImageFile(open(idea_path, 'rb'))
+            self.picture.save(name, image_file, save=True)
     
     
     def __str__(self):
