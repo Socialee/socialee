@@ -152,7 +152,7 @@ class Project(CommonGround):
         if urlparse(settings.MEDIA_URL).scheme != "":
             idea_path = os.path.join(settings.MEDIA_URL, idea.picture.name).replace(" ", "%20")
             result, headers = urllib.request.urlretrieve(idea_path)
-            image_file = ImageFile(open(result))
+            image_file = ImageFile(open(result, 'rb'))
             self.picture.save(name, image_file, save=True)
         else:
             idea_path = os.path.join(settings.MEDIA_ROOT, idea.picture.name)
