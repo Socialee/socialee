@@ -1,17 +1,24 @@
 {% load socialee_filters %}
 <div class="comment" id="comment{{ comment.id }}">
   <div class="comment__header">
-    {% include "snippet_follow.html" with to_follow=comment.by_instance %}
-      <div class="row">
-        <div class="comment__avatar small-12 column">
-        <a href="#"><img src="{{ MEDIA_URL }}{{ comment.by_instance.picture }}" alt="profile image"></a>
-        <div class="comment__avatar-text">
-          <div class="h6">{{ comment.by_instance.long_name }} </div>
-          <div class="h-f15 greyblue-2 h-capital h-pt-5">vor {{ comment.date|timesince }}</div>
-        </div>
+    {% if comment.by_instance %}
+      {% include "snippet_follow.html" with to_follow=comment.by_instance %}
+    {% endif %}
+    <div class="row">
+      <div class="comment__avatar small-12 column">
+        {% if comment.by_instance %}
+          <a href="#"><img src="{{ MEDIA_URL }}{{ comment.by_instance.picture }}" alt="profile image"></a>
+        {% else %}
+          <img src="{{ STATIC_URL }}img/app/ralph1.jpg" alt="{{comment.by_user}}">
+        {% endif %}
+          <div class="comment__avatar-text">
+            <div class="h6">{{ comment.by_instance.long_name }} </div>
+            <div class="h-f15 greyblue-2 h-capital h-pt-5">vor {{ comment.date|timesince }}</div>
+          </div>
       </div>
     </div>
   </div>
+  
   <div class="comment__content">
     <p>{{ comment.message| link_ats }}</p>
   </div>
