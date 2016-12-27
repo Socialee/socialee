@@ -44,6 +44,7 @@ urlpatterns = [
     #url(r'^profile/(?P<slug>[\w.@+-]+)/socialeebhaber/$', login_required(views.Socialeebhaber.as_view()), name='socialeebhaber'),
     url(r'^comment/$', login_required(views.Comment.as_view()), name='comment'),
     url(r'^follow/$', login_required(views.Follow.as_view()), name='comment'),
+    url(r'^actAs/$', login_required(views.ActAs.as_view()), name='actAs'),
 ]
 
 if not settings.PROD:

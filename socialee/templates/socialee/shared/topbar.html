@@ -13,11 +13,26 @@
     {% if request.user.is_authenticated %}
     <ul class="dropdown menu" data-dropdown-menu>
       <li class="menu-text">
-        <a href="">{% if request.user.first_name %}{{ request.user.first_name }}{% else %}{{ request.user.email }}{% endif %}</a>
+        <a id="js-instance" href="">
+          {% if request.user.current_instance %}
+            {{ request.user.current_instance.short_name }}
+          {% else %}
+            {% if request.user.first_name %}{{ request.user.first_name }}{% else %}{{ request.user.email }}{% endif %}
+          {% endif %}
+        </a>
         <ul class="menu">
           <li><a href="{% url 'welcome' request.user %}">Deine Übersicht</a></li>
           <li><a href="{% url 'account_change_password' %}">Passwort ändern</a></li>
           <li><a href="{% url 'account_logout' %}">Abmelden</a></li>
+          <li><a>------------------</a></li>
+          {% for instance in request.user.instances.all %}
+            <li><a class="js-actAs" instance_slug="{{ instance.slug }}">{{ instance.slug }}</a></li>
+          {% endfor %}
+          {% if request.user.current_instance %}
+            <li><a class="js-actAs" instance_slug="{{ request.user.username }}">
+            {% if request.user.first_name %}{{ request.user.first_name }}{% else %}{{ request.user.email }}{% endif %}
+            </a></li>
+          {% endif %}
         </ul>
       </li>
     </ul>
@@ -44,6 +59,18 @@
     else msg = "Gute Nacht bei Socialee";
 
     $("#daytime").html(msg);
+  });
+
+  function actAs(object, instance_slug) {
+    post_to_url( "/actAs/",
+                { instance_slug : instance_slug },
+                function(data){
+                    object.html(data);
+                });
+  };
+
+  $(".js-actAs").click( function() {
+    actAs($("#js-instance"), $(this).attr('instance_slug'));
   });
 </script>
 {% endaddtoblock %}

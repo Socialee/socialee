@@ -272,10 +272,6 @@ class ProfileView(BaseView, DetailView):
 
         context['friends'] = friends
 
-        if self.object.created_by == self.request.user:
-            self.request.user.instances.update(current=False)
-            #self.object.current = True
-            #self.object.save()
         return context
 
 
@@ -337,3 +333,16 @@ class Comment(BaseView, UpdateView):
             
 
         return render(request, self.template_name, {'comment' : message} )
+
+class ActAs(BaseView, UpdateView):
+
+    def post(self, request, *args, **kwargs):
+        instance_slug = request.POST.get('instance_slug')
+        self.request.user.instances.update(current=False)
+
+        if self.request.user.instances.filter(slug=instance_slug):
+            instance = self.request.user.instances.get(slug=instance_slug)
+            instance.current = True
+            instance.save()
+
+        return HttpResponse(instance_slug)
