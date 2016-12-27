@@ -40,9 +40,8 @@
                     {% endif %}
 
                     <div class="column small-12 profile__tagline h6">
-                    {% if object.tagline %}
-                      {{ object.tagline }}
-                    {% else %}
+                    {{ object.tagline }}
+                    {% if request.user in object.manager.all %}
                       <p>Hey {{ request.user }}, hier kann der Slogan deines Projektes stehen. <a href="{% url 'project_updateview' slug=project.slug %}">Bearbeite das mal!</a></p>
                     {% endif %}
                     </div>
@@ -54,9 +53,9 @@
                       </div>
 
                     <div class="column small-12">
-                      <p class="lead">{% if object.description %}
-                        {{ object.description }}
-                      {% else %}
+                      <p class="lead">
+                      {{ object.description }}
+                      {% if request.user in object.manager.all %}
                       <p>Hey {{ request.user }}, hier sollte eine kurze Beschreibung deines Projektes stehen. <a href="{% url 'project_updateview' slug=project.slug %}">Bearbeite das mal!</a></p>
                       {% endif %}
                       </p>
@@ -69,7 +68,7 @@
                 </div>
               </div>
             </div>
-            {% if object.socialee_output or object.socialee_input %}
+            {% if object.socialee_output.count or object.socialee_input.count %}
             <div class="small-12 columns">
               <div class="row column">
                 <div class="small-12 medium-10 columns small-centered tags-wrapper">
@@ -88,7 +87,7 @@
                 </div>
               </div>
             </div>
-            {% else %}
+            {% elif request.user in object.manager.all %}
             <a href="{% url 'project_updateview' slug=project.slug %}"><p class="text-center lead">Input & Output bearbeiten</p></a>
             {% endif %}
           </div>

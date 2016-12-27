@@ -45,10 +45,6 @@ class LocationTaggedItem(GenericTaggedItemBase):
   tag = models.ForeignKey(LocationTag)
 
 
-class Creator(models.Model):
-    user = models.OneToOneField(User, default=None, related_name='creator')
-    picture = models.ImageField(upload_to=upload_location_user_pic, null=True, blank=True)
-
 class CommonGround(models.Model):
     """
     Stores all the common fields for :model:`Profile` and :model:`Project`.
