@@ -315,12 +315,16 @@ class Comment(BaseView, UpdateView):
         comment = request.POST.get('comment')
         instance_id = request.POST.get('instance_id')
         reply_id = request.POST.get('reply_id')
-
-        by_instance = self.request.user.current_instance
+        by_instance = None
+        by_user = None
+        if self.request.user.instances.filter(current=True):
+            by_instance = self.request.user.current_instance
+        else:
+            by_user = self.request.user
 
         if reply_id:
             reply = Message.objects.get(id=reply_id)
-            message = Message.objects.create(reply=reply, by_instance=by_instance, message=comment )
+            message = Message.objects.create(reply=reply, by_instance=by_instance, by_user=by_user, message=comment )
             message.save()
         else:
             instance = CommonGround.objects.get(id=instance_id)
@@ -328,7 +332,7 @@ class Comment(BaseView, UpdateView):
             if created:
                 instance.conversation = conv
                 instance.save()
-            message = Message.objects.create(conversation=conv, by_instance=by_instance, message=comment )
+            message = Message.objects.create(conversation=conv, by_instance=by_instance, by_user=by_user, message=comment )
             message.save()
             
 

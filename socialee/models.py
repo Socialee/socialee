@@ -130,7 +130,8 @@ class Conversation(models.Model):
 
 class Message(models.Model):
     conversation = models.ForeignKey(Conversation, related_name='messages', null=True, blank=True) # message Replys
-    by_instance = models.ForeignKey(CommonGround, null=True)
+    by_instance = models.ForeignKey(CommonGround, null=True, blank=True)
+    by_user = models.ForeignKey(User, null=True, blank=True)
     message = models.TextField(max_length=5000, null=True, blank=True)
     reply_to = models.ForeignKey('Message', null=True, blank=True, related_name='replys') # message Replys
     date = models.DateTimeField(auto_now=False, auto_now_add=True)
