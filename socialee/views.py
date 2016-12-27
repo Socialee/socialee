@@ -20,7 +20,7 @@ from django.views.generic.detail import SingleObjectMixin
 from django.dispatch import receiver
 
 from ideas.models import Idea
-from .models import Project, Input, Output, Profile, CommonGround, Conversation
+from .models import Project, Input, Output, Profile, CommonGround, Conversation, Message
 from .forms import *
 
 from taggit.utils import parse_tags, edit_string_for_tags
