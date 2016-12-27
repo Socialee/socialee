@@ -128,16 +128,6 @@ class Output(InputOutput):
 class Conversation(models.Model):
     slug = models.SlugField(null=True, blank=True)
 
-class Message(models.Model):
-    conversation = models.ForeignKey(Conversation, related_name='messages', null=True, blank=True) # message Replys
-    by_instance = models.ForeignKey(CommonGround, null=True)
-    by_user = models.ForeignKey(User, null=True, blank=True)
-    message = models.TextField(max_length=5000, null=True, blank=True)
-    reply_to = models.ForeignKey('Message', null=True, blank=True, related_name='replys') # message Replys
-    date = models.DateTimeField(auto_now=False, auto_now_add=True)
-    class Meta:
-        ordering = ['-date']
-
 
 class Project(CommonGround):
     title = models.CharField(max_length=60, verbose_name='Titel')
