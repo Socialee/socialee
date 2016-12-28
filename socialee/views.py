@@ -126,11 +126,6 @@ class ProjectView(BaseView, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ProjectView, self).get_context_data(**kwargs)
-        if self.object.created_by == self.request.user:
-            self.request.user.instances.update(current=False)
-            # self.object.current = True
-            # self.object.save()
-
         return context
 
 
