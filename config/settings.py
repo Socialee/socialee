@@ -368,6 +368,10 @@ ADMIN_REORDER = (
         'model': 'auth.Group',
         'label': 'User-Gruppe',
         },
+        {
+        'model': 'invitations.Invitation',
+        'label': 'Einladungen',
+        }
         )},
 
     # Ideen
