@@ -10,7 +10,7 @@
           {% endvideo %}
         </div>
     </div>
-  {% elif request.user in object.manager.all %}
+  {% elif request.user in object.managers.all %}
     <div class="small-11 medium-10 columns small-centered section">
       <h3 class="h-text-center-sm">{{ object.title }} - das Video</h3>
         <a href="{% url 'project_updateview' slug=project.slug %}"><p>Hier ist Platz für Dein Video.</p></a>
@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-  {% elif request.user in object.manager.all %}
+  {% elif request.user in object.managers.all %}
       <div class="small-11 medium-10 columns small-centered section">
       <h3 class="h-text-center-sm">Worum geht es in diesem Projekt?</h3>
           <a href="{% url 'project_updateview' slug=project.slug %}"><p>Hier ist Platz für eine Ausführliche Beschreibung.</p></a>
@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-  {% elif request.user in object.manager.all %}
+  {% elif request.user in object.managers.all %}
     <div style="float:none" class="small-11 medium-10 columns small-centered section">
       <h3 class="h-text-center-sm">Wie ist dieses Projekt enstanden?</h3>
       <a href="{% url 'project_updateview' slug=project.slug %}"><p>Hier kannst Du erzählen, wie das Projekt {{ object.title }} entstanden ist.</p></a>
@@ -50,7 +50,7 @@
     add a section to inform user that no information was posted yet
   {% endcomment %}
   {% if not object.video and not object.longdescription and not object.history %}
-    {% if not request.user in object.manager.all %}
+    {% if not request.user in object.managers.all %}
       <div style="float:none" class="small-11 medium-10 columns small-centered section">
         <h3 class="h-text-center-sm">Dieses Projekt hat noch keine Informationen.</h3>
         <a href="{% url 'project_view' slug=project.slug %}#panel2"><p>Schreib den Verantwortlichen.</p></a>
