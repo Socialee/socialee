@@ -86,9 +86,11 @@
         {% endblock after_content %}
         {# end of content #}
 
+        {% comment %} Wird es gebraucht, wird es das nicht? Man weiß es nicht....
         {% if debug %}
               <script src="//localhost:35729/livereload.js"></script>
         {% endif %}
+        {% endcomment %}
 
         {# jQuery #}
         <script src="{% static 'bower_components/jquery/dist/jquery.js' %}"></script>
