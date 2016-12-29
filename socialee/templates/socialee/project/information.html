@@ -53,7 +53,7 @@
     {% if not request.user in object.managers.all %}
       <div style="float:none" class="small-11 medium-10 columns small-centered section">
         <h3 class="h-text-center-sm">Dieses Projekt hat noch keine Informationen.</h3>
-        <a href="{% url 'project_view' slug=project.slug %}#panel2"><p>Schreib den Verantwortlichen.</p></a>
+        <a href="#panel2"><p>Schreib den Verantwortlichen.</p></a>
       </div>
     {% endif %}
   {% endif %}
