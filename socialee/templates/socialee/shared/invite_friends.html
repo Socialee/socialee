@@ -1,0 +1,42 @@
+{% load sekizai_tags %}
+<div class="tabs-content small-11 small-centered x-large-12">
+    <div class="small-11 medium-10 columns small-centered section">
+      <h3 class="h-text-center-sm">Lade deine Freunde ein:</h3>  
+      <div id="js-invites">
+        <div class="row"><label> Email: </label><input class="js-invite" type="text"/></div>
+      </div>
+       <div id="js-add-invite" class="button button--yellow button--icon"><i class="fa fa-plus" aria-hidden="true"></i></div>
+       <div id="js-inviteAll" class="button button--yellow button--icon">Einladen</div>
+    </div>
+</div>
+
+
+{% addtoblock 'js' %}
+<script type="text/javascript">
+function addInvite()
+{
+  var $invite = $("<div class='row'><label> Email: </label></div>");
+  $("<input class='js-invite' type='text'/>").appendTo($invite);
+
+   $invite.appendTo("#js-invites");
+}
+
+$("#js-add-invite").click( addInvite );
+
+
+function inviteAll(emails) {
+    console.log(JSON.stringify(emails));
+    post_to_url( "{% url 'invitations:send-json-invite' %}",
+                JSON.stringify(emails),
+                function(data){
+                    $('js-invites').html("<div class='row'><label> Email: </label><input class='js-invite' type='text'/></div>");
+                });
+  };
+
+  $("#js-inviteAll").click( function() {
+    inviteAll($(".js-invite").map(function() {
+            return $(this).val();
+        }).get());
+  });
+</script>
+{% endaddtoblock %}

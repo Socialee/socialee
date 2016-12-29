@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^feedback/', include("feedback.urls")), # Feedback-App
     url(r'^ideen/', include('ideas.urls')), # TODO IDs vergeben
     url(r'^impressum/$', views.Impressum.as_view(), name='impressum'), # ID 021
-    url(r'^registrieren/', include('register.urls')), # ID 080
+    url(r'^registrieren/', include('register.urls'), name='register'), # ID 080
     url(r'^protect/', include('simple_auth.urls')), # password-protection for staging-server
     url(r'^question/', include('questions.urls')), # inaktiv, future feature
     url(r'^summernote/', include('django_summernote.urls')), # für Blog

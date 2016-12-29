@@ -262,6 +262,9 @@ ACCOUNT_LOGOUT_ON_GET = True # SECURITY RISK??? See: http://django-allauth.readt
 
 ACCOUNT_ADAPTER = "register.adapter.AdvancedMailAccountAdapter"
 
+INVITATIONS_ALLOW_JSON_INVITES = True
+INVITATIONS_SIGNUP_REDIRECT = 'register'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
