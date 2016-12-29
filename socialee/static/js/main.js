@@ -58,16 +58,6 @@ function post_to_url(url, data, success_fct)
     });
 }
 
-function post_comment(comment, instance_id, reply_id) {
-    post_to_url( "/comment/",
-                { comment : comment,
-                instance_id: instance_id,
-                reply_id: reply_id },
-                function(data){
-                    $('#object'+instance_id).children().first().after(data);
-                });
-};
-
 function follow(object, instance_id) {
     post_to_url( "/follow/",
                 { instance_id : instance_id },
@@ -75,10 +65,6 @@ function follow(object, instance_id) {
                     object.replaceWith(data);
                 });
 };
-
-$(document).on("click", ".comment_button", function(event) {
-     post_comment($("#comment_value").val(), $(this).attr('instance_id'), $(this).attr('message_id'))
- });
 
 $(document).on("click", ".follow", function(event) {
     follow($(this), $(this).attr('instance_id'))

@@ -1,11 +1,8 @@
 {% load socialee_filters %}
 <div class="comment" id="comment{{ comment.id }}">
   <div class="comment__header">
-    {% if comment.by_instance %}
-      {% include "snippet_follow.html" with to_follow=comment.by_instance %}
-    {% endif %}
     <div class="row">
-      <div class="comment__avatar small-12 column">
+      <div class="comment__avatar small-6 column">
         {% if comment.by_instance %}
           <a href="#"><img src="{{ MEDIA_URL }}{{ comment.by_instance.picture }}" alt="profile image"></a>
         {% else %}
@@ -16,6 +13,11 @@
             <div class="h-f15 greyblue-2 h-capital h-pt-5">vor {{ comment.date|timesince }}</div>
           </div>
       </div>
+      {% if comment.by_instance %}
+        <div class="small-6 column">
+        {% include "snippet_follow.html" with to_follow=comment.by_instance %}
+        </div>
+      {% endif %}
     </div>
   </div>
   
@@ -24,21 +26,47 @@
   </div>
   <div class="comment__actions">
     <ul class="inline-list">
-      <li><a href="#"><i class="fa fa-reply"></i>§Antworten </a></li>
-      <li><a href="#"><i class="fa fa-heart"></i>§3</a></li>
+      <li class="js-reply-comment" comment_id="{{ comment.id }}"><a><i class="fa fa-reply"></i>Antworten </a></li>
+      <li><a ><i class="fa fa-heart"></i>§3</a></li>
     </ul>
     <ul class="inline-list show-for-medium float-right">
-      <li><a href="#">§Zeige Verbindungen</a></li>
-      <li><a href="#">§Das ist eine Idee!</a></li>
+      <li><a>§Zeige Verbindungen</a></li>
+      <li><a>§Das ist eine Idee!</a></li>
     </ul>
     <ul class="dropdown menu inline-list float-right show-for-small-only" data-dropdown-menu>
       <li>
-        <a href="#">mehr</a>
+        <a>mehr</a>
         <ul class="menu">
-          <li><a href="#">§Zeige Verbindungen</a></li>
-          <li><a href="#">§Das ist eine Idee!</a></li>
+          <li><a>§Zeige Verbindungen</a></li>
+          <li><a>§Das ist eine Idee!</a></li>
         </ul>
       </li>
     </ul>
   </div>
+  <div class="comment comment__input h-hidden" id="js-reply-input-{{comment.id}}">
+      <div class="comment__header">
+        <div class="row">
+          <div class="comment__avatar small-12 column">
+          {% if request.user.current_instance.picture %}
+            <a><img src="{{ MEDIA_URL }}{{ request.user.current_instance.picture }}" alt=""></a>
+          {% endif %}
+            <div class="comment__avatar-text">
+              <div class="h6">{{ request.user.current_instance.long_name }}</div>
+              <div class="h-f15 greyblue-2 h-capital h-pt-5">Antworten</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="comment__content">
+        <textarea name="" id="comment_value{{ comment.id }}" cols="30" rows="4"></textarea>
+      </div>
+      <div class="row comment__actions">
+        <div class="small-12 medium-8 column">
+          <p class="h-f22 greyblue-2">Übrigens: Projekte können mit @titel erwähnt werden.</p>
+        </div>
+        <div class="small-12 medium-4 column">
+          <a class="button expanded-sm float-right-md button--yellow comment_button" comment_val="comment_value{{ comment.id }}" instance_id="{{ object.id }}" message_id="{{ comment.id }}">Antworten</a>
+        </div>
+      </div>
+    </div>
 </div>

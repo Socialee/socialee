@@ -1,4 +1,4 @@
-{% load static socialee_filters %}
+{% load static socialee_filters sekizai_tags %}
 <div class="tabs-panel" id="panel2">
  <div class="row">
   <div class="large-8 large-offset-2 small-12 columns" id="object{{ object.id }}">
@@ -25,26 +25,48 @@
           <p class="h-f22 greyblue-2">Übrigens: Projekte können mit @titel erwähnt werden.</p>
         </div>
         <div class="small-12 medium-4 column">
-          <a class="large button expanded-sm float-right-md button--yellow comment_button" instance_id="{{ object.id }}" href="#">Kommentieren</a>
+          <a class="button expanded-sm float-right-md button--yellow comment_button" comment_val="comment_value" instance_id="{{ object.id }}" href="#">Kommentieren</a>
         </div>
       </div>
     </div>
 
-    {% for message in object.conversation.messages.all %}
-
-
-        {% include "snippet_comment.html" with comment=message %}
-
-        {% for reply in message.replys.all %}
-        <div class="comment--indented">
-          <div class="comment__wrap">
-            {% include "snippet_comment.html" with comment=reply %}
-            </div>
-          </div>
-        {% endfor %}
-    {% endfor %}
+    {% include "snippet_comment_loop.html" with comments=object.conversation.messages.all %}
 
     </div>
   </div>
 </div>
+
+
+{% addtoblock 'js' %}
+<script type="text/javascript">
+
+
+$(".js-reply-comment").click( function() {
+  $("#js-reply-input-"+$(this).attr("comment_id")).slideToggle();
+} );
+
+
+function post_comment(comment, instance_id, reply_id) {
+    post_to_url( "/comment/",
+                { comment : comment,
+                instance_id: instance_id,
+                reply_id: reply_id },
+                function(data){
+                  if(!reply_id) {
+                    $('#object'+instance_id).children().first().after(data);
+                  }
+                  else {
+                    var $reply = $("<div class='comment--indented'><div class='comment__wrap'></div></div>");
+                    $(data).appendTo($reply);
+                    $('#js-replys-'+reply_id).children().first().before($reply);
+                  }
+                });
+};
+
+$(".comment_button").click( function(event) {
+    var comment_val = $(this).attr('comment_val')
+     post_comment($("#"+comment_val).val(), $(this).attr('instance_id'), $(this).attr('message_id'))
+ });
+</script>
+{% endaddtoblock %}
 

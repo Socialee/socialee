@@ -1,0 +1,13 @@
+{% for message in comments %}
+
+    {% include "snippet_comment.html" with comment=message %}
+
+    <div id="js-replys-{{message.id}}">
+    <div class="comment--indented"> 
+      <div class="comment__wrap">
+        {% include "snippet_comment_loop.html" with comments=message.replys.all %}
+        </div>
+      </div>
+    
+    </div>
+{% endfor %}
