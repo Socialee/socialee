@@ -339,5 +339,11 @@ class ActAs(BaseView, UpdateView):
             instance = self.request.user.instances.get(slug=instance_slug)
             instance.current = True
             instance.save()
+            instance_slug = instance.short_name()
+        else:
+            if request.user.first_name:
+                instance_slug =  request.user.first_name
+            else:
+                instance_slug = request.user.email
 
         return HttpResponse(instance_slug)
