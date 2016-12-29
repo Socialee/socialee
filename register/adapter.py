@@ -31,7 +31,8 @@ class AdvancedMailAccountAdapter(DefaultAccountAdapter):
         if 'message_register' in self.request.session:
             self.request.session.pop('message_register')
             context["message_register"] = True
-        context["pass"] = self.request.session.pop('pass')
+        if 'pass' in self.request.session:
+            context["pass"] = self.request.session.pop('pass')
         msg = self.render_mail(template_prefix, email, context)
         msg.send()
 
