@@ -1,21 +1,23 @@
 {% load sekizai_tags %}
-<div class="tabs-content small-11 small-centered x-large-12">
-    <div class="small-11 medium-10 columns small-centered section">
-      <h3 class="h-text-center-sm">Lade deine Freunde ein:</h3>  
-      <div id="js-invites">
-        <div class="row"><label> Email: </label><input class="js-invite" type="text"/></div>
-      </div>
-       <div id="js-add-invite" class="button button--yellow button--icon"><i class="fa fa-plus" aria-hidden="true"></i></div>
-       <div id="js-inviteAll" class="button button--yellow button--icon">Einladen</div>
-    </div>
+
+
+<div class="small-10 small-centered section">
+<h3 class="h-text-center-sm">Lade deine Freunde ein!</h3>
+<p>Erzähle deinen Freunden von deiner Idee oder deinem Projekt. So wird was draus.</p>
+<div id="js-invites">
+  <label>E-Mail-Adresse:</label><input class="js-invite" type="text"/>
 </div>
+<div id="js-add-invite" class="button button--yellow button--icon"><i class="fa fa-plus" aria-hidden="true"></i></div>
+<div id="js-inviteAll" class="button button--yellow button--icon">Einladen</div>
+</div>
+
 
 
 {% addtoblock 'js' %}
 <script type="text/javascript">
 function addInvite()
 {
-  var $invite = $("<div class='row'><label> Email: </label></div>");
+  var $invite = $("<label>E-Mail-Adresse:</label>");
   $("<input class='js-invite' type='text'/>").appendTo($invite);
 
    $invite.appendTo("#js-invites");
@@ -29,7 +31,7 @@ function inviteAll(emails) {
     post_to_url( "{% url 'invitations:send-json-invite' %}",
                 JSON.stringify(emails),
                 function(data){
-                    $('js-invites').html("<div class='row'><label> Email: </label><input class='js-invite' type='text'/></div>");
+                    $('js-invites').html("<label>E-Mail-Adresse:</label><input class='js-invite' type='text'/>");
                 });
   };
 
