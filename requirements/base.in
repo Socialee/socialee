@@ -29,3 +29,5 @@ whitenoise
 django-modeladmin-reorder
 
 django-embed-video
+
+django-invitations

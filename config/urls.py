@@ -40,6 +40,8 @@ urlpatterns = [
     url(r'^profile/(?P<slug>[\w.@+-]+)/$', login_required(views.ProfileView.as_view()), name='profile_view'), # ID 203
     url(r'^profile/(?P<slug>[\w.@+-]+)/edit/$', login_required(views.ProfileUpdateView.as_view()), name='profile_updateview'), # ID 201
 
+    url(r'^invitations/', include('invitations.urls', namespace='invitations')),
+
     #face view for user interagtion
     #url(r'^profile/(?P<slug>[\w.@+-]+)/socialeebhaber/$', login_required(views.Socialeebhaber.as_view()), name='socialeebhaber'),
     url(r'^comment/$', login_required(views.Comment.as_view()), name='comment'),

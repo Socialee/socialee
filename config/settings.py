@@ -76,6 +76,7 @@ INSTALLED_APPS = (
     'zinnia',
     'zinnia_ckeditor',
     'storages',
+    'invitations', # has to be after allauth
 
     # SOCIALEE CUSTOM APPS
     'feedback.apps.FeedbackConfig',
@@ -208,7 +209,6 @@ if EMAIL_PORT == '465':
     EMAIL_USE_SSL = True
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
