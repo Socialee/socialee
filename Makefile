@@ -77,11 +77,11 @@ $(if $(DEBUG),$(call info-debug-var,CSS_DIR)\
 FOUNDATION_ROOT:=$(BOWER_COMPONENTS)/foundation-sites
 SCSS_COMPONENTS=$(wildcard $(FOUNDATION_ROOT)/scss/*/*.scss)
 # Known scss files that are expected to exist after "bower_install".
-SCSS_COMPONENTS+=$(addprefix $(BOWER_COMPONENTS)/,\
-	slick.js/slick/slick.scss \
-	fullpage.js/jquery.fullPage.scss \
-	foundation-icon-fonts/_foundation-icons.scss \
-	)
+# SCSS_COMPONENTS+=$(addprefix $(BOWER_COMPONENTS)/,\
+# 	slick.js/slick/slick.scss \
+# 	fullpage.js/jquery.fullPage.scss \
+# 	foundation-icon-fonts/_foundation-icons.scss \
+# 	)
 
 SCSS_RUN_NO_SOURCEMAP:=sassc -I $(BOWER_COMPONENTS) -I $(FOUNDATION_ROOT)/scss
 SCSS_RUN:=$(SCSS_RUN_NO_SOURCEMAP) $(if $(USE_SCSS_SOURCEMAPS),--sourcemap,)

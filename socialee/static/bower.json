@@ -13,11 +13,8 @@
     "tests"
   ],
   "dependencies": {
-    "foundation-sites": "~6.2.1",
+    "foundation-sites": "~6.3.0",
     "jquery": "~2.2.0",
-    "slick.js": "~1.5.3",
-    "fullpage.js": "~2.6.5",
-    "foundation-icon-fonts": "*",
     "jquery-ui": "~1.11.4"
   }
 }

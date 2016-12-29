@@ -238,7 +238,8 @@ $accordionmenu-arrow-color: $primary-color;
 // --------
 
 $badge-background: $primary-color;
-$badge-color: foreground($badge-background);
+$badge-color: $white;
+$badge-color-alt: $black;
 $badge-padding: 0.3em;
 $badge-minwidth: 2.1em;
 $badge-font-size: 0.6rem;
@@ -386,7 +387,8 @@ $input-radius: $global-radius;
 // ---------
 
 $label-background: $primary-color;
-$label-color: foreground($label-background);
+$label-color: $white;
+$label-color-alt: $black;
 $label-font-size: 0.8rem;
 $label-padding: 0.33333rem 0.5rem;
 $label-radius: $global-radius;
