@@ -8,7 +8,7 @@
         <div class="row">
           <div class="comment__avatar small-12 column">
           {% if request.user.current_instance.picture %}
-            <a href="#"><img src="{{ MEDIA_URL }}{{ request.user.current_instance.picture }}" alt=""></a>
+            <a><img src="{{ MEDIA_URL }}{{ request.user.current_instance.picture }}" alt=""></a>
           {% endif %}
             <div class="comment__avatar-text">
               <div class="h6">{{ request.user.current_instance.long_name }}</div>
@@ -25,7 +25,7 @@
           <p class="h-f22 greyblue-2">Übrigens: Projekte können mit @titel erwähnt werden.</p>
         </div>
         <div class="small-12 medium-4 column">
-          <a class="button expanded-sm float-right-md button--yellow comment_button" comment_val="comment_value" instance_id="{{ object.id }}" href="#">Kommentieren</a>
+          <a class="button expanded-sm float-right-md button--yellow comment_button" comment_val="comment_value" instance_id="{{ object.id }}">Kommentieren</a>
         </div>
       </div>
     </div>
@@ -53,12 +53,10 @@ function post_comment(comment, instance_id, reply_id) {
                 reply_id: reply_id },
                 function(data){
                   if(!reply_id) {
-                    $('#object'+instance_id).children().first().after(data);
+                    $(data).prependTo($('#object'+instance_id).children().first().next()).hide().slideDown();
                   }
                   else {
-                    var $reply = $("<div class='comment--indented'><div class='comment__wrap'></div></div>");
-                    $(data).appendTo($reply);
-                    $('#js-replys-'+reply_id).children().first().before($reply);
+                    $(data).prependTo($('#js-replys-'+reply_id).find(".comment__wrap")).hide().slideDown();
                   }
                 });
 };
