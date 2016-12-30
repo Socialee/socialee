@@ -340,7 +340,6 @@ class ActAs(BaseView, UpdateView):
             instance.current = True
             instance.save()
             instance_slug = instance.short_name()
-            print("instance")
         else:
             if request.user.first_name:
                 instance_slug =  request.user.first_name

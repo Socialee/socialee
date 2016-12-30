@@ -43,30 +43,41 @@
       </li>
     </ul>
   </div>
-  <div class="comment comment__input h-hidden" id="js-reply-input-{{comment.id}}">
-      <div class="comment__header">
-        <div class="row">
-          <div class="comment__avatar small-12 column">
-          {% if request.user.current_instance.picture %}
-            <a><img src="{{ MEDIA_URL }}{{ request.user.current_instance.picture }}" alt=""></a>
-          {% endif %}
-            <div class="comment__avatar-text">
-              <div class="h6">{{ request.user.current_instance.long_name }}</div>
-              <div class="h-f15 greyblue-2 h-capital h-pt-5">Antworten</div>
+</div>
+
+<div id="js-replys-{{comment.id}}">
+  <div class="comment--indented"> 
+    <div class="comment__wrap">
+      <div class="comment comment__input h-hidden" id="js-reply-input-{{comment.id}}">
+          <div class="comment__header">
+            <div class="row">
+              <div class="comment__avatar small-12 column">
+              {% if request.user.current_instance.picture %}
+                <a><img src="{{ MEDIA_URL }}{{ request.user.current_instance.picture }}" alt=""></a>
+              {% endif %}
+                <div class="comment__avatar-text">
+                  <div class="h6">{{ request.user.current_instance.long_name }}</div>
+                  <div class="h-f15 greyblue-2 h-capital h-pt-5">Antworten</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="comment__content">
+            <textarea name="" id="comment_value{{ comment.id }}" cols="30" rows="4"></textarea>
+          </div>
+          <div class="row comment__actions">
+            <div class="small-12 medium-8 column">
+              <p class="h-f22 greyblue-2">Übrigens: Projekte können mit @titel erwähnt werden.</p>
+            </div>
+            <div class="small-12 medium-4 column">
+              <a class="button expanded-sm float-right-md button--yellow comment_button" comment_val="comment_value{{ comment.id }}" instance_id="{{ object.id }}" message_id="{{ comment.id }}">Antworten</a>
             </div>
           </div>
         </div>
-      </div>
-      <div class="comment__content">
-        <textarea name="" id="comment_value{{ comment.id }}" cols="30" rows="4"></textarea>
-      </div>
-      <div class="row comment__actions">
-        <div class="small-12 medium-8 column">
-          <p class="h-f22 greyblue-2">Übrigens: Projekte können mit @titel erwähnt werden.</p>
-        </div>
-        <div class="small-12 medium-4 column">
-          <a class="button expanded-sm float-right-md button--yellow comment_button" comment_val="comment_value{{ comment.id }}" instance_id="{{ object.id }}" message_id="{{ comment.id }}">Antworten</a>
-        </div>
+      <div id="js-replys-pos-{{comment.id}}">
+          {% include "snippet_comment_loop.html" with comments=comment.replys.all %}
       </div>
     </div>
+  </div>
+
 </div>

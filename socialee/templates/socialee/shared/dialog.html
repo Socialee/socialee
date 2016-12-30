@@ -1,7 +1,7 @@
 {% load static socialee_filters sekizai_tags %}
 <div class="tabs-panel" id="panel2">
  <div class="row">
-  <div class="large-8 large-offset-2 small-12 columns" id="object{{ object.id }}">
+  <div class="large-8 large-offset-2 small-12 columns" id="js-conversation-{{object.id}}">
 
     <div class="comment comment__input">
       <div class="comment__header">
@@ -41,7 +41,7 @@
 <script type="text/javascript">
 
 
-$(".js-reply-comment").click( function() {
+$("#js-conversation-{{object.id}}").on('click', '.js-reply-comment', function() {
   $("#js-reply-input-"+$(this).attr("comment_id")).slideToggle();
 } );
 
@@ -53,15 +53,15 @@ function post_comment(comment, instance_id, reply_id) {
                 reply_id: reply_id },
                 function(data){
                   if(!reply_id) {
-                    $(data).prependTo($('#object'+instance_id).children().first().next()).hide().slideDown();
+                    $(data).prependTo($('#js-comments-pos-'+instance_id)).hide().slideDown();
                   }
                   else {
-                    $(data).prependTo($('#js-replys-'+reply_id).find(".comment__wrap")).hide().slideDown();
+                    $(data).prependTo($('#js-replys-pos-'+reply_id)).hide().slideDown();
                   }
                 });
 };
 
-$(".comment_button").click( function(event) {
+$("#js-conversation-{{object.id}}").on('click', '.comment_button', function(event) {
     var comment_val = $(this).attr('comment_val')
      post_comment($("#"+comment_val).val(), $(this).attr('instance_id'), $(this).attr('message_id'))
  });
