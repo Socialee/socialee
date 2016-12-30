@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^protect/', include('simple_auth.urls')), # password-protection for staging-server
     url(r'^question/', include('questions.urls')), # inaktiv, future feature
     url(r'^summernote/', include('django_summernote.urls')), # für Blog
+    url(r'^styleguide/$', views.Styleguide.as_view(), name='styleguide'),
     url(r'^zitat/', include('quotes.urls')), # ID 024
 
     # LOGIN REQUIRED

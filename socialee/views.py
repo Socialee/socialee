@@ -49,6 +49,15 @@ class Impressum(BaseView, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(Impressum, self).get_context_data(**kwargs)
 
+        return context  
+
+
+class Styleguide(BaseView, TemplateView):
+    template_name = 'styleguide.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(Styleguide, self).get_context_data(**kwargs)
+
         return context        
 
 # Project-Views
