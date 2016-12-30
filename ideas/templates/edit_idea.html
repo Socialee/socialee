@@ -15,7 +15,7 @@
           <div id="idea_form">
             <div class="row">
             {% include "snippet_formfield.html" with field=form.picture size="medium-12" upload_val=" Bild hochladen " %}
-            <img class="small-12 medium-6 pull-right" src="{{ MEDIA_URL }}{{ object.picture }}">
+            {# <img class="small-12 medium-6 pull-right" src="{{ MEDIA_URL }}{{ object.picture }}"> #}
             
             {% include "snippet_formfield.html" with field=form.title size="medium-12" %}
 
@@ -37,50 +37,8 @@
 {% addtoblock 'js' %}
 <script type="text/javascript">
 
+$(".input_with_img").parent().find("img").attr("src", "{{ MEDIA_URL }}{{ object.picture }}");
 
-function fixPreview()
-{
-  $("#idea_form").children().hide();
-  $("#idea_title").html($("#id_title").val());
-  $("#idea_description").html($("#id_description").val());
-  $("#idea_img").attr("src", $("#id_picture").parent().find("img").attr("src"));
-}
-
-
-{% if reload %}
-$("#idea_form").children().hide();
-$("#idea_title").html($("#id_title").val());
-$("#idea_description").html($("#id_description").val());
-{% else %}
-$("#review").hide();
-$("#id_email").parent().hide();
-{% endif %}
-
-$("#review_button").click(function()
-  {
-    if($("#id_title").val() || $("#id_description").val() || $("#id_picture").val())
-    {
-      $("#id_email").parent().show();
-      fixPreview();
-      $("#review").show();
-      $("#top_desc").html("");
-      $("#top_titel").html("Sieht gut aus, oder?!");
-    }
-    else
-    {
-      $("#top_desc").html("Eines der Felder musst du aber schon ausfüllen ;-) Oder einfach nur ein Bild hochladen.");
-    }
-
-  });
-$("#change").click(function()
-  {
-    $("#review").hide();
-    $("#idea_form").children().show();
-    $("#id_email").parent().hide();
-    $("#top_desc").show();
-    $("#top_desc").html("Mach deine Idee noch hübscher.");
-    $("#top_titel").html("Gute Idee!");
-  });
 </script>
 {% endaddtoblock %}
 {% endblock content %}

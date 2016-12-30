@@ -169,7 +169,8 @@ class IdeaDetailView(DetailView):
 class IdeaEditView(UpdateView):
     template_name = 'edit_idea.html'
     model = Idea
-    fields = ['picture', 'title', 'description', 'private']
+    # fields = ['picture', 'title', 'description', 'private']
+    form_class = IdeaEditForm
 
     def get_success_url(self):
         slug = self.request.user
