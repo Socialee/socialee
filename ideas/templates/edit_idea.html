@@ -3,37 +3,30 @@
 
 {% block content %}
 
-<div class="c-section -solo">
-  <div class="row">
-    <div class="medium-10 medium-offset-1 large-8 large-offset-2 column">
-      <div class="callout">
+  <div class="row align-center">
+    <div class="medium-10 large-8 columns">
+      <div class="c-form">
 
-        <h3 id="top_titel">Idee bearbeiten</h3>
+        <h3>Idee bearbeiten</h3>
 
         <form method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
 
           <div id="idea_form">
             <div class="row">
-            {% include "snippet_formfield.html" with field=form.picture size="medium-12" upload_val=" Bild hochladen " %}
-            {# <img class="small-12 medium-6 pull-right" src="{{ MEDIA_URL }}{{ object.picture }}"> #}
+              {% include "snippet_formfield.html" with field=form.picture size="small-12" upload_val=" Bild hochladen " %}
+              {% include "snippet_formfield.html" with field=form.title size="small-12" %}
+              {% include "snippet_formfield.html" with field=form.description size="small-12" len_restricted="true" %}
+              {% include "snippet_formfield.html" with field=form.private size="small-12" %}
+            </div>
             
-            {% include "snippet_formfield.html" with field=form.title size="medium-12" %}
-
-            {% include "snippet_formfield.html" with field=form.description size="medium-12" len_restricted="true" %}
-
-            {% include "snippet_formfield.html" with field=form.private size="medium-12" %}
-
-            </div>
-            <div class="c-form__footer">
-              <input class="button button--yellow" type="submit" value="Speichern" />
-            </div>
-
+            <input class="button" type="submit" value="Speichern" />
           </div>
         </form>
+        
       </div>
     </div>
   </div>
-</div>
+
 {% addtoblock 'js' %}
 <script type="text/javascript">
 
