@@ -46,18 +46,6 @@ button:focus {outline:none !important;}
   color: $white;
 }
 
-// Callout for messages e.g. "Thanks, your message has been sent!"
-.message-callout {
-  @include callout-base;
-  background-color: $orange;
-  margin-bottom: 0;
-  color: $white;
-  font-weight: bold;
-  p {
-    margin-bottom: 0;
-  }
-}
-
 .white-orange {
   color: $white;
   &:hover {

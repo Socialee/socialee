@@ -1,3 +1,10 @@
 .callout {
 
 }
+
+// Callout for messages e.g. "Thanks, your message has been sent!"
+.message-callout {
+  background-color: $orange;
+  color: $white;
+  padding: 1rem;
+}
