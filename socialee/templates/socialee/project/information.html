@@ -1,107 +1,38 @@
 {% load static socialee_filters embed_video_tags %}
 <div class="tabs-panel is-active" id="panel1">
-  <div class="NO-row">
   {% if object.video %}
-    <div class="small-11 medium-10 columns small-centered section">
-      <h3 class="h-text-center-sm">{{ object.title }} - das Video</h3>
-        <div class="flex-video widescreen">
-          {% video object.video as my_video %}
-              {% video my_video 'medium' %}
-          {% endvideo %}
-        </div>
+    <h3>{{ object.title }} - das Video</h3>
+    <div class="flex-video widescreen">
+      {% video object.video as my_video %}
+          {% video my_video 'medium' %}
+      {% endvideo %}
     </div>
   {% elif request.user in object.managers.all %}
-    <div class="small-11 medium-10 columns small-centered section">
-      <h3 class="h-text-center-sm">{{ object.title }} - das Video</h3>
-        <a href="{% url 'project_updateview' slug=project.slug %}"><p>Hier ist Platz für Dein Video.</p></a>
-    </div>
+    <h3>{{ object.title }} - das Video</h3>
+    <a href="{% url 'project_updateview' slug=project.slug %}"><p>Hier ist Platz für Dein Video.</p></a>
   {% endif %}
   {% if object.longdescription %}
-    <div class="small-11 medium-10 columns small-centered section">
-      <h3 class="h-text-center-sm">Worum geht es in diesem Projekt?</h3>
-      <div class="row">
-        <div class="small-12 column l-multi-column">
-          <p>{{ object.longdescription }}</p>
-        </div>
-      </div>
-    </div>
+    <h3>Worum geht es in diesem Projekt?</h3>    
+    <p>{{ object.longdescription }}</p>
   {% elif request.user in object.managers.all %}
-      <div class="small-11 medium-10 columns small-centered section">
-      <h3 class="h-text-center-sm">Worum geht es in diesem Projekt?</h3>
-          <a href="{% url 'project_updateview' slug=project.slug %}"><p>Hier ist Platz für eine Ausführliche Beschreibung.</p></a>
-      </div>
+    <h3>Worum geht es in diesem Projekt?</h3>
+    <a href="{% url 'project_updateview' slug=project.slug %}"><p>Hier ist Platz für eine Ausführliche Beschreibung.</p></a>
   {% endif %}
   {% if object.history %}
-    <div style="float:none" class="small-11 medium-10 columns small-centered section">
-      <h3 class="h-text-center-sm">Wie ist dieses Projekt enstanden?</h3>
-      <div class="row">
-        <div class="small-12 column">
-              <p>{{ object.history }}</p>
-        </div>
-      </div>
-    </div>
+  <h3>Wie ist dieses Projekt enstanden?</h3>
+  <p>{{ object.history }}</p>
   {% elif request.user in object.managers.all %}
-    <div style="float:none" class="small-11 medium-10 columns small-centered section">
-      <h3 class="h-text-center-sm">Wie ist dieses Projekt enstanden?</h3>
-      <a href="{% url 'project_updateview' slug=project.slug %}"><p>Hier kannst Du erzählen, wie das Projekt {{ object.title }} entstanden ist.</p></a>
-    </div>
+  <h3>Wie ist dieses Projekt enstanden?</h3>
+  <a href="{% url 'project_updateview' slug=project.slug %}"><p>Hier kannst Du erzählen, wie das Projekt {{ object.title }} entstanden ist.</p></a>
   {% endif %}
-  {% comment %} 
-    add a section to inform user that no information was posted yet
-  {% endcomment %}
+   
+  {# add a section to inform user that no information was posted yet #}
   {% if not object.video and not object.longdescription and not object.history %}
     {% if not request.user in object.managers.all %}
-      <div style="float:none" class="small-11 medium-10 columns small-centered section">
-        <h3 class="h-text-center-sm">Dieses Projekt hat noch keine Informationen.</h3>
-        <a href="#panel2"><p>Schreib den Verantwortlichen.</p></a>
-      </div>
+    <h3>Dieses Projekt hat noch keine Informationen.</h3>
+    <a href="#panel2"><p>Schreib den Verantwortlichen.</p></a>
     {% endif %}
   {% endif %}
-    {% comment %}
-    <div class="small-12 medium-10 columns small-centered section">  <!-- l-text-box -->
-      <div class="row">
-        <div class="small-12">
-          <div class="row">
-            <div class="small-12 medium-10 columns small-centered section">
-            <h3 class="h-text-center-sm">Wie ist dieses Projekt enstanden?</h3>
-            {% if object.history %}
-              <p>{{ object.history }}</p>
-            {% else %}
-              <p>Es gibt noch keine Projektgeschichte.</p>
-            {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="small-12 medium-10 columns small-centered section">
-      <h3 class="h-text-center-sm">Wer betreut diese Projekt?</h3>
-        <div class="row">
-        <div class="small-12 medium-6 large-4">
-          <div class="card">
-            <div class="row align-center card-img">
-              <img src="{{ MEDIA_URL }}{{ friend.picture }}" alt="{{ friend.short_name }}">
-            </div>
-            <div class="card-section text-center">
-              <h4>{{ friend.long_name }}</h4>
-              <div class="small-12 columns">
-                <div class="tags">
-                  {% for tag in friend.tags.all %}
-                    <a class="tag tag--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
-                  {% endfor %}
-                </div>
-                {% include "snippet_open_instance.html" with instance=friend %}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="small-12 medium-10 columns small-centered section end section">
-      <h3 class="h-text-center-sm">Wieviel Geld brauchen wir?</h3>
-    </div>
-    {% endcomment %}
   </div>
-</div>
 
 

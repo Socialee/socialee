@@ -1,64 +1,46 @@
 {% extends "base.html" %}
 {% load socialee_filters idea_tags %}
-{% block head_extra %}
-{% endblock head_extra %}
 
-{% block before_content %}
-  <div class="off-canvas-wrapper">
-  <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+{% block offcanvas %}
+  <div class="off-canvas position-left" id="offCanvas" data-off-canvas>
+    <!-- Your menu or Off-canvas content goes here -->
+    <ul class="vertical menu">
+      {% if not request.user.is_authenticated %}
+      <a class="button hollow" href="{% url 'register' %}">Registrieren</a>
+      {% else %}
+      <li><p>Dein Profil</p></li>
+      <li><a href="{% url 'welcome' request.user %}">Deine Übersicht</a></li>
+      <li><a href="{% url 'account_change_password' %}">Passwort ändern</a></li>
+      <li><a href="{% url 'account_logout' %}">Abmelden</a></li>
+      {% endif %}
 
-      <div class="off-canvas position-left" id="offCanvas" data-off-canvas data-position="left">
+      {% if request.user.is_staff %}
+      <li class="oc-title">Projekte (staff only)</li>
+      {% for item in request.user.instances.all %}
+        {% if item.project %}
+          <li><a href="{% url 'project_view' item.slug %}">{{ item.project.title }}</a></li>    
+        {% endif %}
+      {% endfor %}
+      {% endif %}
 
-        <!-- Menu -->
-        <ul class="vertical menu">
-          {% if not request.user.is_authenticated %}
-          <a class="button button--yellow" href="{% url 'register' %}">Registrieren</a>
-          {% else %}
-          <li class="title">Dein Profil</li>
-          <li><a href="{% url 'welcome' request.user %}">Deine Übersicht</a></li>
-          <li><a href="{% url 'account_change_password' %}">Passwort ändern</a></li>
-          <li><a href="{% url 'account_logout' %}">Abmelden</a></li>
-          {% endif %}
-
-          {% if request.user.is_staff %}
-          <li class="title">Projekte (staff only)</li>
-          {% for item in request.user.instances.all %}
-            {% if item.project %}
-              <li><a href="{% url 'project_view' item.slug %}">{{ item.project.title }}</a></li>    
-            {% endif %}
-          {% endfor %}
-          {% endif %}
-
-          <li class="title">Weitere Seiten</li>
-          <li class="show-for-small-only"><a href="{% url 'account_login' %}">Anmelden</a></li>
-          <li><a href="{% url 'home' %}">Startseite</a></li>
-          <li><a href="{% url 'idea_list' %}">Alle Ideen ({% idea_count %})</a></li>
-          <li><a href="{% url 'zinnia:entry_archive_index' %}">Blog</a></li>
-          
-          {% if request.user.is_staff %}
-          <li class="title">Admin</li>
-          <li><a href="{% url 'startproject' %}">Starte Projekt</a></li>
-            {% profiles request.user as user_profiles %}
-            {% if user_profiles.count == 0 %}
-            <li><a href="{% url 'startprofile' %}">Profil anlegen</a></li>
-            {% endif %}
-          <li><a href="/admin/">Socialee-Admin</a></li>
-            {% if DEBUG %}
-              <li><a href="/admin/doc/">Socialee-Docs</a></li>  
-            {% endif %}
-          {% endif %}
-        </ul>
-      </div>
-
-  <div class="off-canvas-content" data-off-canvas-content>
-{% endblock before_content %}
-
-  {# Content from all other templates goes here #}
-  {% block content %}  
-  {% endblock content %}
-
-{% block after_content %}
+      <li class="oc-title">Weitere Seiten</li>
+      <li class="show-for-small-only"><a href="{% url 'account_login' %}">Anmelden</a></li>
+      <li><a href="{% url 'home' %}">Startseite</a></li>
+      <li><a href="{% url 'idea_list' %}">Alle Ideen ({% idea_count %})</a></li>
+      <li><a href="{% url 'zinnia:entry_archive_index' %}">Blog</a></li>
+      
+      {% if request.user.is_staff %}
+      <li class="oc-title">Admin</li>
+      <li><a href="{% url 'startproject' %}">Starte Projekt</a></li>
+        {% profiles request.user as user_profiles %}
+        {% if user_profiles.count == 0 %}
+        <li><a href="{% url 'startprofile' %}">Profil anlegen</a></li>
+        {% endif %}
+      <li><a href="/admin/">Socialee-Admin</a></li>
+        {% if DEBUG %}
+          <li><a href="/admin/doc/">Socialee-Docs</a></li>  
+        {% endif %}
+      {% endif %}
+    </ul>
   </div>
-  </div>
-  </div>
-{% endblock after_content %}
+{% endblock offcanvas %}

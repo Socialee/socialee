@@ -1,24 +1,25 @@
 {% extends "offcanvas.html" %}
 {% load static %}
+
 {% block content %}
 
-<div class="c-section -solo">
-  <div class="row">
-	  <div class="medium-10 medium-offset-1 large-8 large-offset-2 column">
+<section class="bg-img">
+<div class="row align-center align-middle">
+  <div class="full-height-100"></div>
+	  <div class="medium-10 large-8 columns">
 	    <div class="c-form">
         <h2>Schicke uns ein Zitat!</h2>
-  	    <p class="-lead">Wir gucken es uns an und veröffentlichen es, sofern es jugendfrei ist.</p>
+  	    <p>Wir gucken es uns an und veröffentlichen es, sofern es jugendfrei ist.</p>
   	    <form method="post"> {% csrf_token %}
   	      {{ form }}
   	      <div class="c-form__footer">
-            <input class="button button--yellow" type="submit" value="Abschicken" />
+            <input class="button" type="submit" value="Abschicken" />
     	      <a class="text-link-special pull-right" onClick="javascript:history.go(-1);">Raus hier.</a>
           </div>
   	    </form>
       </div>
 	  </div>
 	</div>
-</div>
+</section>
+
 {% endblock content %}
-
-

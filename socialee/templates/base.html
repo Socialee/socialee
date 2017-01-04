@@ -18,7 +18,7 @@
 
         {# Socialee CSS #}
         <link type="text/css" rel="stylesheet" href="{% static 'css/socialee_global.css' %}" />
-        <link type="text/css" rel="stylesheet" href="{% static 'css/socialee_app.css' %}"  />
+        {# <link type="text/css" rel="stylesheet" href="{% static 'css/socialee_app.css' %}"  /> #}
 
         {# CSS & JS via Sekizai #}
         {% render_block "css" %}
@@ -46,48 +46,37 @@
     </head>
 
     <body>
-        {# start of content #}
-        {% include "messages.html" %}
+      <div class="off-canvas-wrapper">
 
+        {% block offcanvas %}
+        {# Content of offcanvas.html is being loaded #}
+        {% endblock offcanvas %}
 
+        <div class="off-canvas-content" data-off-canvas-content>
+          {# load messages #}
+          {% include "messages.html" %}
+          {# load topbar #}
+          {% include "topbar.html" %}
+          
+          {# load main page content #}
+          {% block content %}
+          {% endblock content %}
 
-        {% block before_content %}
-        {% endblock before_content %}
+          {# load feedback button #}
+          <div class="show-for-large">
+            {% if request.user.is_authenticated %}
+              {% include "feedback-button.html" %}
+            {% endif %}
+          </div>
 
-        {% if request.path == '/' %}
-        <div class="top-bar-app-wrap">
-            {% include "topbar.html" %}
+          {# load footer #}
+          {% include "footer.html" %}
+
         </div>
-        {% else %}
-        <div class="top-bar-app-wrap -not-home">
-            {% include "topbar.html" %}
-        </div>
-        {% endif %}
+      </div>
 
-
-        <div class="show-for-large">
-        {% if request.user.is_authenticated %}
-        {% include "feedback-button.html" %}
-        {% endif %}
-        </div>
-
-        {% include "feedback-button.html" %}
-
-        {% block content %}
-        {% endblock content %}
-
-        {% include "footer.html" %}
-
-        {% block after_content %}
-        {% endblock after_content %}
-        {# end of content #}
-
-        {% comment %} Wird es gebraucht, wird es das nicht? Man weiß es nicht....
-        {% if debug %}
-              <script src="//localhost:35729/livereload.js"></script>
-        {% endif %}
-        {% endcomment %}
-
+        
+        {# load scripts #}
         {# jQuery #}
         <script src="{% static 'bower_components/jquery/dist/jquery.js' %}"></script>
         {# jQuery UI#}

@@ -4,12 +4,12 @@
 {% block content %}
 
 <div class="c-section -solo">
-  <div class="row">
-    <div class="small-12 medium-11 large-11 small-centered">
+  <div class="row align-center">
+    <div class="small-12 medium-11 large-11">
       <div class="c-form">
         <h6 class="text-center">Hallo {{ request.user.first_name }}!</h6>
         {% if request.user.first_name %}
-          <p class="-lead text-center">Hier entsteht eine Seite, die dir Übersicht über deine Ideen und Projekte gibt.</p>  
+          <p class="lead text-center">Hier entsteht eine Seite, die dir Übersicht über deine Ideen und Projekte gibt.</p>  
         {% endif %}
 
           {% own_idea_list request.user.email as idea_list %}

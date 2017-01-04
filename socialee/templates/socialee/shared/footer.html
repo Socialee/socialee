@@ -1,25 +1,20 @@
 {% load static sekizai_tags quote_tags %}
 
-<div class="c-section--bg-img c-section--quotes">
-  <div class="row">
-     <div class="c-section-img-wrapper">
-      <!-- <img class="section-img" src="{{ STATIC_URL }}img/app/footer_guy.png" alt="1"> -->
-    </div>
-    <div class="small-12 text-center">
+<div class="quote-footer">
+
+  <div class="row align-center">
+    <div class="small-12 medium-10 columns text-center mt-2rem mb-2rem">
     {% random_quote as random_quote %}
-      <h5 class="quote white strong">{{ random_quote.title }}</h5>
-      <p class="-lead white strong">Das hat {{ random_quote.author }} gesagt. <br class="show-for-small-only"><a class="text--underline" href="{% url 'make_quote' %}">Was sagst Du?</a></p>
+      <h3 class="quote white">{{ random_quote.title }}</h3>
+      <p class="lead white"><strong>Das hat {{ random_quote.author }} gesagt.</strong> <br class="show-for-small-only"><a class="text--underline" href="{% url 'make_quote' %}">Was sagst Du?</a></p>
     </div>
   </div>
+
 </div>
 
-<footer>
-  <div class="menu-centered">
-    <ul class="vertical medium-horizontal menu">
-      <li><a href="{% url 'home' %}">Home</a></li>
-      <li><a href="{% url 'zinnia:entry_archive_index' %}">Blog</a></li>
-      <li><a href="{% url 'impressum' %}">Impressum</a></li>
-      <li><a href="{% url 'register' %}">Registrieren</a></li>
-    </ul>
-  </div>
-</footer>
+  <ul style="background-color: #302f35;" class="menu align-center">
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'zinnia:entry_archive_index' %}">Blog</a></li>
+    <li><a href="{% url 'impressum' %}">Impressum</a></li>
+    <li><a href="{% url 'register' %}">Registrieren</a></li>
+  </ul>

@@ -1,51 +1,57 @@
 {% load socialee_filters sekizai_tags %}
 
-<div class="top-bar-app">
-  <div class="top-bar-left">
-    <ul class="menu">
-      <li><a data-toggle="offCanvas"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
-      <li class="menu-text show-for-medium"><a id="daytime" href="/">Hallo bei Socialee!</a></li>
-      <li class="menu-text show-for-small-only"><a href="/">Hallo bei Socialee!</a></li>
-    </ul>
-  </div>
-  <span class="socialee-label-beta">BETA</span>
-  <div class="top-bar-right show-for-large">
-    {% if request.user.is_authenticated %}
-    <ul class="dropdown menu" data-dropdown-menu>
-      <li class="menu-text">
-        <a id="js-instance" href="">
-          {% if request.user.current_instance %}
-            {{ request.user.current_instance.short_name }}
-          {% else %}
-            {% if request.user.first_name %}{{ request.user.first_name }}{% else %}{{ request.user.email }}{% endif %}
-          {% endif %}
-        </a>
-        <ul class="menu">
-          <li><a href="{% url 'welcome' request.user %}">Deine Übersicht</a></li>
-          <li><a href="{% url 'account_change_password' %}">Passwort ändern</a></li>
-          <li><a href="{% url 'account_logout' %}">Abmelden</a></li>
-          <li><a>------------------</a></li>
-          {% for instance in request.user.instances.all %}
-            {% if instance.slug != request.user.username %}
-              <li><a class="js-actAs" instance_slug="{{ instance.slug }}">{{ instance.slug }}</a></li>
+<div data-sticky-container>
+  <div class="top-bar" data-sticky data-options="marginTop:0;" style="width:100%">
+
+    <div class="top-bar-left">
+      <ul class="menu">
+        <li><a data-toggle="offCanvas"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
+        <li class="show-for-medium"><a id="daytime" href="/">Hallo bei Socialee!</a></li>
+        <li class="show-for-small-only"><a href="/">Hallo bei Socialee!</a></li>
+        <li><span class="socialee-label-beta">BETA</span></li>
+      </ul>
+    </div>
+
+    <div class="top-bar-right show-for-large">
+      {% if request.user.is_authenticated %}
+      <ul class="dropdown menu" data-dropdown-menu>
+        <li>
+          <a id="js-instance" href="">
+            {% if request.user.current_instance %}
+              {{ request.user.current_instance.short_name }}
+            {% else %}
+              {% if request.user.first_name %}{{ request.user.first_name }}{% else %}{{ request.user.email }}{% endif %}
             {% endif %}
-          {% endfor %}
-          {% if request.user.current_instance %}
-            <li><a class="js-actAs" instance_slug="{{ request.user.username }}">
-            {% if request.user.first_name %}{{ request.user.first_name }}{% else %}{{ request.user.email }}{% endif %}
-            </a></li>
-          {% endif %}
-        </ul>
-      </li>
-    </ul>
-    {% else %}
-    <ul class="menu">
-      <li class="menu-text"><a class="" href="{% url 'account_login' %}">Anmelden</a></li>
-      <li class="menu-text"><a class="button button--yellow" href="{% url 'register' %}">Registrieren</a></li>
-    </ul>
-    {% endif %}
+          </a>
+          <ul class="menu">
+            <li><a href="{% url 'welcome' request.user %}">Deine Übersicht</a></li>
+            <li><a href="{% url 'account_change_password' %}">Passwort ändern</a></li>
+            <li><a href="{% url 'account_logout' %}">Abmelden</a></li>
+            <li><a>------------------</a></li>
+            {% for instance in request.user.instances.all %}
+              {% if instance.slug != request.user.username %}
+                <li><a class="js-actAs" instance_slug="{{ instance.slug }}">{{ instance.slug }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if request.user.current_instance %}
+              <li><a class="js-actAs" instance_slug="{{ request.user.username }}">
+              {% if request.user.first_name %}{{ request.user.first_name }}{% else %}{{ request.user.email }}{% endif %}
+              </a></li>
+            {% endif %}
+          </ul>
+        </li>
+      </ul>
+      {% else %}
+      <ul class="menu">
+        <li><a href="{% url 'account_login' %}">Anmelden</a></li>
+        <li><a class="hollow button small" href="{% url 'register' %}">Registrieren</a></li>
+      </ul>
+      {% endif %}
+    </div>
+
   </div>
 </div>
+
 
 {% addtoblock 'js' %}
 <script type="text/javascript">

@@ -3,13 +3,60 @@
 {% load static sekizai_tags %}
 {% block content %}
 
+{% if object.profile %}
+  {% include "snippet_formfield.html" with field=form.first_name size="medium-6" %}
+  {% include "snippet_formfield.html" with field=form.last_name size="medium-6" %}
+{% else %}
+  {% include "snippet_formfield.html" with field=form.title size="medium-6" %}
+{% endif %}
+
+{% if request.user == object.created_by %} <!-- saveguard -->
+<div class="small-12 medium-12 large-4 column show-for-medium header-text-h2 header-text-sm-h2">
+  <input class="button button--yellow button--icon float-right-lg" type="submit" value="Save" />
+</div>
+{% endif %}
+
+{% include "snippet_formfield.html" with field=form.tags %}
+
+<div class="column small-12 profile__tagline tags tags--attribute tags--orange">
+  {% for tag in object.tags.all %}
+    <a class="tag tag--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
+  {% endfor %}
+</div>
+<div class="column small-12">
+  {% include "snippet_formfield.html" with field=form.description size="medium-12" %}
+</div>
+
+<div class="row">
+  {% include "snippet_formfield.html" with field=form.socialee_outputs %}
+  <div class="tags green">
+    <div class="column h5 mb-10 strong green">{{ object.short_name }} bietet</div>
+    {%  for input in object.socialee_output.all %}
+    <a class="tag tag--green"><i class="fi-x-circle"></i>{{ input }}{% if badge_count >= 1 %}
+    <span>{{ badge_count }}</span>{% endif %}</a>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="row">
+  {% include "snippet_formfield.html" with field=form.socialee_inputs %}
+  <div class="tags blue">
+    <div class="column h5 mb-10 strong blue">{{ object.short_name }} benötigt</div>
+    {% for output in object.socialee_input.all %}
+    <a class="tag tag--blue"><i class="fi-x-circle"></i>{{ output.title }}{% if badge_count >= 1 %}
+    <span>{{ badge_count }}</span>{% endif %}</a>
+    {% endfor %}
+  </div>
+</div> 
+
+{% comment %}
 <div class="c-section -solo">
-  <div class="row">
-    <div class="medium-10 medium-offset-1 large-10 large-offset-1 xlarge-10 xlarge-offset-1 xxlarge-12 xxlarge-offset-0 column">
+  <div class="row align-center">
+    <div class="medium-10 large-10 columns">
       <div class="c-form">
         <form method="POST" enctype="multipart/form-data">{% csrf_token %}
           <div class="row">
-            <div class="small-12 column">
+            <div class="small-12 columns">
               <div class="row column media-object stack-for-small">
                 {% if object.profile %}
                 <div class="media-object-section">
@@ -90,6 +137,7 @@
     </div>
   </div>
 </div>
+{% endcomment %}
 
 {% addtoblock "js" %}
 <script>

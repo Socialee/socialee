@@ -5,51 +5,19 @@
 
 
   <h2>Willkommen bei Socialee!</h2>
-  <p class="-lead mb-20">Wir sind in der Entwicklungs-Phase, habe Nachsicht mit allem, was noch keinen Sinn macht oder nicht funktioniert. Du kannst dich registrieren und nach Herzenslust testen. Schick uns gerne dein Feedback. Wenn du schon ein Konto hast, <a href="{% url 'account_login' %}"> melde dich an.</a></p>
+  <p>Wir sind in der Entwicklungs-Phase, habe Nachsicht mit allem, was noch keinen Sinn macht oder nicht funktioniert. Du kannst dich registrieren und nach Herzenslust testen. Schick uns gerne dein Feedback. Wenn du schon ein Konto hast, <a class="text-link-special" href="{% url 'account_login' %}"> melde dich an.</a></p>
 
     <form class="mt-20" method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
 
     <div class="row">
-
-      <div class="columns medium-6">
-          {{ form.first_name.errors }}
-          <label>{{ form.first_name.label }}</label>
-            {% if form.first_name.help_text %}
-<!--              <span class="second-form-label">{{ form.first_name.help_text|safe }}</span>
- -->            {% endif %}
-          {{ form.first_name }}
-      </div>
-
-      <div class="columns medium-6">
-          {{ form.email.errors }}
-          <label>{{ form.email.label }}</label>
-            {% if form.email.help_text %}
-<!--              <span class="second-form-label">{{ form.email.help_text|safe }}</span>
- -->            {% endif %}
-          {{ form.email }}
-      </div>
-
-      <div class="columns medium-12">
-          {{ form.message.errors }}
-          <label>{{ form.message.label|safe }}</label>
-            {% if form.message.help_text %}
-<!--              <span class="second-form-label">{{ form.message.help_text|safe }}</span>
- -->            {% endif %}
-          {{ form.message }}
-      </div>
-      <div class="columns medium-12">
-          {{ form.newsletter.errors }}
-          <label>{{ form.newsletter.label }}</label>
-            {% if form.newsletter.help_text %}
-<!--              <label class="second-form-label">{{ form.newsletter.help_text|safe }}</label>
- -->            {% endif %}
-          {{ form.newsletter }}
-      </div>
-
+      {% include "snippet_formfield.html" with field=form.first_name size="small-12 medium-6" %}
+      {% include "snippet_formfield.html" with field=form.email size="small-12 medium-6" %}
+      {% include "snippet_formfield.html" with field=form.message size="small-12" %}
+      {% include "snippet_formfield.html" with field=form.newsletter size="small-12" %}
     </div>
 
     <div class="c-form__footer">
-      <input class="button button--yellow" type="submit" value="registrieren" />
+      <input class="button" type="submit" value="registrieren" />
     </div>
 
     </form>

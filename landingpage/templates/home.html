@@ -2,27 +2,27 @@
 {% load sekizai_tags static landingpage_tags idea_tags %}
 
 {% block content %}
-  
-  <section class="lp-header">
-    <div class="row">
-      <div class="small-12 medium-10 large-10 columns small-centered text-center">
-        <h1>Idee trifft Macher</h1>
-        <p class="small-12 medium-10 large-8 small-centered">Socialee ist ein Netzwerk für Ideen und die Menschen dahinter. Hier treffen sich alle, die mitgestalten möchten. Damit aus guten Einfällen auch was Gutes werden kann.</p>
+
+  <section class="full-height-100 landingpage-head">
+    <div class="row align-center">
+      <div class="small-12 medium-10 large-8 columns text-center">
+        <h1 class="white huge-title">Idee trifft Macher</h1>
+        <p class="lead white">Socialee ist ein Netzwerk für Ideen und die Menschen dahinter. Hier treffen sich alle, die mitgestalten möchten. Damit aus guten Einfällen auch was Gutes werden kann.</p>
       </div>
     </div>
   </section>
 
-  <section class="gallery">
-    <div class="row">
-      <div class="small-12 medium-11 large-11 small-centered">
-        <div class="callout idea-gallery">
-          <h6 class="text-center">Hier kannst du Ideen entdecken oder <a class="text--underline" href="{% url 'create_idea' %}">deine eigene Idee teilen.</a></h6>
-            <div class="small-12 medium-12 large-11 small-centered">
+  <section class="move-up">
+    <div class="row align-center">
+      <div class="small-12 medium-11 large-11 columns">
+        <div class="row align-center callout move-up">
+        <h3 class="text-center mt-2rem">Hier kannst du Ideen entdecken oder <a class="text-link-special" href="{% url 'create_idea' %}">deine eigene Idee teilen.</a></h3>
+            <div class="small-12 medium-12 large-11 columns">
               {% featured_idea_list as idea_list %}
               {% include 'snippet_ideas.html'%}
               {% ideas_left as ideas_left %}
               {% if ideas_left >= 1 %}
-              <p class="text-center -lead">Es gibt {% ideas_left %} weitere Ideen, <a href="{% url 'idea_list' %}">schau sie dir an!</a></p>  
+              <p class="text-center lead">Es gibt {% ideas_left %} weitere Ideen, <a href="{% url 'idea_list' %}">schau sie dir an!</a></p>  
               {% endif %}
             </div>
         </div>
@@ -30,9 +30,9 @@
     </div>
   </section>
 
-<section class="lp-bottom">
-  <div class="row">
-    <div class="small-10 medium-8 large-7 small-centered text-center">
+<section class="landingpage-bottom">
+  <div class="row align-center">
+    <div class="small-10 medium-8 large-7 text-center">
         <h2 class="white">Wir machen das jetzt mal.</h2>
         <p class="white">Wir finden, dass jede Idee zählt. Deshalb bauen wir Socialee: Eine Webseite für Ideen, die wahr werden sollen. Einfache und komplizierte. Lang gehegte und ganz spontane. Verrückte und ernste. Eben alle, die was werden sollten.<br><br>Diese Ideen sammeln wir und zeigen sie euch auf den Ideenkarten. Aber das ist erst der Anfang. Unser Ziel ist eine Plattform, auf der sich Ideengeber vernetzen mit denen, die sie unterstützen möchten. Also in etwa: Idee trifft Ressourcen und wird Projekt. Daran arbeiten wir. Demnächst bietet Socialee also alles, damit jede Idee ein Stückchen weiterkommt.<br><br>Soviel zu uns. Jetzt brauchen wir dich: Stell deine eigene Idee ein oder entdecke andere Ideen. Wenn dir Socialee gefällt, mach mit.</p><br>
         <p><a class="button button--yellow" href="{% url 'create_idea' %}">Teile deine Idee!</a></p>

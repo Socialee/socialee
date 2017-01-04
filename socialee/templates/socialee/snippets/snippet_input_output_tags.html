@@ -1,29 +1,22 @@
-{% if input_output.count %}
-    {% if left %}
-    <div class="column h5 mb-10 strong {{ color }} show-for-medium">{{ title }}</div>
-    {% else %}
-    <div class="card-section__title text-center">
-      <!-- make title position aware with counter -->
-      <h5 class="{{ color }} show-for-medium">{{ title }}</h5>
-    </div>
-    {% endif %}
-    <div class="tags {{ color }} js-content-sized">
+<div class="{{ color }}"><h5>{{ title }}</h5></div>
+
+<div class="tags {{ color }} js-content-sized">
+
     {% for inout in input_output.all %}
-    	<a class="tag tag--{{ color }} js-sized"><i class="fi-x-circle"></i>{{ inout.title }}
-    		{% if inout.badge_count >= 1 %}
-    			<span>{{ inout.badge_count }}</span>
-    		{% endif %}</a>
+        <a class="tag tag--{{ color }} js-sized"><i class="fi-x-circle"></i>{{ inout.title }}
     {% endfor %}
-    	<a class="tag tag--white tag--more js-sized-more"><i class="fa fa-plus"></i>  Mehr</a>
-    </div>
-    {% if left %}
-    <div class="column h5 mb-10 strong {{ color }} show-for-small-only">{{ title }}</div>
-    {% else %}
-    <div class="card-section__title text-center ">
-       <!-- make title position aware with counter -->
-      <h5 class="{{ color }} show-for-small-only">{{ title }}</h5>
-    </div>
-    {% endif %}
-{% elif request.user == object.created_by %}
-<div class="column h5 mb-10 strong {{ color }} show-for-medium">Sag was {{ title }} </div>
-{% endif %}
+    <a class="tag tag--white tag--more js-sized-more"><i class="fa fa-plus"></i>  Mehr</a>
+</div>
+
+
+
+
+{% comment %}
+    {% if inout.badge_count >= 1 %}
+        <span>{{ inout.badge_count }}</span>
+    {% endif %}</a>
+
+<div class="column mb-10 strong {{ color }} show-for-small-only"><h5>{{ title }}</h5></div>
+
+{% endcomment %}
+    
