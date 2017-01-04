@@ -1,11 +1,46 @@
 {% extends "offcanvas.html" %}
-{% load socialee_filters %}
-{% load static sekizai_tags %}
+{% load socialee_filters static sekizai_tags %}
+
 {% block content %}
 
-<div class="c-section -solo">
-  <div class="row">
-    <div class="medium-10 medium-offset-1 large-10 large-offset-1 xlarge-10 xlarge-offset-1 xxlarge-12 xxlarge-offset-0 column">
+  <div class="row align-center">
+    <div class="medium-10 large-10 columns">
+      <div class="c-form">
+        <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+
+          <div class="row">
+            
+              {% include "snippet_formfield.html" with field=form.first_name size="small-12" %}
+              {% include "snippet_formfield.html" with field=form.last_name size="small-12" %}
+            
+              {% include "snippet_formfield.html" with field=form.title size="small-12" %}
+              {% include "snippet_formfield.html" with field=form.tagline size="small-12" %}
+              
+              {% include "snippet_formfield.html" with field=form.tags size="small-12" %}
+
+              {% include "snippet_formfield.html" with field=form.description size="small-12" %}
+                
+              {# Inputs und Outputs gehen noch nicht.... #}
+              {# {% include "snippet_formfield.html" with field=form.socialee_inputs size="small-6"%} #}
+              {# {% include "snippet_formfield.html" with field=form.socialee_outputs size="small-6"%} #}
+
+          </div>
+
+          <div class="row">
+            <div class="small-12 columns">
+              <button class="button" type="submit">Projekt erstellen</button>
+            </div>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% comment %}
+  
+  <div class="row align-center">
+    <div class="medium-10 large-10 columns">
       <div class="c-form">
         <form method="POST" enctype="multipart/form-data">{% csrf_token %}
           <div class="row">
@@ -27,16 +62,16 @@
                   <div class="row">
                     <div class="small-12 medium-12 large-12 column profile__name header-text-h2 header-text-sm-h2">
                       {% if object.profile %}
-                        {% include "snippet_formfield.html" with field=form.first_name size="medium-12" %}
-                        {% include "snippet_formfield.html" with field=form.last_name size="medium-12" %}
+                        {% include "snippet_formfield.html" with field=form.first_name size="small-12" %}
+                        {% include "snippet_formfield.html" with field=form.last_name size="small-12" %}
                       {% else %}
-                        {% include "snippet_formfield.html" with field=form.title size="medium-12" %}
+                        {% include "snippet_formfield.html" with field=form.title size="small-12" %}
                       {% endif %}
                     </div>
 
 
                     <div class="column small-12 profile__tagline header-text-h6 header-text-sm-h6">
-                    {% include "snippet_formfield.html" with field=form.tagline size="medium-12" %}
+                    {% include "snippet_formfield.html" with field=form.tagline size="small-12" %}
                     </div>
 
                   </div>
@@ -50,7 +85,7 @@
                       {% endfor %}
                     </div>
                 <div class="column small-12">
-                  {% include "snippet_formfield.html" with field=form.description size="medium-12" %}
+                  {% include "snippet_formfield.html" with field=form.description size="small-12" %}
                 </div>
               </div>
             </div>
@@ -59,7 +94,7 @@
                 <div class="">
                   <div class="small-12 medium-6 columns">
                     <div class="row">
-                      {% include "snippet_formfield.html" with field=form.socialee_outputs %}
+                      {% include "snippet_formfield.html" with field=form.socialee_outputs size="small-12" %}
                       <div class="tags green">
                         <div class="column h5 mb-10 strong green">{{ object.short_name }} bietet</div>
                         {%  for input in object.socialee_output.all %}
@@ -74,7 +109,7 @@
 
                   <div class="small-12 medium-6 columns">
                     <div class="row">
-                      {% include "snippet_formfield.html" with field=form.socialee_inputs %}
+                      {% include "snippet_formfield.html" with field=form.socialee_inputs size="small-12"%}
                       <div class="tags blue">
                         <div class="column h5 mb-10 strong blue">{{ object.short_name }} benötigt</div>
                         {% for output in object.socialee_input.all %}
@@ -92,29 +127,9 @@
       </div>
     </div>
   </div>
-</div>
 
-{% addtoblock "js" %}
-<script>
+{% endcomment %}
 
-function readURL(input) {
 
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-          $("#js-id-picture").attr("src", e.target.result);
-        }
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-$("#id_picture").change(function(){
-    readURL(this);
-});
-
-</script>
-{% endaddtoblock %}
 
 {% endblock content %}
