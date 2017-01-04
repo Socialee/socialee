@@ -1,3 +1,44 @@
+.c-box {
+  @include callout; // further adjustments via settings.py
+
+  &.small {
+    padding: 1.6rem;
+  }
+
+  &.shadow {
+    box-shadow: 0 0 10px $grey05;
+  }
+ 
+  @include breakpoint(medium) {
+      margin-bottom: 3rem;
+      margin-top: 3rem;
+    }
+
+  @include breakpoint(small only) {
+      padding: 2rem 2rem;
+    }
+}
+
+.black-c-box {
+  @extend .c-box; // further adjustments via settings.py
+  background-color: $black;
+  color: $white;
+  &.small {
+    padding: 1.6rem;
+  }
+}
+
+.c-section--hero-bg-img {
+    -webkit-background-size: cover 100%;
+    -moz-background-size: cover 100%;
+    background-size: cover 100%;
+    -o-background-size: cover 100%;
+    background-position: center center;
+    background-repeat: no-repeat, no-repeat;
+}
+
+///////////////////////////////////
+
 .c-section--top {
   margin-bottom: 3rem;
   margin-top: 3rem;
@@ -13,17 +54,17 @@
 
 .c-section--white {
   @extend .c-section;
-  background-color: c(special, white);
+  background-color: $white;
 }
 
 .c-section--grey {
   @extend .c-section;
-  background-color: c(grey, f8);
+  background-color: $grey01;
 }
 
 .c-section--grey-ea {
   @extend .c-section;
-  background-color: c(grey, ea);
+  background-color: $grey01;
 }
 
 .c-section--bg-img {
@@ -71,7 +112,7 @@
 }
 
 .c-section--quotes {
-background-color: c(black, 1);
+background-color: $black;
 padding-top: 5rem;
 padding-bottom: 5rem;
 }
@@ -100,10 +141,4 @@ background-image: url(../img/landingpage_bg/Landingpage_Footer.jpg);
   }
 }
 
-.c-section--hero-bg-img {
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-    background-position: center center;
-}
+

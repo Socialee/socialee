@@ -9,14 +9,14 @@
   visibility: hidden;
   position: relative;
   z-index: 100;
-  color: $socialee-orange;
+  color: $orange;
 
   .expand-icon {
     margin: 0.5rem;
     position: absolute;
     left: 0;
     &:hover {
-    color: $socialee-hover;
+    color: $hover-color;
     cursor: pointer;
     }
   }
@@ -26,7 +26,7 @@
     position: absolute;
     right: 0;
     &:hover {
-    color: $socialee-hover;
+    color: $hover-color;
     cursor: pointer;
     }
   }
@@ -104,17 +104,17 @@
   }
 
   .idea-heart {
-    color: #FF9E1A;
+    color: $orange;
     position: relative;
     bottom:-27px;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     strong {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       color: white;
     }
     span {
     &:hover {
-      color: $socialee-hover;
+      color: $hover-color;
       cursor: pointer;
     }}
   }
@@ -160,7 +160,6 @@
     margin-bottom: 0;
     font-weight: bold;
     font-size: 0.7rem;
-    color: gray;
   }
 }
 
@@ -191,14 +190,6 @@
   background-color: #264A42;
 }
 
-.text-link-special {
-  border-bottom: 4px solid;
-  font-weight: bold;
-  &:hover {
-    text-decoration: none;
-  }
-}
-
 .status-unpublished {
   background-color: #302f35;
 }
@@ -225,7 +216,7 @@
 }
 
 .idea-details-dark {
-  background-color: $socialee-black;
+  background-color: $black;
   color: white;
   padding: 2rem;
   margin-bottom: 0;
@@ -334,7 +325,7 @@ img.center {
 }
 
 .idea-details-dark-temp {
-  background-color: $socialee-black;
+  background-color: $black;
   color: white;
   padding: 2rem;
   margin-top: 4rem;

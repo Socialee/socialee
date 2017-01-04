@@ -63,32 +63,32 @@
 }
 
 .tag--orange {
-  background-color: c(orange, 1);
+  background-color: $orange;
 
   &:hover {
-    background-color: c(orange, 2);
+    background-color: $darkorange;;
   }
 }
 
 .tag--green {
-  background-color: c(green, 1);
+  background-color: $green;
 
   &:hover {
-    background-color: c(green, 2);
+    background-color: $darkgreen;
   }
 }
 
 .tag--blue {
-  background-color: c(blue, 1);
+  background-color: $blue;
 
   &:hover {
-    background-color: c(blue, 2);
+    background-color: $darkblue;
   }
 }
 
 .tag--grey {
   background-color: #f8f8f8;
-  color: c(orange, 1)
+  color: $orange;
 }
 
 .tag--white {
@@ -96,19 +96,19 @@
 }
 
 .tag--orange:before {
-  border-color:transparent c(orange, 1) transparent transparent;
+  border-color:transparent $orange transparent transparent;
 }
 
 .tag--orange:hover::before {
-  border-color:transparent c(orange, 2) transparent transparent;
+  border-color:transparent $orange transparent transparent;
 }
 
 .tag--green:before {
-  border-color:transparent c(green, 1) transparent transparent;
+  border-color:transparent $green transparent transparent;
 }
 
 .tag--green:hover::before {
-  border-color:transparent c(green, 2) transparent transparent;
+  border-color:transparent $darkgreen transparent transparent;
 }
 
 .tag--grey:before {
@@ -120,19 +120,19 @@
 }
 
 .tag--blue:before {
-  border-color:transparent c(blue, 1) transparent transparent;
+  border-color:transparent $blue transparent transparent;
 }
 
 .tag--blue:hover::before {
-  border-color:transparent c(blue, 2) transparent transparent;
+  border-color:transparent $darkblue transparent transparent;
 }
 
 .tags.green .tag--white {
-    color: map-get($foundation-palette, green);
+    color: $green;
 }
 
 .tags.blue .tag--white {
-    color: map-get($foundation-palette, blue);
+    color: $blue;
 }
 
 a.tag {
@@ -194,19 +194,20 @@ a.socialee-label:hover, a.socialee-label:focus {
 }
 
 .socialee-label-beta {
-  float:left;
-  height:24px;
-  line-height:24px;
-  position:relative;
-  font-size:11px;
-  font-weight: 700;
-  color:#fff;
-  text-decoration:none;
-  text-transform: uppercase;
+  position: relative;
+  top: -3px;
+  font-size: 0.6rem;
+  font-weight: 900;
+  color: $white;
   background-color: rgba(255, 255, 255, 0.1);
-  top: 15px;
-  left: 0;
-  margin-left: 0;
-  padding: 0 10px 0 10px;
+  padding: 5px 10px;
   border-radius: 10px;
+  &:hover:after {
+    margin-left: 1rem;
+    letter-spacing: 0.05rem;
+    // text-transform: uppercase;
+    content: "Wir arbeiten dran";
+    color: $white;
+    font-weight: bold;
+  }
 }

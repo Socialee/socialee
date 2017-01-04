@@ -1,16 +1,17 @@
-section.team {
-  background-color: c(greyblue, 3);
+.landingpage-head {
+    background-image: url("../img/landingpage_bg/lilienthal.png"), url("../img/landingpage_bg/landingpage_bg.jpg");
+    background-repeat: no-repeat, no-repeat;
+    background-position: 500% 68%, center center;
+    background-size: 110%, cover;
+    h1 {
+      margin-top: 8rem;
+      @include breakpoint(small only){
+        margin-top: 4rem;  
+      }
+    } 
 }
 
-section.gallery {
-  background-color: #F4F4F5;
-  margin-bottom: -20rem;
-  @include breakpoint(small only) {
-    margin-bottom: -10rem;
-  }
-}
-
-section.lp-bottom {
+.landingpage-bottom {
   background-image: url("../img/landingpage_bg/ship.jpg");
   background-repeat: no-repeat;
   background-position: center center;
@@ -18,79 +19,4 @@ section.lp-bottom {
   padding-top: 15rem;
   padding-bottom: 5rem;
   z-index: 0;
-  p {
-    line-height: 1.45;
-    font-size: 1.4rem;
-  }
-  @include breakpoint(small only) {
-    padding: 5rem 0;
-    h2 {
-      margin-top: 2rem;
-    }
-  }
-}
-
-.callout.idea-gallery {
-  z-index: 2;
-  top: -10rem;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
-  @include breakpoint(small only) {
-  top: -5rem;
-  }
-}
-
-section.lp-header {
-    background-image: url("../img/landingpage_bg/lilienthal.png"), url("../img/landingpage_bg/landingpage_bg.jpg");
-    background-repeat: no-repeat, no-repeat;
-    background-position: 500% 68%, center center;
-    background-size: 110%, cover;
-
-    min-height: 90vH;
-
-  h1 {
-    font-weight: 600;
-    color: $white;
-    margin-top: 9rem;
-  }
-  p {
-    line-height: 1.45;
-    font-size: 1.6rem;
-    color: $white;
-  }
-  @include breakpoint(medium only) {
-    h1 {
-    line-height: 3rem;
-    font-size: 3rem;
-    margin-top: 5rem;
-    }
-  }
-  @include breakpoint(small only) {
-    background-size: 150%, cover;
-    background-position: 100% 90%, center center;
-    p, a {
-    font-size: 1.2rem;
-    line-height: 1.625rem;
-    }
-    h1 {
-    line-height: 2.5rem;
-    font-size: 2.1rem;
-    margin-top: 6rem;
-    }
-  }
-}
-
-.callout.dark {
-  background-color: $socialee-black;
-  padding: 4rem 8rem;
-  position: relative;
-  top: -10rem;
-    p {
-      line-height: 2rem;
-      font-size: 1.4rem;
-      font-weight: normal;
-  }
-  @include breakpoint(small only) {
-    padding: 2rem 2rem;
-    top: -5rem;
-  }
 }

@@ -1,9 +1,5 @@
 .c-form {
-  background-color: c(special, white);
-  padding: 3rem 3.5rem;
-  margin-bottom: 1.5rem;
-  margin-top: 1.5rem;
-
+  @include callout; // further adjustments via settings.py
   @include breakpoint(medium) {
       margin-bottom: 3rem;
       margin-top: 3rem;
@@ -14,20 +10,21 @@
     }
 }
 
-// .c-section__callout {
-//   background-color: c(special, white);
-//   padding: 3rem 3.5rem;
-//   margin-bottom: 1.5rem;
-//     margin-top: 1.5rem;
-//   @include breakpoint(medium) {
-//       margin-bottom: 3rem;
-//       margin-top: 3rem;
-//     }
-// }
+.help-text {
+    margin-top: $helptext-margin-top;
 
-.c-form__fieldset {
-
+    &.error {
+      color: $alertred;
+    }
 }
+
+.second-form-label {
+ display: inline;
+ margin-left: 2rem;
+ color: $form-label-color;
+}
+
+//////////////////////////////////////
 
 .c-form__title {
   text-align: center;
@@ -35,10 +32,4 @@
 
 .c-form__footer {
   padding-top: rem-calc(20px);
-}
-
-.second-form-label {
- display: inline;
- margin-left: 2rem;
- color: grey;
 }

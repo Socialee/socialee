@@ -5,7 +5,7 @@
   // font-size: 1rem;
   // margin-right: 0.65rem;
   &:hover {
-      color: $socialee-hover;
+      color: $hover-color;
       text-decoration: none;
     }
 	@include breakpoint(small only){

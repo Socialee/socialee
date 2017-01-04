@@ -1,3 +1,22 @@
+// used for moving up idea-gallery on Landingpage
+.move-up {
+  z-index: 2;
+  top: -12rem;
+  @include breakpoint(small only) {
+  top: -6rem;
+  }
+}
+
+// used for moving up idea-gallery on Landingpage
+section.move-up {
+  margin-bottom: -24rem;
+  @include breakpoint(small only) {
+    margin-bottom: -6rem;
+  }
+}
+
+/////////////////////
+
 .l-site-content {
   // background-color: #fff;
   // padding-top: rem-calc(20px);
@@ -13,14 +32,14 @@
 }
 
 .l-text-box {
-  background-color: map-get($foundation-palette, black);
-  color: c(special, white);
+  background-color: $black;
+  color: $white;
   padding-top: rem-calc(87px);
   padding-bottom: rem-calc(116px);
 }
 
-.l-multi-column {
-  @include breakpoint(medium) {
-  	@include col-cstm(150px, 2, 20px, 1px outset transparent)
-  }
-}
+// .l-multi-column {
+//   @include breakpoint(medium) {
+//   	@include col-cstm(150px, 2, 20px, 1px outset transparent)
+//   }
+// }

@@ -1,36 +1,11 @@
-$anchor-color: c(orange, 1);
-$anchor-color-hover: c(orange, 2);
-$anchor-text-decoration: none;
-$anchor-text-decoration-hover: none;
+a {
+  font-weight: bold;
+}
 
-// a.text {
-//   font-size: rem-calc(22);
-//   font-weight: 700;
-//   text-decoration: none;
-//   border-bottom: 4px solid;
-
-//   &:hover {
-//     color: c(orange, 2);
-//   }
-// }
-
-a.text--capital {
+a.capital {
   text-transform: uppercase;
 }
 
-a.text--underline {
+a.text-link-special {
   border-bottom: 4px solid;
-
-  &:hover {
-    border-bottom: 4px solid c(orange, 2);
-  }
 }
-
-// a.thick {
-// 	text-decoration: none;
-// 	border-bottom: 4px solid;
-
-// 	&:hover {
-// 		border-bottom: 4px solid #CD931F;
-// 	}
-// }

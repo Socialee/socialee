@@ -5,14 +5,13 @@
 		margin-top: 1rem;
 		margin-left: 1rem;
 	}
-    outline: none;
 }
 
-.title {
-    color: #8a8a8a;
+// offcanvas title
+.oc-title {
+    font-size: rem-calc(16);
+    color: $greyblue;
     padding: 2rem 1rem 0rem 1rem;
-    padding-left: 15px;
     text-transform: uppercase;
     font-weight: bold;
   }
-

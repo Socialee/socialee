@@ -1,0 +1,29 @@
+// Theses classes are used to display our colors in Styleguide
+
+.sg-orange {background-color: $orange;}
+.sg-darkorange{background-color: $darkorange;}
+.sg-superdarkorange{background-color: $superdarkorange;}
+
+.sg-green{background-color: $green;}
+.sg-darkgreen{background-color: $darkgreen;} // Standart Tag OUT
+.sg-superdarkgreen{background-color: $superdarkgreen;} // Standart Tag OUT hover
+
+.sg-blue{background-color: $blue;} // Standart Tag IN
+.sg-darkblue{background-color: $darkblue;} // Standart Tag IN hover
+.sg-superdarkblue{background-color: $superdarkblue;}
+
+.sg-greyblue{background-color: $greyblue;} // Standart LABEL (Form) Textfarbe
+.sg-darkgreyblue{background-color: $darkgreyblue;}
+.sg-superdarkgreyblue{background-color: $superdarkgreyblue;} // Standart Textfarbe (Socialees BLACK)
+
+.sg-grey01{background-color: $grey01;} // Input Hintergrund
+.sg-grey02{background-color: $grey02;} // horiz. Linienfarbe
+.sg-grey03{background-color: $grey03;} // 
+.sg-grey04{background-color: $grey04;} // Placeholder Text
+.sg-grey05{background-color: $grey05;}
+
+.sg-alertred{background-color: $alertred;} // Fehlerfarbe
+.sg-alertgreen{background-color: $alertgreen;} // Fehlerfarbe
+.sg-alertyellow{background-color: $warning-color;} // Fehlerfarbe
+
+.sg-white{background-color: $white;}

@@ -1,143 +1,151 @@
-// $breakpoints: (
-//   small: 0,
-//   medium: 640px,
-//   large: 1024px,
-//   xlarge: 1200px,
-//   xxlarge: 1440px,
+.huge-title {
+	font-size: 74px;
+	@include breakpoint(small only) {
+   		font-size: 50px;
+    }
+}
+
+
+// // $breakpoints: (
+// //   small: 0,
+// //   medium: 640px,
+// //   large: 1024px,
+// //   xlarge: 1200px,
+// //   xxlarge: 1440px,
+// // );
+
+// // $breakpoint-classes: (small medium large);
+
+// // $header-sizes: (
+// //   small: (
+// //     'h1': rem-calc(38px),
+// //     'h2': rem-calc(38px),
+// //     'h3': rem-calc(38px),
+// //     'h4': rem-calc(34px),
+// //     'h5': rem-calc(30px),
+// //     'h6': rem-calc(19px),
+// //   ),
+// //   medium: (
+// //     'h1': rem-calc(74px),
+// //     'h2': rem-calc(54px),
+// //     'h3': rem-calc(38px),
+// //     'h4': rem-calc(34px),
+// //     'h5': rem-calc(30px),
+// //     'h6': rem-calc(28px),
+// //   ),
+// // );
+
+// $p-font-sizes: (
+//   null  : (16px, 24px),
+//   small : (16px, 24px),
+//   medium: (16px, 24px),
+//   large : (16px, 24px),
 // );
 
-// $breakpoint-classes: (small medium large);
-
-// $header-sizes: (
-//   small: (
-//     'h1': rem-calc(38px),
-//     'h2': rem-calc(38px),
-//     'h3': rem-calc(38px),
-//     'h4': rem-calc(34px),
-//     'h5': rem-calc(30px),
-//     'h6': rem-calc(19px),
-//   ),
-//   medium: (
-//     'h1': rem-calc(74px),
-//     'h2': rem-calc(54px),
-//     'h3': rem-calc(38px),
-//     'h4': rem-calc(34px),
-//     'h5': rem-calc(30px),
-//     'h6': rem-calc(28px),
-//   ),
+// $plead-font-sizes: (
+//   null  : (20px, 32px),
+//   small : (20px, 32px),
+//   medium: (20px, 32px),
+//   large : (20px, 32px),
 // );
 
-$p-font-sizes: (
-  null  : (16px, 24px),
-  small : (16px, 24px),
-  medium: (16px, 24px),
-  large : (16px, 24px),
-);
+// $h1-font-sizes: (
+//   //null  : (15px, 1.3),
+//   small : (38px, 1.1),
+//   medium: (38px, 1.1),
+//   large : (74px, 80px),
+// );
 
-$p-lead-font-sizes: (
-  null  : (20px, 32px),
-  small : (20px, 32px),
-  medium: (20px, 32px),
-  large : (20px, 32px),
-);
+// $h2-font-sizes: (
+//   //null  : (15px, 1.3),
+//   small: (34px, 40px),
+//   medium: (34px, 40px),
+//   large : (38px, 48px)
+// );
 
-$h1-font-sizes: (
-  //null  : (15px, 1.3),
-  small : (38px, 1.1),
-  medium: (38px, 1.1),
-  large : (74px, 80px),
-);
+// $h3-font-sizes: (
+//   //null  : (15px, 1.3),
+//   small: (34px, 40px),
+//   medium: (34px, 40px),
+//   large : (38px, 44px)
+// );
 
-$h2-font-sizes: (
-  //null  : (15px, 1.3),
-  small: (34px, 40px),
-  medium: (34px, 40px),
-  large : (38px, 48px)
-);
+// $h4-font-sizes: (
+//   null  : (15px, 1.3),
+//   small : (26px, 38px),
+//   medium: (26px, 38px),
+//   large : (34px, 44px)
+// );
 
-$h3-font-sizes: (
-  //null  : (15px, 1.3),
-  small: (34px, 40px),
-  medium: (34px, 40px),
-  large : (38px, 44px)
-);
+// $h5-font-sizes: (
+//   null  : (15px, 1.3),
+//   small : (26px, 38px),
+//   medium: (26px, 38px),
+//   large : (28px, 38px)
+// );
 
-$h4-font-sizes: (
-  null  : (15px, 1.3),
-  small : (26px, 38px),
-  medium: (26px, 38px),
-  large : (34px, 44px)
-);
+// $h6-font-sizes: (
+//   null  : (15px, 1.3),
+//   small : (19px, 18px),
+//   medium: (19px, 18px),
+//   large : (28px, 18px)
+// );
 
-$h5-font-sizes: (
-  null  : (15px, 1.3),
-  small : (26px, 38px),
-  medium: (26px, 38px),
-  large : (28px, 38px)
-);
+// $_28-26: (
+//   null  : (26px, 38px),
+//   small : (26px, 38px),
+//   medium: (26px, 38px),
+//   large : (28px, 38px)
+// );
 
-$h6-font-sizes: (
-  null  : (15px, 1.3),
-  small : (19px, 18px),
-  medium: (19px, 18px),
-  large : (28px, 18px)
-);
-
-$_28-26: (
-  null  : (26px, 38px),
-  small : (26px, 38px),
-  medium: (26px, 38px),
-  large : (28px, 38px)
-);
-
-$_34-18: (
-  null  : (15px, 1.3),
-  small : (18px, 38px),
-  medium: (18px, 38px),
-  large : (34px, 44px)
-);
+// $_34-18: (
+//   null  : (15px, 1.3),
+//   small : (18px, 38px),
+//   medium: (18px, 38px),
+//   large : (34px, 44px)
+// );
 
 
 
-@include generate-sizes("header-text", s(medium, h1), s(medium, h2), s(medium, h3), s(medium, h4), s(medium, h5), s(medium, h6) );
+// @include generate-sizes("header-text", s(medium, h1), s(medium, h2), s(medium, h3), s(medium, h4), s(medium, h5), s(medium, h6) );
 
-@include breakpoint(small only) {
-	@include generate-sizes("header-text-sm", s(small, h1), s(small, h2), s(small, h3), s(small, h4), s(small, h5), s(small, h6) );
-}
+// @include breakpoint(small only) {
+// 	@include generate-sizes("header-text-sm", s(small, h1), s(small, h2), s(small, h3), s(small, h4), s(small, h5), s(small, h6) );
+// }
 
-p {
-  @include font-size($p-font-sizes);
-}
+// p {
+//   @include font-size($p-font-sizes);
+// }
 
-p.-lead {
-  @include font-size($p-lead-font-sizes);
-}
+// p.lead {
+//   @include font-size($plead-font-sizes);
+// }
 
-h1, .h1 {
-	@include font-size($h1-font-sizes);
-}
+// h1, .h1 {
+// 	@include font-size($h1-font-sizes);
+// }
 
-h2, .h2 {
-  @include font-size($h2-font-sizes);
-  font-weight: 900;
-}
+// h2, .h2 {
+//   @include font-size($h2-font-sizes);
+//   font-weight: 900;
+// }
 
-h3, .h3 {
-	@include font-size($h3-font-sizes);
-}
+// h3, .h3 {
+// 	@include font-size($h3-font-sizes);
+// }
 
-h5, .h5 {
-	@include font-size($h5-font-sizes);
-}
+// h5, .h5 {
+// 	@include font-size($h5-font-sizes);
+// }
 
-h6, .h6 {
-	@include font-size($h6-font-sizes);
-}
+// h6, .h6 {
+// 	@include font-size($h6-font-sizes);
+// }
 
-._28-26 {
-	@include font-size($_28-26);
-}
+// ._28-26 {
+// 	@include font-size($_28-26);
+// }
 
-._34-18 {
-	@include font-size($_34-18);
-}
+// ._34-18 {
+// 	@include font-size($_34-18);
+// }

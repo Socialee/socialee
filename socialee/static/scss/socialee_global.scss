@@ -1,11 +1,39 @@
-@import "settings";
+// Foundation
+@import 'settings';
 @import 'foundation';
-@include foundation-everything(false);
+@include foundation-everything(true);
+
+// Socialee Custom Stuff
+@import "components/_anchors";
+@import "components/_buttons";
+@import "components/_callout";
+@import "components/_comments";
+@import "components/_cards";
+@import "components/_connections";
+@import "components/_feedback-app";
+@import "components/_forms";
+@import "components/_footer";
+@import "components/_hero";
+@import "components/_idea-cards";
+@import "components/_landingpage";
+@import "components/_misc";
+@import "components/_offcanvas";
+@import "components/_sections";
+@import "components/_tabs";
+@import "components/_tags";
+@import "components/_top-bar";
+
+@import "general/_styleguide";
+@import "general/_helper";
+@import "layouts/_layouts";
 
 
-/* GLOBAL STYLES AND HELPERS*/
+// Diverse Styles, die noch keinen besseren Platz gefunden haben
 
-.button:focus { outline:0 !important; }
+//Hell, I'm trying to get rid of the blue outline in the offcanvas menu.... it does not work.
+:focus {outline: none !important;}
+.button:focus {outline:none !important;}
+button:focus {outline:none !important;}
 
 .bg-img {
     background-image: url("../img/landingpage_bg/landingpage_bg.jpg");
@@ -21,7 +49,7 @@
 // Callout for messages e.g. "Thanks, your message has been sent!"
 .message-callout {
   @include callout-base;
-  background-color: $socialee-orange;
+  background-color: $orange;
   margin-bottom: 0;
   color: $white;
   font-weight: bold;
@@ -33,7 +61,7 @@
 .white-orange {
   color: $white;
   &:hover {
-    color: $socialee-orange;
+    color: $orange;
   }
 }
 
@@ -65,17 +93,17 @@
   font-size: 1.5rem;
   font-weight: bold;
   transition: border-bottom 0.5s ease, color 0.5s ease;
-  border-bottom: 5px solid $socialee-orange;
+  border-bottom: 5px solid $orange;
   color: #fff;
   &:hover {
-    color: $socialee-hover;
-    border-bottom: 5px solid $socialee-hover;
+    color: $hover-color;
+    border-bottom: 5px solid $hover-color;
     text-decoration: none;
   }
   @include breakpoint(small only) {
     font-size: 2em;
-    border-bottom: 3px solid $socialee-orange;
-    color: $socialee-orange;
+    border-bottom: 3px solid $orange;
+    color: $orange;
   }
 }
 
@@ -84,12 +112,11 @@
   font-weight: bold;
   transition: border-bottom 0.5s ease, color 0.5s ease;
   border: none;
-  border-bottom: 5px solid $socialee-mediumgreen;
-  color: $socialee-mediumgreen;
+  border-bottom: 5px solid $darkgreen;
   background-color: white;
   &:hover {
-    color: $socialee-orange;
-    border-bottom: 5px solid $socialee-orange;
+    color: $orange;
+    border-bottom: 5px solid $orange;
     text-decoration: none;
   }
 }
@@ -146,7 +173,7 @@
     margin-bottom: 0;
     font-weight: 900;
     font-size: 1.9rem;
-    color: $socialee-darkgreen;
+    color: $superdarkgreen;
   }
   @include breakpoint(small only) {
     outline: 0px solid rgba($black, 0.1);
@@ -173,12 +200,10 @@
 /*PROJEKTÜBERSICHT STYLES*/
 
 .s-projectcard{
-  /*min-width: 400px;*/
-  // min-width-height: 90%;
   border: solid 2px $medium-gray;
   padding: 1rem;
   margin: 1rem;
-  background-color: $socialee-gray;
+  background-color: $medium-gray;
   h3 {
     line-height: 1;
     margin-bottom: 0;
@@ -221,7 +246,7 @@
 }
 
 .project-status-bar {
-  background: $socialee-gray;
+  background: $medium-gray;
   background-clip: content-box;
   i {
     font-size: 2rem;
@@ -251,7 +276,7 @@
     padding: 0 1.5rem 0 0.5rem;
     height: 100%;
     width: 100%;
-    background-color: $socialee-gray;
+    background-color: $medium-gray;
   }
 }
 
@@ -264,7 +289,7 @@
     padding: 0 1.5rem 0 0.5rem;
     height: 100%;
     width: 100%;
-    background-color: $socialee-gray;
+    background-color: $medium-gray;
   }
 }
 

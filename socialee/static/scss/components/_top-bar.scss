@@ -1,30 +1,3 @@
-.-not-home {
-	background-color: c(black,1)
-}
-
-.top-bar-app {
-  @include top-bar-container;
-    background-color: transparent;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 1.25rem;
-    padding: 0;
-    max-width: 85.625rem;
-    li {padding:0.35rem}
-  ,.top-bar-app ul li {
-    background-color: transparent;
-    color: $white;
+.top-bar {
+  
   }
-
-}
-
-.top-bar-app .top-bar-left ul {
-    background-color: rgba(0,0,0,0);
-}
-
-.top-bar-app .top-bar-right ul {
-    background-color: rgba(0,0,0,0);
-    .submenu {
-      background-color: rgba(41,47,53,0.4);
-    }
-}

@@ -4,11 +4,11 @@
     padding: 3rem;
     width: 100%;
     p, a, li {
-      color: $socialee-black;
+      color: $black;
       font-size: 1.2rem;
     }
     a {
-      color: $socialee-orange;
+      color: $orange;
     }
   
   @include breakpoint(small only) {
