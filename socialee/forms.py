@@ -31,15 +31,14 @@ class StartProjectForm(forms.ModelForm):
         }
 
 class EditProjectForm(forms.ModelForm):
-    fields = ('tagline', 'description', 'picture', 'tags')
     socialee_outputs = forms.CharField(required=False)
     socialee_inputs = forms.CharField(required=False)
     class Meta:
         model = Project
-        fields = ('title', 'tagline', 'description', 'picture', 'tags')
+        fields = ['picture', 'title', 'tagline', 'tags', 'location', 'description', 'video', 'longdescription', 'history', ]
         labels = {
-            'title': _('Gib deiner Idee einen Namen...'),
-            'tagline': _('... und einen Untertitel.'),
+            'title': _('Titel'),
+            'tagline': _('Motto, Slogan oder Tagline'),
         }
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Socialee'}),

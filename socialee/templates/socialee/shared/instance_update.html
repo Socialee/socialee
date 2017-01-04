@@ -3,51 +3,46 @@
 {% load static sekizai_tags %}
 {% block content %}
 
-{% if object.profile %}
-  {% include "snippet_formfield.html" with field=form.first_name size="medium-6" %}
-  {% include "snippet_formfield.html" with field=form.last_name size="medium-6" %}
-{% else %}
-  {% include "snippet_formfield.html" with field=form.title size="medium-6" %}
-{% endif %}
+  <div class="row align-center">
+    <div class="medium-10 large-10 columns">
+      <div class="c-form">
+        <form method="POST" enctype="multipart/form-data">{% csrf_token %}
 
-{% if request.user == object.created_by %} <!-- saveguard -->
-<div class="small-12 medium-12 large-4 column show-for-medium header-text-h2 header-text-sm-h2">
-  <input class="button button--yellow button--icon float-right-lg" type="submit" value="Save" />
-</div>
-{% endif %}
+          <div class="row">
+            <div class="small-12 columns">
+              <h3>Projekt bearbeiten</h3>
+            </div>
 
-{% include "snippet_formfield.html" with field=form.tags %}
+              {% include "snippet_formfield.html" with field=form.first_name size="small-12" %}
+              {% include "snippet_formfield.html" with field=form.last_name size="small-12" %}
+            
+              {% include "snippet_formfield.html" with field=form.title size="small-12" %}
+              {% include "snippet_formfield.html" with field=form.tagline size="small-12" %}
+              
+              {% include "snippet_formfield.html" with field=form.tags size="small-12" %}
 
-<div class="column small-12 profile__tagline tags tags--attribute tags--orange">
-  {% for tag in object.tags.all %}
-    <a class="tag tag--orange"><i class="fi-x-circle"></i>{{ tag }}</a>
-  {% endfor %}
-</div>
-<div class="column small-12">
-  {% include "snippet_formfield.html" with field=form.description size="medium-12" %}
-</div>
+              {% include "snippet_formfield.html" with field=form.description size="small-12" %}
 
-<div class="row">
-  {% include "snippet_formfield.html" with field=form.socialee_outputs %}
-  <div class="tags green">
-    <div class="column h5 mb-10 strong green">{{ object.short_name }} bietet</div>
-    {%  for input in object.socialee_output.all %}
-    <a class="tag tag--green"><i class="fi-x-circle"></i>{{ input }}{% if badge_count >= 1 %}
-    <span>{{ badge_count }}</span>{% endif %}</a>
-    {% endfor %}
+              {# TODO: Inputs und Outputs werden noch nicht gespeichert... #}
+              {% include "snippet_formfield.html" with field=form.socialee_inputs size="small-6"%}
+              {% include "snippet_formfield.html" with field=form.socialee_outputs size="small-6"%}
+
+              {% include "snippet_formfield.html" with field=form.video size="small-12" %}
+              {% include "snippet_formfield.html" with field=form.longdescription size="small-12" %}
+              {% include "snippet_formfield.html" with field=form.history size="small-12" %}
+
+          </div>
+
+          <div class="row">
+            <div class="small-12 columns">
+              <input class="button" type="submit" value="Änderungen speichern" />
+            </div>
+          </div>
+          
+        </form>
+      </div>
+    </div>
   </div>
-</div>
-
-<div class="row">
-  {% include "snippet_formfield.html" with field=form.socialee_inputs %}
-  <div class="tags blue">
-    <div class="column h5 mb-10 strong blue">{{ object.short_name }} benötigt</div>
-    {% for output in object.socialee_input.all %}
-    <a class="tag tag--blue"><i class="fi-x-circle"></i>{{ output.title }}{% if badge_count >= 1 %}
-    <span>{{ badge_count }}</span>{% endif %}</a>
-    {% endfor %}
-  </div>
-</div> 
 
 {% comment %}
 <div class="c-section -solo">
