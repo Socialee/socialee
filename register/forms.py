@@ -29,14 +29,16 @@ class NewsletterForm(EmailRegisterForm):
         self.fields = OrderedDict((k, self.fields[k]) for k in fields_key_order)
 
         self.fields['email'].label = _('E-Mail-Adresse')
-        self.fields['email'].help_text = _('Das brauchen wir')
+        self.fields['email'].help_text = _('')
         self.fields['email'].widget = forms.TextInput(attrs={'placeholder': ""})
+        self.fields['email'].error_messages['required'] = 'Dieses Feld musst du ausfüllen.'
+
 
         self.fields['first_name'].label = _('Vor- & Nachname')
-        self.fields['first_name'].help_text = _('Wenn Du magst')
+        self.fields['first_name'].help_text = _('')
 
         self.fields['message'].label = _("Möchtest Du sonst noch was loswerden? Dies ist die Gelegenheit.")
-        self.fields['message'].help_text = _('Wenn Du magst')
+        self.fields['message'].help_text = _('')
 
         self.fields['newsletter'].label = _('Newsletter abonnieren')
 
