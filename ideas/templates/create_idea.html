@@ -3,38 +3,32 @@
 
 {% block content %}
 
-<div class="c-section -solo">
-  <div class="row">
-    <div class="medium-10 medium-offset-1 large-8 large-offset-2 column">
+<div class="bg-img">
+  <div class="row align-center">
+    <div class="small-12 medium-10 large-8 columns">
       <div class="c-form">
 
         <h3 id="top_titel">Was ist deine Idee?</h3>
-        <p id="top_desc" class="lead">Egal, ob groß oder klein. Mit einer Idee fängt es immer an.</p>
+        <p id="top_desc">Egal, ob groß oder klein. Mit einer Idee fängt es immer an.</p>
 
         <form method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
 
           <div id="idea_form">
             <div class="row">
-            {% include "snippet_formfield.html" with field=form.picture size="medium-12" upload_val=" Bild hochladen " %}
-            {{ form.picturefile }}
-            
-            {% include "snippet_formfield.html" with field=form.title size="medium-12" %}
-
-            {% include "snippet_formfield.html" with field=form.description size="medium-12" len_restricted="true" %}
-
-            {% include "snippet_formfield.html" with field=form.private size="medium-12" %}
-
+              {% include "snippet_formfield.html" with field=form.picture size="small-12" upload_val="Bild hochladen" %}
+              {% include "snippet_formfield.html" with field=form.title size="small-12" %}
+              {% include "snippet_formfield.html" with field=form.description size="small-12" len_restricted="true" %}
+              {% include "snippet_formfield.html" with field=form.private size="small-12" %}
             </div>
-
             <div class="c-form__footer">
-              <div id="review_button" class="button button--yellow" >Vorschau deiner Idee</div>
-              <a href="{% url 'idea_list' %}" class="text-link-special pull-right">zurück zur Übersicht</a></p>
+              <div id="review_button" class="button">Vorschau deiner Idee</div>
+              <a href="{% url 'idea_list' %}" class="text-link-special pull-right">zurück zur Übersicht</a>
             </div>
-
           </div>
 
           <div id="review">
-            <div class="row">
+
+              {# idea card TODO: show real card-layout #}
               <div class="small-12 medium-6 columns">
                 <div class="idea-card-front">
                   <div class="idea-image">
@@ -56,27 +50,21 @@
               {% if not request.user.is_authenticated %}
               <div class="row">
                 <div class="small-12 columns">
-                  <p class="lead">Trage noch deine E-Mail-Adresse ein und erstelle dir so ein Konto bei Socialee.</p>
-                    <div class="row">
-                      {% include "snippet_formfield.html" with field=form.email size="medium-12" %}
-                    </div>
+                  <p>Trage noch deine E-Mail-Adresse ein und erstelle dir so ein Konto bei Socialee.</p>  
                 </div>
+                {% include "snippet_formfield.html" with field=form.email size="small-12" %}  
               </div> 
               {% endif %}
-              
-              <div class="row">
-                <div class="small-12 columns">
-                  <div class="c-form__footer">
-                    <input class="button button--yellow" type="submit" value="Idee Absenden" />
-                    <a id="change" class="text-link-special float-right-md">Idee nochmal ändern</a>
-                  </div>
-                </div>
+
+              <div class="c-form__footer">
+                <input class="button" type="submit" value="Idee Absenden" />
+                <a href="" id="change" class="text-link-special pull-right float-right">Idee nochmal ändern</a>
               </div>
 
-            </div>
           </div>
 
         </form>
+        
       </div>
     </div>
   </div>

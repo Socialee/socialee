@@ -34,9 +34,9 @@ class IdeaForm(EmailRegisterForm):
         self.fields['private'].label = _('Möchtest du, dass nur du diese Idee sehen kannst? Sie ist dann eine private Idee. Du kannst sie später jederzeit veröffentlichen.')
         self.fields['private'].initial = 0
 
-        self.fields['picture'].help_text = _('Wenn du eins hast')
-        self.fields['title'].help_text = _('Wenn du magst')
-        self.fields['description'].help_text = _('Wenn du Lust hast')
+        self.fields['picture'].help_text = _('')
+        self.fields['title'].help_text = _('')
+        self.fields['description'].help_text = _('')
 
     def custom_signup(self, request, user):
         request.session["idea_register"] = True

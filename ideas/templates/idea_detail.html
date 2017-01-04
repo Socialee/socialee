@@ -3,90 +3,57 @@
 
 {% block content %}
 
-{% comment %}
+<div class="row align-center">
+  <div class="small-11 medium-10 large-10 columns">
+    <div class="c-box">
 
-{% endcomment %}
-<div class="c-section c-section--hero-bg-img  c-section--hero" style="background-image:url('/static/img/landingpage_bg/landingpage_bg.jpg')">
-  <div class="row">
-    <div class="small-12">
-    </div>
-  </div>
-</div>
-<div class="c-section c-section--white">
-  <div class="row">
-      <div class="small-11 small-centered x-large-12">
-      <a class="socialee-label">gute Idee</a>
-        <div class="idea-detail">
-          {% if idea.picture %}
-            {% if idea.title or idea.description %}<!--Bild und Titel oder Bild und Beschreibung-->
-            <div class="row">
-              <div class="small-11 medium-10 columns small-centered text-center">
-                <h2 class="idea-detail__title">{{ idea.title }}</h2>
+      <div class="row align-center">
+        <div class="small-12 medium-10 large-10 columns">
+          
+          <h2 class="text-center mb-2rem">{{ idea.title }}</h2>
+          <img src="{{ MEDIA_URL }}{{ idea.picture }}">
+          <p class="text-center mt-2rem">{{ idea.description|urlizetrunc:25|url_target_blank|safe }}</p>
 
+          <div class="black-c-box small">
 
-                <img class="idea-detail__image" src="{{ MEDIA_URL }}{{ idea.picture }}">
-                <p class="lead">{{ idea.description|urlizetrunc:25|url_target_blank|safe }}</p>
-            {% elif not idea.title and not idea.description %}<!--nur Bild-->
-              <div class="idea-detail__image detail-idea-image">
-                <img src="{{ MEDIA_URL }}{{ idea.picture }}">
-              </div>
+            {% if request.user.is_authenticated %}
+              <h5 class="idea-comments__title">Diskutiere mit bei {{ idea.title }}</h5>
+              <div class="idea-comments__input">
+
+                  <textarea autofocus="autofocus" class="idea_comment_input" id="idea_comment_{{idea.id}}" name="idea_comment" rows="2"></textarea> <label class="idea-comments__label float-right">140 Zeichen übrig</label>
+                  <a class="button button--yellow button--icon idea_comment_button" id="idea_comment_button_{{ idea.id }}" idea_id="{{ idea.id }}">Kommentieren</a>
+              </div>    
+            {% else %}
+              <p class="white text-center">Dazu fällt dir was ein?<br><a class="button hollow" href="{% url 'register' %}">Jetzt registrieren</a><br><a class="text-link-special" href="{% url 'account_login' %}">oder anmelden.</a></p>
             {% endif %}
-          {% else %}<!-- kein Bild -->
-            {% if idea.title and idea.description %}<!-- Titel und Beschreibung -->
-                <div class="detail-green-card">
-                  <h2>{{ idea.title }}</h2>
+
+            <div id="idea_comments_{{idea.id}}">
+              {% for comment in idea.comments.all %}
+                <div class="idea-comments__item">
+                <label class="idea-comments__label">VOR {{ comment.date|timesince|upper }} VON {% if comment.by_user.is_superuser %}SOCIALEE{% else %}{{ comment.by_user|upper|truncatechars:6 }}{% endif %}</label>
+                  <p>{{ comment.message|urlizetrunc:25 }}</p>
                 </div>
-              <div class="idea-details">
-                <p class="lead">{{ idea.description|urlizetrunc:25|url_target_blank|safe }}</p>
-              </div>
-            {% endif %}
-            {% if idea.title and not idea.description %}<!-- nur Titel -->
-              <div class="detail-green-card">
-                <h2>{{ idea.title }}</h2>
-              </div>
-            {% endif %}
-            {% if idea.description and not idea.title %}<!-- nur Beschreibung -->
-              <div class="detail-green-card">
-                <p class="lead">{{ idea.description|urlizetrunc:25|url_target_blank|safe }}</p>
-              </div>
-            {% endif %}
-          {% endif %}
+              {% endfor %}
+            </div>
+
+          </div>
 
           {% if request.user.is_superuser %}
-            <p><a href="{% url 'startprojectWithIdea' idea.pk %}">zum Projekt machen</a></p>
-          {% endif %}
-        </div>
-        </div>
-        <div class="row">
-        <div class="small-12 medium-10 columns small-centered">
-        <div class="idea-details-dark-temp">
-        {% if request.user.is_authenticated %}
-          <h5 class="idea-comments__title">Diskutiere mit bei {{ idea.title }}</h5>
-          <div class="idea-comments__input">
-
-              <textarea autofocus="autofocus" class="idea_comment_input" id="idea_comment_{{idea.id}}" name="idea_comment" rows="5" cols="70" ></textarea> <label class="idea-comments__label float-right">140 Zeichen übrig</label>
-              <a class="button button--yellow button--icon idea_comment_button" id="idea_comment_button_{{ idea.id }}" idea_id="{{ idea.id }}">Kommentieren</a>
-
-        {% else %}
-        <p class="white">Du willst was sagen? <a href="{% url 'account_login' %}">Melde dich an!</a></p>
-        {% endif %}
-        </div>
-        </div>
-        <div class="idea-details-dark" id="idea_comments_{{idea.id}}">
-          <div class="idea-comments__comments">
-          {% for comment in idea.comments.all %}
-            <div class="idea-comments__item">
-            <label class="idea-comments__label">VOR {{ comment.date|timesince|upper }} VON {% if comment.by_user.is_superuser %}SOCIALEE{% else %}{{ comment.by_user|upper|truncatechars:6 }}{% endif %}</label>
-              <p>{{ comment.message|urlizetrunc:25 }}</p>
+          <div class="row align-center">
+            <div class="small-12 columns text-center">
+              admin only<br><a class="button hollow" href="{% url 'startprojectWithIdea' idea.pk %}">zum Projekt machen</a>
             </div>
-          {% endfor %}
           </div>
+            
+          {% endif %}
+          
+
         </div>
       </div>
     </div>
-  </div>
+  </div>  
 </div>
-</div>
+
 
 {% addtoblock 'js' %}
 <script type="text/javascript">
@@ -101,9 +68,9 @@ function idea_comment(idea_id, comment) {
                   $(new_comment).css({ display: 'none'});
                   $("#idea_comments_"+idea_id).prepend(new_comment);
                   $(new_comment).slideDown('fast');
-                  $('html, body').animate({
-                      scrollTop: ($(new_comment).offset().top-20)
-                  },500);
+                  // $('html, body').animate({
+                  //     scrollTop: ($(new_comment).offset().top-20)
+                  // },500);
                 });
   }
 

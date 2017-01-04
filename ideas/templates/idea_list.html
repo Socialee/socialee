@@ -4,10 +4,10 @@
 {% block content %}
 
 <div class="c-section -solo">
-  <div class="row">
-    <div class="small-12 medium-11 large-11 small-centered">
-      <div class="c-form">
-        <h6 class="text-center">Hier kannst du Ideen entdecken oder <a class="text--underline" href="{% url 'create_idea' %}">deine eigene Idee teilen.</a></h6>
+  <div class="row align-center">
+    <div class="small-12 medium-11 large-11 columns">
+      <div class="callout large">
+        <h3 class="text-center">Socialee sammelt alle Ideen der Welt. <a class="text-link-special" href="{% url 'create_idea' %}">Teile deine!</a></h3>
 
           {% idea_list as idea_list %}
           {% include 'snippet_ideas.html'%}

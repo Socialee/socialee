@@ -7,11 +7,11 @@
       <div class="front_card">
           <div class="card-icons">
           <div class="idea-gradient"></div>
-            <span class="fa-stack fa-lg expand-icon show-for-medium" expand_id="{{idea.id}}">
+            <span class="fa-stack expand-icon show-for-medium" expand_id="{{idea.id}}">
               <i class="fa fa-square fa-stack-2x"></i>
               <i class="fa fa-expand fa-stack-1x fa-inverse"></i>
             </span>
-            <span class="fa-stack fa-lg turn-icon" turn_id="{{idea.id}}">
+            <span class="fa-stack turn-icon" turn_id="{{idea.id}}">
               <i class="fa fa-square fa-stack-2x"></i>
               <i class="fa fa-refresh fa-stack-1x fa-inverse"></i>
             </span>
@@ -69,11 +69,11 @@
         
         {% if not request.user.is_authenticated %}
         <div class="card-notification-wrapper">
-          <p id="login_{{ idea.id }}" class="card-notification" idea_id="{{ idea.id }}">Findest du gut? Zum Gutfinden <a href="{% url 'account_login' %}">melde dich an.</a></p>
+          <p id="login_{{ idea.id }}" class="card-notification" idea_id="{{ idea.id }}">Findest du gut? <a href="{% url 'account_login' %}">Melde dich an!</a></p>
         </div>
         {% endif %}
 
-        <div class="row">
+        <div class="row align-center">
           <div id="do_comment_{{ idea.id }}" class="card-notification-wrapper do_comment">
           {% if do_comment %}
               <p id="make_comment_{{ idea.id }}" class="card-notification" idea_id="{{ idea.id }}">Warum gefällt dir das? <a>Schreib es auf!</a></p>
@@ -95,11 +95,11 @@
       <div class="back-hover-area">
         <div class="card-icons">
         <div class="idea-gradient"></div>
-          <span class="fa-stack fa-lg expand-icon show-for-medium" expand_id="{{idea.id}}">
+          <span class="fa-stack expand-icon show-for-medium" expand_id="{{idea.id}}">
             <i class="fa fa-square fa-stack-2x"></i>
             <i class="fa fa-expand fa-stack-1x fa-inverse"></i>
           </span>
-          <span class="fa-stack fa-lg turn-icon" turn_id="{{idea.id}}">
+          <span class="fa-stack turn-icon" turn_id="{{idea.id}}">
             <i class="fa fa-square fa-stack-2x"></i>
             <i class="fa fa-refresh fa-stack-1x fa-inverse"></i>
           </span>
@@ -133,11 +133,8 @@
           </div>
         </div>
         {% else %}
-        <div class="text-center mt-50">
-          <p class="white text-center mb-0">Willst du mitreden?</p>
-          <a class="button button--yellow" href="{% url 'register' %}">Jetzt registrieren!</a>
-          <p><a class="" href="{% url 'account_login' %}">oder anmelden</a></p>
-        </div>
+        <hr>
+        <p class="white text-center">Was zu sagen?<br><a class="button hollow" href="{% url 'register' %}">Jetzt registrieren</a><br><a class="text-link-special" href="{% url 'account_login' %}">oder anmelden.</a></p>
         {% endif %}
 
     </div>
