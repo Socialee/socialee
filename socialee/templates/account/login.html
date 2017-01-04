@@ -12,7 +12,7 @@
 {% get_providers as socialaccount_providers %}
 
 {% if socialaccount_providers %}
-<p class="-lead">{% blocktrans with site.name as site_name %}Please sign in with one
+<p class="">{% blocktrans with site.name as site_name %}Please sign in with one
 of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
 for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
@@ -29,14 +29,14 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 {% include "socialaccount/snippets/login_extra.html" %}
 
 {% else %}
-<p class="-lead mb-20">Wenn Du noch kein Konto bei Socialee hast, <a class="text-link-special" href="{% url 'register' %}">registriere dich!</a></p>
+<p class="">Wenn Du noch kein Konto bei Socialee hast, <a class="text-link-special" href="{% url 'register' %}">registriere dich!</a></p>
 {% endif %}
 
 <form class="login mt-20" method="POST" action="{% url 'account_login' %}">
   <div class="row">
     {% csrf_token %}
     {% for item in form %}
-    {% include "snippet_formfield.html" with field=item size="medium-6" %}
+    {% include "snippet_formfield.html" with field=item size="small-12 medium-6" %}
     {% endfor %}
     {% if redirect_field_value %}
     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />

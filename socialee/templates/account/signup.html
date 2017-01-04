@@ -8,7 +8,7 @@
 
     <h2>Neues Konto eröffnen.</h2>
 
-    <p class="-lead">Wenn Du schon ein Konto hast, <a href="{{ login_url }}">melde dich an.</a></p>
+    <p class="">Wenn Du schon ein Konto hast, <a href="{{ login_url }}">melde dich an.</a></p>
 
     <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
       {% csrf_token %}
