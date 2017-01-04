@@ -20,14 +20,15 @@ class StartProjectForm(forms.ModelForm):
         model = Project
         fields = ('title', 'tagline', 'description', 'picture', 'tags')
         labels = {
-            'title': _('Projekttitel'),
-            'tagline': _('Untertitel'),
+            'title': _('Titel des Projektes'),
+            'tagline': _('Motto, Slogan oder Tagline'),
+            'tags': _('Beschreibe dein Projekt mit ein paar Schlagworten'),
         }
         widgets = {
-            'title': forms.TextInput(attrs={'placeholder': 'Socialee'}),
+            'title': forms.TextInput(attrs={'placeholder': ''}),
             'tagline': forms.TextInput(attrs={'placeholder': 'Das soziale Netzwerk für Ideen und Projekte'}),
             'description': forms.Textarea(attrs={'rows': 4}),
-            'tags': TagWidget(attrs={'placeholder': 'Eine durch Komma getrennte Schlagwortliste.'}),
+            'tags': TagWidget(attrs={'placeholder': 'Berliner Ökohipster, vegane Sojalatte'}),
         }
 
 class EditProjectForm(forms.ModelForm):

@@ -9,15 +9,14 @@
         <form method="POST" enctype="multipart/form-data">{% csrf_token %}
 
           <div class="row">
-            
-              {% include "snippet_formfield.html" with field=form.first_name size="small-12" %}
-              {% include "snippet_formfield.html" with field=form.last_name size="small-12" %}
+              <div class="small-12 columns">
+                <h3>Cool, dass du ein Projekt erstellst!</h3>
+                <p>Wenn du willst, kannst du noch ein paar Details hinzufügen.</p>
+              </div>
             
               {% include "snippet_formfield.html" with field=form.title size="small-12" %}
               {% include "snippet_formfield.html" with field=form.tagline size="small-12" %}
-              
               {% include "snippet_formfield.html" with field=form.tags size="small-12" %}
-
               {% include "snippet_formfield.html" with field=form.description size="small-12" %}
                 
               {# Inputs und Outputs gehen noch nicht.... #}
@@ -28,7 +27,7 @@
 
           <div class="row">
             <div class="small-12 columns">
-              <button class="button" type="submit">Projekt erstellen</button>
+              <input class="button" type="submit" value="Projekt erstellen">
             </div>
           </div>
           

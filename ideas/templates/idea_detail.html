@@ -11,7 +11,9 @@
         <div class="small-12 medium-10 large-10 columns">
           
           <h2 class="text-center mb-2rem">{{ idea.title }}</h2>
-          <img src="{{ MEDIA_URL }}{{ idea.picture }}">
+          {% if idea.picture %}
+          <img src="{{ MEDIA_URL }}{{ idea.picture }}">  
+          {% endif %}
           <p class="text-center mt-2rem">{{ idea.description|urlizetrunc:25|url_target_blank|safe }}</p>
 
           <div class="black-c-box small">
@@ -39,6 +41,7 @@
           </div>
 
           {% if request.user.is_superuser %}
+          
           <div class="row align-center">
             <div class="small-12 columns text-center">
               admin only<br><a class="button hollow" href="{% url 'startprojectWithIdea' idea.pk %}">zum Projekt machen</a>
