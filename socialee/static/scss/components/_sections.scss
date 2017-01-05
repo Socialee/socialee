@@ -28,13 +28,13 @@
   }
 }
 
-.c-section--hero-bg-img {
-    -webkit-background-size: cover 100%;
-    -moz-background-size: cover 100%;
-    background-size: cover 100%;
-    -o-background-size: cover 100%;
-    background-position: center center;
-    background-repeat: no-repeat, no-repeat;
+.project-bg-img {
+    // -webkit-background-size: cover 100%;
+    // -moz-background-size: cover 100%;
+    // -o-background-size: cover 100%;
+    background-size: contain;
+    background-position: center top;
+    background-repeat: no-repeat;
 }
 
 ///////////////////////////////////

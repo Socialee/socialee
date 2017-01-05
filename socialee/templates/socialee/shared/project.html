@@ -1,93 +1,93 @@
 {% load static socialee_filters idea_tags %}
 
-{# background image #}
-{# <div class="c-section--hero-bg-img full-height-100" style="background-image:url('{{ MEDIA_URL }}{{ object.picture }}')"></div> #}
+<div class="project-bg-img" style="background-image:url('{{ MEDIA_URL }}{{ object.picture }}')">
+  <div class="full-height-33"></div> {# abstandhalter workaround #}
+  <div class="row align-center">
+    <div class="small-12 medium-10 columns">
+      <div class="c-box">
 
-<div class="row align-center">
-	<div class="small-12 medium-10 columns">
-		<div class="c-box">
-
-			<h2 class="text-center">{{ object.long_name }}</h2>
-			<h5 class="text-center">{{ object.tagline }}</h5>
-			<div class="row align-center columns mt-1rem mb-2rem">
-			{% for tag in object.tags.all %}
-			<a class="tag tag--orange js-sized"><i class="fi-x-circle"></i>{{ tag }}</a>
-			{% endfor %}
-			{# <a class="tag tag--white tag--more js-sized-more"><i class="fa fa-plus"></i>  Mehr</a> #}
-			</div>
-			<p class="text-center mt-2rem">{{ object.description }}</p>
-
-			<div class="mt-2rem mb-2rem">
-			{% if request.user == object.created_by %}
-					<div class="text-center">
-					{% if object.profile %}
-						<a class="button hollow" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
-					{% else %}
-						<a class="button hollow" href="{% url 'project_updateview' slug=project.slug %}"><i class="fa fa-pencil" aria-hidden="true"></i> Projekt bearbeiten</a>
-					{% endif %}
-					</div>
-				{% else %}
-					<div class="button hollow follow{{ object.id }}">
-					{% include "snippet_follow.html" with to_follow=object.commonground_ptr %}
-					</div>
-			{% endif %}
-			</div>
-
-      {% if object.socialee_output.count or object.socialee_input.count %}
-          
-      <div class="c-box small shadow">
-        <div class="row align-center">
-	        	<div class="small-12 medium-6 columns">
-	        		{% include "snippet_input_output_tags.html" with input_output=object.socialee_output title=object.short_name|add:" bietet" color="green" left="true" %}
-	        	</div>
-	        	<div class="small-12 medium-6 columns">
-	        		{% include "snippet_input_output_tags.html" with input_output=object.socialee_input title=object.short_name|add:" benötigt" color="blue" left="true" %}
-	        	</div>
+        <h2 class="text-center">{{ object.long_name }}</h2>
+        <h5 class="text-center">{{ object.tagline }}</h5>
+        <div class="row align-center columns mt-1rem mb-2rem">
+        {% for tag in object.tags.all %}
+        <a class="tag tag--orange js-sized"><i class="fi-x-circle"></i>{{ tag }}</a>
+        {% endfor %}
+        {# <a class="tag tag--white tag--more js-sized-more"><i class="fa fa-plus"></i>  Mehr</a> #}
         </div>
-    	</div>		
+        <p class="text-center mt-2rem">{{ object.description }}</p>
 
-    	{% elif request.user in object.manager.all %}
-      <a href="{% url 'project_updateview' slug=project.slug %}"><p class="text-center lead">Input &amp; Output bearbeiten</p></a>
-      {% endif %}
+        <div class="mt-2rem mb-2rem">
+        {% if request.user == object.created_by %}
+            <div class="text-center">
+            {% if object.profile %}
+              <a class="button hollow" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
+            {% else %}
+              <a class="button hollow" href="{% url 'project_updateview' slug=project.slug %}"><i class="fa fa-pencil" aria-hidden="true"></i> Projekt bearbeiten</a>
+            {% endif %}
+            </div>
+          {% else %}
+            <div class="button hollow follow{{ object.id }}">
+            {% include "snippet_follow.html" with to_follow=object.commonground_ptr %}
+            </div>
+        {% endif %}
+        </div>
+
+        {% if object.socialee_output.count or object.socialee_input.count %}
+            
+        <div class="c-box small shadow">
+          <div class="row align-center">
+              <div class="small-12 medium-6 columns">
+                {% include "snippet_input_output_tags.html" with input_output=object.socialee_output title=object.short_name|add:" bietet" color="green" left="true" %}
+              </div>
+              <div class="small-12 medium-6 columns">
+                {% include "snippet_input_output_tags.html" with input_output=object.socialee_input title=object.short_name|add:" benötigt" color="blue" left="true" %}
+              </div>
+          </div>
+        </div>    
+
+        {% elif request.user in object.manager.all %}
+        <a href="{% url 'project_updateview' slug=project.slug %}"><p class="text-center lead">Input &amp; Output bearbeiten</p></a>
+        {% endif %}
 
 
-    
-    <ul class="tabs" data-update-history="true" data-deep-link="true" data-tabs id="instance-tabs">
-      <li class="tabs-title is-active"><a href="#panel1">Info</a></li>
-      <li class="tabs-title"><a href="#panel2">Gespräch</a></li>
-      <li class="tabs-title"><a href="#panel3">Netzwerk</a></li>
-    </ul>
+      
+      <ul class="tabs" data-update-history="true" data-deep-link="true" data-tabs id="instance-tabs">
+        <li class="tabs-title is-active"><a href="#panel1">Info</a></li>
+        <li class="tabs-title"><a href="#panel2">Gespräch</a></li>
+        <li class="tabs-title"><a href="#panel3">Netzwerk</a></li>
+      </ul>
 
-	  <div class="tabs-content" data-tabs-content="instance-tabs">
-	    {% include "information.html" %}
-	    {% include "dialog.html" %}
-	    {% include "connections.html" %}
-	  </div>
+      <div class="tabs-content" data-tabs-content="instance-tabs">
+        {% include "information.html" %}
+        {% include "dialog.html" %}
+        {% include "connections.html" %}
+      </div>
 
-    {% include "invite_friends.html" %}
+      {% include "invite_friends.html" %}
 
-		</div>
-	</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 {% comment %}
-	                    {% if request.user in object.manager.all %}
-	                      <p>Hey {{ request.user }}, hier kann der Slogan deines Projektes stehen. <a href="{% url 'project_updateview' slug=project.slug %}">Bearbeite das mal!</a></p>
-	                    {% endif %}
-	                    
-	                      <div class="column small-12 profile__tagline tags tags--attribute tags--orange js-content-sized">
-	                        {% for tag in object.tags.all %}
-	                        <a class="tag tag--orange js-sized"><i class="fi-x-circle"></i>{{ tag }}</a>
-	                        {% endfor %}
-	                        <a class="tag tag--white tag--more js-sized-more"><i class="fa fa-plus"></i>  Mehr</a>
-	                      </div>
+                      {% if request.user in object.manager.all %}
+                        <p>Hey {{ request.user }}, hier kann der Slogan deines Projektes stehen. <a href="{% url 'project_updateview' slug=project.slug %}">Bearbeite das mal!</a></p>
+                      {% endif %}
+                      
+                        <div class="column small-12 profile__tagline tags tags--attribute tags--orange js-content-sized">
+                          {% for tag in object.tags.all %}
+                          <a class="tag tag--orange js-sized"><i class="fi-x-circle"></i>{{ tag }}</a>
+                          {% endfor %}
+                          <a class="tag tag--white tag--more js-sized-more"><i class="fa fa-plus"></i>  Mehr</a>
+                        </div>
 
-	                    
-	                      <p class="lead">
-	                      {{ object.description }}
-	                      {% if request.user in object.manager.all %}
-	                      <p>Hey {{ request.user }}, hier sollte eine kurze Beschreibung deines Projektes stehen. <a href="{% url 'project_updateview' slug=project.slug %}">Bearbeite das mal!</a></p>
-	                      {% endif %}
-	                      </p>
+                      
+                        <p class="lead">
+                        {{ object.description }}
+                        {% if request.user in object.manager.all %}
+                        <p>Hey {{ request.user }}, hier sollte eine kurze Beschreibung deines Projektes stehen. <a href="{% url 'project_updateview' slug=project.slug %}">Bearbeite das mal!</a></p>
+                        {% endif %}
+                        </p>
 
 {% endcomment %}
