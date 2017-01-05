@@ -9,8 +9,11 @@
         <h2 class="text-center">{{ object.long_name }}</h2>
         <h5 class="text-center">{{ object.tagline }}</h5>
         <div class="row align-center columns mt-1rem mb-2rem">
+         {% for tag in object.location.all %}
+           <a class="tag tag--green js-sized"><i class="fi-x-circle"></i>{{ tag }}</a>
+        {% endfor %} 
         {% for tag in object.tags.all %}
-        <a class="tag tag--orange js-sized"><i class="fi-x-circle"></i>{{ tag }}</a>
+          <a class="tag tag--orange js-sized"><i class="fi-x-circle"></i>{{ tag }}</a>
         {% endfor %}
         {# <a class="tag tag--white tag--more js-sized-more"><i class="fa fa-plus"></i>  Mehr</a> #}
         </div>

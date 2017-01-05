@@ -23,7 +23,7 @@ from allauth.account.models import EmailAddress
 from embed_video.fields import EmbedVideoField
 
 from taggit.managers import TaggableManager
-from taggit.models import GenericTaggedItemBase, TagBase
+from taggit.models import TaggedItemBase, TagBase
 
 
 def upload_location(instance, filename):
@@ -39,11 +39,8 @@ def upload_location_user_pic(instance, filename):
     return "%s/%s/%s/%s" % (str("users"), slug, date, filename)
 
 
-class LocationTag(TagBase):
-  pass
-class LocationTaggedItem(GenericTaggedItemBase):
-  tag = models.ForeignKey(LocationTag)
-
+class LocationTaggedItem(TaggedItemBase):
+    content_object = models.ForeignKey('CommonGround')
 
 class CommonGround(models.Model):
     """
@@ -55,7 +52,7 @@ class CommonGround(models.Model):
     description = models.TextField(max_length=5000, null=True, blank=True, verbose_name='Kurzbeschreibung')
     conversation = models.OneToOneField('Conversation', blank=True, null=True)
     tags = TaggableManager( blank=True, verbose_name='Tags' )
-    location = TaggableManager(verbose_name='Location', through=LocationTaggedItem, blank=True)
+    location = TaggableManager(verbose_name='Location', through=LocationTaggedItem, related_name='in_locations', blank=True)
     picture = models.ImageField(upload_to=upload_location, null=True, blank=True)
 
     current = models.BooleanField(default=False)
