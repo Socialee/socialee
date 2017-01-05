@@ -86,7 +86,9 @@ class StartProject(BaseView, CreateView):
         if form.is_valid():
             ret = super(StartProject, self).post(request, *args, **kwargs)
             if not self.object.picture:
-                self.object.use_pic(Idea.objects.get(id=kwargs['idea']))
+                idea = Idea.objects.get(id=kwargs['idea'])
+                if idea.picture:
+                    self.object.use_pic(idea)
             tags = form.cleaned_data['tags']
             self.object.tags.add(*tags)
             
