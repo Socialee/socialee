@@ -1,17 +1,16 @@
 {% load sekizai_tags %}
 
-
-<div class="small-10 small-centered section">
-<h3>Lade deine Freunde ein!</h3>
-<p>Erzähle deinen Freunden von deiner Idee oder deinem Projekt. So wird was draus.</p>
-<div id="js-invites">
-  <label>E-Mail-Adresse:</label><input class="js-invite" type="text"/>
+<div class="row align-center mt-5rem">
+  <div class="small-12 columns">
+    <h3>Lade deine Freunde ein!</h3>
+    <p>Die Personen in dieser Liste bekommen eine Einladung zu Socialee und können dann deine Projektseite sehen und kommentieren. Wähle den + Button um noch mehr Freunde einzuladen.</p>
+    <div id="js-invites">
+      <label>E-Mail-Adresse:</label><input class="js-invite" type="text"/>
+    </div>
+    <div id="js-add-invite" class="button button--yellow button--icon"><i class="fa fa-plus" aria-hidden="true"></i></div>
+    <div id="js-inviteAll" class="button button--yellow button--icon">Einladen</div>
+  </div>
 </div>
-<div id="js-add-invite" class="button button--yellow button--icon"><i class="fa fa-plus" aria-hidden="true"></i></div>
-<div id="js-inviteAll" class="button button--yellow button--icon">Einladen</div>
-</div>
-
-
 
 {% addtoblock 'js' %}
 <script type="text/javascript">

@@ -5,9 +5,9 @@
 
 <div class="c-section -solo">
   <div class="row align-center">
-    <div class="small-12 medium-11 large-11">
+    <div class="small-12 medium-11 large-11 columns">
       <div class="c-form">
-        <h6 class="text-center">Hallo {{ request.user.first_name }}!</h6>
+        <h3 class="text-center">Hallo {{ request.user.first_name }}!</h3>
         {% if request.user.first_name %}
           <p class="lead text-center">Hier entsteht eine Seite, die dir Übersicht über deine Ideen und Projekte gibt.</p>  
         {% endif %}
