@@ -5,16 +5,81 @@
 
 <div class="c-section -solo">
   <div class="row align-center">
-    <div class="small-12 medium-11 large-11 columns">
+    <div class="small-12 medium-10 columns">
       <div class="c-form">
-        <h3 class="text-center">Hallo {{ request.user.first_name }}!</h3>
-        {% if request.user.first_name %}
-          <p class="lead text-center">Hier entsteht eine Seite, die dir Übersicht über deine Ideen und Projekte gibt.</p>  
-        {% endif %}
 
-          {% own_idea_list request.user.email as idea_list %}
-          {% include 'snippet_ideas.html' %}
+          <h3>Deine Ideen</h3>
+          <table class="hover">
+            <thead>
+              <tr>
+                <th width="200">Idee</th>
+                <th>Beschreibung</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% own_idea_list request.user.email as idea_list %}
+            {% for idea in idea_list %}
+              <tr>
+                <td><a href="{% url 'idea_detail' idea.pk %}">{{ idea.title }}</a></td>
+                <td>{{ idea.description|truncatechars:150 }}</td>
+              </tr>              
+            {% endfor %}
+            </tbody>
+          </table>
 
+          <h3>Deine Projekte</h3>
+          <table>
+            <thead>
+              <tr>
+                <th width="200">Projekt</th>
+                <th>Beschreibung</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for item in request.user.instances.all %}
+              {% if item.project %}
+                <tr>
+                  <td><a href="{% url 'project_view' item.slug %}">{{ item.project.title }}</a></td>
+                  <td>{{ item.project.title }}</td>
+                </tr>
+               {% endif %} 
+            {% endfor %}
+            </tbody>
+          </table>
+
+         <h3>Projekte, denen du folgst</h3>
+          <table>
+            <thead>
+              <tr>
+                <th width="200">Projekt</th>
+                <th>Beschreibung</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% if request.user.current_instance %} 
+
+            {% for project in request.user.current_instance.inst_follows.all %}
+                <tr>
+                  <td>{{ project.title }}</td>
+                  <td>{{ project.description }}</td>
+                </tr>
+            {% endfor %}
+
+            {% else %}
+
+              {% for project in request.user.follows.all %}
+                <tr>
+                  <td>{{ project.title }}</td>
+                  <td>{{ project.description }}</td>
+                </tr>
+              {% endfor %}
+              
+            {% endif %}
+            </tbody>
+          </table>
+          
+            
+          {% comment %}
           {% if request.user.current_instance %} 
             {% for project in request.user.current_instance.inst_follows.all %}
               {% include "project_card_element.html" %}
@@ -24,14 +89,12 @@
               {% include "project_card_element.html" %}
             {% endfor %}
           {% endif %}
-
-        <p class="text-center"><a class="button button--yellow" href="{% url 'create_idea' %}">Teile eine Idee</a></p>
+          {% endcomment %}
+        
         
      </div>
     </div>
   </div>
 </div>
 
-
-{% endblock content %}
-
+{% endblock %}
