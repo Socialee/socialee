@@ -151,6 +151,37 @@ class ProjectUpdateView(BaseView, UpdateView):
     model = Project
     form_class = EditProjectForm
 
+    def get(self, request, *args, **kwargs):
+        super(ProjectUpdateView, self).get(request, *args, **kwargs)
+        form = self.form_class(initial={
+            'socialee_outputs': ', '.join([str(o.title) for o in self.object.socialee_output.all()]),
+            'socialee_inputs': ', '.join([str(i.title) for i in self.object.socialee_input.all()])
+                    }, instance=self.object)
+        return self.render_to_response(self.get_context_data(
+            object=self.object, form=form))
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(request.POST)
+        if form.is_valid():
+
+            tags = form.cleaned_data['tags']
+            self.object.tags.add(*tags)
+            
+            outputs = form.cleaned_data['socialee_outputs'].split(",")
+            outputs = list(filter(None, outputs))
+            for i in outputs:
+                Output.objects.get_or_create(title=i.strip(), owner=self.object)
+
+            inputs = form.cleaned_data['socialee_inputs'].split(",")
+            inputs = list(filter(None, inputs))
+            for i in inputs:
+                Input.objects.get_or_create(title=i.strip(), owner=self.object)
+
+            return super(ProjectUpdateView, self).post(request, *args, **kwargs)
+        else:
+            return self.form_invalid(form)
+
     def get_context_data(self, **kwargs):
         context = super(ProjectUpdateView, self).get_context_data(**kwargs)
 
@@ -216,9 +247,6 @@ class ProfileUpdateView(BaseView, UpdateView):
 
     def get(self, request, *args, **kwargs):
         super(ProfileUpdateView, self).get(request, *args, **kwargs)
-        self.request.user.instances.update(current=False)
-        self.object.current = True
-        self.object.save()
         form = self.form_class(initial={
             'first_name': request.user.first_name,
             'last_name': request.user.last_name,

@@ -17,19 +17,19 @@
         <p class="text-center mt-2rem">{{ object.description }}</p>
 
         <div class="mt-2rem mb-2rem">
-        {% if request.user == object.created_by %}
-            <div class="text-center">
-            {% if object.profile %}
-              <a class="button hollow" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
+          <div class="text-center">
+          {% if request.user.current_instance.id == object.id %}
+              {% if object.profile %}
+                <a class="button hollow" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
+              {% else %}
+                <a class="button hollow" href="{% url 'project_updateview' slug=project.slug %}"><i class="fa fa-pencil" aria-hidden="true"></i> Projekt bearbeiten</a>
+              {% endif %}
             {% else %}
-              <a class="button hollow" href="{% url 'project_updateview' slug=project.slug %}"><i class="fa fa-pencil" aria-hidden="true"></i> Projekt bearbeiten</a>
-            {% endif %}
-            </div>
-          {% else %}
-            <div class="button hollow follow{{ object.id }}">
-            {% include "snippet_follow.html" with to_follow=object.commonground_ptr %}
-            </div>
-        {% endif %}
+              <div class="button hollow follow{{ object.id }}">
+              {% include "snippet_follow.html" with to_follow=object.commonground_ptr %}
+              </div>
+          {% endif %}
+          </div>
         </div>
 
         {% if object.socialee_output.count or object.socialee_input.count %}

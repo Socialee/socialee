@@ -32,8 +32,8 @@ class StartProjectForm(forms.ModelForm):
         }
 
 class EditProjectForm(forms.ModelForm):
-    socialee_outputs = forms.CharField(required=False)
-    socialee_inputs = forms.CharField(required=False)
+    socialee_outputs = forms.CharField(required=False, label='Was bietet das Projekt?')
+    socialee_inputs = forms.CharField(required=False, label='Was benötigt das Projekt?')
     class Meta:
         model = Project
         fields = ['picture', 'title', 'tagline', 'tags', 'location', 'description', 'video', 'longdescription', 'history', ]
