@@ -167,13 +167,19 @@ class ProjectUpdateView(BaseView, UpdateView):
 
             outputs = form.cleaned_data['socialee_outputs'].split(",")
             outputs = list(filter(None, outputs))
+            outputs = list(map(str.strip, outputs))
+            # delete all that were removed
+            Output.objects.filter(owner=self.object).exclude(title__in=outputs).delete()
             for i in outputs:
-                Output.objects.get_or_create(title=i.strip(), owner=self.object)
+                Output.objects.get_or_create(title=i, owner=self.object)
 
             inputs = form.cleaned_data['socialee_inputs'].split(",")
             inputs = list(filter(None, inputs))
+            inputs = list(map(str.strip, inputs))
+            # delete all that were removed
+            Input.objects.filter(owner=self.object).exclude(title__in=inputs).delete()
             for i in inputs:
-                Input.objects.get_or_create(title=i.strip(), owner=self.object)
+                Input.objects.get_or_create(title=i, owner=self.object)
 
             return super(ProjectUpdateView, self).post(request, *args, **kwargs)
         else:
@@ -265,13 +271,20 @@ class ProfileUpdateView(BaseView, UpdateView):
             
             outputs = form.cleaned_data['socialee_outputs'].split(",")
             outputs = list(filter(None, outputs))
+            outputs = list(map(str.strip, outputs))
+            # delete all that were removed
+            Output.objects.filter(owner=self.object).exclude(title__in=outputs).delete()
             for i in outputs:
-                Output.objects.get_or_create(title=i.strip(), owner=request.user.current_instance)
+                Output.objects.get_or_create(title=i, owner=self.object)
 
             inputs = form.cleaned_data['socialee_inputs'].split(",")
             inputs = list(filter(None, inputs))
+            inputs = list(map(str.strip, inputs))
+            # delete all that were removed
+            Input.objects.filter(owner=self.object).exclude(title__in=inputs).delete()
             for i in inputs:
-                Input.objects.get_or_create(title=i.strip(), owner=request.user.current_instance)
+                Input.objects.get_or_create(title=i, owner=self.object)
+
 
             return super(ProfileUpdateView, self).post(request, *args, **kwargs)
         else:
