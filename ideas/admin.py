@@ -7,16 +7,16 @@ from .models import Idea, Comment
 # Register your models here.
 
 def make_published(modeladmin, request, queryset):
-    queryset.update(active=True)
+    queryset.update(enabled=True)
 make_published.short_description = "Idee veröffentlichen"
 
 def make_unpublished(modeladmin, request, queryset):
-    queryset.update(active=False)
+    queryset.update(enabled=False)
 make_unpublished.short_description = "Veröffentlichung zurücknehmen"
 
 def feature(modeladmin, request, queryset):
     queryset.update(featured=True)
-    queryset.update(active=True)
+    queryset.update(enabled=True)
 feature.short_description = "Idee featuren"
 
 def unfeature(modeladmin, request, queryset):
@@ -27,12 +27,12 @@ class CommentInline(admin.TabularInline):
     model = Comment
 
 class IdeaAdmin(admin.ModelAdmin):
-    list_display = ('was_submitted_recently', 'active', 'featured', 'title', 'private', 'author', 'thumb')
+    list_display = ('was_submitted_recently', 'enabled', 'featured', 'title', 'private', 'author', 'thumb', 'active')
     list_display_links = ['title', 'was_submitted_recently', 'thumb']
-    fields = [('private', 'active', 'featured', 'thumb', 'picture'), ('title', 'author'), 'description', 'likes']
+    fields = [('private', 'enabled', 'featured', 'thumb', 'picture'), ('title', 'author'), 'description', 'likes']
     list_filter = ['subm_date', 'author']
     search_fields = ['title', 'author', 'description']
-    readonly_fields = ('likes', 'thumb', 'private')
+    readonly_fields = ('likes', 'thumb', 'private', 'active')
     inlines = [
         CommentInline,
     ]

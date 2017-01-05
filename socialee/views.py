@@ -102,6 +102,11 @@ class StartProject(BaseView, CreateView):
             for i in inputs:
                 Input.objects.get_or_create(title=i.strip(), owner=request.user.current_instance)
 
+
+            if 'idea' in kwargs:
+               idea = Idea.objects.get(id=kwargs['idea'])
+               idea.active = False
+               idea.save()
             return ret
         else:
             return self.form_invalid(form)

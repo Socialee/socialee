@@ -23,7 +23,8 @@ class Idea(models.Model):
     subm_date = models.DateTimeField(auto_now=True, verbose_name='Datum', null=True, blank=True)
     featured = models.BooleanField(default=False, verbose_name='featured')
     private = models.BooleanField(default=False, verbose_name='Privat ')
-    active = models.BooleanField(default=False, verbose_name='Freigegeben')
+    enabled = models.BooleanField(default=False, verbose_name='Freigegeben')
+    active = models.BooleanField(default=True, verbose_name='Ohne Projekt')
     likes = models.ManyToManyField(User, related_name='likes_ideas')
 
     class Meta:
