@@ -397,6 +397,10 @@ ADMIN_REORDER = (
         'model': 'socialee.Project',
         'label': 'Projekte',
         },
+        # {
+        # 'model': 'socialee.CommonGround',
+        # 'label': 'CommonGround',
+        # },
         )},
 
     # Blog

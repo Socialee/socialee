@@ -58,20 +58,29 @@
             <tbody>
             {% if request.user.current_instance %} 
 
-            {% for project in request.user.current_instance.inst_follows.all %}
-                <tr>
-                  <td>{{ project.title }}</td>
-                  <td>{{ project.description }}</td>
-                </tr>
-            {% endfor %}
+              {% for instance in request.user.current_instance.inst_follows.all %}
+                  <tr>
+                    {% if instance.project %}
+                      <td><a href="{% url 'project_view' instance.slug %}">{{ instance.project.title }}</a></td>
+                    {% elif instance.profile %}
+                      <td><a href="{% url 'profile_view' instance.slug %}">{{ instance.profile.short_name }}</a></td>
+                    {% endif %}
+                    <td>{{ instance.description }}</td>
+                  </tr>
+                
+              {% endfor %}
 
             {% else %}
 
-              {% for project in request.user.follows.all %}
+              {% for instance in request.user.follows.all %}
                 <tr>
-                  <td>{{ project.title }}</td>
-                  <td>{{ project.description }}</td>
-                </tr>
+                    {% if instance.project %}
+                      <td><a href="{% url 'project_view' instance.slug %}">{{ instance.project.title }}</a></td>
+                    {% elif instance.profile %}
+                      <td><a href="{% url 'profile_view' instance.slug %}">{{ instance.profile.short_name }}</a></td>
+                    {% endif %}
+                    <td>{{ instance.description }}</td>
+                  </tr>
               {% endfor %}
               
             {% endif %}
