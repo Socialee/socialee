@@ -138,11 +138,12 @@ class Like(UpdateView):
         instance = Idea.objects.get(id=idea_id)
         comment = True;
         
-        if self.request.user in instance.likes.all():
-            comment = False
-            instance.likes.remove(self.request.user)
-        else:
-            instance.likes.add(self.request.user)
+        if self.request.user.is_authenticated():
+            if self.request.user in instance.likes.all():
+                comment = False
+                instance.likes.remove(self.request.user)
+            else:
+                instance.likes.add(self.request.user)
 
         return render(request, self.template_name, {'idea' : instance, 'do_comment' : comment } )
 
@@ -156,7 +157,8 @@ class Commentate(UpdateView):
 
         instance = Idea.objects.get(id=idea_id)
         
-        Comment.objects.create(to_idea=instance, by_user=self.request.user, message=comment)
+        if request.user.is_authenticated():
+            Comment.objects.create(to_idea=instance, by_user=self.request.user, message=comment)
         
         return render(request, self.template_name, {'idea' : instance } )
 

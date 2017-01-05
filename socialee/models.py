@@ -265,7 +265,6 @@ def pre_save_profile(sender, instance, *args, **kwargs):
 pre_save.connect(pre_save_profile, sender = Profile)
 
 User.current_instance = property(lambda u: u.instances.get(current=True))
-User.creator = property(lambda u: Creator.objects.get_or_create(user=u)[1])
 
 
 
