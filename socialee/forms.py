@@ -41,11 +41,16 @@ class EditProjectForm(forms.ModelForm):
             'title': _('Titel'),
             'tagline': _('Motto, Slogan oder Tagline'),
         }
+        help_texts = {
+            'tags' : _(''),
+            'location': _(''),
+        }
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Socialee'}),
             'tagline': forms.TextInput(attrs={'placeholder': 'Das soziale Netzwerk für Ideen und Projekte'}),
             'description': forms.Textarea(attrs={'rows': 4}),
             'tags': TagWidget(attrs={'placeholder': 'Eine durch Komma getrennte Schlagwortliste.'}),
+            'location': TagWidget(attrs={'placeholder': 'Eine durch Komma getrennte Orteliste.'}),
         }
 
 

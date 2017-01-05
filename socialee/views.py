@@ -165,9 +165,6 @@ class ProjectUpdateView(BaseView, UpdateView):
         form = self.form_class(request.POST)
         if form.is_valid():
 
-            tags = form.cleaned_data['tags']
-            self.object.tags.add(*tags)
-            
             outputs = form.cleaned_data['socialee_outputs'].split(",")
             outputs = list(filter(None, outputs))
             for i in outputs:
@@ -265,9 +262,6 @@ class ProfileUpdateView(BaseView, UpdateView):
             request.user.last_name = form.cleaned_data['last_name']
             #request.user.email = form.cleaned_data['email']
             request.user.save()
-
-            tags = form.cleaned_data['tags']
-            self.object.tags.add(*tags)
             
             outputs = form.cleaned_data['socialee_outputs'].split(",")
             outputs = list(filter(None, outputs))

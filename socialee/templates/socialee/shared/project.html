@@ -45,8 +45,7 @@
           </div>
         </div>    
 
-        {% elif request.user in object.manager.all %}
-        <a href="{% url 'project_updateview' slug=project.slug %}"><p class="text-center lead">Input &amp; Output bearbeiten</p></a>
+        {# {% elif request.user in object.managers.all %} <a href="{% url 'project_updateview' slug=project.slug %}"><p class="text-center lead">Input &amp; Output bearbeiten</p></a> #}
         {% endif %}
 
 
