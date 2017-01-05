@@ -40,7 +40,7 @@
 
           </div>
 
-          {% if request.user.is_superuser %}
+          {% if request.user.is_superuser and idea.active %}
           
           <div class="row align-center">
             <div class="small-12 columns text-center">
