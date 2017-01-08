@@ -1,19 +1,12 @@
-.masonry-wrapper {
-	max-height: 200px;
+.masonry-layout-ideas {
+	box-sizing: border-box;
+	column-count: 3;
+	column-gap: rem-calc(10px);
+	position: relative;
+	@include breakpoint(small only){
+		column-count: 1;
+	}
 }
-
-.masonry-item {
-	// @include flex;
-	// @include flex-direction(column);
-	padding: 0;
-}
-
-.masonry-item-nested {
-	flex-basis: 50%;
-}
-
-
-/////////////////////////////////
 .masonry-layout {
 	box-sizing: border-box;
 	column-count: 4;
