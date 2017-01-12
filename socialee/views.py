@@ -367,7 +367,6 @@ class Comment(BaseView, UpdateView):
         if reply_id:
             reply = Message.objects.get(id=reply_id)
             message = Message.objects.create(reply_to=reply, by_instance=by_instance, by_user=by_user, message=comment )
-            message.save()
         else:
             instance = CommonGround.objects.get(id=instance_id)
             conv, created = Conversation.objects.get_or_create(slug=instance.slug)
@@ -375,7 +374,6 @@ class Comment(BaseView, UpdateView):
                 instance.conversation = conv
                 instance.save()
             message = Message.objects.create(conversation=conv, by_instance=by_instance, by_user=by_user, message=comment )
-            message.save()
             
 
         return render(request, self.template_name, {'comment' : message} )
