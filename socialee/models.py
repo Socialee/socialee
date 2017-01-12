@@ -50,7 +50,7 @@ class CommonGround(models.Model):
     created_by = models.ForeignKey(User, null=True, related_name='instances')
     tagline = models.CharField(max_length=140, null= True, blank=True, verbose_name="Tagline")
     description = models.TextField(max_length=5000, null=True, blank=True, verbose_name='Kurzbeschreibung')
-    conversation = models.OneToOneField('Conversation', blank=True, null=True)
+    conversation = models.OneToOneField('Conversation', blank=True, null=True, related_name='instance')
     tags = TaggableManager( blank=True, verbose_name='Tags' )
     location = TaggableManager(verbose_name='Location', through=LocationTaggedItem, related_name='in_locations', blank=True)
     picture = models.ImageField(upload_to=upload_location, null=True, blank=True)
@@ -73,6 +73,14 @@ class CommonGround(models.Model):
             return self.profile.short_name()
         elif hasattr(self, 'project'):
             return self.project.short_name()
+        else:
+            return self.slug
+
+    def get_absolute_url(self):
+        if hasattr(self, 'profile'):
+            return self.profile.get_absolute_url()
+        elif hasattr(self, 'project'):
+            return self.project.get_absolute_url()
         else:
             return self.slug
 
@@ -260,6 +268,20 @@ def pre_save_profile(sender, instance, *args, **kwargs):
     instance.slug = instance.created_by.username
 
 pre_save.connect(pre_save_profile, sender = Profile)
+
+
+# def post_save_message(sender, instance, created, **kwargs):
+#     # created
+#     if created:
+#         recipient = instance.conversation.instance.created_by
+#         creator = instance.by_user
+#         if instance.by_instance:
+#             creator = instance.by_instance
+
+#         notify.send(creator, recipient=recipient, action_object=instance, target=instance.conversation.instance, verb='Neuer Komentar', description=instance.message)
+
+# post_save.connect(post_save_message, sender=Message)
+
 
 User.current_instance = property(lambda u: u.instances.get(current=True))
 

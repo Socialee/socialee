@@ -359,14 +359,25 @@ class Comment(BaseView, UpdateView):
         reply_id = request.POST.get('reply_id')
         by_instance = None
         by_user = None
+
+        #for notification
+        actor = None
+        action_object = None
+        target = None
+        recipient = None
+
         if self.request.user.instances.filter(current=True):
             by_instance = self.request.user.current_instance
+            actor = by_instance.created_by
         else:
             by_user = self.request.user
+            actor = by_user
 
         if reply_id:
             reply = Message.objects.get(id=reply_id)
             message = Message.objects.create(reply_to=reply, by_instance=by_instance, by_user=by_user, message=comment )
+            action_object = message
+            target = reply
         else:
             instance = CommonGround.objects.get(id=instance_id)
             conv, created = Conversation.objects.get_or_create(slug=instance.slug)
@@ -374,7 +385,10 @@ class Comment(BaseView, UpdateView):
                 instance.conversation = conv
                 instance.save()
             message = Message.objects.create(conversation=conv, by_instance=by_instance, by_user=by_user, message=comment )
-            
+            action_object = message
+            target = instance
+
+        action.send(actor, action_object=instance, target=instance, verb='posted', description=comment, recipient=recipient)
 
         return render(request, self.template_name, {'comment' : message} )
 

@@ -1,5 +1,5 @@
 {% extends "offcanvas.html" %}
-{% load static sekizai_tags idea_tags %}
+{% load static sekizai_tags idea_tags activity_tags %}
 
 {% block content %}
 
@@ -8,6 +8,25 @@
     <div class="small-12 medium-10 columns">
       <div class="c-form">
 
+        <h3>Deine Ereignisse</h3>
+        {% activity_stream 'user' request.user %}
+          <table class="hover">
+            <thead>
+              <tr>
+                <th width="200">Aktion</th>
+                <th>Beschreibung</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for notification in stream %}
+              <tr>
+                <td><a href="{{ notification.target.get_absolute_url }}">{{ notification.actor }} {{ notification.verb }} {{ notification.target }}</a></td>
+                <td>{{ notification.description }}</td>
+              </tr>              
+            {% endfor %}
+            </tbody>
+          </table>
+          
           <h3>Deine Ideen</h3>
           <table class="hover">
             <thead>
