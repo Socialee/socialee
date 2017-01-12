@@ -1,10 +1,10 @@
 -r base.txt
 -r testing.txt
-click==6.6                # via pip-tools
+click==6.7                # via pip-tools
 django-extensions==1.7.5
 docutils==0.13.1
 first==2.0.1              # via pip-tools
-livereload==2.5.0
+livereload==2.5.1
 pip-tools==1.8.0
 six==1.10.0               # via django-extensions, livereload, pip-tools
 tornado==4.4.2            # via livereload

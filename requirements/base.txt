@@ -1,11 +1,13 @@
-beautifulsoup4==4.5.1     # via django-blog-zinnia
-Collectfast==0.4.0
+beautifulsoup4==4.5.3     # via django-blog-zinnia
+boto3==1.4.3
+botocore==1.4.93          # via boto3, s3transfer
+Collectfast==0.5.1
 defusedxml==0.4.1         # via python3-openid
-django-allauth==0.29.0
+django-allauth==0.30.0
 django-app-namespace-template-loader==0.4.1
 django-blog-zinnia==0.17
 django-braces==1.10.0     # via django-invitations
-django-ckeditor==5.1.1    # via zinnia-wysiwyg-ckeditor
+django-ckeditor==5.2.1    # via zinnia-wysiwyg-ckeditor
 django-contrib-comments==1.7.3  # via django-blog-zinnia
 django-debug-toolbar==1.6
 django-embed-video==1.1.0
@@ -18,21 +20,25 @@ django-storages==1.5.1
 django-tagging==0.4.5     # via django-blog-zinnia
 django-taggit==0.21.3
 django-xmlrpc==0.1.7      # via django-blog-zinnia
-Django==1.9.9             # via collectfast, django-allauth, django-ckeditor, django-contrib-comments, django-debug-toolbar, django-embed-video, django-environ, django-modeladmin-reorder
+Django==1.10.5            # via collectfast, django-allauth, django-ckeditor, django-contrib-comments, django-debug-toolbar, django-embed-video, django-environ, django-modeladmin-reorder
 docopt==0.4.0             # via mailchimp
+docutils==0.13.1          # via botocore
+jmespath==0.9.0           # via boto3, botocore
 mailchimp==2.0.9
 mots-vides==2015.5.11     # via django-blog-zinnia
 oauthlib==2.0.1           # via requests-oauthlib
-Pillow==3.4.2             # via django-blog-zinnia
+olefile==0.44             # via pillow
+Pillow==4.0.0             # via django-blog-zinnia
 psycopg2==2.6.2
 pyparsing==2.1.10         # via django-blog-zinnia
-python-dateutil==2.6.0    # via collectfast
+python-dateutil==2.6.0    # via botocore
 python3-openid==3.0.10    # via django-allauth
 pytz==2016.10
 regex==2016.12.27         # via django-blog-zinnia
 requests-oauthlib==0.7.0  # via django-allauth
 requests==2.12.4          # via django-allauth, django-embed-video, mailchimp, requests-oauthlib
+s3transfer==0.1.10        # via boto3
 six==1.10.0               # via django-app-namespace-template-loader, django-environ, python-dateutil
 sqlparse==0.2.2           # via django-debug-toolbar
-whitenoise==3.2.2
+whitenoise==3.2.3
 zinnia-wysiwyg-ckeditor==1.3

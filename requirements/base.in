@@ -1,5 +1,5 @@
 # Base requirements.
-Django == 1.9.9
+Django
 Pillow
 
 pytz
@@ -23,6 +23,7 @@ mailchimp
 
 zinnia-wysiwyg-ckeditor
 django-storages
+boto3
 Collectfast
 whitenoise
 
