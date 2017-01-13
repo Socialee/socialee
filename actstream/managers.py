@@ -101,8 +101,9 @@ class ActionManager(GFKManager):
             object_content_type = ContentType.objects.get_for_model(obj)
             actors_by_content_type[object_content_type.id].append(obj.pk)
 
+        user_content_type = ContentType.objects.get_for_model(obj).pk
         follow_gfks = get_model('actstream', 'follow').objects.filter(
-            user=obj).values_list('content_type_id',
+            user_content_type=user_content_type, user_object_id=obj.pk).values_list('content_type_id',
                                   'object_id', 'actor_only')
 
         for content_type_id, object_id, actor_only in follow_gfks.iterator():
@@ -146,10 +147,9 @@ class FollowManager(GFKManager):
         """
         Check if a user is following an instance.
         """
-        if not user or user.is_anonymous():
-            return False
         queryset = self.for_object(instance)
-        return queryset.filter(user=user).exists()
+        user_content_type = ContentType.objects.get_for_model(user).pk
+        return queryset.filter(user_content_type=user_content_type, user_object_id=user.pk).exists()
 
     def followers_qs(self, actor):
         """
@@ -159,7 +159,7 @@ class FollowManager(GFKManager):
         return self.filter(
             content_type=ContentType.objects.get_for_model(actor),
             object_id=actor.pk
-        ).select_related('user')
+        ).fetch_generic_relations('user')
 
     def followers(self, actor):
         """
@@ -173,7 +173,8 @@ class FollowManager(GFKManager):
         Items in the list can be of any model unless a list of restricted models are passed.
         Eg following(user, User) will only return users following the given user
         """
-        qs = self.filter(user=user)
+        user_content_type = ContentType.objects.get_for_model(user).pk
+        qs = self.filter(user_content_type=user_content_type, user_object_id=user.pk)
         ctype_filters = Q()
         for model in models:
             check(model)

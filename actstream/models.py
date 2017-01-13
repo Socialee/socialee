@@ -26,7 +26,10 @@ class Follow(models.Model):
     """
     Lets a user follow the activities of any specific actor
     """
-    user = models.ForeignKey(user_model_label, db_index=True)
+    user_content_type = models.ForeignKey(ContentType, related_name='user',
+                                           db_index=True)
+    user_object_id = models.CharField(max_length=255, db_index=True)
+    user = generic.GenericForeignKey('user_content_type', 'user_object_id')
 
     content_type = models.ForeignKey(ContentType, db_index=True)
     object_id = models.CharField(max_length=255, db_index=True)
@@ -37,7 +40,7 @@ class Follow(models.Model):
     objects = FollowManager()
 
     class Meta:
-        unique_together = ('user', 'content_type', 'object_id')
+        unique_together = ('user_content_type', 'user_object_id', 'content_type', 'object_id')
 
     def __str__(self):
         return '%s -> %s' % (self.user, self.follow_object)

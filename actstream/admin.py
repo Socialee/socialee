@@ -19,9 +19,9 @@ class ActionAdmin(ModelAdmin):
 
 class FollowAdmin(ModelAdmin):
     list_display = ('__str__', 'user', 'follow_object', 'actor_only', 'started')
-    list_editable = ('user',)
-    list_filter = ('user', 'started',)
-    raw_id_fields = ('user', 'content_type')
+    #list_editable = ('user',)
+    list_filter = ('started',)
+    raw_id_fields = ('user_content_type', 'content_type')
 
 
 admin.site.register(models.Action, ActionAdmin)
