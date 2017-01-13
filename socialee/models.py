@@ -56,8 +56,8 @@ class CommonGround(models.Model):
     picture = models.ImageField(upload_to=upload_location, null=True, blank=True)
 
     current = models.BooleanField(default=False)
-    follower = models.ManyToManyField(User, related_name='follows')
-    inst_follower = models.ManyToManyField('CommonGround', related_name='inst_follows')
+    #follower = models.ManyToManyField(User, related_name='follows')
+    #inst_follower = models.ManyToManyField('CommonGround', related_name='inst_follows')
     #liked_messages = models.ManyToManyField('Message', related_name='message_likes')
 
     def long_name(self):

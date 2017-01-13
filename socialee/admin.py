@@ -27,18 +27,12 @@ class OutputInline(admin.TabularInline):
         models.TextField: {'widget': Textarea(attrs={'rows':1, 'cols':50})},
     }
 
-class FollowsInline(admin.TabularInline):
-    model = CommonGround.inst_follower.through
-    fk_name = "to_commonground"
-    extra = 1
-
 
 class ProjectAdmin(AdminVideoMixin, admin.ModelAdmin):
     model = Project
     list_display = ['title', 'created_by']
     fields = ('picture', ('title', 'tagline'), 'description', 'location', 'tags', 'video', 'longdescription', 'history', 'managers')
     inlines = [
-        FollowsInline,
         OutputInline,
         InputInline,
         ]
@@ -49,17 +43,8 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ['created_by', 'user_email', 'user_full_name']
     fields = (('created_by', 'picture'), 'tags', 'tagline', 'description', ('phone', 'plz', 'newsletter'))
     inlines = [
-        FollowsInline,
         OutputInline,
         InputInline,
-        ]
-
-class CommonGroundAdmin(admin.ModelAdmin):
-    model = CommonGround
-    list_display = ['slug']
-    fields = (('created_by', 'picture'), 'tags', 'tagline', 'description')
-    inlines = [
-        FollowsInline,
         ]
 
 

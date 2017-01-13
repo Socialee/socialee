@@ -19,6 +19,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import SingleObjectMixin
 from django.dispatch import receiver
 
+from actstream import action
+from actstream.actions import follow, unfollow
+from actstream.models import following
 from ideas.models import Idea
 from .models import Project, Input, Output, Profile, CommonGround, Conversation, Message
 from .forms import *
@@ -311,12 +314,12 @@ class ProfileView(BaseView, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
-        follower = self.object.inst_follower.all()
-        friends = None
-        if self.request.user.instances.filter(current=True):
-            friends = self.object.inst_follows.filter( id__in=follower ).exclude(id=self.request.user.current_instance.id)
+        # follower = self.object.inst_follower.all()
+        # friends = None
+        # if self.request.user.instances.filter(current=True):
+        #     friends = self.object.inst_follows.filter( id__in=follower ).exclude(id=self.request.user.current_instance.id)
 
-        context['friends'] = friends
+        # context['friends'] = friends
 
         return context
 
@@ -333,20 +336,16 @@ class Follow(BaseView, CreateView):
     def post(self, request, *args, **kwargs):
         instance_id = request.POST.get('instance_id')
 
-        instance = CommonGround.objects.get(id=instance_id)
-        if self.request.user.instances.filter(current=True):
-            if instance in self.request.user.current_instance.inst_follows.all():
-                self.request.user.current_instance.inst_follows.remove(instance)
-            else:
-                self.request.user.current_instance.inst_follows.add(instance)
-        else:
-            if instance in self.request.user.follows.all():
-                self.request.user.follows.remove(instance)
-            else:
-                self.request.user.follows.add(instance)
-        
+        to_follow = CommonGround.objects.get(id=instance_id)
+        follower = self.request.user
 
-        return render(request, self.template_name, {'to_follow' : instance} )
+        if to_follow in following(follower):
+            #unfollow
+            unfollow(follower, to_follow)
+        else:
+            follow(follower, to_follow, actor_only=False)
+
+        return render(request, self.template_name, {'to_follow' : to_follow } )
 
 
 
