@@ -8,27 +8,31 @@
 
         <h2 class="text-center">{{ object.long_name }}</h2>
         <h5 class="text-center">{{ object.tagline }}</h5>
-        <div class="row align-center columns mt-1rem mb-2rem">
-         {% for tag in object.location.all %}
-           <a class="tag tag--green js-sized"><i class="fi-x-circle"></i>{{ tag }}</a>
-        {% endfor %} 
-        {% for tag in object.tags.all %}
-          <a class="tag tag--orange js-sized"><i class="fi-x-circle"></i>{{ tag }}</a>
-        {% endfor %}
-        {# <a class="tag tag--white tag--more js-sized-more"><i class="fa fa-plus"></i>  Mehr</a> #}
-        </div>
+        
+        {% if object.tags|length >= 1 or object.location|length >= 1 %}
+          <div class="row align-center columns mt-1rem mb-2rem">
+           {% for tag in object.location.all %}
+             <a class="tag tag--green js-sized"><i class="fi-x-circle"></i>{{ tag }}</a>
+          {% endfor %} 
+          {% for tag in object.tags.all %}
+            <a class="tag tag--orange js-sized"><i class="fi-x-circle"></i>{{ tag }}</a>
+          {% endfor %}
+          {# <a class="tag tag--white tag--more js-sized-more"><i class="fa fa-plus"></i>  Mehr</a> #}
+          </div>
+        {% endif %}
+
         <p class="text-center mt-2rem">{{ object.description }}</p>
 
         <div class="mt-2rem mb-2rem">
           <div class="text-center">
-          {% if request.user.current_instance.id == object.id %}
+          {% if user == object.created_by %}
               {% if object.profile %}
                 <a class="button hollow" href="{% url 'profile_updateview' request.user %}"><i class="fa fa-pencil" aria-hidden="true"></i> Profil bearbeiten</a>
               {% else %}
                 <a class="button hollow" href="{% url 'project_updateview' slug=project.slug %}"><i class="fa fa-pencil" aria-hidden="true"></i> Projekt bearbeiten</a>
               {% endif %}
             {% else %}
-              <div class="button hollow follow{{ object.id }}">
+              <div class="follow{{ object.id }}">
               {% include "snippet_follow.html" with to_follow=object.commonground_ptr %}
               </div>
           {% endif %}

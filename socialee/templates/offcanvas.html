@@ -8,10 +8,18 @@
       {% if not request.user.is_authenticated %}
       <a class="button hollow" href="{% url 'register' %}">Registrieren</a>
       {% else %}
-      <li><p>Dein Profil</p></li>
+      <li class="oc-title">Dein Profil</li>
       <li><a href="{% url 'welcome' request.user %}">Deine Übersicht</a></li>
       <li><a href="{% url 'account_change_password' %}">Passwort ändern</a></li>
       <li><a href="{% url 'account_logout' %}">Abmelden</a></li>
+
+      <li class="oc-title">Deine Projekte</li>
+      {% for item in request.user.instances.all %}
+        {% if item.project %}
+          <li><a href="{% url 'project_view' item.slug %}">{{ item.project.title }}</a></li>    
+        {% endif %}
+      {% endfor %}
+      
       {% endif %}
 
       {% if request.user.is_staff %}

@@ -1,5 +1,8 @@
 {% load static socialee_filters embed_video_tags %}
+
 <div class="tabs-panel is-active" id="panel1">
+
+
   {% if object.video %}
     <h3>{{ object.title }} - das Video</h3>
     <div class="flex-video widescreen">
@@ -9,28 +12,27 @@
     </div>
   {% elif request.user in object.managers.all %}
     <h3>{{ object.title }} - das Video</h3>
-    <a href="{% url 'project_updateview' slug=project.slug %}"><p>Hier ist Platz für Dein Video.</p></a>
+    <a href="{% url 'project_updateview' slug=project.slug %}"><p>Zeig uns Dein Projekt-Video!</p></a>
   {% endif %}
   {% if object.longdescription %}
     <h3>Worum geht es in diesem Projekt?</h3>    
     <p>{{ object.longdescription }}</p>
   {% elif request.user in object.managers.all %}
     <h3>Worum geht es in diesem Projekt?</h3>
-    <a href="{% url 'project_updateview' slug=project.slug %}"><p>Hier ist Platz für eine Ausführliche Beschreibung.</p></a>
+    <a href="{% url 'project_updateview' slug=project.slug %}"><p>Hier ist Platz für eine Ausführliche Beschreibung des Projekts.</p></a>
   {% endif %}
   {% if object.history %}
   <h3>Wie ist dieses Projekt enstanden?</h3>
   <p>{{ object.history }}</p>
   {% elif request.user in object.managers.all %}
   <h3>Wie ist dieses Projekt enstanden?</h3>
-  <a href="{% url 'project_updateview' slug=project.slug %}"><p>Hier kannst Du erzählen, wie das Projekt {{ object.title }} entstanden ist.</p></a>
+  <a href="{% url 'project_updateview' slug=project.slug %}"><p>Erzähle, wie das Projekt {{ object.title }} entstanden ist.</p></a>
   {% endif %}
    
   {# add a section to inform user that no information was posted yet #}
   {% if not object.video and not object.longdescription and not object.history %}
     {% if not request.user in object.managers.all %}
-    <h3>Dieses Projekt hat noch keine Informationen.</h3>
-    <a href="#panel2"><p>Schreib den Verantwortlichen.</p></a>
+      <h3 class="subheader text-center">Dieses Projekt hat bisher keine weiteren Infos für dich.</h3>
     {% endif %}
   {% endif %}
   </div>
