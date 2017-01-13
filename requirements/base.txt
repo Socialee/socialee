@@ -5,7 +5,7 @@ Collectfast==0.5.1
 defusedxml==0.4.1         # via python3-openid
 django-allauth==0.30.0
 django-app-namespace-template-loader==0.4.1
-django-blog-zinnia==0.17
+django-blog-zinnia==0.18.1
 django-braces==1.10.0     # via django-invitations
 django-ckeditor==5.2.1    # via zinnia-wysiwyg-ckeditor
 django-contrib-comments==1.7.3  # via django-blog-zinnia
@@ -13,6 +13,7 @@ django-debug-toolbar==1.6
 django-embed-video==1.1.0
 django-environ==0.4.1
 django-invitations==1.8
+django-jsonfield==1.0.1
 django-modeladmin-reorder==0.2
 django-mptt==0.8.7        # via django-blog-zinnia
 django-simple-auth==0.1.5
@@ -34,7 +35,7 @@ pyparsing==2.1.10         # via django-blog-zinnia
 python-dateutil==2.6.0    # via botocore
 python3-openid==3.0.10    # via django-allauth
 pytz==2016.10
-regex==2016.12.27         # via django-blog-zinnia
+regex==2017.1.12          # via django-blog-zinnia
 requests-oauthlib==0.7.0  # via django-allauth
 requests==2.12.4          # via django-allauth, django-embed-video, mailchimp, requests-oauthlib
 s3transfer==0.1.10        # via boto3
