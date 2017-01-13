@@ -42,6 +42,7 @@ urlpatterns = [
     url(r'^profile/(?P<slug>[\w.@+-]+)/edit/$', login_required(views.ProfileUpdateView.as_view()), name='profile_updateview'), # ID 201
 
     url(r'^invitations/', include('invitations.urls', namespace='invitations')),
+    url(r'^activity/', include('actstream.urls')),
 
     #face view for user interagtion
     #url(r'^profile/(?P<slug>[\w.@+-]+)/socialeebhaber/$', login_required(views.Socialeebhaber.as_view()), name='socialeebhaber'),

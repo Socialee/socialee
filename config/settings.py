@@ -86,6 +86,8 @@ INSTALLED_APPS = (
     'quotes.apps.QuotesConfig',
     'socialee.apps.SocialeeConfig',
     'register.apps.RegisterConfig',
+
+    'actstream.apps.ActstreamConfig', #this has to be last
 )
 
 if DEBUG:
@@ -263,6 +265,10 @@ ACCOUNT_ADAPTER = "register.adapter.AdvancedMailAccountAdapter"
 
 INVITATIONS_ALLOW_JSON_INVITES = True
 INVITATIONS_SIGNUP_REDIRECT = 'register'
+
+ACTSTREAM_SETTINGS = {
+    'USE_JSONFIELD': True,
+}
 
 
 # Static files (CSS, JavaScript, Images)
