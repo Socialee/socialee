@@ -9,7 +9,7 @@ from django import forms
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, UpdateView
-from django.views.generic import FormView, DetailView
+from django.views.generic import FormView, DetailView, TemplateView
 from django.core.validators import validate_email
 from django.template.loader import render_to_string
 from django.utils.decorators import method_decorator
@@ -129,8 +129,9 @@ def idea_list(request):
     return render(request, "idea_list.html", context)
 
 
-class Like(UpdateView):
+class Like(TemplateView):
     template_name = 'idea_card.html'
+    http_method_names = ['post']
 
     def post(self, request, *args, **kwargs):
         idea_id = request.POST.get('idea_id')
@@ -148,8 +149,9 @@ class Like(UpdateView):
         return render(request, self.template_name, {'idea' : instance, 'do_comment' : comment } )
 
 
-class Commentate(UpdateView):
+class Commentate(TemplateView):
     template_name = 'idea_card.html'
+    http_method_names = ['post']
 
     def post(self, request, *args, **kwargs):
         idea_id = request.POST.get('idea_id')

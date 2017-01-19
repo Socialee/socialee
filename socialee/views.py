@@ -14,7 +14,7 @@ from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import TemplateView, FormView, ListView, DetailView
+from django.views.generic import TemplateView, FormView, ListView, DetailView, View
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import SingleObjectMixin
 from django.dispatch import receiver
@@ -330,8 +330,9 @@ class WelcomePage(ListView):
     model = Idea
 
 
-class Follow(BaseView, CreateView):
+class Follow(BaseView, TemplateView):
     template_name = 'snippet_follow.html'
+    http_method_names = ['post']
 
     def post(self, request, *args, **kwargs):
         instance_id = request.POST.get('instance_id')
@@ -349,8 +350,9 @@ class Follow(BaseView, CreateView):
 
 
 
-class Comment(BaseView, UpdateView):
+class Comment(BaseView, TemplateView):
     template_name = 'snippet_comment.html'
+    http_method_names = ['post']
 
     def post(self, request, *args, **kwargs):
         comment = request.POST.get('comment')
@@ -391,7 +393,8 @@ class Comment(BaseView, UpdateView):
 
         return render(request, self.template_name, {'comment' : message} )
 
-class ActAs(BaseView, UpdateView):
+class ActAs(BaseView, View):
+    http_method_names = ['post']
 
     def post(self, request, *args, **kwargs):
         instance_slug = request.POST.get('instance_slug')
