@@ -129,6 +129,7 @@ def idea_list(request):
     return render(request, "idea_list.html", context)
 
 
+
 class Like(TemplateView):
     template_name = 'idea_card.html'
     http_method_names = ['post']
@@ -146,6 +147,7 @@ class Like(TemplateView):
             else:
                 instance.likes.add(self.request.user)
 
+
         return render(request, self.template_name, {'idea' : instance, 'do_comment' : comment } )
 
 
@@ -161,8 +163,19 @@ class Commentate(TemplateView):
         
         if request.user.is_authenticated():
             Comment.objects.create(to_idea=instance, by_user=self.request.user, message=comment)
+            self.send_mail_to_creator(email=instance.author, context={'comment': comment, 'idea': instance.title })
         
         return render(request, self.template_name, {'idea' : instance } )
+
+    def send_mail_to_creator(self, email, context):
+        message_to_creator = render_to_string('email/email_new_comment.txt', context=context)
+        send_mail(
+            'Deine Idee auf Socialee!',
+            message_to_creator,
+            settings.SERVER_EMAIL,
+            [email,],
+            fail_silently=True,
+        )
 
 
 class IdeaDetailView(DetailView):
