@@ -333,7 +333,7 @@ $card-divider-background: $light-gray;
 $card-border: 0px solid $light-gray;
 $card-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
 $card-border-radius: $global-radius;
-$card-padding: $global-padding;
+$card-padding: rem-calc(20px) rem-calc(20px) rem-calc(38px) rem-calc(20px);
 $card-margin: 0px;
 
 // 15. Close Button

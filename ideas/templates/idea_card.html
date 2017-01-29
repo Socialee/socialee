@@ -8,7 +8,7 @@
         <a href="{% url 'idea_detail' idea.pk %}"><img src="{{ MEDIA_URL }}{{ idea.picture }}"></a>
         <div class="card-section">
           <h4 class="text-center">{{ idea.title }}</h4>
-          <p>{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
+          <p class="text-center">{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
         </div>
     {% elif not idea.title and not idea.description %}<!--nur Bild-->
         <a href="{% url 'idea_detail' idea.pk %}"><img src="{{ MEDIA_URL }}{{ idea.picture }}"></a>
@@ -23,17 +23,19 @@
             </div>
           </a>
           <div class="card-section">
-          <p>{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
+          <p class="text-center">{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
         </div>
     {% endif %}
     {% if idea.title and not idea.description %}<!-- nur Titel -->
-      <div class="green-card" expand_id="{{ idea.id }}">
-        <h3>{{ idea.title }}</h3>
-      </div>
+      <a href="{% url 'idea_detail' idea.pk %}">
+        <div class="green-card">
+          <h4 class="text-center">{{ idea.title }}</h4>
+        </div>
+      </a>
     {% endif %}
     {% if idea.description and not idea.title %}<!-- nur Beschreibung -->
-      <div class="green-card" expand_id="{{ idea.id }}">
-        <p>{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
+      <div class="green-card">
+        <p class="text-center">{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
       </div>
     {% endif %}
 
