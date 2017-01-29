@@ -41,11 +41,13 @@
 
 {% endif %} 
 
-{% if request.user.email == idea.author %}
-  <div class="card-divider">
-    <h6 class="text-center">Deine Idee! Du kannst sie <a href="{% url 'idea_edit' idea.pk %}">bearbeiten!</a></h6>
-  </div>
-{% endif %} 
+{% if request.user.is_authenticated %}
+  {% if request.user.email == idea.author %}
+    <div class="card-divider">
+      <h6 class="text-center">Deine Idee! Du kannst sie <a href="{% url 'idea_edit' idea.pk %}">bearbeiten!</a></h6>
+    </div>
+  {% endif %} 
+{% endif %}
 
 </div>
 
