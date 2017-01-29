@@ -1,140 +1,105 @@
-.idea-gradient {
-  position: absolute;
-  width: 100%;
-  height: 4rem;
-  background: linear-gradient(#302F35, rgba(0,0,0,0));
-}
 
-.card-icons {
-  visibility: hidden;
-  position: relative;
-  z-index: 100;
-  color: $orange;
 
-  .expand-icon {
-    margin: 0.5rem;
-    position: absolute;
-    left: 0;
-    &:hover {
-    color: $hover-color;
-    cursor: pointer;
-    }
-  }
+// .grid {
+//   padding-top: 3rem;
+//   padding-bottom: 3rem;
+//   margin: 0 auto;
+// }
 
-  .turn-icon {
-    margin: 0.5rem;
-    position: absolute;
-    right: 0;
-    &:hover {
-    color: $hover-color;
-    cursor: pointer;
-    }
-  }
-  @include breakpoint(small only) {
-    visibility: visible;
-  }
-}
-
-.grid {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  margin: 0 auto;
-}
-
-/* item is invisible, but used for layout */
-.grid-sizer,
-.grid-item {
-  width: 31%;
-  @include breakpoint(medium only) {
-    width: 48%;
-  }
-  @include breakpoint(small only) {
-    width: 100%;
-  }
-}
-.gutter-sizer {
-  width: 3.5%;
-  @include breakpoint(medium only) {
-    width: 4%;
-  }
-  @include breakpoint(small only) {
-    width: 0%;
-  }
-}
+// /* item is invisible, but used for layout */
+// .grid-sizer,
+// .grid-item {
+//   width: 31%;
+//   @include breakpoint(medium only) {
+//     width: 48%;
+//   }
+//   @include breakpoint(small only) {
+//     width: 100%;
+//   }
+// }
+// .gutter-sizer {
+//   width: 3.5%;
+//   @include breakpoint(medium only) {
+//     width: 4%;
+//   }
+//   @include breakpoint(small only) {
+//     width: 0%;
+//   }
+// }
 
 /* both item and item content change size */
-.grid-item.is-expanded,
-.grid-item.is-expanded .idea-card {
-  width: 65.5%;
-  z-index: 2;
-  @include breakpoint(medium only) {
-  width: 100%;
-  z-index: 2;
-  }
-  @include breakpoint(small only) {
-  width: 100%;
-  z-index: 2;
-  }
-}
+// .grid-item.is-expanded,
+// .grid-item.is-expanded .idea-card {
+//   width: 65.5%;
+//   z-index: 2;
+//   @include breakpoint(medium only) {
+//   width: 100%;
+//   z-index: 2;
+//   }
+//   @include breakpoint(small only) {
+//   width: 100%;
+//   z-index: 2;
+//   }
+// }
 
-.idea-card-front, .idea-card-back {
-  height:auto;
-  text-align: center;
-  background-color: white;
-  border-radius: 3px;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08);
-  margin-bottom: 3rem;
-  transition: box-shadow 0.3s;
-  -webkit-transition: width 0.2s; /* Safari */
-    transition: width 0.2s;
+// .idea-card-front, .idea-card-back {
+//   height:auto;
+//   text-align: center;
+//   background-color: white;
+//   border-radius: 3px;
+//   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.08);
+//   margin-bottom: 3rem;
+//   transition: box-shadow 0.3s;
+//   -webkit-transition: width 0.2s; /* Safari */
+//     transition: width 0.2s;
 
-  .idea-image img {
-    min-height: 200px;
-    padding: 0;
-      @include breakpoint(small only) {
-      min-height: 100px;
-    }
-  }
+//   .idea-image img {
+//     min-height: 200px;
+//     padding: 0;
+//       @include breakpoint(small only) {
+//       min-height: 100px;
+//     }
+//   }
 
-  .idea-details {
-    padding: 0.9rem;
-    &:hover {
-      cursor: default;
-    }
-  }
+//   .idea-details {
+//     padding: 0.9rem;
+//     &:hover {
+//       cursor: default;
+//     }
+//   }
 
-  .idea-heart {
-    color: $orange;
-    position: relative;
-    bottom:-27px;
-    font-size: 0.8rem;
-    strong {
-      font-size: 0.7rem;
-      color: white;
-    }
-    span {
-    &:hover {
-      color: $hover-color;
-      cursor: pointer;
-    }}
-  }
-  &:hover {
-    box-shadow: 0px 0px 28px 0px rgba(0, 0, 0, 0.18);
-  }
+//   .idea-heart {
+//     color: $orange;
+//     position: relative;
+//     bottom:-27px;
+//     font-size: 0.8rem;
+//     strong {
+//       font-size: 0.7rem;
+//       color: white;
+//     }
+//     span {
+//     &:hover {
+//       color: $hover-color;
+//       cursor: pointer;
+//     }}
+//   }
+//   &:hover {
+//     box-shadow: 0px 0px 28px 0px rgba(0, 0, 0, 0.18);
+//   }
 
-}
+// }
 
-.idea-card-back {
-  color: white;
-  text-align: left;
-  overflow: hidden;
-  background-color: #302F35;
-}
+// .idea-card-back {
+//   color: white;
+//   text-align: left;
+//   overflow: hidden;
+//   background-color: #302F35;
+// }
 
-.idea-card-back-content {
-  overflow: hidden;
-  padding: 0 1rem;
-}
+// .idea-card-back-content {
+//   overflow: hidden;
+//   padding: 0 1rem;
+// }
 
 .idea-card-front:hover .card-icons {
   visibility: visible;
@@ -181,14 +146,7 @@
   }
 }
 
-.green-card {
-  color: white;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  width: 100%;
-  min-height: 250px;
-  background-color: #264A42;
-}
+
 
 .status-unpublished {
   background-color: #302f35;
@@ -233,12 +191,7 @@ img.center {
     margin: 0 auto;
 }
 
-.detail-green-card {
-  padding: 4rem 1rem 1rem 1rem;
-  width: 100%;
-  min-height: 20rem;
-  background-color: #264A42;
-}
+
 
 .idea_comment_area
 {

@@ -330,11 +330,11 @@ $callout-link-tint: 30%;
 $card-background: $white;
 $card-font-color: $body-font-color;
 $card-divider-background: $light-gray;
-$card-border: 1px solid $light-gray;
-$card-shadow: none;
+$card-border: 0px solid $light-gray;
+$card-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
 $card-border-radius: $global-radius;
 $card-padding: $global-padding;
-$card-margin: $global-margin;
+$card-margin: 0px;
 
 // 15. Close Button
 // ----------------

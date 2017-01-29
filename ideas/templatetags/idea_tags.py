@@ -17,7 +17,7 @@ def featured_idea_list():
     Heißt, dass bei jedem Neuladen der Seite andere Ideen angezeigt werden, sofern mehr als acht featured = True sind.
     '''
     ideas = Idea.objects.filter(private=False).filter(active=True).filter(featured=True)
-    random_ideas = ideas.order_by('?')[:9]
+    random_ideas = ideas.order_by('-subm_date')[:12]
 
     return random_ideas
 

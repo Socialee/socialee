@@ -1,144 +1,70 @@
-{% load socialee_filters %}
+{% load socialee_filters static %}
 
-<div class="grid-item">
-  <div class="flip-card" id="flip_idea_{{ idea.id }}" idea_id="{{ idea.id }}">
-    <!--CARD FRONT -->
-    <div class="idea-card-front">
-      <div class="front_card">
-          <div class="card-icons">
-          <div class="idea-gradient"></div>
-            <span class="fa-stack expand-icon show-for-medium" expand_id="{{idea.id}}">
-              <i class="fa fa-square fa-stack-2x"></i>
-              <i class="fa fa-expand fa-stack-1x fa-inverse"></i>
-            </span>
-            <span class="fa-stack turn-icon" turn_id="{{idea.id}}">
-              <i class="fa fa-square fa-stack-2x"></i>
-              <i class="fa fa-refresh fa-stack-1x fa-inverse"></i>
-            </span>
-          </div>
-          {% comment %}  
-          {% if not idea.active %}
-          <div class="status-unpublished">
-            <p class"text-center white">Noch nicht veröffentlicht</p>
-          </div>
-          {% endif %}
-          {% endcomment %}
-        {% if idea.picture %}
-          {% if idea.title or idea.description %}<!--Bild und Titel oder Bild und Beschreibung-->
-            <div class="idea-image" expand_id="{{ idea.id }}">
-              <img src="{{ MEDIA_URL }}{{ idea.picture }}"> 
-            </div>
-            <div class="idea-details">
-              <h3>{{ idea.title }}</h3>
-              <p>{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
-            </div>
-          {% elif not idea.title and not idea.description %}<!--nur Bild-->
-            <div class="idea-image" expand_id="{{ idea.id }}">
-              <img src="{{ MEDIA_URL }}{{ idea.picture }}"> 
-            </div>
-            <!-- kleiner workaround: falls es nur ein Bild gibt, sorgt ein bissche unsichtbarer Text für die Mindestgröße der Karte-->
-            <div class="idea-details">
-              <p style="visibility: hidden;">{% lorem 5 w %}</p>
-            </div>
-          {% endif %}
-        {% else %}<!-- kein Bild -->
-          {% if idea.title and idea.description %}<!-- Titel und Beschreibung -->
-              <div class="green-card" expand_id="{{ idea.id }}">
-                <h3>{{ idea.title }}</h3>
-              </div>  
-            <div class="idea-details">
-              <p>{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
-            </div>
-          {% endif %}
-          {% if idea.title and not idea.description %}<!-- nur Titel -->
-            <div class="green-card" expand_id="{{ idea.id }}">
-              <h3>{{ idea.title }}</h3>
-            </div>
-          {% endif %}
-          {% if idea.description and not idea.title %}<!-- nur Beschreibung -->
-            <div class="green-card" expand_id="{{ idea.id }}">
-              <p>{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
-            </div>
-          {% endif %}
-        {% endif %}
+<div class="card">
 
-        {% if request.user.email == idea.author %}
-        <p>Diese Idee ist von Dir! Du kannst sie <a href="{% url 'idea_edit' idea.pk %}">bearbeiten!</a></p>
-          
-        {% endif %}
-        
-        {% if not request.user.is_authenticated %}
-        <div class="card-notification-wrapper">
-          <p id="login_{{ idea.id }}" class="card-notification" idea_id="{{ idea.id }}">Findest du gut? <a href="{% url 'account_login' %}">Melde dich an!</a></p>
+{% if idea.picture %}<!-- Idee mit Bild -->
+    
+    {% if idea.title or idea.description %}<!--Bild und Titel oder Bild und Beschreibung-->
+        <a href="{% url 'idea_detail' idea.pk %}"><img src="{{ MEDIA_URL }}{{ idea.picture }}"></a>
+        <div class="card-section">
+          <h4 class="text-center">{{ idea.title }}</h4>
+          <p>{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
         </div>
-        {% endif %}
+    {% elif not idea.title and not idea.description %}<!--nur Bild-->
+        <a href="{% url 'idea_detail' idea.pk %}"><img src="{{ MEDIA_URL }}{{ idea.picture }}"></a>
+    {% endif %}
 
-        <div class="row align-center">
-          <div id="do_comment_{{ idea.id }}" class="card-notification-wrapper do_comment">
-          {% if do_comment %}
-              <p id="make_comment_{{ idea.id }}" class="card-notification" idea_id="{{ idea.id }}">Warum gefällt dir das? <a>Schreib es auf!</a></p>
-          {% endif %}
-          </div>
-          <div id="id_heart_{{ idea.id }}" class="idea-heart" idea_id="{{ idea.id }}">
-          <span class="fa-stack fa-lg">
-            <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
-            <strong class="fa-stack-1x" id="heart_{{ idea.id }}">{{ idea.likes.count }}</strong>  
-          </span>
-          </div>
+{% else %}<!-- kein Bild -->
+
+    {% if idea.title and idea.description %}<!-- Titel und Beschreibung -->          
+          <a href="{% url 'idea_detail' idea.pk %}">
+            <div class="green-card">
+              <h4 class="text-center">{{ idea.title }}</h4>
+            </div>
+          </a>
+          <div class="card-section">
+          <p>{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
         </div>
+    {% endif %}
+    {% if idea.title and not idea.description %}<!-- nur Titel -->
+      <div class="green-card" expand_id="{{ idea.id }}">
+        <h3>{{ idea.title }}</h3>
       </div>
-    </div>
-    <!-- END CARD FRONT -->
-
-    <!--CARD BACK -->
-    <div class="idea-card-back">
-      <div class="back-hover-area">
-        <div class="card-icons">
-        <div class="idea-gradient"></div>
-          <span class="fa-stack expand-icon show-for-medium" expand_id="{{idea.id}}">
-            <i class="fa fa-square fa-stack-2x"></i>
-            <i class="fa fa-expand fa-stack-1x fa-inverse"></i>
-          </span>
-          <span class="fa-stack turn-icon" turn_id="{{idea.id}}">
-            <i class="fa fa-square fa-stack-2x"></i>
-            <i class="fa fa-refresh fa-stack-1x fa-inverse"></i>
-          </span>
-        </div>
+    {% endif %}
+    {% if idea.description and not idea.title %}<!-- nur Beschreibung -->
+      <div class="green-card" expand_id="{{ idea.id }}">
+        <p>{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
       </div>
-      <h3 class="text-center mt-10">{{ idea.title|truncatechars:17 }}</h3>
-      <div class="idea-card-back-content">
-        <div class="idea_comments" id="idea_comments_{{ idea.id }}" idea_id="{{ idea.id }}">
-          {% for comment in idea.comments.all %}
-          <div class="idea_comment" idea_id="{{ idea.id }}">
-            <label>VOR {{ comment.date|timesince|upper }} VON {% if comment.by_user.is_superuser %}SOCIALEE{% else %}{{ comment.by_user|upper|truncatechars:6 }}{% endif %}</label>
-            <p>{{ comment.message|urlizetrunc:25|escape|truncatechars_html:90 }}{% if comment.message|length > 89 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
-          </div>
-          {% empty %} 
-          <p class="white text-center" id="idea_comment_empty_{{idea.id}}">Es gibt noch keine Kommentare</p>
-          <p  class="text-center"><a href="{% url 'idea_detail' idea.pk %}">Zur Detailseite</a></p>
-          {% endfor %}
-        </div>
-        <div class="idea_comment_more" id="idea_comment_more_{{idea.id}}"> <!-- Wenn es mehr als x Kommentare gibt -->
-          <p class="text-center"><a href="{% url 'idea_detail' idea.pk %}">Alle {{ idea.comments.all|length }} Kommentare auf Detailseite anzeigen</a></p>
-        </div>
-      </div>
-        {% if request.user.is_authenticated %}
-        <div class="comment-form">
-        <p class="pull-left mb-0">Sag, was du denkst!</p>
-          <div class="idea_comment_form">
-              <label class="pull-right">70 Zeichen übrig</label>
-              <input autofocus="autofocus" class="idea_comment_input" id="idea_comment_{{idea.id}}" name="idea_comment" type="text"  />
-              <a class="button expanded button--yellow button--icon idea_comment_button mb-0" id="idea_comment_button_{{ idea.id }}" idea_id="{{ idea.id }}">
-                Kommentieren </a>
-          </div>
-        </div>
-        {% else %}
-        <hr>
-        <p class="white text-center">Was zu sagen?<br><a class="button hollow" href="{% url 'register' %}">Jetzt registrieren</a><br><a class="text-link-special" href="{% url 'account_login' %}">oder anmelden.</a></p>
-        {% endif %}
+    {% endif %}
 
-    </div>
-    <!-- END CARD BACK -->
+{% endif %} 
 
+{% if request.user.email == idea.author %}
+  <div class="card-divider">
+    <h6 class="text-center">Deine Idee! Du kannst sie <a href="{% url 'idea_edit' idea.pk %}">bearbeiten!</a></h6>
   </div>
+{% endif %} 
+
 </div>
+
+{# Likes #}
+{% if request.user.is_authenticated %}
+  <div class="row align-center">
+    <div id="id_heart_{{ idea.id }}" class="idea-heart" idea_id="{{ idea.id }}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
+        <strong class="fa-stack-1x" id="heart_{{ idea.id }}">{{ idea.likes.count }}</strong>  
+      </span>
+    </div>
+  </div>
+{% else %}
+    <div class="row align-center idea-heart">
+    <a href="{% url 'account_login' %}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
+        <strong class="fa-stack-1x">{{ idea.likes.count }}</strong>  
+      </span>
+    </a>
+    </div>
+{% endif %}
+
