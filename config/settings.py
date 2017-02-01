@@ -424,6 +424,10 @@ ADMIN_REORDER = (
         'model': 'feedback.Feedback',
         'label': 'Feedback',
         },
+        {
+        'model': 'actstream.Follow',
+        'label': 'Follow',
+        },
         )},
 
     # Put all other Apps here

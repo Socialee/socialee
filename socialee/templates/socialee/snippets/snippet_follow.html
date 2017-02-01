@@ -1,14 +1,14 @@
 {% load socialee_filters activity_tags %}
 {% if request.user.current_instance %}
     {% if to_follow.id != request.user.current_instance.id %}
-        {% if request.user|is_following:to_follow %}
+        {% if request.user.current_instance.get_profile_or_project|is_following:to_follow.get_profile_or_project %}
             <a class="button follow" instance_id="{{ to_follow.id }}"><i class="fa fa-check" aria-hidden="true"></i> Du Folgst {{ to_follow.short_name }}</a>
         {% else %}
             <a class="button follow" instance_id="{{ to_follow.id }}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge {{ to_follow.short_name }}</a>
         {% endif %}
     {% endif %}
 {% else %}
-    {% if request.user|is_following:to_follow %}
+    {% if request.user|is_following:to_follow.get_profile_or_project %}
         <a class="button hollow follow" instance_id="{{ to_follow.id }}"><i class="fa fa-check" aria-hidden="true"></i> Du Folgst {{ to_follow.short_name }}</a>
     {% else %}
         <a class="button follow" instance_id="{{ to_follow.id }}"><i class="fa fa-plus-circle" aria-hidden="true"></i> Folge {{ to_follow.short_name }}</a>

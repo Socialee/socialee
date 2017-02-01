@@ -20,8 +20,8 @@ from django.views.generic.detail import SingleObjectMixin
 from django.dispatch import receiver
 
 from actstream import action
-from actstream.actions import follow, unfollow
-from actstream.models import following
+from actstream.actions import follow, unfollow, is_following
+from actstream.models import following, followers
 from ideas.models import Idea
 from .models import Project, Input, Output, Profile, CommonGround, Conversation, Message
 from .forms import *
@@ -145,7 +145,14 @@ class ProjectView(BaseView, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ProjectView, self).get_context_data(**kwargs)
+        obj_follower = followers(self.object)
+        obj_following = following(self.object)
+        friends = [friend for friend in set(obj_follower) & set(obj_following)]
+
+        context['friends'] = friends
+
         return context
+
 
 
 # CRUD UPDATE PARTICULAR PROJECT
@@ -314,12 +321,10 @@ class ProfileView(BaseView, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
-        # follower = self.object.inst_follower.all()
-        # friends = None
-        # if self.request.user.instances.filter(current=True):
-        #     friends = self.object.inst_follows.filter( id__in=follower ).exclude(id=self.request.user.current_instance.id)
-
-        # context['friends'] = friends
+        obj_follower = followers(self.object)
+        obj_following = following(self.object)
+        friends = [friend for friend in set(obj_follower) & set(obj_following)]
+        context['friends'] = friends
 
         return context
 
@@ -337,10 +342,12 @@ class Follow(BaseView, TemplateView):
     def post(self, request, *args, **kwargs):
         instance_id = request.POST.get('instance_id')
 
-        to_follow = CommonGround.objects.get(id=instance_id)
+        to_follow = CommonGround.objects.get(id=instance_id).get_profile_or_project()
         follower = self.request.user
+        if self.request.user.instances.filter(current=True):
+            follower = self.request.user.current_instance.get_profile_or_project()
 
-        if to_follow in following(follower):
+        if is_following(follower, to_follow):
             #unfollow
             unfollow(follower, to_follow)
         else:

@@ -159,7 +159,7 @@ class FollowManager(GFKManager):
         return self.filter(
             content_type=ContentType.objects.get_for_model(actor),
             object_id=actor.pk
-        ).fetch_generic_relations('user')
+        )
 
     def followers(self, actor):
         """
@@ -180,7 +180,7 @@ class FollowManager(GFKManager):
             check(model)
             ctype_filters |= Q(content_type=ContentType.objects.get_for_model(model))
         qs = qs.filter(ctype_filters)
-        return qs.fetch_generic_relations('follow_object')
+        return qs
 
     def following(self, user, *models):
         """

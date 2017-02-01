@@ -84,6 +84,14 @@ class CommonGround(models.Model):
         else:
             return self.slug
 
+    def get_profile_or_project(self):
+        if hasattr(self, 'profile'):
+            return self.profile
+        elif hasattr(self, 'project'):
+            return self.project
+        else:
+            return self
+
     def __str__(self):
         return self.slug
 
