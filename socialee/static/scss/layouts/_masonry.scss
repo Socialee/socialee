@@ -11,7 +11,11 @@
 .masonry-layout-ideas {
 	box-sizing: border-box;
 	column-count: 3;
+    -moz-column-count: 3;
+    -webkit-column-count: 3;
 	column-gap: rem-calc(15px);
+    -moz-column-gap: rem-calc(15px);
+    -webkit-column-gap: rem-calc(15px);
 	position: relative;
 	@include breakpoint(medium only){
 		column-count: 2;
