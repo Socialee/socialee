@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from allauth.account.forms import *
 
 from django import forms
-from .models import Project, Profile, Input, Output, User
+from .models import Project, Profile, Input, Output, User, UserData
 from django.utils.safestring import mark_safe
 
 
@@ -70,6 +70,24 @@ class EditProfileForm(forms.ModelForm):
             'tags': TagWidget(attrs={'placeholder': 'Eine durch Komma getrennte Schlagwortliste.'}),
             'description': forms.Textarea(attrs={'rows': 4}),
         }
+
+
+class EditUserDataForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(EditUserDataForm, self).__init__(*args, **kwargs)
+    class Meta:
+        model = UserData
+        fields = ('picture',  )
+        widgets = {
+            'picture': forms.FileInput( attrs={'class' : 'input_with_img'} ),
+        }
+
+class EditUserForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(EditUserForm, self).__init__(*args, **kwargs)
+    class Meta:
+        model = User
+        fields = ('username',)
 
 
 class SocialeeLoginForm(LoginForm): # Changing labels of default Allauth Login Form (note ACCOUNT_FORMS in settings.py)

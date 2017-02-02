@@ -1,0 +1,39 @@
+{% extends "offcanvas.html" %}
+{% load socialee_filters %}
+{% load static sekizai_tags %}
+{% block content %}
+
+  <div class="row align-center">
+    <div class="medium-10 large-10 columns">
+      <div class="c-form">
+        <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+
+          <div class="row">
+            <div class="small-12 columns">
+              <h3>User Daten</h3>
+            </div>
+
+              {% include "snippet_formfield.html" with field=form.username size="small-12" %}
+              {% include "snippet_formfield.html" with field=form_user_data.picture size="small-12" upload_val="Bild hochladen" %}
+            
+          </div>
+
+          <div class="row">
+            <div class="small-12 columns">
+              <input class="button" type="submit" value="Änderungen speichern" />
+            </div>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% addtoblock 'js' %}
+<script type="text/javascript">
+
+$(".input_with_img").parent().find("img").attr("src", "{{ MEDIA_URL }}{{ form_user_data.instance.picture }}");
+
+</script>
+{% endaddtoblock %}
+{% endblock content %}

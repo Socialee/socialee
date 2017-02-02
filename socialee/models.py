@@ -38,6 +38,11 @@ def upload_location_user_pic(instance, filename):
     date = now.strftime("%Y-%m-%d_%HUhr%M")
     return "%s/%s/%s/%s" % (str("users"), slug, date, filename)
 
+class UserData(models.Model):
+    user = models.OneToOneField(User, related_name='data')
+    picture = models.ImageField(upload_to=upload_location_user_pic, null=True, blank=True)
+    dateJoined = models.DateTimeField(auto_now=False, auto_now_add=True)
+
 
 class LocationTaggedItem(TaggedItemBase):
     content_object = models.ForeignKey('CommonGround')
@@ -289,7 +294,6 @@ pre_save.connect(pre_save_profile, sender = Profile)
 #         notify.send(creator, recipient=recipient, action_object=instance, target=instance.conversation.instance, verb='Neuer Komentar', description=instance.message)
 
 # post_save.connect(post_save_message, sender=Message)
-
 
 User.current_instance = property(lambda u: u.instances.get(current=True))
 

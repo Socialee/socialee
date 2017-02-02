@@ -61,7 +61,36 @@ class Styleguide(BaseView, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(Styleguide, self).get_context_data(**kwargs)
 
-        return context        
+        return context     
+
+class UserUpdateView(BaseView, UpdateView):
+    model = User
+    slug_field = 'username'
+    template_name = 'user_update.html'
+    form_class = EditUserForm
+    success_url = '/'
+
+    def get(self, request, *args, **kwargs):
+        super(UserUpdateView, self).get(request, *args, **kwargs)
+        form = self.form_class(instance=self.object)
+        userdata, created = UserData.objects.get_or_create(user=request.user)
+        if created:
+            request.user.data = userdata
+            request.user.save()
+        form_user_data = EditUserDataForm(instance=userdata)
+        return self.render_to_response(self.get_context_data(
+            object=self.object, form=form, form_user_data=form_user_data))
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        form_user_data = EditUserDataForm(instance=request.user.data)
+
+        if form_user_data.is_valid():
+            if len(request.FILES) != 0:
+                form_user_data.instance.picture = request.FILES['picture']
+            form_user_data.save()
+        return super(UserUpdateView, self).post(request, *args, **kwargs)
+       
 
 # Project-Views
 

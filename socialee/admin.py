@@ -49,9 +49,14 @@ class ProfileAdmin(admin.ModelAdmin):
         ]
 
 
+class UserDataAdmin( admin.ModelAdmin):
+    model = UserData
+
+
 #admin.site.register(CommonGround, CommonGroundAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Profile, ProfileAdmin)
+admin.site.register(UserData, UserDataAdmin)
 
 ## unregister Apps that are not used in Admin
 # from django.contrib.sites.models import Site

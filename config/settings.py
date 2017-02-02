@@ -406,6 +406,10 @@ ADMIN_REORDER = (
         # 'model': 'socialee.CommonGround',
         # 'label': 'CommonGround',
         # },
+        {
+        'model': 'socialee.UserData',
+        'label': 'UserData',
+        },
         )},
 
     # Blog
