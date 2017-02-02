@@ -1,0 +1,25 @@
+{% extends "offcanvas.html" %}
+{% load static %}
+
+{% block content %}
+<div class="bg-img">
+  <div class="row align-center">
+    <div class="small-12 medium-10 large-8 columns">
+      <div class="c-form">
+        <form action="" method="post">{% csrf_token %}
+            <div class="row">
+              <div>Willst du deine Idee "{{ object }}" wirklich löschen?</div>
+            </div>
+            <div class="c-form__footer">
+              <input class="button" type="submit" value='Ja weg damit' />
+              <a href="{% url 'idea_list' %}" class="text-link-special pull-right">zurück zur Übersicht</a>
+            </div>
+            
+            
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

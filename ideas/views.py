@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django import forms
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import FormView, DetailView, TemplateView
 from django.core.validators import validate_email
 from django.template.loader import render_to_string
@@ -188,6 +188,14 @@ class IdeaEditView(UpdateView):
     model = Idea
     # fields = ['picture', 'title', 'description', 'private']
     form_class = IdeaEditForm
+
+    def get_success_url(self):
+        slug = self.request.user
+        return reverse('welcome', kwargs={'slug': slug})
+
+class IdeaDeleteView(DeleteView):
+    model = Idea
+    template_name = 'idea_confirm_delete.html'
 
     def get_success_url(self):
         slug = self.request.user
