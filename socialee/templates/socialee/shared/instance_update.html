@@ -10,7 +10,7 @@
 
           <div class="row">
             <div class="small-12 columns">
-              <h3>Projekt bearbeiten</h3>
+              <h3>Projekt <a href="{% url 'project_view' slug=object.slug %}">{{object.long_name}}</a> bearbeiten</h3>
             </div>
 
               {% include "snippet_formfield.html" with field=form.first_name size="small-12" %}
@@ -28,6 +28,7 @@
               {% include "snippet_formfield.html" with field=form.socialee_inputs size="small-6"%}
 
               {% include "snippet_formfield.html" with field=form.video size="small-12" %}
+              {% include "snippet_formfield.html" with field=form.picture size="small-12" upload_val="Bild hochladen" %}
               {% include "snippet_formfield.html" with field=form.longdescription size="small-12" %}
               {% include "snippet_formfield.html" with field=form.history size="small-12" %}
 
@@ -137,22 +138,7 @@
 {% addtoblock "js" %}
 <script>
 
-function readURL(input) {
-
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-          $("#profile_pic").attr("src", e.target.result);
-        }
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-$("#id_picture").change(function(){
-    readURL(this);
-});
+$(".input_with_img").parent().find("img").attr("src", "{{ MEDIA_URL }}{{ object.picture }}");
 </script>
 {% endaddtoblock %}
 

@@ -40,6 +40,7 @@ class EditProjectForm(forms.ModelForm):
         labels = {
             'title': _('Titel'),
             'tagline': _('Motto, Slogan oder Tagline'),
+            'picture': _('Hintergrund'),
         }
         help_texts = {
             'tags' : _(''),
@@ -51,6 +52,7 @@ class EditProjectForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'rows': 4}),
             'tags': TagWidget(attrs={'placeholder': 'Eine durch Komma getrennte Schlagwortliste.'}),
             'location': TagWidget(attrs={'placeholder': 'Eine durch Komma getrennte Orteliste.'}),
+            'picture': forms.FileInput( attrs={'class' : 'input_with_img'} ),
         }
 
 
@@ -69,6 +71,7 @@ class EditProfileForm(forms.ModelForm):
         widgets = {
             'tags': TagWidget(attrs={'placeholder': 'Eine durch Komma getrennte Schlagwortliste.'}),
             'description': forms.Textarea(attrs={'rows': 4}),
+            'picture': forms.FileInput( attrs={'class' : 'input_with_img'} ),
         }
 
 
