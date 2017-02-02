@@ -58,7 +58,7 @@ class EditProjectForm(forms.ModelForm):
 
 class EditProfileForm(forms.ModelForm):
     model = Profile
-    fields = ('tagline', 'description', 'picture', 'phone', 'plz', 'newsletter', 'tags')
+    fields = ('tagline', 'description', 'picture', 'phone', 'plz', 'tags')
     first_name = forms.CharField(required=False)
     last_name = forms.CharField(required=False)
     socialee_outputs = forms.CharField(required=False)
@@ -67,7 +67,7 @@ class EditProfileForm(forms.ModelForm):
         super(EditProfileForm, self).__init__(*args, **kwargs)
     class Meta:
         model = Profile
-        fields = ('tagline', 'description', 'picture', 'phone', 'plz', 'newsletter', 'tags')
+        fields = ('tagline', 'description', 'picture', 'phone', 'plz', 'tags')
         widgets = {
             'tags': TagWidget(attrs={'placeholder': 'Eine durch Komma getrennte Schlagwortliste.'}),
             'description': forms.Textarea(attrs={'rows': 4}),
@@ -76,13 +76,17 @@ class EditProfileForm(forms.ModelForm):
 
 
 class EditUserDataForm(forms.ModelForm):
+    newsletter = forms.BooleanField(required=False)
     def __init__(self, *args, **kwargs):
         super(EditUserDataForm, self).__init__(*args, **kwargs)
     class Meta:
         model = UserData
-        fields = ('picture',  )
+        fields = ('picture', )
         widgets = {
             'picture': forms.FileInput( attrs={'class' : 'input_with_img'} ),
+        }
+        labels = {
+            'picture': _('Bild'),
         }
 
 class EditUserForm(forms.ModelForm):

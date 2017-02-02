@@ -9,8 +9,8 @@
     {% endif %}
 
     {# field-label and form-field / placeholders are set in forms.py #}
-    <label>{{ field.label }}</label>
-    {{ field }}
+    <label>{{ field.label }} {{ field }}</label>
+    
 
     {# show help text if available #}
     {% if field.help_text and not field.errors %}
@@ -27,12 +27,12 @@
     {% comment %} file upload
     if you have a picture to upload add upload_val to the snippet and add the attr {"class":"input_with_img"} to the input in forms.py {% endcomment %}
     {% if upload_val %}
-    <label for="{{field.id_for_label}}" class="button"><i class="fa fa-upload" aria-hidden="true"></i> {{ upload_val }}</label>
     <div class="row">
       <div class="small-12 medium-6 columns">
         <img class="thumbnail" />
       </div>
     </div>
+    <label for="{{field.id_for_label}}" class="button hollow"><i class="fa fa-upload" aria-hidden="true"></i> {{ upload_val }}</label>
     {% endif %}
 
 

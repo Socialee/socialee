@@ -153,6 +153,7 @@ class Message(models.Model):
     message = models.TextField(max_length=5000, null=True, blank=True)
     reply_to = models.ForeignKey('Message', null=True, blank=True, related_name='replys') # message Replys
     date = models.DateTimeField(auto_now=False, auto_now_add=True)
+    likes = models.ManyToManyField(User, related_name='likes_message')
     class Meta:
         ordering = ['-date']
 
@@ -204,7 +205,6 @@ pre_save.connect(pre_save_project, sender = Project)
 class Profile(CommonGround):
     phone = models.CharField(max_length=50, blank=True)
     plz = models.CharField(max_length=5, null=True, blank=True)
-    newsletter = models.BooleanField(default=False)
 
     def is_email_verified(self):
         return (self.created_by.is_authenticated and

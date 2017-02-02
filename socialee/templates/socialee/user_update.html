@@ -14,7 +14,11 @@
             </div>
 
               {% include "snippet_formfield.html" with field=form.username size="small-12" %}
-              {% include "snippet_formfield.html" with field=form_user_data.picture size="small-12" upload_val="Bild hochladen" %}
+              <fieldset class="small-6 columns">
+                <a class="button hollow" href="{% url 'password_change' %}"><i class="fa fa-pencil" aria-hidden="true"></i> Password ändern</a>
+              </fieldset>
+              {% include "snippet_formfield.html" with field=form_user_data.newsletter size="small-6" %}
+              {% include "snippet_formfield.html" with field=form_user_data.picture size="small-6" upload_val="Bild hochladen" %}
             
           </div>
 
@@ -32,7 +36,7 @@
 {% addtoblock 'js' %}
 <script type="text/javascript">
 
-$(".input_with_img").parent().find("img").attr("src", "{{ MEDIA_URL }}{{ form_user_data.instance.picture }}");
+$(".input_with_img").parents("fieldset").first().find("img").attr("src", "{{ MEDIA_URL }}{{ form_user_data.instance.picture }}");
 
 </script>
 {% endaddtoblock %}

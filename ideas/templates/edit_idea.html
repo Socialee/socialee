@@ -30,7 +30,7 @@
 {% addtoblock 'js' %}
 <script type="text/javascript">
 
-$(".input_with_img").parent().find("img").attr("src", "{{ MEDIA_URL }}{{ object.picture }}");
+$(".input_with_img")..parents("fieldset").first().find("img").attr("src", "{{ MEDIA_URL }}{{ object.picture }}");
 
 </script>
 {% endaddtoblock %}

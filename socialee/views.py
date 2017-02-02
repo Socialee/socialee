@@ -18,6 +18,7 @@ from django.views.generic import TemplateView, FormView, ListView, DetailView, V
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import SingleObjectMixin
 from django.dispatch import receiver
+from django.contrib.auth.models import User, Group
 
 from actstream import action
 from actstream.actions import follow, unfollow, is_following
@@ -77,18 +78,22 @@ class UserUpdateView(BaseView, UpdateView):
         if created:
             request.user.data = userdata
             request.user.save()
-        form_user_data = EditUserDataForm(instance=userdata)
+        form_user_data = EditUserDataForm(instance=userdata, initial={'newsletter':request.user.groups.filter(name='signed_up_for_newsletter').exists()})
         return self.render_to_response(self.get_context_data(
             object=self.object, form=form, form_user_data=form_user_data))
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
-        form_user_data = EditUserDataForm(instance=request.user.data)
+        form_user_data = EditUserDataForm(instance=request.user.data, data=request.POST or None, files=request.FILES or None)
 
         if form_user_data.is_valid():
-            if len(request.FILES) != 0:
-                form_user_data.instance.picture = request.FILES['picture']
             form_user_data.save()
+            newsletter = form_user_data.cleaned_data.get('newsletter')
+            newsletter_group = Group.objects.get_or_create(name='signed_up_for_newsletter')[0]
+            if newsletter:
+                request.user.groups.add(newsletter_group)
+            else:
+                request.user.groups.remove(newsletter_group)
         return super(UserUpdateView, self).post(request, *args, **kwargs)
        
 
