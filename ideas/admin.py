@@ -32,7 +32,7 @@ class IdeaAdmin(admin.ModelAdmin):
     fields = [('private', 'enabled', 'featured', 'thumb', 'picture'), ('title', 'author'), 'description', 'likes']
     list_filter = ['subm_date', 'author']
     search_fields = ['title', 'author', 'description']
-    readonly_fields = ('likes', 'thumb', 'private', 'active')
+    readonly_fields = ('likes', 'thumb', 'private')
     inlines = [
         CommentInline,
     ]
