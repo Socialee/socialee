@@ -51,7 +51,7 @@ class CreateIdea(SignupView):
                 if settings.PROD:
                     self.send_mail_to_us(title, description, email)
                 
-                newIdea = Idea.objects.create( picture = pic, title = title, description = description, author=email )
+                newIdea = Idea.objects.create( picture = pic, title = title, description = description, author=email, private=private )
                 newIdea.save()
 
                 # set message to inform user it was successful
