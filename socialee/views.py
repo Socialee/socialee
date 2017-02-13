@@ -431,7 +431,7 @@ class Comment(BaseView, TemplateView):
             action_object = message
             target = instance
 
-        action.send(actor, action_object=instance, target=instance, verb='posted', description=comment, recipient=recipient)
+        action.send(actor, action_object=action_object, target=target, verb='posted', description=comment, recipient=recipient)
 
         return render(request, self.template_name, {'comment' : message} )
 
