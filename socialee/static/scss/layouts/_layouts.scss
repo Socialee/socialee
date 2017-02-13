@@ -1,9 +1,25 @@
+.full-height-100 {
+  min-height: 100vH;
+}
+
+.full-height-75 {
+  min-height: 75vH;
+}
+
+.full-height-33 {
+  min-height: 33vH;
+}
+
+
 // used for moving up idea-gallery on Landingpage
 .move-up {
   z-index: 2;
   top: -12rem;
   @include breakpoint(small only) {
   top: -6rem;
+  }
+  @include breakpoint(xxlarge only) {
+  top: -20rem;
   }
 }
 
@@ -12,6 +28,9 @@ section.move-up {
   margin-bottom: -24rem;
   @include breakpoint(small only) {
     margin-bottom: -6rem;
+  }
+  @include breakpoint(xxlarge only) {
+    margin-bottom: -10rem;
   }
 }
 
