@@ -17,7 +17,7 @@ class IdeaForm(EmailRegisterForm):
                             label='')
     title = CharField( required=False, widget = TextInput( attrs={ 'autofocus': 'autofocus' }))
     description = CharField( required=False, widget=Textarea(attrs={'cols': 80, 'rows': 5, 'max_length':1500, 'class':'input_with_bound'}))
-    YESNO_CHOICES = ((0, 'Nein'), (1, 'Ja'))
+    YESNO_CHOICES = ((1, 'Ja'),(0, 'Nein')) 
     private = ChoiceField(
                      choices=YESNO_CHOICES, widget=RadioSelect
                 )
@@ -28,10 +28,10 @@ class IdeaForm(EmailRegisterForm):
         self.fields = OrderedDict((k, self.fields[k]) for k in fields_key_order)
 
         self.fields['email'].required = False
-        self.fields['picture'].label = _('Idee als Bild')
+        self.fields['picture'].label = _('')
         self.fields['title'].label = _('Ideen-Titel')
         self.fields['description'].label = _('Beschreibung der Idee')
-        self.fields['private'].label = _('Möchtest du, dass nur du diese Idee sehen kannst? Sie ist dann eine private Idee. Du kannst sie später jederzeit veröffentlichen.')
+        self.fields['private'].label = _('Möchtest du, dass nur du diese Idee sehen kannst? Du kannst das später jederzeit ändern.')
         self.fields['private'].initial = 0
 
         self.fields['picture'].help_text = _('')

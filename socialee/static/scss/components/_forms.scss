@@ -18,6 +18,14 @@
     }
 }
 
+.errorlist {
+  margin-left: 0;
+  list-style-type: none;
+  margin-top: $helptext-margin-top;
+  color: $alertred;
+
+}
+
 .second-form-label {
  display: inline;
  margin-left: 2rem;
@@ -32,4 +40,9 @@
 
 .c-form__footer {
   padding-top: rem-calc(20px);
+}
+
+label ul {
+  margin: 0;
+  list-style-type: none;
 }
