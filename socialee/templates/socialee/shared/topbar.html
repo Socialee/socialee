@@ -43,8 +43,8 @@
       </ul>
       {% else %}
       <ul class="menu">
-        <li><a href="{% url 'account_login' %}">Anmelden</a></li>
-        <li><a class="hollow button small" href="{% url 'register' %}">Registrieren</a></li>
+        <li><a href="{% url 'account_login' %}?next={{ request.path }}">Anmelden</a></li>
+        <li><a class="hollow button small" href="{% url 'register' %}?next={{ request.path }}">Registrieren</a></li>
       </ul>
       {% endif %}
     </div>
