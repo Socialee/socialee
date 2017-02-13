@@ -149,25 +149,25 @@ class Like(TemplateView):
             else:
                 instance.likes.add(self.request.user)
 
-
         return render(request, self.template_name, {'idea' : instance, 'do_comment' : comment } )
 
 
 class Commentate(TemplateView):
-    template_name = 'idea_card.html'
+    template_name = 'snippet_ideas_comment.html'
     http_method_names = ['post']
 
     def post(self, request, *args, **kwargs):
         idea_id = request.POST.get('idea_id')
         comment = request.POST.get('comment')
+        comment_obj= None
 
         instance = Idea.objects.get(id=idea_id)
         
         if request.user.is_authenticated():
-            Comment.objects.create(to_idea=instance, by_user=self.request.user, message=comment)
+            comment_obj = Comment.objects.create(to_idea=instance, by_user=self.request.user, message=comment)
             self.send_mail_to_creator(email=instance.author, context={'comment': comment, 'idea': instance.title })
-        
-        return render(request, self.template_name, {'idea' : instance } )
+
+        return render(request, self.template_name, {'comment' : comment_obj } )
 
     def send_mail_to_creator(self, email, context):
         message_to_creator = render_to_string('email/email_new_comment.txt', context=context)

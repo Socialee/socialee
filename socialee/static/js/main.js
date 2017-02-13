@@ -107,7 +107,7 @@ function setLimit() {
   if(num == 0)
     $label.css('color', 'red');
   else 
-    $label.css('color', 'initial');
+    $label.css('color', 'grey');
 }
 
 
