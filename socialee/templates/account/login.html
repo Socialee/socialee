@@ -35,6 +35,7 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 <form class="login mt-20" method="POST" action="{% url 'account_login' %}">
   <div class="row">
     {% csrf_token %}
+    <fieldset class="small-12 columns">{{ form.non_field_errors }}</fieldset>
     {% for item in form %}
     {% include "snippet_formfield.html" with field=item size="small-12 medium-6" %}
     {% endfor %}
