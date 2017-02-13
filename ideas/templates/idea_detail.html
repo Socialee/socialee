@@ -48,13 +48,17 @@
 
           </div>
 
-          {% if request.user.is_superuser and idea.active %}
-          
-          <div class="row align-center">
-            <div class="small-12 columns text-center">
-              admin only<br><a class="button hollow" href="{% url 'startprojectWithIdea' idea.pk %}">zum Projekt machen</a>
-            </div>
-          </div>
+          {% if idea.active %}
+            {% if request.user.is_authenticated %}
+              {% if request.user.is_superuser  or request.user.email == idea.author %}
+            
+                <div class="row align-center">
+                  <div class="small-12 columns text-center">
+                    <br><a class="button hollow" href="{% url 'startprojectWithIdea' idea.pk %}">zum Projekt machen</a>
+                  </div>
+                </div>
+              {% endif %}
+              {% endif %}
             
           {% endif %}
           
