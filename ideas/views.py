@@ -39,7 +39,9 @@ class CreateIdea(SignupView):
             ret = super(CreateIdea, self).post(request, *args, **kwargs)
 
             if pic or title or description:
-                email = form.cleaned_data.get('email', 'Anonym')
+                email = form.cleaned_data.get('email')
+                if not email:
+                    email = 'Anonym'
 
                 if hasattr(request.user, 'email'):
                     email = request.user.email
