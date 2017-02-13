@@ -34,13 +34,13 @@
                   <a class="button button--yellow button--icon idea_comment_button" id="idea_comment_button_{{ idea.id }}" idea_id="{{ idea.id }}">Kommentieren</a>
               </div>    
             {% elif idea.active %}
-              <p class="white text-center">Dazu fällt dir was ein?<br><a class="button hollow" href="{% url 'register' %}">Jetzt registrieren</a><br><a class="text-link-special" href="{% url 'account_login' %}?next={{ request.path }}">oder anmelden.</a></p>
+              <p class="white text-center">Dazu fällt dir was ein?<br><a class="button hollow" href="{% url 'register' %}">Jetzt registrieren</a><br><a class="text-link-special" href="{% url 'account_login' %}">oder anmelden.</a></p>
             {% endif %}
 
             <div id="idea_comments_{{idea.id}}">
               {% for comment in idea.comments.all %}
                 <div class="idea-comments__item">
-                <label class="idea-comments__label">VOR {{ comment.date|timesince|upper }} VON {% if comment.by_user.is_superuser %}SOCIALEE{% else %}{{ comment.by_user|upper|truncatechars:6 }}{% endif %}</label>
+                <label class="idea-comments__label">VOR {{ comment.date|timesince|upper }} VON {% if comment.by_user.is_superuser %}SOCIALEE{% elif not idea.author == request.user.email %}{{ comment.by_user|upper|truncatechars:6 }} {% else %} {{ comment.by_user|upper }} {% endif %}</label>
                   <p>{{ comment.message|urlizetrunc:25 }}</p>
                 </div>
               {% endfor %}
