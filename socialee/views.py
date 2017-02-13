@@ -143,6 +143,7 @@ class StartProject(BaseView, CreateView):
             if 'idea' in kwargs:
                idea = Idea.objects.get(id=kwargs['idea'])
                idea.active = False
+               idea.project = self.object
                idea.save()
             return ret
         else:

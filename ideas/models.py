@@ -26,6 +26,7 @@ class Idea(models.Model):
     enabled = models.BooleanField(default=False, verbose_name='Freigegeben')
     active = models.BooleanField(default=True, verbose_name='Ohne Projekt')
     likes = models.ManyToManyField(User, related_name='likes_ideas')
+    project = models.OneToOneField('socialee.Project', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Idee'
