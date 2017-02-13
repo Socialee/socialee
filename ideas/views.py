@@ -65,7 +65,7 @@ class CreateIdea(SignupView):
                 request.session['title'] = form.data['title']
                 request.session['description'] = form.data['description']
                 request.session['private'] = form.data['private']
-                request.session['picturefile'] = form.data['picturefile']
+                # request.session['picturefile'] = form.data['picturefile']
                 return self.response_for_email_taken(request, form=form, login=form.data['email'])
             return self.form_invalid(form)
 
