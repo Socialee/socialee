@@ -1,6 +1,6 @@
 from django import template
 from django.template import Context, Template
-from socialee.models import CommonGround, Profile
+from socialee.models import CommonGround, Profile, User
 import re
 
 register = template.Library()
@@ -22,17 +22,17 @@ def url_target_blank(text):
 
 @register.filter
 def link_ats(value):
-	c = Context()
-	for user in re.finditer(r'@(?P<slug>[\w.@+-]+)', value):
-		try:
-			u = CommonGround.objects.get(slug=user.group(1))
-			c[user.group(1)] = u
-		except:
-			pass
-	t = Template(re.sub(r'@(?P<slug>[\w.@+-]+)', 
-		r'{% if \1.profile %}<a href="{% url "profile_view" slug=\1.slug %}">@\1</a>' +
-		r'{% elif \1.project %}<a href="{% url "project_view" slug=\1.slug %}">@\1</a>{% else %}@\1{% endif %}', value))
-	return t.render(c)
+    c = Context()
+    for user in re.finditer(r'@(?P<slug>[\w.@+-]+)', value):
+        if CommonGround.objects.filter(slug=user.group(1)).exists():
+            c[user.group(1)] = CommonGround.objects.get(slug=user.group(1))
+        elif User.objects.filter(username=user.group(1)).exists():
+            c[user.group(1)] = User.objects.get(username=user.group(1))
+    t = Template(re.sub(r'@(?P<slug>[\w.@+-]+)', 
+        r'{% if \1.profile %}<a href="{% url "profile_view" slug=\1.slug %}">@\1</a>' +
+        r'{% elif \1.project %}<a href="{% url "project_view" slug=\1.slug %}">@\1</a>' +
+        r'{% else %}@\1{% endif %}', value))
+    return t.render(c)
 
 
 @register.filter

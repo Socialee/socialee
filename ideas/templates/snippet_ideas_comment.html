@@ -1,4 +1,5 @@
+{% load socialee_filters %}
 <div class="idea-comments__item">
     <label class="idea-comments__label">VOR {{ comment.date|timesince|upper }} VON {% if comment.by_user.is_superuser %}SOCIALEE{% else %}{{ comment.by_user|upper|truncatechars:6 }}{% endif %}</label>
-  <p>{{ comment.message|urlizetrunc:25 }}</p>
+  <p>{{ comment.message| link_ats |urlizetrunc:25 }}</p>
 </div>
