@@ -105,7 +105,7 @@ $("#review_button").click(function()
     }
     else
     {
-      $("#top_desc").html("Eines der Felder musst du aber schon ausfüllen ;-) Oder einfach nur ein Bild hochladen.");
+      $("#top_desc").html("Eines der Felder musst du aber schon ausfüllen ;-) Oder einfach nur ein Bild hochladen.").css("color", "red");
     }
 
   });
@@ -116,7 +116,7 @@ $("#change").click(function()
     $("#id_email").parent().hide();
     $("#idea_form").children().show();
 
-    $("#top_desc").html("Mach deine Idee noch hübscher.");
+    $("#top_desc").html("Mach sie noch hübscher!").css("color", "black");
     $("#top_titel").html("Gute Idee!");
   });
 
