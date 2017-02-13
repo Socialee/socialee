@@ -26,7 +26,7 @@
           <ul class="menu">
             <li><a href="{% url 'welcome' request.user %}">Deine Übersicht</a></li>
             <li><a href="{% url 'account_change_password' %}">Passwort ändern</a></li>
-            <li><a href="{% url 'account_logout' %}">Abmelden</a></li>
+            <li><a href="{% url 'account_logout' %}?next={{ request.path }}">Abmelden</a></li>
             <li><a>------------------</a></li>
             {% for instance in request.user.instances.all %}
               {% if instance.slug != request.user.username %}
