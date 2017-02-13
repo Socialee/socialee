@@ -29,21 +29,20 @@
           <div id="review">
 
               {# idea card TODO: show real card-layout #}
-              <div class="small-12 medium-6 columns">
-                <div class="idea-card-front">
-                  <div class="idea-image">
-                    <img id="idea_img" src="">
-                  </div>
-                  <div class="idea-details">
-                    <h2 id="idea_title"></h2>
-                    <p id="idea_description"></p>
-                  </div>
-                  <div class="idea-heart">
-                    <span class="fa-stack fa-lg">
-                      <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
-                      <strong class="fa-stack-1x">0</strong>
-                    </span>
-                  </div>
+              <div class="card">
+                <img id="idea_img" src="">
+                <div class="card-section">
+                  <h4 class="text-center" id="idea_title"></h4>
+                  <p class="text-center" id="idea_description"></p>
+                </div>
+              </div>
+
+              <div class="row align-center">
+                <div id="id_heart_{{ idea.id }}" class="idea-heart" idea_id="{{ idea.id }}">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
+                    <strong class="fa-stack-1x" id="heart_{{ idea.id }}">{{ idea.likes.count }}</strong>  
+                  </span>
                 </div>
               </div>
 
@@ -58,7 +57,7 @@
 
               <div class="c-form__footer">
                 <input class="button" type="submit" value="Idee Absenden" />
-                <a href="" id="change" class="text-link-special pull-right float-right">Idee nochmal ändern</a>
+                <a id="change" class="text-link-special pull-right float-right">Idee nochmal ändern</a>
               </div>
 
           </div>
@@ -76,10 +75,9 @@
 
 function fixPreview()
 {
-  $("#idea_form").children().hide();
   $("#idea_title").html($("#id_title").val());
   $("#idea_description").html($("#id_description").val());
-  $("#idea_img").attr("src", $("#id_picture").parent().find("img").attr("src"));
+  $("#idea_img").attr("src", $("#id_picture").parents("fieldset").first().find("img").attr("src"));
 }
 
 
@@ -96,9 +94,11 @@ $("#review_button").click(function()
   {
     if($("#id_title").val() || $("#id_description").val() || $("#id_picture").val())
     {
-      $("#id_email").parent().show();
       fixPreview();
+      $("#idea_form").children().hide();
       $("#review").show();
+      $("#id_email").parent().show();
+      
       $("#top_desc").html("");
       $("#top_titel").html("Sieht gut aus, oder?!");
     }
@@ -108,15 +108,17 @@ $("#review_button").click(function()
     }
 
   });
+
 $("#change").click(function()
   {
     $("#review").hide();
-    $("#idea_form").children().show();
     $("#id_email").parent().hide();
-    $("#top_desc").show();
+    $("#idea_form").children().show();
+
     $("#top_desc").html("Mach deine Idee noch hübscher.");
     $("#top_titel").html("Gute Idee!");
   });
+
 </script>
 {% endaddtoblock %}
 
