@@ -17,7 +17,7 @@
           {% if not idea.active %}
           <div class="row align-center">
             <div class="small-12 columns text-center">
-              Diese Idee ist schon zum Projekt geworden. <br><a class="button hollow" href="{% url 'startprojectWithIdea' idea.pk %}">zum Projekt machen</a>
+              Diese Idee ist schon zum Projekt geworden. <br><a class="button hollow" href="{% url 'project_view' idea.project.slug %}">zum Projekt</a>
             </div>
           </div>
           {% endif %}
