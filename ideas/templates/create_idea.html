@@ -28,28 +28,30 @@
 
           <div id="review">
 
-              {# idea card TODO: show real card-layout #}
-              <div class="card">
-                <img id="idea_img" src="">
-                <div class="card-section">
-                  <h4 class="text-center" id="idea_title"></h4>
-                  <p class="text-center" id="idea_description"></p>
-                </div>
-              </div>
-
-              <div class="row align-center">
-                <div id="id_heart_{{ idea.id }}" class="idea-heart" idea_id="{{ idea.id }}">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
-                    <strong class="fa-stack-1x" id="heart_{{ idea.id }}">{{ idea.likes.count }}</strong>  
-                  </span>
+              <div class="masonry-layout-ideas mt-2rem">
+                <div class="ml-panel-ideas">
+                  <div class="card">
+                    <img id="idea_img" src="">
+                    <div class="card-section">
+                      <h4 class="text-center" id="idea_title"></h4>
+                      <p class="text-center" id="idea_description"></p>
+                    </div>
+                  </div>
+                  <div class="row align-center">
+                    <div id="id_heart_{{ idea.id }}" class="idea-heart" idea_id="{{ idea.id }}">
+                      <span class="fa-stack fa-lg">
+                        <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
+                        <strong class="fa-stack-1x" id="heart_{{ idea.id }}">{{ idea.likes.count }}</strong>  
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
 
               {% if not request.user.is_authenticated %}
               <div class="row">
                 <div class="small-12 columns">
-                  <p>Trage noch deine E-Mail-Adresse ein und erstelle dir so ein Konto bei Socialee.</p>  
+                  <p>Trage noch deine E-Mail-Adresse ein und erstelle dir ein Konto bei Socialee.</p>  
                 </div>
                 {% include "snippet_formfield.html" with field=form.email size="small-12" %}  
               </div> 
