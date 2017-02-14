@@ -9,7 +9,7 @@ from django import forms
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import FormView, DetailView, TemplateView
+from django.views.generic import FormView, DetailView, TemplateView, ListView
 from django.core.validators import validate_email
 from django.template.loader import render_to_string
 from django.utils.decorators import method_decorator
@@ -124,11 +124,11 @@ class CreateIdea(SignupView):
         return self.render_to_response(self.get_context_data(args, kwargs))
 
 
-def idea_list(request):
-    context = {
-    }
-    
-    return render(request, "idea_list.html", context)
+class IdeaListView(ListView):
+    template_name = 'idea_list.html'
+    context_object_name = 'idea_list'
+    # model = Idea
+    queryset = Idea.objects.filter(enabled=True, private=False)
 
 
 

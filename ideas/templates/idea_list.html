@@ -9,7 +9,6 @@
       <div class="callout large">
         <h3 class="text-center">Socialee sammelt alle Ideen der Welt. <a class="text-link-special" href="{% url 'create_idea' %}">Teile deine!</a></h3>
 
-          {% idea_list as idea_list %}
           {% include 'snippet_ideas.html'%}
 
         <p class="text-center"><a class="button button--yellow" href="{% url 'create_idea' %}">Teile deine Idee</a></p>
