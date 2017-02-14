@@ -1,6 +1,6 @@
 from allauth.account.views import SignupView
 
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.conf import settings
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -194,6 +194,7 @@ class IdeaEditView(UpdateView):
         slug = self.request.user
         return reverse('welcome', kwargs={'slug': slug})
 
+
 class IdeaDeleteView(DeleteView):
     model = Idea
     template_name = 'idea_confirm_delete.html'
@@ -201,10 +202,4 @@ class IdeaDeleteView(DeleteView):
     def get_success_url(self):
         slug = self.request.user
         return reverse('welcome', kwargs={'slug': slug})
-
-
-
-
-
-
 

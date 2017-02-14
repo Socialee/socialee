@@ -49,6 +49,13 @@ class Idea(models.Model):
 
     thumb.short_description = 'Vorschau'
 
+    # def has_delete_permission(self, request, obj=None):
+    #     if obj and obj.private and hasattr(request.user, 'email') and request.user.email != obj.author:
+    #         print("inhere")
+    #         return False
+    #     print("nope")
+    #     return super(Idea, self).has_delete_permission(request, obj)
+
     def __str__(self):
         return format(self.title)
 
