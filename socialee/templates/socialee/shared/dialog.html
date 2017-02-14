@@ -59,6 +59,7 @@ function post_comment(comment, instance_id, reply_id) {
                   }
                   else {
                     $(data).prependTo($('#js-replys-pos-'+reply_id)).hide().slideDown();
+                    $("#js-reply-input-"+reply_id).slideUp();
                   }
                 });
 };
