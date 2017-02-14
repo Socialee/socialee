@@ -165,7 +165,8 @@ class Commentate(TemplateView):
         
         if request.user.is_authenticated():
             comment_obj = Comment.objects.create(to_idea=instance, by_user=self.request.user, message=comment)
-            self.send_mail_to_creator(email=instance.author, context={'comment': comment, 'idea': instance.title })
+            if instance.author:
+                self.send_mail_to_creator(email=instance.author, context={'comment': comment, 'idea': instance.title })
 
         return render(request, self.template_name, {'comment' : comment_obj } )
 
