@@ -34,7 +34,7 @@
                   <a class="button button--yellow button--icon idea_comment_button" id="idea_comment_button_{{ idea.id }}" idea_id="{{ idea.id }}">Kommentieren</a>
               </div>    
             {% elif idea.active %}
-              <p class="white text-center">Dazu fällt dir was ein?<br><a class="button hollow" href="{% url 'register' %}">Jetzt registrieren</a><br><a class="text-link-special" href="{% url 'account_login' %}">oder anmelden.</a></p>
+              <p class="white text-center">Dazu fällt dir was ein?<br><a class="button hollow" href="{% url 'register' %}?next={{ request.path }}">Jetzt registrieren</a><br><a class="text-link-special" href="{% url 'account_login' %}?next={{ request.path }}">oder anmelden.</a></p>
             {% endif %}
 
             <div id="idea_comments_{{idea.id}}">
