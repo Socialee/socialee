@@ -62,6 +62,14 @@
   background:#fff;
 }
 
+.tag--black {
+  background-color: $greyblue;
+
+  &:hover {
+    background-color: $darkgreyblue;;
+  }
+}
+
 .tag--orange {
   background-color: $orange;
 
@@ -95,12 +103,20 @@
   background-color: #fff;
 }
 
+.tag--black:before {
+  border-color:transparent $greyblue transparent transparent;
+}
+
+.tag--black:hover::before {
+  border-color:transparent $darkgreyblue transparent transparent;
+}
+
 .tag--orange:before {
   border-color:transparent $orange transparent transparent;
 }
 
 .tag--orange:hover::before {
-  border-color:transparent $orange transparent transparent;
+  border-color:transparent $darkorange transparent transparent;
 }
 
 .tag--green:before {

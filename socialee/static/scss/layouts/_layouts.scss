@@ -18,7 +18,7 @@
   @include breakpoint(small only) {
   top: -6rem;
   }
-  @include breakpoint(xxlarge only) {
+  @include breakpoint(xxlarge) {
   top: -20rem;
   }
 }
@@ -29,7 +29,7 @@ section.move-up {
   @include breakpoint(small only) {
     margin-bottom: -6rem;
   }
-  @include breakpoint(xxlarge only) {
+  @include breakpoint(xxlarge) {
     margin-bottom: -10rem;
   }
 }

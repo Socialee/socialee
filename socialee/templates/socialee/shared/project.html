@@ -9,10 +9,10 @@
         <h2 class="text-center">{{ object.long_name }}</h2>
         <h5 class="text-center">{{ object.tagline }}</h5>
         
-        {% if object.tags|length >= 1 or object.location|length >= 1 %}
+        {% if object.tags or object.location %}
           <div class="row align-center columns mt-1rem mb-2rem">
            {% for tag in object.location.all %}
-             <a class="tag tag--green js-sized"><i class="fi-x-circle"></i>{{ tag }}</a>
+             <a class="tag tag--black js-sized"><i class="fi-x-circle"></i>{{ tag }}</a>
           {% endfor %} 
           {% for tag in object.tags.all %}
             <a class="tag tag--orange js-sized"><i class="fi-x-circle"></i>{{ tag }}</a>
