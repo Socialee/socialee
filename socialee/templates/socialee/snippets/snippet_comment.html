@@ -3,10 +3,10 @@
   <div class="comment__header">
     <div class="row">
       <div class="comment__avatar small-6 column">
-        {% if comment.by_instance %}
+        {% if comment.by_instance.picture %}
           <a><img src="{{ MEDIA_URL }}{{ comment.by_instance.picture }}" alt="profile image"></a>
-        {% else %}
-          <img src="{{ STATIC_URL }}img/app/ralph1.jpg" alt="{{comment.by_user}}">
+        {% elif comment.by_user.data.picture %}
+          <img src="{{ MEDIA_URL }}{{ comment.by_user.data.picture }}" alt="{{comment.by_user}}">
         {% endif %}
           <div class="comment__avatar-text">
             <div class="h6">{{ comment.by_instance.long_name }} </div>
@@ -54,6 +54,8 @@
               <div class="comment__avatar small-12 column">
               {% if request.user.current_instance.picture %}
                 <a><img src="{{ MEDIA_URL }}{{ request.user.current_instance.picture }}" alt=""></a>
+              {% elif request.user.data.picture %}
+                <a><img src="{{ MEDIA_URL }}{{ request.user.data.picture }}" alt=""></a>
               {% endif %}
                 <div class="comment__avatar-text">
                   <div class="h6">{{ request.user.current_instance.long_name }}</div>

@@ -9,6 +9,8 @@
           <div class="comment__avatar small-12 columns">
           {% if request.user.current_instance.picture %}
             <a><img src="{{ MEDIA_URL }}{{ request.user.current_instance.picture }}" alt=""></a>
+          {% elif request.user.data.picture %}
+            <a><img src="{{ MEDIA_URL }}{{ request.user.data.picture }}" alt=""></a>
           {% endif %}
             <div class="comment__avatar-text">
               <h6>{{ request.user.current_instance.long_name }}</h6>
