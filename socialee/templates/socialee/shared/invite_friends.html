@@ -3,6 +3,7 @@
 <div class="row align-center mt-5rem">
   <div class="small-12 columns">
     <h3>Lade deine Freunde ein!</h3>
+    <p id='thx' style="color:red"></p>
     <p>Die Personen in dieser Liste bekommen eine Einladung zu Socialee und können dann deine Projektseite sehen und kommentieren. Wähle den + Button um noch mehr Freunde einzuladen.</p>
     <div id="js-invites">
       <label>E-Mail-Adresse:</label><input class="js-invite" type="text"/>
@@ -26,12 +27,14 @@ $("#js-add-invite").click( addInvite );
 
 
 function inviteAll(emails) {
-    console.log(JSON.stringify(emails));
+    //console.log(JSON.stringify(emails));
     post_to_url( "{% url 'invitations:send-json-invite' %}",
                 JSON.stringify(emails),
                 function(data){
-                    $('js-invites').html("<label>E-Mail-Adresse:</label><input class='js-invite' type='text'/>");
+                   // $('js-invites').html("<label>E-Mail-Adresse:</label><input class='js-invite' type='text'/>");
                 });
+    $('#js-invites').html("<label>E-Mail-Adresse:</label><input class='js-invite' type='text'/>");
+    $('#thx').html('Danke wir haben ' + emails.join(", ") + ' eingeladen');
   };
 
   $("#js-inviteAll").click( function() {

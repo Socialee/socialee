@@ -23,9 +23,11 @@
         <textarea name="" id="comment_value" cols="30" rows="5"></textarea>
       </div>
       <div class="row comment__actions">
+        {% comment %}
         <div class="small-12 medium-8 columns">
           <p class="h-f22 greyblue-2">Übrigens: Projekte können mit @titel erwähnt werden.</p>
         </div>
+        {% endcomment %}
         <div class="small-12 medium-4 columns">
           <a class="button expanded-sm float-right-md button--yellow comment_button" comment_val="comment_value" instance_id="{{ object.id }}">Kommentieren</a>
         </div>

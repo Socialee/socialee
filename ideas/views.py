@@ -140,16 +140,14 @@ class Like(TemplateView):
         idea_id = request.POST.get('idea_id')
 
         instance = Idea.objects.get(id=idea_id)
-        comment = True;
         
         if self.request.user.is_authenticated():
             if self.request.user in instance.likes.all():
-                comment = False
                 instance.likes.remove(self.request.user)
             else:
                 instance.likes.add(self.request.user)
 
-        return render(request, self.template_name, {'idea' : instance, 'do_comment' : comment } )
+        return render(request, self.template_name, {'idea' : instance } )
 
 
 class Commentate(TemplateView):
