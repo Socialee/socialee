@@ -1,14 +1,14 @@
 {% autoescape off %}
 Hallo!
 
-Dein Projekt {{project}} auf Socialee hat einen neuen Kommentar.
-{{ comment.by_user }} schreibt:
+Dein Projekt {{project.long_name}} auf Socialee hat einen neuen Kommentar.
+{% if comment.by_user %}{{ comment.by_user }}{% else %}{{ comment.by_instance }{% endif %} schreibt:
 
-{{comment}}
+{{comment.message}}
 
 
 Klicke auf diesen Link, um zu Deinem Projekt zu gelangen:
-{% url 'project_view' project %}
+http://socialee.de{% url 'project_view' project.slug %}
 
 
 

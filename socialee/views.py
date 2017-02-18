@@ -440,12 +440,13 @@ class Comment(BaseView, TemplateView):
 
         action.send(actor, action_object=action_object, target=target, verb='posted', description=comment, recipient=recipient)
         if instance:
-            self.send_mail_to_creator(email=instance.created_by.email, context={'comment': comment, 'project': instance.short_name() })
+            self.send_mail_to_creator(email=instance.created_by.email, context={'comment': message, 'project': instance })
 
         return render(request, self.template_name, {'comment' : message} )
 
     def send_mail_to_creator(self, email, context):
         message_to_creator = render_to_string('email/email_new_comment.txt', context=context)
+        # print(message_to_creator)
         send_mail(
             'Dein Projekt auf Socialee!',
             message_to_creator,
