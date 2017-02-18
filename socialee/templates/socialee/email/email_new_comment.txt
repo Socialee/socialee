@@ -1,0 +1,17 @@
+{% autoescape off %}
+Hallo!
+
+Dein Projekt {{project}} auf socialee hat einen neuen Kommentar.
+
+{{comment}}
+
+Schön, dass du dabei bist.  
+
+
+
++++ Wir machen das jetzt mal. +++
+
+Socialee GmbH
+Weisestr. 11
+12049 Berlin
+{% endautoescape %}
