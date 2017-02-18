@@ -1,5 +1,5 @@
 {% extends "offcanvas.html" %}
-{% load static sekizai_tags idea_tags activity_tags %}
+{% load static sekizai_tags idea_tags activity_tags socialee_tags %}
 
 {% block content %}
 
@@ -7,7 +7,13 @@
   <div class="row align-center">
     <div class="small-12 medium-10 columns">
       <div class="c-form">
-
+        {% comment %}
+        this is how you go though all followers or all following
+        {% following_instance request.user.current_instance.get_profile_or_project as following_list %}
+        {% for following in  following_list %} {{following}} {% endfor %}
+        {% instance_followers request.user.current_instance.get_profile_or_project as follower_list %}
+        {% for follower in  follower_list %} {{follower}} {% endfor %}
+        {% endcomment %}
         <h3>Deine Ereignisse</h3>
         {% if request.user.current_instance %}
           {% activity_stream 'any' request.user.current_instance %}
@@ -80,48 +86,21 @@
             </thead>
             <tbody>
             {% if request.user.current_instance %} 
-
-              {% for instance in request.user.current_instance.inst_follows.all %}
-                  <tr>
-                    {% if instance.project %}
-                      <td><a href="{% url 'project_view' instance.slug %}">{{ instance.project.title }}</a></td>
-                    {% elif instance.profile %}
-                      <td><a href="{% url 'profile_view' instance.slug %}">{{ instance.profile.short_name }}</a></td>
-                    {% endif %}
-                    <td>{{ instance.description }}</td>
-                  </tr>
-                
-              {% endfor %}
+              {% following_instance request.user.current_instance.get_profile_or_project as following_list %}
 
             {% else %}
-
-              {% for instance in request.user.follows.all %}
-                <tr>
-                    {% if instance.project %}
-                      <td><a href="{% url 'project_view' instance.slug %}">{{ instance.project.title }}</a></td>
-                    {% elif instance.profile %}
-                      <td><a href="{% url 'profile_view' instance.slug %}">{{ instance.profile.short_name }}</a></td>
-                    {% endif %}
+              {% following_instance request.user as following_list %}
+              
+            {% endif %}
+            {% for instance in following_list %}
+                  <tr>
+                   
+                    <td><a href="{% url 'project_view' instance.slug %}">{{ instance.project.short_name }}</a></td>
                     <td>{{ instance.description }}</td>
                   </tr>
               {% endfor %}
-              
-            {% endif %}
             </tbody>
           </table>
-          
-            
-          {% comment %}
-          {% if request.user.current_instance %} 
-            {% for project in request.user.current_instance.inst_follows.all %}
-              {% include "project_card_element.html" %}
-            {% endfor %}
-          {% else %}
-            {% for project in request.user.follows.all %}
-              {% include "project_card_element.html" %}
-            {% endfor %}
-          {% endif %}
-          {% endcomment %}
         
         
      </div>
