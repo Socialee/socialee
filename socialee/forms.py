@@ -23,12 +23,14 @@ class StartProjectForm(forms.ModelForm):
             'title': _('Titel des Projektes'),
             'tagline': _('Motto, Slogan oder Tagline'),
             'tags': _('Beschreibe dein Projekt mit ein paar Schlagworten'),
+            'picture': _('Hintergrund Bild'),
         }
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': ''}),
             'tagline': forms.TextInput(attrs={'placeholder': 'Das soziale Netzwerk für Ideen und Projekte'}),
             'description': forms.Textarea(attrs={'rows': 4}),
             'tags': TagWidget(attrs={'placeholder': 'Berliner Ökohipster, vegane Sojalatte'}),
+            'picture': forms.FileInput( attrs={'class' : 'input_with_img'} ),
         }
 
 class EditProjectForm(forms.ModelForm):

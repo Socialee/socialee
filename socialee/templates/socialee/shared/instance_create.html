@@ -14,6 +14,7 @@
                 <p>Wenn du willst, kannst du noch ein paar Details hinzufügen.</p>
               </div>
             
+              {% include "snippet_formfield.html" with field=form.picture size="small-12" upload_val="Bild hochladen" %}
               {% include "snippet_formfield.html" with field=form.title size="small-12" %}
               {% include "snippet_formfield.html" with field=form.tagline size="small-12" %}
               {% include "snippet_formfield.html" with field=form.tags size="small-12" %}

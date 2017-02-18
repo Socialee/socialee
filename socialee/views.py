@@ -114,6 +114,7 @@ class StartProject(BaseView, CreateView):
             form = self.form_class(initial={
                 'title': idea.title,
                 'description': idea.description,
+                'picture' : idea.picture
                         })
         return self.render_to_response(self.get_context_data(
             object=self.object, form=form, idea=idea))
