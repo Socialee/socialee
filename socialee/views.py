@@ -70,7 +70,9 @@ class UserUpdateView(BaseView, UpdateView):
     slug_field = 'username'
     template_name = 'user_update.html'
     form_class = EditUserForm
-    success_url = '/'
+
+    def get_success_url(self):
+        return reverse('user_updateview', args=[self.object.username])
 
     def get(self, request, *args, **kwargs):
         super(UserUpdateView, self).get(request, *args, **kwargs)
