@@ -9,6 +9,8 @@ from register.views import password_change
 from socialee import views
 from . import allauth_urls
 
+from socialee.decorators import user_is_project_manager, user_is_profile_owner, user_is_request_user
+
 urlpatterns = [
     
     url(r'^', include('landingpage.urls')), # ID 000
@@ -34,14 +36,14 @@ urlpatterns = [
     url(r'^startproject/(?P<idea>\w+)$', login_required(views.StartProject.as_view()), name='startprojectWithIdea'), 
     url(r'^project_overview/$', views.ProjectOverview.as_view(), name='project_overview'), # ID 101
     url(r'^project/(?P<slug>[-\w]+)/$', login_required(views.ProjectView.as_view()), name='project_view'), # ID 102
-    url(r'^project/(?P<slug>[-\w]+)/edit/$', login_required(views.ProjectUpdateView.as_view()), name='project_updateview'), # ID 103
+    url(r'^project/(?P<slug>[-\w]+)/edit/$', login_required(user_is_project_manager(views.ProjectUpdateView.as_view())), name='project_updateview'), # ID 103
     
     url(r'^startprofile/$', login_required(views.StartProfile.as_view()), name='startprofile'),
-    url(r'^profile/(?P<slug>[\w.@+-]+)/willkommen/$', login_required(views.WelcomePage.as_view()), name='welcome'), # ID 200
+    url(r'^profile/(?P<slug>[\w.@+-]+)/willkommen/$', login_required(user_is_request_user(views.WelcomePage.as_view())), name='welcome'), # ID 200
     url(r'^profile/(?P<slug>[\w.@+-]+)/$', login_required(views.ProfileView.as_view()), name='profile_view'), # ID 203
-    url(r'^profile/(?P<slug>[\w.@+-]+)/edit/$', login_required(views.ProfileUpdateView.as_view()), name='profile_updateview'), # ID 201
+    url(r'^profile/(?P<slug>[\w.@+-]+)/edit/$', login_required(user_is_profile_owner(views.ProfileUpdateView.as_view())), name='profile_updateview'), # ID 201
 
-    url(r'^user/(?P<slug>[\w.@+-]+)/edit/$', login_required(views.UserUpdateView.as_view()), name='user_updateview'), # ID 201
+    url(r'^user/(?P<slug>[\w.@+-]+)/edit/$', login_required(user_is_request_user(views.UserUpdateView.as_view())), name='user_updateview'), # ID 201
 
     url(r'^invitations/', include('invitations.urls', namespace='invitations')),
     url(r'^activity/', include('actstream.urls')),
