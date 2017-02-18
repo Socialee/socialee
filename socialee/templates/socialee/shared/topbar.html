@@ -23,11 +23,7 @@
               {% if request.user.first_name %}{{ request.user.first_name }}{% else %}{{ request.user.email }}{% endif %}
             {% endif %}
           </a>
-          <ul class="menu">
-            <li><a href="{% url 'welcome' request.user %}">Deine Übersicht</a></li>
-            <li><a href="{% url 'user_updateview' request.user %}">Profil bearbeiten</a></li>
-            <li><a href="{% url 'account_logout' %}?next={{ request.path }}">Abmelden</a></li>
-            <li><a>------------------</a></li>
+          <ul class="menu">            
             {% for instance in request.user.instances.all %}
               {% if instance.slug != request.user.username %}
                 <li><a class="js-actAs" instance_slug="{{ instance.slug }}">{{ instance.slug }}</a></li>
@@ -38,6 +34,13 @@
               {% if request.user.first_name %}{{ request.user.first_name }}{% else %}{{ request.user.email }}{% endif %}
               </a></li>
             {% endif %}
+          </ul>
+        </li>
+        <li>
+          <a href="{% url 'welcome' request.user %}">Deine Übersicht</a>
+          <ul class="menu">
+            <li><a href="{% url 'user_updateview' request.user %}">Einstellungen</a></li>
+            <li><a href="{% url 'account_logout' %}?next={{ request.path }}">Abmelden</a></li>
           </ul>
         </li>
       </ul>
