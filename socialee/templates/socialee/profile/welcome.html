@@ -9,7 +9,11 @@
       <div class="c-form">
 
         <h3>Deine Ereignisse</h3>
-        {% activity_stream 'user' request.user %}
+        {% if request.user.current_instance %}
+          {% activity_stream 'any' request.user.current_instance %}
+        {% else %}
+          {% activity_stream 'actor' request.user %}
+        {% endif %}
           <table class="hover">
             <thead>
               <tr>

@@ -19,6 +19,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.detail import SingleObjectMixin
 from django.dispatch import receiver
 from django.contrib.auth.models import User, Group
+from django.template.loader import render_to_string
 
 from actstream import action
 from actstream.actions import follow, unfollow, is_following
@@ -410,9 +411,12 @@ class Comment(BaseView, TemplateView):
         target = None
         recipient = None
 
+        # for email notification
+        instance = None
+
         if self.request.user.instances.filter(current=True):
             by_instance = self.request.user.current_instance
-            actor = by_instance.created_by
+            actor = by_instance
         else:
             by_user = self.request.user
             actor = by_user
@@ -433,8 +437,20 @@ class Comment(BaseView, TemplateView):
             target = instance
 
         action.send(actor, action_object=action_object, target=target, verb='posted', description=comment, recipient=recipient)
+        if instance:
+            self.send_mail_to_creator(email=instance.created_by.email, context={'comment': comment, 'project': instance.short_name() })
 
         return render(request, self.template_name, {'comment' : message} )
+
+    def send_mail_to_creator(self, email, context):
+        message_to_creator = render_to_string('email/email_new_comment.txt', context=context)
+        send_mail(
+            'Dein Projekt auf Socialee!',
+            message_to_creator,
+            settings.SERVER_EMAIL,
+            [email,],
+            fail_silently=True,
+        )
 
 
 class Like(BaseView, View):
