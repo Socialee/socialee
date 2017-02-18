@@ -31,14 +31,14 @@
     </ul>
     <ul class="inline-list show-for-medium float-right">
       {# <li><a>§Zeige Verbindungen</a></li> #}
-      <li><a>§Das ist eine Idee!</a></li>
+      <li><a href="{% url 'create_idea_with_message' comment.pk %}">Das ist eine Idee!</a></li>
     </ul>
     <ul class="dropdown menu inline-list float-right show-for-small-only" data-dropdown-menu>
       <li>
         <a>mehr</a>
         <ul class="menu">
           {# <li><a>§Zeige Verbindungen</a></li> #}
-          <li><a>§Das ist eine Idee!</a></li>
+          <li><a href="{% url 'create_idea_with_message' comment.pk %}">Das ist eine Idee!</a></li>
         </ul>
       </li>
     </ul>

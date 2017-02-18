@@ -29,7 +29,11 @@
     {% if upload_val %}
         <div class="row">
           <div class="small-12 medium-6 columns">
-            <img src="{{ MEDIA_URL }}{{ field.initial }}">
+            {% if field.initial %}
+                <img src="{{ MEDIA_URL }}{{ field.initial }}">
+            {% else %}
+                <img src="">
+            {% endif %}
           </div>
         </div>        
 

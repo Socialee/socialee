@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^(?P<pk>\d+)$', is_idea_not_private(views.IdeaDetailView.as_view()), name='idea_detail'),
     url(r'^edit/(?P<pk>\d+)$', user_is_idea_author(views.IdeaEditView.as_view()), name='idea_edit'),
     url(r'^delete/(?P<pk>\d+)$', user_is_idea_author(views.IdeaDeleteView.as_view()), name='delete_idea'),
+
+    url(r'^neu/(?P<message>\w+)$', views.CreateIdea.as_view(), name='create_idea_with_message'),
 ]

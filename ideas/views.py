@@ -17,12 +17,29 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import *
 from .models import Idea, Comment
+from socialee.models import Message
 
 
 class CreateIdea(SignupView):
     template_name = 'create_idea.html'
     form_class = IdeaForm
     success_url = reverse_lazy('idea_list')
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data()
+        title = context.get('title')
+        description = context.get('description')
+
+        if 'message' in kwargs:
+            message = Message.objects.get(id=kwargs['message'])
+            description = message.message
+        form = self.form_class(initial={
+                'title': title,
+                'description': description,
+                        })
+        old_reload = context.get('reload')
+        super(CreateIdea, self).get(request, *args, **kwargs)
+        return self.render_to_response(self.get_context_data( form=form, reload=old_reload ))
 
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
@@ -86,17 +103,6 @@ class CreateIdea(SignupView):
                 context['private'] = self.request.session.pop('private')
         return context
 
-    def get(self, request, *args, **kwargs):
-        context = self.get_context_data()
-        form = self.form_class(initial={
-                'title': context.get('title'),
-                'description': context.get('description'),
-                'picturefile': context.get('picturefile'),
-                # 'private': context.get('private'), # wenn das hier drin ist, werden choices nicht vorausgewählt
-                        })
-        old_reload = context.get('reload')
-        super(CreateIdea, self).get(request, *args, **kwargs)
-        return self.render_to_response(self.get_context_data( form=form, reload=old_reload ))
 
     def send_mail_to_creator(self, email):
         message_to_them = render_to_string('email/email_thank_you_idea.txt')
