@@ -25,6 +25,8 @@ from embed_video.fields import EmbedVideoField
 from taggit.managers import TaggableManager
 from taggit.models import TaggedItemBase, TagBase
 
+from actstream.models import following, followers
+
 
 def upload_location(instance, filename):
     slug = str(instance.slug)
@@ -99,6 +101,13 @@ class CommonGround(models.Model):
 
     def __str__(self):
         return self.slug
+
+    def friends(self):
+        obj = self.get_profile_or_project()
+        obj_follower = followers(obj)
+        obj_following = following(obj)
+        friends = [friend for friend in set(obj_follower) & set(obj_following)]
+        return friends
 
 class InputOutput(models.Model):
     UNKNOWN = '...'

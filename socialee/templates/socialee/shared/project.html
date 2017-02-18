@@ -31,7 +31,7 @@
               {% else %}
                 <a class="button hollow" href="{% url 'project_updateview' slug=project.slug %}"><i class="fa fa-pencil" aria-hidden="true"></i> Projekt bearbeiten</a>
               {% endif %}
-            {% else %}
+          {% else %}
               <div class="follow{{ object.id }}">
               {% include "snippet_follow.html" with to_follow=object.commonground_ptr %}
               </div>
