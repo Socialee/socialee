@@ -1,11 +1,15 @@
 {% autoescape off %}
 Hallo!
 
-Dein Projekt {{project}} auf socialee hat einen neuen Kommentar.
+Dein Projekt {{project}} auf Socialee hat einen neuen Kommentar.
+{{ comment.by_user }} schreibt:
 
 {{comment}}
 
-Schön, dass du dabei bist.  
+
+Klicke auf diesen Link, um zu Deinem Projekt zu gelangen:
+{{ project.slug }}
+
 
 
 
