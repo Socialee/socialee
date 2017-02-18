@@ -436,6 +436,25 @@ class Comment(BaseView, TemplateView):
 
         return render(request, self.template_name, {'comment' : message} )
 
+
+class Like(BaseView, View):
+    http_method_names = ['post']
+
+    def post(self, request, *args, **kwargs):
+        message_id = request.POST.get('message_id')
+
+        instance = Message.objects.get(id=message_id)
+        
+        if self.request.user.is_authenticated():
+            if self.request.user in instance.likes.all():
+                instance.likes.remove(self.request.user)
+            else:
+                instance.likes.add(self.request.user)
+
+        message_likes = instance.likes.count()
+
+        return HttpResponse(message_likes)
+
 class ActAs(BaseView, View):
     http_method_names = ['post']
 

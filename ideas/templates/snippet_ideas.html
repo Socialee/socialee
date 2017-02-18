@@ -39,12 +39,10 @@
                     });
       }
   
-  $(".idea-heart").click(
-  function()
-  {
-    var id = $(this).attr('idea_id');
-    idea_like(id);
-  });
+  $(".idea-heart").click( function()
+    {
+      idea_like($(this).attr('idea_id'));
+    });
 
   </script>
 {% endaddtoblock %}

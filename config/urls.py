@@ -51,6 +51,7 @@ urlpatterns = [
     url(r'^comment/$', login_required(views.Comment.as_view()), name='comment'),
     url(r'^follow/$', login_required(views.Follow.as_view()), name='comment'),
     url(r'^actAs/$', login_required(views.ActAs.as_view()), name='actAs'),
+    url(r'^like/$', login_required(views.Like.as_view()), name='like_message'),
 ]
 
 if not settings.PROD:

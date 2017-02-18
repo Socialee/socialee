@@ -70,6 +70,21 @@ $("#js-conversation-{{object.id}}").on('click', '.comment_button', function(even
     var comment_val = $(this).attr('comment_val')
      post_comment($("#"+comment_val).val(), $(this).attr('instance_id'), $(this).attr('message_id'))
  });
+
+function message_like(message_id) {
+    post_to_url( '{% url "like_message" %}', 
+                { message_id : message_id
+                },
+                function(data){
+                  $("#message_heart_"+message_id).html("<i class='fa fa-heart'></i>"+data);
+                });
+  }
+  
+  $(".message-heart").click( function()
+    {
+      message_like($(this).attr('comment_id'));
+    });
+
 </script>
 {% endaddtoblock %}
 
