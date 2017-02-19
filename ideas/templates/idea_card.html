@@ -10,8 +10,8 @@
   <div class="card-section">
     <a href="{% url 'idea_detail' idea.pk %}">
     {# Bild und Label #}
-    {% if idea.picture %}
-      <img src="{{ MEDIA_URL }}{{ idea.picture }}">
+    {% if idea.picture or idea == "preview" %}
+      <img src="{{ MEDIA_URL }}{{ idea.picture }}" id="idea_img">
       <div class="row align-center">
       {% if idea.active %}
         <div class="socialee-label small-3 column text-center">Idee</div>
@@ -55,10 +55,10 @@
 
 
     {# Titel #}
-    <h4 class="text-center mt-05rem">{{ idea.title }}</h4>
+    <h4 class="text-center mt-05rem" id="idea_title">{{ idea.title }}</h4>
 
     {# Beschreibung #}
-    <p class="text-center small">{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
+    <p class="text-center small" id="idea_description">{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
 
     {# Link zur Projektseite #}
     {% if not idea.active %}
