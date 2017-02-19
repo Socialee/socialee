@@ -51,6 +51,8 @@
               <tr>
                 <td><a href="{% url 'idea_detail' idea.pk %}">{{ idea.title }}</a></td>
                 <td>{{ idea.description|truncatechars:150 }}</td>
+                <td><a href="{% url 'idea_edit' idea.pk %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                <td><a href="{% url 'delete_idea' idea.pk %}"><i class="fa fa-close" aria-hidden="true"></i></a></td>
               </tr>              
             {% endfor %}
             </tbody>
@@ -70,6 +72,8 @@
                 <tr>
                   <td><a href="{% url 'project_view' item.slug %}">{{ item.project.title }}</a></td>
                   <td>{{ item.project.title }}</td>
+                  <td><a href="{% url 'project_updateview' item.slug %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                  {# <td><a href="{% url 'delete_idea' idea.pk %}"><i class="fa fa-close" aria-hidden="true"></i></a></td> #}
                 </tr>
                {% endif %} 
             {% endfor %}
