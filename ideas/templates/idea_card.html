@@ -8,7 +8,7 @@
 {% endif %}
 
   <div class="card-section">
-    <a href="{% url 'idea_detail' idea.pk %}">
+    <a {% if idea != "preview" %} href="{% url 'idea_detail' idea.pk %}" {% endif %}>
     {# Bild und Label #}
     {% if idea.picture or idea == "preview" %}
       <img src="{{ MEDIA_URL }}{{ idea.picture }}" id="idea_img">
@@ -30,7 +30,7 @@
     {% if idea.private or not idea.active or not idea.enabled %}
     <div class="row align-center text-center mt-05rem">
       
-      {% if not idea.active %}
+      {% if not idea.active and idea != "preview"%}
       <div class="columns">
         <p class="meta mb-0">Inzwischen ein Projekt</p>
       </div>
@@ -61,7 +61,7 @@
     <p class="text-center small" id="idea_description">{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
 
     {# Link zur Projektseite #}
-    {% if not idea.active %}
+    {% if not idea.active and idea != "preview" %}
     <div class="row align-center">
       <a class="button darkblue small" href="{% url 'project_view' idea.project.slug %}">Projektseite öffnen</a>
     </div>
