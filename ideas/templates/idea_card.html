@@ -8,7 +8,7 @@
 {% endif %}
 
   <div class="card-section">
-    
+    <a href="{% url 'idea_detail' idea.pk %}">
     {# Bild und Label #}
     {% if idea.picture %}
       <img src="{{ MEDIA_URL }}{{ idea.picture }}">
@@ -70,6 +70,8 @@
     {# Autor & Zeit #} 
     <p class="meta text-center mt-2rem mb-0">{% if idea.authorUser %}{{ idea.authorUser }} &#183; {% endif %}{{ idea.subm_date|timesince}}</p>
     <div class="separator-line"></div>
+
+    </a>
 
     {# Likes und Kommentare #} {# get like-counts up and running #}
     <div class="row align-center">
