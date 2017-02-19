@@ -160,31 +160,29 @@ a.tag:hover{
 }
 
 .socialee-label {
-  float:left;
-  height:24px;
-  line-height:24px;
   position:relative;
+  height:24px;
+  line-height:20px;
+  top:-12px;
   font-size:11px;
   font-weight: 700;
   padding: 0 20px 0 20px;
-  color:#fff;
-  text-decoration:none;
-  border-radius: 4px;
+  color: $white;
+  border: 2px solid $white;
+  border-radius: 2px;
   text-transform: uppercase;
-  background-color: #1f7f9e;
-  top:-12px;
-  left:50%;
-  margin-left: -44px;
+  background-color: $darkblue;
+  text-decoration:none;
 }
 
 .socialee-label:before {
   content:"";
   position:absolute;
-  top:10px;
+  top:8px;
   right:10px;
   float:right;
-  width:4px;
-  height:4px;
+  width:3px;
+  height:3px;
   -moz-border-radius:2px;
   -webkit-border-radius:2px;
   border-radius:2px;
@@ -194,11 +192,11 @@ a.tag:hover{
 .socialee-label:after{
   content:"";
   position:absolute;
-  top:10px;
+  top:8px;
   left:10px;
   float:left;
-  width:4px;
-  height:4px;
+  width:3px;
+  height:3px;
   -moz-border-radius:2px;
   -webkit-border-radius:2px;
   border-radius:2px;
