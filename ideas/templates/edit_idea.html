@@ -9,7 +9,7 @@
 
         <h3>Idee bearbeiten</h3>
 
-        <a class="button hollow" href="{% url 'delete_idea' object.id %}"><i class="fa fa-pencil" aria-hidden="true"></i> Idee löschen</a>
+        <a class="button hollow" href="{% url 'delete_idea' object.id %}"><i class="fa fa-close" aria-hidden="true"></i> Idee löschen</a>
 
         <form method="POST" id="form_id" enctype="multipart/form-data">{% csrf_token %}
 
@@ -32,7 +32,9 @@
 {% addtoblock 'js' %}
 <script type="text/javascript">
 
+{% if object.picture %}
 $(".input_with_img").parents("fieldset").first().find("img").attr("src", "{{ MEDIA_URL }}{{ object.picture }}");
+{% endif %}
 
 </script>
 {% endaddtoblock %}

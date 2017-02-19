@@ -20,6 +20,12 @@
               Diese Idee ist schon zum Projekt geworden. <br><a class="button hollow" href="{% url 'project_view' idea.project.slug %}">zum Projekt</a>
             </div>
           </div>
+          {% elif idea.authorUser == request.user %}
+          <div class="row align-center">
+            <div class="small-12 columns text-center">
+              <a class="button hollow" href="{% url 'idea_edit' idea.pk %}"><i class="fa fa-pencil" aria-hidden="true"></i>Idee bearbeiten</a>
+            </div>
+          </div>
           {% endif %}
           <p class="text-center mt-2rem">{{ idea.description|urlizetrunc:25|url_target_blank|safe }}</p>
 
