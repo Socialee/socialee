@@ -65,10 +65,12 @@ class CreateIdea(SignupView):
                 if hasattr(request.user, 'email'):
                     email = request.user.email
 
+                allert = 'Wieder eine gute, Deine Idee.'
                 # check if we have a valid email to send to
                 if not email == 'Anonym':
                     self.send_mail_to_creator(email)
                     authorUser = User.objects.get(email=email)
+                    allert += ' Check mal dein E-Mail-Postfach!'
 
                 if settings.PROD:
                     self.send_mail_to_us(title, description, email)
@@ -77,7 +79,7 @@ class CreateIdea(SignupView):
                 newIdea.save()
 
                 # set message to inform user it was successful
-                messages.success(request, 'Wieder eine gute Deine Idee. Check mal dein E-Mail-Postfach!')
+                messages.success(request, allert)
             else:
                 return self.form_invalid(form)
             return ret
