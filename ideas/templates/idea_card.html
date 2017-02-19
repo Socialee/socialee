@@ -11,17 +11,17 @@
     <a {% if idea != "preview" %} href="{% url 'idea_detail' idea.pk %}" {% endif %}>
     {# Bild und Label #}
     {% if idea.picture or idea == "preview" %}
-      <img src="{{ MEDIA_URL }}{{ idea.picture }}" id="idea_img">
+      <img class="float-center" src="{{ MEDIA_URL }}{{ idea.picture }}" id="idea_img">
       <div class="row align-center">
       {% if idea.active %}
-        <div class="socialee-label small-3 column text-center">Idee</div>
+        <div class="socialee-label shrink column text-center">Idee</div>
       {% else %}
-        <div class="socialee-label grey small-3 column text-center">Idee</div>
+        <div class="socialee-label grey shrink column text-center">Idee</div>
       {% endif %}
       </div>
     {% else %}
       <div class="row align-center">
-        <div class="socialee-label small-3 column text-center">Idee</div>
+        <div class="socialee-label shrink column text-center">Idee</div>
       </div>
     {% endif %}
     {# End Bild und Label #}

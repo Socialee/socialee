@@ -27,23 +27,26 @@
           </div>
 
           <div id="review">
-              <div class="layout-idea-review mt-2rem">
+            
+            <div class="row">
+              <div class="small-12 medium-4 columns">
                 {% include "idea_card.html" with idea="preview" %}
               </div>
+            </div>
 
-              {% if not request.user.is_authenticated %}
-              <div class="row">
-                <div class="small-12 columns">
-                  <p>Trage noch deine E-Mail-Adresse ein und erstelle dir ein Konto bei Socialee.</p>  
-                </div>
-                {% include "snippet_formfield.html" with field=form.email size="small-12" %}  
-              </div> 
-              {% endif %}
-
-              <div class="c-form__footer">
-                <input class="button" type="submit" value="Idee Absenden" />
-                <a id="change" class="text-link-special pull-right float-right">Idee nochmal ändern</a>
+            {% if not request.user.is_authenticated %}
+            <div class="row">
+              <div class="small-12 columns">
+                <p>Trage noch deine E-Mail-Adresse ein und erstelle dir ein Konto bei Socialee.</p>  
               </div>
+              {% include "snippet_formfield.html" with field=form.email size="small-12" %}  
+            </div> 
+            {% endif %}
+
+            <div class="c-form__footer">
+              <input class="button" type="submit" value="Idee Absenden" />
+              <a id="change" class="text-link-special pull-right float-right">Idee nochmal ändern</a>
+            </div>
 
           </div>
 
