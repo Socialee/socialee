@@ -15,14 +15,19 @@
     <p class="text-center small">{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
 
     {# Autor & Zeit #} 
-    <p class="meta text-center mt-2rem mb-0">{% if idea.authorUser %}{{ idea.authorUser }} &#183 {% endif %}{{ idea.subm_date|timesince}}</p>
+    <p class="meta text-center mt-2rem mb-0">{% if idea.authorUser %}{{ idea.authorUser }} &#183; {% endif %}{{ idea.subm_date|timesince}}</p>
     <div class="separator-line"></div>
 
     {# Likes und Kommentare #} {# get like-counts up and running #}
     <div class="row align-center">
       <div class="small-4 column">
-        <div class="like-button" idea_id="{{ idea.id }}">
-          <i class="fa fa-heart" aria-hidden="true" id="heart_{{ idea.id }}"> {{ idea.likes.count }}</i>
+        <div class="like-button" idea_id="{{ idea.id }}" id="heart_{{ idea.id }}">
+          {% if idea in request.user.likes_ideas.all  %}
+          <i class="fa fa-heart orange" aria-hidden="true"> {{ idea.likes.count }}</i>
+          {% else %}
+          <i class="fa fa-heart" aria-hidden="true"> {{ idea.likes.count }}</i>
+          {% endif %}
+          
         </div>
       </div>
       <div class="small-4 column">
