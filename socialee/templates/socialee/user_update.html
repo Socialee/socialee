@@ -35,8 +35,9 @@
 
 {% addtoblock 'js' %}
 <script type="text/javascript">
-
+{% if form_user_data.instance.picture %}
 $(".input_with_img").parents("fieldset").first().find("img").attr("src", "{{ MEDIA_URL }}{{ form_user_data.instance.picture }}");
+{% endif %}
 
 </script>
 {% endaddtoblock %}
