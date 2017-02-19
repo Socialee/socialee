@@ -68,7 +68,7 @@
     {% endif %}
 
     {# Autor & Zeit #} 
-    <p class="meta text-center mt-2rem mb-0">{% if idea.authorUser %}{{ idea.authorUser }} &#183; {% endif %}{{ idea.subm_date|timesince}}</p>
+    <p class="meta text-center mt-2rem mb-0">{% if idea.authorUser %}{{ idea.authorUser }} {% else %} Anonym {% endif %} &#183; vor {{ idea.subm_date|timesince}}</p>
     <div class="separator-line"></div>
 
     </a>
