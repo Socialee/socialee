@@ -15,6 +15,7 @@ from django.template.loader import render_to_string
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from allauth.utils import build_absolute_uri
 
 from .forms import *
 from .models import Idea, Comment
@@ -65,19 +66,18 @@ class CreateIdea(SignupView):
                 if hasattr(request.user, 'email'):
                     email = request.user.email
 
+                
+                newIdea = Idea.objects.create( picture = pic, title = title, description = description, author=email, authorUser=authorUser, private=private )
+
                 allert = 'Wieder eine gute, Deine Idee.'
                 # check if we have a valid email to send to
                 if not email == 'Anonym':
-                    self.send_mail_to_creator(email)
+                    self.send_mail_to_creator(email=email, context={'idea_url':build_absolute_uri(request, newIdea.get_absolute_url())})
                     authorUser = User.objects.get(email=email)
                     allert += ' Check mal dein E-Mail-Postfach!'
 
                 if settings.PROD:
                     self.send_mail_to_us(title, description, email)
-                
-                newIdea = Idea.objects.create( picture = pic, title = title, description = description, author=email, authorUser=authorUser, private=private )
-                newIdea.save()
-
                 # set message to inform user it was successful
                 messages.success(request, allert)
             else:
@@ -109,8 +109,8 @@ class CreateIdea(SignupView):
         return context
 
 
-    def send_mail_to_creator(self, email):
-        message_to_them = render_to_string('email/email_thank_you_idea.txt')
+    def send_mail_to_creator(self, email, context):
+        message_to_them = render_to_string('email/email_thank_you_idea.txt', context=context)
         send_mail(
             'Deine Idee auf Socialee!',
             message_to_them,

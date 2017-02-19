@@ -60,6 +60,9 @@ class Idea(models.Model):
     def __str__(self):
         return format(self.title)
 
+    def get_absolute_url(self):
+        return reverse('idea_detail', kwargs = {"pk": self.pk})
+
 class Comment(models.Model):
     to_idea = models.ForeignKey(Idea, null=True, blank=True, related_name='comments')
     by_user = models.ForeignKey(User, null=True, blank=True)

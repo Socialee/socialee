@@ -4,6 +4,8 @@ Hallo!
 Du hast eine Idee bei Socialee geteilt. Das ist toll.
 Wie geht es jetzt weiter? Erstmal schauen wir uns deine Idee an und veröffentlichen sie. Das dauert etwa einen Tag. Sobald das passiert ist, schreiben wir dir und geben ein Feedback. Das ist immer der erste Schritt.
 
+{{idea_url}}
+
 Also, bis morgen!
 
 Schön, dass du dabei bist.  

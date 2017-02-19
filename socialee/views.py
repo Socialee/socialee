@@ -20,6 +20,7 @@ from django.views.generic.detail import SingleObjectMixin
 from django.dispatch import receiver
 from django.contrib.auth.models import User, Group
 from django.template.loader import render_to_string
+from allauth.utils import build_absolute_uri
 
 from actstream import action
 from actstream.actions import follow, unfollow, is_following
@@ -440,7 +441,7 @@ class Comment(BaseView, TemplateView):
 
         action.send(actor, action_object=action_object, target=target, verb='posted', description=comment, recipient=recipient)
         if instance:
-            self.send_mail_to_creator(email=instance.created_by.email, context={'comment': message, 'project': instance })
+            self.send_mail_to_creator(email=instance.created_by.email, context={'comment': message, 'project': instance, 'project_url': build_absolute_uri(request, instance.get_absolute_url()) })
 
         return render(request, self.template_name, {'comment' : message} )
 
