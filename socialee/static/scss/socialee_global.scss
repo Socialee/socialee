@@ -23,9 +23,10 @@
 @import "components/_tags";
 @import "components/_top-bar";
 
+@import "general/_colors";
+@import "general/_helper";
 @import "general/_styleguide";
 @import "general/_typography";
-@import "general/_helper";
 
 @import "layouts/_layouts";
 @import "layouts/_masonry";
@@ -33,7 +34,6 @@
 
 // Diverse Styles, die noch keinen besseren Platz gefunden haben
 
-//Hell, I'm trying to get rid of the blue outline in the offcanvas menu.... it does not work.
 :focus {outline: none !important;}
 .button:focus {outline:none !important;}
 button:focus {outline:none !important;}
@@ -43,21 +43,6 @@ button:focus {outline:none !important;}
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-}
-
-.white {
-  color: $white;
-}
-
-.orange {
-  color: $orange;
-}
-
-.white-orange {
-  color: $white;
-  &:hover {
-    color: $orange;
-  }
 }
 
 .callout-form {

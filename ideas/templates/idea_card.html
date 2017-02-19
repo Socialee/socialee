@@ -21,22 +21,44 @@
     {# Likes und Kommentare #} {# get like-counts up and running #}
     <div class="row align-center">
       <div class="small-4 column">
-        <div class="like-button" idea_id="{{ idea.id }}" id="heart_{{ idea.id }}">
-          {% if idea in request.user.likes_ideas.all  %}
-          <i class="fa fa-heart orange" aria-hidden="true"> {{ idea.likes.count }}</i>
-          {% else %}
-          <i class="fa fa-heart" aria-hidden="true"> {{ idea.likes.count }}</i>
-          {% endif %}
+      
+        {% if request.user.is_authenticated %}
+
+            {% if idea in request.user.likes_ideas.all  %}
+            <div class="button-wrapper" idea_id="{{ idea.id }}" id="heart_{{ idea.id }}">
+              <div class="like-button orange">
+                <i class="fa fa-heart orange" aria-hidden="true"> {{ idea.likes.count }}</i>
+              </div>
+            </div>
+            {% else %}
+            <div class="button-wrapper" idea_id="{{ idea.id }}" id="heart_{{ idea.id }}">
+              <div class="like-button grey">
+                <i class="fa fa-heart" aria-hidden="true"> {{ idea.likes.count }}</i>
+              </div>
+            </div>
+            {% endif %}
           
-        </div>
+        {% else %}
+
+          <div class="button-wrapper">
+            <div class="like-button">
+              <a href="{% url 'account_login' %}"><i class="fa fa-heart" aria-hidden="true"> {{ idea.likes.count }}</i></a>
+            </div>
+          </div>
+
+        {% endif %}
+
       </div>
+
       <div class="small-4 column">
-        <div class="button-pill">
-          <i class="fa fa-comment" aria-hidden="true"> {{ idea.comments.count }}</i>
+        <div class="button-wrapper">
+          <div class="button-pill">
+            <i class="fa fa-comment" aria-hidden="true"> {{ idea.comments.count }}</i>
+          </div>
         </div>
       </div>
-    </div>
-    
+
+    </div>    
 
   </div>
 </div>

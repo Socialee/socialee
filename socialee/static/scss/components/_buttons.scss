@@ -28,11 +28,17 @@
   margin: 0 auto;
   padding: 0.2rem 0;
   font-size: 14px;
-  border: 2px solid $grey04;
-  border-radius: 1rem;
   color: $greyblue;
   text-align: center;
   width: 64px;
+  &.orange {
+    border: 2px solid $orange;
+    border-radius: 1rem;
+  }
+  &.grey {
+    border: 2px solid $grey04;
+    border-radius: 1rem;
+  }
   &:hover {
     border-color: $orange;
   }
@@ -40,6 +46,8 @@
 
 .button-pill  {
   @extend .like-button;
+    border: 2px solid $grey04;
+    border-radius: 1rem;
   &:hover {
     border-color: $grey05;
   }
