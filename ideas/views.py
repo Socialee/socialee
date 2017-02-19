@@ -14,6 +14,7 @@ from django.core.validators import validate_email
 from django.template.loader import render_to_string
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from .forms import *
 from .models import Idea, Comment
@@ -57,6 +58,7 @@ class CreateIdea(SignupView):
 
             if pic or title or description:
                 email = form.cleaned_data.get('email')
+                authorUser = None
                 if not email:
                     email = 'Anonym'
 
@@ -66,11 +68,12 @@ class CreateIdea(SignupView):
                 # check if we have a valid email to send to
                 if not email == 'Anonym':
                     self.send_mail_to_creator(email)
+                    authorUser = User.objects.get(email=email)
 
                 if settings.PROD:
                     self.send_mail_to_us(title, description, email)
                 
-                newIdea = Idea.objects.create( picture = pic, title = title, description = description, author=email, private=private )
+                newIdea = Idea.objects.create( picture = pic, title = title, description = description, author=email, authorUser=authorUser, private=private )
                 newIdea.save()
 
                 # set message to inform user it was successful
