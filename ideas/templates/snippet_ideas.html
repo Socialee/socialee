@@ -4,19 +4,20 @@
 {% if idea_list|length == 0 %}
   <h3 class="text-center">Hier gibt es noch nichts anzuzeigen.</h3>
   <p class="text-center lead">Das ändert sich, sobald du eine Idee teilst.</p>
+
 {% else %}
-<div class="masonry-layout-ideas mt-2rem">
-      {% for idea in idea_list %}
+  <div class="masonry-layout-ideas mt-2rem">
+        {% for idea in idea_list %}
+          <div class="ml-panel-ideas">
+          {% include "idea_card.html" %}
+          </div>
+        {% endfor %}
+        
         <div class="ml-panel-ideas">
-        {% include "idea_card.html" %}
+          {% include "idea_card_cta_2.html" %}
         </div>
-      {% endfor %}
-      
-      <div class="ml-panel-ideas">
-        {% include "idea_card_cta_2.html" %}
-      </div>
-      
-</div>
+        
+  </div>
 {% endif %}
 
 {% addtoblock 'js' %}
@@ -25,6 +26,7 @@
         post_to_url( '{% url "idea_like" %}', 
                     { idea_id : idea_id
                     },
+                    // TODO: herz soll orange sein, wenn user geliked hat
                     function(data){
                       $("#heart_"+idea_id).html($(data).find("#heart_"+idea_id).html());
                       var do_comment_html = $(data).find("#do_comment_"+idea_id).html();
@@ -32,14 +34,13 @@
                       $("#make_comment_"+idea_id).fadeToggle();
                       $("#make_comment_"+idea_id).click(
                         function(){setTimeout(function() {
-                        $("#flip_idea_"+idea_id).flip('toggle');
                         $("#make_comment_"+idea_id).fadeOut();
                         },500);
                       });
                     });
       }
   
-  $(".idea-heart").click( function()
+  $(".like-button").click( function()
     {
       idea_like($(this).attr('idea_id'));
     });

@@ -1,0 +1,74 @@
+{% load socialee_filters static %}
+
+<div class="card">
+
+{% if idea.picture %}<!-- Idee mit Bild -->
+    
+    {% if idea.title or idea.description %}<!--Bild und Titel oder Bild und Beschreibung-->
+        <a href="{% url 'idea_detail' idea.pk %}"><img src="{{ MEDIA_URL }}{{ idea.picture }}"></a>
+        <div class="card-section">
+          <h4 class="text-center">{{ idea.title }}</h4>
+          <p class="text-center">{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
+        </div>
+    {% elif not idea.title and not idea.description %}<!--nur Bild-->
+        <a href="{% url 'idea_detail' idea.pk %}"><img src="{{ MEDIA_URL }}{{ idea.picture }}"></a>
+    {% endif %}
+
+{% else %}<!-- kein Bild -->
+
+    {% if idea.title and idea.description %}<!-- Titel und Beschreibung -->          
+          <a href="{% url 'idea_detail' idea.pk %}">
+            <div class="green-card">
+              <h4 class="text-center">{{ idea.title }}</h4>
+            </div>
+          </a>
+          <div class="card-section">
+          <p class="text-center">{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
+        </div>
+    {% endif %}
+    {% if idea.title and not idea.description %}<!-- nur Titel -->
+      <a href="{% url 'idea_detail' idea.pk %}">
+        <div class="green-card">
+          <h4 class="text-center">{{ idea.title }}</h4>
+        </div>
+      </a>
+    {% endif %}
+    {% if idea.description and not idea.title %}<!-- nur Beschreibung -->
+      <div class="green-card">
+        <p class="text-center">{{ idea.description|truncatechars:600|urlizetrunc:25|url_target_blank|safe }}{% if idea.description|length > 599 %} |<a href="{% url 'idea_detail' idea.pk %}"> mehr</a>{% endif %}</p>
+      </div>
+    {% endif %}
+
+{% endif %} 
+
+{% if request.user.is_authenticated %}
+  {% if request.user.email == idea.author %}
+    <div class="card-divider">
+      <h6 class="text-center">Deine Idee! Du kannst sie <a href="{% url 'idea_edit' idea.pk %}">bearbeiten!</a></h6>
+    </div>
+  {% endif %} 
+{% endif %}
+
+</div>
+
+{# Likes #}
+{% if request.user.is_authenticated %}
+  <div class="row align-center">
+    <div id="id_heart_{{ idea.id }}" class="idea-heart" idea_id="{{ idea.id }}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
+        <strong class="fa-stack-1x" id="heart_{{ idea.id }}">{{ idea.likes.count }}</strong>  
+      </span>
+    </div>
+  </div>
+{% else %}
+    <div class="row align-center idea-heart">
+    <a href="{% url 'account_login' %}">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-heart fa-stack-2x" aria-hidden="true"></i>
+        <strong class="fa-stack-1x">{{ idea.likes.count }}</strong>  
+      </span>
+    </a>
+    </div>
+{% endif %}
+
