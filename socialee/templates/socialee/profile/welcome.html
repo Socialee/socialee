@@ -30,7 +30,13 @@
             <tbody>
             {% for notification in stream %}
               <tr>
-                <td><a href="{{ notification.target.get_absolute_url }}">{{ notification.actor }} {{ notification.verb }} {{ notification.target }}</a></td>
+                <td><a href="{{ notification.target.get_absolute_url }}">
+                  {% if notification.verb == 'posted' %}
+                    {{ notification.actor }} schrieb in {{ notification.target }}</a>
+                  {% else %}
+                  {{ notification.actor }} {{ notification.verb }} {{ notification.target }}
+                  {% endif %}
+                  </td>
                 <td>{{ notification.description }}</td>
               </tr>              
             {% endfor %}
@@ -91,9 +97,11 @@
             <tbody>
             {% if request.user.current_instance %} 
               {% following_instance request.user.current_instance.get_profile_or_project as following_list %}
+              {% instance_followers request.user.current_instance.get_profile_or_project as follower_list %}
 
             {% else %}
               {% following_instance request.user as following_list %}
+              {% instance_followers request.user as follower_list %}
               
             {% endif %}
             {% for instance in following_list %}
@@ -101,6 +109,9 @@
                    
                     <td><a href="{% url 'project_view' instance.slug %}">{{ instance.project.short_name }}</a></td>
                     <td>{{ instance.description }}</td>
+                    {% if instance in follower_list %}
+                      <td>Ihr seid Freunde</td>
+                    {% endif %}
                   </tr>
               {% endfor %}
             </tbody>
