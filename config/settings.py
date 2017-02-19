@@ -159,6 +159,7 @@ TEMPLATES = [
         'DIRS': [
                 str(APPS_DIR('templates/')),
                 str(APPS_DIR('templates/socialee/')),
+                str(APPS_DIR('templates/socialee/cards/')),
                 str(APPS_DIR('templates/socialee/project/')),
                 str(APPS_DIR('templates/socialee/profile/')),
                 str(APPS_DIR('templates/socialee/shared/')),

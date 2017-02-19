@@ -1,0 +1,115 @@
+{% load socialee_filters static %}
+
+{# Edit-Mode if own project #}
+{% if request.user == item.created_by %}
+<div class="card edit">
+{% else %}
+<div class="card">
+{% endif %}
+
+  <a style="font-weight: normal;" href="{% url 'project_view' item.project.slug %}">
+
+  {# Bild und Label #}
+  {% if item.project.picture %}
+    <img class="float-center" src="{{ MEDIA_URL }}{{ item.project.picture }}">
+    <div class="row align-center">
+      <div class="socialee-label shrink column text-center">Projekt</div>
+    </div>
+  {% endif %}
+  {# End Bild und Label #}
+
+  <div class="card-section pt-0">
+
+    {# Statusbereich #}
+    {% if project.private %} {# does not exist yet #}
+
+    <div class="row align-center text-center mt-05rem">
+      <div class="columns">
+        <p class="meta red mb-0"><i class="fa fa-lock" aria-hidden="true"></i><strong> Nicht öffentlich</strong></p>
+      </div>
+    </div>
+
+    <div class="separator-line"></div>
+    {% endif %}
+    {# END Statusbereich #}
+
+
+    {# Titel #}
+    <h4 class="text-center mt-05rem">{{ item.project.title }}</h4>
+
+    {# start content box #}
+    <div class="project-card-content">
+
+      {# Beschreibung #}
+      <p class="text-center small">{{ item.project.description }}</p>
+
+      {# tags #}
+      <div class="row align-center columns">
+       {% for tag in item.project.location.all %}
+         <a class="tag tag--black js-sized"><i class="fi-x-circle"></i>{{ tag }}</a>
+      {% endfor %} 
+      {% for tag in item.project.tags.all %}
+        <a class="tag tag--orange js-sized"><i class="fi-x-circle"></i>{{ tag }}</a>
+      {% endfor %}
+      </div>
+
+    </div>
+    {# end content box #}
+
+    {# Autor & Zeit #} 
+    <p class="meta text-center mt-2rem mb-0">{% if idea.authorUser %}{{ idea.authorUser }} {% else %} Anonym {% endif %} &#183; vor {{ idea.subm_date|timesince}}</p>
+    <div class="separator-line"></div>
+
+    </a>
+
+    {# Likes und Kommentare #} {# get like-counts up and running #}
+    <div class="row align-center">
+      <div class="shrink column">
+      
+        {% if request.user.is_authenticated %}
+
+            {% if idea in request.user.likes_ideas.all  %}
+            <div class="button-wrapper" idea_id="{{ idea.id }}" id="heart_{{ idea.id }}">
+              <div class="like-button orange">
+                <i class="fa fa-heart orange" aria-hidden="true"></i> {{ idea.likes.count }}
+              </div>
+            </div>
+            {% else %}
+            <div class="button-wrapper" idea_id="{{ idea.id }}" id="heart_{{ idea.id }}">
+              <div class="like-button grey">
+                <i class="fa fa-heart" aria-hidden="true"></i> {{ idea.likes.count }}
+              </div>
+            </div>
+            {% endif %}
+          
+        {% else %}
+
+          <div class="button-wrapper">
+            <div class="like-button grey">
+              <a href="{% url 'account_login' %}"><i class="fa fa-heart" aria-hidden="true"></i> {{ idea.likes.count }}</a>
+            </div>
+          </div>
+
+        {% endif %}
+
+      </div>
+
+      <div class="shrink column">
+        <div class="button-wrapper">
+          <div class="button-pill">
+            <i class="fa fa-comment" aria-hidden="true"></i> {{ idea.comments.count }}
+          </div>
+        </div>
+      </div>
+
+    </div>    
+
+  </div>
+  {% if request.user == item.created_by %}
+  <div class="row">
+    <div class="small-12 columns card-edit-section">
+      <p class="text-center mb-0"><a href="{% url 'project_updateview' slug=item.project.slug %}"><i class="fa fa-pencil"></i> Projekt bearbeiten</a></p>
+    </div>
+  </div>
+  {% endif %}
+</div>

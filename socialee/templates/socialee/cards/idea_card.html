@@ -8,7 +8,7 @@
 {% endif %}
 
   <div class="card-section">
-    <a {% if idea != "preview" %} href="{% url 'idea_detail' idea.pk %}" {% endif %}>
+    <a style="font-weight: normal;" {% if idea != "preview" %} href="{% url 'idea_detail' idea.pk %}" {% endif %}>
     {# Bild und Label #}
     {% if idea.picture or idea == "preview" %}
       <img class="float-center" src="{{ MEDIA_URL }}{{ idea.picture }}" id="idea_img">
@@ -69,26 +69,28 @@
 
     {# Autor & Zeit #} 
     <p class="meta text-center mt-2rem mb-0">{% if idea.authorUser %}{{ idea.authorUser }} {% else %} Anonym {% endif %} &#183; vor {{ idea.subm_date|timesince}}</p>
+
     <div class="separator-line"></div>
 
     </a>
+    {# End Clickable Area #}
 
-    {# Likes und Kommentare #} {# get like-counts up and running #}
+    {# Likes und Kommentare #}
     <div class="row align-center">
-      <div class="small-4 column">
+      <div class="shrink column">
       
         {% if request.user.is_authenticated %}
 
             {% if idea in request.user.likes_ideas.all  %}
             <div class="button-wrapper" idea_id="{{ idea.id }}" id="heart_{{ idea.id }}">
               <div class="like-button orange">
-                <i class="fa fa-heart orange" aria-hidden="true"> {{ idea.likes.count }}</i>
+                <i class="fa fa-heart orange" aria-hidden="true"></i> {{ idea.likes.count }}
               </div>
             </div>
             {% else %}
             <div class="button-wrapper" idea_id="{{ idea.id }}" id="heart_{{ idea.id }}">
               <div class="like-button grey">
-                <i class="fa fa-heart" aria-hidden="true"> {{ idea.likes.count }}</i>
+                <i class="fa fa-heart" aria-hidden="true"></i> {{ idea.likes.count }}
               </div>
             </div>
             {% endif %}
@@ -97,7 +99,7 @@
 
           <div class="button-wrapper">
             <div class="like-button grey">
-              <a href="{% url 'account_login' %}"><i class="fa fa-heart" aria-hidden="true"> {{ idea.likes.count }}</i></a>
+              <a href="{% url 'account_login' %}"><i class="fa fa-heart" aria-hidden="true"></i> {{ idea.likes.count }}</a>
             </div>
           </div>
 
@@ -105,15 +107,16 @@
 
       </div>
 
-      <div class="small-4 column">
+      <div class="shrink column">
         <div class="button-wrapper">
           <div class="button-pill">
-            <i class="fa fa-comment" aria-hidden="true"> {{ idea.comments.count }}</i>
+            <i class="fa fa-comment" aria-hidden="true"></i> {{ idea.comments.count }}
           </div>
         </div>
       </div>
 
-    </div>    
+    </div>
+    {# End Likes und Kommentare #}
 
   </div>
   {% if request.user.email == idea.author %}

@@ -1,0 +1,20 @@
+{% load static sekizai_tags socialee_filters %}
+
+
+<div class="masonry-layout-cards mt-2rem">
+
+{% for item in request.user.instances.all %}
+  {% if item.project %}
+      <div class="ml-panel-cards">
+        {% include "project_card.html" %}
+      </div>
+   {% endif %} 
+{% endfor %}
+
+</div>
+
+{% addtoblock 'js' %}
+<script type="text/javascript">
+
+</script>
+{% endaddtoblock %}

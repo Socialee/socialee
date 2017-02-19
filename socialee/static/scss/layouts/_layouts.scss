@@ -23,9 +23,6 @@
   @include breakpoint(small only) {
   top: -6rem;
   }
-  @include breakpoint(xxlarge) {
-  top: -20rem;
-  }
 }
 
 // used for moving up idea-gallery on Landingpage
@@ -33,9 +30,6 @@ section.move-up {
   margin-bottom: -24rem;
   @include breakpoint(small only) {
     margin-bottom: -6rem;
-  }
-  @include breakpoint(xxlarge) {
-    margin-bottom: -10rem;
   }
 }
 

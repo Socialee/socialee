@@ -6,7 +6,63 @@
 <div class="c-section -solo">
   <div class="row align-center">
     <div class="small-12 medium-10 columns">
-      <div class="c-form">
+      <div class="c-form">        
+
+        <ul class="tabs" data-deep-link="true" data-tabs id="user-overview">
+          <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Deine Ideen</a></li>
+          <li class="tabs-title"><a href="#panel2">Deine Projekte</a></li>
+          <li class="tabs-title"><a href="#panel3">Deine Freunde</a></li>
+        </ul>
+
+        <div class="tabs-content" data-tabs-content="user-overview">
+
+          <div class="tabs-panel is-active" id="panel1">
+            {% include "snippet_ideas.html" with own_ideas="true" %}
+          </div>
+
+          <div class="tabs-panel" id="panel2">      
+            {% include "snippet_project.html" with own_ideas="true" %}
+          </div>
+
+          <div class="tabs-panel" id="panel3">
+            <p>Hier gibt es bald eine Liste deiner Freunde.</p>
+          </div>
+
+        </div>
+
+
+
+         <h3>Projekte, denen du folgst</h3>
+          <table>
+            <thead>
+              <tr>
+                <th width="200">Projekt</th>
+                <th>Beschreibung</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% if request.user.current_instance %} 
+              {% following_instance request.user.current_instance.get_profile_or_project as following_list %}
+              {% instance_followers request.user.current_instance.get_profile_or_project as follower_list %}
+
+            {% else %}
+              {% following_instance request.user as following_list %}
+              {% instance_followers request.user as follower_list %}
+              
+            {% endif %}
+            {% for instance in following_list %}
+                  <tr>
+                   
+                    <td><a href="{% url 'project_view' instance.slug %}">{{ instance.project.short_name }}</a></td>
+                    <td>{{ instance.description }}</td>
+                    {% if instance in follower_list %}
+                      <td>Ihr seid Freunde</td>
+                    {% endif %}
+                  </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
         {% comment %}
         this is how you go though all followers or all following
         {% following_instance request.user.current_instance.get_profile_or_project as following_list %}
@@ -40,80 +96,6 @@
                 <td>{{ notification.description }}</td>
               </tr>              
             {% endfor %}
-            </tbody>
-          </table>
-          
-          <h3>Deine Ideen</h3>
-          <table class="hover">
-            <thead>
-              <tr>
-                <th width="200">Idee</th>
-                <th>Beschreibung</th>
-              </tr>
-            </thead>
-            <tbody>
-            {% own_idea_list request.user.email as idea_list %}
-            {% for idea in idea_list %}
-              <tr>
-                <td><a href="{% url 'idea_detail' idea.pk %}">{{ idea.title }}</a></td>
-                <td>{{ idea.description|truncatechars:150 }}</td>
-                <td><a href="{% url 'idea_edit' idea.pk %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                <td><a href="{% url 'delete_idea' idea.pk %}"><i class="fa fa-close" aria-hidden="true"></i></a></td>
-              </tr>              
-            {% endfor %}
-            </tbody>
-          </table>
-
-          <h3>Deine Projekte</h3>
-          <table>
-            <thead>
-              <tr>
-                <th width="200">Projekt</th>
-                <th>Beschreibung</th>
-              </tr>
-            </thead>
-            <tbody>
-            {% for item in request.user.instances.all %}
-              {% if item.project %}
-                <tr>
-                  <td><a href="{% url 'project_view' item.slug %}">{{ item.project.title }}</a></td>
-                  <td>{{ item.project.title }}</td>
-                  <td><a href="{% url 'project_updateview' item.slug %}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                  {# <td><a href="{% url 'delete_idea' idea.pk %}"><i class="fa fa-close" aria-hidden="true"></i></a></td> #}
-                </tr>
-               {% endif %} 
-            {% endfor %}
-            </tbody>
-          </table>
-
-         <h3>Projekte, denen du folgst</h3>
-          <table>
-            <thead>
-              <tr>
-                <th width="200">Projekt</th>
-                <th>Beschreibung</th>
-              </tr>
-            </thead>
-            <tbody>
-            {% if request.user.current_instance %} 
-              {% following_instance request.user.current_instance.get_profile_or_project as following_list %}
-              {% instance_followers request.user.current_instance.get_profile_or_project as follower_list %}
-
-            {% else %}
-              {% following_instance request.user as following_list %}
-              {% instance_followers request.user as follower_list %}
-              
-            {% endif %}
-            {% for instance in following_list %}
-                  <tr>
-                   
-                    <td><a href="{% url 'project_view' instance.slug %}">{{ instance.project.short_name }}</a></td>
-                    <td>{{ instance.description }}</td>
-                    {% if instance in follower_list %}
-                      <td>Ihr seid Freunde</td>
-                    {% endif %}
-                  </tr>
-              {% endfor %}
             </tbody>
           </table>
         
