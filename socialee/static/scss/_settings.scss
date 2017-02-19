@@ -48,7 +48,6 @@
 // ------------------------
 
 @import "general/_mixins";
-@import "general/_typography";
 // @import "components/_forms-overwrite";
 
 $socialee-transparent: rgba(#fff, 0.48);
@@ -92,7 +91,7 @@ $dark-gray: $grey05;
 // 1. Global
 // ----------------------------------------------------------------------------------
 
-$global-font-size: 20px; // default-value was 100%
+$global-font-size: 21px; // default-value was 100%
 $global-width: rem-calc(1400);
 $global-lineheight: 1.5;
 $foundation-palette: (
@@ -146,6 +145,14 @@ $block-grid-max: 8;
 // 4. Base Typography
 // ------------------
 
+// Socialee Specifications
+// lineheights
+$fender: 1;
+$gibson: 1.2;
+$ibanez: 1.3;
+$martin: 1.5;
+$yamaha: 1.618;
+
 $header-font-family: $body-font-family;
 $header-font-weight: $global-weight-bold;
 $header-font-style: normal;
@@ -163,18 +170,18 @@ $header-styles: (
     'h6': ('fs': 16, 'lh': $header-lineheight, 'mt': 0, 'mb': $header-margin-bottom)
   ),
   'medium': (
-    'h1': ('fs': 48, 'lh': $header-lineheight, 'mt': 0, 'mb': $header-margin-bottom),
-    'h2': ('fs': 40, 'lh': $header-lineheight, 'mt': 0, 'mb': $header-margin-bottom),
-    'h3': ('fs': 31, 'lh': $header-lineheight, 'mt': 0, 'mb': $header-margin-bottom),
-    'h4': ('fs': 25, 'lh': $header-lineheight, 'mt': 0, 'mb': $header-margin-bottom),
-    'h5': ('fs': 20, 'lh': $header-lineheight, 'mt': 0, 'mb': $header-margin-bottom),
-    'h6': ('fs': 16, 'lh': $header-lineheight, 'mt': 0, 'mb': $header-margin-bottom)
+    'h1': ('fs': 74, 'lh': $gibson, 'mt': 0, 'mb': $header-margin-bottom),
+    'h2': ('fs': 43, 'lh': $ibanez, 'mt': 0, 'mb': $header-margin-bottom),
+    'h3': ('fs': 30, 'lh': $ibanez, 'mt': 0, 'mb': $header-margin-bottom),
+    'h4': ('fs': 25, 'lh': $ibanez, 'mt': 0, 'mb': $header-margin-bottom),
+    'h5': ('fs': 20, 'lh': $ibanez, 'mt': 0, 'mb': $header-margin-bottom),
+    'h6': ('fs': 16, 'lh': $ibanez, 'mt': 0, 'mb': $header-margin-bottom)
   ),
 );
 $header-text-rendering: optimizeLegibility;
-$small-font-size: 70%;
+$small-font-size: 80%;
 $header-small-font-color: $darkgreyblue;
-$paragraph-lineheight: 1.6;
+$paragraph-lineheight: $martin;
 $paragraph-margin-bottom: 1rem;
 $paragraph-text-rendering: optimizeLegibility;
 $code-color: $black;
@@ -215,7 +222,7 @@ $abbr-underline: 1px dotted $black;
 // 5. Typography Helpers
 // ---------------------
 
-$lead-font-size: $global-font-size * 1.25;
+$lead-font-size: $global-font-size * 1.20;
 $lead-lineheight: 1.6;
 $subheader-lineheight: 1.4;
 $subheader-color: $dark-gray;
@@ -330,11 +337,11 @@ $callout-link-tint: 30%;
 $card-background: $white;
 $card-font-color: $body-font-color;
 $card-divider-background: $light-gray;
-$card-border: 0px solid $light-gray;
-$card-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+$card-border: 1px solid $grey02;
+$card-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.08);
 $card-border-radius: $global-radius;
 $card-padding: rem-calc(20px) rem-calc(20px) rem-calc(38px) rem-calc(20px);
-$card-margin: 0px;
+$card-margin: rem-calc(15px);
 
 // 15. Close Button
 // ----------------

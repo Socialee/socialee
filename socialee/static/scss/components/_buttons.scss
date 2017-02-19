@@ -22,3 +22,25 @@
 .button--upload  {
 	margin-left: rem-calc(40px);
 }
+
+.like-button  {
+  cursor: pointer;
+  margin: 0 auto;
+  padding: 0.2rem 0;
+  font-size: 14px;
+  border: 2px solid $grey04;
+  border-radius: 1rem;
+  color: $greyblue;
+  text-align: center;
+  width: 64px;
+  &:hover {
+    border-color: $orange;
+  }
+}
+
+.button-pill  {
+  @extend .like-button;
+  &:hover {
+    border-color: $grey05;
+  }
+}

@@ -1,10 +1,12 @@
-.huge-title {
-	font-size: 74px;
-	@include breakpoint(small only) {
-   		font-size: 50px;
-    }
+.small {
+	font-size: 17px;
 }
 
+.meta {
+	font-size: 14px;
+	color: $greyblue;
+	line-height: 19px;	
+}
 
 // // $breakpoints: (
 // //   small: 0,
