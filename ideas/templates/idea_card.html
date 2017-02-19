@@ -1,6 +1,11 @@
 {% load socialee_filters static %}
 
+{% if request.user.email == idea.author %}
+<div class="card edit">
+{% else %}
 <div class="card">
+{% endif %}
+
   <div class="card-section">
     
     {# Bild #}
@@ -48,7 +53,7 @@
         {% else %}
 
           <div class="button-wrapper">
-            <div class="like-button">
+            <div class="like-button grey">
               <a href="{% url 'account_login' %}"><i class="fa fa-heart" aria-hidden="true"> {{ idea.likes.count }}</i></a>
             </div>
           </div>
@@ -68,5 +73,12 @@
     </div>    
 
   </div>
+  {% if request.user.email == idea.author %}
+  <div class="row">
+    <div class="small-12 columns card-edit-section">
+      <p class="text-center mb-0"><a href="{% url 'idea_edit' idea.pk %}"><i class="fa fa-pencil"></i> Idee bearbeiten</a></p>
+    </div>
+  </div>
+  {% endif %}
 </div>
 
