@@ -173,6 +173,9 @@ a.tag:hover{
   text-transform: uppercase;
   background-color: $darkblue;
   text-decoration:none;
+  &.grey {
+    background-color: $grey04;
+  }
 }
 
 .socialee-label:before {
