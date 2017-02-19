@@ -19,7 +19,7 @@ def migrate_authoruser_back(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('ideas', '0019_idea_authoruser'),
+        ('ideas', '0020_auto_20170219_1034'),
     ]
 
     operations = [
