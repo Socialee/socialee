@@ -175,9 +175,15 @@ class Commentate(TemplateView):
         if request.user.is_authenticated():
             comment_obj = Comment.objects.create(to_idea=instance, by_user=self.request.user, message=comment)
             if instance.author and instance.author != 'Anonym':
-                self.send_mail_to_creator(email=instance.author, context={'comment': comment, 'idea': instance.title })
+                context = {
+                    'object_title': 'Deine Idee',
+                    'comment': comment_obj, 
+                    'object': instance,
+                    'object_dat' : 'Deiner Idee',
+                    'object_url': build_absolute_uri(request, instance.get_absolute_url()) }
+                self.send_mail_to_creator(email=instance.author, context=context)
 
-        return render(request, self.template_name, {'comment' : comment_obj } )
+        return render(request, self.template_name, {'comment' : comment_obj, 'idea': instance } )
 
     def send_mail_to_creator(self, email, context):
         message_to_creator = render_to_string('email/email_new_comment.txt', context=context)

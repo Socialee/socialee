@@ -441,7 +441,13 @@ class Comment(BaseView, TemplateView):
 
         action.send(actor, action_object=action_object, target=target, verb='posted', description=comment, recipient=recipient)
         if instance:
-            self.send_mail_to_creator(email=instance.created_by.email, context={'comment': message, 'project': instance, 'project_url': build_absolute_uri(request, instance.get_absolute_url()) })
+            context = {
+                'object_title': 'Dein Projekt',
+                'comment': message, 
+                'object_dat' : 'Deinem Projekt',
+                'object': instance, 
+                'object_url': build_absolute_uri(request, instance.get_absolute_url()) }
+            self.send_mail_to_creator(email=instance.created_by.email, context=context)
 
         return render(request, self.template_name, {'comment' : message} )
 
