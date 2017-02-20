@@ -1,42 +1,33 @@
 {% load static socialee_filters sekizai_tags %}
-<div class="tabs-panel" id="panel2">
- <div class="">
-  <div class="" id="js-conversation-{{object.id}}">
 
-    <div class="comment comment__input">
-      <div class="comment__header">
-        <div class="row">
-          <div class="comment__avatar small-12 columns">
-          {% if request.user.current_instance.picture %}
-            <a><img src="{{ MEDIA_URL }}{{ request.user.current_instance.picture }}" alt=""></a>
-          {% elif request.user.data.picture %}
-            <a><img src="{{ MEDIA_URL }}{{ request.user.data.picture }}" alt=""></a>
-          {% endif %}
-            <div class="comment__avatar-text">
-              <h6>{{ request.user.current_instance.long_name }}</h6>
-            </div>
-          </div>
+<div class="tabs-panel" id="panel2">
+  <div id="js-conversation-{{object.id}}">
+
+  {# new comment #}
+    <div class="row medium-uncollapse">
+      <div class="small-12 medium-2 columns">
+        <div class="row align-center">
+        {% if request.user.current_instance.picture %}
+          <a><img class="profile-img mb-0" src="{{ MEDIA_URL }}{{ request.user.current_instance.picture }}" alt="Profilbild"></a>
+        {% elif request.user.data.picture %}
+          <a><img class="profile-img mb-0" src="{{ MEDIA_URL }}{{ request.user.data.picture }}" alt="Profilbild"></a>
+        {% endif %}
         </div>
+        <h6 class="text-center">{{ request.user.current_instance.long_name }}</h6>
+        <h6 class="text-center">{{ request.user.username }}</h6>  
       </div>
-      <div class="comment__content">
-      <label>Neuen Kommentar schreiben</label>
-        <textarea name="" id="comment_value" cols="30" rows="5"></textarea>
-      </div>
-      <div class="row comment__actions">
-        {% comment %}
-        <div class="small-12 medium-8 columns">
-          <p class="h-f22 greyblue-2">Übrigens: Projekte können mit @titel erwähnt werden.</p>
-        </div>
-        {% endcomment %}
-        <div class="small-12 medium-4 columns">
-          <a class="button expanded-sm float-right-md button--yellow comment_button" comment_val="comment_value" instance_id="{{ object.id }}">Kommentieren</a>
-        </div>
+
+      <div class="small-12 medium-expand columns">
+        <label>Kommentar schreiben</label>
+        <textarea name="" id="comment_value" cols="30" rows="3"></textarea>
+        <a class="button comment_button" comment_val="comment_value" instance_id="{{ object.id }}">Kommentieren</a>
       </div>
     </div>
+    <div class="separator-line"></div>
+    {# end new comment #}
 
     {% include "snippet_comment_loop.html" with comments=object.conversation.messages.all %}
 
-    </div>
   </div>
 </div>
 
