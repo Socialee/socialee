@@ -44,7 +44,7 @@ def upload_location_user_pic(instance, filename):
 class UserData(models.Model):
     user = models.OneToOneField(User, related_name='data')
     picture = models.ImageField(upload_to=upload_location_user_pic, null=True, blank=True)
-    dateJoined = models.DateTimeField(auto_now=False, auto_now_add=True)
+    dateJoined = models.DateTimeField(auto_now=False, auto_now_add=True, verbose_name='Details erstellt am:')
     
     def thumb(self):
         if self.picture:

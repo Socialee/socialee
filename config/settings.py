@@ -371,6 +371,10 @@ ADMIN_REORDER = (
         'label': 'User',
         },
         {
+        'model': 'socialee.UserData',
+        'label': 'User Details',
+        },
+        {
         'model': 'auth.Group',
         'label': 'User-Gruppe',
         },
@@ -407,10 +411,6 @@ ADMIN_REORDER = (
         # 'model': 'socialee.CommonGround',
         # 'label': 'CommonGround',
         # },
-        {
-        'model': 'socialee.UserData',
-        'label': 'User Details',
-        },
         )},
 
     # Blog
