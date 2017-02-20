@@ -409,7 +409,7 @@ ADMIN_REORDER = (
         # },
         {
         'model': 'socialee.UserData',
-        'label': 'UserData',
+        'label': 'User Details',
         },
         )},
 

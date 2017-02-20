@@ -51,7 +51,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
 class UserDataAdmin( admin.ModelAdmin):
     model = UserData
-
+    list_display = ['user', 'thumb', 'dateJoined']
 
 #admin.site.register(CommonGround, CommonGroundAdmin)
 admin.site.register(Project, ProjectAdmin)

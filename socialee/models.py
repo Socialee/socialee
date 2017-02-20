@@ -12,6 +12,7 @@ from django.db.models.signals import pre_save, post_save
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.utils.text import slugify
+from django.utils.safestring import mark_safe
 from allauth.account.signals import email_confirmed
 from django.dispatch import receiver
 from django.core.files.images import ImageFile
@@ -44,6 +45,13 @@ class UserData(models.Model):
     user = models.OneToOneField(User, related_name='data')
     picture = models.ImageField(upload_to=upload_location_user_pic, null=True, blank=True)
     dateJoined = models.DateTimeField(auto_now=False, auto_now_add=True)
+    
+    def thumb(self):
+        if self.picture:
+            return mark_safe(u'<img src="%s" width=60 height=60 />' % (self.picture.url))
+        else:
+            return u''
+    thumb.short_description = 'Profilbild'
 
 
 class LocationTaggedItem(TaggedItemBase):
