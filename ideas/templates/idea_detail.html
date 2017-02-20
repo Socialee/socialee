@@ -12,7 +12,10 @@
           
           <h2 class="text-center mb-2rem">{{ idea.title }}</h2>
           {% if idea.picture %}
-          <img src="{{ MEDIA_URL }}{{ idea.picture }}">  
+          <img class="float-center" src="{{ MEDIA_URL }}{{ idea.picture }}">
+            <div class="row align-center">
+              <div class="socialee-label shrink column text-center">Idee</div>
+            </div>
           {% endif %}
           {% if not idea.active %}
           <div class="row align-center">
@@ -51,18 +54,16 @@
 
           </div>
 
-          {% if idea.active %}
-            {% if request.user.is_authenticated %}
-              {% if request.user.is_superuser  or request.user.email == idea.author %}
+          {% if request.user.is_authenticated and idea.active and idea.enabled %}
+            {% if request.user.is_superuser  or request.user.email == idea.author %}
             
-                <div class="row align-center">
-                  <div class="small-12 columns text-center">
-                    <br><a class="button hollow" href="{% url 'startprojectWithIdea' idea.pk %}">zum Projekt machen</a>
-                  </div>
+              <div class="row align-center">
+                <div class="small-12 columns text-center">
+                  <br><a class="button hollow" href="{% url 'startprojectWithIdea' idea.pk %}">zum Projekt machen</a>
                 </div>
-              {% endif %}
-              {% endif %}
-            
+              </div>
+
+            {% endif %}
           {% endif %}
           
 
