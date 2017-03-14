@@ -55,7 +55,7 @@
           </div>
 
           {% if request.user.is_authenticated and idea.active and idea.enabled %}
-            {% if request.user.is_superuser  or request.user.email == idea.author %}
+            {% if request.user.is_superuser %} {# or request.user.email == idea.author #}
             
               <div class="row align-center">
                 <div class="small-12 columns text-center">
